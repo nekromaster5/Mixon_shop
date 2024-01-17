@@ -145,7 +145,103 @@ h1,
   font-size: 2.2rem;
   line-height: 3.2rem;
 }
+.panel {
+  display: flex;
+  width: 200px;
+  height: 20.5px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  margin-right: 12px; /* Добавлен отступ справа между панелями */
+}
 
+.panel img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.panel .icon {
+  width: 10px;
+  height: 5px;
+  flex-shrink: 0;
+  background: url('your_icon_url.png') no-repeat center center;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+  width: 100%;
+  margin-top: 30px;
+  left: 0;
+}
+
+.dropdown button {
+  width: 100%;
+  padding: 8px;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.dropdown button:hover {
+  background-color: #f1f1f1;
+}
+
+/* Добавлена новая стилизация для правой панели */
+.panel-right {
+  display: flex;
+  width: 200px;
+  height: 20.5px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+
+.panel-right img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.panel-right .label {
+  text-align: center;
+  margin-right: auto;
+}
+
+/* Новая стилизация для третьей панели */
+.logo-messengers {
+  display: flex;
+  width: 200px;
+  height: 20.5px;
+  justify-content: flex-end; /* Иконки выравниваются вправо */
+  align-items: center;
+  flex-shrink: 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+
+.logo-messengers img {
+  width: 19px;
+  height: 20px;
+  margin-right: 5px;
+}
 @media only screen and (min-width: 480px) {
   h1,
   .h1 {
