@@ -145,6 +145,12 @@ h1,
   font-size: 2.2rem;
   line-height: 3.2rem;
 }
+.panel-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px; /* Добавлено небольшое поле между панелями и краями */
+}
+
 .panel {
   display: flex;
   width: 200px;
