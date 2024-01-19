@@ -150,7 +150,29 @@ h1,
   justify-content: space-between;
   margin: 10px; /* Добавлено небольшое поле между панелями и краями */
 }
+/* Стили для слайдера */
+.swiper-container {
+  width: 878px;
+  height: 421px;
+  flex-shrink: 0;
+  margin: auto; /* Центрирование слайдера */
+}
 
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  /* Дополнительные стили для слайдов, если необходимо */
+}
+.horizontal-buttons {
+  display: flex;
+  width: 1172px;
+  padding: 5px 0px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+ 
 .panel {
   display: flex;
   width: 200px;

@@ -1,10 +1,14 @@
 const gulp = require('gulp');
 const rigger = require('gulp-rigger');
 
-gulp.task('build', function() {
-  return gulp.src('header.html') // Замените 'src/*.html' путем к вашим исходным файлам
-    .pipe(rigger())
-    .pipe(gulp.dest('dist')); // Замените 'dist' путем к вашему выходному каталогу
+// Задача для обработки каталога
+gulp.task('catalog', function() {
+  return gulp.src('partsix/catalog.html') // Путь к вашему каталогу
+    .pipe(rigger({
+      includePaths: ['partsix'] // Папка, где находятся header.html и другие файлы
+    }))
+    .pipe(gulp.dest('dist')); // Путь к выходной папке, куда сохранится обработанный файл
 });
 
-// Добавьте другие задачи Gulp, если необходимо
+// Задача по умолчанию, которая будет выполняться при запуске команды 'gulp'
+gulp.task('default', gulp.series('catalog'));
