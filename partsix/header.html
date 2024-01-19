@@ -141,7 +141,7 @@
                         
                     </div>
                     <div class="header__search--widget d-none d-lg-block header__sticky--none"  style="  
-                    position: relative;left: -100px;">
+                    position: relative;left: -100px; ">
                         <form class="d-flex header__search--form border-radius-5" action="#">
                             
                             <div class="header__search--box">
@@ -176,6 +176,24 @@
                     </div>
                 </div>
             </div>
+            <div class="vertical-block" style="margin-left: 100px; ">
+                <div class="item" onclick="handleItemClick('Item 1') ">
+                    <img src="path/to/logo1.png" alt="Logo 1">
+                    <p>Item 1</p>
+                </div>
+                <div class="item" onclick="handleItemClick('Item 2')">
+                    <img src="path/to/logo2.png" alt="Logo 2">
+                    <p>Item 2</p>
+                </div>
+                <!-- Add more items as needed -->
+            </div>
+        
+            <script>
+                function handleItemClick(itemName) {
+                    alert('Clicked on ' + itemName);
+                    // Add your custom click handling logic here
+                }
+            </script>
         </div>
 <!-- Start Offcanvas header menu -->
 <div class="offcanvas__header">
