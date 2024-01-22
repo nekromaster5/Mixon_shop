@@ -1,8 +1,8 @@
-import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js';
-import App from './App.vue';
+// main.js
 
-Vue.config.productionTip = false;
+import Vue from "vue";
+import Catalog from "@/путь/к/Catalog.vue";
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app');
+  render: (h) => h(Catalog),
+}).$mount("#app");
