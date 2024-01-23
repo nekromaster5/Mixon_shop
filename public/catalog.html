@@ -18,26 +18,14 @@
 
   <!-- Custom Style CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var includeContainer = document.getElementById('includeContainer');
-
-      // Загрузка содержимого файла
-      fetch('header.html')
-        .then(response => response.text())
-        .then(html => {
-          includeContainer.innerHTML = html;
-        })
-        .catch(error => {
-          console.error('Ошибка загрузки файла:', error);
-        });
-    });
-  </script>
+   
 </head>
 
 <body>
-<div id="includeContainer"></div>
-    
+  <iframe src="header.html" frameborder="0" style="width: 100%; height: 300px;"></iframe>
+
+<link rel="import" href="publuic/header.html">
+ 
     <div id="app"></div>
 <div class="vertical-block" style="margin-left: 100px; ">
   <div class="item" onclick="handleItemClick('Item 1') ">
