@@ -1496,14 +1496,17 @@ Custom css by Nekromaster for Mixon
 
  
 .panel {
+  margin-top: 6px;
+  background: none;
+  border: none;
   display: flex;
   width: 200px;
   height: 20.5px;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  
+  
   overflow: hidden;
   position: relative;
   margin-right: 12px; /* Добавлен отступ справа между панелями */
@@ -1550,14 +1553,16 @@ Custom css by Nekromaster for Mixon
 
 /* Добавлена новая стилизация для правой панели */
 .panel-right {
+  margin-left: 5px;
   display: flex;
-  width: 200px;
+  width: 170px;
   height: 20.5px;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: none;
+  margin-top: 5px;
+  background: none;
   overflow: hidden;
   position: relative;
 }
@@ -1569,6 +1574,7 @@ Custom css by Nekromaster for Mixon
 }
 
 .panel-right .label {
+   
   text-align: center;
   margin-right: auto;
 }
@@ -1576,15 +1582,16 @@ Custom css by Nekromaster for Mixon
 /* Новая стилизация для третьей панели */
 .logo-messengers {
   display: flex;
-  width: 200px;
+  width: 80px;
   height: 20.5px;
   justify-content: flex-end; /* Иконки выравниваются вправо */
   align-items: center;
   flex-shrink: 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: none;
+  background: none;
   overflow: hidden;
   position: relative;
+  margin-top: 5px;
 }
 
 .logo-messengers img {
@@ -1593,7 +1600,9 @@ Custom css by Nekromaster for Mixon
   margin-right: 5px;
 }
 .language_panel {
-  display: flex; /* Расположение дочерних элементов внутри блока в виде горизонтальной линии */
+  display: flex;
+  background: none;
+  border: none; /* Расположение дочерних элементов внутри блока в виде горизонтальной линии */
 }
 /*
     offcanvas header css
@@ -1650,7 +1659,7 @@ Custom css by Nekromaster for Mixon
 }
 
 .offcanvas__header.open ~ .offcanvas-overlay {
-  visibility: visible;
+  visibility: visible;  
   opacity: 0.75;
 }
 
