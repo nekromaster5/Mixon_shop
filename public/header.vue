@@ -4,18 +4,18 @@
     <title>Partsix - Auto Parts & Car Accessories Shop HTML Template</title>
     <meta name="description" content="Morden Bootstrap HTML5 Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="../src/assets/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="../static/src/assets/img/favicon.ico">
       
      <!-- ======= All CSS Plugins here ======== -->
-    <link rel="stylesheet" href="../src/assets/css/plugins/swiper-bundle.min.css">
-    <link rel="stylesheet" href="../src/assets/css/plugins/glightbox.min.css">
+    <link rel="stylesheet" href="../static/src/assets/css/plugins/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../static/src/assets/css/plugins/glightbox.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500&display=swap" rel="stylesheet">
   
     <!-- Plugin css -->
-    <link rel="stylesheet" href="../src/assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/src/assets/css/vendor/bootstrap.min.css">
   
     <!-- Custom Style CSS -->
-    <link rel="stylesheet" href="../src/assets/css/style.css">
+    <link rel="stylesheet" href="../static/src/assets/css/style.css">
   
   </head>
   
@@ -129,7 +129,7 @@
     left: -100px;
                       ">
                           <div class="categories__menu--header bg__secondary text-white d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#categoriesAccordion">
-                              <img src="../src/assets/img/icon/logo-katalog1.svg" alt="Logo Katalog">
+                              <img src="../static/src/assets/img/icon/logo-katalog1.svg" alt="Logo Katalog">
       
                               <span class="categories__menu--title">Каталог товаров</span>
                               <svg class="categories__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394" viewBox="0 0 10.355 6.394">
@@ -198,7 +198,7 @@
       <div class="offcanvas__inner">
           <div class="offcanvas__logo">
               <a class="offcanvas__logo_link" href="../templates/index.html">
-                  <img src="../src/assets/img/logo/nav-log.webp" alt="Grocee Logo" width="158" height="36">
+                  <img src="../static/src/assets/img/logo/nav-log.webp" alt="Grocee Logo" width="158" height="36">
               </a>
               <button class="offcanvas__close--btn" data-offcanvas>close</button>
           </div>
@@ -294,7 +294,7 @@
               <div class="offcanvas__account--wrapper d-flex">
                   <div class="offcanvas__account--currency">
                       <a class="offcanvas__account--currency__menu d-flex align-items-center text-black" href="javascript:void(0)">
-                          <img src="../src/assets/img/icon/usd-icon.webp" alt="currency">
+                          <img src="../static/src/assets/img/icon/usd-icon.webp" alt="currency">
                           <span>USD</span> 
                           <svg xmlns="http://www.w3.org/2000/svg" width="9.797" height="6.05" viewBox="0 0 9.797 6.05">
                               <path  d="M14.646,8.59,10.9,12.329,7.151,8.59,6,9.741l4.9,4.9,4.9-4.9Z" transform="translate(-6 -8.59)" fill="currentColor" opacity="0.7"/>
@@ -401,7 +401,7 @@
       <div class="minicart__product">
           <div class="minicart__product--items d-flex">
               <div class="minicart__thumb">
-                  <a href="product-details.html"><img src="../src/assets/img/product/small-product/product1.webp" alt="prduct-img"></a>
+                  <a href="product-details.html"><img src="../static/src/assets/img/product/small-product/product1.webp" alt="prduct-img"></a>
               </div>
               <div class="minicart__text">
                   <h4 class="minicart__subtitle"><a href="product-details.html">Car & Motorbike Care.</a></h4>
@@ -424,7 +424,7 @@
           </div>
           <div class="minicart__product--items d-flex">
               <div class="minicart__thumb">
-                  <a href="product-details.html"><img src="../src/assets/img/product/small-product/product2.webp" alt="prduct-img"></a>
+                  <a href="product-details.html"><img src="../static/src/assets/img/product/small-product/product2.webp" alt="prduct-img"></a>
               </div>
               <div class="minicart__text">
                   <h4 class="minicart__subtitle"><a href="product-details.html">Engine And Drivetrain.</a></h4>
@@ -474,10 +474,10 @@
 
  
  <!-- All Script JS Plugins here  -->
- <script src="../src/assets/js/vendor/popper.js" defer="defer"></script>
- <script src="../src/assets/js/vendor/bootstrap.min.js" defer="defer"></script>
- <script src="../src/assets/js/plugins/swiper-bundle.min.js"></script>
- <script src="../src/assets/js/plugins/glightbox.min.js"></script>
+ <script src="../static/src/assets/js/vendor/popper.js" defer="defer"></script>
+ <script src="../static/src/assets/js/vendor/bootstrap.min.js" defer="defer"></script>
+ <script src="../static/src/assets/js/plugins/swiper-bundle.min.js"></script>
+ <script src="../static/src/assets/js/plugins/glightbox.min.js"></script>
  <script>
  export default {
   props: {
@@ -506,7 +506,7 @@
     }
   </script>
 <!-- Customscript js -->
-<script src="../src/assets/js/script.js"></script>
+<script src="../static/src/assets/js/script.js"></script>
 <style scoped>
  @charset "UTF-8";
 /*
