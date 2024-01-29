@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="description" content="Morden Bootstrap HTML5 Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="src/assets/img/favicon.ico">
+
+    <!-- ======= All CSS Plugins here ======== -->
+    <link rel="stylesheet" href="src/assets/css/plugins/swiper-bundle.min.css">
+    <link rel="stylesheet" href="src/assets/css/plugins/glightbox.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500&display=swap"
+          rel="stylesheet">
+
+    <!-- Plugin css -->
+    <link rel="stylesheet" href="src/assets/css/vendor/bootstrap.min.css">
+
+    <!-- Custom Style CSS -->
+    <link rel="stylesheet" href="src/assets/css/style.css">
+    <title></title>
+
+</head>
+
+<body>
+
+
+<!-- Start header area -->
+
+<div class="main__header header__sticky">
+    <div class="container">
+        <div class="main__header--inner position__relative d-flex justify-content-between align-items-center">
+            <div class="offcanvas__header--menu__open ">
+                <a class="offcanvas__header--menu__open--btn" href="javascript:void(0)" data-offcanvas>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ionicon offcanvas__header--menu__open--svg"
+                         viewBox="0 0 512 512">
+                        <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
+                              stroke-width="32" d="M80 160h352M80 256h352M80 352h352"></path>
+                    </svg>
+                    <span class="visually-hidden">Offcanvas Menu Open</span>
+                </a>
+            </div>
+            <div class="main__logo" style="width: 101px;
+                    height: 41px;
+                    position: relative;
+                    left: -90px; ">
+                <h1 class="main__logo--title"><a class="main__logo--link" href="index.html"><img class="main__logo--img"
+                                                                                                 src="../src/assets/img/logo/logo_mix2.svg"
+                                                                                                 alt="logo-img"></a>
+                </h1>
+            </div>
+            <div class="panel-container">
+                <div class="header__menu-panel"
+                     style="display: inline-flex;  align-items: center; gap: 15px; margin-right: 260px;">
+                    <button class="menu-panel__button_first"
+                            style="background: none;color: #F00; font-family: Montserrat; font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px; border: none;">
+                        Акции
+                    </button>
+                    <button class="menu-panel__button"
+                            style="background: none;  font-family: Montserrat; font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px;border: none;">
+                        Button
+                    </button>
+                    <button class="menu-panel__button"
+                            style="background: none;  font-family: Montserrat; font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px;border: none;">
+                        Button
+                    </button>
+                    <button class="menu-panel__button"
+                            style=" background: none; font-family: Montserrat; font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px;border: none;">
+                        Button
+                    </button>
+                    <button class="menu-panel__button"
+                            style=" background: none; font-family: Montserrat; font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px;border: none;">
+                        Button
+                    </button>
+
+                    <!-- Добавьте еще кнопки, если нужно -->
+                </div>
+                <div class="panel" id="myPanel">
+                    <img src="../src/assets/img/icon/city_mark1.svg" alt="Icon">
+                    <div class="label">Надпись</div>
+                    {#                        <button onclick="toggleDropdown()" src="Mixon-shop\assets\img\icon\Vector 1.svg" style=" width: 20px; /* ваш желаемый размер по горизонтали */#}
+                    {#                        height: 10px; /* ваш желаемый размер по вертикали */"> </button>#}
+                    <div class="dropdown" id="myDropdown">
+                        <button>Вариант 1</button>
+                        <button>Вариант 2</button>
+                        <button>Вариант 3</button>
+                    </div>
+                </div>
+                <div class="panel-right">
+                    <img src="src/assets/img/icon/phone.svg" alt="Phone Icon">
+                    <div class="label">+38 097 295 88 03</div>
+                </div>
+                <!-- Новая третья панель -->
+                <div class="logo-messengers">
+                    <img src="src/assets/img/icon/viber-top.svg" alt="Messenger Icon 1">
+                    <img src="src/assets/img/icon/wats-app-top.svg" alt="Messenger Icon 2">
+                    <img src="src/assets/img/icon/telegram-top.svg" alt="Messenger Icon 3">
+                </div>
+                <div class="language_panel">
+                    <button style="background: none;
+    border: none;">Укр
+                    </button>
+                    <button style="background: none;
+    border: none;">Рус
+                    </button>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="header__bottom bg__primary">
+    <div class="container">
+        <div class="header__bottom--inner position__relative d-flex align-items-center">
+            <div class="categories__menu mobile-v-none" style="
+                    position: relative;left: -100px; margin-left:100px;
+                    ">
+                <div class="categories__menu--header bg__secondary text-white d-flex align-items-center"
+                     data-bs-toggle="collapse" data-bs-target="#categoriesAccordion">
+                    <img src="../src/assets/img/icon/logo-katalog1.svg" alt="Logo Katalog">
+
+                    <span class="categories__menu--title">Каталог товаров</span>
+                    <svg class="categories__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355"
+                         height="8.394" viewBox="0 0 10.355 6.394">
+                        <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"
+                              transform="translate(-6 -8.59)" fill="currentColor"></path>
+                    </svg>
+                </div>
+
+            </div>
+            <div class="header__search--widget d-none d-lg-block header__sticky--none" style="
+                    position: relative;left: -100px; ">
+                <form class="d-flex header__search--form border-radius-5" action="#">
+
+                    <div class="header__search--box">
+                        <label>
+                            <input class="header__search--input" placeholder="Поиск товара"
+                                   svg="src/assets/img/icon/lupa 1.svg">
+                        </label>
+                        <button class="header__search--button bg__primary text-white" aria-label="search button"
+                                type="submit">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15.6952 14.4991L11.7663 10.5588C12.7765 9.4008 13.33 7.94381 13.33 6.42703C13.33 2.88322 10.34 0 6.66499 0C2.98997 0 0 2.88322 0 6.42703C0 9.97085 2.98997 12.8541 6.66499 12.8541C8.04464 12.8541 9.35938 12.4528 10.4834 11.6911L14.4422 15.6613C14.6076 15.827 14.8302 15.9184 15.0687 15.9184C15.2944 15.9184 15.5086 15.8354 15.6711 15.6845C16.0166 15.364 16.0276 14.8325 15.6952 14.4991ZM6.66499 1.67662C9.38141 1.67662 11.5913 3.8076 11.5913 6.42703C11.5913 9.04647 9.38141 11.1775 6.66499 11.1775C3.94857 11.1775 1.73869 9.04647 1.73869 6.42703C1.73869 3.8076 3.94857 1.67662 6.66499 1.67662Z"
+                                      fill="currentColor"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="frame3-panel" style="margin-left: 160px;">
+                <button class="icon-button" style="background: none;border: none;">
+                    <img src="../src/assets/img/icon/cart-logo.svg" alt="Корзина">
+                </button>
+                <button class="icon-button" style="background: none;border: none;">
+                    <img src="../src/assets/img/icon/account-logo.svg" alt="Личный кабинет">
+                </button>
+                <button class="icon-button" style="background: none;border: none;">
+                    <img src="src/assets/img/icon/favorites-logo.svg" alt="Избранное">
+                </button>
+                <button class="icon-button" style="background: none;border: none;">
+                    <img src="src/assets/img/icon/logo-sravnenie.svg" alt="Сравнение">
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- End header area -->
+<!-- All Script JS Plugins here  -->
+<script src="src/assets/js/vendor/popper.js" defer="defer"></script>
+<script src="src/assets/js/vendor/bootstrap.min.js" defer="defer"></script>
+<script src="src/assets/js/plugins/swiper-bundle.min.js"></script>
+<script src="src/assets/js/plugins/glightbox.min.js"></script>
+<script>
+    function toggleDropdown() {
+        var dropdown = document.getElementById("myDropdown");
+        dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+    }
+
+    // Закрыть выпадающий список при клике вне него
+    window.onclick = function (event) {
+        if (!event.target.matches('.panel button')) {
+            var dropdowns = document.getElementsByClassName("dropdown");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.style.display === "block") {
+                    openDropdown.style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+<!-- Customscript js -->
+<script src="src/assets/js/script.js"></script>
+
+</body>
+</html>

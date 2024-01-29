@@ -4,18 +4,18 @@
     <title>Partsix - Auto Parts & Car Accessories Shop HTML Template</title>
     <meta name="description" content="Morden Bootstrap HTML5 Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="../src/assets/img/favicon.ico">
       
      <!-- ======= All CSS Plugins here ======== -->
-    <link rel="stylesheet" href="assets/css/plugins/swiper-bundle.min.css">
-    <link rel="stylesheet" href="assets/css/plugins/glightbox.min.css">
+    <link rel="stylesheet" href="../src/assets/css/plugins/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../src/assets/css/plugins/glightbox.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500&display=swap" rel="stylesheet">
   
     <!-- Plugin css -->
-    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="../src/assets/css/vendor/bootstrap.min.css">
   
     <!-- Custom Style CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../src/assets/css/style.css">
   
   </head>
   
@@ -77,7 +77,7 @@
                       height: 41px;
                       position: relative;
                       left: -90px; ">
-                          <h1 class="main__logo--title"><a class="main__logo--link" href="index.html"><img class="main__logo--img" src="assets\img\logo\logo-mikc 2 .svg" alt="logo-img"></a></h1>
+                          <h1 class="main__logo--title"><a class="main__logo--link" href="../templates/index.html"><img class="main__logo--img" src="assets\img\logo\logo-mikc 2 .svg" alt="logo-img"></a></h1>
                       </div>
                       <div class="panel-container">
                       <div class="header__menu-panel" style="display: inline-flex; padding: 5px 15px; align-items: center; gap: 15px;">
@@ -129,7 +129,7 @@
     left: -100px;
                       ">
                           <div class="categories__menu--header bg__secondary text-white d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#categoriesAccordion">
-                              <img src="assets/img/icon/logo-katalog 1.svg" alt="Logo Katalog">
+                              <img src="../src/assets/img/icon/logo-katalog1.svg" alt="Logo Katalog">
       
                               <span class="categories__menu--title">Каталог товаров</span>
                               <svg class="categories__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394" viewBox="0 0 10.355 6.394">
@@ -197,17 +197,17 @@
   <div class="offcanvas__header">
       <div class="offcanvas__inner">
           <div class="offcanvas__logo">
-              <a class="offcanvas__logo_link" href="index.html">
-                  <img src="assets/img/logo/nav-log.webp" alt="Grocee Logo" width="158" height="36">
+              <a class="offcanvas__logo_link" href="../templates/index.html">
+                  <img src="../src/assets/img/logo/nav-log.webp" alt="Grocee Logo" width="158" height="36">
               </a>
               <button class="offcanvas__close--btn" data-offcanvas>close</button>
           </div>
           <nav class="offcanvas__menu">
               <ul class="offcanvas__menu_ul">
                   <li class="offcanvas__menu_li">
-                      <a class="offcanvas__menu_item" href="index.html">Home</a>
+                      <a class="offcanvas__menu_item" href="../templates/index.html">Home</a>
                       <ul class="offcanvas__sub_menu">
-                          <li class="offcanvas__sub_menu_li"><a href="index.html" class="offcanvas__sub_menu_item">Home One</a></li>
+                          <li class="offcanvas__sub_menu_li"><a href="../templates/index.html" class="offcanvas__sub_menu_item">Home One</a></li>
                           <li class="offcanvas__sub_menu_li"><a href="index-2.html" class="offcanvas__sub_menu_item">Home Two</a></li>
                           <li class="offcanvas__sub_menu_li"><a href="index-3.html" class="offcanvas__sub_menu_item">Home Three</a></li>
                           <li class="offcanvas__sub_menu_li"><a href="index-4.html" class="offcanvas__sub_menu_item">Home Four</a></li>
@@ -294,7 +294,7 @@
               <div class="offcanvas__account--wrapper d-flex">
                   <div class="offcanvas__account--currency">
                       <a class="offcanvas__account--currency__menu d-flex align-items-center text-black" href="javascript:void(0)">
-                          <img src="assets/img/icon/usd-icon.webp" alt="currency">
+                          <img src="../src/assets/img/icon/usd-icon.webp" alt="currency">
                           <span>USD</span> 
                           <svg xmlns="http://www.w3.org/2000/svg" width="9.797" height="6.05" viewBox="0 0 9.797 6.05">
                               <path  d="M14.646,8.59,10.9,12.329,7.151,8.59,6,9.741l4.9,4.9,4.9-4.9Z" transform="translate(-6 -8.59)" fill="currentColor" opacity="0.7"/>
@@ -334,7 +334,7 @@
   <div class="offcanvas__stikcy--toolbar">
       <ul class="d-flex justify-content-between">
           <li class="offcanvas__stikcy--toolbar__list">
-              <a class="offcanvas__stikcy--toolbar__btn" href="index.html">
+              <a class="offcanvas__stikcy--toolbar__btn" href="../templates/index.html">
               <span class="offcanvas__stikcy--toolbar__icon"> 
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="21.51" height="21.443" viewBox="0 0 22 17"><path fill="currentColor" d="M20.9141 7.93359c.1406.11719.2109.26953.2109.45703 0 .14063-.0469.25782-.1406.35157l-.3516.42187c-.1172.14063-.2578.21094-.4219.21094-.1406 0-.2578-.04688-.3515-.14062l-.9844-.77344V15c0 .3047-.1172.5625-.3516.7734-.2109.2344-.4687.3516-.7734.3516h-4.5c-.3047 0-.5742-.1172-.8086-.3516-.2109-.2109-.3164-.4687-.3164-.7734v-3.6562h-2.25V15c0 .3047-.11719.5625-.35156.7734-.21094.2344-.46875.3516-.77344.3516h-4.5c-.30469 0-.57422-.1172-.80859-.3516-.21094-.2109-.31641-.4687-.31641-.7734V8.46094l-.94922.77344c-.11719.09374-.24609.14062-.38672.14062-.16406 0-.30468-.07031-.42187-.21094l-.35157-.42187C.921875 8.625.875 8.50781.875 8.39062c0-.1875.070312-.33984.21094-.45703L9.73438.832031C10.1094.527344 10.5312.375 11 .375s.8906.152344 1.2656.457031l8.6485 7.101559zm-3.7266 6.50391V7.05469L11 1.99219l-6.1875 5.0625v7.38281h3.375v-3.6563c0-.3046.10547-.5624.31641-.7734.23437-.23436.5039-.35155.80859-.35155h3.375c.3047 0 .5625.11719.7734.35155.2344.211.3516.4688.3516.7734v3.6563h3.375z"></path></svg>
                   </span>
@@ -401,7 +401,7 @@
       <div class="minicart__product">
           <div class="minicart__product--items d-flex">
               <div class="minicart__thumb">
-                  <a href="product-details.html"><img src="assets/img/product/small-product/product1.webp" alt="prduct-img"></a>
+                  <a href="product-details.html"><img src="../src/assets/img/product/small-product/product1.webp" alt="prduct-img"></a>
               </div>
               <div class="minicart__text">
                   <h4 class="minicart__subtitle"><a href="product-details.html">Car & Motorbike Care.</a></h4>
@@ -424,7 +424,7 @@
           </div>
           <div class="minicart__product--items d-flex">
               <div class="minicart__thumb">
-                  <a href="product-details.html"><img src="assets/img/product/small-product/product2.webp" alt="prduct-img"></a>
+                  <a href="product-details.html"><img src="../src/assets/img/product/small-product/product2.webp" alt="prduct-img"></a>
               </div>
               <div class="minicart__text">
                   <h4 class="minicart__subtitle"><a href="product-details.html">Engine And Drivetrain.</a></h4>
@@ -474,10 +474,10 @@
 
  
  <!-- All Script JS Plugins here  -->
- <script src="assets/js/vendor/popper.js" defer="defer"></script>
- <script src="assets/js/vendor/bootstrap.min.js" defer="defer"></script>
- <script src="assets/js/plugins/swiper-bundle.min.js"></script>
- <script src="assets/js/plugins/glightbox.min.js"></script>
+ <script src="../src/assets/js/vendor/popper.js" defer="defer"></script>
+ <script src="../src/assets/js/vendor/bootstrap.min.js" defer="defer"></script>
+ <script src="../src/assets/js/plugins/swiper-bundle.min.js"></script>
+ <script src="../src/assets/js/plugins/glightbox.min.js"></script>
  <script>
  export default {
   props: {
@@ -506,7 +506,7 @@
     }
   </script>
 <!-- Customscript js -->
-<script src="assets/js/script.js"></script>
+<script src="../src/assets/js/script.js"></script>
 <style scoped>
  @charset "UTF-8";
 /*
