@@ -1467,7 +1467,20 @@ body.overlay__active::before,
 /*
 Custom css by Nekromaster for Mixon
 */
+.path_panel {
+  display: flex;
+  
+}
 
+.path_text {
+  margin-right: 10px; /* Расстояние между текстом и иконкой */
+}
+
+.path_icon {
+  width: 20px; /* Выберите нужный размер иконки */
+  height: 20px;
+  /* Добавьте стили для иконки, если необходимо */
+}
 .panel-container {
   display: flex;
   justify-content: space-between;
