@@ -1467,6 +1467,7 @@ body.overlay__active::before,
 /*
 Custom css by Nekromaster for Mixon
 */
+
 .panel-container {
   display: flex;
   justify-content: space-between;
@@ -2528,6 +2529,7 @@ Custom css by Nekromaster for Mixon
 .categories__menu {
   width: 225px;
   position: relative;
+  
 }
 
 @media only screen and (max-width: 991px) {
