@@ -52,12 +52,55 @@
 </div>
 <div class="product_description">
   <div style="width: 100%; height: 100%; position: relative">
-     <button  style="width: 20.48px; height: 18.67px;   position: absolute; border: 1px black solid;margin-left: 920px;"></div>
-      <button style="width: 20.48px; height: 18.67px;position: absolute; background: white;border: 1px black solid; margin-left: 950px;"></div>
-        <div style="width: 10px; height: 10px; background: #FE0000; border-radius: 9999px"> </div>
+     <button  style="width: 20.48px; height: 18.67px;   position: absolute; border: 1px black solid;margin-left: 920px;"></button>
+      <button style="width: 20.48px; height: 18.67px;position: absolute; background: white;border: 1px black solid; margin-left: 950px;"></button>
+        <button style="width: 100px; height: 20px;position: absolute; background: white;border: 1px black solid; margin-left: 750px;margin-top:50px"></button>
+          <button style="width: 100px; height: 20px;position: absolute; background: white;border: 1px black solid; margin-left: 750px;margin-top:80px"></button>
+            <button style="width: 100px; height: 20px;position: absolute; background: white;border: 1px black solid; margin-left: 600px;margin-top:80px"></button>
+            <div class="Availability" style="margin-left: 100px;height: 20px;">
+              <div style="margin-right: 200px;">Есть в наличии</div>
+              <img src="путь_к_вашему_изображению.jpg"  style="margin-left: 200px;margin-top:-20px;">
+ </div>
+            <div class="slider-container"style="width: 600px;">
+                <div class="slider"  >
+                  <!-- Ваши слайды -->
+                  <div class="slide" style="width: 500px;height: 500px;margin-top: -60px;margin-left:50px;">
+                    
+                    <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}" alt="Slide 1">
+                    <!-- Дополнительный контент слайда -->
+                  </div>
+                  <div class="slide" style="width: 500px;height: 500px;margin-top: -60px;margin-left:50px; ">
+                    <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}" alt="Slide 2">
+                    <!-- Дополнительный контент слайда -->
+                  </div>
+                  <!-- Добавьте другие слайды по необходимости -->
+              
+                </div>
+                
+                <div class="slide-buttons" style="display: flex; flex-direction: column; margin-left: -400px;">
+                  <!-- Ваши кнопки слайдов с уменьшенными изображениями -->
+                  <button data-slide-index="0"  style="display: flex; flex-direction: column; align-items: center;width: 50px;height: 50px;margin-top:30px;">
+                    <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}" alt="Thumb 1">
+                  </button>
+                  <button data-slide-index="1" style="display: flex; flex-direction: column; align-items: center;width: 50px;height: 50px; margin-top:20px;">
+                    <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}" alt="Thumb 2">
+                  </button>
+                  <!-- Добавьте другие кнопки по необходимости -->
+                </div>
+              </div>
 
 
 </div>
 </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $(".slide-buttons button").click(function() {
+      var index = $(this).data("slide-index");
+      $(".slide").hide();
+      $(".slide").eq(index).show();
+    });
+  });
+</script>
 </html>
