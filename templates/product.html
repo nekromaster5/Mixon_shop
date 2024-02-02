@@ -23,6 +23,7 @@
 </head>
 <body>
  {% include "header.html" %}
+ <div class="description_product">
  <div style="width: 100%; height: 100%; justify-content: flex-start; align-items: center; gap: 13px; display: inline-flex">
   <div style="color: black; font-size: 16px; font-family: Montserrat; font-weight: 400; word-wrap: break-word">Главная</div>
   <div style="width: 9.57px; height: 4.87px; transform: rotate(-90deg); transform-origin: 0 0; border: 1px black solid"></div>
@@ -61,15 +62,18 @@
               <div style="margin-left: 500px;">Есть в наличии</div>
               <img src="путь_к_вашему_изображению.jpg"  style="margin-left: 460px;margin-top:-30px; ">
  </div>
-            <div class="slider-container"style="width: 600px;">
-                <div class="slider"  >
+            <div class="slider-container"style="width: 500px;border-style: solid;    
+            border-color: #0000FF;">
+                <div class="slider" style="border-style: solid;    
+                border-color: #0000FF;"  >
                   <!-- Ваши слайды -->
-                  <div class="slide" style="width: 500px;height: 500px;margin-top: -60px;margin-left:50px;">
+                  <div class="slide" style="width: 200px;height: 200px;margin-top: -60px;margin-left:50px;border-style: solid;    
+                  border-color: #0000FF;">
                     
                     <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}" alt="Slide 1">
                     <!-- Дополнительный контент слайда -->
                   </div>
-                  <div class="slide" style="width: 500px;height: 500px;margin-top: -60px;margin-left:50px; ">
+                  <div class="slide" style="width: 200px;height: 200px;margin-top: -60px;margin-left:50px; ">
                     <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}" alt="Slide 2">
                     <!-- Дополнительный контент слайда -->
                   </div>
@@ -77,7 +81,7 @@
               
                 </div>
                 
-                <div class="slide-buttons" style="display: flex; flex-direction: column; margin-left: -400px;">
+                <div class="slide-buttons" style="display: flex; flex-direction: column; margin-left: -300px;">
                   <!-- Ваши кнопки слайдов с уменьшенными изображениями -->
                   <button data-slide-index="0"  style="display: flex; flex-direction: column; align-items: center;width: 50px;height: 50px;margin-top:30px;">
                     <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}" alt="Thumb 1">
@@ -87,33 +91,52 @@
                   </button>
                   <!-- Добавьте другие кнопки по необходимости -->
                 </div>
-                <div style="margin-left: 500px;width:40px; height: 20px;" >232.00 &#8372:</div>
+
+                 
               </div>
+              <div style="margin-left: 500px;width:70px; height: 20px;order-width: 2px;         /* Толщина границы */
+                border-style: solid;       /* Стиль границы (например, сплошная линия) */
+                border-color: #FF0000;margin-top:15px;" >232.00 &#8372:</div>
               <div style="margin-left: 600px;width:40px; height: 20px; margin-top: -50px;">
                 Упаковка
               </div  style="margin-left: 600px;width:40px; height: 20px; margin-top: -60px;">
               
-              <div style=" /* Frame 14 */
-              position: absolute;
-              width: 182px;
-              height: 40px;
-              left: 726px;
-              right: 532px;
-              top: 617px;
-              bottom: 3588px;
-              /* Auto layout */
-              display: flex;
-              flex-direction: row;
-              justify-content: flex-start;
-              align-items: flex-start;
-              padding: 0px;
-              
-              ;">
-                <button class="button_0" style="width: 20px; height: 20px; margin: 0;margin-left: 170px;"> </button>
-                <button class="button_1"style="width: 20px; height: 20px; margin: 0;margin-left: 320px;"> </button>
-                <button  class="button_2" style="width: 20px; height: 20px;margin: 0; margin-left: 320px;"> </button>
+              <div style="margin: none;margin-right:600px;margin-left:600px;  border-width: 2px;         /* Толщина границы */
+              border-style: solid;       /* Стиль границы (например, сплошная линия) */
+              border-color: #FF0000;height: 20px;witdth: 70px;">
+                <button class="button_0" style="width: 20px; height: 20px; margin: 0;margin"> </button>
+                <button class="button_1"style="width: 20px; height: 20px; margin: 0;"> </button>
+                <button  class="button_2" style="width: 20px; height: 20px;margin: 0; "> </button>
               </div>
-              
+              <div style="margin-left: 600px;width:70px; height: 20px;order-width: 2px;         /* Толщина границы */
+              border-style: solid;      
+              border-color: #FF0000;margin-top:30px;">Цвет:</div>
+              <div class="prodtuct_table" style="margin-left: 600px;width:300px; height: 200px;order-width: 2px;         /* Толщина границы */
+              border-style: solid;      
+              border-color: #FF0000;margin-top:34px; ">
+              <div style="/* Rectangle 253 */
+              border-style: solid;    
+              border-color: #0000FF;margin-top: 1px; ">
+Артикул  Название цвета     Кол-во
+              </div>
+              <div style=
+            "border-style: solid;    
+              border-color: #0000FF;margin-top: 1px;
+             width:30px; height:165px;margin-top: -1px; ">
+             <button style="border-style: solid;    
+             border-color: #0000FF;height:10px;width: 10px;">
+             <button style="border-style: solid;    
+             border-color: #0000FF;">
+             <button style="border-style: solid;    
+             border-color: #0000FF;">
+             <button style="border-style: solid;    
+             border-color: #0000FF;">
+             <button style="border-style: solid;    
+             border-color: #0000FF;">
+             <button style="border-style: solid;    
+             border-color: #0000FF;">
+             
+            </div>
                  
 <div style="position: absolute;
 width: 1114px;
@@ -121,9 +144,11 @@ height: 490px;
 left: 163px;
 right: 163px;
 top: 1185px;
-bottom: 2570px;margin-top: -700px;">
-             Описание Грунтовка влагоизолятор Mixon Аквастоп - это простой в применении высокоэффективныйпродукт, который, впитываясь глубоко в основание, укрепляют его и в результате улучшает сцепление отделочных материалов с основой. Аквастоп повышает влагостойкость покрытия и сокращает расход покровных красок.  Нанесение:  Грунтование пористых и чувствительных к влаге поверхностей, улучшение свойств цементных и известковых строительных растворов. Применяется для внутренних работ.  Сфера применения:  Средство Аквастоп смешивается с водой для приготовления растворов: штукатурка: 1:5 - 1:20; цементные известковые растворы: цементные самовыравнивающиеся смеси Для нанесения на поверхность Аквастопа: бетон, цемент, газобетон, штукатурка; гипсовые плиты; основа для пола.
+bottom: 2570px;margin-top: -700px; border-style: solid;       /* Стиль границы (например, сплошная линия) */
+border-color: #FF0000;margin-top:15px;">
+             Описание Грунтовка влагоизолятор Mixon Аквастоп - это простой в применении высокоэффективныйпродукт, который, впитываясь глубоко в основание, укрепляют его и в результате улучшает сцепление отделочных материалов с основой. Аквастоп повышает влагостойкость покрытия и сокращает расход покровных красок. Нанесение: Грунтование пористых и чувствительных к влаге поверхностей, улучшение свойств цементных и известковых строительных растворов. Применяется для внутренних работ.Сфера применения: Средство Аквастоп смешивается с водой для приготовления растворов: штукатурка: 1:5 - 1:20; цементные известковые растворы: цементные самовыравнивающиеся смеси Для нанесения на поверхность Аквастопа: бетон, цемент, газобетон, штукатурка; гипсовые плиты; основа для пола.
             </div>
+</div>
 </div>
 </div>
 </body>
