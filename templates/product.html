@@ -43,15 +43,27 @@
     <div style="width: 30.40px; height: 29.92px; background: #AEADAA"></div>
 </div>
 <div style="width: 100%; height: 100%; background: white; display: flex;">
-  <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 500; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Все о товаре</button>
-  <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Характеристики</button>
+  <button onclick="switchBlock_to_product_description()" style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 500; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Все о товаре</button>
+  <button onclick="switchBlock_to_Characteristics()" style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Характеристики</button>
   <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Покупают вместе</button>
   <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Похожие товары</button>
   <button class="text" style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Текст</button>
   <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Отзывы</button>
   <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Наличие в магазинах</button>
 </div>
+  
+ <div class="Characteristics">
+  <div style="margin-left:130px;width:140px;height:1px; background:red;">
+  <div><div style="width: 100%; height: 100%; position: relative">
+    <button  style="width: 20.48px; height: 18.67px;   position: absolute; border: 1px black solid;margin-left: 920px;"></button>
+     <button style="width: 20.48px; height: 18.67px;position: absolute; background: white;border: 1px black solid; margin-left: 950px;"></button>
+       <button style="width: 100px; height: 20px;position: absolute; background: white;border: 1px black solid; margin-left: 750px;margin-top:50px"></button>
+         <button style="width: 100px; height: 20px;position: absolute; background: white;border: 1px black solid; margin-left: 750px;margin-top:80px"></button>
+           <button style="width: 100px; height: 20px;position: absolute; background: white;border: 1px black solid; margin-left: 600px;margin-top:80px"></button>
+             </div></div></div></div>
+             
 <div class="product_description">
+  <div style="width:120px;height:1px; background:red;"></div>
   <div style="width: 100%; height: 100%; position: relative">
      <button  style="width: 20.48px; height: 18.67px;   position: absolute; border: 1px black solid;margin-left: 920px;"></button>
       <button style="width: 20.48px; height: 18.67px;position: absolute; background: white;border: 1px black solid; margin-left: 950px;"></button>
@@ -67,7 +79,7 @@
                 <div class="slider" style="border-style: solid;    
                 border-color: #0000FF;"  >
                   <!-- Ваши слайды -->
-                  <div class="slide" style="width: 200px;height: 200px;margin-top: -60px;margin-left:50px;border-style: solid;    
+                  <div class="slide active" style="width: 200px;height: 200px;margin-top: -10px;margin-left:100px;border-style: solid;    
                   border-color: #0000FF;">
                     
                     <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}" alt="Slide 1">
@@ -94,12 +106,18 @@
 
                  
               </div>
-              <div style="margin-left: 500px;width:70px; height: 20px;order-width: 2px;         /* Толщина границы */
-                border-style: solid;       /* Стиль границы (например, сплошная линия) */
-                border-color: #FF0000;margin-top:15px;" >232.00 &#8372:</div>
-              <div style="margin-left: 600px;width:40px; height: 20px; margin-top: -50px;">
+              <div style="  border-style: solid; border-color: #FF0000; width: 100px; height: 30px;
+              margin-left:600px;margin-top: -40px;">
+              232.00 &#8372
+                <p  style="color: gray;
+                text-decoration: line-through;
+                font-size: 0.8em; /* Уменьшение размера текста */ margin-top:-50px;margin-left:80px; width:10px;">232.00 &#8372;</p>
+              </div>
+              
+              
+              <div style="margin-left: 600px;width:40px; height: 20px; margin-top: 10px; ">
                 Упаковка
-              </div  style="margin-left: 600px;width:40px; height: 20px; margin-top: -60px;">
+              </div>
               
               <div style="margin: none;margin-right:600px;margin-left:600px;  border-width: 2px;         /* Толщина границы */
               border-style: solid;       /* Стиль границы (например, сплошная линия) */
@@ -114,6 +132,7 @@
               <div class="prodtuct_table" style="margin-left: 600px;width:300px; height: 200px;order-width: 2px;         /* Толщина границы */
               border-style: solid;      
               border-color: #FF0000;margin-top:34px; ">
+              
               <div style="
               border-style: solid;    
               border-color: #0000FF;margin-top: 1px; ">
@@ -192,11 +211,40 @@ border-color: #FF0000;margin-top:15px;">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   $(document).ready(function() {
+     // Показать первый слайд при загрузке страницы
+     $(".slide.active").show();
+
     $(".slide-buttons button").click(function() {
       var index = $(this).data("slide-index");
       $(".slide").hide();
       $(".slide").eq(index).show();
     });
   });
+  function switchBlock_to_Characteristics() {
+    var productDescriptionBlock = document.querySelector('.product_description');
+    var otherBlock = document.querySelector('.Characteristics');
+
+    // Переключение отображения блоков
+    if (productDescriptionBlock.style.display === 'block') {
+        productDescriptionBlock.style.display = 'none';
+        otherBlock.style.display = 'block';
+    } else {
+        productDescriptionBlock.style.display = 'none';
+        otherBlock.style.display = 'block';
+    }
+}
+function switchBlock_to_product_description() {
+  var productDescriptionBlock = document.querySelector('.Characteristics');
+  var otherBlock = document.querySelector('.product_description');
+
+  // Переключение отображения блоков
+  if (productDescriptionBlock.style.display === 'block') {
+      productDescriptionBlock.style.display = 'none';
+      otherBlock.style.display = 'block';
+  } else {
+      productDescriptionBlock.style.display = 'none';
+      otherBlock.style.display = 'block';
+  }
+}
 </script>
 </html>

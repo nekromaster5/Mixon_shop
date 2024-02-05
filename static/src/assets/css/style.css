@@ -1468,12 +1468,27 @@ body.overlay__active::before,
 Custom css by Nekromaster for Mixon
 */
 /*
+/*
 Product page 
+*/
+
+/* Block changes
+*/
+.product-description {
+  display: block;
+}
+
+.Characteristics {
+  display: none;
+}
+
+/* 
+Product-description
 */
 .slider-container {
   display: flex;
 }
-
+ 
 .slider {
   width: 70%;
 }
