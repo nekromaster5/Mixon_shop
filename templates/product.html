@@ -43,62 +43,80 @@
     <div style="width: 30.40px; height: 29.92px; background: #AEADAA"></div>
 </div>
 <div style="width: 100%; height: 100%; background: white; display: flex;">
-  <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 500; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Все о товаре</button>
-  <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Характеристики</button>
+  <button onclick="switchBlock_to_product_description()" style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 500; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Все о товаре</button>
+  <button onclick="switchBlock_to_Characteristics()" style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Характеристики</button>
   <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Покупают вместе</button>
   <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Похожие товары</button>
    <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Отзывы</button>
   <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Наличие в магазинах</button>
 </div>
+  
+ <div class="Characteristics">
+  <div style="margin-left:130px;width:140px;height:1px; background:red;">
+  <div><div style="width: 100%; height: 100%; position: relative">
+    <button  style="width: 20.48px; height: 18.67px;   position: absolute; border: 1px black solid;margin-left: 920px;"></button>
+     <button style="width: 20.48px; height: 18.67px;position: absolute; background: white;border: 1px black solid; margin-left: 950px;"></button>
+       <button style="width: 100px; height: 20px;position: absolute; background: white;border: 1px black solid; margin-left: 750px;margin-top:50px"></button>
+         <button style="width: 100px; height: 20px;position: absolute; background: white;border: 1px black solid; margin-left: 750px;margin-top:80px"></button>
+           <button style="width: 100px; height: 20px;position: absolute; background: white;border: 1px black solid; margin-left: 600px;margin-top:80px"></button>
+             </div></div></div></div>
+             
 <div class="product_description">
-  <div style="width: 100%; height: 100%; position: relative">
-     <button  style="width: 20.48px; height: 18.67px;   position: absolute; border: 1px black solid;margin-left: 920px;"></button>
-      <button style="width: 20.48px; height: 18.67px;position: absolute; background: white;border: 1px black solid; margin-left: 950px;"></button>
-        <button style=" background-color: #FF0000;border-radius: 5px;width: 100px; height: 30px;position: absolute; background: white;border: 1px black solid; margin-left: 700px;margin-top:40px"></button>
-          <button style="border-radius: 5px;width: 100px; height: 30px;position: absolute; background: white;border: 1px black solid; margin-left: 700px;margin-top:80px"></button>
-            <button style="border-radius: 5px;width: 100px; height: 30px;position: absolute; background: white;border: 1px black solid; margin-left: 580px;margin-top:80px"></button>
-            <div class="Availability" style="margin-left: 100px;height: 25px;margin-top: 10px;">
-              <div style="margin-left: 500px;">Есть в наличии</div>
-              <img src="путь_к_вашему_изображению.jpg"  style="margin-left: 460px;margin-top:-30px; ">
- </div>
-            <div class="slider-container"style="width: 300px;border-style: solid;    
-            border-color: #0000FF;margin-left:30px;">
-                <div class="slider" style="border-style: solid;    
-                border-color: #0000FF;"  >
-                  <!-- Ваши слайды -->
-                  <div class="slide" style="width: 450px;height: 300px;margin-top: -100px;margin-left:40px;border-style: solid;    
-                  border-color: #0000FF;display: block;">
-                    
-                    <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}" alt="Slide 1">
-                    <!-- Дополнительный контент слайда -->
-                  </div>
-                  <div class="slide" style="width: 200px;height: 200px;margin-top: -60px;margin-left:50px; ">
-                    <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}" alt="Slide 2">
-                    <!-- Дополнительный контент слайда -->
-                  </div>
-                  <!-- Добавьте другие слайды по необходимости -->
-              
-                </div>
-                
-                <div class="slide-buttons" style="display: flex; flex-direction: column; margin-left: -200px;">
-                  <!-- Ваши кнопки слайдов с уменьшенными изображениями -->
-                  <button data-slide-index="0"  style="display: flex; flex-direction: column; align-items: center;width: 70px;height: 70px;margin-top:30px;">
-                    <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}" alt="Thumb 1">
-                  </button>
-                  <button data-slide-index="1" style="display: flex; flex-direction: column; align-items: center;width: 70px;height: 70px; margin-top:20px;">
-                    <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}" alt="Thumb 2">
-                  </button>
-                  <!-- Добавьте другие кнопки по необходимости -->
-                </div>
+  <div style="width:120px;height:1px; background:red;"></div>
+  <button  style="width: 20.48px; height: 18.67px;   position: absolute; border: 1px black solid;margin-left: 920px;"></button> 
+  <button style="width: 20.48px; height: 18.67px;position: absolute; background: white;border: 1px black solid; margin-left: 950px;"></button> 
+    <button style=" background-color: #FF0000;border-radius: 5px;width: 100px; height: 30px;position: absolute; background: white;border: 1px black solid; margin-left: 700px;margin-top:40px"></button> 
+      <button style="border-radius: 5px;width: 100px; height: 30px;position: absolute; background: white;border: 1px black solid; margin-left: 700px;margin-top:80px"></button> 
+        <button style="border-radius: 5px;width: 100px; height: 30px;position: absolute; background: white;border: 1px black solid; margin-left: 580px;margin-top:80px"></button> 
+        <div class="Availability" style="margin-left: 100px;height: 25px;margin-top: 10px;"> 
+          <div style="margin-left: 500px;">Есть в наличии</div> 
+          <img src="путь_к_вашему_изображению.jpg"  style="margin-left: 460px;margin-top:-30px; "> 
+</div> 
+        <div class="slider-container"style="width: 300px;border-style: solid;     
+        border-color: #0000FF;margin-left:30px;"> 
+            <div class="slider" style="border-style: solid;     
+            border-color: #0000FF;"  > 
+              <!-- Ваши слайды --> 
+              <div class="slide" style="width: 450px;height: 150px;margin-top: -20px;margin-left:40px;border-style: solid;     
+              border-color: #0000FF;display: block;"> 
+                 
+                <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}" alt="Slide 1" style="margin-top: -20px; height:250px;"> 
+                <!-- Дополнительный контент слайда --> 
+              </div> 
+              <div class="slide" style="width: 200px;height: 200px;margin-top: -60px;margin-left:50px; "> 
+                <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}" alt="Slide 2"> 
+                <!-- Дополнительный контент слайда --> 
+              </div> 
+              <!-- Добавьте другие слайды по необходимости --> 
+           
+            </div> 
+             
+            <div class="slide-buttons" style="display: flex; flex-direction: column; margin-left: -200px;"> 
+              <!-- Ваши кнопки слайдов с уменьшенными изображениями --> 
+              <button data-slide-index="0"  style="display: flex; flex-direction: column; align-items: center;width: 70px;height: 70px;margin-top:30px;"> 
+                <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}" alt="Thumb 1"> 
+              </button> 
+              <button data-slide-index="1" style="display: flex; flex-direction: column; align-items: center;width: 70px;height: 70px; margin-top:20px;"> 
+                <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}" alt="Thumb 2"> 
+              </button> 
+              <!-- Добавьте другие кнопки по необходимости --> 
+            </div>
+
 
                  
               </div>
-              <div style="margin-left: 500px;width:70px; height: 20px;order-width: 2px;         /* Толщина границы */
-                border-style: solid;       /* Стиль границы (например, сплошная линия) */
-                border-color: #FF0000;margin-top:15px;" >232.00 &#8372:</div>
-              <div style="margin-left: 600px;width:40px; height: 20px; margin-top: -50px;">
+              <div style="  border-style: solid; border-color: #FF0000; width: 100px; height: 30px;
+              margin-left:600px;margin-top: -40px;">
+              232.00 &#8372
+                <p  style="color: gray;
+                text-decoration: line-through;
+                font-size: 0.8em; /* Уменьшение размера текста */ margin-top:-50px;margin-left:80px; width:10px;">232.00 &#8372;</p>
+              </div>
+              
+              
+              <div style="margin-left: 600px;width:40px; height: 20px; margin-top: 10px; ">
                 Упаковка
-              </div  style="margin-left: 600px;width:40px; height: 20px; margin-top: -60px;">
+              </div>
               
               <div style="margin: none;margin-right:600px;margin-left:600px;  border-width: 2px;         /* Толщина границы */
               border-style: solid;       /* Стиль границы (например, сплошная линия) */
@@ -113,6 +131,7 @@
               <div class="prodtuct_table" style="margin-left: 600px;width:300px; height: 200px;order-width: 2px;         /* Толщина границы */
               border-style: solid;      
               border-color: #FF0000;margin-top:34px; ">
+              
               <div style="
               border-style: solid;    
               border-color: #0000FF;margin-top: 1px; ">
@@ -191,11 +210,40 @@ border-color: #FF0000;margin-top:15px;">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   $(document).ready(function() {
+     // Показать первый слайд при загрузке страницы
+     $(".slide.active").show();
+
     $(".slide-buttons button").click(function() {
       var index = $(this).data("slide-index");
       $(".slide").hide();
       $(".slide").eq(index).show();
     });
   });
+  function switchBlock_to_Characteristics() {
+    var productDescriptionBlock = document.querySelector('.product_description');
+    var otherBlock = document.querySelector('.Characteristics');
+
+    // Переключение отображения блоков
+    if ( (productDescriptionBlock.style.display === 'block')) {
+        productDescriptionBlock.style.display = 'none';
+        otherBlock.style.display = 'block';
+    } else {
+        productDescriptionBlock.style.display = 'none';
+        otherBlock.style.display = 'block';
+    }
+}
+function switchBlock_to_product_description() {
+  var productDescriptionBlock = document.querySelector('.Characteristics');
+  var otherBlock = document.querySelector('.product_description');
+
+  // Переключение отображения блоков
+  if (productDescriptionBlock.style.display === 'block') {
+      productDescriptionBlock.style.display = 'none';
+      otherBlock.style.display = 'block';
+  } else {
+      productDescriptionBlock.style.display = 'none';
+      otherBlock.style.display = 'block';
+  }
+}
 </script>
 </html>
