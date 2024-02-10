@@ -2,207 +2,262 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  {% load static %}
-  <meta name="description" content="Morden Bootstrap HTML5 Template">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="{% static '/src/assets/img/favicon.ico' %}">
-    
-   <!-- ======= All CSS Plugins here ======== -->
-  <link rel="stylesheet" href="{% static '/src/assets/css/plugins/swiper-bundle.min.css' %}">
-  <link rel="stylesheet" href="{% static '/src/assets/css/plugins/glightbox.min.css' %}">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    {% load static %}
+    <meta name="description" content="Morden Bootstrap HTML5 Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static '/src/assets/img/favicon.ico' %}">
 
-  <!-- Plugin css -->
-  <link rel="stylesheet" href="{% static '/src/assets/css/vendor/bootstrap.min.css' %}">
+    <!-- Font link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
 
-  <!-- Custom Style CSS -->
-  <link rel="stylesheet" href="{% static '/src/assets/css/style.css' %}">
+    <!-- ======= All CSS Plugins here ======== -->
+    <link rel="stylesheet" href="{% static '/src/assets/css/plugins/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static '/src/assets/css/plugins/glightbox.min.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500&display=swap"
+          rel="stylesheet">
+
+    <!-- Plugin css -->
+    <link rel="stylesheet" href="{% static '/src/assets/css/vendor/bootstrap.min.css' %}">
+
+    <!-- Custom Style CSS -->
+    <link rel="stylesheet" href="{% static '/src/assets/css/style.css' %}">
     <title></title>
 
 </head>
 <body>
- {% include "header.html" %}
- <div class="description_product">
- <div style="width: 100%; height: 100%; justify-content: flex-start; align-items: center; gap: 13px; display: inline-flex">
-  <div style="color: black; font-size: 16px; font-family: Montserrat; font-weight: 400; word-wrap: break-word">Главная</div>
-  <div style="width: 9.57px; height: 4.87px; transform: rotate(-90deg); transform-origin: 0 0; border: 1px black solid"></div>
-  <div><span style="color: black; font-size: 16px; font-family: Montserrat; font-weight: 400; word-wrap: break-word">ЛКМ для </span><span style="color: black; font-size: 16px; font-family: Montserrat; font-weight: 400; word-wrap: break-word">Строительства </span></div>
-  <div style="width: 9.57px; height: 4.87px; transform: rotate(-90deg); transform-origin: 0 0; border: 1px black solid"></div>
-  <div style="color: #787878; font-size: 16px; font-family: Montserrat; font-weight: 400; word-wrap: break-word">Шпатлевка универсальная</div>
-  <div style="width: 9.57px; height: 4.87px; transform: rotate(-90deg); transform-origin: 0 0; border: 1px black solid"></div>
-  <div style="color: #787878; font-size: 16px; font-family: Montserrat; font-weight: 400; word-wrap: break-word">Шпатлевка универсальная 2 кг Mixon Uni</div>
-  </div>
-  <div style="color: black; font-size: 30px; font-family: Montserrat; font-weight: 500; word-wrap: break-word">Шпатлевка универсальная 2 кг Mixon Uni</div>
 
-  <div style="width: 100%; height: 100%; justify-content: flex-start; align-items: flex-start; gap: 9px; display: inline-flex">
-    <div style="width: 30.40px; height: 29.92px; background: #FFC107"></div>
-    <div style="width: 30.40px; height: 29.92px; background: #FFC107"></div>
-    <div style="width: 30.40px; height: 29.92px; background: #FFC107"></div>
-    <div style="width: 30.40px; height: 29.92px; background: #FFC107"></div>
-    <div style="width: 30.40px; height: 29.92px; background: #AEADAA"></div>
-</div>
-<div style="width: 100%; height: 100%; background: white; display: flex;">
-  <button onclick="switchBlock_to_product_description()" style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 500; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Все о товаре</button>
-  <button onclick="switchBlock_to_Characteristics()" style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Характеристики</button>
-  <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Покупают вместе</button>
-  <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Похожие товары</button>
-   <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Отзывы</button>
-  <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">Наличие в магазинах</button>
-</div>
-  
-<div class="Characteristics" style="position: relative;">
-  <div style="margin-left:130px;width:140px;height:1px;  margin-top:100px;">
-      <div style=" ">
-          <div style="width: 100%; height: 100%; position: relative;">
-            <p  style=" color: gray;
+<div class="body__wrapper">
+    <header>{% include "header.html" %}</header>
+    <main class="main__content_wrapper">
+        <div class="description_product">
+            <div style="width: 100%; height: 100%; justify-content: flex-start; align-items: center; gap: 13px; display: inline-flex">
+                <div style="color: black; font-size: 16px; font-family: Montserrat; font-weight: 400; word-wrap: break-word">
+                    Главная
+                </div>
+                <div style="width: 9.57px; height: 4.87px; transform: rotate(-90deg); transform-origin: 0 0; border: 1px black solid"></div>
+                <div><span
+                        style="color: black; font-size: 16px; font-family: Montserrat; font-weight: 400; word-wrap: break-word">ЛКМ для </span><span
+                        style="color: black; font-size: 16px; font-family: Montserrat; font-weight: 400; word-wrap: break-word">Строительства </span>
+                </div>
+                <div style="width: 9.57px; height: 4.87px; transform: rotate(-90deg); transform-origin: 0 0; border: 1px black solid"></div>
+                <div style="color: #787878; font-size: 16px; font-family: Montserrat; font-weight: 400; word-wrap: break-word">
+                    Шпатлевка универсальная
+                </div>
+                <div style="width: 9.57px; height: 4.87px; transform: rotate(-90deg); transform-origin: 0 0; border: 1px black solid"></div>
+                <div style="color: #787878; font-size: 16px; font-family: Montserrat; font-weight: 400; word-wrap: break-word">
+                    Шпатлевка универсальная 2 кг Mixon Uni
+                </div>
+            </div>
+            <div style="color: black; font-size: 30px; font-family: Montserrat; font-weight: 500; word-wrap: break-word">
+                Шпатлевка универсальная 2 кг Mixon Uni
+            </div>
+
+            <div style="width: 100%; height: 100%; justify-content: flex-start; align-items: flex-start; gap: 9px; display: inline-flex">
+                <div style="width: 30.40px; height: 29.92px; background: #FFC107"></div>
+                <div style="width: 30.40px; height: 29.92px; background: #FFC107"></div>
+                <div style="width: 30.40px; height: 29.92px; background: #FFC107"></div>
+                <div style="width: 30.40px; height: 29.92px; background: #FFC107"></div>
+                <div style="width: 30.40px; height: 29.92px; background: #AEADAA"></div>
+            </div>
+            <div style="width: 100%; height: 100%; background: white; display: flex;">
+                <button onclick="switchBlock_to_product_description()"
+                        style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 500; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
+                    Все о товаре
+                </button>
+                <button onclick="switchBlock_to_Characteristics()"
+                        style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
+                    Характеристики
+                </button>
+                <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
+                    Покупают вместе
+                </button>
+                <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
+                    Похожие товары
+                </button>
+                <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
+                    Отзывы
+                </button>
+                <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
+                    Наличие в магазинах
+                </button>
+            </div>
+
+            <div class="Characteristics" style="position: relative;">
+                <div style="margin-left:130px;width:140px;height:1px;  margin-top:100px;">
+                    <div style=" ">
+                        <div style="width: 100%; height: 100%; position: relative;">
+                            <p style=" color: gray;
             text-decoration: line-through;
-            font-size: 0.8em; /* Уменьшение размера текста */ margin-top:-50px;margin-left:500px; width:60px;height:15px;">232.00 &#8372;</p>
-            <p  style=" color: red;
+            font-size: 0.8em; /* Уменьшение размера текста */ margin-top:-50px;margin-left:500px; width:60px;height:15px;">
+                                232.00 &#8372;</p>
+                            <p style=" color: red;
             margin-top:40px;margin-left:500px; width:80px;height:30px;">232.00 &#8372;</p>
-              <img style="margin-top: 30px;position: absolute; top: -80px; left:650px; right: 0;" src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}" alt="Slide 2"> 
-              <button style="margin-top:50px;border-radius: 5px;width: 40px; height:40px;position: absolute;border: 1px black solid;left: 720px;"></button>
-              <button style="margin-top:50px;border-radius: 5px;width: 40px; height:40px;position: absolute;border: 1px black solid;left: 670px;"></button>
-              <button style="width: 200px; height: 40px;position: absolute;background: white;border: 1px black solid;left: 620px;margin-top:99px;border-radius: 5px;">Быстрый заказ</button>
-              <button style="width: 160px; height: 40px;position: absolute;background: white;border: 1px black solid;left: 500px;margin-top:50px;border-radius: 5px;">Хочу дешевле</button>
-              <button style="width: 100px; height: 40px;background-color:red;border-radius: 5px;position: absolute;background: white;border: 1px black solid;left: 500px;margin-top:100px;">Купить</button>
-          </div>
-      </div>
-  </div>
-</div>
-<div class="product_description">
-  <div style="width:120px;height:1px; background:red;"></div>
-  <button  style="width: 20.48px; height: 18.67px;   position: absolute; border: 1px black solid;margin-left: 920px;"></button> 
-  <button style="width: 20.48px; height: 18.67px;position: absolute; background: white;border: 1px black solid; margin-left: 950px;"></button> 
-    <button style=" background-color: #FF0000;border-radius: 5px;width: 100px; height: 30px;position: absolute; background: white;border: 1px black solid; margin-left: 700px;margin-top:40px"></button> 
-      <button style="border-radius: 5px;width: 100px; height: 30px;position: absolute; background: white;border: 1px black solid; margin-left: 700px;margin-top:80px"></button> 
-        <button style="border-radius: 5px;width: 100px; height: 30px;position: absolute; background: white;border: 1px black solid; margin-left: 580px;margin-top:80px"></button> 
-        <div class="Availability" style="margin-left: 100px;height: 25px;margin-top: 10px;"> 
-          <div style="margin-left: 500px;">Есть в наличии</div> 
-          <img src="путь_к_вашему_изображению.jpg"  style="margin-left: 460px;margin-top:-30px; "> 
-</div> 
-        <div class="slider-container"style="width: 300px;border-style: solid;     
-        border-color: #0000FF;margin-left:30px;"> 
-            <div class="slider" style="border-style: solid;     
-            border-color: #0000FF;"  > 
-              <!-- Ваши слайды --> 
-              <div class="slide" style="width: 450px;height: 160px;margin-top: -30px;margin-left:40px;border-style: solid;     
-              border-color: #0000FF;display: block;"> 
-                 
-                <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}" alt="Slide 1" style="margin-top: -20px; height:400px;"> 
-                <!-- Дополнительный контент слайда --> 
-              </div> 
-              <div class="slide" style="width: 200px;height: 200px;margin-top: -60px;margin-left:50px; "> 
-                <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}" alt="Slide 2"> 
-                <!-- Дополнительный контент слайда --> 
-              </div> 
-              <!-- Добавьте другие слайды по необходимости --> 
-           
-            </div> 
-             
-            <div class="slide-buttons" style="display: flex; flex-direction: column; margin-left: -200px;"> 
-              <!-- Ваши кнопки слайдов с уменьшенными изображениями --> 
-              <button data-slide-index="0"  style="display: flex; flex-direction: column; align-items: center;width: 70px;height: 70px;margin-top:30px;"> 
-                <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}" alt="Thumb 1"> 
-              </button> 
-              <button data-slide-index="1" style="display: flex; flex-direction: column; align-items: center;width: 70px;height: 70px; margin-top:20px;"> 
-                <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}" alt="Thumb 2"> 
-              </button> 
-              <!-- Добавьте другие кнопки по необходимости --> 
+                            <img style="margin-top: 30px;position: absolute; top: -80px; left:650px; right: 0;"
+                                 src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
+                                 alt="Slide 2">
+                            <button style="margin-top:50px;border-radius: 5px;width: 40px; height:40px;position: absolute;border: 1px black solid;left: 720px;"></button>
+                            <button style="margin-top:50px;border-radius: 5px;width: 40px; height:40px;position: absolute;border: 1px black solid;left: 670px;"></button>
+                            <button style="width: 200px; height: 40px;position: absolute;background: white;border: 1px black solid;left: 620px;margin-top:99px;border-radius: 5px;">
+                                Быстрый заказ
+                            </button>
+                            <button style="width: 160px; height: 40px;position: absolute;background: white;border: 1px black solid;left: 500px;margin-top:50px;border-radius: 5px;">
+                                Хочу дешевле
+                            </button>
+                            <button style="width: 100px; height: 40px;background-color:red;border-radius: 5px;position: absolute;background: white;border: 1px black solid;left: 500px;margin-top:100px;">
+                                Купить
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="product_description">
+                <div style="width:120px;height:1px; background:red;"></div>
+                <button style="width: 20.48px; height: 18.67px;   position: absolute; border: 1px black solid;margin-left: 920px;"></button>
+                <button style="width: 20.48px; height: 18.67px;position: absolute; background: white;border: 1px black solid; margin-left: 950px;"></button>
+                <button style=" background-color: #FF0000;border-radius: 5px;width: 100px; height: 30px;position: absolute; background: white;border: 1px black solid; margin-left: 700px;margin-top:40px"></button>
+                <button style="border-radius: 5px;width: 100px; height: 30px;position: absolute; background: white;border: 1px black solid; margin-left: 700px;margin-top:80px"></button>
+                <button style="border-radius: 5px;width: 100px; height: 30px;position: absolute; background: white;border: 1px black solid; margin-left: 580px;margin-top:80px"></button>
+                <div class="Availability" style="margin-left: 100px;height: 25px;margin-top: 10px;">
+                    <div style="margin-left: 500px;">Есть в наличии</div>
+                    <img src="путь_к_вашему_изображению.jpg" style="margin-left: 460px;margin-top:-30px; ">
+                </div>
+                <div class="slider-container" style="width: 300px;border-style: solid;
+        border-color: #0000FF;margin-left:30px;">
+                    <div class="slider" style="border-style: solid;
+            border-color: #0000FF;">
+                        <!-- Ваши слайды -->
+                        <div class="slide" style="width: 450px;height: 160px;margin-top: -30px;margin-left:40px;border-style: solid;
+              border-color: #0000FF;display: block;">
+
+                            <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
+                                 alt="Slide 1" style="margin-top: -20px; height:400px;">
+                            <!-- Дополнительный контент слайда -->
+                        </div>
+                        <div class="slide" style="width: 200px;height: 200px;margin-top: -60px;margin-left:50px; ">
+                            <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
+                                 alt="Slide 2">
+                            <!-- Дополнительный контент слайда -->
+                        </div>
+                        <!-- Добавьте другие слайды по необходимости -->
+
+                    </div>
+
+                    <div class="slide-buttons" style="display: flex; flex-direction: column; margin-left: -200px;">
+                        <!-- Ваши кнопки слайдов с уменьшенными изображениями -->
+                        <button data-slide-index="0"
+                                style="display: flex; flex-direction: column; align-items: center;width: 70px;height: 70px;margin-top:30px;">
+                            <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}"
+                                 alt="Thumb 1">
+                        </button>
+                        <button data-slide-index="1"
+                                style="display: flex; flex-direction: column; align-items: center;width: 70px;height: 70px; margin-top:20px;">
+                            <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}"
+                                 alt="Thumb 2">
+                        </button>
+                        <!-- Добавьте другие кнопки по необходимости -->
+                    </div>
 
 
-            <div style="  border-style: solid; border-color: #FF0000; width: 160px; height: 30px;
+                    <div style="  border-style: solid; border-color: #FF0000; width: 160px; height: 30px;
             margin-left:520px;margin-top: 3px;">
-            232.00 &#8372
-              <p  style="color: gray;
+                        232.00 &#8372
+                        <p style="color: gray;
               text-decoration: line-through;
-              font-size: 0.8em; /* Уменьшение размера текста */ margin-top:-60px;margin-left:80px; width:10px;">232.00 &#8372;</p>
-            </div>
-              </div>
-              
-              
-              
-              <div style="margin-left: 600px;width:40px; height: 20px; margin-top: 10px; ">
-                Упаковка:
-              </div>
-              
-              <div style="margin: none;margin-right:600px;margin-left:600px;  border-width: 2px;         /* Толщина границы */
+              font-size: 0.8em; /* Уменьшение размера текста */ margin-top:-60px;margin-left:80px; width:10px;">232.00
+                            &#8372;</p>
+                    </div>
+                </div>
+
+
+                <div style="margin-left: 600px;width:40px; height: 20px; margin-top: 10px; ">
+                    Упаковка:
+                </div>
+
+                <div style="margin: none;margin-right:600px;margin-left:600px;  border-width: 2px;         /* Толщина границы */
               border-style: solid;       /* Стиль границы (например, сплошная линия) */
               border-color: #FF0000;height: 20px;witdth: 70px;margin-top:20px;">
-                <button class="button_0" style="width: 40px; height: 40px; margin: 0;">1л. </button>
-                <button class="button_1"style="width: 40px; height: 40px; margin: 0;margin-left:7px;">3л. </button>
-                <button  class="button_2" style="width: 40px; height: 40px;margin: 0; margin-left:8px; ">10л. </button>
-              </div>
-              <div style="margin-left: 600px;width:70px; height: 20px;order-width: 2px;         /* Толщина границы */
-              border-style: solid;      
-              border-color: #FF0000;margin-top:30px;">Цвет:</div>
-              <div class="prodtuct_table" style="margin-left: 600px;width:300px; height: 200px;order-width: 2px;         /* Толщина границы */
-              border-style: solid;      
+                    <button class="button_0" style="width: 40px; height: 40px; margin: 0;">1л.</button>
+                    <button class="button_1" style="width: 40px; height: 40px; margin: 0;margin-left:7px;">3л.</button>
+                    <button class="button_2" style="width: 40px; height: 40px;margin: 0; margin-left:8px; ">10л.
+                    </button>
+                </div>
+                <div style="margin-left: 600px;width:70px; height: 20px;order-width: 2px;         /* Толщина границы */
+              border-style: solid;
+              border-color: #FF0000;margin-top:30px;">Цвет:
+                </div>
+                <div class="prodtuct_table" style="margin-left: 600px;width:300px; height: 200px;order-width: 2px;         /* Толщина границы */
+              border-style: solid;
               border-color: #FF0000;margin-top:20px; ">
-              
-              <div style="
-              border-style: solid;    
+
+                    <div style="
+              border-style: solid;
               border-color: #0000FF;margin-top: 1px; background-color:gray; ">
-Артикул  Название цвета     Кол-во
-              </div>
-              <div style=
-            "border-style: solid;    
+                        Артикул Название цвета Кол-во
+                    </div>
+                    <div style=
+                                 "border-style: solid;
               border-color: #0000FF;margin-top: 1px;
              width:30px; height:165px;margin-top: -1px; ">
-             <button style="border-style: solid;    
+                        <button style="border-style: solid;
              border-color: #0000FF;height:10px;width: 10px;">
-             <button style="border-style: solid;    
+                            <button style="border-style: solid;
              border-color: #0000FF;">
-             <button style="border-style: solid;    
+                                <button style="border-style: solid;
              border-color: #0000FF;">
-             <button style="border-style: solid;    
+                                    <button style="border-style: solid;
              border-color: #0000FF;">
-             <button style="border-style: solid;    
+                                        <button style="border-style: solid;
              border-color: #0000FF;">
-             <button style="border-style: solid;    
+                                            <button style="border-style: solid;
              border-color: #0000FF;">
-            </div>
-             <div style="border-style: solid;    
+                    </div>
+                    <div style="border-style: solid;
             border-color: #FFFF00;margin-top:-165px;width:80px; height: 165px;margin-right:100px;margin-left: 30px;">
-              MA603BAL
-            </div>
-            <div style="border-style: solid;    
+                        MA603BAL
+                    </div>
+                    <div style="border-style: solid;
             border-color: #00FF00;margin-top:-165px;width:80px; height: 165px;margin-right:100px;margin-left: 110px;">
-              Хаки-603
-            </div>
-            <div style="border-style: solid;    
+                        Хаки-603
+                    </div>
+                    <div style="border-style: solid;
             border-color: #00FF00;margin-top:-165px;width:80px; height: 165px;margin-right:100px;margin-left: 110px;">
-              Хаки-603
-            </div>
-             <div style="border-style: solid;    
+                        Хаки-603
+                    </div>
+                    <div style="border-style: solid;
             border-color: #0000FF;margin-top:-165px;width:30px; height: 165px;margin-right:70px;margin-left: 190px;">
-            <div style="
+                        <div style="
               width: 20px;            /* Ширина элипса */
               height: 20px;            /* Высота элипса */
               border-radius: 50%;      /* Задает радиус границы, делая форму элиптической */
               background-color: red;   /* Красный цвет фона */
             "></div>
-            </div>
-            <div style="border-style: solid;    
+                    </div>
+                    <div style="border-style: solid;
             border-color: #00FF00;margin-top:-165px;width:80px; height: 165px;margin-right:100px;margin-left: 220px;">
-              0
-            </div>
-            </div>
-            <div class="delivery" style="border-style: solid;    
+                        0
+                    </div>
+                </div>
+                <div class="delivery" style="border-style: solid;
             border-color: #00FF00; width:400px; height: 180px; margin-left:505px;">
-                  Доставка в Хмельницики
-                  <div  style="border-style: solid;    
-                  border-color:#0000FF;margin-top:10px;">Самовывоз из магазина </div>
-                  <div style="border-style: solid;    
-                  border-color: #0000FF;margin-top:15px;">Самовывоз из отделения</div>
-                  <div style="border-style: solid;    
-                  border-color: #0000FF;margin-top:20px;">Доставка до  квартиры</div>
-            </div>
-            <div>
-             
- 
-<div style="position: absolute;
+                    Доставка в Хмельницики
+                    <div style="border-style: solid;
+                  border-color:#0000FF;margin-top:10px;">Самовывоз из магазина
+                    </div>
+                    <div style="border-style: solid;
+                  border-color: #0000FF;margin-top:15px;">Самовывоз из отделения
+                    </div>
+                    <div style="border-style: solid;
+                  border-color: #0000FF;margin-top:20px;">Доставка до квартиры
+                    </div>
+                </div>
+                <div>
+
+
+                    <div style="position: absolute;
 width: 1114px;
 height: 490px;
 left: 163px;
@@ -210,49 +265,62 @@ right: 163px;
 top: 1185px;
 bottom: 2570px;margin-top: 10000px; border-style: solid;       /* Стиль границы (например, сплошная линия) */
 border-color: #FF0000;margin-top:15px;">
-             Описание Грунтовка влагоизолятор Mixon Аквастоп - это простой в применении высокоэффективныйпродукт, который, впитываясь глубоко в основание, укрепляют его и в результате улучшает сцепление отделочных материалов с основой. Аквастоп повышает влагостойкость покрытия и сокращает расход покровных красок. Нанесение: Грунтование пористых и чувствительных к влаге поверхностей, улучшение свойств цементных и известковых строительных растворов. Применяется для внутренних работ.Сфера применения: Средство Аквастоп смешивается с водой для приготовления растворов: штукатурка: 1:5 - 1:20; цементные известковые растворы: цементные самовыравнивающиеся смеси Для нанесения на поверхность Аквастопа: бетон, цемент, газобетон, штукатурка; гипсовые плиты; основа для пола.
+                        Описание Грунтовка влагоизолятор Mixon Аквастоп - это простой в применении
+                        высокоэффективныйпродукт, который, впитываясь глубоко в основание, укрепляют его и в результате
+                        улучшает сцепление отделочных материалов с основой. Аквастоп повышает влагостойкость покрытия и
+                        сокращает расход покровных красок. Нанесение: Грунтование пористых и чувствительных к влаге
+                        поверхностей, улучшение свойств цементных и известковых строительных растворов. Применяется для
+                        внутренних работ.Сфера применения: Средство Аквастоп смешивается с водой для приготовления
+                        растворов: штукатурка: 1:5 - 1:20; цементные известковые растворы: цементные самовыравнивающиеся
+                        смеси Для нанесения на поверхность Аквастопа: бетон, цемент, газобетон, штукатурка; гипсовые
+                        плиты; основа для пола.
+                    </div>
+                </div>
             </div>
-</div>
-</div>
+        </div>
+    </main>
+    <footer>{% include "footer.html" %}</footer>
 </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-  $(document).ready(function() {
-     // Показать первый слайд при загрузке страницы
-     $(".slide.active").show();
+    $(document).ready(function () {
+        // Показать первый слайд при загрузке страницы
+        $(".slide.active").show();
 
-    $(".slide-buttons button").click(function() {
-      var index = $(this).data("slide-index");
-      $(".slide").hide();
-      $(".slide").eq(index).show();
+        $(".slide-buttons button").click(function () {
+            var index = $(this).data("slide-index");
+            $(".slide").hide();
+            $(".slide").eq(index).show();
+        });
     });
-  });
-  function switchBlock_to_Characteristics() {
-    var productDescriptionBlock = document.querySelector('.product_description');
-    var otherBlock = document.querySelector('.Characteristics');
 
-    // Переключение отображения блоков
-    if ( (productDescriptionBlock.style.display === 'block')) {
-        productDescriptionBlock.style.display = 'none';
-        otherBlock.style.display = 'block';
-    } else {
-        productDescriptionBlock.style.display = 'none';
-        otherBlock.style.display = 'block';
+    function switchBlock_to_Characteristics() {
+        var productDescriptionBlock = document.querySelector('.product_description');
+        var otherBlock = document.querySelector('.Characteristics');
+
+        // Переключение отображения блоков
+        if ((productDescriptionBlock.style.display === 'block')) {
+            productDescriptionBlock.style.display = 'none';
+            otherBlock.style.display = 'block';
+        } else {
+            productDescriptionBlock.style.display = 'none';
+            otherBlock.style.display = 'block';
+        }
     }
-}
-function switchBlock_to_product_description() {
-  var productDescriptionBlock = document.querySelector('.Characteristics');
-  var otherBlock = document.querySelector('.product_description');
 
-  // Переключение отображения блоков
-  if (productDescriptionBlock.style.display === 'block') {
-      productDescriptionBlock.style.display = 'none';
-      otherBlock.style.display = 'block';
-  } else {
-      productDescriptionBlock.style.display = 'none';
-      otherBlock.style.display = 'block';
-  }
-}
+    function switchBlock_to_product_description() {
+        var productDescriptionBlock = document.querySelector('.Characteristics');
+        var otherBlock = document.querySelector('.product_description');
+
+        // Переключение отображения блоков
+        if (productDescriptionBlock.style.display === 'block') {
+            productDescriptionBlock.style.display = 'none';
+            otherBlock.style.display = 'block';
+        } else {
+            productDescriptionBlock.style.display = 'none';
+            otherBlock.style.display = 'block';
+        }
+    }
 </script>
 </html>
