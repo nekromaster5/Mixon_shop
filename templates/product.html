@@ -72,16 +72,16 @@
                         style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
                     Характеристики
                 </button>
-                <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
+                <button onclick="switchBlock_to_Buy_too()"style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
                     Покупают вместе
                 </button>
-                <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
+                <button onclick="" style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
                     Похожие товары
                 </button>
-                <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
+                <button onclick="switchBlock_to_Reviev()" style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
                     Отзывы
                 </button>
-                <button style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
+                <button onclick="switchBlock_to_avability()"style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
                     Наличие в магазинах
                 </button>
             </div>
@@ -99,15 +99,15 @@
                             <img style="margin-top: 30px;position: absolute; top: -80px; left:650px; right: 0;"
                                  src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
                                  alt="Slide 2">
-                            <button style="margin-top:50px;border-radius: 5px;width: 40px; height:40px;position: absolute;border: 1px black solid;left: 720px;"></button>
-                            <button style="margin-top:50px;border-radius: 5px;width: 40px; height:40px;position: absolute;border: 1px black solid;left: 670px;"></button>
-                            <button style="width: 200px; height: 40px;position: absolute;background: white;border: 1px black solid;left: 620px;margin-top:99px;border-radius: 5px;">
+                            <button style="position: absolute;margin-top:50px;border-radius: 5px;width: 40px; height:40px;border: 1px black solid;left: 720px;"></button>
+                            <button style="position: absolute;margin-top:50px;border-radius: 5px;width: 40px; height:40px;border: 1px black solid;left: 670px;"></button>
+                            <button style="position: absolute;width: 200px; height: 40px;background: white;border: 1px black solid;left: 620px;margin-top:99px;border-radius: 5px;">
                                 Быстрый заказ
                             </button>
-                            <button style="width: 160px; height: 40px;position: absolute;background: white;border: 1px black solid;left: 500px;margin-top:50px;border-radius: 5px;">
+                            <button style="position: absolute;width: 160px; height: 40px;background: white;border: 1px black solid;left: 500px;margin-top:50px;border-radius: 5px;">
                                 Хочу дешевле
                             </button>
-                            <button style="width: 100px; height: 40px;background-color:red;border-radius: 5px;position: absolute;background: white;border: 1px black solid;left: 500px;margin-top:100px;">
+                            <button style="position: absolute;width: 100px; height: 40px;background-color:red;border-radius: 5px;background: white;border: 1px black solid;left: 500px;margin-top:100px;">
                                 Купить
                             </button>
                         </div>
@@ -115,7 +115,59 @@
                 </div>
             </div>
             <div class="Buy_too" style="position: relative;"></div>
-             <div class="Review" style="position: relative;"></div>
+             <div class="Review" style="position: relative;flex-direction: row;display:flex;">
+                <div class="f_block" style="border-style: solid;
+                border-color: red;width:740px;height:100px;margin-left:60px;margin-bottom: 5px;margin-top:10px;"></div>
+                <div class="reviev_block" style="border-style: solid;
+                border-color: #FFFF00;width:740px;height:200px;margin-left:60px;margin-bottom: 5px;"></div>
+                <div class="reviev_block" style="border-style: solid;
+                border-color: #FFFF00;width:740px;height:200px;margin-left:60px;margin-bottom: 5px;"></div>
+                <div class="reviev_block" style="border-style: solid;
+                border-color: #FFFF00;width:740px;height:200px;margin-left:60px;margin-bottom: 5px;"></div>
+                <div class="reviev_block" style="border-style: solid;
+                border-color: #FFFF00;width:740px;height:200px;margin-left:60px;margin-bottom: 5px;"></div>
+                <div class="Sale_block" style="border-style: solid;
+                border-color: #FFFF00;width:400px;height:300px;margin-left:800px;position:absolute;margin-top:-800px; margin-bottom: 5px;">
+                <img style="weight:170px;height:170px;margin-left:190px;position: relative;"
+                src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
+               >
+               <div style="width:100px;height:50px;border-style: solid;
+               border-color: #FFFF00;position:absolute;margin-top:-70px;">
+               <p style="color: gray;
+              text-decoration: line-through;
+              font-size: 0.8em; /* Уменьшение размера текста */  width:80px;  ">232.00
+                            &#8372;</p>
+                            <p style=" color: red;
+                            margin-top:-20px; width:80px;height:30px;">232.00 &#8372;</p>
+             </div>
+
+                 <div style="border-style: solid;
+               border-color: #FFFF00;width:400px;height:40px;position:absolute;margin-top:10px;">
+               <button style="position:absolute;width: 170px; height: 40px;background-color:red;border-radius: 5px;background: white;border: 1px black solid;">
+                Хочу дешевле
+            </button>
+            <button style="position:absolute;width: 40px; height: 40px;background-color:red;border-radius: 5px;background: white;border: 1px black solid;margin-left:270px;">
+                
+            </button>
+            <button style="position:absolute;width: 40px; height: 40px;background-color:red;border-radius: 5px;background: white;border: 1px black solid;margin-left:210px;">
+                
+            </button>
+            
+             </div>
+               <div style="border-style: solid;
+               border-color: #FFFF00; margin-top:50px;width:400px;margin-top:80px;">
+                <button style="width: 110px; height: 40px;background-color:red;border-radius: 5px;background: white;border: 1px black solid;">
+                    Купить
+                </button>
+                <button style="width: 200px; height: 40px; background-color: red; border-radius: 5px; background: white; border: 1px black solid; margin-left:70px; ">
+                    Быстрый заказ
+                </button>  
+            </div>
+        </div>
+                <div>
+                
+            </div>
+             </div>
              <div class="avability" style="position: relative;"></div>
             <div class="product_description" >
                 <div style="width:120px;height:1px; background:red;margin-left: 60px;"></div>
@@ -194,8 +246,7 @@
                     </button>
                 </div>
                 <div style="margin-left: 600px;width:70px; height: 20px;order-width: 2px;         /* Толщина границы */
-              border-style: solid;
-              border-color: #FF0000;margin-top:30px;">Цвет:
+              margin-top:30px;">Цвет:
                 </div>
                 <div class="prodtuct_table" style="margin-left: 600px;width:300px; height: 200px;order-width: 2px;         /* Толщина границы */
               border-style: solid;
@@ -286,32 +337,47 @@
         });
     });
 
-    function switchBlock_to_Characteristics() {
-        var productDescriptionBlock = document.querySelector('.product_description');
-        var otherBlock = document.querySelector('.Characteristics');
-
-        // Переключение отображения блоков
-        if ((productDescriptionBlock.style.display === 'block')) {
-            productDescriptionBlock.style.display = 'none';
-            otherBlock.style.display = 'block';
-        } else {
-            productDescriptionBlock.style.display = 'none';
-            otherBlock.style.display = 'block';
-        }
-    }
-
+     
     function switchBlock_to_product_description() {
-        var productDescriptionBlock = document.querySelector('.Characteristics');
-        var otherBlock = document.querySelector('.product_description');
-
-        // Переключение отображения блоков
-        if (productDescriptionBlock.style.display === 'block') {
-            productDescriptionBlock.style.display = 'none';
-            otherBlock.style.display = 'block';
-        } else {
-            productDescriptionBlock.style.display = 'none';
-            otherBlock.style.display = 'block';
-        }
+        document.querySelector('.product_description').style.display = 'block';
+        document.querySelector('.Characteristics').style.display = 'none';
+        document.querySelector('.Buy_too').style.display = 'none';
+        document.querySelector('.Review').style.display = 'none';
+        document.querySelector('.avability').style.display = 'none';
     }
+
+    function switchBlock_to_Characteristics() {
+        document.querySelector('.Characteristics').style.display = 'block';
+        document.querySelector('.product_description').style.display = 'none';
+        document.querySelector('.Buy_too').style.display = 'none';
+        document.querySelector('.Review').style.display = 'none';
+        document.querySelector('.avability').style.display = 'none';
+    }
+    function switchBlock_to_Buy_too() {
+        document.querySelector('.Characteristics').style.display = 'none';
+        document.querySelector('.product_description').style.display = 'none';
+        document.querySelector('.Buy_too').style.display = 'block';
+        document.querySelector('.Review').style.display = 'none';
+        document.querySelector('.avability').style.display = 'none';
+    }
+    function switchBlock_to_Reviev() {
+        document.querySelector('.Characteristics').style.display = 'none';
+        document.querySelector('.product_description').style.display = 'none';
+        document.querySelector('.Buy_too').style.display = 'none';
+        document.querySelector('.Review').style.display = 'block';
+        document.querySelector('.avability').style.display = 'none';
+    }
+    function switchBlock_to_avability() {
+        document.querySelector('.Characteristics').style.display = 'none';
+        document.querySelector('.product_description').style.display = 'none';
+        document.querySelector('.Buy_too').style.display = 'none';
+        document.querySelector('.Review').style.display = 'none';
+        document.querySelector('.avability').style.display = 'block';
+    }
+
+    // Добавьте аналогичные функции для других кнопок, если необходимо
+
+    // По умолчанию активируем блок "Все о товаре" (product_description)
+    switchBlock_to_product_description();
 </script>
 </html>
