@@ -52,7 +52,9 @@
             </div>
             <div class="panel-container"  > 
                 <div class="header__menu-panel" 
-                     style="display: inline-flex;  align-items: center; gap: 15px; margin-right: 50px; width: -20px;">
+                     style="display: inline-flex;  align-items: center; gap: 15px; margin-right: 50px; width: -20px;border-style: solid;
+    
+                     border-color: #00FF00; width:500px; position:absolute;margin-left:-500px;margin-top:-10px;">
                     <button class="menu-panel__button_first"
                             style="background: none;color: #F00; font-family: Montserrat; font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px; border: none;">
                         Акции
@@ -132,16 +134,16 @@
 
             </div>
             <div class="header__search--widget d-none d-lg-block header__sticky--none" style="
-                    position: relative;left: -100px; ">
+                    position: absolute;left: -100px;margin-left:355px;width:600px; ">
                 <form class="d-flex header__search--form border-radius-5" action="#">
 
                     <div class="header__search--box"  >
                         <label>
-                            <input class="header__search--input" style="height: 30px;" >
+                            <input class="header__search--input" style="height: 30px;width:600px" >
                                    <img svg="{% static '/src/assets/img/icon/lupa 1.svg' %}">
                         </label>
                         <button class="header__search--button bg__primary text-white" aria-label="search button"
-                                type="submit" placeholder="Найти" style="width: 100px;"  >
+                                type="submit" placeholder="Найти" style="width: 100px;left:540px; position:absolute;"  >
                                 Найти
                           <!--    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"-->
                                  <!-- xmlns="http://www.w3.org/2000/svg"> -->
@@ -152,7 +154,7 @@
                 </form>
             </div>
 
-            <div class="frame3-panel" style="margin-left: 160px;">
+            <div class="frame3-panel" style="margin-left: 600px;">
                 <button class="icon-button" style="background: none;border: none;">
                     <img src="{% static '/src/assets/img/icon/cart-logo.svg' %}" alt="Корзина">
                 </button>
