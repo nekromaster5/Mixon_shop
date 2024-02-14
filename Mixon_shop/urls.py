@@ -17,9 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from Mixon_shop.views import HomePage
+from Mixon_shop.views import HomePage, ProdBlock
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomePage.as_view(), name='home'),
+    path('catalogue', ProdBlock.as_view(), name='home'),
 ]

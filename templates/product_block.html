@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    {% load static %}
+    <meta name="description" content="Morden Bootstrap HTML5 Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static '/src/assets/img/favicon.ico' %}">
+
+    <!-- Font link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+
+    <!-- ======= All CSS Plugins here ======== -->
+    <link rel="stylesheet" href="{% static '/src/assets/css/plugins/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static '/src/assets/css/plugins/glightbox.min.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500&display=swap"
+          rel="stylesheet">
+
+    <!-- Plugin css -->
+    <link rel="stylesheet" href="{% static '/src/assets/css/vendor/bootstrap.min.css' %}">
+
+    <!-- Custom Style CSS -->
+    <link rel="stylesheet" href="{% static '/src/assets/css/style.css' %}">
+    <title></title>
+</head>
+<body>
+<article class="product__card">
+    <div class="product__card--thumbnail">
+        <img class="product__card--thumbnail__img product__primary--img"
+             src="{% static '/src/assets/img/other/temp_product.png' %}" alt="product image">
+    </div>
+    <div class="product__card--content">
+        <h3 class="product__card--title"><a href="">Шпатлевка<br>универсальная<br>Карс 1 кг UNI</a></h3>
+        <ul class="rating product__card--rating d-flex">
+            <li class="rating__list">
+                <span class="rating__icon">
+                    <img src="{% static '/src/assets/img/other/rating_star_filled.png' %}" alt="filled star">
+                </span>
+            </li>
+            <li class="rating__list">
+                <span class="rating__icon">
+                    <img src="{% static '/src/assets/img/other/rating_star_filled.png' %}" alt="filled star">
+                </span>
+            </li>
+            <li class="rating__list">
+                <span class="rating__icon">
+                    <img src="{% static '/src/assets/img/other/rating_star_filled.png' %}" alt="filled star">
+                </span>
+            </li>
+            <li class="rating__list">
+                <span class="rating__icon">
+                    <img src="{% static '/src/assets/img/other/rating_star_filled.png' %}" alt="filled star">
+                </span>
+            </li>
+            <li class="rating__list">
+                <span class="rating__icon">
+                    <img src="{% static '/src/assets/img/other/rating_star_void.png' %}" alt="void star">
+                </span>
+            </li>
+        </ul>
+        <ul class="rating__review--text d-flex">
+            <li>
+                <span><img class="d-inline-block" style="width: 13px; height: 14px;" src="{% static '/src/assets/img/icon/like_icon.png' %}"
+                                                        alt="review icon"> 67</span>
+            </li>
+            <li>
+                <span><img class="d-inline-block" style="width: 15px; height: 12px;" src="{% static '/src/assets/img/icon/review_icon.png' %}"
+                                                        alt="review icon"> 23</span>
+            </li>
+        </ul>
+        <div class="product__card--price d-flex">
+            <span class="current__price">232.00₴</span>
+            <span class="is__in_stock">Есть в наличии</span>
+        </div>
+    </div>
+</article>
+</body>
+</html>
