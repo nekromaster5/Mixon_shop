@@ -10,4 +10,4 @@ class HomePage(View):
 
 class ProdBlock(View):
     def get(self, request):
-        return render(request, 'product_block.html')
+        return render(request, 'catalogue.html')
