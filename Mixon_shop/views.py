@@ -5,9 +5,14 @@ from django.views import View
 
 class HomePage(View):
     def get(self, request):
-        return render(request, 'product.html')
+        return render(request, 'home_page.html')
 
 
-class ProdBlock(View):
+class CataloguePage(View):
     def get(self, request):
         return render(request, 'catalogue.html')
+
+
+class ProductPage(View):
+    def get(self, request):
+        return render(request, 'product.html')

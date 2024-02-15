@@ -3,7 +3,7 @@ const rigger = require('gulp-rigger');
 
 // Задача для обработки каталога
 gulp.task('catalog', function() {
-  return gulp.src('partsix/catalog.html') // Путь к вашему каталогу
+  return gulp.src('partsix/home_page.html') // Путь к вашему каталогу
     .pipe(rigger({
       includePaths: ['partsix'] // Папка, где находятся header.html и другие файлы
     }))
