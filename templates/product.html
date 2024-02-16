@@ -202,9 +202,80 @@
                         </div>
                     </div>
                 </div>
-                <div class="Buy_too" style="">
-                    <div style="width:170px;height:3px; background:red; position:relative;left:420px;top:6px;"></div>
+                <div class="Buy_too">
+                    <div style="width:170px;height:3px; background:red; position:relative;left:330px;top: 9px"></div>
+                    <div class="mb-6" style="margin-top:10px;background:white;">
+                        <span class="buying-together__content--title mt-5 mb-5">Покупают вместе</span>
+                    </div>
+                    <div class="row">
+                        <div class="row col-lg-8 mb-6" style="margin-left: -4px">
+                            {% for i in 'abcdef'|make_list %}
+                                <div class="col-lg-5 mb-6">
+                                    {% include "product_block.html" %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-lg-5 mb-6 bg-white">
+                            <div>{# style="width: 100%; height: 100%; position: relative;" #}
+                                <div>
 
+                                </div>
+                                <div class="d-flex">
+                                    {# style="+ position:absolute;width:150px;margin-left:500px;margin-top:-50px;" #}<img
+                                        src="{% static '/src/assets/img/icon/Path 47.png' %}">
+                                    <p>{# style="position:absolute;margin-left:27px;margin-top:-21px;color:green;" #}Есть
+                                        в
+                                        наличии
+                                    <p>
+                                </div>
+                                <p>265.00 &#8372;</p>
+                                {#                                style=" color: gray;#}
+                                {#        text-decoration: line-through;#}
+                                {#        font-size: 0.8em; /* Уменьшение размера текста */ margin-top:-20px;margin-left:500px; width:60px;height:15px;position:absolute;"#}
+                                <p>232.00 &#8372;</p>
+                                {#                                style=" color: gray;#}
+                                {#        text-decoration: line-through;#}
+                                {#        font-size: 0.8em; /* Уменьшение размера текста */ margin-top:-20px;margin-left:500px; width:60px;height:15px;position:absolute;"#}
+                                <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
+                                     alt="Slide 2">
+                                {#  style="margin-top: 30px;position: absolute; top: -120px; left:650px; right: 0;" #}
+                                <button>
+                                    {#                                    style="position: absolute;margin-top:50px;border-radius: 5px;width: 40px;#}
+                                    {#                                    height:40px;border: 1px black solid;left: 720px;box-shadow: 0 4px 8px 0#}
+                                    {#                                    rgba(0,0,0,0.2);border:none;"#}
+                                    <img src="{% static '/src/assets/img/icon/Path 49.png' %}"></button>
+                                <button>
+                                    {#                                    style="position: absolute;margin-top:50px;border-radius: 5px;width: 40px;#}
+                                    {#                                    height:40px;border: 1px black solid;left: 670px;box-shadow: 0 4px 8px 0#}
+                                    {#                                    rgba(0,0,0,0.2);border:none;"#}
+                                    <img src="{% static '/src/assets/img/icon/Group 34.png' %}"></button>
+                                <button>
+                                    {#                                    style="position: absolute;width: 200px; height: 40px;background: white;border: 1px#}
+                                    {#                                    black solid;left: 620px;margin-top:99px;border-radius: 5px;border-color:red;"#}
+                                    <img src="{% static '/src/assets/img/icon/Group 94.png' %}">
+                                    <p>Быстрый заказ</p>
+                                    {#                                     style="position:absolute;margin-top:-23px;margin-left:30px;color:red;"#}
+                                </button>
+                                <button>
+                                    {#                                    style=" box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);position: absolute;width: 160px;#}
+                                    {#                                    height: 40px;background: white;border:none;left:#}
+                                    {#                                    500px;margin-top:50px;border-radius: 5px;"#}
+                                    <img src="{% static '/src/assets/img/icon/Group 95.png' %}">
+                                    <p>Хочу дешевле</p>
+                                    {#                                    style="position:absolute; margin-top:-25px;margin-left:30px;"#}
+                                </button>
+                                <button>
+{#                                    style="position: absolute;width: 100px; height:#}
+                                    {#                                    40px;background-color:red;border-radius: 5px; border: 1px black solid;left:#}
+                                    {#                                    500px;margin-top:100px;border:none;"#}
+                                    <img src="{% static '/src/assets/img/icon/Path 55.png' %}"> {#  style="position:relative;top:5px;" #}
+                                    <p>{#  style="color:white;" #}
+                                    <p>Купить</p>{#  style="position:relative;top:-33px;left:10px;color:white;" #}
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
                 <div class="Review"
                      style="position: relative;flex-direction: row;display:flex;background-color:white;">
