@@ -20,7 +20,7 @@
 :root {
     --primary-color: #212121;
     --on_hover-color: rgb(255, 0, 0);
-    --secondary-color: #ED1D24;
+    --secondary-color: rgb(255, 0, 0);
     --grey-color: rgb(174, 173, 170);
     --foreground-color: rgb(0, 0, 0);
     --foreground-sub-color: #898686;
@@ -806,43 +806,43 @@ select {
     position: relative;
 }
 
-.section__heading::before {
-    position: absolute;
-    content: "";
-    width: 2.5rem;
-    height: 2.5rem;
-    border: 1px solid var(--secondary-color);
-    left: 0;
-    top: 1px;
-    border-radius: 50%;
-}
+/*.section__heading::before {*/
+/*    position: absolute;*/
+/*    content: "";*/
+/*    width: 2.5rem;*/
+/*    height: 2.5rem;*/
+/*    border: 1px solid var(--secondary-color);*/
+/*    left: 0;*/
+/*    top: 1px;*/
+/*    border-radius: 50%;*/
+/*}*/
 
-@media only screen and (min-width: 768px) {
-    .section__heading::before {
-        top: 3px;
-    }
-}
+/*@media only screen and (min-width: 768px) {*/
+/*    .section__heading::before {*/
+/*        top: 3px;*/
+/*    }*/
+/*}*/
 
-.section__heading::after {
-    position: absolute;
-    content: "";
-    width: 1.1rem;
-    height: 1.1rem;
-    background: var(--secondary-color);
-    left: 7px;
-    top: 8px;
-    border-radius: 50%;
-}
+/*.section__heading::after {*/
+/*    position: absolute;*/
+/*    content: "";*/
+/*    width: 1.1rem;*/
+/*    height: 1.1rem;*/
+/*    background: var(--secondary-color);*/
+/*    left: 7px;*/
+/*    top: 8px;*/
+/*    border-radius: 50%;*/
+/*}*/
 
-@media only screen and (min-width: 768px) {
-    .section__heading::after {
-        top: 10px;
-    }
-}
+/*@media only screen and (min-width: 768px) {*/
+/*    .section__heading::after {*/
+/*        top: 10px;*/
+/*    }*/
+/*}*/
 
 .section__heading--maintitle {
-    text-transform: uppercase;
-    padding-left: 3.4rem;
+    font-size: 30px;
+    font-weight: 500;
 }
 
 .section__heading--maintitle span {
@@ -880,6 +880,12 @@ select {
         font-size: 2rem;
         line-height: 2.6rem;
     }
+}
+
+.section__heading--maintitle--text__secondary{
+    color: var(--secondary-color);
+    font-size: 15px;
+    font-weight: 500;
 }
 
 .section__heading.style2::before {
@@ -4236,14 +4242,16 @@ input[type=number]::-webkit-outer-spin-button {
 /*}*/
 
 .product__card--thumbnail {
-    padding: 2rem;
+    /*padding: 2rem;*/
     position: relative;
     overflow: hidden;
+    align-items: center;
 }
 
 @media only screen and (min-width: 1200px) {
     .product__card--thumbnail {
-        padding: 2rem 2.5rem;
+        padding: 0.5rem 0.5rem;
+
     }
 }
 
@@ -4982,5 +4990,4 @@ input[type=number]::-webkit-outer-spin-button {
     margin-bottom: 0;
     border-bottom: 0;
 }
-
 
