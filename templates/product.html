@@ -32,7 +32,7 @@
 
 <div class="body__wrapper">
     <header>{% include "header.html" %}</header>
-    <main class="main__content_wrapper" style="">
+    <main class="main__content_wrapper" style="background:#E5E5E5;">
         <div class="description_product">
             <div class="container">
 
@@ -57,6 +57,45 @@
                         </div>
                         <h1 class="breadcrumb__content--title">Шпатлевка универсальная 2 кг Mixon Uni</h1>
                     </div>
+                    <ul class="rating product__card--rating d-flex">
+                        <li class="rating__list">
+                            <span class="rating__icon">
+                                <img src="{% static '/src/assets/img/other/rating_star_filled.png' %}" alt="filled star">
+                            </span>
+                        </li>
+                        <li class="rating__list">
+                            <span class="rating__icon">
+                                <img src="{% static '/src/assets/img/other/rating_star_filled.png' %}" alt="filled star">
+                            </span>
+                        </li>
+                        <li class="rating__list">
+                            <span class="rating__icon">
+                                <img src="{% static '/src/assets/img/other/rating_star_filled.png' %}" alt="filled star">
+                            </span>
+                        </li>
+                        <li class="rating__list">
+                            <span class="rating__icon">
+                                <img src="{% static '/src/assets/img/other/rating_star_filled.png' %}" alt="filled star">
+                            </span>
+                        </li>
+                        <li class="rating__list">
+                            <span class="rating__icon">
+                                <img src="{% static '/src/assets/img/other/rating_star_void.png' %}" alt="void star">
+                            </span>
+                        </li>
+                    </ul>
+                    <ul class="rating__review--text d-flex">
+                        <li>
+                            <span><img class="d-inline-block" style="width: 13px; height: 14px;" src="{% static '/src/assets/img/icon/like_icon.png' %}"
+                                                                    alt="review icon"> 67</span>
+                        </li>
+                        <li class="invisible">ad</li>
+                        <li>
+                            <span><img class="d-inline-block" style="width: 15px; height: 12px;" src="{% static '/src/assets/img/icon/review_icon.png' %}"
+                                                                    alt="review icon"> 23</span>
+                        </li>
+                    </ul>
+                    <br>
                 </section>
 
                 <div style="width: 100%; height: 30px; justify-content: flex-start; align-items: flex-start; gap: 9px; display: inline-flex;">
