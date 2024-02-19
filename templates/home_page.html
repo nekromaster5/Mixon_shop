@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     {% load static %}
-    <title>Partsix - Auto Parts & Car Accessories Shop HTML Template</title>
+    <title></title>
     <meta name="description" content="Morden Bootstrap HTML5 Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="{% static '/src/assets/img/favicon.ico' %}">
@@ -35,71 +35,78 @@
     <main class="main__content_wrapper bg__off_white">
         <section class="slider--section mb-7">
             <div class="container">
-                <iframe src="../templates/header.html" frameborder="0" style="width: 100%; height: 300px;"></iframe>
-
+              
                 <link rel="import" href="publuic/header.html">
 
                 <div id="app"></div>
-                <div class="vertical-block" style="margin-left: 100px; ">
-                    <div class="item" onclick="handleItemClick('Item 1') ">
-                        <img src="path/to/logo1.png" alt="Logo 1">
-                        <p>Item 1</p>
+                <div class="vertical-block" style="position:relative;margin-left:15px; px;height:550px; ">
+                    <div class="item" style="position:relative;top:20px;left:15px;" onclick="handleItemClick('Item 1')"  >
+                        <img style="position:absolute;margin-top:3px;left:-30px;" src="{% static '/src/assets/img/icon/akciya 1.svg' %}">
+                        <p style="font-family:Montserrat;color:red;font-weight: 500;">Акции</p>
                     </div>
-                    <div class="item" onclick="handleItemClick('Item 2')">
-                        <img src="path/to/logo2.png" alt="Logo 2">
-                        <p>Item 2</p>
+                    <div class="item"  style="position:relative;top:30px;left:15px;"onclick="handleItemClick('Item 2')">
+                        <img style="position:absolute;margin-top:px;left:-30px;" src="{% static '/src/assets/img/icon/lkm-stroitelstvo 1.svg' %}">
+                        <p style="font-family:Montserrat; font-weight: 500;position:relative; ">
+                            ЛКМ для Строительства</p>
+                    </div>  
+                    <div class="item" style="position:relative;top:40px;left:15px;" onclick="handleItemClick('Item 1') ">
+                        <img style="position:absolute;margin-top:px;left:-30px;"src="{% static '/src/assets/img/icon/lkm-autoremont 1.svg' %}">
+                        <p style="font-family:Montserrat; font-weight: 500;">ЛКМ для Авторемонта</p>
+                    </div>
+                    <div class="item" style="position:relative;top:50px;left:15px;" onclick="handleItemClick('Item 2')">
+                        <img style="position:absolute;margin-top:px;left:-30px;"src="{% static '/src/assets/img/icon/lkm-derevo 1.svg' %}">
+                        <p style="font-family:Montserrat; font-weight: 500;">ЛКМ для Древообработки</p>
+                    </div>
+                    <div class="item" style="position:relative;top:60px;left:15px;" onclick="handleItemClick('Item 1') ">
+                        <img style="position:absolute;margin-top:px;left:-30px;" src="{% static '/src/assets/img/icon/lkm-industry 1.svg' %}">
+                        <p style="font-family:Montserrat; font-weight: 500;">ЛКМ для Промышленности</p>
+                    </div>
+                    <div class="item" style="position:relative;top:70px;left:15px;" onclick="handleItemClick('Item 2')">
+                        <img style="position:absolute;margin-top:px;left:-30px;"src="{% static '/src/assets/img/icon/auto-chemikal 1.svg' %}">
+                        <p style="font-family:Montserrat; font-weight: 500;">Автохимия,автокосметика,<br>
+                            оборудование для автомоек</p>
+                    </div>
+                    <div class="item" style="position:relative;top:80px;left:15px;" onclick="handleItemClick('Item 2')">
+                        <img style="position:absolute;margin-top:px;left:-30px;"src="{% static '/src/assets/img/icon/instrument 1.svg' %}">
+                        <p style="font-family:Montserrat; font-weight: 500;">Инструменты, аксесуары,<br> оборудование</p>
                     </div>
                     <!-- Add more items as needed -->
                 </div>
 
-                <script>
-                    function handleItemClick(itemName) {
-                        alert('Clicked on ' + itemName);
-                        // Add your custom click handling logic here
-                    }
-                </script>
+                 
                 <!-- Добавьте другие элементы по аналогии -->
-                <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-                <div class="swiper-container">
-                    <!-- Дополнительные обертки, если нужны -->
-                    <div class="swiper-wrapper">
-                        <!-- Слайды -->
-                        <div class="swiper-slide">Слайд 1</div>
-                        <div class="swiper-slide">Слайд 2</div>
-                        <div class="swiper-slide">Слайд 3</div>
-                        <!-- Добавьте нужное количество слайдов -->
-                    </div>
-                    <!-- Если нужны навигационные кнопки -->
-                    <!-- <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div> -->
-                    <!-- Если нужны индикаторы слайдов -->
-                    <div class="swiper-pagination"></div>
+                <div style="position:relative;top:-550px;left:300px;">
+                <img style="position:realtive;  "src="{% static '/src/assets/img/icon/slaider 2.png' %}">
+                <div style="position:realtive; width:190px;height:5px;margin-left:400px;margin-top:20px; ">
+                    <div style=" width:30px;height:2px;background-color:grey;"></div>
+                    <div style="position:realtive;margin-left:60px;margin-top:-4px;width:30px;height:2px;background-color:grey;"></div>
+                    <div style="position:realtive;margin-left:90px;margin-top:-8px;width:30px;height:2px;background-color:red;"></div>
+                    <div style="position:realtive;margin-left:40px;width:30px;height:2px;background-color:grey;"></div>
+                    <div style="position:realtive;margin-left:50px;width:30px;height:2px;background-color:grey;"></div>
                 </div>
-
+                </div>
+                 
                 <!-- Блок с кнопками "brends" -->
-                <div class="brends">
-                    <button>Кнопка 1</button>
-                    <button>Кнопка 2</button>
-                    <button>Кнопка 3</button>
-                    <button>Кнопка 4</button>
-                    <button>Кнопка 5</button>
-                    <button>Кнопка 6</button>
+                <div class="brends" style="position:relative;top:-450px;">
+                    <button style="border:none;position:realtive;width:170;heigh:63; "> 
+                    <img style="position:realtive;left:px;margin-left:20px;"src="{% static '/src/assets/img/icon/logo-mixon.png' %}">
+                </button>
+                    <button style="border:none;width:170;heigh:63;position:relative;left:20px;top:-10px;">
+                <img style="position:realtive;left:px;margin-left:20px;"src="{% static '/src/assets/img/icon/Path 82.png' %}">
+                    </button>
+                    <button style="border:none;width:170;heigh:63;position:relative;left:40px;top:-10px;"> 
+                        <img style="position:realtive;left:px;margin-left:20px;"src="{% static '/src/assets/img/icon/Logo_1.png' %}">
+                    </button>
+                    <button style="border:none;width:170;heigh:63;position:relative;left:60px;"> 
+                        <img style="position:realtive;left:px;margin-left:20px;"src="{% static '/src/assets/img/icon/Logo_2.png' %}">
+                    </button>
+                    <button style="border:none;width:170;heigh:63; position:relative;left:100px;top:-10px;"> 
+                    <img style="position:realtive;left:px;margin-left:20px;"src="{% static '/src/assets/img/icon/logo-prodyver.png' %}">
+                    </button>
+                    <button style="border:none;width:170;heigh:63; position:relative;left:140px;top:-10px;">Все бренды >></button>
                 </div>
 
-                <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-                <!-- Инициализация слайдера -->
-                <script>
-                    var swiper = new Swiper('.swiper-container', {
-                        navigation: {
-                            nextEl: '.swiper-button-next',
-                            prevEl: '.swiper-button-prev',
-                        },
-                        pagination: {
-                            el: '.swiper-pagination',
-                            clickable: true,
-                        },
-                    });
-                </script>
+                 
                 <!-- All Script JS Plugins here  -->
                 <script src="{% static '/src/assets/js/vendor/popper.js' %}" defer="defer"></script>
                 <script src="{% static '/src/assets/js/vendor/bootstrap.min.js' %}" defer="defer"></script>
