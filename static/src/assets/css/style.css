@@ -4998,4 +4998,37 @@ input[type=number]::-webkit-outer-spin-button {
     margin-left: 3rem;
     font-size: 20px;
 }
+/*Cabinet styles*/
+.Cabinet_Heading_area
+{
 
+}
+.personal_name{
+    color: red;
+    margin-top: 5px; /* Добавьте необходимый верхний отступ для разделения от h3 */
+}
+.widget__personal_cabinet_button {
+    list-style-type: none; /* Убираем маркеры списка */
+}
+
+.widget__cabinet--button {
+     background-color: none;
+     
+}
+
+.widget__cabinet--button img {
+    margin-right: 10px; /* Добавляем отступ справа для изображения */
+}
+.drop_down_cabinet_city_list
+{
+    width:10px;
+    height:10px;                                 
+    margin-left:-20px;
+    background-color: transparent;
+    border: none;
+}
+.cabinet_save_button
+{
+    width:160px;
+    height:40px;     
+}

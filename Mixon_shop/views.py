@@ -16,3 +16,7 @@ class CataloguePage(View):
 class ProductPage(View):
     def get(self, request):
         return render(request, 'product.html')
+
+class Personalpage(View):
+    def get(self, request):
+        return render(request, 'Personal_Area.html')
