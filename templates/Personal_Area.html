@@ -114,7 +114,21 @@
                     </div>
                     <div class="orders_history col-lg-8"></div>
                      
-                    <div class="my_review col-lg-8"></div>
+                    <div class="my_review col-lg-8">
+                        <div class="review_personal_block ml-6" style="">
+                            <img src="{% static '/src/assets/img/icon/tovar-photo 1.png' %}">
+                            <div class="rev_div d-flex" style="width:260px;height:35px; margin-left: 200px; position: relative; top: -100px;">
+                                <h2 class="h3">Шпатлевка универсальная Карс 1 кг UNI</h2>
+                            </div>
+                            <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                        </div>
+                        <div class="review_personal_block ml-6" style="">
+                            <img src="{% static '/src/assets/img/icon/tovar-photo 1.png' %}">
+       
+                               </div>
+                          
+                             
+                    </div>
                      
                     <div class="my_marks col-lg-8-ml-6"  ></div>
                     <div class="contact_information col-lg-8" style="margin-left:20px;">
@@ -149,13 +163,18 @@
                                     <input type="text" class="form-control" placeholder="Четвертая строка ввода">
                                 </div>
                         </div>
-                        <div class="contact_block_first ml-6 d-flex" style="">
+                        <div class="contact_block_first ml-6  " style="">
                             <h2 class="h3">Пароль:</h2>
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-6  ">
                                     <!-- Первая колонка с двумя строками ввода -->
-                                    <input type="text" class="form-control mb-2" placeholder="Первая строка ввода">
-                                    <button class="cabinet_save_button" style="width:160px;
+                                    <input type="text" class="form-control mb-2 d-flex" placeholder="Первая строка ввода">
+                                    <button class="password_hider   " style="width:12px;
+                                    height:px; 
+                                    background-color:transparent ;
+                                     
+                                    margin-top:-100px;"><img png="{% static '/src/assets/img/icon/Group 484.png' %}"></button>
+                                    <button class="cabinet_save_button"  style="width:160px;
                                     height:40px; margin-top:10px;background-color:red;border:none;"><p>Сохранить</p></button>
                                  </div>
                                 <div class="col-lg-6">
@@ -205,10 +224,10 @@
     }
 
     function switchBlock_to_my_review() {
-        document.querySelector('.zakladki  ').style.display = 'none';
+        document.querySelector('.zakladki').style.display = 'none';
         document.querySelector('.comparison_lists').style.display = 'none';
         document.querySelector('.orders_history').style.display = 'none';
-        document.querySelector('.my_review ').style.display = 'block';
+        document.querySelector('.my_review').style.display = 'block';
         document.querySelector('.my_marks').style.display = 'none';
         document.querySelector(".contact_information").style.display = 'none';
     }

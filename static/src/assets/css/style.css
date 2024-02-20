@@ -5032,3 +5032,9 @@ input[type=number]::-webkit-outer-spin-button {
     width:160px;
     height:40px;     
 }
+.password_hider{
+    width:12px;
+    height:8px; 
+    background-color:transparent ;
+    border:none;
+}
