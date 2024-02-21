@@ -5038,3 +5038,11 @@ input[type=number]::-webkit-outer-spin-button {
     background-color:transparent ;
     border:none;
 }
+.comparison-container p {
+    float: left;
+    margin-right: 10px; /* добавляем отступ справа */
+}
+
+.comparison-container button {
+    float: left;
+}

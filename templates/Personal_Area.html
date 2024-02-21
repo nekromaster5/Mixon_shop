@@ -64,33 +64,33 @@
                                     <div class="widget-fucntions">
                                         <ul class="widget__personal_cabinet_button">
                                             <li class="widget__cabinet--button-list" style=" display: flex;align-items: center;">
-                                                <img class="widget__cabinet--button img" style="margin-right: 10px;" src="{% static '/src/assets/img/icon/' %}">
+                                                <img class="widget__cabinet--button img" style="margin-right: 10px;" src="{% static '/src/assets/img/icon/Path 38.png' %}">
                                                  <button onclick="switchBlock_to_zakladki()" class="widget__cabinet--button" style="  background-color: transparent; border:none;">Закладки</button>
                                             </li>
                                             <li class="widget__cabinet--button" style=" display: flex;align-items: center;margin-top:10px;">
-                                                <img class="widget__cabinet--button img" style="margin-right: 10px;" src="{% static '/src/assets/img/icon/' %}">
-                                                <button onclick="switchBlock_to_comparison_lists()" class="widget__cabinet--button">Списки сравнений</button>
+                                                <img class="widget__cabinet--button img" style="margin-right: 10px;" src="{% static '/src/assets/img/icon/comparison_path.png' %}">
+                                                <button onclick="switchBlock_to_comparison_lists()" style="  background-color: transparent; border:none;" class="widget__cabinet--button">Списки сравнений</button>
         
                                             </li>
                                             <li class="widget__cabinet--button" style=" display: flex;align-items: center;margin-top:10px;">
                                                
-                                                <img class="widget__cabinet--button img" style="margin-right: 10px;" src="{% static '/src/assets/img/icon/' %}">
-                                                <button onclick="switchBlock_to_orders_history()" class="widget__cabinet--button">История заказов</button>
+                                                <img class="widget__cabinet--button img" style="margin-right: 10px;" src="{% static '/src/assets/img/icon/order_path.png' %}">
+                                                <button onclick="switchBlock_to_orders_history()" style="  background-color: transparent; border:none;" class="widget__cabinet--button">История заказов</button>
                                             </li>
                                             <li class="widget__cabinet--button" style=" display: flex;align-items: center;margin-top:10px;">
                                                 
-                                                <img class="widget__cabinet--button img" style="margin-right: 10px;" src="{% static '/src/assets/img/icon/' %}">
-                                                <button onclick="switchBlock_to_my_review()" class="widget__cabinet--button">Мои отзывы</button>
+                                                <img class="widget__cabinet--button img" style="margin-right: 10px;" src="{% static '/src/assets/img/icon/review_path.png' %}">
+                                                <button onclick="switchBlock_to_my_review()" style="  background-color: transparent; border:none;" class="widget__cabinet--button">Мои отзывы</button>
                                             </li>
                                             <li class="widget__cabinet--button" style=" display: flex;align-items: center;margin-top:10px;">
                                                 
-                                                <img class="widget__cabinet--button img" style="margin-right: 10px;" src="{% static '/src/assets/img/icon/' %}">
-                                                <button onclick="switchBlock_to_my_marks()" class="widget__cabinet--button">Мои оценки</button>
+                                                <img class="widget__cabinet--button img" style="margin-right: 10px;" src="{% static '/src/assets/img/icon/Group 40.png' %}">
+                                                <button onclick="switchBlock_to_my_marks()" style="  background-color: transparent; border:none;" class="widget__cabinet--button">Мои оценки</button>
                                             </li>
                                             <li class="widget__cabinet--button" style=" display: flex;align-items: center;margin-top:10px;">
                                                 
-                                                <img class="widget__cabinet--button img" style="margin-right: 10px;" src="{% static '/src/assets/img/icon/' %}">
-                                                <button onclick="switchBlock_to_contact_information()" class="widget__cabinet--button">Контактная информация</button>
+                                                <img class="widget__cabinet--button img" style="margin-right: 10px;" src="{% static '/src/assets/img/icon/Path 44.png' %}">
+                                                <button onclick="switchBlock_to_contact_information()" style="  background-color: transparent; border:none;" class="widget__cabinet--button">Контактная информация</button>
                                             </li>
                                         </ul>
                                     </div>
@@ -110,25 +110,91 @@
                         </div>
                             {% endfor %}
                             </div>
-                            <div class="comparison_lists col-lg-8"></div>
+                             
                     </div>
-                    <div class="orders_history col-lg-8"></div>
+                    <div class="comparison_lists col-lg-8" >
+                        <div style="position: relative;">
+                            <p>Сравнение 1 универсальные краски</p>
+                            <button style="position: absolute; top: 0; right: 0;color:red; background-color:transparent; border:none;">
+                                <p>Добавить в сравнение >></p>
+                            </button>
+                        </div>
+                                <div class="row">
+                                <!-- Ваш цикл для вывода продуктов -->
+                                {% for i in '12345'|make_list %}
+                        {% if forloop.counter0|divisibleby:3 %}
+                              
+                        {% endif %}
+                        <div class="col-lg-5 mb-6">
+                            {% include "product_block.html" %}
+                            
+                        </div>
+                            {% endfor %}
+                            </div>
+                            </div>
+                    <div class="orders_history col-lg-8">
+                        <div class="review_personal_block ml-6" style="">
+                              <div style="border: 1px solid;border-color:#FF0000;height:30px;width:;display: flex; ">
+                                <h2 class="h3">Заказ №123</h2>
+                                    <p style="margin-left:20px;">01.01.2021</p>
+                                        <p></p>
+                                            <p></p>
+                            </div>
+                            <div style="border: 1px solid;border-color:#FF0000;height:30px;width: ;display: flex; ">
+                                <h2 class="h3">Заказ №123</h2>
+                                    <p style="margin-left:20px;">01.01.2021</p>
+                                        <p></p>
+                                            <p></p>
+                            </div>
+                            <div style="float: right;margin-left:20px;margin-top:-50px;">
+                                <button>Кнопка</button>
+                            </div>
+                            <div class="open_order_bord">
+                                <div class="order_table" style="border: 1px solid;border-color:#FF0000;height:30px;width: ;display: flex; ">
+                                    <div style="border: 1px solid;border-color:#FF0000;height:30px;width:;display: flex; ">
+                                        <h2 class="h3">Наименование </h2>
+                                            <p style="margin-left:20px;">Артикул</p>
+                                                <p>Количество</p>
+                                                    <p>Цена</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button onclick="toggleBlock()" style=""></button>
+                            <hr style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
+                        </div>
+                    </div>
                      
                     <div class="my_review col-lg-8">
                         <div class="review_personal_block ml-6" style="">
                             <img src="{% static '/src/assets/img/icon/tovar-photo 1.png' %}">
                             <div class="rev_div d-flex" style="width:260px;height:35px; margin-left: 200px; position: relative; top: -100px;">
-                                <h2 class="h3">Шпатлевка универсальная Карс 1 кг UNI</h2>
+                                <h2 class="h3" style="margin-right: 10px;margin-top:-20px;">Шпатлевка универсальная Карс 1 кг UNI</h2>
+                                <button style="border: 1px solid;border-color:#FF0000; background-color:transparent ; min-width:200px;height:40px;align-self: center;margin-left:100px;"><p style="color:#FF0000;">Оставить отзыв</p></button>
                             </div>
-                            <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                            <hr style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
                         </div>
                         <div class="review_personal_block ml-6" style="">
                             <img src="{% static '/src/assets/img/icon/tovar-photo 1.png' %}">
-       
+                            <div class="rev_div d-flex" style="width:260px;height50px; margin-left: 200px; position: relative; top: -100px;">
+                                 
+                                    
+                                <div style="display: flex; flex-direction: column; margin-top:-50px;">
+                                    <h2 class="h3" style="  margin-right: 10px;">Шпатлевка универсальная Карс 1 кг UNI</h2>
+                                    <div style="  overflow:  ;width:400px;height:100px;">
+                                        <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був добре запакований, помітно що ніхто до мене його не відкривав</p>
+                                        <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
+                                        <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
+                                    </div>
+                                </div>
+ 
+                                    </div>
+                                    <hr style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
+
+                            </div>
                                </div>
                           
                              
-                    </div>
+                    
                      
                     <div class="my_marks col-lg-8-ml-6"  ></div>
                     <div class="contact_information col-lg-8" style="margin-left:20px;">
@@ -154,7 +220,7 @@
                                     <input type="text" class="form-control" placeholder="Первая строка ввода">
                                     <input type="text" class="form-control" placeholder="Вторая строка ввода">
                                      
-                                        <button class="drop_down_cabinet_city_list float-right"  >F</button>
+                                       
                                      
                                 </div>
                                 <div class="col-lg-6">
@@ -169,17 +235,19 @@
                                 <div class="col-lg-6  ">
                                     <!-- Первая колонка с двумя строками ввода -->
                                     <input type="text" class="form-control mb-2 d-flex" placeholder="Первая строка ввода">
-                                    <button class="password_hider   " style="width:12px;
-                                    height:px; 
-                                    background-color:transparent ;
                                      
-                                    margin-top:-100px;"><img png="{% static '/src/assets/img/icon/Group 484.png' %}"></button>
                                     <button class="cabinet_save_button"  style="width:160px;
-                                    height:40px; margin-top:10px;background-color:red;border:none;"><p>Сохранить</p></button>
+                                    height:40px; margin-top:10px;background-color:red;border:none;margin-right:px;"><p>Сохранить</p></button>
                                  </div>
                                 <div class="col-lg-6">
                                     <!-- Вторая колонка с двумя строками ввода -->
+                                 
                                     <input type="text" class="form-control mb-2" placeholder="Третья строка ввода">
+                                     <button style="width:20px;height:23px; margin-top:-29px;position:absolute;margin-left:175px;background-color:transparent; border:none;">
+                                        <img src="{% static '/src/assets/img/icon/Group 484.png' %}">
+
+                                     </button>     
+                                                              
                                  </div>
                         </div>
                     </div>
@@ -248,7 +316,14 @@
         document.querySelector('.my_marks').style.display = 'none';
         document.querySelector(".contact_information").style.display = 'block';
     }
-
+    function toggleBlock() {
+        var block = document.querySelector('.open_order_bord');
+        if (block.style.display === 'none') {
+          block.style.display = 'block';
+        } else {
+          block.style.display = 'none';
+        }
+      }
     // Добавьте аналогичные функции для других кнопок, если необходимо
 
     // По умолчанию активируем блок "Все о товаре" (product_description)
