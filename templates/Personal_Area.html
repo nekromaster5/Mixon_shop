@@ -138,7 +138,7 @@
                                 <h2 class="h3">Заказ №123</h2>
                                     <p style="margin-left:45px;">01.01.2021
                                     <p style="margin-left:200px;">Кол-во товаров:
-<p style="margin-left:70px;">24</p>
+                                    <p style="margin-left:70px;">24</p>
                                     </p></p>
                                          
                             </div>
@@ -157,19 +157,37 @@
                                     <img   style="margin-top:5px; " src="{% static '/src/assets/img/icon/repeat_button.svg' %}">
                                     <p style="margin-left:5px;margin-top:-25px;">Повторить</p></button>
                             </div>
-                            <div class="open_order_bord">
-                                <div class="order_table" style="border: 1px solid;border-color:#FF0000;height:30px;width: ;display: flex; ">
+                            <div class="open_order_bord d-flex flex-column" style="" >
+                                <div class="order_table   flex-column" style=" overflow-y:;margin-bottom: 10px;display: flex;flex-direction: column;  border: 1px solid;border-color:#FF0000;height:30px; ">
                                     <div style="border: 1px solid;border-color:#FF0000;height:30px;width:;display: flex; background-color:#F5F5F5; ">
                                         <h2 class="h3">Наименование </h2>
-                                            <p style="margin-left:400px;">Артикул</p>
-                                                <p style="margin-left:37px;">Количество</p>
-                                                    <p style="margin-left:30px;">Цена</p>
+                                            <p style="margin-left:400px;">Артикул 
+                                                <p style="margin-left:37px;">Количество
+                                                    <p style="margin-left:30px;">Цена</p></p></p>
+                                                 
+                                                     
                                     </div>
+                                    <div style="border: 1px solid;border-color:#FF0000;height:30px;width:;display: flex; background-color:#F5F5F5; ">
+                                        <p>Шпатлевка универсальная Карс 1 кг UNI</p>
+                                                 
+                                                     
+                                    </div>
+                                    <div style="border: 1px solid;border-color:#FF0000;height:30px;width:;display: flex; background-color:#F5F5F5; ">
+                                        <p>Шпатлевка универсальная Карс 1 кг UNI</p>
+                                                 
+                                                     
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <div>
+                                    asdasdasdasdasdada
                                 </div>
                             </div>
-                            <button onclick="toggleBlock()" style=""></button>
+                            <button class="order_button"onclick="toggleBlock()" style="margin-top:20px;"></button>
                             <hr style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
                         </div>
+                        
                     </div>
                      
                     <div class="my_review col-lg-8">
@@ -326,10 +344,14 @@
     }
     function toggleBlock() {
         var block = document.querySelector('.open_order_bord');
+        var button = document.querySelector('.your_button_class');  
+        var hr = document.querySelector('.your_hr_class');  
         if (block.style.display === 'none') {
           block.style.display = 'block';
+          
         } else {
           block.style.display = 'none';
+         
         }
       }
     // Добавьте аналогичные функции для других кнопок, если необходимо
