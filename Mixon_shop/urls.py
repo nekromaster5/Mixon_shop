@@ -17,12 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from Mixon_shop.views import HomePage, CataloguePage, Personalpage, ProductPage
+from Mixon_shop.views import HomePage, CataloguePage, Personalpage, ProductPage, Erorpage, Brands, News
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomePage.as_view(), name='home'),
     path('catalogue', CataloguePage.as_view(), name='catalogue'),
     path('product/', ProductPage.as_view(), name='product'),
-    path('Personal_Area/', Personalpage.as_view(), name='personal')
+    path('Personal_Area/', Personalpage.as_view(), name='personal'),
+    path('eror_page/', Erorpage.as_view(), name='eror'),
+    path('brands/', Brands.as_view(), name='brands'),
+    path('news/', News.as_view(), name='news')
 ]

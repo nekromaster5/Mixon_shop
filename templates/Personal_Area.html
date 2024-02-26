@@ -163,7 +163,7 @@
                     </div>
                     <div class="orders_history col-lg-8">
                         <div class="review_personal_block ml-6" style="">
-                            <div style="border: 1px solid;border-color:#FF0000;height:30px;width:;display: flex; ">
+                            <div style=" height:30px;width:;display: flex; ">
                                 <h2 class="h3">Заказ №123</h2>
                                 <p style="margin-left:45px;">01.01.2021
                                 <p style="margin-left:200px;">Кол-во товаров:
@@ -171,7 +171,7 @@
                                 </p></p>
 
                             </div>
-                            <div style="border: 1px solid;border-color:#FF0000;height:30px;width: ;display: flex; ">
+                            <div style=" height:30px;width: ;display: flex; ">
                                 <h2 class="h3">Статус заказа:</h2>
                                 <p style="margin-left:20px;">в обработке
                                 <p style="margin-left:260px;">Итого:
@@ -189,8 +189,8 @@
                             </div>
                             <div class="open_order_bord  " style="">
                                 <div class="order_table d-flex flex-column"
-                                     style="margin-bottom: 10px; border: 1px solid;border-color:#FF0000;">
-                                    <div style="border: 1px solid;border-color:#FF0000;height:30px;display: flex; background-color:#F5F5F5; ">
+                                     style="margin-bottom: 10px;  ">
+                                    <div style=" height:30px;display: flex; background-color:#F5F5F5; ">
                                         <h2 class="h3">Наименование </h2>
                                         <p style="margin-left:400px;">Артикул
                                         <p style="margin-left:37px;">Количество
@@ -198,7 +198,7 @@
 
 
                                     </div>
-                                    <div style="border: 1px solid;border-color:#FF0000;height:30px;width:;display: flex; background-color:#F5F5F5; ">
+                                    <div style=" height:30px;width:;display: flex; background-color:#F5F5F5; ">
                                         <p>Шпатлевка универсальная Карс 1 кг UNI
                                             <p style="margin-left:220px;">1234567890
                                                 <p style="margin-left:80px;">1</p>
@@ -207,12 +207,12 @@
 
 
                                     </div>
-                                    <div style="border: 1px solid;border-color:#FF0000;height:30px;width:;display: flex; background-color:#F5F5F5; ">
+                                    <div style=" height:30px;width:;display: flex; background-color:#F5F5F5; ">
                                         <p>Шпатлевка универсальная Карс 1 кг UNI</p>
 
 
                                     </div>
-                                    <div style="border: 1px solid;border-color:#FF0000;height:30px;width:;display: flex; background-color:#F5F5F5; ">
+                                    <div style=" height:30px;width:;display: flex; background-color:#F5F5F5; ">
                                         <p>Шпатлевка универсальная Карс 1 кг UNI</p>
 
 
@@ -227,10 +227,18 @@
                                 <h2 class="h3">Василий Иванов<span style="margin-left:480px;">Итого:</span>
                                 <span style="margin-left:10px; color:red;">1 632.00₴</span></h2>
                                  
-<p>asdasd</p>
+                                <span>+38 098 76 54 321, example@gmail.com 
+                                </span>
+                                <h2 class="h3">Доставка: <span style="margin-left:"> Самовывоз из магазина Одесса</span>
+                                </h2>
+                                <h2 class="h3">Оплата: <span style="margin-left:20px;"> Наличными в магазине</span>
+                                </h2>
+                                <h2 class="h3" style:="margin-left:50px;">Коментариев нет</h2>
                             </div>
-                            <button class="order_button" onclick="toggleBlock()" style="margin-top:20px;"></button>
-                            <hr style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
+                            <button class="order_button" onclick="toggleBlock()" style="margin-top:20px;border:none;background-color:transparent;color:red;
+                              "><p class="button_text">Свернуть >></p></button>
+                            <hr style="color: none; background-color: #AEADAA; height: 1px; border: none;">
+                             
                         </div>
 
                     </div>
@@ -303,6 +311,11 @@
                                         <input type="text" class="form-control mb-2" placeholder="Третья строка ввода">
                                         <input type="text" class="form-control" placeholder="Четвертая строка ввода">
                                     </div>
+                                    <div class="col-lg-6">
+                                        <!-- Вторая колонка с двумя строками ввода -->
+                                         
+                                        <input style="margin-top:30px;" type="text" class="form-control" placeholder="Четвертая строка ввода">
+                                    </div>
                                 </div>
                                 <div class="contact_block_first ml-6  " style="">
                                     <h2 class="h3">Пароль:</h2>
@@ -337,7 +350,7 @@
 </div>
 </div>
 </main>
-
+<footer>{% include "footer.html" %}</footer>
 </body>
 <script>
     function switchBlock_to_zakladki() {
@@ -397,12 +410,14 @@
 
     function toggleBlock() {
         var block = document.querySelector('.open_order_bord');
-
+var text=document.querySelector('.button_text');
         if (block.style.display === 'none') {
             block.style.display = 'block';
+            text.textContent  = 'Свернуть >>'; // Текст при открытом состоянии
 
         } else {
             block.style.display = 'none';
+            text.textContent = 'Детально >>'; // Текст при закрытом состоянии
 
         }
     }
