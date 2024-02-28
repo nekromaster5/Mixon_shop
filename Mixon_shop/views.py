@@ -30,3 +30,9 @@ class Brands(View):
 class News(View):
     def get(self, request):
         return render(request, 'news.html')
+class Aboutcompany(View):
+    def get(self, request):
+        return render(request, 'about_company.html')
+class New(View):
+    def get(self, request):
+        return render(request, 'new.html')
