@@ -42,38 +42,29 @@
                     <span class="visually-hidden">Offcanvas Menu Open</span>
                 </a>
             </div>
-            <div class="main__logo" style="width: 101px;
-            height: 41px;
-                    position: relative;
-                    left: 10px;  ">
-                <h1 class="main__logo--title"><a class="main__logo--link" href="{% url 'home' %}"><img class="main__logo--img"
-                                                                                                 src="{% static '/src/assets/img/logo/logo_mix2.svg' %}"
-                                                                                                 alt="logo-img"></a>
-                </h1>
+            <div class="main__logo" >
+                 <a class="main__logo--link" href="{% url 'home' %}">
+                <img class="main__logo--img" src="{% static '/src/assets/img/logo/logo_mix2.svg' %}"
+                alt="logo-img"></a>
+               
             </div>
             <div class="panel-container"  > 
-                <div class="header__menu-panel" 
-                     style="display: inline-flex; font-family: 'Montserrat', sans-serif;  align-items: center; gap: 15px; margin-right: 50px; width: -20px; width:600px; position:absolute;margin-left:-500px;margin-top:5px;">
-                    <button class="menu-panel__button_first"
-                            style="position:relative; font-family: 'Montserrat', sans-serif;background: none;color: #F00; font-family: Montserrat; font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px; border: none;">
-                       <p style="font-family: Montserrat; "> Акции</p>
+                <div class="header__menu-panel">
+                    <button class="menu-panel__button_first">
+                       <p  class="first_menu-panel__button_text"  > Акции</p>
                     </button>
-                    <button class="menu-panel__button"
-                            style="position:relative;right:15px;background: none;      
-                            font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px;border: none;">
-                            <p style="font-family: Montserrat; color:#787878;">     О нас</p>
+                    <button  class="menu-panel__button"
+                            style=" ">
+                            <p class="menu-panel__button_text"  >     О нас</p>
                     </button>
-                    <button class="menu-panel__button"
-                            style="position:relative;right:30px;background: none;  font-family: Montserrat; font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px;border: none;">
-                            <p style="font-family: Montserrat; color:#787878;">       Новости</p>
+                    <button class="menu-panel__button">
+                            <p class="menu-panel__button_text"   >       Новости</p>
                     </button>
-                    <button class="menu-panel__button"
-                            style=" position:relative;right:40px;background: none; font-family: Montserrat; font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px;border: none;  ">
-                            <p style="font-family: Montserrat; color:#787878;">       Оплата и доставка</p>
+                    <button class="menu-panel__button">
+                    <p class="menu-panel__button_text" >       Оплата и доставка</p>
                     </button>
-                    <button class="menu-panel__button"
-                            style="position:relative;right:50px; background: none; font-family: Montserrat; font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px;border: none; ">
-                            <p style="font-family: Montserrat; color:#787878;">        Контакты </p>
+                    <button class="menu-panel__button">
+                            <p class="menu-panel__button_text" >        Контакты </p>
                     </button>
 
                     <!-- Добавьте еще кнопки, если нужно -->

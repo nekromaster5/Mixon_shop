@@ -1583,7 +1583,83 @@ Product-description
 /*
 Header
 */
+.panel-container{
 
+}
+ 
+.main__logo {
+    display: flex;
+    width: 100px;
+    height: 40px;
+}
+
+.main__logo--link {
+    flex-grow: 1;
+    width: 100px;
+    height: 40px;
+}
+
+.main__logo--img {
+   
+    width: 100px;
+    height: 40px;
+    
+}
+
+.header__menu{
+    display: inline-flex;
+    font-family: 'Montserrat', sans-serif;
+    align-items: center;
+     gap: 15px;
+      margin-right: 50px; 
+      
+       width:600px; 
+        
+       margin-left:-500px;
+       margin-top:5px;
+}
+.menu-panel__button{
+    
+    margin-right:15px;
+    background: none;
+    font-size: 16px;
+     font-style: normal;
+      font-weight: 500;
+       line-height: normal;
+        letter-spacing: -0.48px;
+        border: none;
+}
+.menu-panel__button_text{
+    font-family: Montserrat;
+     color:#787878;
+}
+.menu-panel__button_text:hover {
+    color: var(  --on_hover-color);
+}
+.first_menu-panel__button_text
+{
+    font-family: Montserrat;color:red;
+}
+.first_menu-panel__button_text:hover{
+    color: var(  --on_hover-color);
+}
+.menu-panel__button_first{
+   
+    font-family: 'Montserrat', sans-serif;
+    background: none;color: #F00;
+     font-family: Montserrat;
+      font-size: 16px;
+      font-style: normal;
+       font-weight: 500;
+        line-height: normal;
+         letter-spacing: -0.48px;
+          border: none;
+}
+.header__menu-panel
+{
+    width: 550px;
+    
+}
 .path_panel {
     display: flex;
 
