@@ -4371,7 +4371,9 @@ input[type=number]::-webkit-outer-spin-button {
     background: var(--secondary-color);
     color: var(--text-white-color);
 }
-
+.footer__widget--menu__text:hover {
+    color: var(--on_hover-color);
+}
 @media only screen and (min-width: 576px) {
     .product__card--action__btn {
         width: 3.5rem;
