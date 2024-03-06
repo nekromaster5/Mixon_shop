@@ -19,7 +19,9 @@
 */
 :root {
     --primary-color: #212121;
-    --on_hover-color: rgb(255, 0, 0);
+    --product_button_light-color:#FFFFFF;
+    --product_button_dark-color:#FFFFFF;
+     --on_hover-color: rgb(255, 0, 0);
     --secondary-color: rgb(255, 0, 0);
     --grey-color: rgb(174, 173, 170);
     --foreground-color: rgb(0, 0, 0);
@@ -3845,8 +3847,7 @@ input[type=number]::-webkit-outer-spin-button {
     color: inherit;
     background-color: inherit;
     border-color: inherit;
-!important;
-}
+ }
 
 .no-cursor_change {
     cursor: text;
@@ -4074,7 +4075,7 @@ input[type=number]::-webkit-outer-spin-button {
     home five footer css
 */
 .footer__bg5 {
-    background: -webkit-gradient(linear, left top, right top, from(#F1F2FA), to(#FCEDF1));
+    background: --webkit-gradient(linear, left top, right top, from(#F1F2FA), to(#FCEDF1));
     background: linear-gradient(to right, #F1F2FA, #FCEDF1);
 }
 
@@ -4602,8 +4603,7 @@ input[type=number]::-webkit-outer-spin-button {
     margin-right: 0;
     padding-right: 0;
     color: rgb(120, 120, 120);
-!important;
-}
+ }
 
 .breadcrumb__content--menu__items:last-child::before {
     display: none;
@@ -4683,8 +4683,7 @@ input[type=number]::-webkit-outer-spin-button {
     color: inherit;
     background-color: inherit;
     border-color: inherit;
-!important;
-}
+ }
 
 .refresh__page {
     font-size: 18px;
@@ -4998,4 +4997,11 @@ input[type=number]::-webkit-outer-spin-button {
     margin-left: 3rem;
     font-size: 20px;
 }
-
+/*Product block    */
+.product_button
+{
+    border-radius: 5px;
+    width: 200px;
+    height: 40px;
+    border: 1px red solid;
+}
