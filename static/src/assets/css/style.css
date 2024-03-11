@@ -1874,7 +1874,7 @@ Header
      margin-left:20px;
 }
 .header__search--widget{
-    position: absolute;left: -100px;margin-left:430px;width:540px; height: 40px;
+     
 }
 /*
     offcanvas header css
@@ -2539,7 +2539,7 @@ Header
 }
 
 .header__search--button {
-    position: absolute;
+   
     top: 0;
     right: 0;
     height: 100%;
