@@ -1583,7 +1583,83 @@ Product-description
 /*
 Header
 */
+.panel-container{
 
+}
+ 
+.main__logo {
+    display: flex;
+    width: 100px;
+    height: 40px;
+}
+
+.main__logo--link {
+    flex-grow: 1;
+    width: 100px;
+    height: 40px;
+}
+
+.main__logo--img {
+   
+    width: 100px;
+    height: 40px;
+    
+}
+
+.header__menu{
+    display: inline-flex;
+    font-family: 'Montserrat', sans-serif;
+    align-items: center;
+     gap: 15px;
+      margin-right: 50px; 
+      
+       width:600px; 
+        
+       margin-left:-500px;
+       margin-top:5px;
+}
+.menu-panel__button{
+    
+    margin-right:15px;
+    background: none;
+    font-size: 16px;
+     font-style: normal;
+      font-weight: 500;
+       line-height: normal;
+        letter-spacing: -0.48px;
+        border: none;
+}
+.menu-panel__button_text{
+    font-family: Montserrat;
+     color:#787878;
+}
+.menu-panel__button_text:hover {
+    color: var(  --on_hover-color);
+}
+.first_menu-panel__button_text
+{
+    font-family: Montserrat;color:red;
+}
+.first_menu-panel__button_text:hover{
+    color: var(  --on_hover-color);
+}
+.menu-panel__button_first{
+   
+    font-family: 'Montserrat', sans-serif;
+    background: none;color: #F00;
+     font-family: Montserrat;
+      font-size: 16px;
+      font-style: normal;
+       font-weight: 500;
+        line-height: normal;
+         letter-spacing: -0.48px;
+          border: none;
+}
+.header__menu-panel
+{
+    width: 550px;
+    
+}
 .path_panel {
     display: flex;
 
@@ -1634,18 +1710,33 @@ Header
     background: none;
     border: none;
     display: flex;
-    width: 200px;
+   
     height: 20.5px;
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
-
+     
 
     overflow: hidden;
-    position: relative;
+  
     margin-right: 12px; /* Добавлен отступ справа между панелями */
 }
+.panel_label{
 
+}
+.panel_label_text{
+    font-family: Montserrat;
+     color:#787878;
+}
+.panel_dropdowm_button{
+    width: 20px;  
+    height: 10px;
+     background-color:white;
+     border:none;
+}
+.panel_dropdowm_button_img{
+     margin-top:-5px;
+}
 .panel img {
     width: 20px;
     height: 20px;
@@ -1684,12 +1775,51 @@ Header
 .dropdown button:hover {
     background-color: #f1f1f1;
 }
+@media only screen   and (min-width: 768px) and (max-width: 1199px){
+    .header__search--widget
+    {
+        margin-left:20px;
+    }
+    .categories__menu_img{
+        width: 23px;
+    }
+    .header__menu-panel {
+        display: none;
+      }
+    .logo-messengers{
+        display: none;
+      }
+      .logo-messengers img{
+        display: none;
+      }
+      .panel-right{
+       
+      }
+      .panel-right .label {
 
+        display: none;
+    }
+    .panel{
+         
+    }
+    .categories__menu_text{
+        display: none;
+    }
+    .categories__menu_img{
+        
+    }
+    .panel_label{
+        display: none;
+    }
+    .header__search--form{
+        
+    }
+}
 /* Добавлена новая стилизация для правой панели */
 .panel-right {
     margin-left: 5px;
     display: flex;
-    width: 170px;
+   
     height: 20.5px;
     justify-content: center;
     align-items: center;
@@ -1698,7 +1828,8 @@ Header
     margin-top: 5px;
     background: none;
     overflow: hidden;
-    position: relative;
+    
+   
 }
 
 .panel-right img {
@@ -1724,8 +1855,9 @@ Header
     border: none;
     background: none;
     overflow: hidden;
-    position: relative;
+    
     margin-top: 5px;
+    margin-right:30px;
 }
 
 .logo-messengers img {
@@ -1739,7 +1871,24 @@ Header
     background: none;
     border: none; /* Расположение дочерних элементов внутри блока в виде горизонтальной линии */
 }
-
+.header__bottom{
+    background: #383433; 
+    height:63px;
+}
+.categories__menu{
+      width:300px;
+}
+.categories__menu--header{
+    
+}
+.categories__menu_text{
+     font-family: Montserrat;
+     font-size: 1.4em;
+     margin-left:20px;
+}
+.header__search--widget{
+     
+}
 /*
     offcanvas header css
 */
@@ -2403,7 +2552,7 @@ Header
 }
 
 .header__search--button {
-    position: absolute;
+   
     top: 0;
     right: 0;
     height: 100%;
