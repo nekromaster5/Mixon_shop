@@ -5196,5 +5196,15 @@ input[type=number]::-webkit-outer-spin-button {
 .comparison-container button {
     float: left;
 }
- 
- 
+.menu_button{
+    display:none;
+    background-color:red;
+}
+@media only screen   and (min-width: 750px) and (max-width: 1199px){
+    .vidget_block_cabinet{
+        display: none;
+    }
+    .menu_button{
+        display: block;
+    }
+}
