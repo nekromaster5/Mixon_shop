@@ -1814,6 +1814,9 @@ Header
     .header__search--form{
         
     }
+    .icon-button{
+        display: none;
+    }
 }
 /* Добавлена новая стилизация для правой панели */
 .panel-right {
@@ -2523,19 +2526,17 @@ Header
 }
 
 .header__search--box {
-    position: relative;
-    width: 330px;
-}
+    
 
 @media only screen and (min-width: 1200px) {
     .header__search--box {
-        width: 400px;
+         
     }
 }
 
 @media only screen and (min-width: 1366px) {
     .header__search--box {
-        width: 462px;
+        
     }
 }
 
