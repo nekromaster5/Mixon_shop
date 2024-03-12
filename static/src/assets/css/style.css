@@ -1876,7 +1876,7 @@ Header
     height:63px;
 }
 .categories__menu{
-      width:300px;
+       
 }
 .categories__menu--header{
     
@@ -2811,8 +2811,7 @@ Header
     categories menu css here
 */
 .categories__menu {
-    width: 225px;
-    position: relative;
+    
 
 }
 
