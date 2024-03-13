@@ -5203,6 +5203,15 @@ input[type=number]::-webkit-outer-spin-button {
     display:none;
     background-color:red;
 }
+.order_history_artikyl{
+    margin-left:400px;
+}
+.order_history_quantity{
+    margin-left:37px;
+}
+order_history_price{
+    margin-left:30px;
+}
 @media only screen   and (min-width: 750px) and (max-width: 1199px){
     .vidget_block_cabinet{
         display: none;
@@ -5210,4 +5219,5 @@ input[type=number]::-webkit-outer-spin-button {
     .menu_button{
         display: block;
     }
+
 }
