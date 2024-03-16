@@ -389,25 +389,40 @@
                     <div class="container" style="display: flex;">
                         <!-- Левый блок -->
                         <div class="left_block" style="width: 50%; margin-top: 30px;">
-                            <div class="slider-container" style="width: 300px; margin-left: 20px;">
-                                <div class="slider">
-                                    <div class="slide" style="width: 400px; height: 400px; margin-top: -50px; margin-left: 70px; display: block;">
-                                        <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}" alt="Slide 1" style="margin-top: -20px; height: 400px; width: 400px;">
+                            <div class="left_flex_display" style="display:flex;">
+                                <div class="product_left_path">
+                                    <button><img src="{% static '/src/assets/img/icon/Path 1622.svg' %}"></button>
+                                </div>
+
+                            <div class="slide-buttons" style=" margin-left:40px; ">
+                                <button data-slide-index="0" style="display: flex; flex-direction: column; align-items: center; width: 100px; height: 100px; margin-top: 30px;">
+                                    <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}" alt="Thumb 1">
+                                </button>
+                                <button data-slide-index="1" style="display: flex; flex-direction: column; align-items: center; width: 100px; height: 100px; margin-top: 20px;">
+                                    <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}" alt="Thumb 2">
+                                </button>
+                            </div>
+                                <div class="slider" style="display:flex;">
+                                    <div class="slide" style=" ">
+                                        <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}" alt="Slide 1"  >
                                     </div>
-                                    <div class="slide" style="width: 200px; height: 200px; margin-top: -60px; margin-left: 50px;">
+                                    <div class="slide" style=" ">
                                         <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}" alt="Slide 2">
                                     </div>
                                 </div>
-            
-                                <div class="slide-buttons" style="display: flex; flex-direction: column; margin-left: -200px; margin-top: -10px;">
-                                    <button data-slide-index="0" style="display: flex; flex-direction: column; align-items: center; width: 100px; height: 100px; margin-top: 30px;">
-                                        <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}" alt="Thumb 1">
-                                    </button>
-                                    <button data-slide-index="1" style="display: flex; flex-direction: column; align-items: center; width: 100px; height: 100px; margin-top: 20px;">
-                                        <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}" alt="Thumb 2">
-                                    </button>
+            <div class="product_right_path">
+                <button><img src="{% static '/src/assets/img/icon/Path 1623.svg' %}"></button>
+
                                 </div>
                             </div>
+                            <div class="product_buttons" style=" ">
+                                <button class="product_slider_button"></button>
+                                <button class="product_slider_button"></button>
+                                <button class="product_slider_button"></button>
+                                <button class="product_slider_button"></button>
+                                <button class="product_slider_button"></button>
+                            </div>
+                            
                         </div>
             
                         <!-- Правый блок -->
@@ -469,12 +484,12 @@
                             <div class="right_second_block">
                                 <div style="width: 70px; height: 20px; border-width: 2px; margin-top: 30px;">Цвет:</div> 
                                 <div class="product_table" style="width: 400px; height: 250px; border-width: 3px; background-color:#E9E7E6; border-color:#E9E7E6;">
-                                    <div style="margin-top: 1px; background-color:#E9E7E6; height: 30px; margin-bottom:5px;">
+                                    <div style="margin-top: 1px; background-color:#E9E7E6; height: 30px; margin-bottom:1px;">
                                         <div style="position:relative; left: 50px;">Артикул</div> 
                                         <div style="position:relative; top: -27px; left: 160px;">Название цвета</div> 
                                         <div style="position:relative; top: -55px; left: 330px;">Кол-во</div> 
                                     </div> 
-                                    <div style="width: 400px; height: 33px;margin-bottom:5px; margin-right: 100px; left: 3px; background-color: white;display:flex;"> 
+                                    <div style="width: 400px; height: 33px;margin-bottom:1px; margin-right: 100px; left: 3px; background-color: white;display:flex;"> 
                                         <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button> 
                                         <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">MA603BAL
                                             <span style="margin-left:40px;">Хаки603</span>
@@ -485,7 +500,7 @@
                                         
 
                                     </div> 
-                                    <div style="width: 400px;margin-bottom:5px; height: 33px; margin-right: 100px; left: 3px; background-color: white;display:flex;"> 
+                                    <div style="width: 400px;margin-bottom:1px; height: 33px; margin-right: 100px; left: 3px; background-color: white;display:flex;"> 
                                         <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button> 
                                         <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">MA603BAL
                                             <span style="margin-left:40px;">Хаки603</span>
@@ -496,7 +511,7 @@
                                         
 
                                         </div>
-                                        <div style="width: 400px;margin-bottom:5px; height: 33px; margin-right: 100px; left: 3px; background-color: white;display:flex;"> 
+                                        <div style="width: 400px;margin-bottom:1px; height: 33px; margin-right: 100px; left: 3px; background-color: white;display:flex;"> 
                                             <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button> 
                                             <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">MA603BAL
                                                 <span style="margin-left:40px;">Хаки603</span>
