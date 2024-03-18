@@ -390,8 +390,8 @@
                         <!-- Левый блок -->
                         <div class="left_block" style="width: 50%; margin-top: 30px;">
                             <div class="left_flex_display" style="display:flex;">
-                                <div class="product_left_path">
-                                    <button><img src="{% static '/src/assets/img/icon/Path 1622.svg' %}"></button>
+                                <div class="product_left_path" >
+                                    <button style="border:none;background-color:transparent"><img src="{% static '/src/assets/img/icon/Path 1623.svg' %}"></button>
                                 </div>
 
                             <div class="slide-buttons" style=" margin-left:40px; ">
@@ -411,7 +411,7 @@
                                     </div>
                                 </div>
             <div class="product_right_path">
-                <button><img src="{% static '/src/assets/img/icon/Path 1623.svg' %}"></button>
+                <button style="border:none;background-color:transparent"> <img src="{% static '/src/assets/img/icon/Path 1622.svg' %}"></button>
 
                                 </div>
                             </div>
@@ -428,11 +428,11 @@
                         <!-- Правый блок -->
                         <div class="right_block" style="display: flex; flex-direction: column; margin-top: 30px;">
                             <div class="first_sale_block" style="display: flex;">
-                                <div style="display: flex; align-items: center;">
+                                <div   style="display: flex; align-items: center;">
                                     <p style="color: green; margin-right: 10px;">Есть в наличии</p>
                                     <img src="{% static '/src/assets/img/icon/Path 47.png' %}" style="margin-top: -15px;">
                                 </div>
-                                <div style="margin-left: 200px;">
+                                <div class="first_sale_block_buttons"style=" ">
                                     <button style="border-radius: 5px; width: 40px; height: 40px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); background: white; border: none;">
                                         <img src="{% static '/src/assets/img/icon/Group 34.png' %}">
                                     </button>
@@ -634,11 +634,11 @@
                         <div class="product__section--inner"> 
                             <div class="row row-md-reverse"> 
                                 <div class="row"> 
-                                    <img class="col-lg-6 mb-7" 
+                                    <img class="col-lg-6 col-md  mb-7" 
                                          src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}" 
                                          alt="mixon banner"> 
                                     {% for i in 'abc'|make_list %} 
-                                        <div class="col-lg-6 mb-7"> 
+                                        <div class="col-lg-6 col-md  mb-7"> 
                                             {% include "product_block.html" %} 
                                         </div> 
                                     {% endfor %} 
@@ -718,12 +718,18 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
-        // Показать первый слайд при загрузке страницы
-        $(".slide.active").show();
+        // Скрываем все слайды, кроме первого
+        $(".slide:not(:first)").hide();
 
+        // Обработчик клика по кнопкам
         $(".slide-buttons button").click(function () {
+            // Получаем индекс слайда из атрибута data-slide-index
             var index = $(this).data("slide-index");
+            
+            // Скрываем все слайды
             $(".slide").hide();
+            
+            // Показываем выбранный слайд
             $(".slide").eq(index).show();
         });
     });
