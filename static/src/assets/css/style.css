@@ -5221,3 +5221,58 @@ order_history_price{
     }
 
 }
+/*About company*/
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    display: none;
+  }
+  
+  .carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  
+  .slide {
+    flex: 0 0 100%;
+  }
+  
+  .controls {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .prev-button,
+  .next-button {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .prev-button:hover,
+  .next-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  .about_company_brend_buttons{
+
+  }
+  @media only screen   and (min-width: 750px) and (max-width: 1199px){
+     .carousel-container{
+        display: flex;
+     }
+     .about_company_brend_buttons{
+        display: none;
+     }
+
+}
