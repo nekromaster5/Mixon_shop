@@ -80,28 +80,28 @@
  
             <section>
                 <div style="height: 100%; background: white; display: flex; position:relative;top:9px;">
-                    <button onclick="switchBlock_to_product_description()"
-                            style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 500; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
+                    <button class="product_main_button" onclick="switchBlock_to_product_description(); switchBorder(this)"
+                            >
                         Все о товаре
                     </button>
-                    <button onclick="switchBlock_to_Characteristics()"
-                            style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
+                    <button class="product_main_button" onclick="switchBlock_to_Characteristics(); switchBorder(this)"
+                            >
                         Характеристики
                     </button>
-                    <button onclick="switchBlock_to_Buy_too()"
-                            style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
+                    <button class="product_main_button" onclick="switchBlock_to_Buy_too(); switchBorder(this)"
+                            >
                         Покупают вместе
                     </button>
-                    <button onclick=""
-                            style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
+                    <button class="product_main_button" onclick=" switchBorder(this)"
+                            >
                         Похожие товары
                     </button>
-                    <button onclick="switchBlock_to_Reviev()"
-                            style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
+                    <button class="product_main_button" onclick="switchBlock_to_Reviev(); switchBorder(this)"
+                            >
                         Отзывы
                     </button>
-                    <button onclick="switchBlock_to_avability()"
-                            style="color: black; font-size: 18px; font-family: Montserrat; font-weight: 400; word-wrap: break-word; margin-left: 10px; border: none; background: none; cursor: pointer;">
+                    <button class="product_main_button" onclick="switchBlock_to_avability(); switchBorder(this)"
+                            style=" ">
                         Наличие в магазинах
                     </button>
                 </div>
@@ -110,8 +110,7 @@
 
                 <!-- Характеристики -->
                 <div class="t_block" style="height: 500px; background-color: white; position: relative; top: 11px;">
-                    <div style="width: 150px; height: 3px; background: red; position: relative; left: 160px; top: -1px;"></div>
-                    <p style="font-size: 20px; font-weight: bold; position: relative; left: 10px;">Характеристики</p>
+                     <p style="font-size: 20px; font-weight: bold; position: relative; left: 10px;">Характеристики</p>
                     <br>
                     <p style="position: relative; left: 10px;">Использование.............................. Внутри помещений</p>
                     <p style="position: relative; left: 10px;">Связующее вещество....................... Сополимер</p>
@@ -133,8 +132,7 @@
           
             </div>
             <div class="Buy_too">
-                <div style="width: 170px; height: 3px; background: red; position: relative; left: 330px; top: 9px;"></div>
-                <div class="mb-6" style="margin-top: 10px; background: white;">
+                 <div class="mb-6" style="margin-top: 10px; background: white;">
                     <span class="buying-together__content--title mt-5 mb-5">Покупают вместе</span>
                 </div>
                 <div class="row">
@@ -167,8 +165,7 @@
             <div class="Review" style="    background-color: white;">
                 
                 <div class="f_block" style="width: 740px; height: 100px; margin-left: 20px; margin-bottom: 5px; margin-top: 10px;">
-                    <div style="width: 100px; height: 3px; background: red; position: relative; left: 645px; top: 0;"></div>
-                    <p style="width: 85px; height: 25px; font-weight: bold; font-weight: 500;">Отзывы</p>
+                     <p style="width: 85px; height: 25px; font-weight: bold; font-weight: 500;">Отзывы</p>
                     <div style="position: relative;">
                         <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
                         <img style="position: relative; left: 30px; top: -30px;" src="{% static '/src/assets/img/icon/Path 131.png' %}">
@@ -300,8 +297,7 @@
             </div>
             
             <div class="avability" style="margin-top: 10px;">
-                <div style="width: 200px; height: 3px; background: red;margin-left: 795px;"></div>
-                <section style="background:white; margin-bottom ">
+                 <section style="background:white; margin-bottom ">
                 <div class="container">
                     <div style="display:flex">
                         <div class="avability_main">
@@ -382,7 +378,7 @@
             
 
             <div class="product_description" style="margin-top: 10px;">
-                <div style="width: 150px; height: 3px; background: red;margin-left: px;"></div>
+            
 
                 <section style="background:white;">
                 <section style="display: flex;">
@@ -734,7 +730,12 @@
         });
     });
 
-
+    function switchBorder(button) {
+        // Удаляем класс у всех кнопок
+        $(".product_main_button").removeClass("active");
+        // Добавляем класс "active" к текущей кнопке
+        $(button).addClass("active");
+    }
     function switchBlock_to_product_description() {
         document.querySelector('.product_description').style.display = 'block';
         document.querySelector('.Characteristics').style.display = 'none';
