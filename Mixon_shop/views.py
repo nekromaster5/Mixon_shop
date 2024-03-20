@@ -17,22 +17,37 @@ class ProductPage(View):
     def get(self, request):
         return render(request, 'product.html')
 
-class Personalpage(View):
+
+class PersonalPage(View):
     def get(self, request):
         return render(request, 'Personal_Area.html')
 
-class Erorpage(View):
+
+class ErrorPage(View):
     def get(self, request):
         return render(request, 'eror_page.html')
+
+
 class Brands(View):
     def get(self, request):
         return render(request, 'brands.html')
+
+
 class News(View):
     def get(self, request):
         return render(request, 'news.html')
-class Aboutcompany(View):
+
+
+class AboutCompany(View):
     def get(self, request):
         return render(request, 'about_company.html')
+
+
 class New(View):
     def get(self, request):
         return render(request, 'new.html')
+
+
+class Slider(View):
+    def get(self, request):
+        return render(request, 'test_slider.html')
