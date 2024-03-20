@@ -54,33 +54,14 @@
     <div class="about_company_brend_buttons">
         <div uk-slider>
 
-            <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider>
-            <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m">
-                <li>
-                    <img src="{% static '/src/assets/img/icon/logo-mixon.svg' %}" >
-                </li>
-                <li>
-                    <img src="{% static '/src/assets/img/icon/Path 82.svg' %}" >
-                </li>
-                <li>
-                    <img src="{% static '/src/assets/img/icon/logo-prodyver.svg' %}" >
-                </li>
-                <li>
-                    <img src="{% static '/src/assets/img/icon/logo-prodyver.svg' %}" >
-                </li>
-                <li>
-                    <img src="{% static '/src/assets/img/icon/logo-prodyver.svg' %}" >
-                </li>
-                <li>
-                    <img src="{% static '/src/assets/img/icon/logo-prodyver.svg' %}" >
-                </li>
-                <li>
-                    <img src="{% static '/src/assets/img/icon/logo-prodyver.svg' %}" >
-                </li>
-            </ul>
-            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href uk-slidenav-previous uk-slider-item="previous"></a>
-            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href uk-slidenav-next uk-slider-item="next"></a>
-        </div>
+            <<div class="adaptive-slider-container">
+                <div class="adaptive-slider" style="display:flex;">
+                  <img class="adaptive-slide" src="path/to/image1.jpg" alt="Image 1">
+                  <img class="adaptive-slide" src="path/to/image2.jpg" alt="Image 2">
+                  <img class="adaptive-slide" src="path/to/image3.jpg" alt="Image 3">
+                  <img class="adaptive-slide" src="path/to/image4.jpg" alt="Image 4">
+                </div>
+              </div>
        </div> 
 
     
@@ -232,7 +213,75 @@
     </main>
     <footer>{% include "footer.html" %}</footer>
 </div>
-<script src="path/to/uikit.min.js">
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const slider = document.querySelector('.adaptive-slider');
+        let isDragging = false,
+            startPos = 0,
+            currentTranslate = 0,
+            prevTranslate = 0,
+            animationID = 0,
+            currentSlideIndex = 0;
+      
+        slider.addEventListener('touchstart', touchStart);
+        slider.addEventListener('touchend', touchEnd);
+        slider.addEventListener('touchmove', touchMove);
+      
+        // Получение индекса текущего слайда
+        function getPositionX(event) {
+          return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+        }
+      
+        // Запуск перемещения слайдера
+        function touchStart(event) {
+          isDragging = true;
+          startPos = getPositionX(event);
+          animationID = requestAnimationFrame(animation);
+          slider.classList.add('grabbing');
+        }
+      
+        // Окончание перемещения слайдера
+        function touchEnd() {
+          isDragging = false;
+          cancelAnimationFrame(animationID);
+      
+          const movedBy = currentTranslate - prevTranslate;
+      
+          // Если свайпнули достаточно сильно, меняем слайд
+          if (movedBy < -100 && currentSlideIndex < slider.children.length - 1) currentSlideIndex += 1;
+          if (movedBy > 100 && currentSlideIndex > 0) currentSlideIndex -= 1;
+      
+          setPositionByIndex();
+      
+          slider.classList.remove('grabbing');
+        }
+      
+        // Обработка движения
+        function touchMove(event) {
+          if (isDragging) {
+            const currentPosition = getPositionX(event);
+            currentTranslate = prevTranslate + currentPosition - startPos;
+          }
+        }
+      
+        // Функция анимации для плавного перетаскивания
+        function animation() {
+          setSliderPosition();
+          if (isDragging) requestAnimationFrame(animation);
+        }
+      
+        // Установка позиции слайдера
+        function setSliderPosition() {
+          slider.style.transform = translateX(${currentTranslate}px);
+        }
+      
+        // Установка позиции слайдера в зависимости от индекса текущего слайда
+        function setPositionByIndex() {
+          currentTranslate = -currentSlideIndex * (slider.clientWidth / slider.children.length);
+          prevTranslate = currentTranslate;
+          setSliderPosition();
+        }
+      });
 
 </script>
 </body>

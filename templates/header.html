@@ -32,7 +32,7 @@
 <div class="main__header header__sticky" style='background: #FFF;'>
     <div class="container">
         <div class="main__header--inner position__relative d-flex justify-content-between align-items-center">
-           
+           <button class="adaptive_header_button"></button>
             <div class="main__logo" >
                  <a class="main__logo--link" href="{% url 'home' %}">
                 <img class="main__logo--img" src="{% static '/src/assets/img/logo/logo_mix2.svg' %}"
@@ -71,7 +71,9 @@
                         <button>Вариант 2</button>
                         <button>Вариант 3</button>
                     </div>
+                    
                 </div>
+                <button class="header_mobile_button"></button>
                 <div class="panel-right" >
                     <img src="{% static '/src/assets/img/icon/phone.svg' %}" alt="Phone Icon">
                     <div class="label">+38 097 295 88 03</div>

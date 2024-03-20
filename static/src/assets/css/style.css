@@ -1762,7 +1762,9 @@ Header
     margin-top: 30px;
     left: 0;
 }
-
+.adaptive_header_button{
+    display: none;
+}
 .dropdown button {
     width: 100%;
     padding: 8px;
@@ -1771,14 +1773,27 @@ Header
     background: none;
     cursor: pointer;
 }
-
+.header_mobile_button{
+    display: none;
+}
 .dropdown button:hover {
     background-color: #f1f1f1;
+}
+@media only screen   and (min-width: 320px) and (max-width: 760px){
+    .header_mobile_button{
+        display: block;
+    }
+    .adaptive_header_button{
+        display: block;
+    }
 }
 @media only screen   and (min-width: 768px) and (max-width: 1199px){
     .header__search--widget
     {
         margin-left:20px;
+    }
+    .adaptive_header_button{
+        display: block;
     }
     .categories__menu_img{
         width: 23px;
@@ -5222,47 +5237,11 @@ order_history_price{
 
 }
 /*About company*/
-.carousel-container {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    display: none;
-  }
-  
-  .carousel {
-    display: flex;
-    transition: transform 0.5s ease;
-  }
-  
-  .slide {
-    flex: 0 0 100%;
-  }
-  
-  .controls {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .prev-button,
-  .next-button {
-    width: 50px;
-    height: 50px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .prev-button:hover,
-  .next-button:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+.adaptive-slide {
+    max-width: 100%; /* гарантирует, что изображения не выходят за пределы своих контейнеров */
+    height: auto;
+    object-fit: cover; /* изменяет способ отображения изображений, чтобы они заполняли контейнер без искажения */
+    margin-right: 10px;
   }
   .about_company_brend_buttons{
 
