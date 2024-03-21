@@ -5237,15 +5237,24 @@ order_history_price{
 
 }
 /*About company*/
-.adaptive-slide {
-    max-width: 100%; /* гарантирует, что изображения не выходят за пределы своих контейнеров */
-    height: auto;
-    object-fit: cover; /* изменяет способ отображения изображений, чтобы они заполняли контейнер без искажения */
-    margin-right: 10px;
-  }
-  .about_company_brend_buttons{
+.adaptive-slider-container {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
 
-  }
+.adaptive-slider {
+    transition: transform 0.5s ease;
+}
+
+.adaptive-slide {
+    display: inline-block;
+    border: 2px solid black;
+
+    margin-right: 2px;
+}
+ 
+ 
   @media only screen   and (min-width: 750px) and (max-width: 1199px){
      .carousel-container{
         display: flex;

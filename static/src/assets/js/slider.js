@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const slider = document.querySelector('.slider');
-    const slides = document.querySelectorAll('.slide');
+    const slider = document.querySelector('.adaptive-slider');
+    const slides = document.querySelectorAll('.adaptive-slide');
     let isDragging = false,
         startPos = 0,
         currentTranslate = 0,

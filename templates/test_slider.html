@@ -6,17 +6,17 @@
     <title>Slider Example</title>
     {% load static %}
     <style>
-        .slider-container {
+        .adaptive-slider-container {
             overflow: hidden;
             white-space: nowrap;
             width: 100%;
         }
 
-        .slider {
+        .adaptive-slider {
             transition: transform 0.5s ease;
         }
 
-        .slide {
+        .adaptive-slide {
             display: inline-block;
             border: 2px solid black;
 
@@ -28,9 +28,9 @@
 </head>
 <body>
 
-<div class="slider-container">
-    <div class="slider">
-        <div class="slide"><img src="{% static '/src/assets/img/other/test__catalog_image.png' %}"></div>
+<div class="adaptive-slider-container">
+    <div class="adaptive-slider">
+        <div class="adaptive-slide"><img src="{% static '/src/assets/img/other/test__catalog_image.png' %}"></div>
         <div class="slide"><img src="{% static '/src/assets/img/other/test__catalog_image.png' %}"></div>
         <div class="slide"><img src="{% static '/src/assets/img/other/test__catalog_image.png' %}"></div>
         <div class="slide"><img src="{% static '/src/assets/img/other/test__catalog_image.png' %}"></div>
