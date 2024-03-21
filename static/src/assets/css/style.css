@@ -1786,6 +1786,13 @@ Header
     .adaptive_header_button{
         display: block;
     }
+   .panel-container{
+    display: none;
+   }
+   .header__bottom {
+    display: none;
+   }
+
 }
 @media only screen   and (min-width: 768px) and (max-width: 1199px){
     .header__search--widget
@@ -5250,6 +5257,8 @@ order_history_price{
 .adaptive-slide {
     display: inline-block;
     border: 2px solid black;
+    width: 170px;
+    height: 63px;
 
     margin-right: 2px;
 }
@@ -5263,4 +5272,9 @@ order_history_price{
         
      }
 
+}
+@media only screen   and (min-width: 320px) and (max-width: 760px){
+    .about_company_brend_buttons{
+        display: none;
+    }
 }
