@@ -168,37 +168,41 @@
                         </div>
                     </div>
                     <div class="orders_history col-lg-8">
-                        <div class="review_personal_block ml-6" style="">
-                            <div style=" height:30px;width:;display: flex; ">
-                                <div class="first_text_block" style=" ">
+                        <div class="review_personal_block ml-6" style="block">
+                            <div style="display:flex;margin-bottom:50px;">
+                            <div  style="  width:;display: block; ">
+                                <div class="first_text_block" style="display:flex; ">
                                 <h2 class="h3">Заказ №123</h2>
-                                <p style="margin-left:45px;">01.01.2021
+                                <p style=" ">01.01.2021
                                 </div>
-                                <div class="second_text_block" >
-                                <p style=" ">Кол-во товаров:
-                                <p style=" ">24</p>
+                                <div class="second_text_block" style="display:flex;" >
+                                    <h2 class="h3">Статус заказа:</h2>
+                                    <p style=" ">в обработке</p>
                                 </div>
 
                             </div>
                              
-                            <div style=" height:30px;width: ;display: flex; ">
+                            <div class="first_order_history_block" style="  width: ;display: block; ">
                                 <div class="first_text_block" style="display:flex;">
-                                <h2 class="h3">Статус заказа:</h2>
-                                <p style="margin-left:20px;">в обработке</p>
+                                    <p style=" ">Кол-во товаров:
+                                        <p style=" ">24</p>
+                                
                                 </div>
-                                <div class="second_text_block" >
+                                <div class="second_text_block" style="display:flex;" >
                                 <p style=" ">Итого:</p>
                                 <p style=" color:#FF0000;">232.00 &#8372</p>
                                
                                 </div>
 
                             </div>
-                            <div style="float: right;margin-left:20px;margin-top:-50px;">
+                            <div style=" margin-left:20px; ">
                                 <button style="width: height:40px;background-color:#FF0000;border:none;border-radius:5px;">
                                     <img style="margin-top:5px; "
                                          src="{% static '/src/assets/img/icon/repeat_button.svg' %}">
                                     <p style="margin-left:30px;margin-top:-25px;">Повторить</p></button>
                             </div>
+                        </div>
+                             
                             <div class="open_order_bord  " style="">
                                 <div class="order_table d-flex flex-column"
                                      style="margin-bottom: 10px;  ">

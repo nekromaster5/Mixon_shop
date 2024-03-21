@@ -5243,12 +5243,18 @@ order_history_price{
     }
 
 }
-.first_text_block{
-    display:flex;
+.second_text_block{
+    height: 28px;
 }
-.second_text_block{ margin-left:275px;display:flex;}
+.first_text_block{
+    height: 28px;
+}
+.first_order_history_block{
+     margin-left: 200px;
+}
+.second_text_block{ display:flex;}
 @media only screen   and (min-width: 320px) and (max-width: 760px){ 
-    .second_text_block{ margin-left:200px;}
+      
 }
 /*About company*/
 .adaptive-slider-container {
