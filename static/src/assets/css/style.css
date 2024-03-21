@@ -5243,6 +5243,13 @@ order_history_price{
     }
 
 }
+.first_text_block{
+    display:flex;
+}
+.second_text_block{ margin-left:275px;display:flex;}
+@media only screen   and (min-width: 320px) and (max-width: 760px){ 
+    .second_text_block{ margin-left:200px;}
+}
 /*About company*/
 .adaptive-slider-container {
     overflow: hidden;
