@@ -5273,8 +5273,14 @@ order_history_price{
      }
 
 }
+.about_company_Heading{
+    margin-left:400px;font-size: 40px;
+   }
 @media only screen   and (min-width: 320px) and (max-width: 760px){
     .about_company_brend_buttons{
         display: none;
     }
+   .about_company_Heading{
+    margin-left: 0px;
+   }
 }
