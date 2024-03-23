@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider Example</title>
+    {% load static %}
+    <style>
+        .adaptive-slider-container {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+        }
+
+        .adaptive-slider {
+            transition: transform 0.5s ease;
+        }
+
+        .adaptive-slide {
+            display: inline-block;
+            border: 2px solid black;
+
+            margin-right: 2px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="adaptive-slider-container">
+    <div class="adaptive-slider">
+        <div class="adaptive-slide"><img src="{% static '/src/assets/img/other/test__catalog_image.png' %}"></div>
+        <div class="slide"><img src="{% static '/src/assets/img/other/test__catalog_image.png' %}"></div>
+        <div class="slide"><img src="{% static '/src/assets/img/other/test__catalog_image.png' %}"></div>
+        <div class="slide"><img src="{% static '/src/assets/img/other/test__catalog_image.png' %}"></div>
+        <div class="slide"><img src="{% static '/src/assets/img/other/test__catalog_image.png' %}"></div>
+        <div class="slide"><img src="{% static '/src/assets/img/other/test__catalog_image.png' %}"></div>
+
+
+    </div>
+</div>
+<button id="slideLeft">Влево</button>
+<button id="slideRight">Вправо</button>
+
+<script src="{% static '/src/assets/js/slider.js' %}"></script>
+</body>
+</html>

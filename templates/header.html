@@ -32,71 +32,55 @@
 <div class="main__header header__sticky" style='background: #FFF;'>
     <div class="container">
         <div class="main__header--inner position__relative d-flex justify-content-between align-items-center">
-            <div class="offcanvas__header--menu__open ">
-                <a class="offcanvas__header--menu__open--btn" href="javascript:void(0)" data-offcanvas>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="ionicon offcanvas__header--menu__open--svg"
-                         viewBox="0 0 512 512">
-                        <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
-                              stroke-width="32" d="M80 160h352M80 256h352M80 352h352"></path>
-                    </svg>
-                    <span class="visually-hidden">Offcanvas Menu Open</span>
-                </a>
+           <button class="adaptive_header_button"></button>
+            <div class="main__logo" >
+                 <a class="main__logo--link" href="{% url 'home' %}">
+                <img class="main__logo--img" src="{% static '/src/assets/img/logo/logo_mix2.svg' %}"
+                alt="logo-img"></a>
+               
             </div>
-            <div class="main__logo" style="width: 101px;
-            height: 41px;
-                    position: relative;
-                    left: 10px;  ">
-                <h1 class="main__logo--title"><a class="main__logo--link" href="{% url 'home' %}"><img class="main__logo--img"
-                                                                                                 src="{% static '/src/assets/img/logo/logo_mix2.svg' %}"
-                                                                                                 alt="logo-img"></a>
-                </h1>
-            </div>
+            <button class="header_mobile_button"></button>
             <div class="panel-container"  > 
-                <div class="header__menu-panel" 
-                     style="display: inline-flex; font-family: 'Montserrat', sans-serif;  align-items: center; gap: 15px; margin-right: 50px; width: -20px; width:600px; position:absolute;margin-left:-500px;margin-top:5px;">
-                    <button class="menu-panel__button_first"
-                            style="position:relative; font-family: 'Montserrat', sans-serif;background: none;color: #F00; font-family: Montserrat; font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px; border: none;">
-                       <p style="font-family: Montserrat; "> Акции</p>
+                <div class="header__menu-panel">
+                    <button class="menu-panel__button_first">
+                       <p  class="first_menu-panel__button_text"  > Акции</p>
                     </button>
-                    <button class="menu-panel__button"
-                            style="position:relative;right:15px;background: none;      
-                            font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px;border: none;">
-                            <p style="font-family: Montserrat; color:#787878;">     О нас</p>
+                    <button  class="menu-panel__button"
+                            style=" ">
+                            <p class="menu-panel__button_text"  >     О нас</p>
                     </button>
-                    <button class="menu-panel__button"
-                            style="position:relative;right:30px;background: none;  font-family: Montserrat; font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px;border: none;">
-                            <p style="font-family: Montserrat; color:#787878;">       Новости</p>
+                    <button class="menu-panel__button">
+                            <p class="menu-panel__button_text"   >       Новости</p>
                     </button>
-                    <button class="menu-panel__button"
-                            style=" position:relative;right:40px;background: none; font-family: Montserrat; font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px;border: none;  ">
-                            <p style="font-family: Montserrat; color:#787878;">       Оплата и доставка</p>
+                    <button class="menu-panel__button">
+                    <p class="menu-panel__button_text" >       Оплата и доставка</p>
                     </button>
-                    <button class="menu-panel__button"
-                            style="position:relative;right:50px; background: none; font-family: Montserrat; font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px;border: none; ">
-                            <p style="font-family: Montserrat; color:#787878;">        Контакты </p>
+                    <button class="menu-panel__button">
+                            <p class="menu-panel__button_text" >        Контакты </p>
                     </button>
 
                     <!-- Добавьте еще кнопки, если нужно -->
                 </div>
-                <div class="panel" id="myPanel" style="relative;right:20px;"> 
+                <div class="panel" id="myPanel"  > 
                     <img src="{% static '/src/assets/img/icon/city_mark1.svg' %}" alt="Icon">
-                    <div class="label" ><p style="font-family: Montserrat; color:#787878;">Хмельницикий</p></div>
-                    <button onclick="toggleDropdown()"    style=" width: 20px; /* ваш желаемый размер по горизонтали */
-                                            height: 10px; background-color:white;border:none;"> 
-                                            <img style="position:relative;top:-5px;"src="{% static '/src/assets/img/icon/Vector 1.svg' %}" >
+                    <div class="panel_label" ><p class="panel_label_text"  >Хмельницикий</p></div>
+                    <button class="panel_dropdowm_button"onclick="toggleDropdown(python manage.py runserver)"> 
+                                            <img class="panel_dropdowm_button_img" src="{% static '/src/assets/img/icon/Vector 1.svg' %}" >
                                         </button>
                     <div class="dropdown" id="myDropdown">
                         <button>Вариант 1</button>
                         <button>Вариант 2</button>
                         <button>Вариант 3</button>
                     </div>
+                    
                 </div>
-                <div class="panel-right" style="position:relative;right:30px;">
+             
+                <div class="panel-right" >
                     <img src="{% static '/src/assets/img/icon/phone.svg' %}" alt="Phone Icon">
                     <div class="label">+38 097 295 88 03</div>
                 </div>
                 <!-- Новая третья панель -->
-                <div class="logo-messengers" style="position:relative;right:30px;">
+                <div class="logo-messengers"  >
                     <img src="{% static '/src/assets/img/icon/viber-top.svg' %}" alt="Messenger Icon 1">
                     <img src="{% static '/src/assets/img/icon/wats-app-top.svg' %}" alt="Messenger Icon 2">
                     <img src="{% static '/src/assets/img/icon/telegram-top.svg' %}" alt="Messenger Icon 3">
@@ -116,37 +100,31 @@
         </div>
     </div>
 </div>
-<div class="header__bottom bg__primary" style='background: #383433; height:63px;'>
+<div class="header__bottom bg__primary" >
     <div class="container">
         <div class="header__bottom--inner position__relative d-flex align-items-center">
-            <div class="categories__menu mobile-v-none" style="
-                    position: relative;left: -100px; margin-left:100px; width:300px;
-                    ">
+            <div class="categories__menu  " style=" "  >
                 <div class="categories__menu--header bg__secondary text-white d-flex align-items-center"
-                     data-bs-toggle="collapse" data-bs-target="#categoriesAccordion" style='background: #1F0D01; height:63px;'>
-                    <img src="{% static '/src/assets/img/icon/logo-katalog1.svg' %}" alt="Logo Katalog">
+                     data-bs-toggle="collapse" data-bs-target="#categoriesAccordion" style='background: #1F0D01; height:63px; '>
+                    <img class="categories__menu_img"src="{% static '/src/assets/img/icon/logo-katalog1.svg' %}" alt="Logo Katalog">
 
-                    <span  style="position:relative;font-family: Montserrat;font-size: 1.4em;left:20px; ">Каталог товаров</span>
-                    <svg class="categories__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355"
-                         height="8.394" viewBox="0 0 10.355 6.394">
-                        <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"
-                              transform="translate(-6 -8.59)" fill="currentColor"></path>
-                    </svg>
+                    <span  class="categories__menu_text"style="  ">Каталог товаров</span>
+                     
                 </div>
 
             </div>
-            <div class="header__search--widget d-none d-lg-block header__sticky--none" style="
-                    position: absolute;left: -100px;margin-left:430px;width:540px; height: 40px;">
+            <div class="header__search--widget   d-lg-block header__sticky--none" style="
+                    margin-left:100px; ">
                 <form class="d-flex header__search--form border-radius-" action="#">
 
-                    <div class="header__search--box"  >
+                    <div class="header__search--box" style="display:flex;"  >
                         <label>
-                            <input class="header__search--input" style="height: 40px;width:540px;border-radius:0; 
+                            <input class="header__search--input" style="height: 40px; border-radius:0; 
                             }"placeholder="Поиск товара" >
                                    <img svg="{% static '/src/assets/img/icon/lupa 1.svg' %}">
                         </label>
                         <button class="header__search--button bg__primary text-white" aria-label="search button"
-                                type="submit" placeholder="Найти" style="width: 100px;left:500px; position:absolute; height: 42px;margin-top:-1px;border-radius:0;background-color:red;"  >
+                                type="submit" placeholder="Найти" style="   height: 42px;margin-top:-1px;border-radius:0;background-color:red;"  >
                                 Найти
                           <!--    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"-->
                                  <!-- xmlns="http://www.w3.org/2000/svg"> -->
@@ -157,17 +135,17 @@
                 </form>
             </div>
 
-            <div class="frame3-panel" style="margin-left: 600px;">
-                <button class="icon-button" style="background: none;border: none;position:relative;right:30px;">
+            <div class="frame3-panel" style=" margin-left:30px;">
+                <button class="icon-button_n" style="background: none;border: none;position:relative; ">
                     <img src="{% static '/src/assets/img/icon/account-logo.svg' %}" alt="Личный кабинет">
                 </button>
-                <button class="icon-button" style="background: none;border: none;position:relative;right:10px;">
+                <button class="icon-button" style="background: none;border: none;position:relative; ">
                     <img src="{% static '/src/assets/img/icon/logo-sravnenie.svg' %}" alt="Сравнение">
                 </button>
-                <button class="icon-button" style="background: none;border: none;position:relative;left:10px;">
+                <button class="icon-button" style="background: none;border: none;position:relative; ">
                     <img src="{% static '/src/assets/img/icon/favorites-logo.svg' %}" alt="Избранное">
                 </button>
-                <button class="icon-button" style="background: none;border: none;position:relative;left:30px;">
+                <button class="icon-button_n" style="background: none;border: none;position:relative; ">
                   
                     <img src="{% static '/src/assets/img/icon/cart-logo.svg' %}" alt="Корзина">
                 </button>

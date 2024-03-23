@@ -1695,7 +1695,85 @@ display: block;
 /*
 Header
 */
+
+.panel-container{
+
+}
  
+.main__logo {
+    display: flex;
+    width: 100px;
+    height: 40px;
+}
+
+.main__logo--link {
+    flex-grow: 1;
+    width: 100px;
+    height: 40px;
+}
+
+.main__logo--img {
+   
+    width: 100px;
+    height: 40px;
+    
+}
+
+.header__menu{
+    display: inline-flex;
+    font-family: 'Montserrat', sans-serif;
+    align-items: center;
+     gap: 15px;
+      margin-right: 50px; 
+      
+       width:600px; 
+        
+       margin-left:-500px;
+       margin-top:5px;
+}
+.menu-panel__button{
+    
+    margin-right:15px;
+    background: none;
+    font-size: 16px;
+     font-style: normal;
+      font-weight: 500;
+       line-height: normal;
+        letter-spacing: -0.48px;
+        border: none;
+}
+.menu-panel__button_text{
+    font-family: Montserrat;
+     color:#787878;
+}
+.menu-panel__button_text:hover {
+    color: var(  --on_hover-color);
+}
+.first_menu-panel__button_text
+{
+    font-family: Montserrat;color:red;
+}
+.first_menu-panel__button_text:hover{
+    color: var(  --on_hover-color);
+}
+.menu-panel__button_first{
+   
+    font-family: 'Montserrat', sans-serif;
+    background: none;color: #F00;
+     font-family: Montserrat;
+      font-size: 16px;
+      font-style: normal;
+       font-weight: 500;
+        line-height: normal;
+         letter-spacing: -0.48px;
+          border: none;
+}
+.header__menu-panel
+{
+    width: 550px;
+    
+}
+
 .path_panel {
     display: flex;
 
@@ -1746,18 +1824,33 @@ Header
     background: none;
     border: none;
     display: flex;
-    width: 200px;
+   
     height: 20.5px;
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
-
+     
 
     overflow: hidden;
-    position: relative;
+  
     margin-right: 12px; /* Добавлен отступ справа между панелями */
 }
+.panel_label{
 
+}
+.panel_label_text{
+    font-family: Montserrat;
+     color:#787878;
+}
+.panel_dropdowm_button{
+    width: 20px;  
+    height: 10px;
+     background-color:white;
+     border:none;
+}
+.panel_dropdowm_button_img{
+     margin-top:-5px;
+}
 .panel img {
     width: 20px;
     height: 20px;
@@ -1783,7 +1876,9 @@ Header
     margin-top: 30px;
     left: 0;
 }
-
+.adaptive_header_button{
+    display: none;
+}
 .dropdown button {
     width: 100%;
     padding: 8px;
@@ -1792,16 +1887,78 @@ Header
     background: none;
     cursor: pointer;
 }
-
+.header_mobile_button{
+    display: none;
+}
 .dropdown button:hover {
     background-color: #f1f1f1;
 }
+@media only screen   and (min-width: 320px) and (max-width: 760px){
+    .header_mobile_button{
+        display: block;
+    }
+    .adaptive_header_button{
+        display: block;
+    }
+   .panel-container{
+    display: none;
+   }
+   .header__bottom {
+    display: none;
+   }
 
+}
+@media only screen   and (min-width: 768px) and (max-width: 1199px){
+    .header__search--widget
+    {
+        margin-left:20px;
+    }
+    .adaptive_header_button{
+        display: block;
+    }
+    .categories__menu_img{
+        width: 23px;
+    }
+    .header__menu-panel {
+        display: none;
+      }
+    .logo-messengers{
+        display: none;
+      }
+      .logo-messengers img{
+        display: none;
+      }
+      .panel-right{
+       
+      }
+      .panel-right .label {
+
+        display: none;
+    }
+    .panel{
+         
+    }
+    .categories__menu_text{
+        display: none;
+    }
+    .categories__menu_img{
+        
+    }
+    .panel_label{
+        display: none;
+    }
+    .header__search--form{
+        
+    }
+    .icon-button{
+        display: none;
+    }
+}
 /* Добавлена новая стилизация для правой панели */
 .panel-right {
     margin-left: 5px;
     display: flex;
-    width: 170px;
+   
     height: 20.5px;
     justify-content: center;
     align-items: center;
@@ -1810,7 +1967,8 @@ Header
     margin-top: 5px;
     background: none;
     overflow: hidden;
-    position: relative;
+    
+   
 }
 
 .panel-right img {
@@ -1836,8 +1994,9 @@ Header
     border: none;
     background: none;
     overflow: hidden;
-    position: relative;
+    
     margin-top: 5px;
+    margin-right:30px;
 }
 
 .logo-messengers img {
@@ -1851,7 +2010,24 @@ Header
     background: none;
     border: none; /* Расположение дочерних элементов внутри блока в виде горизонтальной линии */
 }
-
+.header__bottom{
+    background: #383433; 
+    height:63px;
+}
+.categories__menu{
+       
+}
+.categories__menu--header{
+    
+}
+.categories__menu_text{
+     font-family: Montserrat;
+     font-size: 1.4em;
+     margin-left:20px;
+}
+.header__search--widget{
+     
+}
 /*
     offcanvas header css
 */
@@ -2486,19 +2662,19 @@ Header
 }
 
 .header__search--box {
-    position: relative;
-    width: 330px;
+    
 }
+    
 
 @media only screen and (min-width: 1200px) {
     .header__search--box {
-        width: 400px;
+         
     }
 }
 
 @media only screen and (min-width: 1366px) {
     .header__search--box {
-        width: 462px;
+        
     }
 }
 
@@ -2515,7 +2691,7 @@ Header
 }
 
 .header__search--button {
-    position: absolute;
+   
     top: 0;
     right: 0;
     height: 100%;
@@ -2774,8 +2950,7 @@ Header
     categories menu css here
 */
 .categories__menu {
-    width: 225px;
-    position: relative;
+    
 
 }
 
@@ -2803,7 +2978,7 @@ Header
 
 @media only screen and (max-width: 991px) {
     .categories__menu {
-        width: 100%;
+        
     }
 }
 
@@ -4482,7 +4657,9 @@ input[type=number]::-webkit-outer-spin-button {
     background: var(--secondary-color);
     color: var(--text-white-color);
 }
-
+.footer__widget--menu__text:hover {
+    color: var(--on_hover-color);
+}
 @media only screen and (min-width: 576px) {
     .product__card--action__btn {
         width: 3.5rem;
@@ -5107,6 +5284,7 @@ input[type=number]::-webkit-outer-spin-button {
     margin-left: 3rem;
     font-size: 20px;
 }
+
 /*Product block    */
 .product_button
 {
@@ -5115,3 +5293,183 @@ input[type=number]::-webkit-outer-spin-button {
     height: 40px;
     border: 1px red solid;
 }
+
+/*Cabinet styles*/
+.Cabinet_Heading_area
+{
+
+}
+.personal_name{
+    color: red;
+    margin-top: 5px; /* Добавьте необходимый верхний отступ для разделения от h3 */
+}
+.widget__personal_cabinet_button {
+    list-style-type: none; /* Убираем маркеры списка */
+}
+
+.widget__cabinet--button {
+     background-color: none;
+     
+}
+
+.widget__cabinet--button img {
+    margin-right: 10px; /* Добавляем отступ справа для изображения */
+}
+.drop_down_cabinet_city_list
+{
+    width:10px;
+    height:10px;                                 
+    margin-left:-20px;
+    background-color: transparent;
+    border: none;
+}
+.cabinet_save_button
+{
+    width:160px;
+    height:40px;     
+}
+.password_hider{
+    width:12px;
+    height:8px; 
+    background-color:transparent ;
+    border:none;
+}
+.comparison-container p {
+    float: left;
+    margin-right: 10px; /* добавляем отступ справа */
+}
+
+.comparison-container button {
+    float: left;
+}
+.menu_button{
+    display:none;
+    background-color:red;
+}
+.order_history_artikyl{
+    margin-left:400px;
+}
+.order_history_quantity{
+    margin-left:37px;
+}
+order_history_price{
+    margin-left:30px;
+}
+@media only screen   and (min-width: 750px) and (max-width: 1199px){
+    .vidget_block_cabinet{
+        display: none;
+    }
+    .menu_button{
+        display: block;
+    }
+
+}
+.second_text_block{
+    height: 28px;
+}
+.first_text_block{
+    height: 28px;
+}
+.first_order_history_block{
+     margin-left: 200px;
+}
+.second_text_block{ display:flex;}
+@media only screen   and (min-width: 320px) and (max-width: 760px){ 
+      
+}
+/*About company*/
+.adaptive-slider-container {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.adaptive-slider {
+    transition: transform 0.5s ease;
+}
+
+.adaptive-slide {
+    display: inline-block;
+    border: 2px solid black;
+    width: 170px;
+    height: 63px;
+
+    margin-right: 2px;
+}
+ 
+ 
+  @media only screen   and (min-width: 750px) and (max-width: 1199px){
+     .carousel-container{
+        display: flex;
+     }
+     .about_company_brend_buttons{
+        
+     }
+
+}
+.about_company_img_block{
+    width: 70px; height: 70px; border-radius: 50%; background-color: #e0e0e0; overflow: hidden; margin-left: 20px;
+   }
+   .about_company_img {
+    width: 40px; height: 40px; margin-left: 15px; margin-top: 10px;
+   }
+    
+.about_company_Heading{
+    margin-left:400px;font-size: 40px;
+   }
+   .about_company_Heading_non{
+    margin-left:400px;font-size: 40px;
+   }
+   .block_about_company_heading{
+    margin-left: 20px; width: 460px;
+   }
+   .img_ab_block{
+    display: flex;   
+    align-items: center;
+   }
+.about_company_content{
+    display: flex; flex-direction: row-reverse; flex-wrap: wrap;
+}
+@media only screen   and (min-width: 320px) and (max-width: 760px){
+    .about_company_brend_buttons{
+        display: none;
+    }
+   .about_company_Heading{
+    margin-left: 0px;
+   }
+   .img_ab_block{
+    flex-direction:column;   
+   }
+   .about_company_Heading_non{
+    display: none;
+   }
+   .block_about_company{
+ 
+    flex-direction: column;
+    display: flex;
+   }
+    
+   .block_about_company_heading{
+    width: 270px;
+    
+   }
+   .about_company_content{
+     flex-direction: column; 
+}
+.about_company_img_block{
+    width: 70px; height: 70px; border-radius: 50%; background-color: #e0e0e0; overflow: hidden; margin-left: 20px;
+   }
+   .about_company_img {
+    width: 40px; height: 40px; margin-left: 15px; margin-top: 10px;
+   }
+}
+ /*news*/
+ @media only screen   and (min-width: 320px) and (max-width: 760px){
+    .news_header{
+        display: none;
+    }
+    .button_array{
+        display: none;
+    }
+ }
+

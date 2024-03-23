@@ -16,3 +16,38 @@ class CataloguePage(View):
 class ProductPage(View):
     def get(self, request):
         return render(request, 'product.html')
+
+
+class PersonalPage(View):
+    def get(self, request):
+        return render(request, 'Personal_Area.html')
+
+
+class ErrorPage(View):
+    def get(self, request):
+        return render(request, 'eror_page.html')
+
+
+class Brands(View):
+    def get(self, request):
+        return render(request, 'brands.html')
+
+
+class News(View):
+    def get(self, request):
+        return render(request, 'news.html')
+
+
+class AboutCompany(View):
+    def get(self, request):
+        return render(request, 'about_company.html')
+
+
+class New(View):
+    def get(self, request):
+        return render(request, 'new.html')
+
+
+class Slider(View):
+    def get(self, request):
+        return render(request, 'test_slider.html')
