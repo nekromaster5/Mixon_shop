@@ -19,7 +19,9 @@
 */
 :root {
     --primary-color: #212121;
-    --on_hover-color: rgb(255, 0, 0);
+    --product_button_light-color:#FFFFFF;
+    --product_button_dark-color:#FFFFFF;
+     --on_hover-color: rgb(255, 0, 0);
     --secondary-color: rgb(255, 0, 0);
     --grey-color: rgb(174, 173, 170);
     --foreground-color: rgb(0, 0, 0);
@@ -1545,6 +1547,7 @@ Product-description
 
 .slider {
     width: 70%;
+    margin-top: -40px;
 }
 
 .slide {
@@ -1561,8 +1564,11 @@ Product-description
     flex-direction: column;
     align-items: center;
     width: 20px;
+    
 }
-
+.product_buttons{
+    display:none;
+}
 .slide-buttons button {
     display: flex;
     flex-direction: column;
@@ -1574,15 +1580,122 @@ Product-description
     border: none;
     cursor: pointer;
 }
+.product_slider_button{
+    width: 30px;
+    height: 1px;
+}
+.product_left_path
+{
+display: none;
+}
+.product_right_path
+{
+    display: none;
 
+}
 .slide-buttons button img {
     width: 100%;
     height: 100%;
 }
+.slide{
+    width: 400px; height: 400px;  display: block;
+}
+.first_sale_block_buttons{
+    margin-left: 200px;
+}
+.product_left_path{
+    margin-top:100px;
+     
+}
+.product_right_path{
+    margin-top:100px;
+     
+}
+.product_buttons {
+    height: 100%;
+    background: white;
+    display: flex;
+    position:relative;
+    top:9px;
+}
 
+.product_main_button {
+    color: black;
+    font-size: 18px;
+    font-family: Montserrat;
+    font-weight: 400;
+    word-wrap: break-word;
+    margin-left: 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.product_main_button.active {
+    border-bottom: 3px solid red;
+}
+
+.product_main_button:not(.active) {
+    border-bottom: none;
+}
+
+.product_buttons {
+    display: none;
+    gap: 5px; /* Расстояние между кнопками */
+    margin-left: 30px;
+}
+.description_block{
+    margin-left:40px;
+}
+.product_slider_button{
+
+}
+@media only screen   and (min-width: 768px) and (max-width: 1199px){
+    .slide-buttons{
+        display: none;
+    }
+    .product_buttons{
+        display:flex;
+    }
+    .product_left_path
+{
+display: block;
+}
+.first_sale_block_buttons{
+    margin-left: 100px;
+}
+.product_slider_button{
+    width: 30px;
+    height: 1px;
+}
+.slide{
+    width: 300px; height: 300px;  display: block;
+}
+.slider {
+     
+    margin-top: 0px;
+}
+.product_right_path
+{
+    display: block;
+
+}
+.product_buttons {
+    display: flex;
+    gap: 5px; /* Расстояние между кнопками */
+    margin-left: 60px;
+    margin-top: -60px;
+
+    
+}
+.delivery{
+    margin-left:-300px;
+}
+}
 /*
 Header
 */
+
 .panel-container{
 
 }
@@ -1660,6 +1773,7 @@ Header
     width: 550px;
     
 }
+
 .path_panel {
     display: flex;
 
@@ -4018,8 +4132,7 @@ input[type=number]::-webkit-outer-spin-button {
     color: inherit;
     background-color: inherit;
     border-color: inherit;
-!important;
-}
+ }
 
 .no-cursor_change {
     cursor: text;
@@ -4247,7 +4360,7 @@ input[type=number]::-webkit-outer-spin-button {
     home five footer css
 */
 .footer__bg5 {
-    background: -webkit-gradient(linear, left top, right top, from(#F1F2FA), to(#FCEDF1));
+    background: --webkit-gradient(linear, left top, right top, from(#F1F2FA), to(#FCEDF1));
     background: linear-gradient(to right, #F1F2FA, #FCEDF1);
 }
 
@@ -4777,8 +4890,7 @@ input[type=number]::-webkit-outer-spin-button {
     margin-right: 0;
     padding-right: 0;
     color: rgb(120, 120, 120);
-!important;
-}
+ }
 
 .breadcrumb__content--menu__items:last-child::before {
     display: none;
@@ -4858,8 +4970,7 @@ input[type=number]::-webkit-outer-spin-button {
     color: inherit;
     background-color: inherit;
     border-color: inherit;
-!important;
-}
+ }
 
 .refresh__page {
     font-size: 18px;
@@ -5173,6 +5284,16 @@ input[type=number]::-webkit-outer-spin-button {
     margin-left: 3rem;
     font-size: 20px;
 }
+
+/*Product block    */
+.product_button
+{
+    border-radius: 5px;
+    width: 200px;
+    height: 40px;
+    border: 1px red solid;
+}
+
 /*Cabinet styles*/
 .Cabinet_Heading_area
 {
@@ -5351,3 +5472,4 @@ order_history_price{
         display: none;
     }
  }
+
