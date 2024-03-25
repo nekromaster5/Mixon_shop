@@ -5364,6 +5364,9 @@ order_history_price{
     }
 
 }
+.rev_div{
+    width:260px;height:80px; margin-left: 200px; position: relative; top: -100px;display:flex;
+}
 .second_text_block{
     height: 28px;
 }
@@ -5373,9 +5376,49 @@ order_history_price{
 .first_order_history_block{
      margin-left: 200px;
 }
+.rev_but{
+    border: 1px solid;border-color:#FF0000; 
+    background-color:transparent ;
+     min-width:200px;
+     height:40px;
+     align-self: center;
+     margin-left:100px;
+}
+.rev_labe{
+    margin-right: 10px;margin-top:-20px;
+}
 .second_text_block{ display:flex;}
 @media only screen   and (min-width: 320px) and (max-width: 760px){ 
-      
+    .rev_div {
+       
+        
+        
+        display: flex;
+        flex-direction: column; /* Столбцовая ориентация */
+        align-items: center; /* Центрирование по горизонтали */
+    }
+    .rev_img{
+        width:100px;
+        height: 100px;
+    }
+    .rev_but {
+        border: 1px solid;
+        border-color: #FF0000;
+        background-color: transparent;
+        min-width: 200px;
+        height: 40px;
+        align-self: center;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        text-align: center; /* Центрирование содержимого кнопки */
+    }
+    
+    .rev_labe {
+        margin-top: -50px; /* Увеличение отрицательного значения для перемещения надписи выше */
+        display: block;
+        text-align: center; /* Центрирование текста */
+    }
 }
 /*About company*/
 .adaptive-slider-container {
