@@ -5365,7 +5365,7 @@ order_history_price{
 
 }
 .rev_div{
-    width:260px;height:80px; margin-left: 200px; position: relative; top: -100px;display:flex;
+      margin-left: 200px;   top: -100px;display:flex;
 }
 .second_text_block{
     height: 28px;
@@ -5407,10 +5407,8 @@ order_history_price{
         background-color: transparent;
         min-width: 200px;
         height: 40px;
-        align-self: center;
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
+       
+         
         text-align: center; /* Центрирование содержимого кнопки */
     }
     
