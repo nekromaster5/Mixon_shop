@@ -5365,7 +5365,7 @@ order_history_price{
 
 }
 .rev_div{
-      margin-left: 200px;   top: -100px;display:flex;
+      margin-left: 200px;   margin-top: -100px;display:flex;margin-bottom: 50px;
 }
 .second_text_block{
     height: 28px;
@@ -5392,8 +5392,8 @@ order_history_price{
     .rev_div {
        
         
-        
-        display: flex;
+        margin-top:0px;
+         
         flex-direction: column; /* Столбцовая ориентация */
         align-items: center; /* Центрирование по горизонтали */
     }
@@ -5416,6 +5416,7 @@ order_history_price{
         margin-top: -50px; /* Увеличение отрицательного значения для перемещения надписи выше */
         display: block;
         text-align: center; /* Центрирование текста */
+        font-size: 80%;
     }
 }
 /*About company*/
