@@ -22,6 +22,7 @@
     --on_hover-color: rgb(255, 0, 0);
     --secondary-color: rgb(255, 0, 0);
     --grey-color: rgb(174, 173, 170);
+    --dark_grey-color: rgb(121, 116, 113);
     --foreground-color: rgb(0, 0, 0);
     --foreground-sub-color: #898686;
     --body-text-color: #000000;
@@ -4219,16 +4220,16 @@ input[type=number]::-webkit-outer-spin-button {
 /*    visibility: visible;*/
 /*}*/
 
-/*.product__card:hover .product__card--action {*/
-/*    opacity: 1;*/
-/*    visibility: visible;*/
-/*    bottom: 35%;*/
-/*}*/
+.product__card:hover .product__card--action {
+    opacity: 1;
+    visibility: visible;
+    bottom: 15%;
+}
 
-/*.product__card:hover .product__card--action__btn {*/
-/*    -webkit-transform: scale(1);*/
-/*    transform: scale(1);*/
-/*}*/
+.product__card:hover .product__card--action__btn {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
 
 /*.product__card:hover .product__card--price {*/
 /*    opacity: 0;*/
@@ -4242,18 +4243,18 @@ input[type=number]::-webkit-outer-spin-button {
 /*}*/
 
 .product__card--thumbnail {
-    /*padding: 2rem;*/
+    padding: 2.6rem;
     position: relative;
     overflow: hidden;
     align-items: center;
 }
 
-@media only screen and (min-width: 1200px) {
-    .product__card--thumbnail {
-        padding: 0.5rem 0.5rem;
+/*@media only screen and (min-width: 1200px) {*/
+/*    .product__card--thumbnail {*/
+/*        padding: 0.5rem 0.5rem;*/
 
-    }
-}
+/*    }*/
+/*}*/
 
 .product__card--thumbnail__link {
     position: relative;
@@ -4349,32 +4350,29 @@ input[type=number]::-webkit-outer-spin-button {
     z-index: 9;
     -webkit-transition: 0.5s;
     transition: 0.5s;
-    bottom: 30%;
+    bottom: 10%;
+
+}
+
+.product__card--action--inner__list {
     gap: 0.8rem;
 }
 
 .product__card--action__btn {
-    width: 3rem;
-    height: 3rem;
-    line-height: 2.8rem;
-    color: var(--foreground-sub-color);
-    background: var(--body-background-color);
-    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 3.8rem;
     text-align: center;
+    height: 4rem;
     -webkit-transform: scale(0.5);
     transform: scale(0.5);
     -webkit-transition: 0.5s;
     transition: 0.5s;
 }
 
-.product__card--action__btn:hover {
-    background: var(--secondary-color);
-    color: var(--text-white-color);
-}
-
 @media only screen and (min-width: 576px) {
     .product__card--action__btn {
-        width: 3.5rem;
         height: 3.5rem;
         line-height: 3.3rem;
     }
@@ -4382,9 +4380,99 @@ input[type=number]::-webkit-outer-spin-button {
 
 @media only screen and (min-width: 992px) {
     .product__card--action__btn {
-        width: 4rem;
         height: 4rem;
         line-height: 3.8rem;
+    }
+}
+
+.small__button {
+    width: 4rem;
+    color: var(--body-text-color);
+    background: var(--body-background-color);
+    border-radius: 5%;
+}
+
+.small__button:hover {
+    background: var(--grey-color);
+    color: var(--text-white-color);
+}
+
+.small__button:active {
+    background: var(--body-background-color);
+    color: var(--secondary-color);
+    transition: 0s;
+}
+
+@media only screen and (min-width: 576px) {
+    .small__button {
+        width: 3.5rem;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .small__button {
+        width: 4rem;
+    }
+}
+
+.buy__button {
+    width: 110rem;
+    color: var(--bg-white-color);
+    background: var(--secondary-color);
+    border-radius: 0.2rem;
+
+}
+
+.buy__button:hover {
+    color: var(--bg-white-color);
+    background: var(--grey-color);
+}
+
+.buy__button:active {
+    color: var(--bg-white-color);
+    background: var(--bg-black-color);
+    transition: 0s;
+}
+
+@media only screen and (min-width: 576px) {
+    .buy__button {
+        width: 9rem;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .buy__button {
+        width: 11rem;
+    }
+}
+
+.cheaper__button {
+    width: 17rem;
+    color: var(--body-text-color);
+    background: var(--body-background-color);
+    border-radius: 0.2rem;
+}
+
+.cheaper__button:hover {
+    background: var(--dark_grey-color);
+    color: var(--text-white-color);
+}
+
+.cheaper__button:active {
+    background: var(--body-background-color);
+    color: var(--secondary-color);
+    transition: 0s;
+}
+
+@media only screen and (min-width: 576px) {
+    .cheaper__button {
+        width: 12rem;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .cheaper__button {
+        width: 17rem;
     }
 }
 
