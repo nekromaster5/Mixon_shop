@@ -27,18 +27,11 @@
         <div class="main__footer">
             <img src="{% static '/src/assets/img/logo/logo_mix2.svg' %}" alt="mixon-logo">
             <div class="row ">
-                <div class="col-lg-4 col-md-10">
+                <div class="col-lg-4 col-md-1 order-lg-0 order-md-2 order-1">
                     <div class="footer__widget">
-                        <h2 class="footer__widget--title">Контакты
-                            <button class="footer__widget--button" aria-label="footer widget button"></button>
-                            <svg class="footer__widget--title__arrowdown--icon" xmlns="http://www.w3.org/2000/svg"
-                                 width="12.355" height="8.394" viewBox="0 0 10.355 6.394">
-                                <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"
-                                      transform="translate(-6 -8.59)" fill="currentColor"></path>
-                            </svg>
-                        </h2>
+                        <h2 class="footer__widget--title">Контакты</h2>
                         <div class="footer__widget--inner">
-                            <ul class="footer__widget--menu footer__widget--inner">
+                            <ul class="footer__widget--menu footer__widget--inner mb-4 mb-md-6 mb-lg-5">
                                 <li class="footer__widget--menu__list"><a
                                         class="footer__widget--menu__text no-hover no-cursor_change">+38 095 295 88
                                     03</a></li>
@@ -54,70 +47,125 @@
                                         class="footer__widget--menu__text no-hover no-cursor_change">shop@mixon.ua</a>
                                 </li>
                             </ul>
-                            <ul class="social__share footer__social d-flex">
-                                <li class="social__share--list">
-                                    <a class="social__share--icon__style2 no-hover" target="_blank"
-                                       href="https://web.telegram.org">
-                                        <img src="{% static '/src/assets/img/icon/Telegram_Logo.png' %}"
-                                             alt="telegram-icon">
-                                        <span class="visually-hidden">Telegram</span>
-                                    </a>
+                            <ul class="social__share d-flex d-md-block">
+                                <li class="mb-4">
+                                    <ul class="social__share footer__social d-flex">
+                                        <li class="social__share--list">
+                                            <a class="social__share--icon__style2 no-hover" target="_blank"
+                                               href="https://web.telegram.org">
+                                                <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                          d="M14.927 0.0620119C11.9746 0.0622096 9.08849 0.937695 6.63372 2.57813C4.17896 4.21856 2.26575 6.55008 1.13604 9.27783C0.00633085 12.0056 -0.289146 15.0071 0.286967 17.9028C0.86308 20.7985 2.28492 23.4583 4.37268 25.5459C6.46043 27.6335 9.12034 29.0552 12.0161 29.6311C14.9118 30.207 17.9133 29.9114 20.6409 28.7815C23.3686 27.6516 25.7 25.7383 27.3403 23.2834C28.9805 20.8286 29.856 17.9424 29.856 14.99C29.8561 13.0295 29.4701 11.0881 28.7199 9.27686C27.9696 7.46558 26.87 5.81983 25.4836 4.43359C24.0973 3.04736 22.4515 1.94785 20.6402 1.19775C18.8289 0.447657 16.8875 0.0617492 14.927 0.0620119Z"
+                                                          fill="#039BE6"></path>
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                          d="M22.369 9.84399C22.1583 10.5544 21.9982 11.2789 21.89 12.012C21.655 13.341 21.29 14.9118 21.054 16.2278C20.9314 16.9611 20.8124 17.6859 20.697 18.4019L19.966 21.5439C19.843 22.0229 19.609 23.2268 19.487 23.5898C19.2526 23.7987 18.9569 23.9261 18.644 23.9529C18.2393 23.9149 17.8578 23.7465 17.557 23.4729L12.137 19.3728C12.015 19.2558 11.412 18.8869 11.295 18.6609C11.7067 18.2611 12.1483 17.8933 12.616 17.5608L14.792 15.5088C14.908 15.3918 15.025 15.2639 15.148 15.2639L18.884 11.7729C19.099 11.6765 19.2702 11.503 19.364 11.2869C19.364 10.9319 19.001 11.1699 18.764 11.2869L13.338 14.6609C13.099 14.9069 12.859 15.0289 12.738 15.1519C11.528 15.8719 10.206 16.7128 9.11903 17.4438L8.88004 17.5608L5.02603 16.2339C4.66303 16.1169 4.06104 15.8718 4.06104 15.3918C4.06104 14.9118 4.91004 14.6609 5.38904 14.4329C7.67504 13.4629 9.84403 12.4919 12.136 11.6499C12.259 11.5329 12.493 11.5329 12.615 11.4109L18.404 9.24097C18.766 9.12397 19.123 9.00193 19.604 8.87793C20.3302 8.51105 21.0954 8.22701 21.885 8.03101C22.744 8.03101 22.369 9.24099 22.369 9.84399Z"
+                                                          fill="white"></path>
+                                                </svg>
+                                                <span class="visually-hidden">Telegram</span>
+                                            </a>
+                                        </li>
+                                        <li class="social__share--list">
+                                            <a class="social__share--icon__style2 no-hover" target="_blank"
+                                               href="https://www.facebook.com">
+                                                <svg width="31" height="30" viewBox="0 0 31 30" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                          d="M15.845 3.33703e-08C12.8803 0.000197812 9.9822 0.879369 7.51724 2.52661C5.05227 4.17385 3.13113 6.51507 1.99673 9.25415C0.862324 11.9932 0.565607 15.0071 1.14411 17.9148C1.72262 20.8225 3.15036 23.4936 5.24679 25.5898C7.34322 27.6861 10.0142 29.1136 12.9219 29.6919C15.8297 30.2702 18.8436 29.9735 21.5826 28.8389C24.3216 27.7043 26.6627 25.7829 28.3098 23.3179C29.9568 20.8528 30.836 17.9547 30.836 14.99C30.836 13.0214 30.4482 11.0719 29.6948 9.25317C28.9414 7.43444 27.8372 5.78186 26.4451 4.38989C25.0531 2.99793 23.4005 1.89388 21.5817 1.14062C19.7629 0.387366 17.8136 -0.000131294 15.845 3.33703e-08Z"
+                                                          fill="#3A5997"></path>
+                                                    <path d="M16.8521 9.60278C17.871 9.34081 18.9258 9.24646 19.9751 9.323V5.323C17.3071 5.323 12.8401 5.32282 12.8401 9.86182V12.1619H10.6851V16.1619H12.8401V25.3088H16.8401V16.1619H19.9751V12.1619H16.8401V9.86182C16.8451 9.70082 16.8641 9.61478 16.8521 9.60278Z"
+                                                          fill="white"></path>
+                                                </svg>
+
+                                                <span class="visually-hidden">Facebook</span>
+                                            </a>
+                                        </li>
+                                        <li class="social__share--list">
+                                            <a class="social__share--icon__style2 no-hover" target="_blank"
+                                               href="https://www.instagram.com">
+                                                <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M25.6989 0.558472H4.83594C2.6268 0.558472 0.835938 2.34933 0.835938 4.55847V25.4215C0.835938 27.6306 2.6268 29.4215 4.83594 29.4215H25.6989C27.9081 29.4215 29.6989 27.6306 29.6989 25.4215V4.55847C29.6989 2.34933 27.9081 0.558472 25.6989 0.558472Z"
+                                                          fill="url(#paint0_linear_308_9273)"></path>
+                                                    <path d="M21.0419 5.21667H9.49292C7.28378 5.21667 5.49292 7.00754 5.49292 9.21667V20.7657C5.49292 22.9748 7.28378 24.7657 9.49292 24.7657H21.0419C23.2511 24.7657 25.0419 22.9748 25.0419 20.7657V9.21667C25.0419 7.00754 23.2511 5.21667 21.0419 5.21667Z"
+                                                          stroke="white" stroke-miterlimit="10"></path>
+                                                    <path d="M15.267 19.7056C17.8716 19.7056 19.983 17.5941 19.983 14.9896C19.983 12.385 17.8716 10.2736 15.267 10.2736C12.6625 10.2736 10.551 12.385 10.551 14.9896C10.551 17.5941 12.6625 19.7056 15.267 19.7056Z"
+                                                          stroke="white" stroke-miterlimit="10"></path>
+                                                    <path d="M21.1069 10.2476C21.7271 10.2476 22.2299 9.7448 22.2299 9.12459C22.2299 8.50437 21.7271 8.00159 21.1069 8.00159C20.4867 8.00159 19.9839 8.50437 19.9839 9.12459C19.9839 9.7448 20.4867 10.2476 21.1069 10.2476Z"
+                                                          fill="white"></path>
+                                                    <defs>
+                                                        <linearGradient id="paint0_linear_308_9273" x1="28.1115"
+                                                                        y1="1.59754" x2="2.39454" y2="28.4113"
+                                                                        gradientUnits="userSpaceOnUse">
+                                                            <stop stop-color="#CC39A3"/>
+                                                            <stop offset="0.5" stop-color="#FF553F"/>
+                                                            <stop offset="1" stop-color="#FFD855"/>
+                                                        </linearGradient>
+                                                    </defs>
+                                                </svg>
+
+                                                <span class="visually-hidden">Instagram</span>
+                                            </a>
+                                        </li>
+                                        <li class="social__share--list">
+                                            <a class="social__share--icon__style2 youtube__rectangle no-hover"
+                                               target="_blank"
+                                               href="https://www.youtube.com">
+                                                <svg width="31" height="22" viewBox="0 0 31 22" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M25.827 0.0644531H5.69897C2.93755 0.0644531 0.698975 2.30303 0.698975 5.06445V16.9155C0.698975 19.6769 2.93755 21.9155 5.69897 21.9155H25.827C28.5884 21.9155 30.827 19.6769 30.827 16.9155V5.06445C30.827 2.30303 28.5884 0.0644531 25.827 0.0644531Z"
+                                                          fill="#FE0000"></path>
+                                                    <path d="M12.4451 15.4863V7.29248L20.6391 11.3923L12.4451 15.4863Z"
+                                                          fill="white"></path>
+                                                </svg>
+
+                                                <span class="visually-hidden">YouTube</span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li class="social__share--list">
-                                    <a class="social__share--icon__style2 no-hover" target="_blank"
-                                       href="https://www.facebook.com">
-                                        <img src="{% static '/src/assets/img/icon/Facebook_logo.svg' %}"
-                                             alt="facebook-icon">
-                                        <span class="visually-hidden">Facebook</span>
-                                    </a>
+                                <li>
+                                    <ul class="social__share footer__social d-flex">
+                                        <li class="social__share--list">
+                                            <a class="social__share--icon__style2 no-hover" target="_blank"
+                                               href="https://www.viber.com/">
+                                                <svg width="30" height="31" viewBox="0 0 30 31" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M14.9901 0.979864C12.2439 0.97746 9.54981 1.73008 7.20254 3.15565C4.85526 4.58121 2.94514 6.62485 1.68102 9.06287C0.416904 11.5009 -0.152543 14.2395 0.0349509 16.9794C0.222445 19.7192 1.15966 22.3547 2.74412 24.5978L2.70712 24.5638L1.57513 30.9638L7.48112 28.9498L7.42712 28.9008C9.41431 30.0637 11.6428 30.7531 13.9395 30.9154C16.2363 31.0777 18.5396 30.7087 20.6706 29.8368C22.8016 28.9649 24.703 27.6135 26.2273 25.8878C27.7515 24.1621 28.8576 22.1085 29.4597 19.8861C30.0617 17.6637 30.1435 15.3325 29.6988 13.0734C29.254 10.8142 28.2947 8.68784 26.8951 6.8595C25.4956 5.03116 23.6936 3.55007 21.629 2.53089C19.5643 1.51171 17.2926 0.981893 14.9901 0.982794V0.979864Z"
+                                                          fill="#675CAC"></path>
+                                                    <path d="M24.1912 22.8377C24.1912 23.7147 22.3242 26.7948 19.9052 25.9158C16.3093 24.5779 13.0458 22.4768 10.3392 19.7576C9.51618 18.8461 8.74401 17.8902 8.02616 16.8938C7.48216 15.9048 6.70916 14.6936 6.15816 13.4866C5.71916 12.4966 4.73016 10.8457 5.28116 9.52274C5.88815 8.42126 6.85823 7.56422 8.02616 7.09769C8.33436 6.98069 8.67528 6.98385 8.9813 7.10648C9.28731 7.22911 9.53605 7.46234 9.67816 7.7598C10.6662 9.0828 12.9782 11.2837 11.7682 12.7137C10.7782 13.8137 9.67816 13.4867 10.8892 16.0137C11.8732 18.1037 14.1892 20.5268 16.4982 20.8548C18.8072 21.1828 17.3772 16.4547 23.0982 21.2947C23.6412 21.7347 24.1912 21.8477 24.1912 22.8377ZM21.1182 13.4866C21.4462 14.6986 21.0072 16.0158 22.2182 15.6868C22.7682 13.7078 21.4512 11.4018 20.4552 10.4058C19.1382 9.0878 16.0642 8.09763 15.4022 8.53763L15.2912 9.31083C16.7142 9.74483 20.2342 9.63361 21.1182 13.4866ZM16.1712 11.8348C16.3812 12.0508 17.2712 12.0507 17.7042 12.2737C18.9172 12.8247 18.5832 13.7028 19.0282 14.9148C20.5672 15.1368 19.5722 12.8248 19.3562 12.6018C18.2552 10.5118 15.0652 10.7338 16.1712 11.8348ZM22.9852 9.96073C22.2086 8.89032 21.2236 7.9879 20.0894 7.3079C18.9552 6.62789 17.6952 6.1843 16.3852 6.0037C15.5072 5.8927 14.3012 5.56381 14.5242 6.76981C15.1792 7.09781 16.6072 6.76982 18.8092 7.65482C22.1092 9.19382 23.6452 12.2736 23.8682 15.7986C23.8682 17.1156 24.8572 17.0057 24.8572 16.0157C24.8415 13.8573 24.1904 11.7514 22.9852 9.96073Z"
+                                                          fill="white"></path>
+                                                </svg>
+
+                                                <span class="visually-hidden">Viber</span>
+                                            </a>
+                                        </li>
+                                        <li class="social__share--list">
+                                            <a class="social__share--icon__style2 no-hover" target="_blank"
+                                               href="https://www.facebook.com">
+                                                <svg width="31" height="31" viewBox="0 0 31 31" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                          d="M15.9711 0.979864C13.2248 0.97746 10.5308 1.73008 8.1835 3.15565C5.83622 4.58121 3.9261 6.62485 2.66198 9.06287C1.39786 11.5009 0.828414 14.2395 1.01591 16.9794C1.2034 19.7192 2.14062 22.3547 3.72508 24.5978L3.68807 24.5638L2.55607 30.9638L8.46207 28.9498L8.40807 28.9008C10.3953 30.0637 12.6237 30.7531 14.9205 30.9154C17.2173 31.0777 19.5205 30.7087 21.6515 29.8368C23.7826 28.9649 25.684 27.6135 27.2082 25.8878C28.7325 24.1621 29.8386 22.1085 30.4406 19.8861C31.0427 17.6637 31.1245 15.3325 30.6797 13.0734C30.235 10.8142 29.2756 8.68784 27.8761 6.8595C26.4766 5.03116 24.6746 3.55007 22.6099 2.53089C20.5453 1.51171 18.2736 0.981893 15.9711 0.982794V0.979864Z"
+                                                          fill="#4CAF50"></path>
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                          d="M24.9531 22.603C24.3518 23.4753 23.4879 24.1331 22.4871 24.4809C21.4615 24.8395 20.3447 24.8395 19.3191 24.4809C18.4365 24.2803 17.5727 24.0047 16.7371 23.657C16.3663 23.4541 15.9721 23.2976 15.5631 23.1909C14.8541 22.7179 14.1511 22.3669 13.4481 21.8999L12.2731 20.9619L10.7451 19.4348C9.37368 17.9396 8.19177 16.2811 7.22613 14.4968C6.82753 13.5709 6.62722 12.5719 6.63812 11.5639C6.64143 10.5641 6.92706 9.58555 7.46212 8.74094C7.92812 8.04094 8.63112 7.21384 9.45512 7.21384C10.2791 7.21384 10.7451 7.09902 11.0971 7.57102C11.3331 7.92302 11.6851 8.97792 11.9211 9.44992C12.2852 10.2515 12.5988 11.0752 12.8601 11.916C12.8601 12.855 11.3331 14.0298 11.3331 14.3818C11.6036 15.1724 12.0443 15.8941 12.6241 16.4958L13.2111 17.196C13.2106 17.2117 13.2132 17.2273 13.2187 17.2419C13.2243 17.2566 13.2327 17.2699 13.2435 17.2812C13.2543 17.2926 13.2673 17.3018 13.2816 17.3081C13.296 17.3144 13.3115 17.3176 13.3271 17.3178L15.0901 18.9599C15.4267 19.1154 15.7423 19.3129 16.0291 19.5478C16.3801 19.6618 16.7371 19.8989 17.0841 20.0139C18.3741 20.6009 18.2581 20.8379 19.0841 19.7839C19.0998 19.7836 19.1153 19.7802 19.1296 19.7739C19.144 19.7676 19.1569 19.7586 19.1677 19.7473C19.1785 19.7359 19.1869 19.7224 19.1925 19.7077C19.1981 19.6931 19.2007 19.6775 19.2001 19.6618C19.3211 19.5478 19.4361 19.4329 19.5511 19.3159L20.0241 18.6089C20.2541 18.4919 20.3751 18.02 20.7241 18.02C21.5862 18.2721 22.4143 18.6282 23.1901 19.0808C23.5694 19.2991 23.9622 19.4932 24.3661 19.6618C24.8381 19.8988 25.3051 20.0138 25.3051 20.4858C25.3112 21.2065 25.1921 21.923 24.9531 22.603Z"
+                                                          fill="white"></path>
+                                                </svg>
+
+                                                <span class="visually-hidden">Whats-App</span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li class="social__share--list">
-                                    <a class="social__share--icon__style2 no-hover" target="_blank"
-                                       href="https://www.instagram.com">
-                                        <img src="{% static '/src/assets/img/icon/Instagram_logo.png' %}"
-                                             alt="instagram-icon">
-                                        <span class="visually-hidden">Instagram</span>
-                                    </a>
-                                </li>
-                                <li class="social__share--list">
-                                    <a class="social__share--icon__style2 youtube__rectangle no-hover" target="_blank"
-                                       href="https://www.youtube.com">
-                                        <img src="{% static '/src/assets/img/icon/Youtube_logo.png' %}"
-                                             alt="youtube-icon">
-                                        <span class="visually-hidden">YouTube</span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="social__share footer__social d-flex">
-                                <li class="social__share--list">
-                                    <a class="social__share--icon__style2 no-hover" target="_blank"
-                                       href="https://www.viber.com/">
-                                        <img src="{% static '/src/assets/img/icon/Viber_logo.png' %}" alt="viber-icon">
-                                        <span class="visually-hidden">Viber</span>
-                                    </a>
-                                </li>
-                                <li class="social__share--list">
-                                    <a class="social__share--icon__style2 no-hover" target="_blank"
-                                       href="https://www.facebook.com">
-                                        <img src="{% static '/src/assets/img/icon/WhatsApp_logo.webp' %}"
-                                             alt="whats-app-icon">
-                                        <span class="visually-hidden">Whats-App</span>
-                                    </a>
-                                </li>
+
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4">
+                <div class="col-lg-3 col-md-1 order-lg-1 order-md-0 order-0">
                     <div class="footer__widget">
-                        <h2 class="footer__widget--title ">Меню
-                            <button class="footer__widget--button" aria-label="footer widget button"></button>
-                            <svg class="footer__widget--title__arrowdown--icon" xmlns="http://www.w3.org/2000/svg"
-                                 width="12.355" height="8.394" viewBox="0 0 10.355 6.394">
-                                <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"
-                                      transform="translate(-6 -8.59)" fill="currentColor"></path>
-                            </svg>
-                        </h2>
+                        <h2 class="footer__widget--title d-none d-md-block">Меню</h2>
                         <ul class="footer__widget--menu footer__widget--inner">
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
                                                                       href="">Акции</a></li>
@@ -132,44 +180,36 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-1 col-md-4">
+                <div class="col-lg-1 col-md-2 order-lg-2 order-md-1 d-none d-md-block">
                     <div class="footer__widget">
-                        <h2 class="footer__widget--title ">Товарные направления
-                            <button class="footer__widget--button" aria-label="footer widget button"></button>
-                            <svg class="footer__widget--title__arrowdown--icon" xmlns="http://www.w3.org/2000/svg"
-                                 width="12.355" height="8.394" viewBox="0 0 10.355 6.394">
-                                <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"
-                                      transform="translate(-6 -8.59)" fill="currentColor"></path>
-                            </svg>
-                        </h2>
+                        <h2 class="footer__widget--title ">Товарные направления</h2>
                         <ul class="footer__widget--menu footer__widget--inner">
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
-                                                                      href="{% url 'catalogue' %}">ЛКМ для Строительства</a></li>
+                                                                      href="{% url 'catalogue' %}">ЛКМ для
+                                Строительства</a></li>
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
-                                                                      href="{% url 'catalogue' %}">ЛКМ для Авторемонта</a></li>
+                                                                      href="{% url 'catalogue' %}">ЛКМ для
+                                Авторемонта</a></li>
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
-                                                                      href="{% url 'catalogue' %}">ЛКМ для Деревообработки</a></li>
+                                                                      href="{% url 'catalogue' %}">ЛКМ для
+                                Деревообработки</a></li>
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
-                                                                      href="{% url 'catalogue' %}">ЛКМ для Промышленности</a></li>
+                                                                      href="{% url 'catalogue' %}">ЛКМ для
+                                Промышленности</a></li>
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
-                                                                      href="{% url 'catalogue' %}">Автохимия, автокосметика,
+                                                                      href="{% url 'catalogue' %}">Автохимия,
+                                автокосметика,
                                 оборудование для автомоек</a></li>
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
-                                                                      href="{% url 'catalogue' %}">Инструменты, аксессуары,
+                                                                      href="{% url 'catalogue' %}">Инструменты,
+                                аксессуары,
                                 оборудование</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-4">
+                <div class="col-lg-2 col-md-2 order-lg-3 order-md-3 d-none d-md-block">
                     <div class="footer__widget">
-                        <h2 class="footer__widget--title ">Магазины
-                            <button class="footer__widget--button" aria-label="footer widget button"></button>
-                            <svg class="footer__widget--title__arrowdown--icon" xmlns="http://www.w3.org/2000/svg"
-                                 width="12.355" height="8.394" viewBox="0 0 10.355 6.394">
-                                <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"
-                                      transform="translate(-6 -8.59)" fill="currentColor"></path>
-                            </svg>
-                        </h2>
+                        <h2 class="footer__widget--title ">Магазины</h2>
                         <ul class="footer__widget--menu footer__widget--inner">
                             <li class="footer__widget--menu__list"><a
                                     class="footer__widget--menu__text no-cursor_change no-hover"

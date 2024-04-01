@@ -758,7 +758,7 @@ hr {
     .primary__btn {
         line-height: 4rem;
         height: 4rem;
-        padding: 0 ;
+        padding: 0;
         font-size: 1.4rem;
     }
 }
@@ -768,7 +768,7 @@ hr {
         font-size: 1.5rem;
         line-height: 4.2rem;
         height: 4.2rem;
-        padding: 0 ;
+        padding: 0;
     }
 }
 
@@ -776,7 +776,7 @@ hr {
     .primary__btn {
         line-height: 4.6rem;
         height: 4.6rem;
-        padding: 0 ;
+        padding: 0;
     }
 }
 
@@ -883,7 +883,7 @@ select {
     }
 }
 
-.section__heading--maintitle--text__secondary{
+.section__heading--maintitle--text__secondary {
     color: var(--secondary-color);
     font-size: 15px;
     font-weight: 500;
@@ -3812,8 +3812,19 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .footer__social {
-    gap: 1rem;
-    margin-top: 1.5rem;
+
+}
+
+@media only screen and (min-width: 768px) {
+    .footer__social {
+
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .footer__social {
+
+    }
 }
 
 .social__share--list {
@@ -4025,11 +4036,6 @@ input[type=number]::-webkit-outer-spin-button {
     color: rgb(255, 255, 255);
 }
 
-@media only screen and (max-width: 767px) {
-    .footer__widget--inner {
-        display: none;
-    }
-}
 
 .footer__bottom {
     border-top: 1px solid var(--bg-light-dark-color);
@@ -5086,46 +5092,50 @@ input[type=number]::-webkit-outer-spin-button {
     margin-left: 3rem;
     font-size: 20px;
 }
+
 /*Cabinet styles*/
-.Cabinet_Heading_area
-{
+.Cabinet_Heading_area {
 
 }
-.personal_name{
+
+.personal_name {
     color: red;
     margin-top: 5px; /* Добавьте необходимый верхний отступ для разделения от h3 */
 }
+
 .widget__personal_cabinet_button {
     list-style-type: none; /* Убираем маркеры списка */
 }
 
 .widget__cabinet--button {
-     background-color: none;
-     
+    background-color: none;
+
 }
 
 .widget__cabinet--button img {
     margin-right: 10px; /* Добавляем отступ справа для изображения */
 }
-.drop_down_cabinet_city_list
-{
-    width:10px;
-    height:10px;                                 
-    margin-left:-20px;
+
+.drop_down_cabinet_city_list {
+    width: 10px;
+    height: 10px;
+    margin-left: -20px;
     background-color: transparent;
     border: none;
 }
-.cabinet_save_button
-{
-    width:160px;
-    height:40px;     
+
+.cabinet_save_button {
+    width: 160px;
+    height: 40px;
 }
-.password_hider{
-    width:12px;
-    height:8px; 
-    background-color:transparent ;
-    border:none;
+
+.password_hider {
+    width: 12px;
+    height: 8px;
+    background-color: transparent;
+    border: none;
 }
+
 .comparison-container p {
     float: left;
     margin-right: 10px; /* добавляем отступ справа */
