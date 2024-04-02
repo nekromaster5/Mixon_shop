@@ -1650,6 +1650,9 @@ display: none;
 .product_slider_button{
 
 }
+.describe_product{
+    display: flex;
+}
 @media only screen   and (min-width: 768px) and (max-width: 1199px){
     .slide-buttons{
         display: none;
@@ -1690,6 +1693,46 @@ display: block;
 }
 .delivery{
     margin-left:-300px;
+}
+}
+@media only screen   and (min-width: 320px) and (max-width: 760px){
+   .description_block{
+    display: block;
+   }
+    .slide-buttons{
+        display: none;
+    }
+    .product_buttons{
+        display:flex;
+    }
+    .product_left_path
+{
+display: block;
+}
+.slide{
+    width: 300px; height: 300px;  display: block;
+}
+.slider {
+     
+    margin-top: 0px;
+}
+.product_right_path
+{
+    display: block;
+
+}
+.product_buttons {
+    display: flex;
+    gap: 5px; /* Расстояние между кнопками */
+    
+
+    
+}
+.product-description{
+    display: block;
+}
+.describe_product{
+    display: block;
 }
 }
 /*
@@ -5382,20 +5425,28 @@ order_history_price{
      min-width:200px;
      height:40px;
      align-self: center;
-     margin-left:100px;
+     
 }
 .rev_labe{
-    margin-right: 10px;margin-top:-20px;
+    
+}
+.review_personal_block_f{
+    display: flex;
 }
 .second_text_block{ display:flex;}
 @media only screen   and (min-width: 320px) and (max-width: 760px){ 
     .rev_div {
        
         
-        margin-top:0px;
-         
+       
         flex-direction: column; /* Столбцовая ориентация */
-        align-items: center; /* Центрирование по горизонтали */
+          /* Центрирование по горизонтали */
+    }
+    .rev_text{
+         
+    }
+    .review_personal_block_f{
+        display: block;
     }
     .rev_img{
         width:100px;
@@ -5413,11 +5464,18 @@ order_history_price{
     }
     
     .rev_labe {
-        margin-top: -50px; /* Увеличение отрицательного значения для перемещения надписи выше */
+        /* Увеличение отрицательного значения для перемещения надписи выше */
         display: block;
-        text-align: center; /* Центрирование текста */
-        font-size: 80%;
+        
+       
     }
+    .second_text_block{
+         
+    }
+    .first_text_block{
+       
+    }
+    
 }
 /*About company*/
 .adaptive-slider-container {
