@@ -35,740 +35,740 @@
 
     <main class="main__content_wrapper" style="background:#E5E5E5;">
 
-            <section class="breadcrumb__section breadcrumb__bg--bg-offwhite-color">
+        <section class="breadcrumb__section breadcrumb__bg--bg-offwhite-color">
 
-                <div class="breadcrumb__content text-center" style="width:100%;">
-                    <ul class="breadcrumb__content--menu d-flex">
-                        <li class="breadcrumb__content--menu__items">
-                            <a href="">Главная</a>
-                        </li>
-                        <li class="breadcrumb__content--menu__items">
-                            <a href="">ЛКМ для Строительства</a>
-                        </li>
-                        <li class="breadcrumb__content--menu__items">
-                            <a href="">Шпатлевка универсальная</a>
-                        </li>
-                        <li class="breadcrumb__content--menu__items">
-                            <a href="">Шпатлевка универсальная 2 кг Mixon Uni</a>
-                        </li>
-                    </ul>
+            <div class="breadcrumb__content text-center" style="width:100%;">
+                <ul class="breadcrumb__content--menu d-flex">
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="">Главная</a>
+                    </li>
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="">ЛКМ для Строительства</a>
+                    </li>
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="">Шпатлевка универсальная</a>
+                    </li>
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="">Шпатлевка универсальная 2 кг Mixon Uni</a>
+                    </li>
+                </ul>
+
+            </div>
+            <h1 class="breadcrumb__content--title">Шпатлевка универсальная 2 кг Mixon Uni</h1>
+
+
+            <br>
+            <section>
+                <div style="width: 100%; height: 30px; justify-content: flex-start; align-items: flex-start; gap: 9px; display: inline-flex;">
+
+                    <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                    <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                    <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                    <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                    <img src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                    <div style="position:relative;"><img src="{% static '/src/assets/img/icon/like_icon.png' %}">
+                        <p style="left:35px;position:relative;top:-25px;">67</p>
+                        <img src="{% static '/src/assets/img/icon/review_icon.png' %}"
+                             style="position:relative;top:-65px;left:60px;">
+                        <p style="left:100px;position:relative;top:-93px;">23</p></div>
+                    <p style="position:relative;left:800px;color:#787878;">Артикул1234567890</p>
+                </div>
+            </section>
+        </section>
+
+
+        <div class="product_main_panel" style=" ">
+            <button class="product_main_button" onclick="switchBlock_to_product_description(); switchBorder(this)">
+                Все о товаре
+            </button>
+            <button class="product_main_button" onclick="switchBlock_to_Characteristics(); switchBorder(this)">
+                Характеристики
+            </button>
+            <button class="product_main_button" onclick="switchBlock_to_Buy_too(); switchBorder(this)">
+                Покупают вместе
+            </button>
+            <button class="product_main_button" onclick=" switchBorder(this)">
+                Похожие товары
+            </button>
+            <button class="product_main_button" onclick="switchBlock_to_Reviev(); switchBorder(this)">
+                Отзывы
+            </button>
+            <button class="product_main_button" onclick="switchBlock_to_avability(); switchBorder(this)" style=" ">
+                Наличие в магазинах
+            </button>
+        </div>
+
+        <div class="Characteristics" style="position: relative;">
+
+            <!-- Характеристики -->
+            <div class="t_block" style="height: 500px; background-color: white; position: relative; top: 11px;">
+                <p style="font-size: 20px; font-weight: bold; position: relative; left: 10px;">Характеристики</p>
+                <br>
+                <p style="position: relative; left: 10px;">Использование.............................. Внутри
+                    помещений</p>
+                <p style="position: relative; left: 10px;">Связующее вещество....................... Сополимер</p>
+                <p style="position: relative; left: 10px;">Сухой остаток................................. 10%</p>
+                <p style="position: relative; left: 10px;">Плотность.......................................... 1,05
+                    кг/п</p>
+                <p style="position: relative; left: 10px;">Время высыхания 23C 50% RH...... 2-6 часов</p>
+                <p style="position: relative; left: 10px;">Расход готовой смеси ................ 10-12м2/л в 1
+                    слой</p>
+                <p style="position: relative; left: 10px;">Разбавитель......................................
+                    Вода</p>
+                <p style="position: relative; left: 10px;">Рабочие инструменты..................... Валик, кисть</p>
+                <p style="position: relative; left: 10px;">Очистка рабочих инструментов.... Вода</p>
+                <p style="position: relative; left: 10px;">Хранение.......................................... 3 года
+                    t > 0°C</p>
+            </div>
+
+            <!-- Блоки доставки -->
+
+
+            <!-- Дополнительные блоки -->
+
+
+        </div>
+        <div class="Buy_too">
+            <div class="mb-6" style="margin-top: 10px; background: white;">
+                <span class="buying-together__content--title mt-5 mb-5">Покупают вместе</span>
+            </div>
+            <div class="row">
+                <div class="row col-lg-8 mb-6" style="margin-left: -4px;">
+                    {% for i in 'abcdef'|make_list %}
+                        <div class="col-lg-5 mb-6">
+                            {% include "product_block.html" %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="col-lg-5 mb-6 bg-white">
+                    <div>
+                        <div class="d-flex">
+                            <img src="{% static '/src/assets/img/icon/Path 47.png' %}">
+                            <p>Есть в наличии</p>
+                        </div>
+                        <p>265.00 &#8372;</p>
+                        <p>232.00 &#8372;</p>
+                        <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
+                             alt="Slide 2">
+                        <button><img src="{% static '/src/assets/img/icon/Path 49.png' %}"></button>
+                        <button><img src="{% static '/src/assets/img/icon/Group 34.png' %}"></button>
+                        <button><img src="{% static '/src/assets/img/icon/Group 94.png' %}">
+                            <p>Быстрый заказ</p></button>
+                        <button><img src="{% static '/src/assets/img/icon/Group 95.png' %}">
+                            <p>Хочу дешевле</p></button>
+                        <button><img src="{% static '/src/assets/img/icon/Path 55.png' %}">
+                            <p>Купить</p></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="Review" style="    background-color: white;">
+
+            <div class="f_block"
+                 style="width: 740px; height: 100px; margin-left: 20px; margin-bottom: 5px; margin-top: 10px;">
+                <p style="width: 85px; height: 25px; font-weight: bold; font-weight: 500;">Отзывы</p>
+                <div style="position: relative;">
+                    <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                    <img style="position: relative; left: 30px; top: -30px;"
+                         src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                    <img style="position: relative; left: 60px; top: -60px;"
+                         src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                    <img style="position: relative; left: 90px; top: -90px;"
+                         src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                    <img style="position: relative; left: 120px; top: -120px;"
+                         src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                </div>
+                <p style="position: relative; top: -145px; left: 160px;">Рейтинг 4.0</p>
+            </div>
+            <div class="reviev_block" style=" width: 740px;  ">
+                <div style=" ">
+                    <p>Дмитрий Александрович</p>
+                    <div class="product_reviev_stars" style=" margin-top:-25px;margin-left:600px;display: flex;">
+                        <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                        <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                        <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                        <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                        <img style="" src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                    </div>
 
                 </div>
-                <h1 class="breadcrumb__content--title">Шпатлевка универсальная 2 кг Mixon Uni</h1>
+
+                <div style="margin-bottom:10px;">
+                    <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був
+                        добре запакований, помітно що ніхто до мене його не відкривав</p>
+
+                </div>
+                <div style="width: 740px; height: 30px; margin-top: 5px;">
+                    <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
+                </div>
+                <div style="width: 740px; height: 30px; margin-top: 0px;">
+                    <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
+                </div>
+            </div>
+            <div class="reviev_block" style="width: 740px;   margin-top:30px;  ">
+                <div style="width: 740px; height: 50px;">
+                    <p>Дмитрий Александрович</p>
+                    <div style=" margin-top:-25px;margin-left:600px;display: flex;">
+                        <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                        <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                        <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                        <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                        <img style="" src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                    </div>
+                </div>
+                <div style="width: 740px; height: 70px;">
+                    <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був
+                        добре запакований, помітно що ніхто до мене його не відкривав</p>
+                </div>
+                <div style="width: 740px; height: 30px; margin-top: 5px;">
+                    <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
+                </div>
+                <div style="width: 740px; height: 30px; margin-top: 0px;">
+                    <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
+                </div>
+            </div>
+            <div class="reviev_block" style="width: 740px;   margin-top:30px;  ">
+                <div style="width: 740px; height: 50px;">
+                    <p>Дмитрий Александрович</p>
+                    <div style=" margin-top:-25px;margin-left:600px;display: flex;">
+                        <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                        <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                        <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                        <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                        <img style="" src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                    </div>
+                </div>
+                <div style="width: 740px; height: 70px;">
+                    <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був
+                        добре запакований, помітно що ніхто до мене його не відкривав</p>
+                </div>
+                <div style="width: 740px; height: 30px; margin-top: 5px;">
+                    <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
+                </div>
+                <div style="width: 740px; height: 30px; margin-top: 0px;">
+                    <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
+                </div>
+            </div>
 
 
-                <br>
-                <section>
-                    <div style="width: 100%; height: 30px; justify-content: flex-start; align-items: flex-start; gap: 9px; display: inline-flex;">
+            <button style="border: none; background-color: white;  width: 200px; height: 30px;">
+                <img src="{% static '/src/assets/img/icon/vectorgorupr.png' %}">
+                <p style="position: relative; bottom: 30px;">Показать еще</p>
+            </button>
 
-                        <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                        <div style="position:relative;"><img src="{% static '/src/assets/img/icon/like_icon.png' %}">
-                            <p style="left:35px;position:relative;top:-25px;">67</p>
-                            <img src="{% static '/src/assets/img/icon/review_icon.png' %}"
-                                 style="position:relative;top:-65px;left:60px;">
-                            <p style="left:100px;position:relative;top:-93px;">23</p></div>
-                        <p style="position:relative;left:800px;color:#787878;">Артикул1234567890</p>
+            <div class="revier" style="border-style: none; width: 740px; height: 400px;  ">
+                <div style="display: flex;
+                        flex-direction: column;">
+                    <p style="font-weight: 500;">Написать отзыв</p>
+                    <div style="display: flex;margin-top:-15px;">
+                        <div style="display: flex; align-items: center;">
+                            <img style="width: 30px; height: 30px; "
+                                 src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                            <img style="width: 30px; height: 30px;  "
+                                 src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                            <img style="width: 30px; height: 30px;  "
+                                 src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                            <img style="width: 30px; height: 30px;  "
+                                 src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                            <img style="width: 30px; height: 30px;  "
+                                 src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                        </div>
+
+                        <p style="font-family: Montserrat; color: #000000; margin-left: 10px;margin-top:10px;">Ваша
+                            оценка</p>
+                    </div>
+                </div>
+
+
+                <div class="contact_block_second ml-6" style="margin-top:20px;">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!-- Первая колонка с двумя строками ввода -->
+                            <input type="text" class="form-control form-control-lg mb-2"
+                                   placeholder="Первая строка ввода">
+                            <input type="text" class="form-control form-control-lg"
+                                   placeholder="Вторая строка ввода">
+                        </div>
+                        <div class="col-lg-6">
+                            <!-- Вторая колонка с двумя строками ввода -->
+                            <input type="text" class="form-control form-control-lg mb-2"
+                                   placeholder="Третья строка ввода">
+                            <input type="text" class="form-control form-control-lg"
+                                   placeholder="Четвертая строка ввода">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div style="width: 740px; height: 170px;margin-top:50px;  ">
+                    <div style="position: relative;">
+                        <input type="text" id="name" name="name"
+                               style="display: block; width: 670px; height: 120px; border-radius: 5px; padding-top: 20px;">
+                        <label for="name" style="position: absolute; top: 5px; left: 5px; pointer-events: none;">Напишите
+                            отзыв</label>
+                    </div>
+                    <button style="border-style: solid; border-color: red;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);  width: 200px; height: 40px; margin-top:20px; border-radius:5px;">
+                        <p style="font-family: Montserrat; color: red;">Оставить отзыв</p>
+                    </button>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="avability" style="margin-top: 10px;">
+            <section style="background:white; margin-bottom ">
+                <div class="container">
+                    <div style="display:flex">
+                        <div class="avability_main">
+                            <div style="display:flex;">
+                                <h2 class="h3">Наличие в магазинах</h2>
+                                <button style="margin-left:10px;width:270px;height:40px;border-radius:5px; ">
+                                    <div style="display:flex;">
+                                        <span> Одесса</span>
+                                        <span style="margin-left:180px;">˅</span>
+                                    </div>
+                                </button>
+                                <span style="color:red; margin-left:30px;">Забрать сегодня</span>
+                            </div>
+                            <div class="avability_block" style="margin-top:20px;">
+                                <div style="display:flex;">
+                                    <img style="width:16px;height:18px;margin-top:3px;"
+                                         src="{% static '/src/assets/img/icon/Path 36.png' %}">
+
+                                    <span style="margin-left:10px;">г. Одесса - ул. Елизаветинская 4</span>
+                                    <span style="margin-left:240px;color:gray;">В наличии:<span
+                                            style="color:red;margin-left:10px;">25 штук</span></span>
+                                </div>
+                                <div><span style="margin-left:520px;color:gray;">На 01.07.21</span></div>
+                                <div style="display:flex;">
+                                    <img style="width:16px;height:18px;margin-top:3px;"
+                                         src="{% static '/src/assets/img/icon/Path 35 1.png' %}">
+
+                                    <span style="margin-left:10px;">+38(097) 295 88 03</span>
+                                </div>
+                                <div style="display:flex;">
+
+                                    <span style="margin-left:25px;">+38(095) 295 88 03</span>
+                                </div>
+                                <div style="display:flex;">
+                                    <img style="width:20px;height:20px;margin-top:3px;"
+                                         src="{% static '/src/assets/img/icon/Group 19 1.png' %}">
+
+                                    <span style="margin-left:10px;">09:00 - 17:00</span>
+                                </div>
+                                <div style="display:flex;">
+
+                                    <span style="color:gray">Показать на карте</span>
+                                </div>
+                            </div>
+                            <div class="avability_block" style="margin-top:20px;">
+                                <div style="display:flex;">
+                                    <img style="width:16px;height:18px;margin-top:3px;"
+                                         src="{% static '/src/assets/img/icon/Path 36.png' %}">
+
+                                    <span style="margin-left:10px;">г. Одесса - ул. Елизаветинская 4</span>
+                                    <span style="margin-left:240px;color:gray;">В наличии:<span
+                                            style="color:red;margin-left:10px;">25 штук</span></span>
+                                </div>
+                                <div><span style="margin-left:520px;color:gray;">На 01.07.21</span></div>
+                                <div style="display:flex;">
+                                    <img style="width:16px;height:18px;margin-top:3px;"
+                                         src="{% static '/src/assets/img/icon/Path 35 1.png' %}">
+
+                                    <span style="margin-left:10px;">+38(097) 295 88 03</span>
+                                </div>
+                                <div style="display:flex;">
+
+                                    <span style="margin-left:25px;">+38(095) 295 88 03</span>
+                                </div>
+                                <div style="display:flex;">
+                                    <img style="width:20px;height:20px;margin-top:3px;"
+                                         src="{% static '/src/assets/img/icon/Group 19 1.png' %}">
+
+                                    <span style="margin-left:10px;">09:00 - 17:00</span>
+                                </div>
+                                <div class="d-flex" style="display:flex;">
+
+                                    <span style="color:gray">Показать на карте</span>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <div class="avability_sale">
+                        </div>
+                    </div>
+            </section>
+        </div>
+
+
+        <div class="product_description" style="margin-top: 10px;">
+            <style>
+                @media only screen and (min-width: 320px) and (max-width: 760px) {
+                    .container {
+                        display: block;
+                    }
+                }
+            </style>
+            <section style="background:white;">
+                <section style=" ">
+                    <div class="container" style="display: flex;">
+                        <!-- Левый блок -->
+                        <div class="left_block" style="width: 50%; margin-top: 30px;">
+                            <div class="left_flex_display" style="display:flex;">
+                                <div class="product_left_path">
+                                    <button style="border:none;background-color:transparent"><img
+                                            src="{% static '/src/assets/img/icon/Path 1623.svg' %}"></button>
+                                </div>
+
+                                <div class="slide-buttons" style=" margin-left:40px; ">
+                                    <button data-slide-index="0"
+                                            style="display: flex; flex-direction: column; align-items: center; width: 100px; height: 100px; margin-top: 30px;">
+                                        <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}"
+                                             alt="Thumb 1">
+                                    </button>
+                                    <button data-slide-index="1"
+                                            style="display: flex; flex-direction: column; align-items: center; width: 100px; height: 100px; margin-top: 20px;">
+                                        <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}"
+                                             alt="Thumb 2">
+                                    </button>
+                                </div>
+                                <div class="slider" style="display:flex;">
+                                    <div class="slide" style=" ">
+                                        <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
+                                             alt="Slide 1">
+                                    </div>
+                                    <div class="slide" style=" ">
+                                        <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
+                                             alt="Slide 2">
+                                    </div>
+                                </div>
+                                <div class="product_right_path">
+                                    <button style="border:none;background-color:transparent"><img
+                                            src="{% static '/src/assets/img/icon/Path 1622.svg' %}"></button>
+
+                                </div>
+                            </div>
+                            <div class="product_buttons" style=" ">
+                                <button class="product_slider_button"></button>
+                                <button class="product_slider_button"></button>
+                                <button class="product_slider_button"></button>
+                                <button class="product_slider_button"></button>
+                                <button class="product_slider_button"></button>
+                            </div>
+
+                        </div>
+
+                        <!-- Правый блок -->
+                        <div class="right_block" style="display: flex; flex-direction: column; margin-top: 30px;">
+                            <div class="first_sale_block" style="display: flex;">
+                                <div style="display: flex; align-items: center;">
+                                    <p style="color: green; margin-right: 10px;">Есть в наличии</p>
+                                    <img src="{% static '/src/assets/img/icon/Path 47.png' %}"
+                                         style="margin-top: -15px;">
+                                </div>
+                                <div class="first_sale_block_buttons" style=" ">
+                                    <button style="border-radius: 5px; width: 40px; height: 40px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); background: white; border: none;">
+                                        <img src="{% static '/src/assets/img/icon/Group 34.png' %}">
+                                    </button>
+                                    <button style="border-radius: 5px; width: 40px; height: 40px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); background: white; border: none;">
+                                        <img src="{% static '/src/assets/img/icon/Path 49.png' %}"
+                                             style="position: relative; left: 3px;">
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="second_sale_block" style="margin-top: 10px;">
+                                <div class="row">
+                                    <!-- Первая колонка -->
+                                    <div class="col-md-6" style="width:180px;">
+                                        <div style="width: 160px; height: 30px; display: flex; flex-direction: row;">
+                                            <p style="width:100px; height:20px; margin-top:0; color:red; font-size: 1.3em; font-family: 'Montserrat', sans-serif; font-weight: 500; margin-right: 5px;">
+                                                232.00 &#8372</p>
+                                            <p style="color: gray; text-decoration: line-through; width:67px; height:20px; font-size: 0.8em; width:80px;">
+                                                265.00 &#8372;</p>
+                                        </div>
+
+                                        <button class="product_button"
+                                                style="width:170px;background-color:red;margin-top:20px; ">
+                                            <img style="position:absolute; margin-top:;margin-left:10px;"
+                                                 src="{% static '/src/assets/img/icon/Path 55.png' %}">
+                                            <p style="color:white;">Купить</p>
+                                        </button>
+                                    </div>
+                                    <!-- Вторая колонка -->
+                                    <div class="col-md-6" style="width:180px;">
+                                        <button class="product_button"
+                                                style="background-color: #FF0000;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
+                                            <img style="position:absolute;"
+                                                 src="{% static '/src/assets/img/icon/Group 95.png' %}">
+                                            <p>Хочу дешевле</p>
+                                        </button>
+                                        <button class="product_button" style="background: white;margin-top:10px; ">
+                                            <img style="position:absolute;"
+                                                 src="{% static '/src/assets/img/icon/Group 94.png' %}">
+                                            <p style="color:red;">Быстрый заказ</p>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Вставляем новый блок package_block здесь -->
+                            <div class="package_block" style="margin-top: 10px;">
+                                <div>
+                                    <div style="width:40px; height: 20px; position:relative; font-weight: 500;">
+                                        Упаковка:
+                                    </div>
+                                    <div style="display: flex;   margin-top: 5px;">
+                                        <button class="button_0"
+                                                style="border-radius:2px;border: 1px solid #E9E7E6;box-shadow:none;background-color: white;border-color:#E9E7E6;width: 40px; height: 40px;">
+                                            1л.
+                                        </button>
+                                        <button class="button_1"
+                                                style="border-radius:2px;border: 1px solid #E9E7E6;background-color: white;border-color:#E9E7E6;width: 40px; height: 40px;margin-left:10px;">
+                                            3л.
+                                        </button>
+                                        <button class="button_2"
+                                                style="border-radius:2px;border: 1px solid #E9E7E6;background-color: white;border-color:#E9E7E6;width: 40px; height: 40px;margin-left:10px;">
+                                            10л.
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right_second_block">
+                                <div style="width: 70px; height: 20px; border-width: 2px; margin-top: 30px;">Цвет:
+                                </div>
+                                <div class="product_table"
+                                     style="width: 400px; height: 250px; border-width: 3px; background-color:#E9E7E6; border-color:#E9E7E6;">
+                                    <div style="margin-top: 1px; background-color:#E9E7E6; height: 30px; margin-bottom:1px;">
+                                        <div style="position:relative; left: 50px;">Артикул</div>
+                                        <div style="position:relative; top: -27px; left: 160px;">Название цвета
+                                        </div>
+                                        <div style="position:relative; top: -55px; left: 330px;">Кол-во</div>
+                                    </div>
+                                    <div style="width: 400px; height: 33px;margin-bottom:1px; margin-right: 100px; left: 3px; background-color: white;display:flex;">
+                                        <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
+                                        <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
+                                            MA603BAL
+                                            <span style="margin-left:40px;">Хаки603</span>
+                                        </p>
+                                        <div style="width:20px;height:20px;background-color:red;border-radius:10px;margin-left:20px;margin-top:5px;"></div>
+                                        <p style="margin-left:80px;">0</p>
+
+
+                                    </div>
+                                    <div style="width: 400px;margin-bottom:1px; height: 33px; margin-right: 100px; left: 3px; background-color: white;display:flex;">
+                                        <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
+                                        <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
+                                            MA603BAL
+                                            <span style="margin-left:40px;">Хаки603</span>
+                                        </p>
+                                        <div style="width:20px;height:20px;background-color:red;border-radius:10px;margin-left:20px;margin-top:5px;"></div>
+                                        <p style="margin-left:80px;">0</p>
+
+
+                                    </div>
+                                    <div style="width: 400px;margin-bottom:1px; height: 33px; margin-right: 100px; left: 3px; background-color: white;display:flex;">
+                                        <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
+                                        <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
+                                            MA603BAL
+                                            <span style="margin-left:40px;">Хаки603</span>
+                                        </p>
+                                        <div style="width:20px;height:20px;background-color:red;border-radius:10px;margin-left:20px;margin-top:5px;"></div>
+                                        <p style="margin-left:80px;">0</p>
+
+
+                                    </div>
+
+
+                                </div>
+                                <div class="delivery"
+                                     style="  width:500px; height: 180px;   position:relative; right:3px;top:20px; ">
+                                    <p><span style="color:red;"> Доставка</span> в Хмельницикий</p>
+                                    <div style=" margin-top:10px;display:flex;">
+                                        <img src="{% static '/src/assets/img/icon/Group 42.png' %}"
+                                             style="margin-right:10px;">
+                                        <p>Самовывоз из магазина &nbsp;&nbsp;&nbsp;
+                                            <span style="color:gray;">  Забрать сегодня &nbsp;&nbsp;&nbsp; Бесплатно</span>
+                                        </p>
+                                    </div>
+                                    <div style=" margin-top:15px; display:flex;">
+                                        <img src="{% static '/src/assets/img/icon/Group 41.png' %}"
+                                             style="margin-right:10px;">
+                                        <p>Самовывоз из магазина &nbsp;&nbsp;&nbsp;
+                                            <span style="color:gray;">  Доставят до 01.07 &nbsp;&nbsp;&nbsp; от 100грн</span>
+                                        </p>
+                                    </div>
+                                    <div style=" margin-top:20px;  display:flex;">
+                                        <img src="{% static '/src/assets/img/icon/Group 104.png' %}"
+                                             style="margin-right:10px;">
+                                        <p>Самовывоз из магазина &nbsp;&nbsp;&nbsp;
+                                            <span style="color:gray;">  Доставят до 20.07 &nbsp;&nbsp;&nbsp; от 170грн</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </section>
 
-
-            <div class="product_main_panel" style=" ">
-                <button class="product_main_button" onclick="switchBlock_to_product_description(); switchBorder(this)">
-                    Все о товаре
-                </button>
-                <button class="product_main_button" onclick="switchBlock_to_Characteristics(); switchBorder(this)">
-                    Характеристики
-                </button>
-                <button class="product_main_button" onclick="switchBlock_to_Buy_too(); switchBorder(this)">
-                    Покупают вместе
-                </button>
-                <button class="product_main_button" onclick=" switchBorder(this)">
-                    Похожие товары
-                </button>
-                <button class="product_main_button" onclick="switchBlock_to_Reviev(); switchBorder(this)">
-                    Отзывы
-                </button>
-                <button class="product_main_button" onclick="switchBlock_to_avability(); switchBorder(this)" style=" ">
-                    Наличие в магазинах
-                </button>
-            </div>
-
-            <div class="Characteristics" style="position: relative;">
-
-                <!-- Характеристики -->
-                <div class="t_block" style="height: 500px; background-color: white; position: relative; top: 11px;">
-                    <p style="font-size: 20px; font-weight: bold; position: relative; left: 10px;">Характеристики</p>
-                    <br>
-                    <p style="position: relative; left: 10px;">Использование.............................. Внутри
-                        помещений</p>
-                    <p style="position: relative; left: 10px;">Связующее вещество....................... Сополимер</p>
-                    <p style="position: relative; left: 10px;">Сухой остаток................................. 10%</p>
-                    <p style="position: relative; left: 10px;">Плотность.......................................... 1,05
-                        кг/п</p>
-                    <p style="position: relative; left: 10px;">Время высыхания 23C 50% RH...... 2-6 часов</p>
-                    <p style="position: relative; left: 10px;">Расход готовой смеси ................ 10-12м2/л в 1
-                        слой</p>
-                    <p style="position: relative; left: 10px;">Разбавитель......................................
-                        Вода</p>
-                    <p style="position: relative; left: 10px;">Рабочие инструменты..................... Валик, кисть</p>
-                    <p style="position: relative; left: 10px;">Очистка рабочих инструментов.... Вода</p>
-                    <p style="position: relative; left: 10px;">Хранение.......................................... 3 года
-                        t > 0°C</p>
-                </div>
-
-                <!-- Блоки доставки -->
-
-
-                <!-- Дополнительные блоки -->
-
-
-            </div>
-            <div class="Buy_too">
-                <div class="mb-6" style="margin-top: 10px; background: white;">
-                    <span class="buying-together__content--title mt-5 mb-5">Покупают вместе</span>
-                </div>
-                <div class="row">
-                    <div class="row col-lg-8 mb-6" style="margin-left: -4px;">
-                        {% for i in 'abcdef'|make_list %}
-                            <div class="col-lg-5 mb-6">
-                                {% include "product_block.html" %}
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <div class="col-lg-5 mb-6 bg-white">
-                        <div>
-                            <div class="d-flex">
-                                <img src="{% static '/src/assets/img/icon/Path 47.png' %}">
-                                <p>Есть в наличии</p>
-                            </div>
-                            <p>265.00 &#8372;</p>
-                            <p>232.00 &#8372;</p>
-                            <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
-                                 alt="Slide 2">
-                            <button><img src="{% static '/src/assets/img/icon/Path 49.png' %}"></button>
-                            <button><img src="{% static '/src/assets/img/icon/Group 34.png' %}"></button>
-                            <button><img src="{% static '/src/assets/img/icon/Group 94.png' %}">
-                                <p>Быстрый заказ</p></button>
-                            <button><img src="{% static '/src/assets/img/icon/Group 95.png' %}">
-                                <p>Хочу дешевле</p></button>
-                            <button><img src="{% static '/src/assets/img/icon/Path 55.png' %}">
-                                <p>Купить</p></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Review" style="    background-color: white;">
-
-                <div class="f_block"
-                     style="width: 740px; height: 100px; margin-left: 20px; margin-bottom: 5px; margin-top: 10px;">
-                    <p style="width: 85px; height: 25px; font-weight: bold; font-weight: 500;">Отзывы</p>
-                    <div style="position: relative;">
-                        <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img style="position: relative; left: 30px; top: -30px;"
-                             src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img style="position: relative; left: 60px; top: -60px;"
-                             src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img style="position: relative; left: 90px; top: -90px;"
-                             src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img style="position: relative; left: 120px; top: -120px;"
-                             src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                    </div>
-                    <p style="position: relative; top: -145px; left: 160px;">Рейтинг 4.0</p>
-                </div>
-                <div class="reviev_block" style=" width: 740px;  ">
-                    <div style=" ">
-                        <p>Дмитрий Александрович</p>
-                        <div class="product_reviev_stars" style=" margin-top:-25px;margin-left:600px;display: flex;">
-                            <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                            <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                            <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                            <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                            <img style="" src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                        </div>
-
-                    </div>
-
-                    <div style="margin-bottom:10px;">
-                        <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був
-                            добре запакований, помітно що ніхто до мене його не відкривав</p>
-
-                    </div>
-                    <div style="width: 740px; height: 30px; margin-top: 5px;">
-                        <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
-                    </div>
-                    <div style="width: 740px; height: 30px; margin-top: 0px;">
-                        <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
-                    </div>
-                </div>
-                <div class="reviev_block" style="width: 740px;   margin-top:30px;  ">
-                    <div style="width: 740px; height: 50px;">
-                        <p>Дмитрий Александрович</p>
-                        <div style=" margin-top:-25px;margin-left:600px;display: flex;">
-                            <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                            <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                            <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                            <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                            <img style="" src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                        </div>
-                    </div>
-                    <div style="width: 740px; height: 70px;">
-                        <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був
-                            добре запакований, помітно що ніхто до мене його не відкривав</p>
-                    </div>
-                    <div style="width: 740px; height: 30px; margin-top: 5px;">
-                        <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
-                    </div>
-                    <div style="width: 740px; height: 30px; margin-top: 0px;">
-                        <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
-                    </div>
-                </div>
-                <div class="reviev_block" style="width: 740px;   margin-top:30px;  ">
-                    <div style="width: 740px; height: 50px;">
-                        <p>Дмитрий Александрович</p>
-                        <div style=" margin-top:-25px;margin-left:600px;display: flex;">
-                            <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                            <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                            <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                            <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                            <img style="" src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                        </div>
-                    </div>
-                    <div style="width: 740px; height: 70px;">
-                        <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був
-                            добре запакований, помітно що ніхто до мене його не відкривав</p>
-                    </div>
-                    <div style="width: 740px; height: 30px; margin-top: 5px;">
-                        <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
-                    </div>
-                    <div style="width: 740px; height: 30px; margin-top: 0px;">
-                        <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
-                    </div>
-                </div>
-
-
-                <button style="border: none; background-color: white;  width: 200px; height: 30px;">
-                    <img src="{% static '/src/assets/img/icon/vectorgorupr.png' %}">
-                    <p style="position: relative; bottom: 30px;">Показать еще</p>
-                </button>
-
-                <div class="revier" style="border-style: none; width: 740px; height: 400px;  ">
-                    <div style="display: flex;
-                        flex-direction: column;">
-                        <p style="font-weight: 500;">Написать отзыв</p>
-                        <div style="display: flex;margin-top:-15px;">
-                            <div style="display: flex; align-items: center;">
-                                <img style="width: 30px; height: 30px; "
-                                     src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                                <img style="width: 30px; height: 30px;  "
-                                     src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                                <img style="width: 30px; height: 30px;  "
-                                     src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                                <img style="width: 30px; height: 30px;  "
-                                     src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                                <img style="width: 30px; height: 30px;  "
-                                     src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                            </div>
-
-                            <p style="font-family: Montserrat; color: #000000; margin-left: 10px;margin-top:10px;">Ваша
-                                оценка</p>
-                        </div>
-                    </div>
-
-
-                    <div class="contact_block_second ml-6" style="margin-top:20px;">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <!-- Первая колонка с двумя строками ввода -->
-                                <input type="text" class="form-control form-control-lg mb-2"
-                                       placeholder="Первая строка ввода">
-                                <input type="text" class="form-control form-control-lg"
-                                       placeholder="Вторая строка ввода">
-                            </div>
-                            <div class="col-lg-6">
-                                <!-- Вторая колонка с двумя строками ввода -->
-                                <input type="text" class="form-control form-control-lg mb-2"
-                                       placeholder="Третья строка ввода">
-                                <input type="text" class="form-control form-control-lg"
-                                       placeholder="Четвертая строка ввода">
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div style="width: 740px; height: 170px;margin-top:50px;  ">
-                        <div style="position: relative;">
-                            <input type="text" id="name" name="name"
-                                   style="display: block; width: 670px; height: 120px; border-radius: 5px; padding-top: 20px;">
-                            <label for="name" style="position: absolute; top: 5px; left: 5px; pointer-events: none;">Напишите
-                                отзыв</label>
-                        </div>
-                        <button style="border-style: solid; border-color: red;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);  width: 200px; height: 40px; margin-top:20px; border-radius:5px;">
-                            <p style="font-family: Montserrat; color: red;">Оставить отзыв</p>
-                        </button>
-                    </div>
-                </div>
-
-
-            </div>
-
-            <div class="avability" style="margin-top: 10px;">
-                <section style="background:white; margin-bottom ">
-                    <div class="container">
-                        <div style="display:flex">
-                            <div class="avability_main">
-                                <div style="display:flex;">
-                                    <h2 class="h3">Наличие в магазинах</h2>
-                                    <button style="margin-left:10px;width:270px;height:40px;border-radius:5px; ">
-                                        <div style="display:flex;">
-                                            <span> Одесса</span>
-                                            <span style="margin-left:180px;">˅</span>
-                                        </div>
-                                    </button>
-                                    <span style="color:red; margin-left:30px;">Забрать сегодня</span>
-                                </div>
-                                <div class="avability_block" style="margin-top:20px;">
-                                    <div style="display:flex;">
-                                        <img style="width:16px;height:18px;margin-top:3px;"
-                                             src="{% static '/src/assets/img/icon/Path 36.png' %}">
-
-                                        <span style="margin-left:10px;">г. Одесса - ул. Елизаветинская 4</span>
-                                        <span style="margin-left:240px;color:gray;">В наличии:<span
-                                                style="color:red;margin-left:10px;">25 штук</span></span>
-                                    </div>
-                                    <div><span style="margin-left:520px;color:gray;">На 01.07.21</span></div>
-                                    <div style="display:flex;">
-                                        <img style="width:16px;height:18px;margin-top:3px;"
-                                             src="{% static '/src/assets/img/icon/Path 35 1.png' %}">
-
-                                        <span style="margin-left:10px;">+38(097) 295 88 03</span>
-                                    </div>
-                                    <div style="display:flex;">
-
-                                        <span style="margin-left:25px;">+38(095) 295 88 03</span>
-                                    </div>
-                                    <div style="display:flex;">
-                                        <img style="width:20px;height:20px;margin-top:3px;"
-                                             src="{% static '/src/assets/img/icon/Group 19 1.png' %}">
-
-                                        <span style="margin-left:10px;">09:00 - 17:00</span>
-                                    </div>
-                                    <div style="display:flex;">
-
-                                        <span style="color:gray">Показать на карте</span>
-                                    </div>
-                                </div>
-                                <div class="avability_block" style="margin-top:20px;">
-                                    <div style="display:flex;">
-                                        <img style="width:16px;height:18px;margin-top:3px;"
-                                             src="{% static '/src/assets/img/icon/Path 36.png' %}">
-
-                                        <span style="margin-left:10px;">г. Одесса - ул. Елизаветинская 4</span>
-                                        <span style="margin-left:240px;color:gray;">В наличии:<span
-                                                style="color:red;margin-left:10px;">25 штук</span></span>
-                                    </div>
-                                    <div><span style="margin-left:520px;color:gray;">На 01.07.21</span></div>
-                                    <div style="display:flex;">
-                                        <img style="width:16px;height:18px;margin-top:3px;"
-                                             src="{% static '/src/assets/img/icon/Path 35 1.png' %}">
-
-                                        <span style="margin-left:10px;">+38(097) 295 88 03</span>
-                                    </div>
-                                    <div style="display:flex;">
-
-                                        <span style="margin-left:25px;">+38(095) 295 88 03</span>
-                                    </div>
-                                    <div style="display:flex;">
-                                        <img style="width:20px;height:20px;margin-top:3px;"
-                                             src="{% static '/src/assets/img/icon/Group 19 1.png' %}">
-
-                                        <span style="margin-left:10px;">09:00 - 17:00</span>
-                                    </div>
-                                    <div style="display:flex;">
-
-                                        <span style="color:gray">Показать на карте</span>
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-                            <div class="avability_sale">
-                            </div>
-                </section>
+            <div class="description_block">
+                <p style="font-size: 1.5em;"> Описание</p>
+                <p>Грунтовка влагоизолятор Mixon Аквастоп - это простой в применении высокоэфективный
+                    продукт,который, впитываясь глубоко в <br> основание,
+                    укрепляют его и в результате улучшает сцепление отделочных материалов с основой.<br>
+                    Аквастоп повышает влагостойкость покрытия и скоращает расход покровных красок.</p>
+                <p style="font-size: 1.2em;">
+                    Нанесение:
+                </p>
+                <p>
+                    Грунтование пористых т чуствительных к влаге поверхностей, улучшение свойств цементных и
+                    известковых строительных материалов.<br>
+                    Применяется для внутренних работ.
+                </p>
+                <p style="font-size: 1.2em;">
+                    Сфера применения:
+                </p>
+                <p>
+                    Средство Аквастоп смешивается с водой для приготовления растворов:
+                <ul>
+                    <li>штукатурка:1:5 -1:20;</li>
+                    <li>Цементные известковые растворы</li>
+                    <li>Цементные самовыравнивающиеся смеси</li>
+                </ul>
+                </p>
+                <p>
+                    Для нанесения на поверхность Аквастопа:
+                <ul type="disc">
+                    <li>бетон,цемент,газобетон,штукатурка;</li>
+                    <li>гипсовые плиты</li>
+                    <li>основа для пола</li>
+                </ul>
+                </p>
             </div>
 
 
-            <div class="product_description" style="margin-top: 10px;">
-                <style>
-                    @media only screen and (min-width: 320px) and (max-width: 760px) {
-                        .container {
-                            display: block;
-                        }
-                    }
-                </style>
-                <section style="background:white;">
-                    <section style=" ">
-                        <div class="container" style="display: flex;">
-                            <!-- Левый блок -->
-                            <div class="left_block" style="width: 50%; margin-top: 30px;">
-                                <div class="left_flex_display" style="display:flex;">
-                                    <div class="product_left_path">
-                                        <button style="border:none;background-color:transparent"><img
-                                                src="{% static '/src/assets/img/icon/Path 1623.svg' %}"></button>
-                                    </div>
+            <section>
+                <div class="describe_block mb-7">
 
-                                    <div class="slide-buttons" style=" margin-left:40px; ">
-                                        <button data-slide-index="0"
-                                                style="display: flex; flex-direction: column; align-items: center; width: 100px; height: 100px; margin-top: 30px;">
-                                            <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}"
-                                                 alt="Thumb 1">
-                                        </button>
-                                        <button data-slide-index="1"
-                                                style="display: flex; flex-direction: column; align-items: center; width: 100px; height: 100px; margin-top: 20px;">
-                                            <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}"
-                                                 alt="Thumb 2">
-                                        </button>
-                                    </div>
-                                    <div class="slider" style="display:flex;">
-                                        <div class="slide" style=" ">
-                                            <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
-                                                 alt="Slide 1">
-                                        </div>
-                                        <div class="slide" style=" ">
-                                            <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
-                                                 alt="Slide 2">
-                                        </div>
-                                    </div>
-                                    <div class="product_right_path">
-                                        <button style="border:none;background-color:transparent"><img
-                                                src="{% static '/src/assets/img/icon/Path 1622.svg' %}"></button>
-
-                                    </div>
-                                </div>
-                                <div class="product_buttons" style=" ">
-                                    <button class="product_slider_button"></button>
-                                    <button class="product_slider_button"></button>
-                                    <button class="product_slider_button"></button>
-                                    <button class="product_slider_button"></button>
-                                    <button class="product_slider_button"></button>
-                                </div>
-
-                            </div>
-
-                            <!-- Правый блок -->
-                            <div class="right_block" style="display: flex; flex-direction: column; margin-top: 30px;">
-                                <div class="first_sale_block" style="display: flex;">
-                                    <div style="display: flex; align-items: center;">
-                                        <p style="color: green; margin-right: 10px;">Есть в наличии</p>
-                                        <img src="{% static '/src/assets/img/icon/Path 47.png' %}"
-                                             style="margin-top: -15px;">
-                                    </div>
-                                    <div class="first_sale_block_buttons" style=" ">
-                                        <button style="border-radius: 5px; width: 40px; height: 40px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); background: white; border: none;">
-                                            <img src="{% static '/src/assets/img/icon/Group 34.png' %}">
-                                        </button>
-                                        <button style="border-radius: 5px; width: 40px; height: 40px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); background: white; border: none;">
-                                            <img src="{% static '/src/assets/img/icon/Path 49.png' %}"
-                                                 style="position: relative; left: 3px;">
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="second_sale_block" style="margin-top: 10px;">
-                                    <div class="row">
-                                        <!-- Первая колонка -->
-                                        <div class="col-md-6" style="width:180px;">
-                                            <div style="width: 160px; height: 30px; display: flex; flex-direction: row;">
-                                                <p style="width:100px; height:20px; margin-top:0; color:red; font-size: 1.3em; font-family: 'Montserrat', sans-serif; font-weight: 500; margin-right: 5px;">
-                                                    232.00 &#8372</p>
-                                                <p style="color: gray; text-decoration: line-through; width:67px; height:20px; font-size: 0.8em; width:80px;">
-                                                    265.00 &#8372;</p>
-                                            </div>
-
-                                            <button class="product_button"
-                                                    style="width:170px;background-color:red;margin-top:20px; ">
-                                                <img style="position:absolute; margin-top:;margin-left:10px;"
-                                                     src="{% static '/src/assets/img/icon/Path 55.png' %}">
-                                                <p style="color:white;">Купить</p>
-                                            </button>
-                                        </div>
-                                        <!-- Вторая колонка -->
-                                        <div class="col-md-6" style="width:180px;">
-                                            <button class="product_button"
-                                                    style="background-color: #FF0000;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
-                                                <img style="position:absolute;"
-                                                     src="{% static '/src/assets/img/icon/Group 95.png' %}">
-                                                <p>Хочу дешевле</p>
-                                            </button>
-                                            <button class="product_button" style="background: white;margin-top:10px; ">
-                                                <img style="position:absolute;"
-                                                     src="{% static '/src/assets/img/icon/Group 94.png' %}">
-                                                <p style="color:red;">Быстрый заказ</p>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Вставляем новый блок package_block здесь -->
-                                <div class="package_block" style="margin-top: 10px;">
-                                    <div>
-                                        <div style="width:40px; height: 20px; position:relative; font-weight: 500;">
-                                            Упаковка:
-                                        </div>
-                                        <div style="display: flex;   margin-top: 5px;">
-                                            <button class="button_0"
-                                                    style="border-radius:2px;border: 1px solid #E9E7E6;box-shadow:none;background-color: white;border-color:#E9E7E6;width: 40px; height: 40px;">
-                                                1л.
-                                            </button>
-                                            <button class="button_1"
-                                                    style="border-radius:2px;border: 1px solid #E9E7E6;background-color: white;border-color:#E9E7E6;width: 40px; height: 40px;margin-left:10px;">
-                                                3л.
-                                            </button>
-                                            <button class="button_2"
-                                                    style="border-radius:2px;border: 1px solid #E9E7E6;background-color: white;border-color:#E9E7E6;width: 40px; height: 40px;margin-left:10px;">
-                                                10л.
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="right_second_block">
-                                    <div style="width: 70px; height: 20px; border-width: 2px; margin-top: 30px;">Цвет:
-                                    </div>
-                                    <div class="product_table"
-                                         style="width: 400px; height: 250px; border-width: 3px; background-color:#E9E7E6; border-color:#E9E7E6;">
-                                        <div style="margin-top: 1px; background-color:#E9E7E6; height: 30px; margin-bottom:1px;">
-                                            <div style="position:relative; left: 50px;">Артикул</div>
-                                            <div style="position:relative; top: -27px; left: 160px;">Название цвета
-                                            </div>
-                                            <div style="position:relative; top: -55px; left: 330px;">Кол-во</div>
-                                        </div>
-                                        <div style="width: 400px; height: 33px;margin-bottom:1px; margin-right: 100px; left: 3px; background-color: white;display:flex;">
-                                            <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
-                                            <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
-                                                MA603BAL
-                                                <span style="margin-left:40px;">Хаки603</span>
-                                            </p>
-                                            <div style="width:20px;height:20px;background-color:red;border-radius:10px;margin-left:20px;margin-top:5px;"></div>
-                                            <p style="margin-left:80px;">0</p>
-
-
-                                        </div>
-                                        <div style="width: 400px;margin-bottom:1px; height: 33px; margin-right: 100px; left: 3px; background-color: white;display:flex;">
-                                            <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
-                                            <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
-                                                MA603BAL
-                                                <span style="margin-left:40px;">Хаки603</span>
-                                            </p>
-                                            <div style="width:20px;height:20px;background-color:red;border-radius:10px;margin-left:20px;margin-top:5px;"></div>
-                                            <p style="margin-left:80px;">0</p>
-
-
-                                        </div>
-                                        <div style="width: 400px;margin-bottom:1px; height: 33px; margin-right: 100px; left: 3px; background-color: white;display:flex;">
-                                            <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
-                                            <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
-                                                MA603BAL
-                                                <span style="margin-left:40px;">Хаки603</span>
-                                            </p>
-                                            <div style="width:20px;height:20px;background-color:red;border-radius:10px;margin-left:20px;margin-top:5px;"></div>
-                                            <p style="margin-left:80px;">0</p>
-
-
-                                        </div>
-
-
-                                    </div>
-                                    <div class="delivery"
-                                         style="  width:500px; height: 180px;   position:relative; right:3px;top:20px; ">
-                                        <p><span style="color:red;"> Доставка</span> в Хмельницикий</p>
-                                        <div style=" margin-top:10px;display:flex;">
-                                            <img src="{% static '/src/assets/img/icon/Group 42.png' %}"
-                                                 style="margin-right:10px;">
-                                            <p>Самовывоз из магазина &nbsp;&nbsp;&nbsp;
-                                                <span style="color:gray;">  Забрать сегодня &nbsp;&nbsp;&nbsp; Бесплатно</span>
-                                            </p>
-                                        </div>
-                                        <div style=" margin-top:15px; display:flex;">
-                                            <img src="{% static '/src/assets/img/icon/Group 41.png' %}"
-                                                 style="margin-right:10px;">
-                                            <p>Самовывоз из магазина &nbsp;&nbsp;&nbsp;
-                                                <span style="color:gray;">  Доставят до 01.07 &nbsp;&nbsp;&nbsp; от 100грн</span>
-                                            </p>
-                                        </div>
-                                        <div style=" margin-top:20px;  display:flex;">
-                                            <img src="{% static '/src/assets/img/icon/Group 104.png' %}"
-                                                 style="margin-right:10px;">
-                                            <p>Самовывоз из магазина &nbsp;&nbsp;&nbsp;
-                                                <span style="color:gray;">  Доставят до 20.07 &nbsp;&nbsp;&nbsp; от 170грн</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </section>
-
-                <div class="description_block">
-                    <p style="font-size: 1.5em;"> Описание</p>
-                    <p>Грунтовка влагоизолятор Mixon Аквастоп - это простой в применении высокоэфективный
-                        продукт,который, впитываясь глубоко в <br> основание,
-                        укрепляют его и в результате улучшает сцепление отделочных материалов с основой.<br>
-                        Аквастоп повышает влагостойкость покрытия и скоращает расход покровных красок.</p>
-                    <p style="font-size: 1.2em;">
-                        Нанесение:
-                    </p>
+                    <p style="font-size: 2em; font-weight: bold;margin-top:10px;">
+                        Характеристики
                     <p>
-                        Грунтование пористых т чуствительных к влаге поверхностей, улучшение свойств цементных и
-                        известковых строительных материалов.<br>
-                        Применяется для внутренних работ.
-                    </p>
-                    <p style="font-size: 1.2em;">
-                        Сфера применения:
-                    </p>
-                    <p>
-                        Средство Аквастоп смешивается с водой для приготовления растворов:
-                    <ul>
-                        <li>штукатурка:1:5 -1:20;</li>
-                        <li>Цементные известковые растворы</li>
-                        <li>Цементные самовыравнивающиеся смеси</li>
-                    </ul>
-                    </p>
-                    <p>
-                        Для нанесения на поверхность Аквастопа:
-                    <ul type="disc">
-                        <li>бетон,цемент,газобетон,штукатурка;</li>
-                        <li>гипсовые плиты</li>
-                        <li>основа для пола</li>
-                    </ul>
-                    </p>
+                    <div class="describe_product"
+                         style=" height:300px;background-color:white;">
+                        <div class="col-lg-5 col-md-5" style="width:400px;">
+                            <p> Использование.......................................Внутри помещений </p>
+
+                            <p> Связующее вещество .......................Сополимер </p>
+
+                            <p> Сухой остаток ............................................25 % </p>
+
+                            <p> Плотность .....................................................1,05
+                                кг/л </p>
+                            <p>Время высыхания,<br>
+                                23 C 50% RH...............................2-6 часов</p>
+                        </div>
+                        <div class="col-lg-5 col-md-5" style="width:400px;   ">
+                            <p>Расход готовой смеси................10-12 м2/л в 1 слой</p>
+                            <p>Разбавитель.........................Вода</p>
+                            <p>Рабочие инструменты.................Валик, кисть</p>
+                            <p>Очистка рабочих<br>
+                                инструментов........................Вгода</p>
+                            <p>Хранение............................3 года t > 0oC</p>
+                        </div>
+                    </div>
                 </div>
 
-
-                <section>
-                    <div class="describe_block mb-7">
-
-                        <p style="font-size: 2em; font-weight: bold;margin-top:10px;">
-                            Характеристики
-                        <p>
-                        <div class="describe_product"
-                             style=" height:300px;background-color:white;">
-                            <div class="col-lg-5 col-md-5" style="width:400px;">
-                                <p> Использование.......................................Внутри помещений </p>
-
-                                <p> Связующее вещество .......................Сополимер </p>
-
-                                <p> Сухой остаток ............................................25 % </p>
-
-                                <p> Плотность .....................................................1,05
-                                    кг/л </p>
-                                <p>Время высыхания,<br>
-                                    23 C 50% RH...............................2-6 часов</p>
-                            </div>
-                            <div class="col-lg-5 col-md-5" style="width:400px;   ">
-                                <p>Расход готовой смеси................10-12 м2/л в 1 слой</p>
-                                <p>Разбавитель.........................Вода</p>
-                                <p>Рабочие инструменты.................Валик, кисть</p>
-                                <p>Очистка рабочих<br>
-                                    инструментов........................Вгода</p>
-                                <p>Хранение............................3 года t > 0oC</p>
-                            </div>
+            </section>
+            <section class="product__section section--padding  pt-0">
+                <div class="container">
+                    <div class="section__buying--together">
+                        <div class="section__heading d-flex justify-content-between mb-30 ">
+                            <h2 class="section__heading--maintitle">Покупают вместе</h2>
+                            <a href="{% url 'catalogue' %}" class="d-flex justify-content-center text-nowrap">
+                                <span class="section__heading--maintitle--text__secondary">Посмотреть все</span>
+                                <span class="invisible">a</span>
+                                <img src="{% static '/src/assets/img/icon/two_right_arrows_red.svg' %}"
+                                     alt="two right arrows">
+                            </a>
                         </div>
-                    </div>
+                        <div class="product__section--inner">
+                            <div class="row row-md-reverse">
+                                <div class="row">
+                                    <img class="col-lg-6 col-md  mb-7"
+                                         src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}"
+                                         alt="mixon banner">
+                                    {% for i in 'abc'|make_list %}
+                                        <div class="col-lg-6 col-md  mb-7">
+                                            {% include "product_block.html" %}
+                                        </div>
+                                    {% endfor %}
 
-                </section>
-                <section class="product__section section--padding  pt-0">
-                    <div class="container">
-                        <div class="section__buying--together">
-                            <div class="section__heading d-flex justify-content-between mb-30 ">
-                                <h2 class="section__heading--maintitle">Покупают вместе</h2>
-                                <a href="{% url 'catalogue' %}" class="d-flex justify-content-center text-nowrap">
-                                    <span class="section__heading--maintitle--text__secondary">Посмотреть все</span>
-                                    <span class="invisible">a</span>
-                                    <img src="{% static '/src/assets/img/icon/two_right_arrows_red.svg' %}"
-                                         alt="two right arrows">
-                                </a>
-                            </div>
-                            <div class="product__section--inner">
-                                <div class="row row-md-reverse">
-                                    <div class="row">
-                                        <img class="col-lg-6 col-md  mb-7"
-                                             src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}"
-                                             alt="mixon banner">
-                                        {% for i in 'abc'|make_list %}
-                                            <div class="col-lg-6 col-md  mb-7">
-                                                {% include "product_block.html" %}
-                                            </div>
-                                        {% endfor %}
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="section__look_alike--products">
-                            <div class="section__heading d-flex justify-content-between mb-30 ">
-                                <h2 class="section__heading--maintitle">Похожие товары</h2>
-                                <a href="{% url 'catalogue' %}" class="d-flex justify-content-center text-nowrap">
-                                    <span class="section__heading--maintitle--text__secondary">Посмотреть все</span>
-                                    <span class="invisible">a</span>
-                                    <img src="{% static '/src/assets/img/icon/two_right_arrows_red.svg' %}"
-                                         alt="two right arrows">
-                                </a>
-                            </div>
-                            <div class="product__section--inner">
-                                <div class="row row-md-reverse">
-                                    <div class="row">
-                                        <img class="col-lg-6 mb-7"
-                                             src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}"
-                                             alt="mixon banner">
-                                        {% for i in 'abc'|make_list %}
-                                            <div class="col-lg-6 mb-7">
-                                                {% include "product_block.html" %}
-                                            </div>
-                                        {% endfor %}
-
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
-                <section class="delivery">
-                    <div class="container">
-                        <div style="display: flex;margin-bottom:20px;margin-top:15px;" class="delivery_block">
-                            <div style="display: flex;">
-                                <img src="{% static '/src/assets/img/icon/Group 100.png' %}"
-                                     style="height:50px;width:82px;">
-                                <div style="flex-direction:column;margin-left:10px;">
-                                    <h2 class="h3">Доставка</h2>
-                                    <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
-                                </div>
-                            </div>
-                            <div style="display: flex;margin-bottom:20px;">
-                                <img src="{% static '/src/assets/img/icon/Group 101.png' %}"
-                                     style="height:50px;width:82px;">
-                                <div style="flex-direction:column;margin-left:10px;">
-                                    <h2 class="h3">Доставка</h2>
-                                    <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
-                                </div>
-                            </div>
-                            <div style="display: flex;margin-bottom:20px;">
-                                <img src="{% static '/src/assets/img/icon/Group 102.png' %}"
-                                     style="height:50px;width:82px;">
-                                <div style="flex-direction:column;margin-left:10px;">
-                                    <h2 class="h3">Доставка</h2>
-                                    <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
+                    <div class="section__look_alike--products">
+                        <div class="section__heading d-flex justify-content-between mb-30 ">
+                            <h2 class="section__heading--maintitle">Похожие товары</h2>
+                            <a href="{% url 'catalogue' %}" class="d-flex justify-content-center text-nowrap">
+                                <span class="section__heading--maintitle--text__secondary">Посмотреть все</span>
+                                <span class="invisible">a</span>
+                                <img src="{% static '/src/assets/img/icon/two_right_arrows_red.svg' %}"
+                                     alt="two right arrows">
+                            </a>
+                        </div>
+                        <div class="product__section--inner">
+                            <div class="row row-md-reverse">
+                                <div class="row">
+                                    <img class="col-lg-6 mb-7"
+                                         src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}"
+                                         alt="mixon banner">
+                                    {% for i in 'abc'|make_list %}
+                                        <div class="col-lg-6 mb-7">
+                                            {% include "product_block.html" %}
+                                        </div>
+                                    {% endfor %}
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
-            </div>
-
+                </div>
+            </section>
+            <section class="delivery">
+                <div class="container">
+                    <div style="display: flex;margin-bottom:20px;margin-top:15px;" class="delivery_block">
+                        <div style="display: flex;">
+                            <img src="{% static '/src/assets/img/icon/Group 100.png' %}"
+                                 style="height:50px;width:82px;">
+                            <div style="flex-direction:column;margin-left:10px;">
+                                <h2 class="h3">Доставка</h2>
+                                <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
+                            </div>
+                        </div>
+                        <div style="display: flex;margin-bottom:20px;">
+                            <img src="{% static '/src/assets/img/icon/Group 101.png' %}"
+                                 style="height:50px;width:82px;">
+                            <div style="flex-direction:column;margin-left:10px;">
+                                <h2 class="h3">Доставка</h2>
+                                <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
+                            </div>
+                        </div>
+                        <div style="display: flex;margin-bottom:20px;">
+                            <img src="{% static '/src/assets/img/icon/Group 102.png' %}"
+                                 style="height:50px;width:82px;">
+                            <div style="flex-direction:column;margin-left:10px;">
+                                <h2 class="h3">Доставка</h2>
+                                <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
 
 
     </main>

@@ -64,13 +64,13 @@
                   <img class="adaptive-slide" src="path/to/image4.jpg" alt="Image 4">
                 </div>
               </div>
-       </div> 
+       </div>
 
-    
+
       <div class="about_company_sensor_slider" uk-slider>
 
       </div>
-     
+
 </section>
 <section>
     <div class="container">
@@ -91,7 +91,7 @@
                         <ul>
                             <li>Создавать лимитированные партии под спец-заказы</li>
                             <li style="margin-top:10px;">Обеспечить полный ассортимент материалов и инструментов необходмых для выполнения малярных работ</li>
-                             
+
                         </ul>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                         <ul>
                             <li>Доукомплектовать</li>
                             <li style="margin-top:10px;">Обеспечить полный ассортимент материалов и инструментов необходмых для выполнения малярных работ</li>
-                             
+
                         </ul>
                     </div>
                     </div>
@@ -125,7 +125,7 @@
                             <ul>
                                 <li>Принимать оплату разными способами(наличный и безналичный расчет,в том числе и с НДС, перевод на платежную карту и т.п.)</li>
                                 <li style="margin-top:10px;">Обслуживать клиентов в различных частях города</li>
-                                 
+
                             </ul>
                         </div>
                     </div>
@@ -144,7 +144,7 @@
                             <ul>
                                 <li>Предложить систему скидок в завимости от статуса клиента - професионал, диллер, дистрибьютор.</li>
                                 <li style="margin-top:10px;">Давать скидки в зависимости от объема закупок при условии предоставлении информации клиента о себе.</li>
-                                 
+
                             </ul>
                         </div>
                     </div>
@@ -161,13 +161,13 @@
                             <ul>
                                 <li>Всегда иметь в наличии полный ассортимент продукции</li>
                                 <li style="margin-top:10px;">Организовать доставку товара на объект при сумме закупки от 3 000 грн.</li>
-                                 
+
                             </ul>
                         </div>
                     </div>
                 </div>
                 </div>
-                 
+
             </div>
         </div>
     </section>
@@ -175,7 +175,7 @@
         <div class="container" style=" ">
             <div class="">
                 <h2  class="about_company_Heading_non" style=" ">Товарные направления</h2>
-     
+
         <div class="comparison_lists col-lg-12 row">
             <button  class=""style=" height:190px;margin-left:20px;margin-top:20px">
                 <img  style="margin-left:150px;"src="{% static '/src/assets/img/icon/Group 37.png' %}" alt="Image">
@@ -225,16 +225,16 @@
             prevTranslate = 0,
             animationID = 0,
             currentSlideIndex = 0;
-      
+
         slider.addEventListener('touchstart', touchStart);
         slider.addEventListener('touchend', touchEnd);
         slider.addEventListener('touchmove', touchMove);
-      
+
         // Получение индекса текущего слайда
         function getPositionX(event) {
           return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
         }
-      
+
         // Запуск перемещения слайдера
         function touchStart(event) {
           isDragging = true;
@@ -242,23 +242,23 @@
           animationID = requestAnimationFrame(animation);
           slider.classList.add('grabbing');
         }
-      
+
         // Окончание перемещения слайдера
         function touchEnd() {
           isDragging = false;
           cancelAnimationFrame(animationID);
-      
+
           const movedBy = currentTranslate - prevTranslate;
-      
+
           // Если свайпнули достаточно сильно, меняем слайд
           if (movedBy < -100 && currentSlideIndex < slider.children.length - 1) currentSlideIndex += 1;
           if (movedBy > 100 && currentSlideIndex > 0) currentSlideIndex -= 1;
-      
+
           setPositionByIndex();
-      
+
           slider.classList.remove('grabbing');
         }
-      
+
         // Обработка движения
         function touchMove(event) {
           if (isDragging) {
@@ -266,18 +266,18 @@
             currentTranslate = prevTranslate + currentPosition - startPos;
           }
         }
-      
+
         // Функция анимации для плавного перетаскивания
         function animation() {
           setSliderPosition();
           if (isDragging) requestAnimationFrame(animation);
         }
-      
+
         // Установка позиции слайдера
         function setSliderPosition() {
           slider.style.transform = translateX(${currentTranslate}px);
         }
-      
+
         // Установка позиции слайдера в зависимости от индекса текущего слайда
         function setPositionByIndex() {
           currentTranslate = -currentSlideIndex * (slider.clientWidth / slider.children.length);
@@ -288,4 +288,3 @@
 
 </script>
 </body>
- 
