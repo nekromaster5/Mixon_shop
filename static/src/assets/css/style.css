@@ -1676,6 +1676,9 @@ Product-description
 .describe_product {
     display: flex;
 }
+.review_block{
+width: 740px;
+}
 
 @media only screen   and (min-width: 768px) and (max-width: 1199px) {
     .slide-buttons {
@@ -5576,16 +5579,42 @@ input[type=number]::-webkit-outer-spin-button {
 .order_history_quantity {
     margin-left: 37px;
 }
-
-order_history_price {
+.column_order_history_quantity{
+    margin-left:80px;
+}
+.order_history_price {
     margin-left: 30px;
 }
-
+.column_order_history_artikyl{
+    margin-left:220px;
+}
+.second_order_history_block {
+    margin-left: 200px;
+}
+.first_order_history_block {
+     
+}
 @media only screen   and (min-width: 750px) and (max-width: 1199px) {
     .vidget_block_cabinet {
         display: none;
     }
+    .column_order_history_quantity{
+        margin-left:60px;
+    }
+    .column_order_history_artikyl{
+        margin-left:210px;
+    }
+.order_history_artikyl{
+    margin-left: 350px;
+}
+.order_history_quantity{
+    margin-left: 25px;
+}
+.order_history_price{
+    margin-left: 20px;
 
+
+}
     .menu_button {
         display: block;
     }
@@ -5607,10 +5636,7 @@ order_history_price {
     height: 28px;
 }
 
-.first_order_history_block {
-    margin-left: 200px;
-}
-
+ 
 .rev_but {
     border: 1px solid;
     border-color: #FF0000;
@@ -5632,15 +5658,38 @@ order_history_price {
 .second_text_block {
     display: flex;
 }
+.pa_column{
+    height:30px;display: flex; background-color:#F5F5F5;
+}
 
 @media only screen   and (min-width: 320px) and (max-width: 760px) {
     .rev_div {
-
-
+    }
+    th, td {
+        font-size: 12px; /* Уменьшенный размер шрифта на мобильных устройствах */
+    }
+ 
+        .column_order_history_quantity{
+            margin-left: 0px;
+        }
+        .column_order_history_artikyl{
+            margin-left: 0px;
+        }
+    .order_history_artikyl{
+        margin-left:  0px;
+    }
+    .order_history_quantity{
+        margin-left: 0px;
+    }
+    .order_history_price{
+        margin-left:  0px;
+    
+    
+    }
         flex-direction: column; /* Столбцовая ориентация */
         /* Центрирование по горизонтали */
     }
-
+    
     .rev_text {
 
     }

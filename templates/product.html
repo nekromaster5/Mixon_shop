@@ -36,7 +36,8 @@
     <main class="main__content_wrapper" style="background:#E5E5E5;">
 
         <section class="breadcrumb__section breadcrumb__bg--bg-offwhite-color">
-
+         <div class="container">
+            
             <div class="breadcrumb__content text-center" style="width:100%;">
                 <ul class="breadcrumb__content--menu d-flex">
                     <li class="breadcrumb__content--menu__items">
@@ -74,9 +75,11 @@
                     <p style="position:relative;left:800px;color:#787878;">Артикул1234567890</p>
                 </div>
             </section>
+        <div>
         </section>
 
-
+<section>
+    <div class="container">
         <div class="product_main_panel" style=" ">
             <button class="product_main_button" onclick="switchBlock_to_product_description(); switchBorder(this)">
                 Все о товаре
@@ -181,7 +184,7 @@
                 </div>
                 <p style="position: relative; top: -145px; left: 160px;">Рейтинг 4.0</p>
             </div>
-            <div class="reviev_block" style=" width: 740px;  ">
+            <div class="review_block" style=" width: 740px;  ">
                 <div style=" ">
                     <p>Дмитрий Александрович</p>
                     <div class="product_reviev_stars" style=" margin-top:-25px;margin-left:600px;display: flex;">
@@ -199,14 +202,14 @@
                         добре запакований, помітно що ніхто до мене його не відкривав</p>
 
                 </div>
-                <div style="width: 740px; height: 30px; margin-top: 5px;">
+                <div style=" ;">
                     <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
                 </div>
-                <div style="width: 740px; height: 30px; margin-top: 0px;">
+                <div style=" ">
                     <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
                 </div>
             </div>
-            <div class="reviev_block" style="width: 740px;   margin-top:30px;  ">
+            <div class="review_block" style="     ">
                 <div style="width: 740px; height: 50px;">
                     <p>Дмитрий Александрович</p>
                     <div style=" margin-top:-25px;margin-left:600px;display: flex;">
@@ -217,19 +220,19 @@
                         <img style="" src="{% static '/src/assets/img/icon/Path 133.png' %}">
                     </div>
                 </div>
-                <div style="width: 740px; height: 70px;">
+                <div style=" ">
                     <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був
                         добре запакований, помітно що ніхто до мене його не відкривав</p>
                 </div>
-                <div style="width: 740px; height: 30px; margin-top: 5px;">
+                <div style=" ">
                     <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
                 </div>
-                <div style="width: 740px; height: 30px; margin-top: 0px;">
+                <div style=" ">
                     <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
                 </div>
             </div>
-            <div class="reviev_block" style="width: 740px;   margin-top:30px;  ">
-                <div style="width: 740px; height: 50px;">
+            <div class="review_block" style="   ">
+                <div style=" ">
                     <p>Дмитрий Александрович</p>
                     <div style=" margin-top:-25px;margin-left:600px;display: flex;">
                         <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
@@ -239,14 +242,14 @@
                         <img style="" src="{% static '/src/assets/img/icon/Path 133.png' %}">
                     </div>
                 </div>
-                <div style="width: 740px; height: 70px;">
+                <div style=" ">
                     <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був
                         добре запакований, помітно що ніхто до мене його не відкривав</p>
                 </div>
-                <div style="width: 740px; height: 30px; margin-top: 5px;">
+                <div style=" ">
                     <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
                 </div>
-                <div style="width: 740px; height: 30px; margin-top: 0px;">
+                <div style=" ">
                     <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
                 </div>
             </div>
@@ -680,8 +683,9 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
             </section>
+        </section>
             <section class="product__section section--padding  pt-0">
                 <div class="container">
                     <div class="section__buying--together">
@@ -773,6 +777,7 @@
 
     </main>
     <footer>{% include "footer.html" %}</footer>
+
 </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
