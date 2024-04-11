@@ -36,30 +36,25 @@
     <main class="main__content_wrapper" style="background:#E5E5E5;">
 
         <section class="breadcrumb__section breadcrumb__bg--bg-offwhite-color">
-         <div class="container">
-            
-            <div class="breadcrumb__content text-center" style="width:100%;">
-                <ul class="breadcrumb__content--menu d-flex">
-                    <li class="breadcrumb__content--menu__items">
-                        <a href="">Главная</a>
-                    </li>
-                    <li class="breadcrumb__content--menu__items">
-                        <a href="">ЛКМ для Строительства</a>
-                    </li>
-                    <li class="breadcrumb__content--menu__items">
-                        <a href="">Шпатлевка универсальная</a>
-                    </li>
-                    <li class="breadcrumb__content--menu__items">
-                        <a href="">Шпатлевка универсальная 2 кг Mixon Uni</a>
-                    </li>
-                </ul>
+            <div class="container">
+                <div class="breadcrumb__content text-center" style="width:100%;">
+                    <ul class="breadcrumb__content--menu d-flex">
+                        <li class="breadcrumb__content--menu__items">
+                            <a href="">Главная</a>
+                        </li>
+                        <li class="breadcrumb__content--menu__items">
+                            <a href="">ЛКМ для Строительства</a>
+                        </li>
+                        <li class="breadcrumb__content--menu__items">
+                            <a href="">Шпатлевка универсальная</a>
+                        </li>
+                        <li class="breadcrumb__content--menu__items">
+                            <a href="">Шпатлевка универсальная 2 кг Mixon Uni</a>
+                        </li>
+                    </ul>
 
-            </div>
-            <h1 class="breadcrumb__content--title">Шпатлевка универсальная 2 кг Mixon Uni</h1>
-
-
-            <br>
-            <section>
+                </div>
+                <h1 class="breadcrumb__content--title">Шпатлевка универсальная 2 кг Mixon Uni</h1>
                 <div style="width: 100%; height: 30px; justify-content: flex-start; align-items: flex-start; gap: 9px; display: inline-flex;">
 
                     <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
@@ -74,257 +69,259 @@
                         <p style="left:100px;position:relative;top:-93px;">23</p></div>
                     <p style="position:relative;left:800px;color:#787878;">Артикул1234567890</p>
                 </div>
-            </section>
-        <div>
+            </div>
         </section>
-
-<section>
-    <div class="container">
-        <div class="product_main_panel" style=" ">
-            <button class="product_main_button" onclick="switchBlock_to_product_description(); switchBorder(this)">
-                Все о товаре
-            </button>
-            <button class="product_main_button" onclick="switchBlock_to_Characteristics(); switchBorder(this)">
-                Характеристики
-            </button>
-            <button class="product_main_button" onclick="switchBlock_to_Buy_too(); switchBorder(this)">
-                Покупают вместе
-            </button>
-            <button class="product_main_button" onclick=" switchBorder(this)">
-                Похожие товары
-            </button>
-            <button class="product_main_button" onclick="switchBlock_to_Reviev(); switchBorder(this)">
-                Отзывы
-            </button>
-            <button class="product_main_button" onclick="switchBlock_to_avability(); switchBorder(this)" style=" ">
-                Наличие в магазинах
-            </button>
-        </div>
-
-        <div class="Characteristics" style="position: relative;">
-
-            <!-- Характеристики -->
-            <div class="t_block" style="height: 500px; background-color: white; position: relative; top: 11px;">
-                <p style="font-size: 20px; font-weight: bold; position: relative; left: 10px;">Характеристики</p>
-                <br>
-                <p style="position: relative; left: 10px;">Использование.............................. Внутри
-                    помещений</p>
-                <p style="position: relative; left: 10px;">Связующее вещество....................... Сополимер</p>
-                <p style="position: relative; left: 10px;">Сухой остаток................................. 10%</p>
-                <p style="position: relative; left: 10px;">Плотность.......................................... 1,05
-                    кг/п</p>
-                <p style="position: relative; left: 10px;">Время высыхания 23C 50% RH...... 2-6 часов</p>
-                <p style="position: relative; left: 10px;">Расход готовой смеси ................ 10-12м2/л в 1
-                    слой</p>
-                <p style="position: relative; left: 10px;">Разбавитель......................................
-                    Вода</p>
-                <p style="position: relative; left: 10px;">Рабочие инструменты..................... Валик, кисть</p>
-                <p style="position: relative; left: 10px;">Очистка рабочих инструментов.... Вода</p>
-                <p style="position: relative; left: 10px;">Хранение.......................................... 3 года
-                    t > 0°C</p>
-            </div>
-
-            <!-- Блоки доставки -->
-
-
-            <!-- Дополнительные блоки -->
-
-
-        </div>
-        <div class="Buy_too">
-            <div class="mb-6" style="margin-top: 10px; background: white;">
-                <span class="buying-together__content--title mt-5 mb-5">Покупают вместе</span>
-            </div>
-            <div class="row">
-                <div class="row col-lg-8 mb-6" style="margin-left: -4px;">
-                    {% for i in 'abcdef'|make_list %}
-                        <div class="col-lg-5 mb-6">
-                            {% include "product_block.html" %}
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="col-lg-5 mb-6 bg-white">
-                    <div>
-                        <div class="d-flex">
-                            <img src="{% static '/src/assets/img/icon/Path 47.png' %}">
-                            <p>Есть в наличии</p>
-                        </div>
-                        <p>265.00 &#8372;</p>
-                        <p>232.00 &#8372;</p>
-                        <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
-                             alt="Slide 2">
-                        <button><img src="{% static '/src/assets/img/icon/Path 49.png' %}"></button>
-                        <button><img src="{% static '/src/assets/img/icon/Group 34.png' %}"></button>
-                        <button><img src="{% static '/src/assets/img/icon/Group 94.png' %}">
-                            <p>Быстрый заказ</p></button>
-                        <button><img src="{% static '/src/assets/img/icon/Group 95.png' %}">
-                            <p>Хочу дешевле</p></button>
-                        <button><img src="{% static '/src/assets/img/icon/Path 55.png' %}">
-                            <p>Купить</p></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="Review" style="    background-color: white;">
-
-            <div class="f_block"
-                 style="width: 740px; height: 100px; margin-left: 20px; margin-bottom: 5px; margin-top: 10px;">
-                <p style="width: 85px; height: 25px; font-weight: bold; font-weight: 500;">Отзывы</p>
-                <div style="position: relative;">
-                    <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                    <img style="position: relative; left: 30px; top: -30px;"
-                         src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                    <img style="position: relative; left: 60px; top: -60px;"
-                         src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                    <img style="position: relative; left: 90px; top: -90px;"
-                         src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                    <img style="position: relative; left: 120px; top: -120px;"
-                         src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                </div>
-                <p style="position: relative; top: -145px; left: 160px;">Рейтинг 4.0</p>
-            </div>
-            <div class="review_block" style=" width: 740px;  ">
-                <div style=" ">
-                    <p>Дмитрий Александрович</p>
-                    <div class="product_reviev_stars" style=" margin-top:-25px;margin-left:600px;display: flex;">
-                        <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img style="" src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                    </div>
-
-                </div>
-
-                <div style="margin-bottom:10px;">
-                    <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був
-                        добре запакований, помітно що ніхто до мене його не відкривав</p>
-
-                </div>
-                <div style=" ;">
-                    <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
-                </div>
-                <div style=" ">
-                    <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
-                </div>
-            </div>
-            <div class="review_block" style="     ">
-                <div style="width: 740px; height: 50px;">
-                    <p>Дмитрий Александрович</p>
-                    <div style=" margin-top:-25px;margin-left:600px;display: flex;">
-                        <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img style="" src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                    </div>
-                </div>
-                <div style=" ">
-                    <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був
-                        добре запакований, помітно що ніхто до мене його не відкривав</p>
-                </div>
-                <div style=" ">
-                    <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
-                </div>
-                <div style=" ">
-                    <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
-                </div>
-            </div>
-            <div class="review_block" style="   ">
-                <div style=" ">
-                    <p>Дмитрий Александрович</p>
-                    <div style=" margin-top:-25px;margin-left:600px;display: flex;">
-                        <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img style="" src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                    </div>
-                </div>
-                <div style=" ">
-                    <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був
-                        добре запакований, помітно що ніхто до мене його не відкривав</p>
-                </div>
-                <div style=" ">
-                    <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
-                </div>
-                <div style=" ">
-                    <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
-                </div>
-            </div>
-
-
-            <button style="border: none; background-color: white;  width: 200px; height: 30px;">
-                <img src="{% static '/src/assets/img/icon/vectorgorupr.png' %}">
-                <p style="position: relative; bottom: 30px;">Показать еще</p>
-            </button>
-
-            <div class="revier" style="border-style: none; width: 740px; height: 400px;  ">
-                <div style="display: flex;
-                        flex-direction: column;">
-                    <p style="font-weight: 500;">Написать отзыв</p>
-                    <div style="display: flex;margin-top:-15px;">
-                        <div style="display: flex; align-items: center;">
-                            <img style="width: 30px; height: 30px; "
-                                 src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                            <img style="width: 30px; height: 30px;  "
-                                 src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                            <img style="width: 30px; height: 30px;  "
-                                 src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                            <img style="width: 30px; height: 30px;  "
-                                 src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                            <img style="width: 30px; height: 30px;  "
-                                 src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                        </div>
-
-                        <p style="font-family: Montserrat; color: #000000; margin-left: 10px;margin-top:10px;">Ваша
-                            оценка</p>
-                    </div>
-                </div>
-
-
-                <div class="contact_block_second ml-6" style="margin-top:20px;">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <!-- Первая колонка с двумя строками ввода -->
-                            <input type="text" class="form-control form-control-lg mb-2"
-                                   placeholder="Первая строка ввода">
-                            <input type="text" class="form-control form-control-lg"
-                                   placeholder="Вторая строка ввода">
-                        </div>
-                        <div class="col-lg-6">
-                            <!-- Вторая колонка с двумя строками ввода -->
-                            <input type="text" class="form-control form-control-lg mb-2"
-                                   placeholder="Третья строка ввода">
-                            <input type="text" class="form-control form-control-lg"
-                                   placeholder="Четвертая строка ввода">
-                        </div>
-                    </div>
-                </div>
-
-
-                <div style="width: 740px; height: 170px;margin-top:50px;  ">
-                    <div style="position: relative;">
-                        <input type="text" id="name" name="name"
-                               style="display: block; width: 670px; height: 120px; border-radius: 5px; padding-top: 20px;">
-                        <label for="name" style="position: absolute; top: 5px; left: 5px; pointer-events: none;">Напишите
-                            отзыв</label>
-                    </div>
-                    <button style="border-style: solid; border-color: red;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);  width: 200px; height: 40px; margin-top:20px; border-radius:5px;">
-                        <p style="font-family: Montserrat; color: red;">Оставить отзыв</p>
+        <section>
+            <div class="container">
+                <div class="product_main_panel" style=" ">
+                    <button class="product_main_button"
+                            onclick="switchBlockToProductDescription(); switchBorder(this)">
+                        Все о товаре
+                    </button>
+                    <button class="product_main_button" onclick="switchBlockToCharacteristics(); switchBorder(this)">
+                        Характеристики
+                    </button>
+                    <button class="product_main_button" onclick="switchBlockToBuyTogether(); switchBorder(this)">
+                        Покупают вместе
+                    </button>
+                    <button class="product_main_button" onclick=" switchBorder(this)">
+                        Похожие товары
+                    </button>
+                    <button class="product_main_button" onclick="switchBlockToReview(); switchBorder(this)">
+                        Отзывы
+                    </button>
+                    <button class="product_main_button" onclick="switchBlockToAvailability(); switchBorder(this)"
+                            style=" ">
+                        Наличие в магазинах
                     </button>
                 </div>
-            </div>
+                <div class="characteristics" style="position: relative;">
+                    <!-- Характеристики -->
+                    <div class="t_block" style="height: 500px; background-color: white; position: relative; top: 11px;">
+                        <p style="font-size: 20px; font-weight: bold; position: relative; left: 10px;">
+                            Характеристики</p>
+                        <br>
+                        <p style="position: relative; left: 10px;">Использование.............................. Внутри
+                            помещений</p>
+                        <p style="position: relative; left: 10px;">Связующее вещество.......................
+                            Сополимер</p>
+                        <p style="position: relative; left: 10px;">Сухой остаток.................................
+                            10%</p>
+                        <p style="position: relative; left: 10px;">Плотность..........................................
+                            1,05
+                            кг/п</p>
+                        <p style="position: relative; left: 10px;">Время высыхания 23C 50% RH...... 2-6 часов</p>
+                        <p style="position: relative; left: 10px;">Расход готовой смеси ................ 10-12м2/л в 1
+                            слой</p>
+                        <p style="position: relative; left: 10px;">Разбавитель......................................
+                            Вода</p>
+                        <p style="position: relative; left: 10px;">Рабочие инструменты..................... Валик,
+                            кисть</p>
+                        <p style="position: relative; left: 10px;">Очистка рабочих инструментов.... Вода</p>
+                        <p style="position: relative; left: 10px;">Хранение.......................................... 3
+                            года
+                            t > 0°C</p>
+                    </div>
+
+                    <!-- Блоки доставки -->
 
 
-        </div>
+                    <!-- Дополнительные блоки -->
 
-        <div class="avability" style="margin-top: 10px;">
-            <section style="background:white; margin-bottom ">
-                <div class="container">
+
+                </div>
+                <div class="buy_together">
+                    <div class="mb-6" style="margin-top: 10px; background: white;">
+                        <span class="buying-together__content--title mt-5 mb-5">Покупают вместе</span>
+                    </div>
+                    <div class="row">
+                        <div class="row col-lg-8 mb-6" style="margin-left: -4px;">
+                            {% for i in 'abcdef'|make_list %}
+                                <div class="col-lg-5 mb-6">
+                                    {% include "product_block.html" %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-lg-5 mb-6 bg-white">
+                            <div>
+                                <div class="d-flex">
+                                    <img src="{% static '/src/assets/img/icon/Path 47.png' %}">
+                                    <p>Есть в наличии</p>
+                                </div>
+                                <p>265.00 &#8372;</p>
+                                <p>232.00 &#8372;</p>
+                                <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
+                                     alt="Slide 2">
+                                <button><img src="{% static '/src/assets/img/icon/Path 49.png' %}"></button>
+                                <button><img src="{% static '/src/assets/img/icon/Group 34.png' %}"></button>
+                                <button><img src="{% static '/src/assets/img/icon/Group 94.png' %}">
+                                    <p>Быстрый заказ</p></button>
+                                <button><img src="{% static '/src/assets/img/icon/Group 95.png' %}">
+                                    <p>Хочу дешевле</p></button>
+                                <button><img src="{% static '/src/assets/img/icon/Path 55.png' %}">
+                                    <p>Купить</p></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review" style="    background-color: white;">
+                    <div class="f_block"
+                         style="width: 740px; height: 100px; margin-left: 20px; margin-bottom: 5px; margin-top: 10px;">
+                        <p style="width: 85px; height: 25px; font-weight: bold; font-weight: 500;">Отзывы</p>
+                        <div style="position: relative;">
+                            <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                            <img style="position: relative; left: 30px; top: -30px;"
+                                 src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                            <img style="position: relative; left: 60px; top: -60px;"
+                                 src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                            <img style="position: relative; left: 90px; top: -90px;"
+                                 src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                            <img style="position: relative; left: 120px; top: -120px;"
+                                 src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                        </div>
+                        <p style="position: relative; top: -145px; left: 160px;">Рейтинг 4.0</p>
+                    </div>
+                    <div class="review_block" style=" width: 740px;  ">
+                        <div style=" ">
+                            <p>Дмитрий Александрович</p>
+                            <div class="product_reviev_stars"
+                                 style=" margin-top:-25px;margin-left:600px;display: flex;">
+                                <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img style="" src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                            </div>
+
+                        </div>
+
+                        <div style="margin-bottom:10px;">
+                            <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був
+                                добре запакований, помітно що ніхто до мене його не відкривав</p>
+
+                        </div>
+                        <div style=" ;">
+                            <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
+                        </div>
+                        <div style=" ">
+                            <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
+                        </div>
+                    </div>
+                    <div class="review_block" style="     ">
+                        <div style="width: 740px; height: 50px;">
+                            <p>Дмитрий Александрович</p>
+                            <div style=" margin-top:-25px;margin-left:600px;display: flex;">
+                                <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img style="" src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                            </div>
+                        </div>
+                        <div style=" ">
+                            <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був
+                                добре запакований, помітно що ніхто до мене його не відкривав</p>
+                        </div>
+                        <div style=" ">
+                            <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
+                        </div>
+                        <div style=" ">
+                            <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
+                        </div>
+                    </div>
+                    <div class="review_block" style="   ">
+                        <div style=" ">
+                            <p>Дмитрий Александрович</p>
+                            <div style=" margin-top:-25px;margin-left:600px;display: flex;">
+                                <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img style="" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img style="" src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                            </div>
+                        </div>
+                        <div style=" ">
+                            <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був
+                                добре запакований, помітно що ніхто до мене його не відкривав</p>
+                        </div>
+                        <div style=" ">
+                            <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
+                        </div>
+                        <div style=" ">
+                            <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
+                        </div>
+                    </div>
+
+
+                    <button style="border: none; background-color: white;  width: 200px; height: 30px;">
+                        <img src="{% static '/src/assets/img/icon/vectorgorupr.png' %}">
+                        <p style="position: relative; bottom: 30px;">Показать еще</p>
+                    </button>
+
+                    <div class="revier" style="border-style: none; width: 740px; height: 400px;  ">
+                        <div style="display: flex;
+                        flex-direction: column;">
+                            <p style="font-weight: 500;">Написать отзыв</p>
+                            <div style="display: flex;margin-top:-15px;">
+                                <div style="display: flex; align-items: center;">
+                                    <img style="width: 30px; height: 30px; "
+                                         src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                                    <img style="width: 30px; height: 30px;  "
+                                         src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                                    <img style="width: 30px; height: 30px;  "
+                                         src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                                    <img style="width: 30px; height: 30px;  "
+                                         src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                                    <img style="width: 30px; height: 30px;  "
+                                         src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                                </div>
+
+                                <p style="font-family: Montserrat; color: #000000; margin-left: 10px;margin-top:10px;">
+                                    Ваша
+                                    оценка</p>
+                            </div>
+                        </div>
+
+
+                        <div class="contact_block_second ml-6" style="margin-top:20px;">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <!-- Первая колонка с двумя строками ввода -->
+                                    <input type="text" class="form-control form-control-lg mb-2"
+                                           placeholder="Первая строка ввода">
+                                    <input type="text" class="form-control form-control-lg"
+                                           placeholder="Вторая строка ввода">
+                                </div>
+                                <div class="col-lg-6">
+                                    <!-- Вторая колонка с двумя строками ввода -->
+                                    <input type="text" class="form-control form-control-lg mb-2"
+                                           placeholder="Третья строка ввода">
+                                    <input type="text" class="form-control form-control-lg"
+                                           placeholder="Четвертая строка ввода">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div style="width: 740px; height: 170px;margin-top:50px;  ">
+                            <div style="position: relative;">
+                                <input type="text" id="name" name="name"
+                                       style="display: block; width: 670px; height: 120px; border-radius: 5px; padding-top: 20px;">
+                                <label for="name"
+                                       style="position: absolute; top: 5px; left: 5px; pointer-events: none;">Напишите
+                                    отзыв</label>
+                            </div>
+                            <button style="border-style: solid; border-color: red;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);  width: 200px; height: 40px; margin-top:20px; border-radius:5px;">
+                                <p style="font-family: Montserrat; color: red;">Оставить отзыв</p>
+                            </button>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="availability" style="margin-top: 10px;">
                     <div style="display:flex">
-                        <div class="avability_main">
+                        <div class="availability_main">
                             <div style="display:flex;">
                                 <h2 class="h3">Наличие в магазинах</h2>
                                 <button style="margin-left:10px;width:270px;height:40px;border-radius:5px; ">
@@ -404,21 +401,9 @@
                         <div class="avability_sale">
                         </div>
                     </div>
-            </section>
-        </div>
-
-
-        <div class="product_description" style="margin-top: 10px;">
-            <style>
-                @media only screen and (min-width: 320px) and (max-width: 760px) {
-                    .container {
-                        display: block;
-                    }
-                }
-            </style>
-            <section style="background:white;">
-                <section style=" ">
-                    <div class="container" style="display: flex;">
+                </div>
+                <div class="product_description" style="margin-top: 10px;">
+                    <div class="" style="display: flex;">
                         <!-- Левый блок -->
                         <div class="left_block" style="width: 50%; margin-top: 30px;">
                             <div class="left_flex_display" style="display:flex;">
@@ -496,7 +481,7 @@
 
                                         <button class="product_button"
                                                 style="width:170px;background-color:red;margin-top:20px; ">
-                                            <img style="position:absolute; margin-top:;margin-left:10px;"
+                                            <img style="position:absolute; margin-left:10px;"
                                                  src="{% static '/src/assets/img/icon/Path 55.png' %}">
                                             <p style="color:white;">Купить</p>
                                         </button>
@@ -509,7 +494,8 @@
                                                  src="{% static '/src/assets/img/icon/Group 95.png' %}">
                                             <p>Хочу дешевле</p>
                                         </button>
-                                        <button class="a_product_button" style="background: white;margin-top:10px; border: 1px solid red;">
+                                        <button class="a_product_button"
+                                                style="background: white;margin-top:10px; border: 1px solid red;">
                                             <img style="position:absolute;"
                                                  src="{% static '/src/assets/img/icon/Group 94.png' %}">
                                             <p style="color:red;">Быстрый заказ</p>
@@ -614,165 +600,158 @@
                             </div>
                         </div>
                     </div>
-                </section>
-            </section>
+                    <div class="description_block">
+                        <p style="font-size: 1.5em;"> Описание</p>
+                        <p>Грунтовка влагоизолятор Mixon Аквастоп - это простой в применении высокоэфективный
+                            продукт,который, впитываясь глубоко в <br> основание,
+                            укрепляют его и в результате улучшает сцепление отделочных материалов с основой.<br>
+                            Аквастоп повышает влагостойкость покрытия и скоращает расход покровных красок.</p>
+                        <p style="font-size: 1.2em;">
+                            Нанесение:
+                        </p>
+                        <p>
+                            Грунтование пористых т чуствительных к влаге поверхностей, улучшение свойств цементных и
+                            известковых строительных материалов.<br>
+                            Применяется для внутренних работ.
+                        </p>
+                        <p style="font-size: 1.2em;">
+                            Сфера применения:
+                        </p>
+                        <p>
+                            Средство Аквастоп смешивается с водой для приготовления растворов:
+                        <ul>
+                            <li>штукатурка:1:5 -1:20;</li>
+                            <li>Цементные известковые растворы</li>
+                            <li>Цементные самовыравнивающиеся смеси</li>
+                        </ul>
+                        </p>
+                        <p>
+                            Для нанесения на поверхность Аквастопа:
+                        <ul type="disc">
+                            <li>бетон,цемент,газобетон,штукатурка;</li>
+                            <li>гипсовые плиты</li>
+                            <li>основа для пола</li>
+                        </ul>
+                        </p>
+                    </div>
+                    <div class="describe_block mb-7">
 
-            <div class="description_block">
-                <p style="font-size: 1.5em;"> Описание</p>
-                <p>Грунтовка влагоизолятор Mixon Аквастоп - это простой в применении высокоэфективный
-                    продукт,который, впитываясь глубоко в <br> основание,
-                    укрепляют его и в результате улучшает сцепление отделочных материалов с основой.<br>
-                    Аквастоп повышает влагостойкость покрытия и скоращает расход покровных красок.</p>
-                <p style="font-size: 1.2em;">
-                    Нанесение:
-                </p>
-                <p>
-                    Грунтование пористых т чуствительных к влаге поверхностей, улучшение свойств цементных и
-                    известковых строительных материалов.<br>
-                    Применяется для внутренних работ.
-                </p>
-                <p style="font-size: 1.2em;">
-                    Сфера применения:
-                </p>
-                <p>
-                    Средство Аквастоп смешивается с водой для приготовления растворов:
-                <ul>
-                    <li>штукатурка:1:5 -1:20;</li>
-                    <li>Цементные известковые растворы</li>
-                    <li>Цементные самовыравнивающиеся смеси</li>
-                </ul>
-                </p>
-                <p>
-                    Для нанесения на поверхность Аквастопа:
-                <ul type="disc">
-                    <li>бетон,цемент,газобетон,штукатурка;</li>
-                    <li>гипсовые плиты</li>
-                    <li>основа для пола</li>
-                </ul>
-                </p>
-            </div>
+                        <p style="font-size: 2em; font-weight: bold;margin-top:10px;">
+                            Характеристики
+                        <p>
+                        <div class="describe_product"
+                             style=" height:300px;background-color:white;">
+                            <div class="col-lg-5 col-md-5" style="width:400px;">
+                                <p> Использование.......................................Внутри помещений </p>
 
+                                <p> Связующее вещество .......................Сополимер </p>
 
-            <section>
-                <div class="describe_block mb-7">
+                                <p> Сухой остаток ............................................25 % </p>
 
-                    <p style="font-size: 2em; font-weight: bold;margin-top:10px;">
-                        Характеристики
-                    <p>
-                    <div class="describe_product"
-                         style=" height:300px;background-color:white;">
-                        <div class="col-lg-5 col-md-5" style="width:400px;">
-                            <p> Использование.......................................Внутри помещений </p>
-
-                            <p> Связующее вещество .......................Сополимер </p>
-
-                            <p> Сухой остаток ............................................25 % </p>
-
-                            <p> Плотность .....................................................1,05
-                                кг/л </p>
-                            <p>Время высыхания,<br>
-                                23 C 50% RH...............................2-6 часов</p>
-                        </div>
-                        <div class="col-lg-5 col-md-5" style="width:400px;   ">
-                            <p>Расход готовой смеси................10-12 м2/л в 1 слой</p>
-                            <p>Разбавитель.........................Вода</p>
-                            <p>Рабочие инструменты.................Валик, кисть</p>
-                            <p>Очистка рабочих<br>
-                                инструментов........................Вгода</p>
-                            <p>Хранение............................3 года t > 0oC</p>
+                                <p> Плотность .....................................................1,05
+                                    кг/л </p>
+                                <p>Время высыхания,<br>
+                                    23 C 50% RH...............................2-6 часов</p>
+                            </div>
+                            <div class="col-lg-5 col-md-5" style="width:400px;   ">
+                                <p>Расход готовой смеси................10-12 м2/л в 1 слой</p>
+                                <p>Разбавитель.........................Вода</p>
+                                <p>Рабочие инструменты.................Валик, кисть</p>
+                                <p>Очистка рабочих<br>
+                                    инструментов........................Вгода</p>
+                                <p>Хранение............................3 года t > 0oC</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </section>
         </section>
-            <section class="product__section section--padding  pt-0">
-                <div class="container">
-                    <div class="section__buying--together">
-                        <div class="section__heading d-flex justify-content-between mb-30 ">
-                            <h2 class="section__heading--maintitle">Покупают вместе</h2>
-                            <a href="{% url 'catalogue' %}" class="d-flex justify-content-center text-nowrap">
-                                <span class="section__heading--maintitle--text__secondary">Посмотреть все</span>
-                                <span class="invisible">a</span>
-                                <img src="{% static '/src/assets/img/icon/two_right_arrows_red.svg' %}"
-                                     alt="two right arrows">
-                            </a>
-                        </div>
-                        <div class="product__section--inner">
-                            <div class="row row-md-reverse">
-                                <div class="row">
-                                    <img class="col-lg-6 col-md  mb-7"
-                                         src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}"
-                                         alt="mixon banner">
-                                    {% for i in 'abc'|make_list %}
-                                        <div class="col-lg-6 col-md  mb-7">
-                                            {% include "product_block.html" %}
-                                        </div>
-                                    {% endfor %}
-
-                                </div>
-                            </div>
-                        </div>
+        <section class="product__section section--padding  pt-0">
+            <div class="container">
+                <div class="section__buying--together">
+                    <div class="section__heading d-flex justify-content-between mb-30 ">
+                        <h2 class="section__heading--maintitle">Покупают вместе</h2>
+                        <a href="{% url 'catalogue' %}" class="d-flex justify-content-center text-nowrap">
+                            <span class="section__heading--maintitle--text__secondary">Посмотреть все</span>
+                            <span class="invisible">a</span>
+                            <img src="{% static '/src/assets/img/icon/two_right_arrows_red.svg' %}"
+                                 alt="two right arrows">
+                        </a>
                     </div>
-                    <div class="section__look_alike--products">
-                        <div class="section__heading d-flex justify-content-between mb-30 ">
-                            <h2 class="section__heading--maintitle">Похожие товары</h2>
-                            <a href="{% url 'catalogue' %}" class="d-flex justify-content-center text-nowrap">
-                                <span class="section__heading--maintitle--text__secondary">Посмотреть все</span>
-                                <span class="invisible">a</span>
-                                <img src="{% static '/src/assets/img/icon/two_right_arrows_red.svg' %}"
-                                     alt="two right arrows">
-                            </a>
-                        </div>
-                        <div class="product__section--inner">
-                            <div class="row row-md-reverse">
-                                <div class="row">
-                                    <img class="col-lg-6 mb-7"
-                                         src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}"
-                                         alt="mixon banner">
-                                    {% for i in 'abc'|make_list %}
-                                        <div class="col-lg-6 mb-7">
-                                            {% include "product_block.html" %}
-                                        </div>
-                                    {% endfor %}
+                    <div class="product__section--inner">
+                        <div class="row row-md-reverse">
+                            <div class="row">
+                                <img class="col-lg-6 col-md  mb-7"
+                                     src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}"
+                                     alt="mixon banner">
+                                {% for i in 'abc'|make_list %}
+                                    <div class="col-lg-6 col-md  mb-7">
+                                        {% include "product_block.html" %}
+                                    </div>
+                                {% endfor %}
 
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-            <section class="delivery">
-                <div class="container">
-                    <div style="display: flex;margin-bottom:20px;margin-top:15px;" class="delivery_block">
-                        <div style="display: flex;">
-                            <img src="{% static '/src/assets/img/icon/Group 100.png' %}"
-                                 style="height:50px;width:82px;">
-                            <div style="flex-direction:column;margin-left:10px;">
-                                <h2 class="h3">Доставка</h2>
-                                <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
-                            </div>
-                        </div>
-                        <div style="display: flex;margin-bottom:20px;">
-                            <img src="{% static '/src/assets/img/icon/Group 101.png' %}"
-                                 style="height:50px;width:82px;">
-                            <div style="flex-direction:column;margin-left:10px;">
-                                <h2 class="h3">Доставка</h2>
-                                <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
-                            </div>
-                        </div>
-                        <div style="display: flex;margin-bottom:20px;">
-                            <img src="{% static '/src/assets/img/icon/Group 102.png' %}"
-                                 style="height:50px;width:82px;">
-                            <div style="flex-direction:column;margin-left:10px;">
-                                <h2 class="h3">Доставка</h2>
-                                <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
+                <div class="section__look_alike--products">
+                    <div class="section__heading d-flex justify-content-between mb-30 ">
+                        <h2 class="section__heading--maintitle">Похожие товары</h2>
+                        <a href="{% url 'catalogue' %}" class="d-flex justify-content-center text-nowrap">
+                            <span class="section__heading--maintitle--text__secondary">Посмотреть все</span>
+                            <span class="invisible">a</span>
+                            <img src="{% static '/src/assets/img/icon/two_right_arrows_red.svg' %}"
+                                 alt="two right arrows">
+                        </a>
+                    </div>
+                    <div class="product__section--inner">
+                        <div class="row row-md-reverse">
+                            <div class="row">
+                                <img class="col-lg-6 mb-7"
+                                     src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}"
+                                     alt="mixon banner">
+                                {% for i in 'abc'|make_list %}
+                                    <div class="col-lg-6 mb-7">
+                                        {% include "product_block.html" %}
+                                    </div>
+                                {% endfor %}
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
+        <section class="delivery">
+            <div class="container">
+                <div style="display: flex;margin-bottom:20px;margin-top:15px;" class="delivery_block">
+                    <div style="display: flex;">
+                        <img src="{% static '/src/assets/img/icon/Group 100.png' %}"
+                             style="height:50px;width:82px;">
+                        <div style="flex-direction:column;margin-left:10px;">
+                            <h2 class="h3">Доставка</h2>
+                            <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
+                        </div>
+                    </div>
+                    <div style="display: flex;margin-bottom:20px;">
+                        <img src="{% static '/src/assets/img/icon/Group 101.png' %}"
+                             style="height:50px;width:82px;">
+                        <div style="flex-direction:column;margin-left:10px;">
+                            <h2 class="h3">Доставка</h2>
+                            <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
+                        </div>
+                    </div>
+                    <div style="display: flex;margin-bottom:20px;">
+                        <img src="{% static '/src/assets/img/icon/Group 102.png' %}"
+                             style="height:50px;width:82px;">
+                        <div style="flex-direction:column;margin-left:10px;">
+                            <h2 class="h3">Доставка</h2>
+                            <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 
     </main>
@@ -806,52 +785,52 @@
         $(button).addClass("active");
     }
 
-    function switchBlock_to_product_description() {
+    function switchBlockToProductDescription() {
         document.querySelector('.product_description').style.display = 'block';
-        document.querySelector('.Characteristics').style.display = 'none';
-        document.querySelector('.Buy_too').style.display = 'none';
-        document.querySelector('.Review').style.display = 'none';
-        document.querySelector('.avability').style.display = 'none';
+        document.querySelector('.characteristics').style.display = 'none';
+        document.querySelector('.buy_together').style.display = 'none';
+        document.querySelector('.review').style.display = 'none';
+        document.querySelector('.availability').style.display = 'none';
         document.querySelector(".describe_block").style.display = 'block';
         document.querySelector('.product__section').style.display = 'block';
     }
 
-    function switchBlock_to_Characteristics() {
-        document.querySelector('.Characteristics').style.display = 'block';
+    function switchBlockToCharacteristics() {
+        document.querySelector('.characteristics').style.display = 'block';
         document.querySelector('.product_description').style.display = 'none';
-        document.querySelector('.Buy_too').style.display = 'none';
-        document.querySelector('.Review').style.display = 'none';
-        document.querySelector('.avability').style.display = 'none';
+        document.querySelector('.buy_together').style.display = 'none';
+        document.querySelector('.review').style.display = 'none';
+        document.querySelector('.availability').style.display = 'none';
         document.querySelector(".describe_block").style.display = 'none';
         document.querySelector('.product__section').style.display = 'none';
     }
 
-    function switchBlock_to_Buy_too() {
-        document.querySelector('.Characteristics').style.display = 'none';
+    function switchBlockToBuyTogether() {
+        document.querySelector('.characteristics').style.display = 'none';
         document.querySelector('.product_description').style.display = 'none';
-        document.querySelector('.Buy_too').style.display = 'block';
-        document.querySelector('.Review').style.display = 'none';
-        document.querySelector('.avability').style.display = 'none';
+        document.querySelector('.buy_together').style.display = 'block';
+        document.querySelector('.review').style.display = 'none';
+        document.querySelector('.availability').style.display = 'none';
         document.querySelector(".describe_block").style.display = 'none';
         document.querySelector('.product__section').style.display = 'none';
     }
 
-    function switchBlock_to_Reviev() {
-        document.querySelector('.Characteristics').style.display = 'none';
+    function switchBlockToReview() {
+        document.querySelector('.characteristics').style.display = 'none';
         document.querySelector('.product_description').style.display = 'none';
-        document.querySelector('.Buy_too').style.display = 'none';
-        document.querySelector('.Review').style.display = 'block';
-        document.querySelector('.avability').style.display = 'none';
+        document.querySelector('.buy_together').style.display = 'none';
+        document.querySelector('.review').style.display = 'block';
+        document.querySelector('.availability').style.display = 'none';
         document.querySelector(".describe_block").style.display = 'none';
         document.querySelector('.product__section').style.display = 'none';
     }
 
-    function switchBlock_to_avability() {
-        document.querySelector('.Characteristics').style.display = 'none';
+    function switchBlockToAvailability() {
+        document.querySelector('.characteristics').style.display = 'none';
         document.querySelector('.product_description').style.display = 'none';
-        document.querySelector('.Buy_too').style.display = 'none';
-        document.querySelector('.Review').style.display = 'none';
-        document.querySelector('.avability').style.display = 'block';
+        document.querySelector('.buy_together').style.display = 'none';
+        document.querySelector('.review').style.display = 'none';
+        document.querySelector('.availability').style.display = 'block';
         document.querySelector(".describe_block").style.display = 'none';
         document.querySelector('.product__section').style.display = 'none';
     }
@@ -859,6 +838,6 @@
     // Добавьте аналогичные функции для других кнопок, если необходимо
 
     // По умолчанию активируем блок "Все о товаре" (product_description)
-    switchBlock_to_product_description();
+    switchBlockToProductDescription();
 </script>
 </html>
