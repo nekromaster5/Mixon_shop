@@ -170,14 +170,15 @@
                     </div>
                     <div class="orders_history col-lg-8">
                         <div class="review_personal_block ml-6" style="block">
-                            <div style="display:flex;margin-bottom:50px;">
+                            <div class="suported_pa_high_history_block">
+                            <div class="pa_high_history_block" style=" ">
                             <div class="first_order_history_block" style="  width:;display: block; ">
                                 <div class="first_text_block" style="display:flex; ">
-                                <h3>Заказ №123</h2>
+                                <p>Заказ №123</p>
                                 <p style=" ">01.01.2021
                                 </div>
                                 <div class="second_text_block" style="display:flex;" >
-                                    <h3   >Статус заказа:</h2>
+                                    <p   >Статус заказа:</p>
                                     <p style=" ">в обработке</p>
                                 </div>
 
@@ -196,13 +197,15 @@
                                 </div>
 
                             </div>
-                            <div style=" margin-left:20px; ">
-                                <button style="width: height:40px;background-color:#FF0000;border:none;border-radius:5px;">
-                                    <img style="margin-top:5px; "
-                                         src="{% static '/src/assets/img/icon/repeat_button.svg' %}">
-                                    <p style="margin-left:30px;margin-top:-25px;">Повторить</p></button>
-                            </div>
+                             
                         </div>
+                        <div style=" margin-left:20px; ">
+                            <button class="order_pa_button"style="display:flex;">
+                                <img style="margin-top:5px; "
+                                     src="{% static '/src/assets/img/icon/repeat_button.svg' %}">
+                                <p  >Повторить</p></button>
+                        </div>
+                    </div>
                              
                             <div class="open_order_bord  " style="">
                                 <div class="order_table d-flex flex-column"
@@ -251,7 +254,7 @@
                                 </div>
                                 <hr style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
 
-                                <h2 class="h3">Василий Иванов<span style="margin-left:480px;">Итого:</span>
+                                <h2 class="h3">Василий Иванов<span class="pa_total" style=" ">Итого:</span>
                                 <span style="margin-left:10px; color:red;">1 632.00₴</span></h2>
                                  
                                 <span>+38 098 76 54 321, example@gmail.com 
