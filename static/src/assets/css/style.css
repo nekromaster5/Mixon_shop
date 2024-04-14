@@ -1641,7 +1641,9 @@ Product-description
     margin-top: 100px;
 
 }
-
+.product_description_high_block{
+    display: flex;
+}
 .product_buttons {
     height: 100%;
      
@@ -1745,6 +1747,9 @@ width: 740px;
 
 @media only screen   and (min-width: 320px) and (max-width: 760px) {
     .description_block {
+        display: block;
+    }
+    .product_description_high_block{
         display: block;
     }
     .a_product_button{
