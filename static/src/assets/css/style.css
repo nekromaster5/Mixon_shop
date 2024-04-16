@@ -1542,6 +1542,16 @@ Product page
 /*
 Product-description
 */
+/*
+Reviev
+*/
+.main_review_block
+{
+    margin-left:20px;
+}
+.product_reviev_stars{
+    margin-top:-25px;margin-left:600px;display: flex;
+}
 .slider-container {
     display: flex;
 }
@@ -1679,7 +1689,7 @@ Product-description
 }
 
 .description_block {
-    margin-left: 40px;
+   
 }
 
 .product_slider_button {
@@ -1691,8 +1701,19 @@ Product-description
 }
 .review_block{
 width: 740px;
-}
+margin-top: 10px;
 
+}
+.review_block > p {
+    padding-top: 10px;  
+    padding-bottom: 10px;  
+}
+.review_second_input_block{
+    width: 740px; height: 170px;margin-top:50px;
+}
+.review_second_input_block_form{
+    display: block; width: 670px; height: 120px; border-radius: 5px; padding-top: 20px;
+}
 @media only screen   and (min-width: 768px) and (max-width: 1199px) {
     .slide-buttons {
         display: none;
@@ -1752,6 +1773,16 @@ width: 740px;
     .product_description_high_block{
         display: block;
     }
+    .review_second_input_block_form{
+        display: block; width: 287px; height: 120px; border-radius: 5px; padding-top: 20px;
+    }
+    .contact_block_second{
+        display: block;
+    }
+    .review_second_input_block{
+        width: 290px; height: 120px;margin-top:30px;
+    }
+        
     .a_product_button{
        
         width: 170px;
@@ -1759,7 +1790,18 @@ width: 740px;
     .slide-buttons {
         display: none;
     }
-
+    .product_reviev_stars{
+        margin-left:0px ;
+        padding-top: 10px;  
+        padding-bottom: 5px; 
+    }
+    .review_star{
+        width: 14px;
+        height: 14px;
+    }
+    .review_block{
+        width: 250px;
+        }
     .product_buttons {
         display: flex;
     }
@@ -1783,7 +1825,7 @@ width: 740px;
         display: block;
 
     }
-
+ 
     .product_buttons {
         display: flex;
         gap: 5px; /* Расстояние между кнопками */
@@ -2009,6 +2051,15 @@ Header
     background: none;
     cursor: pointer;
 }
+.table_cell{
+    width: 400px;
+     height: 33px;
+     margin-bottom:1px; 
+     margin-right: 100px;
+      left: 3px;
+       background-color: white;
+       display:flex;
+}
 
 .header_mobile_button {
     display: none;
@@ -2017,12 +2068,81 @@ Header
 .dropdown button:hover {
     background-color: #f1f1f1;
 }
+.product_table{
 
+    width: 400px; height: 250px; border-width: 3px; background-color:#E9E7E6; border-color:#E9E7E6;
+}
+.delivery{
+    width:500px; height: 200px;   position:relative; right:3px;top:20px; 
+}
+.slide-buttons{
+    margin-left:40px;
+}
+.product_button{
+    width:170px;background-color:red;margin-top:20px;
+}
+.table_cell span{
+    margin-left:40px;
+}
+.table_sphere{
+    width:20px;
+    height:20px;
+    background-color:red;
+    border-radius:10px;
+    margin-left:20px;
+    margin-top:5px;
+}
+.table_quantity{
+    margin-left:80px;
+}
+.table_columns{
+    margin-top: 1px; 
+    background-color:#E9E7E6; 
+    height: 30px; 
+    margin-bottom:1px;
+    display: flex;
+}
+.table_columns > div {
+    padding-left: 30px; /* Фиксированный отступ слева */
+    padding-right: 20px; /* Фиксированный отступ справа */
+}
 @media only screen   and (min-width: 320px) and (max-width: 760px) {
     .header_mobile_button {
         display: block;
     }
-
+    .description_block{
+        width: 320px;
+        margin-left: 0px;
+    }
+    .table_quantity{
+        margin-left:40px;
+    }
+    .table_columns > div {
+        padding-left: 20px; /* Фиксированный отступ слева */
+        padding-right: 10px; /* Фиксированный отступ справа */
+    }
+    .table_columns {
+        font-size: smaller; /* Устанавливаем меньший размер шрифта для всех дочерних элементов */
+    }
+    .table_cell{
+        width: 320px;
+     
+         margin-bottom:1px; 
+         margin-right: 100px;
+          left: 3px;
+           background-color: white;
+           display:flex;
+    }
+    .table_sphere{
+        margin-left:10px;
+    }
+    .table_cell span{
+        margin-left:10px;
+    }
+    .table_cell 
+.product_button{
+    margin-left:50px;
+}
     .adaptive_header_button {
         display: block;
     }
@@ -2033,6 +2153,37 @@ Header
 
     .header__bottom {
         display: none;
+    }
+    .first_sale_block_buttons {
+        margin-left: 100px;
+    }
+    .product_table{
+
+        width: 300px; height: 200px; border-width: 3px; background-color:#E9E7E6; border-color:#E9E7E6;
+    }
+    .delivery{
+        width:300px; height: 200px;   position:relative;   
+    }
+    .left_flex_display{
+        height:110px;
+    }
+    .product_buttons{
+        margin-left:-5px;
+    }
+    .product_right_path{
+        margin-top: 50px;
+    }
+    .product_left_path{
+        margin-top: 50px;
+    }
+    .delivery_img{
+        display: none;
+    }
+    .description_block{
+        margin-top:30px;
+    }
+    .first_sale_block_buttons{
+        display: flex;
     }
 
 }
