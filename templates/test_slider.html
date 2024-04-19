@@ -5,43 +5,445 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slider Example</title>
     {% load static %}
-    <style>
-        .adaptive-slider-container {
-            overflow: hidden;
-            white-space: nowrap;
-            width: 100%;
-        }
+    <link rel="stylesheet" href="{% static '/src/assets/css/vendor/bootstrap.min.css' %}">
 
-        .adaptive-slider {
+    <!-- Custom Style CSS -->
+            <link rel="stylesheet" href="{% static '/src/assets/css/style.css' %}">
+    <style>
+        .slider {
             transition: transform 0.5s ease;
         }
 
-        .adaptive-slide {
-            display: inline-block;
-            border: 2px solid black;
-
-            margin-right: 2px;
+        .slider-container {
+            overflow: hidden;
+            white-space: nowrap;
         }
 
+        .slide {
+            display: inline-block;
+        }
 
+        .test__slide {
+            width: 165px;
+            height: 165px;
+            display: flex;
+            flex-direction: column;
+        }
     </style>
 </head>
-<body>
+<body style="background-color: black;">
 
-<div class="adaptive-slider-container">
-    <div class="adaptive-slider">
-        <div class="adaptive-slide"><img src="{% static '/src/assets/img/other/test__catalog_image.png' %}"></div>
-        <div class="slide"><img src="{% static '/src/assets/img/other/test__catalog_image.png' %}"></div>
-        <div class="slide"><img src="{% static '/src/assets/img/other/test__catalog_image.png' %}"></div>
-        <div class="slide"><img src="{% static '/src/assets/img/other/test__catalog_image.png' %}"></div>
-        <div class="slide"><img src="{% static '/src/assets/img/other/test__catalog_image.png' %}"></div>
-        <div class="slide"><img src="{% static '/src/assets/img/other/test__catalog_image.png' %}"></div>
-
-
+<div class="slider-container mt-5">
+    <div class="shipment--types__list slider d-flex mb-5" style="transform: translateX(0px);">
+        <div class="slide">
+            <button id="pickup" class="test__slide" style="">
+                <div class="shipment__method--type__thumbnail">
+                    <svg width="39" height="37" viewBox="0 0 39 37" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.5001 35.5998C15.3779 35.5998 16.9001 34.0776 16.9001 32.1998C16.9001 30.322 15.3779 28.7998 13.5001 28.7998C11.6223 28.7998 10.1001 30.322 10.1001 32.1998C10.1001 34.0776 11.6223 35.5998 13.5001 35.5998Z"
+                              stroke="#FF0000" stroke-width="1.5" stroke-miterlimit="10"></path>
+                        <path d="M31.1998 35.5998C33.0776 35.5998 34.5998 34.0776 34.5998 32.1998C34.5998 30.322 33.0776 28.7998 31.1998 28.7998C29.322 28.7998 27.7998 30.322 27.7998 32.1998C27.7998 34.0776 29.322 35.5998 31.1998 35.5998Z"
+                              stroke="#FF0000" stroke-width="1.5" stroke-miterlimit="10"></path>
+                        <path d="M32.7 27.6C14.1 27.6 13.3 27.6 13.3 27.6L7.6 1H0" stroke="#FF0000"
+                              stroke-width="1.5" stroke-miterlimit="10"></path>
+                        <path d="M9 7.40039C37.9 7.40039 37.9 7.40039 37.9 7.40039L33.8 22.9004H12.3"
+                              stroke="#FF0000" stroke-width="1.5" stroke-miterlimit="10"></path>
+                        <path d="M10.7002 15.0996H35.7002" stroke="#FF0000" stroke-width="1.5"
+                              stroke-miterlimit="10"></path>
+                        <path d="M15.8999 7.40039L17.9999 22.9004" stroke="#FF0000" stroke-width="1.5"
+                              stroke-miterlimit="10"></path>
+                        <path d="M23.3999 7.40039V22.9004" stroke="#FF0000" stroke-width="1.5"
+                              stroke-miterlimit="10"></path>
+                        <path d="M30.3002 7.40039L28.7002 22.9004" stroke="#FF0000" stroke-width="1.5"
+                              stroke-miterlimit="10"></path>
+                    </svg>
+                </div>
+                <h4 class="shipment__method--type__description">Самовывоз из
+                    магазина</h4>
+            </button>
+        </div>
+        <div class="slide">
+            <button id="meest" class="test__slide" style="">
+                <div class="shipment__method--type__thumbnail">
+                    <svg width="127.000000" height="41.000000" viewBox="0 0 127 41" fill="none"
+                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path id="Vector"
+                              d="M48.2 6.29C41.8 6.29 36.6 11.59 36.6 18.2L36.6 20.2C36.6 26.7 41.8 32.09 48.2 32.09C51.89 32.09 55.39 31.5 58.3 30.5L57.5 25.39C54.7 25.89 52.6 26.7 48.2 26.09C43.7 25.5 43.6 21.5 43.6 21.5L59.7 21.5C59.7 21.09 59.8 20.59 59.8 20.2L59.8 18.2C59.8 11.59 56 6.29 48.2 6.29ZM43.6 16.09C43.6 13.39 45.7 11.2 48.2 11.2C50.7 11.2 52.8 13.39 52.8 16.09L43.6 16.09Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M115.9 0.2L121.2 9.79L115.8 19.4L121 19.4L126.4 9.79L121.1 0.2L115.9 0.2Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M33.79 0L35.89 31.9L29.39 31.9L27.6 5.59L21.5 31.29L19.79 31.29L15.89 31.29L14.2 31.29L8.2 5.9L6.5 31.9L0 31.9L2.1 0L6.89 0L8.7 0L12.79 0L18 22.79L23.2 0L27.39 0L29.1 0L33.79 0ZM84.6 18.09L84.6 20.09C84.6 20.5 84.6 21 84.5 21.4L68.39 21.4C68.39 21.4 68.5 25.29 73 26C77.5 26.59 79.5 25.79 82.29 25.29L83.1 30.4C80.1 31.4 76.6 32 73 32C66.6 32 61.39 26.59 61.39 20.09L61.39 18.09C61.39 11.59 66.6 6.2 73 6.2C80.79 6.29 84.6 11.59 84.6 18.09ZM77.6 16.09C77.6 13.4 75.5 11.2 73 11.2C70.5 11.2 68.39 13.4 68.39 16.09L77.6 16.09ZM95.6 16.2C92.5 15.09 92.2 14.59 92.2 13.7C92.2 13 92.39 12.79 92.6 12.59C94.7 10.5 97.6 11.5 99.79 11.79L100.8 6.29C100 6.2 91.7 5.79 88.7 8.29C87.1 9.59 85.79 11.5 85.79 13.7C85.79 19.5 90.7 20.4 93.6 21.5C97 22.79 96.7 23.29 96.7 24.7C96.7 25.09 96.5 25.2 96.39 25.29C94.7 28.4 88.29 26.59 86.1 25.2L84.79 30.29C85.89 30.59 89.39 31.79 93.2 31.79C96 31.79 98.89 31.29 100.9 29.79C102.5 28.59 103.3 26.79 103.3 24.7C103.4 19.09 98.7 17.4 95.6 16.2ZM114.2 25.5C113 25.5 111.9 24.5 111.9 23.2L111.9 0.09L104.9 0.09L104.9 6.9L101.9 6.9L101.3 12L104.9 12L104.9 24.9C104.9 28.79 108.1 32 112 32L113.4 32C114.9 32 116.2 31.59 117.4 30.79L117.4 25.4C117.2 25.5 117 25.5 116.7 25.5L114.2 25.5ZM117.3 6.9L113.2 6.9L113.2 12L117.3 12L118.6 9.59L118.6 9.2L117.3 6.9Z"
+                              fill="#0061B5" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M37.29 35.79L58.19 35.79L58.19 40.79L37.29 40.79L37.29 35.79Z"
+                              fill="#FF002E" fill-opacity="1.000000" fill-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <h4 class="shipment__method--type__description">Доставка Meest
+                    Express на
+                    отделение</h4>
+            </button>
+        </div>
+        <div class="slide">
+            <button id="nova_office" class="test__slide">
+                <div class="shipment__method--type__thumbnail">
+                    <svg width="40.000000" height="40.000000" viewBox="0 0 40 40" fill="none"
+                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path id="Vector"
+                              d="M16.3 8.29L16.3 15.59L23.5 15.59L23.5 8.29L28.2 8.29L19.89 0L11.6 8.29L16.3 8.29Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M31 28.59L39.79 19.89L31 11.09L31 28.59Z" fill="#FF0000"
+                              fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M23.5 31.1L23.5 23.7L16.3 23.7L16.3 31.1L11.2 31.1L19.9 39.79L28.6 31.1L23.5 31.1Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M8.79 11.09L0 19.89L8.79 28.59L8.79 11.09Z" fill="#FF0000"
+                              fill-opacity="1.000000" fill-rule="nonzero"></path>
+                    </svg>
+                </div>
+                <h4 class="shipment__method--type__description">Доставка Новой
+                    Почтой на
+                    отделение</h4>
+            </button>
+        </div>
+        <div class="slide">
+            <button id="nova_courier" class="test__slide" style="">
+                <div class="shipment__method--type__thumbnail">
+                    <svg width="31.000000" height="41.000000" viewBox="0 0 31 41" fill="none"
+                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path id="Vector"
+                              d="M5.7 11.8L5.7 14.4L8.3 14.4L8.3 11.8L9.9 11.8L7 8.9L4.1 11.8L5.7 11.8Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M10.89 19L14 15.89L10.89 12.79L10.89 19Z" fill="#FF0000"
+                              fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M8.3 19.79L8.3 17.2L5.7 17.2L5.7 19.79L4 19.79L7 22.9L10 19.79L8.3 19.79Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M3.1 12.79L0 15.89L3.1 19L3.1 12.79Z" fill="#FF0000"
+                              fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M23.5 15.9C22.8 15.9 22.1 16 21.4 16.3C21.1 16.3 20.7 16.4 20.5 16.6L20.2 17C19.5 17.5 18.9 18.2 18.4 18.9L12.5 25.1L3.1 25.1C1.4 25.1 0.1 26.4 0.1 28.1C0.1 29.8 1.4 31.1 3.1 31.1L13.8 31.1C14.8 31.1 15.7 30.6 16.29 29.8L17 29.2L17 32.2L17 40.2L30.2 40.2L30.2 32.2L30.2 27.5L30.2 23.8C30.1 19.5 27.2 15.9 23.5 15.9Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M30.1 3C30.1 1.4 28.7 0 27.1 0L19.5 0C17.89 0 16.5 1.4 16.5 3L16.5 5.4L14 5.4L14 7.9L16.6 7.9C17.1 11.2 19.9 13.7 23.3 13.7C27.1 13.7 30.1 10.7 30.1 6.9C30.1 6.7 30.1 6.5 30.1 6.29C30.1 6.2 30.1 6.09 30.1 6L30.1 3Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                    </svg>
+                </div>
+                <h4 class="shipment__method--type__description">Доставка
+                    курьером Новой
+                    Почты по городу</h4>
+            </button>
+        </div>
     </div>
 </div>
-<button id="slideLeft">Влево</button>
-<button id="slideRight">Вправо</button>
+<p>asdsadsadsadsa</p>
+<p>asdsadsadsadsa</p>
+<p>asdsadsadsadsa</p>
+<div class="slider-container mt-5">
+    <div class="shipment--types__list slider d-flex mb-5" style="transform: translateX(0px);">
+        <div class="slide">
+            <button id="pickup" class="test__slide" style="">
+                <div class="shipment__method--type__thumbnail">
+                    <svg width="39" height="37" viewBox="0 0 39 37" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.5001 35.5998C15.3779 35.5998 16.9001 34.0776 16.9001 32.1998C16.9001 30.322 15.3779 28.7998 13.5001 28.7998C11.6223 28.7998 10.1001 30.322 10.1001 32.1998C10.1001 34.0776 11.6223 35.5998 13.5001 35.5998Z"
+                              stroke="#FF0000" stroke-width="1.5" stroke-miterlimit="10"></path>
+                        <path d="M31.1998 35.5998C33.0776 35.5998 34.5998 34.0776 34.5998 32.1998C34.5998 30.322 33.0776 28.7998 31.1998 28.7998C29.322 28.7998 27.7998 30.322 27.7998 32.1998C27.7998 34.0776 29.322 35.5998 31.1998 35.5998Z"
+                              stroke="#FF0000" stroke-width="1.5" stroke-miterlimit="10"></path>
+                        <path d="M32.7 27.6C14.1 27.6 13.3 27.6 13.3 27.6L7.6 1H0" stroke="#FF0000"
+                              stroke-width="1.5" stroke-miterlimit="10"></path>
+                        <path d="M9 7.40039C37.9 7.40039 37.9 7.40039 37.9 7.40039L33.8 22.9004H12.3"
+                              stroke="#FF0000" stroke-width="1.5" stroke-miterlimit="10"></path>
+                        <path d="M10.7002 15.0996H35.7002" stroke="#FF0000" stroke-width="1.5"
+                              stroke-miterlimit="10"></path>
+                        <path d="M15.8999 7.40039L17.9999 22.9004" stroke="#FF0000" stroke-width="1.5"
+                              stroke-miterlimit="10"></path>
+                        <path d="M23.3999 7.40039V22.9004" stroke="#FF0000" stroke-width="1.5"
+                              stroke-miterlimit="10"></path>
+                        <path d="M30.3002 7.40039L28.7002 22.9004" stroke="#FF0000" stroke-width="1.5"
+                              stroke-miterlimit="10"></path>
+                    </svg>
+                </div>
+                <h4 class="shipment__method--type__description">Самовывоз из
+                    магазина</h4>
+            </button>
+        </div>
+        <div class="slide">
+            <button id="meest" class="test__slide" style="">
+                <div class="shipment__method--type__thumbnail">
+                    <svg width="127.000000" height="41.000000" viewBox="0 0 127 41" fill="none"
+                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path id="Vector"
+                              d="M48.2 6.29C41.8 6.29 36.6 11.59 36.6 18.2L36.6 20.2C36.6 26.7 41.8 32.09 48.2 32.09C51.89 32.09 55.39 31.5 58.3 30.5L57.5 25.39C54.7 25.89 52.6 26.7 48.2 26.09C43.7 25.5 43.6 21.5 43.6 21.5L59.7 21.5C59.7 21.09 59.8 20.59 59.8 20.2L59.8 18.2C59.8 11.59 56 6.29 48.2 6.29ZM43.6 16.09C43.6 13.39 45.7 11.2 48.2 11.2C50.7 11.2 52.8 13.39 52.8 16.09L43.6 16.09Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M115.9 0.2L121.2 9.79L115.8 19.4L121 19.4L126.4 9.79L121.1 0.2L115.9 0.2Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M33.79 0L35.89 31.9L29.39 31.9L27.6 5.59L21.5 31.29L19.79 31.29L15.89 31.29L14.2 31.29L8.2 5.9L6.5 31.9L0 31.9L2.1 0L6.89 0L8.7 0L12.79 0L18 22.79L23.2 0L27.39 0L29.1 0L33.79 0ZM84.6 18.09L84.6 20.09C84.6 20.5 84.6 21 84.5 21.4L68.39 21.4C68.39 21.4 68.5 25.29 73 26C77.5 26.59 79.5 25.79 82.29 25.29L83.1 30.4C80.1 31.4 76.6 32 73 32C66.6 32 61.39 26.59 61.39 20.09L61.39 18.09C61.39 11.59 66.6 6.2 73 6.2C80.79 6.29 84.6 11.59 84.6 18.09ZM77.6 16.09C77.6 13.4 75.5 11.2 73 11.2C70.5 11.2 68.39 13.4 68.39 16.09L77.6 16.09ZM95.6 16.2C92.5 15.09 92.2 14.59 92.2 13.7C92.2 13 92.39 12.79 92.6 12.59C94.7 10.5 97.6 11.5 99.79 11.79L100.8 6.29C100 6.2 91.7 5.79 88.7 8.29C87.1 9.59 85.79 11.5 85.79 13.7C85.79 19.5 90.7 20.4 93.6 21.5C97 22.79 96.7 23.29 96.7 24.7C96.7 25.09 96.5 25.2 96.39 25.29C94.7 28.4 88.29 26.59 86.1 25.2L84.79 30.29C85.89 30.59 89.39 31.79 93.2 31.79C96 31.79 98.89 31.29 100.9 29.79C102.5 28.59 103.3 26.79 103.3 24.7C103.4 19.09 98.7 17.4 95.6 16.2ZM114.2 25.5C113 25.5 111.9 24.5 111.9 23.2L111.9 0.09L104.9 0.09L104.9 6.9L101.9 6.9L101.3 12L104.9 12L104.9 24.9C104.9 28.79 108.1 32 112 32L113.4 32C114.9 32 116.2 31.59 117.4 30.79L117.4 25.4C117.2 25.5 117 25.5 116.7 25.5L114.2 25.5ZM117.3 6.9L113.2 6.9L113.2 12L117.3 12L118.6 9.59L118.6 9.2L117.3 6.9Z"
+                              fill="#0061B5" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M37.29 35.79L58.19 35.79L58.19 40.79L37.29 40.79L37.29 35.79Z"
+                              fill="#FF002E" fill-opacity="1.000000" fill-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <h4 class="shipment__method--type__description">Доставка Meest
+                    Express на
+                    отделение</h4>
+            </button>
+        </div>
+    </div>
+</div>
+<p>asdsadsadsadsa</p>
+<p>asdsadsadsadsa</p>
+<p>asdsadsadsadsa</p>
+<p>asdsadsadsadsa</p>
+<p>asdsadsadsadsa</p>
+<p>asdsadsadsadsa</p>
+<div class="slider-container mt-5">
+    <div class="shipment--types__list slider d-flex mb-5" style="transform: translateX(0px);">
+        <div class="slide">
+            <button id="pickup" class="test__slide" style="">
+                <div class="shipment__method--type__thumbnail">
+                    <svg width="39" height="37" viewBox="0 0 39 37" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.5001 35.5998C15.3779 35.5998 16.9001 34.0776 16.9001 32.1998C16.9001 30.322 15.3779 28.7998 13.5001 28.7998C11.6223 28.7998 10.1001 30.322 10.1001 32.1998C10.1001 34.0776 11.6223 35.5998 13.5001 35.5998Z"
+                              stroke="#FF0000" stroke-width="1.5" stroke-miterlimit="10"></path>
+                        <path d="M31.1998 35.5998C33.0776 35.5998 34.5998 34.0776 34.5998 32.1998C34.5998 30.322 33.0776 28.7998 31.1998 28.7998C29.322 28.7998 27.7998 30.322 27.7998 32.1998C27.7998 34.0776 29.322 35.5998 31.1998 35.5998Z"
+                              stroke="#FF0000" stroke-width="1.5" stroke-miterlimit="10"></path>
+                        <path d="M32.7 27.6C14.1 27.6 13.3 27.6 13.3 27.6L7.6 1H0" stroke="#FF0000"
+                              stroke-width="1.5" stroke-miterlimit="10"></path>
+                        <path d="M9 7.40039C37.9 7.40039 37.9 7.40039 37.9 7.40039L33.8 22.9004H12.3"
+                              stroke="#FF0000" stroke-width="1.5" stroke-miterlimit="10"></path>
+                        <path d="M10.7002 15.0996H35.7002" stroke="#FF0000" stroke-width="1.5"
+                              stroke-miterlimit="10"></path>
+                        <path d="M15.8999 7.40039L17.9999 22.9004" stroke="#FF0000" stroke-width="1.5"
+                              stroke-miterlimit="10"></path>
+                        <path d="M23.3999 7.40039V22.9004" stroke="#FF0000" stroke-width="1.5"
+                              stroke-miterlimit="10"></path>
+                        <path d="M30.3002 7.40039L28.7002 22.9004" stroke="#FF0000" stroke-width="1.5"
+                              stroke-miterlimit="10"></path>
+                    </svg>
+                </div>
+                <h4 class="shipment__method--type__description">Самовывоз из
+                    магазина</h4>
+            </button>
+        </div>
+        <div class="slide">
+            <button id="meest" class="test__slide" style="">
+                <div class="shipment__method--type__thumbnail">
+                    <svg width="127.000000" height="41.000000" viewBox="0 0 127 41" fill="none"
+                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path id="Vector"
+                              d="M48.2 6.29C41.8 6.29 36.6 11.59 36.6 18.2L36.6 20.2C36.6 26.7 41.8 32.09 48.2 32.09C51.89 32.09 55.39 31.5 58.3 30.5L57.5 25.39C54.7 25.89 52.6 26.7 48.2 26.09C43.7 25.5 43.6 21.5 43.6 21.5L59.7 21.5C59.7 21.09 59.8 20.59 59.8 20.2L59.8 18.2C59.8 11.59 56 6.29 48.2 6.29ZM43.6 16.09C43.6 13.39 45.7 11.2 48.2 11.2C50.7 11.2 52.8 13.39 52.8 16.09L43.6 16.09Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M115.9 0.2L121.2 9.79L115.8 19.4L121 19.4L126.4 9.79L121.1 0.2L115.9 0.2Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M33.79 0L35.89 31.9L29.39 31.9L27.6 5.59L21.5 31.29L19.79 31.29L15.89 31.29L14.2 31.29L8.2 5.9L6.5 31.9L0 31.9L2.1 0L6.89 0L8.7 0L12.79 0L18 22.79L23.2 0L27.39 0L29.1 0L33.79 0ZM84.6 18.09L84.6 20.09C84.6 20.5 84.6 21 84.5 21.4L68.39 21.4C68.39 21.4 68.5 25.29 73 26C77.5 26.59 79.5 25.79 82.29 25.29L83.1 30.4C80.1 31.4 76.6 32 73 32C66.6 32 61.39 26.59 61.39 20.09L61.39 18.09C61.39 11.59 66.6 6.2 73 6.2C80.79 6.29 84.6 11.59 84.6 18.09ZM77.6 16.09C77.6 13.4 75.5 11.2 73 11.2C70.5 11.2 68.39 13.4 68.39 16.09L77.6 16.09ZM95.6 16.2C92.5 15.09 92.2 14.59 92.2 13.7C92.2 13 92.39 12.79 92.6 12.59C94.7 10.5 97.6 11.5 99.79 11.79L100.8 6.29C100 6.2 91.7 5.79 88.7 8.29C87.1 9.59 85.79 11.5 85.79 13.7C85.79 19.5 90.7 20.4 93.6 21.5C97 22.79 96.7 23.29 96.7 24.7C96.7 25.09 96.5 25.2 96.39 25.29C94.7 28.4 88.29 26.59 86.1 25.2L84.79 30.29C85.89 30.59 89.39 31.79 93.2 31.79C96 31.79 98.89 31.29 100.9 29.79C102.5 28.59 103.3 26.79 103.3 24.7C103.4 19.09 98.7 17.4 95.6 16.2ZM114.2 25.5C113 25.5 111.9 24.5 111.9 23.2L111.9 0.09L104.9 0.09L104.9 6.9L101.9 6.9L101.3 12L104.9 12L104.9 24.9C104.9 28.79 108.1 32 112 32L113.4 32C114.9 32 116.2 31.59 117.4 30.79L117.4 25.4C117.2 25.5 117 25.5 116.7 25.5L114.2 25.5ZM117.3 6.9L113.2 6.9L113.2 12L117.3 12L118.6 9.59L118.6 9.2L117.3 6.9Z"
+                              fill="#0061B5" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M37.29 35.79L58.19 35.79L58.19 40.79L37.29 40.79L37.29 35.79Z"
+                              fill="#FF002E" fill-opacity="1.000000" fill-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <h4 class="shipment__method--type__description">Доставка Meest
+                    Express на
+                    отделение</h4>
+            </button>
+        </div>
+        <div class="slide">
+            <button id="nova_office" class="test__slide">
+                <div class="shipment__method--type__thumbnail">
+                    <svg width="40.000000" height="40.000000" viewBox="0 0 40 40" fill="none"
+                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path id="Vector"
+                              d="M16.3 8.29L16.3 15.59L23.5 15.59L23.5 8.29L28.2 8.29L19.89 0L11.6 8.29L16.3 8.29Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M31 28.59L39.79 19.89L31 11.09L31 28.59Z" fill="#FF0000"
+                              fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M23.5 31.1L23.5 23.7L16.3 23.7L16.3 31.1L11.2 31.1L19.9 39.79L28.6 31.1L23.5 31.1Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M8.79 11.09L0 19.89L8.79 28.59L8.79 11.09Z" fill="#FF0000"
+                              fill-opacity="1.000000" fill-rule="nonzero"></path>
+                    </svg>
+                </div>
+                <h4 class="shipment__method--type__description">Доставка Новой
+                    Почтой на
+                    отделение</h4>
+            </button>
+        </div>
+        <div class="slide">
+            <button id="nova_courier" class="test__slide" style="">
+                <div class="shipment__method--type__thumbnail">
+                    <svg width="31.000000" height="41.000000" viewBox="0 0 31 41" fill="none"
+                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path id="Vector"
+                              d="M5.7 11.8L5.7 14.4L8.3 14.4L8.3 11.8L9.9 11.8L7 8.9L4.1 11.8L5.7 11.8Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M10.89 19L14 15.89L10.89 12.79L10.89 19Z" fill="#FF0000"
+                              fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M8.3 19.79L8.3 17.2L5.7 17.2L5.7 19.79L4 19.79L7 22.9L10 19.79L8.3 19.79Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M3.1 12.79L0 15.89L3.1 19L3.1 12.79Z" fill="#FF0000"
+                              fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M23.5 15.9C22.8 15.9 22.1 16 21.4 16.3C21.1 16.3 20.7 16.4 20.5 16.6L20.2 17C19.5 17.5 18.9 18.2 18.4 18.9L12.5 25.1L3.1 25.1C1.4 25.1 0.1 26.4 0.1 28.1C0.1 29.8 1.4 31.1 3.1 31.1L13.8 31.1C14.8 31.1 15.7 30.6 16.29 29.8L17 29.2L17 32.2L17 40.2L30.2 40.2L30.2 32.2L30.2 27.5L30.2 23.8C30.1 19.5 27.2 15.9 23.5 15.9Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M30.1 3C30.1 1.4 28.7 0 27.1 0L19.5 0C17.89 0 16.5 1.4 16.5 3L16.5 5.4L14 5.4L14 7.9L16.6 7.9C17.1 11.2 19.9 13.7 23.3 13.7C27.1 13.7 30.1 10.7 30.1 6.9C30.1 6.7 30.1 6.5 30.1 6.29C30.1 6.2 30.1 6.09 30.1 6L30.1 3Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                    </svg>
+                </div>
+                <h4 class="shipment__method--type__description">Доставка
+                    курьером Новой
+                    Почты по городу</h4>
+            </button>
+        </div>
+        <div class="slide">
+            <button id="nova_courier" class="test__slide" style="">
+                <div class="shipment__method--type__thumbnail">
+                    <svg width="31.000000" height="41.000000" viewBox="0 0 31 41" fill="none"
+                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path id="Vector"
+                              d="M5.7 11.8L5.7 14.4L8.3 14.4L8.3 11.8L9.9 11.8L7 8.9L4.1 11.8L5.7 11.8Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M10.89 19L14 15.89L10.89 12.79L10.89 19Z" fill="#FF0000"
+                              fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M8.3 19.79L8.3 17.2L5.7 17.2L5.7 19.79L4 19.79L7 22.9L10 19.79L8.3 19.79Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M3.1 12.79L0 15.89L3.1 19L3.1 12.79Z" fill="#FF0000"
+                              fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M23.5 15.9C22.8 15.9 22.1 16 21.4 16.3C21.1 16.3 20.7 16.4 20.5 16.6L20.2 17C19.5 17.5 18.9 18.2 18.4 18.9L12.5 25.1L3.1 25.1C1.4 25.1 0.1 26.4 0.1 28.1C0.1 29.8 1.4 31.1 3.1 31.1L13.8 31.1C14.8 31.1 15.7 30.6 16.29 29.8L17 29.2L17 32.2L17 40.2L30.2 40.2L30.2 32.2L30.2 27.5L30.2 23.8C30.1 19.5 27.2 15.9 23.5 15.9Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M30.1 3C30.1 1.4 28.7 0 27.1 0L19.5 0C17.89 0 16.5 1.4 16.5 3L16.5 5.4L14 5.4L14 7.9L16.6 7.9C17.1 11.2 19.9 13.7 23.3 13.7C27.1 13.7 30.1 10.7 30.1 6.9C30.1 6.7 30.1 6.5 30.1 6.29C30.1 6.2 30.1 6.09 30.1 6L30.1 3Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                    </svg>
+                </div>
+                <h4 class="shipment__method--type__description">Доставка
+                    курьером Новой
+                    Почты по городу</h4>
+            </button>
+        </div>
+        <div class="slide">
+            <button id="nova_courier" class="test__slide" style="">
+                <div class="shipment__method--type__thumbnail">
+                    <svg width="31.000000" height="41.000000" viewBox="0 0 31 41" fill="none"
+                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path id="Vector"
+                              d="M5.7 11.8L5.7 14.4L8.3 14.4L8.3 11.8L9.9 11.8L7 8.9L4.1 11.8L5.7 11.8Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M10.89 19L14 15.89L10.89 12.79L10.89 19Z" fill="#FF0000"
+                              fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M8.3 19.79L8.3 17.2L5.7 17.2L5.7 19.79L4 19.79L7 22.9L10 19.79L8.3 19.79Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M3.1 12.79L0 15.89L3.1 19L3.1 12.79Z" fill="#FF0000"
+                              fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M23.5 15.9C22.8 15.9 22.1 16 21.4 16.3C21.1 16.3 20.7 16.4 20.5 16.6L20.2 17C19.5 17.5 18.9 18.2 18.4 18.9L12.5 25.1L3.1 25.1C1.4 25.1 0.1 26.4 0.1 28.1C0.1 29.8 1.4 31.1 3.1 31.1L13.8 31.1C14.8 31.1 15.7 30.6 16.29 29.8L17 29.2L17 32.2L17 40.2L30.2 40.2L30.2 32.2L30.2 27.5L30.2 23.8C30.1 19.5 27.2 15.9 23.5 15.9Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M30.1 3C30.1 1.4 28.7 0 27.1 0L19.5 0C17.89 0 16.5 1.4 16.5 3L16.5 5.4L14 5.4L14 7.9L16.6 7.9C17.1 11.2 19.9 13.7 23.3 13.7C27.1 13.7 30.1 10.7 30.1 6.9C30.1 6.7 30.1 6.5 30.1 6.29C30.1 6.2 30.1 6.09 30.1 6L30.1 3Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                    </svg>
+                </div>
+                <h4 class="shipment__method--type__description">Доставка
+                    курьером Новой
+                    Почты по городу</h4>
+            </button>
+        </div>
+        <div class="slide">
+            <button id="nova_courier" class="test__slide" style="">
+                <div class="shipment__method--type__thumbnail">
+                    <svg width="31.000000" height="41.000000" viewBox="0 0 31 41" fill="none"
+                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path id="Vector"
+                              d="M5.7 11.8L5.7 14.4L8.3 14.4L8.3 11.8L9.9 11.8L7 8.9L4.1 11.8L5.7 11.8Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M10.89 19L14 15.89L10.89 12.79L10.89 19Z" fill="#FF0000"
+                              fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M8.3 19.79L8.3 17.2L5.7 17.2L5.7 19.79L4 19.79L7 22.9L10 19.79L8.3 19.79Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M3.1 12.79L0 15.89L3.1 19L3.1 12.79Z" fill="#FF0000"
+                              fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M23.5 15.9C22.8 15.9 22.1 16 21.4 16.3C21.1 16.3 20.7 16.4 20.5 16.6L20.2 17C19.5 17.5 18.9 18.2 18.4 18.9L12.5 25.1L3.1 25.1C1.4 25.1 0.1 26.4 0.1 28.1C0.1 29.8 1.4 31.1 3.1 31.1L13.8 31.1C14.8 31.1 15.7 30.6 16.29 29.8L17 29.2L17 32.2L17 40.2L30.2 40.2L30.2 32.2L30.2 27.5L30.2 23.8C30.1 19.5 27.2 15.9 23.5 15.9Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M30.1 3C30.1 1.4 28.7 0 27.1 0L19.5 0C17.89 0 16.5 1.4 16.5 3L16.5 5.4L14 5.4L14 7.9L16.6 7.9C17.1 11.2 19.9 13.7 23.3 13.7C27.1 13.7 30.1 10.7 30.1 6.9C30.1 6.7 30.1 6.5 30.1 6.29C30.1 6.2 30.1 6.09 30.1 6L30.1 3Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                    </svg>
+                </div>
+                <h4 class="shipment__method--type__description">Доставка
+                    курьером Новой
+                    Почты по городу</h4>
+            </button>
+        </div>
+        <div class="slide">
+            <button id="nova_courier" class="test__slide" style="">
+                <div class="shipment__method--type__thumbnail">
+                    <svg width="31.000000" height="41.000000" viewBox="0 0 31 41" fill="none"
+                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path id="Vector"
+                              d="M5.7 11.8L5.7 14.4L8.3 14.4L8.3 11.8L9.9 11.8L7 8.9L4.1 11.8L5.7 11.8Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M10.89 19L14 15.89L10.89 12.79L10.89 19Z" fill="#FF0000"
+                              fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M8.3 19.79L8.3 17.2L5.7 17.2L5.7 19.79L4 19.79L7 22.9L10 19.79L8.3 19.79Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M3.1 12.79L0 15.89L3.1 19L3.1 12.79Z" fill="#FF0000"
+                              fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M23.5 15.9C22.8 15.9 22.1 16 21.4 16.3C21.1 16.3 20.7 16.4 20.5 16.6L20.2 17C19.5 17.5 18.9 18.2 18.4 18.9L12.5 25.1L3.1 25.1C1.4 25.1 0.1 26.4 0.1 28.1C0.1 29.8 1.4 31.1 3.1 31.1L13.8 31.1C14.8 31.1 15.7 30.6 16.29 29.8L17 29.2L17 32.2L17 40.2L30.2 40.2L30.2 32.2L30.2 27.5L30.2 23.8C30.1 19.5 27.2 15.9 23.5 15.9Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M30.1 3C30.1 1.4 28.7 0 27.1 0L19.5 0C17.89 0 16.5 1.4 16.5 3L16.5 5.4L14 5.4L14 7.9L16.6 7.9C17.1 11.2 19.9 13.7 23.3 13.7C27.1 13.7 30.1 10.7 30.1 6.9C30.1 6.7 30.1 6.5 30.1 6.29C30.1 6.2 30.1 6.09 30.1 6L30.1 3Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                    </svg>
+                </div>
+                <h4 class="shipment__method--type__description">Доставка
+                    курьером Новой
+                    Почты по городу</h4>
+            </button>
+        </div>
+        <div class="slide">
+            <button id="nova_courier" class="test__slide" style="">
+                <div class="shipment__method--type__thumbnail">
+                    <svg width="31.000000" height="41.000000" viewBox="0 0 31 41" fill="none"
+                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path id="Vector"
+                              d="M5.7 11.8L5.7 14.4L8.3 14.4L8.3 11.8L9.9 11.8L7 8.9L4.1 11.8L5.7 11.8Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M10.89 19L14 15.89L10.89 12.79L10.89 19Z" fill="#FF0000"
+                              fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M8.3 19.79L8.3 17.2L5.7 17.2L5.7 19.79L4 19.79L7 22.9L10 19.79L8.3 19.79Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector" d="M3.1 12.79L0 15.89L3.1 19L3.1 12.79Z" fill="#FF0000"
+                              fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M23.5 15.9C22.8 15.9 22.1 16 21.4 16.3C21.1 16.3 20.7 16.4 20.5 16.6L20.2 17C19.5 17.5 18.9 18.2 18.4 18.9L12.5 25.1L3.1 25.1C1.4 25.1 0.1 26.4 0.1 28.1C0.1 29.8 1.4 31.1 3.1 31.1L13.8 31.1C14.8 31.1 15.7 30.6 16.29 29.8L17 29.2L17 32.2L17 40.2L30.2 40.2L30.2 32.2L30.2 27.5L30.2 23.8C30.1 19.5 27.2 15.9 23.5 15.9Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                        <path id="Vector"
+                              d="M30.1 3C30.1 1.4 28.7 0 27.1 0L19.5 0C17.89 0 16.5 1.4 16.5 3L16.5 5.4L14 5.4L14 7.9L16.6 7.9C17.1 11.2 19.9 13.7 23.3 13.7C27.1 13.7 30.1 10.7 30.1 6.9C30.1 6.7 30.1 6.5 30.1 6.29C30.1 6.2 30.1 6.09 30.1 6L30.1 3Z"
+                              fill="#FF0000" fill-opacity="1.000000" fill-rule="nonzero"></path>
+                    </svg>
+                </div>
+                <h4 class="shipment__method--type__description">Доставка
+                    курьером Новой
+                    Почты по городу</h4>
+            </button>
+        </div>
+    </div>
+</div>
 
 <script src="{% static '/src/assets/js/slider.js' %}"></script>
 </body>

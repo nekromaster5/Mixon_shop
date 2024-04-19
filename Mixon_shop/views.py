@@ -48,6 +48,16 @@ class New(View):
         return render(request, 'new.html')
 
 
-class Slider(View):
+class CheckoutPage(View):
+    def get(self, request):
+        return render(request, 'checkout.html')
+
+
+class TestSlider(View):
     def get(self, request):
         return render(request, 'test_slider.html')
+
+
+class Test(View):
+    def get(self, request):
+        return render(request, 'test.html')

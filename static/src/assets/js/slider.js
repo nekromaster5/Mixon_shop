@@ -1,76 +1,103 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const slider = document.querySelector('.adaptive-slider');
-    const slides = document.querySelectorAll('.adaptive-slide');
+    // Инициализация всех слайдеров на странице
+    const allSliders = document.querySelectorAll('.slider-container');
+    allSliders.forEach(initSlider);
+});
+
+// Определение пользовательского события
+const calculateMaxTranslateEvent = new Event('calculateMaxTranslateEvent');
+
+let disableSlider, enableSlider;
+
+function initSlider(sliderContainer) {
+    const slider = sliderContainer.querySelector('.slider');
+    const slides = sliderContainer.querySelectorAll('.slide');
     let isDragging = false,
         startPos = 0,
         currentTranslate = 0,
         prevTranslate = 0,
         maxTranslate = 0;
 
-    const calculateMaxTranslate = () => {
-    // Ширина видимого контейнера слайдера
-    const sliderContainerWidth = slider.offsetWidth;
-    // Ширина всех слайдов с учетом отступов (маржи)
-    const totalSlidesWidth = Array.from(slides).reduce((total, slide) => total + slide.offsetWidth, 0);
-    // Общий отступ слайдов (например, между слайдами 10px)
-    const totalMargin = 10 * (slides.length - 1);
-    // Вычисляем maxTranslate, учитывая общий отступ
-    maxTranslate = sliderContainerWidth - (totalSlidesWidth + totalMargin);
-};
-
+    let index = 0;
 
     const setSliderPosition = () => slider.style.transform = `translateX(${currentTranslate}px)`;
 
     const getPositionX = e => e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
 
-    const animation = () => {
-        setSliderPosition();
-        if (isDragging) requestAnimationFrame(animation);
-    };
-
     const touchStart = (e) => {
         isDragging = true;
         startPos = getPositionX(e);
         prevTranslate = currentTranslate;
-        animation();
+        slider.classList.add('grabbing');
     };
 
     const touchMove = (e) => {
         if (isDragging) {
             const currentPosition = getPositionX(e);
             currentTranslate = prevTranslate + currentPosition - startPos;
+            setSliderPosition();
         }
     };
 
     const touchEnd = () => {
         isDragging = false;
-        const movedBy = currentTranslate - prevTranslate;
-
-        // Ограничиваем движение слайдера крайними значениями
+        slider.classList.remove('grabbing');
         if (currentTranslate > 0) {
             currentTranslate = 0;
         } else if (currentTranslate < maxTranslate) {
             currentTranslate = maxTranslate;
         }
-
         setSliderPosition();
     };
 
-    // Инициализируем maxTranslate при загрузке
+    const calculateMaxTranslate = () => {
+        const sliderWidth = slider.offsetWidth;
+        setTimeout(() => {
+            const totalSlidesWidth = Array.from(slides).reduce((total, slide) => total + slide.offsetWidth + parseInt(window.getComputedStyle(slider).columnGap), 0);
+            maxTranslate = sliderWidth - totalSlidesWidth;
+            index++;
+        }, 270);
+    };
+
+
+    enableSlider = function(slider) {
+        // Слушатели событий для сенсорного управления
+        slider.addEventListener('touchstart', touchStart);
+        slider.addEventListener('touchmove', touchMove);
+        slider.addEventListener('touchend', touchEnd);
+    };
+
+    disableSlider = function(slider) {
+        slider.removeEventListener('touchstart', touchStart);
+        slider.removeEventListener('touchmove', touchMove);
+        slider.removeEventListener('touchend', touchEnd);
+    };
+
+    enableSlider(slider)
+
+
+    // Инициализируем maxTranslate и добавляем обработчик на изменение размера окна
     calculateMaxTranslate();
-    // Пересчитываем maxTranslate при изменении размера окна, чтобы учесть изменения размера контейнера
-    window.addEventListener('resize', calculateMaxTranslate);
-
-    // Добавляем обработчики сенсорных событий
-    slider.addEventListener('touchstart', touchStart);
-    slider.addEventListener('touchmove', touchMove);
-    slider.addEventListener('touchend', touchEnd);
+    window.addEventListener('resize',() => {
+        calculateMaxTranslate();
+        currentTranslate = 0;
+        setSliderPosition();
+    });
 
 
-    // Предотвращаем контекстное меню на долгое нажатие
+    // Функция для вызова calculateMaxTranslate при возникновении события
+    function calculateMaxTranslateHandler() {
+        calculateMaxTranslate();
+    }
+
+    // Добавление слушателя события на document
+    document.addEventListener('calculateMaxTranslateEvent', calculateMaxTranslateHandler);
+
+
+    // Предотвращение появления контекстного меню при долгом нажатии (для тач-устройств)
     slider.oncontextmenu = (event) => {
         event.preventDefault();
         event.stopPropagation();
         return false;
     };
-});
+}
