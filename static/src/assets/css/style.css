@@ -1665,7 +1665,7 @@ Reviev
 
 }
 
-.carousel-button button {
+.carousel-buttons button {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1699,7 +1699,7 @@ Reviev
     top: 9px;
 }
 
-.carousel-button button img {
+.carousel-buttons button img {
     width: 100%;
     height: 100%;
 }
@@ -1715,12 +1715,12 @@ Reviev
 }
 
 .product_left_path {
-    margin-top: 100px;
+     
 
 }
 
 .product_right_path {
-    margin-top: 100px;
+    
 
 }
 
@@ -1832,12 +1832,13 @@ Reviev
     }
 
     .carousel-container {
-
-        margin-top: 0px;
+margin-left:-30px;
+        margin-top: -20px;
     }
 
     .product_right_path {
         display: block;
+        margin-left:20px;
 
     }
 
@@ -1851,7 +1852,10 @@ Reviev
     }
 
     .delivery {
-
+margin-left:-300px;
+    }
+    .describe_product {
+        display: block;
     }
 }
 
@@ -1921,9 +1925,13 @@ Reviev
     }
 
     .carousel-container {
-        margin-top: 0px;
+        
+        
     }
-
+    .carousel-item{
+        width: 190px;
+        margin-top:40px;
+    }
     .product_right_path {
         display: block;
 
@@ -2187,6 +2195,7 @@ Header
     position: relative;
     right: 3px;
     top: 20px;
+    padding-bottom: 50px;
 }
 
 .carousel-buttons {
@@ -2228,10 +2237,19 @@ Header
     padding-left: 30px; /* Фиксированный отступ слева */
     padding-right: 20px; /* Фиксированный отступ справа */
 }
-
+.product_articyl{
+    position:relative;left:800px;color:#787878;
+}
+.left_block{
+    width: 50%; margin-top: 30px;
+}
 @media only screen   and (min-width: 320px) and (max-width: 760px) {
     .avability_high_block{
         display:block;
+    }
+    .left_block{
+        width: 100%; 
+        height: 100%;
     }
     .delivery_bottom{
         display: none;
@@ -2315,13 +2333,15 @@ Header
     }
 
     .delivery {
-        width: 300px;
-        height: 200px;
+        width: 320px;
+       
         position: relative;
+        background-color: white;
+        padding-bottom: 40px;
     }
 
     .left_flex_display {
-        height: 110px;
+         height: 200px;
     }
 
     .product_buttons {
@@ -2347,14 +2367,18 @@ Header
     .first_sale_block_buttons {
         display: flex;
     }
-
+    .product_articyl{
+        left:100px;
+    }
 }
 
 @media only screen   and (min-width: 768px) and (max-width: 1199px) {
     .header__search--widget {
         margin-left: 20px;
     }
-
+    .product_articyl{
+        left:300px;
+    }
     .adaptive_header_button {
         display: block;
     }
@@ -2406,6 +2430,10 @@ Header
 
     .icon-button {
         display: none;
+    }
+    .left_block{
+        width: 100%; 
+        height: 100%;
     }
 }
 
