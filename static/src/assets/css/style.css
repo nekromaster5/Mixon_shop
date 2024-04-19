@@ -2183,8 +2183,7 @@ Header
 }
 
 .delivery {
-    width: 500px;
-    height: 200px;
+    
     position: relative;
     right: 3px;
     top: 20px;
@@ -2234,7 +2233,7 @@ Header
     .avability_high_block{
         display:block;
     }
-    .delivery{
+    .delivery_bottom{
         display: none;
     }
     .avability_block{
