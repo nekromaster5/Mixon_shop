@@ -17,7 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from Mixon_shop.views import HomePage, CataloguePage, Personalpage, ProductPage, Erorpage, Brands, News, Aboutcompany, New
+from Mixon_shop.views import HomePage, CataloguePage, Personalpage, ProductPage, Erorpage, Brands, News, Aboutcompany, \
+    New, CheckoutPage, TestSlider, Test
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +30,9 @@ urlpatterns = [
     path('brands/', Brands.as_view(), name='brands'),
     path('news/', News.as_view(), name='news'),
     path('about_company/', Aboutcompany.as_view(), name='about_company'),
-    path('new/', New.as_view(), name='new')
+    path('new/', New.as_view(), name='new'),
+    path('checkout/', CheckoutPage.as_view(), name='checkout'),
+    path('slider/', TestSlider.as_view(), name='slider'),
+    path('test/', Test.as_view(), name='test'),
+
 ]

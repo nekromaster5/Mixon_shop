@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заказ</title>
+    <!-- Подключаем Bootstrap CSS -->
+    <!-- Plugin css -->
+    <link rel="stylesheet" href="{% static '/src/assets/css/vendor/bootstrap.min.css' %}">
+    <style>
+        /* Дополнительные стили */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .order-table {
+            margin-bottom: 20px;
+        }
+
+        .customer-info p {
+            margin-bottom: 5px;
+        }
+
+        .customer-info strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <!-- Таблица с заказом -->
+            <table class="table order-table">
+                <thead>
+                <tr>
+                    <th>Наименование</th>
+                    <th>Артикул</th>
+                    <th>Количество</th>
+                    <th>Цена</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Шпателька универсальная Карс 1 кг UNI</td>
+                    <td>1234567890</td>
+                    <td>1</td>
+                    <td>232.00€</td>
+                </tr>
+                <tr>
+                    <td>Шпателька универсальная Карс 1 кг UNI</td>
+                    <td>1234567890</td>
+                    <td>1</td>
+                    <td>232.00€</td>
+                </tr>
+                <tr>
+                    <td>Шпателька универсальная Карс 1 кг UNI</td>
+                    <td>1234567890</td>
+                    <td>1</td>
+                    <td>232.00€</td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- Информация о покупателе -->
+            <div class="customer-info">
+                <p><strong>Василий Иванов</strong><br>
+                    +38 098 765 43 21, example@gmail.com</p>
+                <p><strong>Доставка:</strong> Самовывоз из магазина, Одесса</p>
+                <p><strong>Оплата:</strong> Наличными в магазине</p>
+                <p><strong>Комментариев нет</strong></p>
+                <p><strong>Итого: 1 632.00€</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Подключаем Bootstrap JS (необязательно, если не используются компоненты JS) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
