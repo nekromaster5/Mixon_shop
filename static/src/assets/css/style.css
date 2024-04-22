@@ -1763,17 +1763,31 @@ Reviev
 }
 
 .description_block {
+ 
+}
+.inner_description_block{
+    margin-left:20px;
+    padding-bottom:20px ;
 
 }
-
+.inner_describe_block{
+    margin-left:20px;
+    padding-bottom:20px ;
+}
 .product_slider_button {
 
 }
-
+.availability_main
+ {
+    margin-left:20px;
+    padding-bottom:20px ;
+}
 .describe_product {
     display: flex;
 }
-
+.revier{
+    border-style: none; width: 740px;  
+}
 .review_block {
     width: 740px;
     margin-top: 10px;
@@ -1787,8 +1801,9 @@ Reviev
 
 .review_second_input_block {
     width: 740px;
-    height: 170px;
+     
     margin-top: 50px;
+    padding-bottom: 10px;
 }
 
 .review_second_input_block_form {
@@ -2211,7 +2226,9 @@ Header
 .table_cell span {
     margin-left: 40px;
 }
-
+.delivery_bottom{
+    padding-top:20px ;
+}
 .table_sphere {
     width: 20px;
     height: 20px;
@@ -2246,6 +2263,9 @@ Header
 @media only screen   and (min-width: 320px) and (max-width: 760px) {
     .avability_high_block{
         display:block;
+    }
+    .product_top_icons{
+        display: none;
     }
     .left_block{
         width: 100%; 
@@ -2368,7 +2388,7 @@ Header
         display: flex;
     }
     .product_articyl{
-        left:100px;
+        left:150px;
     }
 }
 
