@@ -44,115 +44,138 @@
                         <li class="breadcrumb__content--menu__items">
                             <a href="">Новости</a>
                         </li>
-
                     </ul>
                 </div>
-<div class="news_header"> 
-    <h2   style="margin-left:500px;font-size: 40px;">Новости</h2>
-       <div class="comparison_lists  "style="height: 150px;
-       width:1500px;
-       margin-top:20px; " >
-         
-        <button class="news_header_button" ><p>ЛКМ для Строительства</p></button>
-        <button class="news_header_button"  ><p>ЛКМ для Авторемонта</p></button>
-        <button class="news_header_button"  ><p>ЛКМ для Деревообработки</p></button>
-        <button class="news_header_button"  ><p>ЛКМ для Промышленности</p></button>
-        <button class="news_header_button"  ><p>Автохимия, автокосметика, оборудование для автомоек</p></button>
-        <button class="news_header_button"  ><p>Инструменты, аксессуары, оборудование</p></button> 
-   
-</div>
-    
- 
+                <div class="news_header">
+                    <h2 class="text-center" style="font-size: 40px;">Новости</h2>
+                    <div class="comparison_lists row">
+                        <div class="news_header_button col-lg-5 col-md-6">
+                            <button>ЛКМ для Строительства</button>
+                        </div>
+                        <div class="news_header_button col-lg-5 col-md-6">
+                            <button>ЛКМ для Авторемонта</button>
+                        </div>
+                        <div class="news_header_button col-lg-5 col-md-6">
+                            <button>ЛКМ для Деревообработки</button>
+                        </div>
+                        <div class="news_header_button col-lg-5 col-md-6">
+                            <button>ЛКМ для Промышленности</button>
+                        </div>
+                        <div class="news_header_button col-lg-5 col-md-6">
+                            <button>Автохимия, автокосметика, оборудование для автомоек</button>
+                        </div>
+                        <div class="news_header_button col-lg-5 col-md-6">
+                            <button>Инструменты, аксессуары, оборудование</button>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </section>
         <section>
             <div class="container">
-            <div class="comparison_lists col-lg-12" style="margin-right:20px;" >
-                <button style="width:370px;height:300px; margin-top:20px">
-                    <img src="{% static '/src/assets/img/icon/Group 2.png' %}">
-                    <h2 class="h3" >Как выбрать краску для стен и городов</h2>
-                </button>
-                <button style="width:370px;height:300px;margin-left:20px;margin-top:20px">
-                    <img src="{% static '/src/assets/img/icon/Group 5.png' %}">
-                    <h2 class="h3" style="width:200px;">Какой клей выбрать для дерева</h2>
-                </button>
-                <button style="width:370px;height:300px;margin-left:20px;margin-top:20px">
-                    <img src="{% static '/src/assets/img/icon/Group 8.png' %}">
-                    <h2 class="h3" style="width:200px;">Чем растворить клей   для дерева</h2>
-                </button>
-                <button style="width:370px;height:300px; margin-top:20px">
-                    <img src="{% static '/src/assets/img/icon/Group 2.png' %}">
-                    <h2 class="h3" >Как выбрать краску для стен и городов</h2>
-                </button>
-                <button style="width:370px;height:300px;margin-left:20px;margin-top:20px">
-                    <img src="{% static '/src/assets/img/icon/Group 5.png' %}">
-                    <h2 class="h3" style="width:200px;">Какой клей выбрать для дерева</h2>
-                </button>
-                <button style="width:370px;height:300px;margin-left:20px;margin-top:20px">
-                    <img src="{% static '/src/assets/img/icon/Group 8.png' %}">
-                    <h2 class="h3" style="width:200px;">Чем растворить клей   для дерева</h2>
-                </button>
-                <button style="width:370px;height:300px; margin-top:20px">
-                    <img src="{% static '/src/assets/img/icon/Group 2.png' %}">
-                    <h2 class="h3" >Как выбрать краску для стен и городов</h2>
-                </button>
-                <button style="width:370px;height:300px;margin-left:20px;margin-top:20px">
-                    <img src="{% static '/src/assets/img/icon/Group 5.png' %}">
-                    <h2 class="h3" style="width:200px;">Какой клей выбрать для дерева</h2>
-                </button>
-                <button style="width:370px;height:300px;margin-left:20px;margin-top:20px">
-                    <img src="{% static '/src/assets/img/icon/Group 8.png' %}">
-                    <h2 class="h3" style="width:200px;">Чем растворить клей   для дерева</h2>
-                </button>
-
-                 
-            </div>
-            <div class="pagination__area">
-                <div class="pagination refresh__page justify-content-center">
-                    <a href="" class="pagination justify-content-center">
-                        <img src="{% static '/src/assets/img/icon/refresh_page__red.svg' %}"
-                             alt="refresh page">
-                        <p class="invisible">a</p>Показать еще
-                    </a>
+                <div class="comparison_lists row" >
+                    <div class="news_buttons col-lg-5 col-md-6">
+                        <button>
+                            <img src="{% static '/src/assets/img/icon/Group 2.png' %}">
+                            <span class="h3">Как выбрать краску для стен и городов</span>
+                        </button>
+                    </div>
+                    <div class="news_buttons col-lg-5 col-md-6">
+                        <button>
+                            <img src="{% static '/src/assets/img/icon/Group 5.png' %}">
+                            <span class="h3" style="width:200px;">Какой клей выбрать для дерева</span>
+                        </button>
+                    </div>
+                    <div class="news_buttons col-lg-5 col-md-6">
+                        <button>
+                            <img src="{% static '/src/assets/img/icon/Group 8.png' %}">
+                            <span class="h3" style="width:200px;">Чем растворить клей для дерева</span>
+                        </button>
+                    </div>
+                    <div class="news_buttons col-lg-5 col-md-6">
+                        <button>
+                            <img src="{% static '/src/assets/img/icon/Group 2.png' %}">
+                            <span class="h3">Как выбрать краску для стен и городов</span>
+                        </button>
+                    </div>
+                    <div class="news_buttons col-lg-5 col-md-6">
+                        <button>
+                            <img src="{% static '/src/assets/img/icon/Group 5.png' %}">
+                            <span class="h3" style="width:200px;">Какой клей выбрать для дерева</span>
+                        </button>
+                    </div>
+                    <div class="news_buttons col-lg-5 col-md-6">
+                        <button>
+                            <img src="{% static '/src/assets/img/icon/Group 8.png' %}">
+                            <span class="h3" style="width:200px;">Чем растворить клей для дерева</span>
+                        </button>
+                    </div>
+                    <div class="news_buttons col-lg-5 col-md-6">
+                        <button>
+                            <img src="{% static '/src/assets/img/icon/Group 2.png' %}">
+                            <span class="h3">Как выбрать краску для стен и городов</span>
+                        </button>
+                    </div>
+                    <div class="news_buttons col-lg-5 col-md-6">
+                        <button>
+                            <img src="{% static '/src/assets/img/icon/Group 5.png' %}">
+                            <span class="h3" style="width:200px;">Какой клей выбрать для дерева</span>
+                        </button>
+                    </div>
+                    <div class="news_buttons col-lg-5 col-md-6">
+                        <button>
+                            <img src="{% static '/src/assets/img/icon/Group 8.png' %}">
+                            <span class="h3" style="width:200px;">Чем растворить клей для дерева</span>
+                        </button>
+                    </div>
                 </div>
+                <div class="pagination__area">
+                    <div class="pagination refresh__page justify-content-center">
+                        <a href="" class="pagination justify-content-center">
+                            <img src="{% static '/src/assets/img/icon/refresh_page__red.svg' %}"
+                                 alt="refresh page">
+                            <p class="invisible">a</p>Показать еще
+                        </a>
+                    </div>
 
-                <nav class="pagination justify-content-center">
-                    <ul class="pagination__wrapper d-flex align-items-center justify-content-center">
-                        <li class="pagination__list">
-                            <a href="" class="pagination__item--arrow  link ">
-                                <img src="{% static '/src/assets/img/icon/left_arrow.svg' %}"
-                                     alt="left arrow">
-                            </a>
-                        </li>
-                        <li class="pagination__list"><span
-                                class="pagination__item pagination__item--current">1</span></li>
-                        <li class="pagination__list">
-                            <a href="" class="pagination__item link">2</a>
-                        </li>
-                        <li class="pagination__list">
-                            <a href="" class="pagination__item link">3</a>
-                        </li>
-                        <li class="pagination__list">
-                            <a href="" class="pagination__item link">4</a>
-                        </li>
-                        <li class="pagination__list">
-                            <a href="" class="pagination__item link no-hover no-cursor_change">...</a>
-                        </li>
-                        <li class="pagination__list">
-                            <a href="" class="pagination__item link">8</a>
-                        </li>
-                        <li class="pagination__list">
-                            <a href="" class="pagination__item--arrow  link ">
-                                <img src="{% static '/src/assets/img/icon/right_arrow.svg' %}"
-                                     alt="right arrow">
-                            </a>
-                        </li>
-                        <li>
-                        </li>
-                    </ul>
-                </nav>
+                    <nav class="pagination justify-content-center">
+                        <ul class="pagination__wrapper d-flex align-items-center justify-content-center">
+                            <li class="pagination__list">
+                                <a href="" class="pagination__item--arrow  link ">
+                                    <img src="{% static '/src/assets/img/icon/left_arrow.svg' %}"
+                                         alt="left arrow">
+                                </a>
+                            </li>
+                            <li class="pagination__list"><span
+                                    class="pagination__item pagination__item--current">1</span></li>
+                            <li class="pagination__list">
+                                <a href="" class="pagination__item link">2</a>
+                            </li>
+                            <li class="pagination__list">
+                                <a href="" class="pagination__item link">3</a>
+                            </li>
+                            <li class="pagination__list">
+                                <a href="" class="pagination__item link">4</a>
+                            </li>
+                            <li class="pagination__list">
+                                <a href="" class="pagination__item link no-hover no-cursor_change">...</a>
+                            </li>
+                            <li class="pagination__list">
+                                <a href="" class="pagination__item link">8</a>
+                            </li>
+                            <li class="pagination__list">
+                                <a href="" class="pagination__item--arrow  link ">
+                                    <img src="{% static '/src/assets/img/icon/right_arrow.svg' %}"
+                                         alt="right arrow">
+                                </a>
+                            </li>
+                            <li>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
-        </div>
         </section>
     </main>
     <footer>{% include "footer.html" %}</footer>
