@@ -1730,15 +1730,7 @@ Reviev
     margin-left: 240px;
 }
 
-.product_left_path {
-
-
-}
-
-.product_right_path {
-
-
-}
+ 
 
 .product_description_high_block {
     display: flex;
@@ -1802,10 +1794,10 @@ Reviev
     display: flex;
 }
 .revier{
-    border-style: none; width: 740px;
+    border-style: none;  
 }
 .review_block {
-    width: 740px;
+   
     margin-top: 10px;
 
 }
@@ -1847,7 +1839,17 @@ Reviev
 
     .product_left_path {
         display: block;
+        margin-top: 70px;
     }
+    .product_right_path {
+        display: block;
+        margin-top: 70px;
+        margin-left:30px;
+    }
+.carousel-item{
+    margin-top: -20px;
+}
+     
 
     .first_sale_block_buttons {
         margin-left: 100px;
@@ -1869,11 +1871,7 @@ Reviev
         margin-top: -20px;
     }
 
-    .product_right_path {
-        display: block;
-        margin-left: 20px;
-
-    }
+     
 
     .product_buttons {
         display: flex;
@@ -1905,7 +1903,7 @@ Reviev
     .review_second_input_block_form {
         display: block;
         width: 287px;
-        height: 120px;
+       
         border-radius: 5px;
         padding-top: 20px;
     }
@@ -1916,7 +1914,7 @@ Reviev
 
     .review_second_input_block {
         width: 290px;
-        height: 120px;
+       
         margin-top: 30px;
     }
 
@@ -1944,9 +1942,7 @@ Reviev
         width: 250px;
     }
 
-    .product_buttons {
-        display: flex;
-    }
+    
 
     .product_left_path {
         display: block;
@@ -1970,12 +1966,15 @@ Reviev
 
     .product_right_path {
         display: block;
+        margin-top:60px;
+        margin-left:-30px;
 
     }
 
     .product_buttons {
         display: flex;
         gap: 5px; /* Расстояние между кнопками */
+         
 
 
     }
@@ -2044,6 +2043,8 @@ Header
 .menu-panel__button_text {
     font-family: Montserrat;
     color: #787878;
+    font-size: 14px; /* или любой другой размер, который вам подходит */
+
 }
 
 .menu-panel__button_text:hover {
@@ -2074,10 +2075,11 @@ Header
 }
 
 .header__menu-panel {
-    width: 550px;
+    width: 600px;
+
 
 }
-
+ 
 .path_panel {
     display: flex;
 
@@ -2277,16 +2279,30 @@ Header
 }
 
 .product_articyl {
-    position: relative;
-    left: 800px;
+     
+    margin-left: 700px;
     color: #787878;
 }
-
+.product_top_icon_left{
+    display: flex;
+}
+ 
+.product_top_icon_right{
+    display: flex;
+    margin-left:10px;
+}
+ 
 .left_block {
     width: 50%;
     margin-top: 30px;
 }
-
+.product_top_icons{
+    display: flex;
+   
+}
+.product_top_stars{
+     align-items: flex-start; gap: 9px; display: inline-flex;
+}
 @media only screen   and (min-width: 320px) and (max-width: 760px) {
     .avability_high_block {
         display: block;
@@ -2395,16 +2411,19 @@ Header
         height: 200px;
     }
 
-    .product_buttons {
-        margin-left: -5px;
-    }
-
+     
+.product_top_stars{
+    display: none;
+}
     .product_right_path {
-        margin-top: 50px;
+       
+        
     }
-
+.carousel-item{
+     margin-right:10px;
+}
     .product_left_path {
-        margin-top: 50px;
+        margin-top: 60px;
     }
 
     .delivery_img {
@@ -2419,7 +2438,7 @@ Header
         display: flex;
     }
     .product_articyl{
-        left:150px;
+        margin-left:100px;
     }
 }
 
@@ -2427,9 +2446,16 @@ Header
     .header__search--widget {
         margin-left: 20px;
     }
-
+    .product_top_icons{
+        margin-left: 60px;
+    }
+    .product_top_icon_right{
+       
+        margin-left:20px;
+    }
+     
     .product_articyl {
-        left: 300px;
+        margin-left: 300px;
     }
 
     .adaptive_header_button {
@@ -6277,6 +6303,11 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 /*About company*/
+.about_company_button{
+    height:190px;
+    width: 370px;
+    margin-left:20px;margin-top:20px
+}
 .adaptive-slider-container {
     overflow: hidden;
     white-space: nowrap;
@@ -6305,7 +6336,11 @@ input[type=number]::-webkit-outer-spin-button {
     .about_company_brend_buttons {
 
     }
-
+    .about_company_button{
+        height:190px;
+        width: 330px;
+      
+    }
 }
 
 .about_company_img_block {
@@ -6327,6 +6362,7 @@ input[type=number]::-webkit-outer-spin-button {
 .about_company_Heading {
     margin-left: 400px;
     font-size: 40px;
+    line-height: 50px;
 }
 
 .about_company_Heading_non {
@@ -6357,6 +6393,8 @@ input[type=number]::-webkit-outer-spin-button {
 
     .about_company_Heading {
         margin-left: 0px;
+        font-size: 20px;
+        padding-bottom: 20px;
     }
 
     .img_ab_block {
@@ -6366,7 +6404,11 @@ input[type=number]::-webkit-outer-spin-button {
     .about_company_Heading_non {
         display: none;
     }
-
+    .about_company_button{
+   height: auto;
+        width: 235px;
+      
+    }
     .block_about_company {
 
         flex-direction: column;
@@ -6400,13 +6442,43 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 /*news*/
+.news_header_button{
+    width: 370px; 
+    margin-right: 20px; 
+    margin-bottom: 20px;
+}
+.comparison_lists {
+    height: 150px;
+    width:1500px;
+    margin-top:20px;
+}
 @media only screen   and (min-width: 320px) and (max-width: 760px) {
     .news_header {
         display: none;
     }
+    .news_header_button{
+        width: 370px; 
+        margin-right: 20px; 
+        margin-bottom: 20px;
+    }
+}
+@media only screen   and (min-width: 768px) and (max-width: 992px)  {
+     
 
     .button_array {
         display: none;
+    }
+    .about_company_Heading {
+        margin-left: 170px;
+        font-size: 40px;
+    }
+    .news_header {
+        display: block;
+    }
+    .news_header_button{
+        width: 370px; 
+        margin-right: 20px; 
+        margin-bottom: 20px;
     }
 }
 
@@ -8340,4 +8412,21 @@ details > summary::-webkit-details-marker {
     font-weight: 500;
     font-size: 1.6rem;
     line-height: 2rem;
+}
+/* Brands page */
+.brands_main_block{
+    margin-top:30px;
+}
+.brands_cell{
+    width:170px;height:63px;margin-right:20px;
+}
+.brands_line{
+    display:flex;
+    margin-top:20px;
+}
+@media only screen   and (min-width: 320px) and (max-width: 760px) {
+    .brands_line{
+        display:block;
+        margin-top:0px;
+    }
 }
