@@ -28,7 +28,7 @@
 </head>
 <body>
 <div class="body__wrapper">
-    {#    <header>{% include "header.html" %}</header>#}
+    <header>{% include "header.html" %}</header>
     <main class="main__content_wrapper">
         <section class="breadcrumb__section breadcrumb__bg">
             <div class="container">
@@ -48,7 +48,7 @@
         <section class="checkout__page--area section--padding">
             <div class="container">
                 <div class="row" style="overflow: hidden;">
-                    <div class="col-lg-11 ps-0 pe-4 position-relative">
+                    <div class="col-lg-15 ps-0 pe-4 position-relative">
                         <div class="section__header">
                             <h2 id="cart--title" class="cart__section__header--title h3">Корзина</h2>
                         </div>
@@ -210,7 +210,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="col-lg-10 p-0 px-md-4">
+                    <div class="col-lg-14 p-0 px-md-4">
                         <aside class="checkout__sidebar sidebar d-block d-md-flex d-lg-block">
                             <div class="checkout__order col-md-6 col-lg-12">
                                 <h2 class="checkout__order--summary__title mb-3 mb-md-7 mb-lg-5">Итого</h2>
@@ -257,7 +257,7 @@
                             оформление
                         </button>
                     </div>
-                    <div class="section--shipping__address col-lg-11 pe-4">
+                    <div class="section--shipping__address col-lg-15 pe-4">
                         <div class="section--shipping__address--content">
                             <div class="shipping__info row position-relative width-100">
                                 <div class="col-13">
@@ -351,7 +351,7 @@
                                             </div>
                                         </div>
                                         <div class="slider-container mt-5">
-                                            <div class="shipment--types__list slider d-flex mb-5">
+                                            <div class="shipment--types__list shipment slider d-flex mb-5">
                                                 <button id="pickup" class="slide shipment__page--list--item shipping">
                                                     <div class="shipment__method--type__thumbnail">
                                                         <svg width="39" height="37" viewBox="0 0 39 37"
@@ -646,7 +646,7 @@
                                     <div id="payment--items__large" class="checkout--shipping__information"
                                          style="display: none;">
                                         <div id="payment--slider" class="slider-container mt-5">
-                                            <div class="shipment--types__list slider payment mb-5">
+                                            <div class="shipment--types__list payment slider mb-5">
                                                 <button id="cod" class="slide shipment__page--list--item payment">
                                                     <h4 class="shipment__method--type__description payment">Наложеный
                                                         платеж при
@@ -739,8 +739,9 @@
                                             <tr>
                                                 <th>Наименование</th>
                                                 <th>Артикул</th>
-                                                <th class="text-center">Количество</th>
-                                                <th class="text-center">Цена</th>
+                                                <th class="confirm__order--head--amount__full">Количество</th>
+                                                <th class="confirm__order--head--amount__short">Кол&#8209;во</th>
+                                                <th>Цена</th>
                                             </tr>
                                             </thead>
                                             <tbody class="confirm__order--body">
@@ -813,7 +814,6 @@
     // Получаем ссылку на элемент с id payment--slider
     const paymentSliderContainer = document.getElementById('payment--slider');
     const paymentSlider = paymentSliderContainer.querySelector('.slider');
-    let listeners
 
     // Функция для проверки размера экрана и скрытия/отображения элемента
     function toggleSliderContainer(sliderContainer, slider) {
