@@ -6765,6 +6765,8 @@ input[type=number]::-webkit-outer-spin-button {
 /*news*/
 .news_header_button {
     padding: 2rem 3rem 2rem 0;
+    border: none;
+    background-color: transparent;
 }
 
 .comparison_lists {
@@ -9046,4 +9048,96 @@ details > summary::-webkit-details-marker {
     border:none;
      width:170px;
     height:63px;
+    margin-left:10px;
+    margin-right: 10px;
+    background-color: #FFFFFF;
+}
+.brends{
+    display: flex;
+}
+.high_main_block{
+    display: flex;
+}
+.main_high_buttons{
+    display: block;
+     
+}
+.main_image{
+    margin-left:28px;
+    padding-bottom: 20px;
+}
+.main_image_buttons{
+    display: none;
+}
+.brend_main_button_img{
+    
+   margin-left:30px;
+}
+.main_image_img{
+
+}
+@media only screen   and (min-width: 768px) and (max-width: 1199px){
+    .main_high_buttons{
+        display: none;
+         
+    }
+    .main_image_img{
+        width:    768px;
+        height: 368px;
+    }
+    .main_image_buttons{
+        display: flex;
+        padding-bottom: 10px;
+        padding-top: 5px;
+        margin-left:170px;
+    }
+    .main_image_button{
+        height: 1px;
+        width: 30px;
+        margin-left: 10px;
+        margin-right: 10px;
+        border:none;
+    }
+    .main_image{
+         margin-left: 0px;
+        padding-bottom: 10px;
+      
+        
+    }
+    .brend_main_button{
+         
+         width:112px;
+        height:41px;
+        margin-left:5px;
+        margin-right: 5px;
+    }
+    .brend_main_button_img{
+    
+        margin-left:10px;
+        width: 65px;
+        height: 25px;
+     }
+}
+@media only screen   and (min-width: 320px) and (max-width: 760px){
+    .main_high_buttons{
+        display: none;
+         
+    }
+    .main_image_buttons{
+        display: flex;
+        padding-bottom: 10px;
+        padding-top: 5px;
+        margin-left:100px;
+    }
+    .main_image_button{
+        height: 1px;
+        width: 18px;
+        margin-left: 5px;
+        margin-right: 5px;
+        border:none;
+    }
+    .main_image_img{
+        width: 320px;
+        height: 153px;
+    }
 }

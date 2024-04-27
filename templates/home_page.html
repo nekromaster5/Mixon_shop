@@ -40,7 +40,9 @@
                 <link rel="import" href="publuic/header.html">
 
                 <div id="app"></div>
-                <div class="vertical-block" style="position:relative;margin-left:15px; px;height:550px; ">
+                <div class="vertical-block" style="  ">
+                    <div class="high_main_block">
+                        <div class="main_high_buttons">
                     <div class="item" style="position:relative;top:20px;left:15px;" onclick="handleItemClick('Item 1')"  >
                         <img style="position:absolute;margin-top:3px;left:-30px;" src="{% static '/src/assets/img/icon/akciya 1.svg' %}">
                         <p style="font-family:Montserrat;color:red;font-weight: 500;">Акции</p>
@@ -71,34 +73,40 @@
                         <img style="position:absolute;margin-top:px;left:-30px;"src="{% static '/src/assets/img/icon/instrument 1.svg' %}">
                         <p style="font-family:Montserrat; font-weight: 500;">Инструменты, аксесуары,<br> оборудование</p>
                     </div>
-                    <!-- Add more items as needed -->
                 </div>
+                    <!-- Add more items as needed -->
+                
 
                  
                 <!-- Добавьте другие элементы по аналогии -->
-                <div style="position:relative;top:-550px;left:300px;">
-                <img style="position:realtive;  "src="{% static '/src/assets/img/icon/slaider 2.png' %}">
-                <div style="position:realtive; width:190px;height:5px;margin-left:400px;margin-top:20px; ">
-                     
+                <div class="main_image"style=" ">
+                <img class="main_image_img"src="{% static '/src/assets/img/icon/slaider 2.png' %}">
+                 <div class="main_image_buttons">
+                    <button class="main_image_button"></button>
+                    <button class="main_image_button "></button>
+                    <button class="main_image_button "></button>
+                    <button class="main_image_button"></button>
+                    <button class="main_image_button"></button>
+                 </div>
                 </div>
-                </div>
+            </div>
                  
                 <!-- Блок с кнопками "brends" -->
-                <div class="brends" style="position:relative;top:-450px;">
+                <div class="brends" style=" ">
                     <button class="brend_main_button"style="  "> 
-                    <img style="position:realtive;left:px;margin-left:20px;"src="{% static '/src/assets/img/icon/logo-mixon.png' %}">
+                    <img  class="brend_main_button_img" src="{% static '/src/assets/img/icon/logo-mixon.png' %}">
                 </button>
                     <button class="brend_main_button" style=" ">
-                <img style="position:realtive;left:px;margin-left:20px;"src="{% static '/src/assets/img/icon/Path 82.png' %}">
+                <img class="brend_main_button_img" src="{% static '/src/assets/img/icon/Path 82.png' %}">
                     </button>
                     <button class="brend_main_button" style=" "> 
-                        <img style="position:realtive;left:px;margin-left:20px;"src="{% static '/src/assets/img/icon/Logo_1.png' %}">
+                        <img class="brend_main_button_img" src="{% static '/src/assets/img/icon/Logo_1.png' %}">
                     </button>
                     <button class="brend_main_button" style=" "> 
-                        <img style="position:realtive;left:px;margin-left:20px;"src="{% static '/src/assets/img/icon/Logo_2.png' %}">
+                        <img class="brend_main_button_img" src="{% static '/src/assets/img/icon/Logo_2.png' %}">
                     </button>
                     <button class="brend_main_button" style=""> 
-                    <img style="position:realtive;left:px;margin-left:20px;"src="{% static '/src/assets/img/icon/logo-prodyver.png' %}">
+                    <img class="brend_main_button_img" src="{% static '/src/assets/img/icon/logo-prodyver.png' %}">
                     </button>
                     <button class="brend_main_button" style="">Все бренды >></button>
                 </div>
