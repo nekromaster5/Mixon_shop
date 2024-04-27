@@ -9041,3 +9041,9 @@ details > summary::-webkit-details-marker {
     }
 }
 
+/* Main page */
+.brend_main_button{
+    border:none;
+     width:170px;
+    height:63px;
+}
