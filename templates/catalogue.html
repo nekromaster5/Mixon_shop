@@ -32,8 +32,8 @@
     <main class="main__content_wrapper">
         <section class="breadcrumb__section breadcrumb__bg">
             <div class="container">
-                <div class="breadcrumb__content text-center">
-                    <ul class="breadcrumb__content--menu d-flex">
+                <div class="breadcrumb__content text-center slider-container">
+                    <ul class="breadcrumb__content--menu d-flex slider">
                         <li class="breadcrumb__content--menu__items">
                             <a href="">Главная</a>
                         </li>
@@ -50,9 +50,9 @@
         </section>
         <section class="product__section section--padding pt-0 bg__off_white">
             <div class="container">
-                <div class="row product__list">
-                    <div class="row col-lg-6" style="padding-right: 0; margin-right: -2px">
-                        <div class="shop__sidebar--widget widget__area d-none d-lg-block">
+                <div class="row product__list br-row_1">
+                    <div class="shop__sidebar--widget__wrapper row col-lg-6 col-md-18 px-0">
+                        <div class="shop__sidebar--widget widget__area px-0">
                             <div class="single__widget widget__bg">
                                 <div class="d-flex widget__title">
                                     <img src="{% static '/src/assets/img/icon/down_arrow.svg' %}" alt="down arrow">
@@ -119,25 +119,19 @@
                                 <form class="price__filter--form" action="#">
                                     <div class="price__filter--form__inner mb-15 d-flex align-items-center">
                                         <div class="price__filter--group">
-
                                             <div class="price__filter--input border-radius-5 d-flex align-items-center">
                                                 <input class="price__filter--input__field border-0"
                                                        name="filter.v.price.gte" id="Filter-Price-GTE2" type="number"
                                                        placeholder="0" min="0" max="5000">
                                             </div>
                                         </div>
-                                        <div class="price__divider">
-
-                                        </div>
                                         <div class="price__filter--group">
-
                                             <div class="price__filter--input border-radius-5 d-flex align-items-center">
                                                 <input class="price__filter--input__field border-0"
                                                        name="filter.v.price.lte" id="Filter-Price-LTE2" type="number"
                                                        min="0" placeholder="500" max="5000">
                                             </div>
                                         </div>
-                                        <div class="invisible">as</div>
                                         <button class="price__filter--group primary__btn price__filter--btn border-radius-5"
                                                 type="submit">
                                             ОК
@@ -222,9 +216,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row col-lg-13">
+                    <div class="row col-lg-13 col-md-19 px-lg-6 px-md-6 px-8">
                         {% for i in 'abcdefghklmn'|make_list %}
-                            <div class="col-lg-5 mb-6">
+                            <div class="col-lg-5 col-6 px-lg-6 px-md-6 px-8 mb-6">
                                 {% include "product_block.html" %}
                             </div>
                         {% endfor %}
@@ -282,4 +276,29 @@
     <footer>{% include "footer.html" %}</footer>
 </div>
 </body>
+<script src="{% static '/src/assets/js/slider.js' %}"></script>
+<script>
+    function dispatchMaxTranslateEvent() {
+        const event = new Event('calculateMaxTranslateEvent');
+        document.dispatchEvent(event);
+    }
+
+    function setBreadcrumbWidth() {
+        const breadcrumbItems = document.querySelectorAll('.breadcrumb__content--menu__items');
+        let totalWidth = 0;
+
+        breadcrumbItems.forEach(function (item) {
+            const style = getComputedStyle(item);
+            totalWidth += item.offsetWidth + parseInt(style.marginLeft) + parseInt(style.marginRight);
+        });
+
+        const breadcrumb = document.querySelector('.breadcrumb__content--menu');
+        breadcrumb.style.width = totalWidth + 'px';
+        dispatchMaxTranslateEvent();
+    }
+
+    window.addEventListener('load', setBreadcrumbWidth);
+    window.addEventListener('resize', setBreadcrumbWidth);
+
+</script>
 </html>
