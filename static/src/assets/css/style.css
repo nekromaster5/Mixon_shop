@@ -2446,12 +2446,23 @@ Header
 /*        padding-right: 0;*/
 /*    }*/
 /*}*/
+.avability_block {
+    display: flex;
 
+}
+.avability_label_mobile{
+    display: none;
+}
 @media only screen   and (min-width: 320px) and (max-width: 760px) {
     .availability_high_block {
         display: block;
     }
-
+    .avability_label_mobile{
+        display: block;
+    }
+    .avability_label_main{
+        display: none;
+    }
     .product_top_icons {
         display: none;
     }
@@ -2582,13 +2593,30 @@ Header
     .first_sale_block_buttons {
         display: flex;
     }
+    .avability_button{
+        width: 272px;
+        height: 42px;
+    }
+    .avability_title{
+        display: none;
+    }
+    .left_avability_block{
+        padding-left:0px ;
+    }
 }
-
+.left_avability_block{
+    padding-left:20px ;
+}
+.availability_high_block{
+    padding-top: 10px;
+}
 @media only screen   and (min-width: 768px) and (max-width: 1199px) {
     .header__search--widget {
         margin-left: 20px;
     }
-
+    .left_avability_block{
+        padding-left:0px ;
+    }
     .product_top_icon_right {
 
         margin-left: 20px;
@@ -2597,7 +2625,12 @@ Header
     .adaptive_header_button {
         display: block;
     }
-
+    .avability_label_mobile{
+        display: block;
+    }
+    .avability_label_main{
+        display: none;
+    }
     .categories__menu_img {
         width: 23px;
     }
@@ -6403,6 +6436,10 @@ input[type=number]::-webkit-outer-spin-button {
 .menu_button {
     display: none;
     background-color: red;
+    width: 271px;
+    height: 40px;
+    border:none;
+    border-radius: 10px;
 }
 
 .order_history_artikyl {
@@ -6437,7 +6474,7 @@ input[type=number]::-webkit-outer-spin-button {
     .vidget_block_cabinet {
         display: none;
     }
-
+ 
     .column_order_history_quantity {
         margin-left: 60px;
     }
@@ -6462,6 +6499,7 @@ input[type=number]::-webkit-outer-spin-button {
 
     .menu_button {
         display: block;
+        margin-left:200px;
     }
 
 }
@@ -6533,7 +6571,10 @@ input[type=number]::-webkit-outer-spin-button {
 @media only screen   and (min-width: 320px) and (max-width: 760px) {
     .rev_div {
     }
-
+.menu_button{
+    display: block;
+    margin-left:50px;
+}
     th, td {
         font-size: 12px; /* Уменьшенный размер шрифта на мобильных устройствах */
     }
@@ -9139,5 +9180,19 @@ details > summary::-webkit-details-marker {
     .main_image_img{
         width: 450px;
         height: 153px;
+    }
+}
+/* News page */
+.new_panel{
+    display: inline-block;   width: 300px; overflow: hidden; word-wrap: break-word;
+}
+@media only screen   and (min-width: 320px) and (max-width: 760px){
+    .new_panel{
+        display: none;
+    }
+}
+@media only screen   and (min-width: 768px) and (max-width: 1199px){
+    .new_panel{
+        display: none;
     }
 }
