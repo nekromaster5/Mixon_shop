@@ -485,7 +485,7 @@ hr {
 }
 
 .br-row_1 {
-    margin-left: -4px !important;
+    margin-left: 0 !important;
     margin-right: -6px !important;
 }
 
@@ -1777,8 +1777,8 @@ Reviev
 }
 
 .product_reviev_stars {
-    
-     
+
+
     display: flex;
 }
 
@@ -2428,10 +2428,12 @@ Header
     background-color: red;
     margin-top: 20px;
 }
-.review_high_star{
+
+.review_high_star {
     padding-left: 5px;
 }
-.review_high_stars{
+
+.review_high_stars {
     display: flex;
     justify-content: space-between;
     margin-left: 20px;
@@ -4957,6 +4959,11 @@ input[type=number]::-webkit-outer-spin-button {
         flex: 0 0 auto;
         width: 28.5%;
     }
+
+    .col-md-22 {
+        flex: 0 0 auto;
+        width: 17%;
+    }
 }
 
 
@@ -6524,17 +6531,21 @@ input[type=number]::-webkit-outer-spin-button {
 .Cabinet_Heading_area {
 
 }
-.orders_history{
+
+.orders_history {
     background-color: #FFFFFF;
 }
-.my_review{
+
+.my_review {
     background-color: #FFFFFF;
 
 }
-.contact_information{
+
+.contact_information {
     background-color: #FFFFFF;
 
 }
+
 .personal_name {
     color: red;
     margin-top: 5px; /* Добавьте необходимый верхний отступ для разделения от h3 */
@@ -6907,13 +6918,20 @@ input[type=number]::-webkit-outer-spin-button {
     flex-wrap: wrap;
 }
 
-.brand_buttons.about_company {
+.brand_buttons-wrapper {
     margin-top: 2.5rem;
-    margin-left: -3rem;
+    margin-left: -1.5rem;
+}
+
+@media only screen and (max-width: 992px) {
+    .brand_buttons-wrapper {
+        margin-left: -3rem;
+        margin-right: -1.5rem;
+    }
 }
 
 @media only screen and (min-width: 992px) {
-    .brand_buttons.about_company {
+    .brand_buttons-wrapper.about_company {
         margin-right: -1.5rem;
     }
 }
@@ -6928,14 +6946,36 @@ input[type=number]::-webkit-outer-spin-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem 2.5rem;
     background: var(--bg-white-color);
     border: none;
     border-radius: 1px;
+    padding: 1rem 2.5rem;
+}
+
+@media only screen and (max-width: 992px) {
+    .brand_buttons-inner {
+        padding: 1rem 2rem;
+    }
+}
+
+.brand_buttons-inner.about_company {
+    padding: 1rem 2.5rem;
+}
+
+@media only screen and (max-width: 992px) {
+    .brand_buttons-inner span {
+
+    }
+}
+
+.brand_buttons-inner.about_company span {
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 2rem;
 }
 
 @media only screen and (max-width: 540px) {
-    .brand_buttons.about_company {
+    .brand_buttons-wrapper.about_company {
         display: none;
     }
 
