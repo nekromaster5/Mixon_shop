@@ -6511,7 +6511,17 @@ input[type=number]::-webkit-outer-spin-button {
 .Cabinet_Heading_area {
 
 }
+.orders_history{
+    background-color: #FFFFFF;
+}
+.my_review{
+    background-color: #FFFFFF;
 
+}
+.contact_information{
+    background-color: #FFFFFF;
+
+}
 .personal_name {
     color: red;
     margin-top: 5px; /* Добавьте необходимый верхний отступ для разделения от h3 */
