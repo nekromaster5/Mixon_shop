@@ -71,7 +71,9 @@ body {
     font-size: 62.5%;
     padding: 0;
 }
-
+.header__bottom{
+    transition: 0.3s;
+}
 body {
     font-family: var(--montserrat-fonts);
     font-size: var(--body-font-size, 1.5rem);
@@ -88,7 +90,15 @@ body {
 footer {
 
 }
+.icon-button_n{
 
+}
+.icon-button_n:active svg path {
+    fill: red;
+}
+.icon-button:active svg path {
+    fill: red;
+}
 .body__wrapper {
     min-height: 100%;
     display: flex;
@@ -2773,6 +2783,9 @@ Header
 
     .icon-button {
         display: none;
+    }
+    .icon-button:hover {
+        color: var(--on_hover-color);
     }
 
     .left_block {
@@ -6990,6 +7003,8 @@ input[type=number]::-webkit-outer-spin-button {
     border: none;
     background-color: #FFFFFF;
     box-shadow: 0 4px 5px 4px rgba(0, 0, 0, 0.25);
+    height: 300px;
+    width: 370px;
 }
 
 .big_news_buttons.topic-side {
@@ -7028,6 +7043,20 @@ input[type=number]::-webkit-outer-spin-button {
     border: none;
     background-color: transparent;
     display: flex;
+    
+font-family: Montserrat;
+font-size: 22px;
+font-weight: 500;
+ 
+text-align: left;
+}
+.news_text{
+    
+font-family: Montserrat;
+font-size: 20px;
+font-weight: 500;
+ 
+text-align: left;
 }
 
 .comparison_lists {
@@ -7040,6 +7069,11 @@ input[type=number]::-webkit-outer-spin-button {
     .news_header {
         display: none;
     }
+    .big_news_buttons {
+        
+        height: 243px;
+        width: 300px;
+    }
 }
 
 @media only screen   and (min-width: 768px) and (max-width: 992px) {
@@ -7048,7 +7082,11 @@ input[type=number]::-webkit-outer-spin-button {
     .button_array {
         display: none;
     }
-
+    .big_news_buttons {
+        
+        height: 274px;
+        width: 337px;
+    }
     .about_company_Heading {
         margin-left: 170px;
         font-size: 40px;
@@ -9435,8 +9473,25 @@ details > summary::-webkit-details-marker {
     .new_panel {
         display: none;
     }
+    .topic_text{
+        
+        font-family: Montserrat;
+        font-size: 12px;
+        font-weight: 400;
+       
+       
+        text-align: left;
+        }
 }
-
+.topic_text{
+font-family: Montserrat;
+font-size: 16px;
+font-weight: 400;
+text-align: left;
+}
+.subtopic-title{
+    padding-top:40px ;
+}
 .topic-wrapper {
     display: flex;
     flex-direction: row;
