@@ -2418,7 +2418,9 @@ Header
     top: 20px;
     padding-bottom: 50px;
 }
-
+.checkout__input--select__field.product_field{
+margin-left:10px;
+}
 .carousel-buttons {
     margin-left: 40px;
 }
@@ -2445,6 +2447,7 @@ Header
 
 .delivery_bottom {
     padding-top: 20px;
+    background-color: transparent;
 }
 
 @media only screen and (max-width: 992px) {
@@ -2706,6 +2709,7 @@ Header
 
 .left_avability_block {
     padding-left: 20px;
+    height: 50px;
 }
 
 .availability_high_block {
@@ -5665,7 +5669,10 @@ input[type=number]::-webkit-outer-spin-button {
     background: var(--secondary-color);
     border-radius: 0.5rem;
 }
-
+.buy__btn.big-button{
+    width:170px;
+    height: 40px;
+}
 .buy__btn:hover {
     color: var(--bg-white-color);
     background: var(--grey-color);
@@ -5692,7 +5699,11 @@ input[type=number]::-webkit-outer-spin-button {
     background: var(--body-background-color);
     border-radius: 0.2rem;
 }
-
+ 
+.cheaper--button.main_cheaper{
+    margin-top: -20px;
+    width: 20rem;
+}
 .cheaper--button:hover {
     background: var(--dark_grey-color);
     color: var(--text-white-color);
@@ -5720,6 +5731,7 @@ input[type=number]::-webkit-outer-spin-button {
 .quick__order--button {
     transition: all 0.3s 0s !important;
     display: none;
+    border-radius: 3px;
     width: 20rem;
     border: 1px solid rgb(255, 0, 0);
     background-color: var(--bg-white-color);
@@ -9335,6 +9347,10 @@ details > summary::-webkit-details-marker {
     .view__all--link:hover {
         display: none;
     }
+    .about_product_table{
+     
+        width: 750px;
+    }
 }
 
 .characteristics__content {
@@ -9346,6 +9362,7 @@ details > summary::-webkit-details-marker {
     .characteristics__content {
         padding-bottom: 3rem;
     }
+     
 }
 
 .characteristic-title {
@@ -9361,10 +9378,20 @@ details > summary::-webkit-details-marker {
 .characteristics__content--table {
     margin-left: 3rem;
 }
+ .about_product_table{
+     
+    width: 1240px;
+    background-color:#FFFFFF;
+}
+ 
 
 @media only screen and (max-width: 540px) {
     .characteristics__content--table {
         margin-left: 2rem;
+    }
+    .about_product_table{
+     
+        width: 320px;
     }
 }
 
