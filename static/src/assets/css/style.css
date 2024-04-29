@@ -1741,8 +1741,8 @@ Reviev
 }
 
 .product_reviev_stars {
-    margin-top: -25px;
-    margin-left: 500px;
+    
+     
     display: flex;
 }
 
@@ -6907,8 +6907,8 @@ width: 250px;
 
 .comparison_lists {
     margin-top: 20px;
-    padding-right: -1.5rem;
-    padding-top: -1.5rem;
+    margin-right: -1.5rem;
+    margin-left: -1.5rem;
 }
 
 @media only screen   and (min-width: 320px) and (max-width: 760px) {
@@ -9105,8 +9105,8 @@ details > summary::-webkit-details-marker {
 
 .news_buttons {
     padding-right: 1.5rem;
-    padding-top: 1.5rem;
-    padding-left: 0;
+    padding-top: 3rem;
+    padding-left: 1.5rem;
 }
 
 .view__all--link {
