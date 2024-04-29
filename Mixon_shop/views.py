@@ -24,8 +24,8 @@ class PersonalPage(View):
 
 
 class ErrorPage(View):
-    def get(self, request):
-        return render(request, 'eror_page.html')
+    def get(self, request, *args, **kwargs):
+        return render(request, 'error_page.html', status=404)
 
 
 class Brands(View):
@@ -43,9 +43,9 @@ class AboutCompany(View):
         return render(request, 'about_company.html')
 
 
-class New(View):
+class Topic(View):
     def get(self, request):
-        return render(request, 'new.html')
+        return render(request, 'topic.html')
 
 
 class CheckoutPage(View):
