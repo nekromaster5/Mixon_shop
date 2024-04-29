@@ -871,13 +871,13 @@
                         <span class="product__content--title__text">Отзывы</span>
                         <div class="d-flex">
                             <div class="review_high_stars">
-                                <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                <img src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                                <img class="review_high_star" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img class="review_high_star" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img class="review_high_star" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img class="review_high_star" src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img class="review_high_star" src="{% static '/src/assets/img/icon/Path 133.png' %}">
                             </div>
-                            <span>Рейтинг 4.0</span>
+                            <span style="margin-left:10px">Рейтинг 4.0</span>
                         </div>
 
                     </div>
@@ -1010,11 +1010,8 @@
 
                             <div class="review_second_input_block">
                                 <div style="position: relative;">
-                                    <input class="review_second_input_block_form" type="text" id="name" name="name"
-                                           style=" ">
-                                    <label for="name"
-                                           style="position: absolute; top: 5px; left: 5px; pointer-events: none;">Напишите
-                                        отзыв</label>
+                                    <textarea class="comments--text__field"
+                                                      placeholder="Напишите отзыв"></textarea>
                                 </div>
                                 <button style="border-style: solid; border-color: red;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);  width: 200px; height: 40px; margin-top:20px; border-radius:5px;">
                                     <p style="font-family: Montserrat; color: red;">Оставить отзыв</p>
@@ -1162,6 +1159,7 @@
                                  
                             </div>
                             <div class="avability_block">
+                                <div >
                                 <div class="right_avability_block" style="display:block;">
                                     <div style="display:flex;">
                                         <img style="width:16px;height:18px;margin-top:3px;"
@@ -1191,6 +1189,7 @@
 
                                         <span style="color:gray">Показать на карте</span>
                                     </div>
+                                </div>
                                                              <hr style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
 
                                 </div>

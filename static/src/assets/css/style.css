@@ -1742,7 +1742,7 @@ Reviev
 
 .product_reviev_stars {
     margin-top: -25px;
-    margin-left: 600px;
+    margin-left: 500px;
     display: flex;
 }
 
@@ -2391,6 +2391,9 @@ Header
     width: 170px;
     background-color: red;
     margin-top: 20px;
+}
+.review_high_star{
+    padding-left: 5px;
 }
 .review_high_stars{
     display: flex;
@@ -6709,6 +6712,11 @@ width: 250px;
     justify-content: space-between;
     margin-left: 50px;
 }
+.review_star {
+    width: 20px;
+    height: 20px;
+}
+
 .rev_img {
     
 }
