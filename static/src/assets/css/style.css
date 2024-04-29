@@ -6879,7 +6879,7 @@ input[type=number]::-webkit-outer-spin-button {
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    background-color: #e0e0e0;
+    background-color: #FFFFFF;
     overflow: hidden;
     margin-left: 20px;
 }
