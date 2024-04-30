@@ -5203,7 +5203,7 @@ input[type=number]::-webkit-outer-spin-button {
     letter-spacing: 0;
     text-align: left;
 }
-
+ 
 /*@media only screen and (min-width: 768px) {*/
 /*    .footer__widget--menu__text {*/
 /*        line-height: 2.8rem;*/
@@ -6587,10 +6587,22 @@ input[type=number]::-webkit-outer-spin-button {
 
 .widget__personal_cabinet_button {
     list-style-type: none; /* Убираем маркеры списка */
+    
 }
-
+.widget__cabinet--button.active{
+    background-color:var(--bg-offwhite-color);
+}
+.widget__cabinet--button-list{
+    width: 300px;
+    margin-left:-20px ;
+}
+.widget__cabinet--button-list_inner{
+    margin-left: 20px;
+    display: flex;
+}
 .widget__cabinet--button {
     background-color: none;
+    width: 100%;
 
 }
 
@@ -6610,14 +6622,28 @@ input[type=number]::-webkit-outer-spin-button {
     width: 160px;
     height: 40px;
 }
-
+.cabinet_save_button p{
+    color:white;
+}
+.menu_button span{
+    color:white;
+}
 .password_hider {
     width: 12px;
     height: 8px;
     background-color: transparent;
     border: none;
 }
-
+.form-control{
+    background-color: #F5F5F5;
+    border: none;
+    width: 270px;
+    height: 40px;
+}
+.form-control::placeholder {
+    color: #787878; /* Цвет текста placeholder */
+   font-size: 16px;
+}
 .comparison-container p {
     float: left;
     margin-right: 10px; /* добавляем отступ справа */
@@ -6762,8 +6788,8 @@ input[type=number]::-webkit-outer-spin-button {
     border-radius: 5px;
 
 }
-.order_pa_button.p{
-    color:white;
+.order_pa_button p {
+    color: white;
 }
 
 .pa_total {

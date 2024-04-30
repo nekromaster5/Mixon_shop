@@ -57,73 +57,75 @@
             <div class="container">
                  
            
-                    <button  class="menu_button"  style=" ">Меню кабинета</button>
+                    <button  class="menu_button"  style=" "><span>Меню кабинета</span></button>
                  
                 <div class="row">
                     <!-- Первый блок - блок виджетов -->
                     <div class="vidget_block_cabinet col-lg-6">
                         <div class="shop__sidebar--widget widget__area d-none d-lg-block">
-                            <div class="single__widget widget__bg">
+                            <div class="single__widget widget__bg px-0">
                                 <div class="d-flex widget__title" style="flex-direction: column;">
                                     <h2 class="h3">Ваш кабинет</h2>
                                     <div class="personal_name">Василий Иванов</div>
                                 </div>
                                 <div class="widget-fucntions">
-                                    <ul class="widget__personal_cabinet_button">
-                                        <li class="widget__cabinet--button-list"
-                                            style=" display: flex;align-items: center;">
+                                    <ul class="widget__personal_cabinet_button" >
+                                        <li class="widget__cabinet--button"
+                                            style=" display: flex;align-items: center;" onclick="switchBlock(this)">
+                                            <div class="widget__cabinet--button-list_inner">
                                             <img class="widget__cabinet--button img" style="margin-right: 10px;"
                                                  src="{% static '/src/assets/img/icon/Path 38.png' %}">
-                                            <button class="footer__widget--menu__text" onclick="switchBlock_to_zakladki()" class="widget__cabinet--button"
+                                            <button class="footer__widget--menu__text" onclick="switchBlock_to_zakladki(); " class="widget__cabinet--button"
                                                     style="  background-color: transparent; border:none;color: black;">Закладки
                                             </button>
+                                        </div>
                                         </li>
                                         <li class="widget__cabinet--button"
-                                            style=" display: flex;align-items: center;margin-top:10px;">
+                                            style=" display: flex;align-items: center;margin-top:10px;"onclick="switchBlock(this)">
                                             <img class="widget__cabinet--button img" style="margin-right: 10px;"
                                                  src="{% static '/src/assets/img/icon/comparison_path.png' %}">
-                                            <button class="footer__widget--menu__text" onclick="switchBlock_to_comparison_lists()"
+                                            <button class="footer__widget--menu__text" onclick="switchBlock_to_comparison_lists(); "
                                                     style="  background-color: transparent; border:none; color: black;"
                                                     class="widget__cabinet--button">Списки сравнений
                                             </button>
 
                                         </li>
                                         <li class="widget__cabinet--button"
-                                            style=" display: flex;align-items: center;margin-top:10px;">
+                                            style=" display: flex;align-items: center;margin-top:10px;"onclick="switchBlock(this)">
 
                                             <img class="widget__cabinet--button img" style="margin-right: 10px;"
                                                  src="{% static '/src/assets/img/icon/order_path.png' %}">
-                                            <button class="footer__widget--menu__text" onclick="switchBlock_to_orders_history()"
+                                            <button class="footer__widget--menu__text" onclick="switchBlock_to_orders_history(); "
                                                     style="  background-color: transparent; border:none;color: black;"
                                                     class="widget__cabinet--button">История заказов
                                             </button>
                                         </li>
                                         <li class="widget__cabinet--button"
-                                            style=" display: flex;align-items: center;margin-top:10px;">
+                                            style=" display: flex;align-items: center;margin-top:10px;" onclick="switchBlock(this)">
 
                                             <img class="widget__cabinet--button img" style="margin-right: 10px;"
                                                  src="{% static '/src/assets/img/icon/review_path.png' %}">
-                                            <button class="footer__widget--menu__text" onclick="switchBlock_to_my_review()"
+                                            <button class="footer__widget--menu__text" onclick="switchBlock_to_my_review(); "
                                                     style="  background-color: transparent; border:none;color: black;"
                                                     class="widget__cabinet--button">Мои отзывы
                                             </button>
                                         </li>
                                         <li class="widget__cabinet--button"
-                                            style=" display: flex;align-items: center;margin-top:10px;">
+                                            style=" display: flex;align-items: center;margin-top:10px;" onclick="switchBlock(this)">
 
                                             <img class="widget__cabinet--button img" style="margin-right: 10px;"
                                                  src="{% static '/src/assets/img/icon/Group 40.png' %}">
-                                            <button class="footer__widget--menu__text" onclick="switchBlock_to_my_marks()"
+                                            <button class="footer__widget--menu__text" onclick="switchBlock_to_my_marks(); "
                                                     style="  background-color: transparent; border:none;color: black;"
                                                     class="widget__cabinet--button">Мои оценки
                                             </button>
                                         </li>
                                         <li class="widget__cabinet--button"
-                                            style=" display: flex;align-items: center;margin-top:10px;">
+                                            style=" display: flex;align-items: center;margin-top:10px;" onclick="switchBlock(this)">
 
                                             <img class="widget__cabinet--button img" style="margin-right: 10px;"
                                                  src="{% static '/src/assets/img/icon/Path 44.png' %}">
-                                            <button class="footer__widget--menu__text" onclick="switchBlock_to_contact_information()"
+                                            <button class="footer__widget--menu__text" onclick="switchBlock_to_contact_information(); "
                                                     style="  background-color: transparent; border:none;color: black;"
                                                     class="widget__cabinet--button">Контактная информация
                                             </button>
@@ -534,7 +536,7 @@
                         <div class="contact_block_first ml-6" style="">
                             <h2 class="h3">Основные данные:</h2>
                             <div class="row">
-                                <div class="col-lg-5 col-md-5">
+                                <div class="col-lg-6 col-md-5">
                                     <!-- Первая колонка с двумя строками ввода -->
                                     <input type="text" class="form-control mb-2" placeholder="Первая строка ввода">
                                     <input type="text" class="form-control" placeholder="Вторая строка ввода">
@@ -563,18 +565,22 @@
                                     <div class="col-lg-5 col-md-5">
                                         <!-- Вторая колонка с двумя строками ввода -->
                                          
-                                        <input style="margin-top:30px;" type="text" class="form-control" placeholder="Четвертая строка ввода">
+                                        <input style="margin-top:45px;" type="text" class="form-control" placeholder="Четвертая строка ввода">
                                     </div>
                                 </div>
                                 <div class="contact_block_first ml-6  " style="">
                                     <h2 class="h3">Пароль:</h2>
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-5  ">
+                                    <div class="row"  >
+                                        <div class="col-lg-5 col-md-5  " style="position:relative;">
                                             <!-- Первая колонка с двумя строками ввода -->
-                                            <input type="text" class="form-control mb-2 d-flex"
+                                            <input type="text" class="form-control mb-2 d-flex"  
                                                    placeholder="Первая строка ввода">
-                                                   <button style="width:20px;height:23px; margin-top:-29px;position:absolute;margin-left:230px;background-color:transparent; border:none;">
-                                                    <img src="{% static '/src/assets/img/icon/Group 484.png' %}">
+                                                   <button style="width:20px;height:23px; top:2px;position:absolute; background-color:transparent; border:none;">
+                                                    <svg width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6.27081 5.14848C7.03738 5.14848 7.65881 4.55166 7.65881 3.81545C7.65881 3.07924 7.03738 2.48242 6.27081 2.48242C5.50424 2.48242 4.88281 3.07924 4.88281 3.81545C4.88281 4.55166 5.50424 5.14848 6.27081 5.14848Z" fill="#787878"/>
+                                                        <path d="M6.271 0C2.808 0 0 3.81661 0 3.81661C0 3.81661 2.808 7.63229 6.271 7.63229C9.734 7.63229 12.542 3.81661 12.542 3.81661C12.542 3.81661 9.735 0 6.271 0ZM6.271 6.72277C5.67235 6.72258 5.08726 6.55193 4.5896 6.23237C4.09194 5.91282 3.70411 5.45873 3.47516 4.92751C3.24621 4.39629 3.18637 3.81179 3.30328 3.24793C3.42019 2.68407 3.70858 2.16615 4.13196 1.75968C4.55533 1.35321 5.09467 1.07642 5.68182 0.964323C6.26898 0.852229 6.87755 0.909858 7.4306 1.12992C7.98366 1.34998 8.45637 1.72261 8.78894 2.20066C9.12151 2.67872 9.29901 3.24074 9.29901 3.81568C9.29901 4.19757 9.22071 4.57571 9.06854 4.92854C8.91637 5.28136 8.69328 5.60195 8.41211 5.87199C8.13093 6.14203 7.79712 6.35622 7.42975 6.50237C7.06237 6.64851 6.66864 6.72374 6.271 6.72374V6.72277Z" fill="#787878"/>
+                                                        </svg>
+                                                        
     
                                                 </button>
 
@@ -585,9 +591,11 @@
 
                                             <input type="text" class="form-control mb-2"
                                                    placeholder="Третья строка ввода">
-                                            <button style="width:20px;height:23px; margin-top:-29px;position:absolute;margin-left:230px;background-color:transparent; border:none;">
-                                                <img src="{% static '/src/assets/img/icon/Group 484.png' %}">
-
+                                            <button style="width:20px;height:23px; margin-top:50%;position:absolute;margin-left:230px;background-color:transparent; border:none;">
+                                                <svg width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M6.27081 5.14848C7.03738 5.14848 7.65881 4.55166 7.65881 3.81545C7.65881 3.07924 7.03738 2.48242 6.27081 2.48242C5.50424 2.48242 4.88281 3.07924 4.88281 3.81545C4.88281 4.55166 5.50424 5.14848 6.27081 5.14848Z" fill="#787878"/>
+                                                    <path d="M6.271 0C2.808 0 0 3.81661 0 3.81661C0 3.81661 2.808 7.63229 6.271 7.63229C9.734 7.63229 12.542 3.81661 12.542 3.81661C12.542 3.81661 9.735 0 6.271 0ZM6.271 6.72277C5.67235 6.72258 5.08726 6.55193 4.5896 6.23237C4.09194 5.91282 3.70411 5.45873 3.47516 4.92751C3.24621 4.39629 3.18637 3.81179 3.30328 3.24793C3.42019 2.68407 3.70858 2.16615 4.13196 1.75968C4.55533 1.35321 5.09467 1.07642 5.68182 0.964323C6.26898 0.852229 6.87755 0.909858 7.4306 1.12992C7.98366 1.34998 8.45637 1.72261 8.78894 2.20066C9.12151 2.67872 9.29901 3.24074 9.29901 3.81568C9.29901 4.19757 9.22071 4.57571 9.06854 4.92854C8.91637 5.28136 8.69328 5.60195 8.41211 5.87199C8.13093 6.14203 7.79712 6.35622 7.42975 6.50237C7.06237 6.64851 6.66864 6.72374 6.271 6.72374V6.72277Z" fill="#787878"/>
+                                                    </svg>
                                             </button>
 
                                         </div>
@@ -677,10 +685,26 @@ var text=document.querySelector('.button_text');
         }
     }
 
-    // Добавьте аналогичные функции для других кнопок, если необходимо
+   
 
+
+ 
     // По умолчанию активируем блок "Все о товаре" (product_description)
     switchBlock_to_zakladki();
+</script>
+<script>
+    const buttons = document.querySelectorAll('.widget__cabinet--button');
+
+// Добавляем обработчик события клика для каждой кнопки
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    // Удаляем класс "active" у всех кнопок
+    buttons.forEach(btn => btn.classList.remove('active'));
+    // Добавляем класс "active" только к нажатой кнопке
+    button.classList.add('active');
+  });
+});
+
 </script>
 </html>
 
