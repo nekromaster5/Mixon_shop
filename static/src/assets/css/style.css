@@ -7230,12 +7230,16 @@ input[type=number]::-webkit-outer-spin-button {
 
     text-align: left;
 }
-
-.comparison_lists {
-  
+.comparison_lists_cabinet{
     margin-right: -0.2rem;
     margin-left: -0.2rem;
     background-color: white;
+}
+.comparison_lists {
+  
+    margin-right: -1.5rem;
+    margin-left: -1.5rem;
+     
 }
 
 @media only screen   and (min-width: 320px) and (max-width: 760px) {
