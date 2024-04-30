@@ -2434,8 +2434,11 @@ Header
 
 .checkout__input--select__field.product_field {
     margin-left: 10px;
+    border: 1px solid black;
 }
-
+.checkout__input--select__field.product_field {
+    color: black; /* Черный цвет текста */
+}
 .carousel-buttons {
     margin-left: 40px;
 }
@@ -2462,7 +2465,7 @@ Header
 
 .delivery_bottom {
     padding-top: 20px;
-    background-color: transparent;
+    background-color: var(--bg-offwhite-color);
 }
 
 @media only screen and (max-width: 992px) {
@@ -6704,10 +6707,12 @@ input[type=number]::-webkit-outer-spin-button {
 
 .second_text_block {
     height: 28px;
+    justify-content:space-between;
 }
 
 .first_text_block {
     height: 28px;
+    justify-content:space-between;
 }
 
 
@@ -6733,6 +6738,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .personal_review_high_block {
     display: flex;
+    
 }
 
 .second_text_block {
@@ -6754,6 +6760,10 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: #FF0000;
     border: none;
     border-radius: 5px;
+
+}
+.order_pa_button.p{
+    color:white;
 }
 
 .pa_total {
@@ -6763,7 +6773,10 @@ input[type=number]::-webkit-outer-spin-button {
 @media only screen   and (min-width: 320px) and (max-width: 760px) {
     .rev_div {
     }
-
+    .rev_labe {
+        font-size: 11px;
+        width: 153px;
+    }
     .menu_button {
         display: block;
         margin-left: 50px;
@@ -6839,7 +6852,9 @@ input[type=number]::-webkit-outer-spin-button {
     width: 20px;
     height: 20px;
 }
-
+.review{
+    display: none;
+}
 .rev_img {
 
 }
@@ -6898,7 +6913,10 @@ input[type=number]::-webkit-outer-spin-button {
     .carousel-container {
         display: flex;
     }
-
+    .rev_labe {
+        font-size: 14px;
+        width: 194px;
+    }
     .about_company_button {
         height: 190px;
         width: 330px;
@@ -6930,7 +6948,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .about_company_Heading_non {
     margin-left: 400px;
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .block_about_company_heading {
@@ -7069,7 +7087,7 @@ input[type=number]::-webkit-outer-spin-button {
 
     .about_company_Heading {
         margin-left: 0px;
-        font-size: 20px;
+        font-size: 30px;
         padding-bottom: 20px;
     }
 
@@ -7131,8 +7149,7 @@ input[type=number]::-webkit-outer-spin-button {
     border: none;
     background-color: #FFFFFF;
     box-shadow: 0 4px 5px 4px rgba(0, 0, 0, 0.25);
-    height: 300px;
-    width: 370px;
+   
 }
 
 .big_news_buttons.topic-side {
@@ -7189,9 +7206,10 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .comparison_lists {
-    margin-top: 20px;
-    margin-right: -1.5rem;
-    margin-left: -1.5rem;
+  
+    margin-right: -0.2rem;
+    margin-left: -0.2rem;
+    background-color: white;
 }
 
 @media only screen   and (min-width: 320px) and (max-width: 760px) {
@@ -7221,7 +7239,7 @@ input[type=number]::-webkit-outer-spin-button {
 
     .about_company_Heading {
         margin-left: 170px;
-        font-size: 40px;
+        font-size: 30px;
     }
 
     .news_header {
@@ -9389,6 +9407,7 @@ details > summary::-webkit-details-marker {
     .product-info__title {
         display: none !important;
     }
+    
 }
 
 @media only screen and (max-width: 540px) {
@@ -9417,8 +9436,19 @@ details > summary::-webkit-details-marker {
         font-size: 1rem;
         line-height: 1.2rem;
     }
+    .adaptive_about_product_table
+    {
+        display: block;
+        
+    }
+    .standart_about_product_table{
+        display: none;
+    }
 }
-
+.standart_about_product_table{
+    
+    display: flex;
+}
 .view__all--link:hover {
     color: var(--secondary-color);
 }
@@ -9432,8 +9462,19 @@ details > summary::-webkit-details-marker {
 
         width: 750px;
     }
+    .adaptive_about_product_table
+{
+    display: block;
+    
 }
-
+.standart_about_product_table{
+    display: none;
+}
+}
+.adaptive_about_product_table
+{
+    display: none;
+}
 .characteristics__content {
     background: var(--bg-white-color);
     padding-bottom: 2rem;
@@ -9461,7 +9502,7 @@ details > summary::-webkit-details-marker {
 }
 
 .about_product_table {
-
+ 
     width: 1240px;
     background-color: #FFFFFF;
 }
@@ -9492,8 +9533,17 @@ details > summary::-webkit-details-marker {
     .characteristics-slider__section {
         display: none;
     }
+    
 }
+@media only screen   and (min-width: 768px) and (max-width: 1199px) {
+    .adaptive_about_product_table{
+display: block;
+    }
+    .about_product_table{
 
+        width: 750px;
+    }
+}
 /* Main page */
 .brend_main_button {
     border: none;
