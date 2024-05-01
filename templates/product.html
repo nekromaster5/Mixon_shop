@@ -156,14 +156,33 @@
                         </div>
 
                         <!-- Правый блок -->
+                        <div class="product-rating product-rating-mobile d-flex">
+                            <div class="product_top_stars">
+                                <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
+                                <img src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                            </div>
+                            <div class="product_top_icons">
+                                <div class="product_top_icon">
+                                    <img src="{% static '/src/assets/img/icon/like_icon.png' %}">
+                                    <span>67</span>
+                                </div>
+                                <div class="product_top_icon">
+                                    <img src="{% static '/src/assets/img/icon/review_icon.png' %}"
+                                         style=" ">
+                                    <span>23</span></div>
+                            </div>
+                        </div>
                         <div class="right_block" style="display: flex; flex-direction: column; margin-top: 30px;">
                             <div class="first_sale_block" style="display: flex;">
-                                <div style="display: flex; align-items: center;">
+                                <div class="about_product_avability" style="display: flex; align-items: center;">
                                     <p style="color: green; margin-right: 10px;">Есть в наличии</p>
                                     <img src="{% static '/src/assets/img/icon/Path 47.png' %}"
                                          style="margin-top: -15px;">
                                 </div>
-                                <div class="first_sale_block_buttons" style="display:flex;">
+                                <div class="first_sale_block_buttons"  >
                                     <a class="product__card--action__btn compare--button no_scale box_shadow-3_1 small__button p-6"
                                        title="Compare">
                                         <svg class="product__card--action__btn--svg" width="80%" height="80%"
@@ -205,10 +224,10 @@
                             <div class="second_sale_block" style="margin-top: 10px;">
                                 <div class="row">
                                     <!-- Первая колонка -->
-                                    <div class="col-md-6" style=" ">
-                                        <div style="width: 160px; height: 30px; display: flex; flex-direction: row;">
-                                            <span class="product-info__text--price">232.00 &#8372;</span>
-                                            <span class="product-info__text--price-old">265.00 &#8372;</span>
+                                    <div class="col-md-6 first_prtoduct_col"  style="">
+                                        <div class="product_texts"  style="width: 160px; height: 30px;   flex-direction: row; margin-top:20px;">
+                                            <span class="product-info__text--price" Style="white-space: nowrap;">232.00 &#8372;</span>
+                                            <span class="product-info__text--price-old about_product_info" style="white-space: nowrap;display:block;">265.00 &#8372;</span>
                                         </div>
 
                                         <a class="primary__btn product__card--action__btn buy__btn big-button d-flex justify-content-evenly no_scale"
@@ -223,7 +242,7 @@
                                         </a>
                                     </div>
                                     <!-- Вторая колонка -->
-                                    <div class="col-md-6" style=" margin-top:8px;">
+                                    <div class="col-md-6 second_col_product" style=" margin-top:8px; ">
                                         <a class="product__card--action__btn cheaper--button main_cheaper no_scale box_shadow-3_1"
                                            title="Want Cheaper">
                                             <svg width="21.776123" height="24.913086" viewBox="0 0 21.7761 24.9131"
@@ -260,6 +279,49 @@
                                             <span>  Быстрый заказ</span>
                                             <span class="visually-hidden">Want Cheaper</span>
                                         </a>
+                                        <div class="mobile_lit_buttons">
+                                            <div class="first_sale_block" style="display: flex;">
+                                                 
+                                      <div class="first_sale_block_buttons_mobile "  >
+                                                    <a class="product__card--action__btn compare--button no_scale box_shadow-3_1 small__button p-6"
+                                                       title="Compare">
+                                                        <svg class="product__card--action__btn--svg" width="80%" height="80%"
+                                                             viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M8.43018 22.99C8.60089 21.922 9.14669 20.9499 9.9696 20.248C10.7925 19.5462 11.8386 19.1607 12.9202 19.1607C14.0017 19.1607 15.0478 19.5462 15.8707 20.248C16.6936 20.9499 17.2394 21.922 17.4102 22.99H8.43018Z"
+                                                                  stroke="currentColor" stroke-miterlimit="10"
+                                                                  stroke-linecap="round"></path>
+                                                            <path d="M1.11108 13.39C1.11108 14.4217 1.52091 15.4111 2.25043 16.1406C2.97994 16.8701 3.96935 17.28 5.00104 17.28C6.03273 17.28 7.02219 16.8701 7.75171 16.1406C8.48123 15.4111 8.89105 14.4217 8.89105 13.39H1.11108Z"
+                                                                  stroke="currentColor" stroke-linecap="round"
+                                                                  stroke-linejoin="round"></path>
+                                                            <path d="M1.11108 13.39L5.00104 3.71497L8.89105 13.39H1.11108Z"
+                                                                  stroke="currentColor" stroke-linecap="round"
+                                                                  stroke-linejoin="round"></path>
+                                                            <path d="M16.949 13.39C16.9653 14.4108 17.3823 15.3842 18.11 16.1002C18.8376 16.8163 19.8176 17.2177 20.8385 17.2177C21.8594 17.2177 22.8394 16.8163 23.567 16.1002C24.2947 15.3842 24.7116 14.4108 24.728 13.39H16.949Z"
+                                                                  stroke="currentColor" stroke-linecap="round"
+                                                                  stroke-linejoin="round"></path>
+                                                            <path d="M16.949 13.39L20.839 3.71497L24.729 13.39H16.949Z"
+                                                                  stroke="currentColor" stroke-linecap="round"
+                                                                  stroke-linejoin="round"></path>
+                                                            <path d="M12.9199 19.157V0.848999" stroke="currentColor"
+                                                                  stroke-miterlimit="10"></path>
+                                                            <path d="M2.125 2.95599H23.715" stroke="currentColor"
+                                                                  stroke-miterlimit="10"></path>
+                                                        </svg>
+                                                        <span class="visually-hidden">Compare</span>
+                                                    </a>
+                                                    <a class="product__card--action__btn favourite--button no_scale box_shadow-3_1 small__button p-6"
+                                                       title="Wishlist">
+                                                        <svg class="product__card--action__btn--svg" width="70%" height="70%"
+                                                             viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M15.6219 0.58197C15.9109 0.58197 16.222 0.597991 16.549 0.627991C18.556 0.815991 20.8749 2.57399 21.1569 5.94299V7.06396C20.8949 10.288 18.351 14.264 10.918 19.254C3.48497 14.265 0.942932 10.289 0.679932 7.06396V5.94299C0.961932 2.57499 3.27996 0.815991 5.28796 0.627991C5.61796 0.597991 5.92594 0.583008 6.21594 0.583008C8.53294 0.583008 9.64595 1.54102 10.916 2.99402C12.19 1.54102 13.301 0.58197 15.616 0.58197"
+                                                                  stroke="currentColor" stroke-miterlimit="10"
+                                                                  stroke-linecap="round"></path>
+                                                        </svg>
+                                                        <span class="visually-hidden">Wishlist</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
