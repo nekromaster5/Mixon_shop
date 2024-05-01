@@ -2535,9 +2535,11 @@ Header
     gap: 9px;
     width: 100%;
 }
-.product-rating-mobile{
+
+.product-rating-mobile {
     display: none !important;
 }
+
 .product-rating__wrapper span {
     color: var(--text-grey-color);
 }
@@ -5722,65 +5724,80 @@ input[type=number]::-webkit-outer-spin-button {
     background: var(--secondary-color);
     border-radius: 0.5rem;
 }
+
 @media only screen   and (min-width: 320px) and (max-width: 760px) {
-    .second_col_product{
-        margin-left:0px  !important;
+    .second_col_product {
+        margin-left: 0px !important;
     }
-    .first_sale_block_buttons{
+
+    .first_sale_block_buttons {
         display: flex;
     }
-    .buy__btn.big-button{
-        margin-left:20px;
+
+    .buy__btn.big-button {
+        margin-left: 20px;
         font-size: 16px;
-         
+
     }
-    .product_texts{
+
+    .product_texts {
         display: block;
     }
+
     .cheaper--button.main_cheaper {
-      margin-bottom: 0px;
+        margin-bottom: 0px;
         width: 168px;
         height: 35px;
         font-size: 14px;
     }
-    .first_sale_block_buttons{
+
+    .first_sale_block_buttons {
         display: none !important;
     }
-    .about_product_avability{
-        margin-left:30px;
+
+    .about_product_avability {
+        margin-left: 30px;
     }
-    .main_quick_order{
+
+    .main_quick_order {
         width: 168px;
         height: 35px;
         font-size: 14px;
-        }
-        .first_prtoduct_col{
-            padding-bottom: 20px !important;
-        }
-        .product-rating-mobile{
-            display: flex !important;
-            height: 100%;
-        }
-        .mobile_lit_buttons{
-            display: flex !important;
-        }
-        .first_sale_block_buttons_mobile {
-            display: flex;
-            position: absolute;
-            margin-left: 200px;
-            margin-top:-100px;
-        }
+    }
+
+    .first_prtoduct_col {
+        padding-bottom: 20px !important;
+    }
+
+    .product-rating-mobile {
+        display: flex !important;
+        height: 100%;
+    }
+
+    .mobile_lit_buttons {
+        display: flex !important;
+    }
+
+    .first_sale_block_buttons_mobile {
+        display: flex;
+        position: absolute;
+        margin-left: 200px;
+        margin-top: -100px;
+    }
 }
-.mobile_lit_buttons{
-    display: none  ;
+
+.mobile_lit_buttons {
+    display: none;
 }
-.second_col_product{
-    margin-left:-50px;
+
+.second_col_product {
+    margin-left: -50px;
 }
+
 .buy__btn.big-button {
     width: 170px;
     height: 40px;
-    margin-top:18px;
+    margin-top: 18px;
 }
 
 .buy__btn:hover {
@@ -5811,7 +5828,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .cheaper--button.main_cheaper {
-    margin-bottom:20px ;
+    margin-bottom: 20px;
     width: 20rem;
 }
 
@@ -7045,7 +7062,13 @@ input[type=number]::-webkit-outer-spin-button {
     height: 190px;
     width: 370px;
     margin-left: 20px;
-    margin-top: 20px
+    margin-top: 20px;
+    background: var(--bg-white-color);
+    border: none;
+}
+
+.about_company_button:hover {
+    box-shadow: 0 4px 4px 2px rgba(0, 0, 0, 0.25);
 }
 
 .adaptive-slider-container {
@@ -9497,8 +9520,9 @@ details > summary::-webkit-details-marker {
         display: block;
         margin-top: 0px;
     }
-    .product_texts{
-        display: block !important; 
+
+    .product_texts {
+        display: block !important;
     }
 }
 
@@ -9521,12 +9545,14 @@ details > summary::-webkit-details-marker {
         line-height: 2rem !important;
         height: 100% !important;
     }
-    .about_product_info{
-        display: block !important; 
-        margin-top: -5px  !important;
+
+    .about_product_info {
+        display: block !important;
+        margin-top: -5px !important;
     }
-    .product_texts{
-        display: block !important; 
+
+    .product_texts {
+        display: block !important;
     }
 }
 
@@ -9535,9 +9561,11 @@ details > summary::-webkit-details-marker {
     text-decoration: line-through;
     display: none;
 }
-.product_texts{
-    display: flex  ; 
+
+.product_texts {
+    display: flex;
 }
+
 @media only screen and (min-width: 992px) {
     .product-info__text--price-old {
         display: block;
@@ -9559,7 +9587,7 @@ details > summary::-webkit-details-marker {
 .compare--button {
     color: inherit;
 }
- 
+
 .product-info__buttons a.cheaper--button {
     margin-right: 3rem;
     margin-bottom: 2rem;
