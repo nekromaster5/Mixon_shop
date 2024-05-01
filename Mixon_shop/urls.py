@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 
 from Mixon_shop.views import HomePage, CataloguePage, ProductPage, Brands, News, \
-    Topic, AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage
+    Topic, AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,7 +34,8 @@ urlpatterns = [
     path('slider/', TestSlider.as_view(), name='slider'),
     path('test/', Test.as_view(), name='test'),
     path('error/', ErrorPage.as_view(), name='error'),
+    path('shipment&payment/', ShipmentPayment.as_view(), name='shipment_and_payment'),
+    path('contacts/', Contacts.as_view(), name='contacts'),
 ]
 
 handler404 = ErrorPage.as_view()
-

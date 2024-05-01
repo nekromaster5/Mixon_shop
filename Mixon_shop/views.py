@@ -61,3 +61,13 @@ class TestSlider(View):
 class Test(View):
     def get(self, request):
         return render(request, 'test.html')
+
+
+class ShipmentPayment(View):
+    def get(self, request):
+        return render(request, 'shipment_and_payment.html')
+
+
+class Contacts(View):
+    def get(self, request):
+        return render(request, 'contacts.html')
