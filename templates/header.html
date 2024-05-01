@@ -53,16 +53,16 @@
                     </button>
                     <button  class="menu-panel__button"
                             style=" ">
-                            <p class="menu-panel__button_text"  >     О нас</p>
+                            <a href="{% url 'about_company' %}" class="menu-panel__button_text">О нас</a>
                     </button>
                     <button class="menu-panel__button">
-                            <p class="menu-panel__button_text"   >       Новости</p>
+                            <a href="{% url 'news' %}" class="menu-panel__button_text">Новости</a>
                     </button>
                     <button class="menu-panel__button">
-                    <p class="menu-panel__button_text" >       Оплата и доставка</p>
+                    <a href="{% url 'shipment_and_payment' %}" class="menu-panel__button_text">Оплата и доставка</a>
                     </button>
                     <button class="menu-panel__button">
-                            <p class="menu-panel__button_text" >        Контакты </p>
+                            <a href="{% url 'contacts' %}" class="menu-panel__button_text">Контакты</a>
                     </button>
 
                     <!-- Добавьте еще кнопки, если нужно -->
