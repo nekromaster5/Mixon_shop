@@ -35,64 +35,59 @@
     <main class="main__content_wrapper bg__off_white">
         <section class="slider--section mb-7">
             <div class="container">
-                <link rel="import" href="publuic/header.html">
-
                 <div id="app"></div>
                 <div class="vertical-block" style="  ">
                     <div class="high_main_block">
                         <div class="main_high_buttons">
                             <div class="item" style="position:relative;top:20px;left:15px;"
-                                 onclick="handleItemClick('Item 1')">
+                                 onclick="">
                                 <img style="position:absolute;margin-top:3px;left:-30px;"
-                                     src="{% static '/src/assets/img/icon/akciya 1.svg' %}">
-                                <p style="font-family:Montserrat;color:red;font-weight: 500;">Акции</p>
+                                     src="{% static '/src/assets/img/icon/akciya 1.svg' %}" alt="">
+                                <p style="color:red;font-weight: 500;">Акции</p>
                             </div>
                             <div class="item" style="position:relative;top:30px;left:15px;"
-                                 onclick="handleItemClick('Item 2')">
-                                <img style="position:absolute;margin-top:px;left:-30px;"
-                                     src="{% static '/src/assets/img/icon/lkm-stroitelstvo 1.svg' %}">
-                                <p style="font-family:Montserrat; font-weight: 500;position:relative; ">
+                                 onclick="">
+                                <img style="position:absolute;left:-30px;"
+                                     src="{% static '/src/assets/img/icon/lkm-stroitelstvo 1.svg' %}" alt="">
+                                <p style="font-weight: 500;position:relative; ">
                                     ЛКМ для Строительства</p>
                             </div>
                             <div class="item" style="position:relative;top:40px;left:15px;"
-                                 onclick="handleItemClick('Item 1') ">
-                                <img style="position:absolute;margin-top:px;left:-30px;"
-                                     src="{% static '/src/assets/img/icon/lkm-autoremont 1.svg' %}">
-                                <p style="font-family:Montserrat; font-weight: 500;">ЛКМ для Авторемонта</p>
+                                 onclick="">
+                                <img style="position:absolute;left:-30px;"
+                                     src="{% static '/src/assets/img/icon/lkm-autoremont 1.svg' %}" alt="">
+                                <p style="font-weight: 500;">ЛКМ для Авторемонта</p>
                             </div>
                             <div class="item" style="position:relative;top:50px;left:15px;"
-                                 onclick="handleItemClick('Item 2')">
-                                <img style="position:absolute;margin-top:px;left:-30px;"
-                                     src="{% static '/src/assets/img/icon/lkm-derevo 1.svg' %}">
-                                <p style="font-family:Montserrat; font-weight: 500;">ЛКМ для Древообработки</p>
+                                 onclick="">
+                                <img style="position:absolute;left:-30px;"
+                                     src="{% static '/src/assets/img/icon/lkm-derevo 1.svg' %}" alt="">
+                                <p style="font-weight: 500;">ЛКМ для Древообработки</p>
                             </div>
                             <div class="item" style="position:relative;top:60px;left:15px;"
-                                 onclick="handleItemClick('Item 1') ">
-                                <img style="position:absolute;margin-top:px;left:-30px;"
-                                     src="{% static '/src/assets/img/icon/lkm-industry 1.svg' %}">
-                                <p style="font-family:Montserrat; font-weight: 500;">ЛКМ для Промышленности</p>
+                                 onclick="">
+                                <img style="position:absolute;left:-30px;"
+                                     src="{% static '/src/assets/img/icon/lkm-industry 1.svg' %}" alt="">
+                                <p style="font-weight: 500;">ЛКМ для Промышленности</p>
                             </div>
                             <div class="item" style="position:relative;top:70px;left:15px;"
-                                 onclick="handleItemClick('Item 2')">
-                                <img style="position:absolute;margin-top:px;left:-30px;"
-                                     src="{% static '/src/assets/img/icon/auto-chemikal 1.svg' %}">
-                                <p style="font-family:Montserrat; font-weight: 500;">Автохимия,автокосметика,<br>
+                                 onclick="">
+                                <img style="position:absolute;left:-30px;"
+                                     src="{% static '/src/assets/img/icon/auto-chemikal 1.svg' %}" alt="">
+                                <p style="font-weight: 500;">Автохимия,автокосметика,<br>
                                     оборудование для автомоек</p>
                             </div>
                             <div class="item" style="position:relative;top:80px;left:15px;"
-                                 onclick="handleItemClick('Item 2')">
-                                <img style="position:absolute;margin-top:px;left:-30px;"
-                                     src="{% static '/src/assets/img/icon/instrument 1.svg' %}">
-                                <p style="font-family:Montserrat; font-weight: 500;">Инструменты, аксесуары,<br>
+                                 onclick="">
+                                <img style="position:absolute;left:-30px;"
+                                     src="{% static '/src/assets/img/icon/instrument 1.svg' %}" alt="">
+                                <p style="font-weight: 500;">Инструменты, аксесуары,<br>
                                     оборудование</p>
                             </div>
                         </div>
-                        <!-- Add more items as needed -->
-
-
                         <!-- Добавьте другие элементы по аналогии -->
                         <div class="main_image" style=" ">
-                            <img class="main_image_img" src="{% static '/src/assets/img/icon/slaider 2.png' %}">
+                            <img class="main_image_img" src="{% static '/src/assets/img/icon/slaider 2.png' %}" alt="">
                             <div class="main_image_buttons">
                                 <button class="main_image_button"></button>
                                 <button class="main_image_button "></button>
@@ -102,7 +97,6 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Блок с кнопками "brends" -->
                     <div class="brand_buttons-wrapper">
                         <div class="slider-container adjustable-slider">
@@ -157,36 +151,8 @@
                             </div>
                         </div>
                     </div>
-
-
-                    <!-- All Script JS Plugins here  -->
-                    <script src="{% static '/src/assets/js/vendor/popper.js' %}" defer="defer"></script>
-                    <script src="{% static '/src/assets/js/vendor/bootstrap.min.js' %}" defer="defer"></script>
-                    <script src="{% static '/src/assets/js/plugins/swiper-bundle.min.js' %}"></script>
-                    <script src="{% static '/src/assets/js/plugins/glightbox.min.js' %}"></script>
-                    <script>
-                        function toggleDropdown() {
-                            var dropdown = document.getElementById("myDropdown");
-                            dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
-                        }
-
-                        // Закрыть выпадающий список при клике вне него
-                        window.onclick = function (event) {
-                            if (!event.target.matches('.panel button')) {
-                                var dropdowns = document.getElementsByClassName("dropdown");
-                                for (var i = 0; i < dropdowns.length; i++) {
-                                    var openDropdown = dropdowns[i];
-                                    if (openDropdown.style.display === "block") {
-                                        openDropdown.style.display = "none";
-                                    }
-                                }
-                            }
-                        }
-                    </script>
-                    <!-- Customscript js -->
-                    <script src="{% static '/src/assets/js/script.js' %}"></script>
-
                 </div>
+            </div>
         </section>
         <section class="product__section section--padding  pt-0">
             <div class="container">
@@ -296,4 +262,29 @@
 </div>
 </body>
 <script src="{% static '/src/assets/js/slider.js' %}"></script>
+
+<!-- All Script JS Plugins here  -->
+<script src="{% static '/src/assets/js/vendor/popper.js' %}" defer="defer"></script>
+<script src="{% static '/src/assets/js/vendor/bootstrap.min.js' %}" defer="defer"></script>
+<script src="{% static '/src/assets/js/plugins/swiper-bundle.min.js' %}"></script>
+<script src="{% static '/src/assets/js/plugins/glightbox.min.js' %}"></script>
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById("myDropdown");
+        dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+    }
+
+    // Закрыть выпадающий список при клике вне него
+    window.onclick = function (event) {
+        if (!event.target.matches('.panel button')) {
+            const dropdowns = document.getElementsByClassName("dropdown");
+            for (let i = 0; i < dropdowns.length; i++) {
+                const openDropdown = dropdowns[i];
+                if (openDropdown.style.display === "block") {
+                    openDropdown.style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 </html>
