@@ -1,4 +1,4 @@
-@charset "UTF-8";
+@charsetmain_quick_order"UTF-8";
 /*
   Template Name: Grocee - Organic Food HTML Template
   Author Name: Hook theme
@@ -5770,7 +5770,9 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: var(--bg-white-color);
     color: var(--secondary-color);
 }
-
+.main_quick_order{
+display: block !important;
+}
 .quick__order--button:hover {
     background-color: var(--bg-grey-color);
     color: var(--text-white-color);
