@@ -20,7 +20,7 @@ class ProductPage(View):
 
 class PersonalPage(View):
     def get(self, request):
-        return render(request, 'Personal_Area.html')
+        return render(request, 'cabinet.html')
 
 
 class ErrorPage(View):

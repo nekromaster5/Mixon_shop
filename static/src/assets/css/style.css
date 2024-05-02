@@ -7116,7 +7116,11 @@ input[type=number]::-webkit-outer-spin-button {
     .carousel-container {
         display: flex;
     }
-
+    .about_company_heading_non{
+      
+        justify-content: left !important; /* Центрирует по горизонтали */
+        align-items:  flex-start !important;
+    }
     .rev_labe {
         font-size: 14px;
         width: 194px;
@@ -7146,13 +7150,17 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .about_company_Heading {
-    margin-left: 400px;
+    align-items: center;
+    display: flex;
     font-size: 40px;
+    justify-content: center;
     line-height: 50px;
 }
 
-.about_company_Heading_non {
-    margin-left: 400px;
+.about_company_heading_non {
+    align-items: center;
+    display: flex;
+    justify-content: center;
     font-size: 30px;
 }
 
@@ -7300,7 +7308,7 @@ input[type=number]::-webkit-outer-spin-button {
         flex-direction: column;
     }
 
-    .about_company_Heading_non {
+    .about_company_heading_non {
         display: none;
     }
 
@@ -7332,7 +7340,7 @@ padding-right: 25px;
         width: 70px;
         height: 70px;
         border-radius: 50%;
-        background-color: #e0e0e0;
+        background-color: #FFFFFF;
         overflow: hidden;
         margin-left: 20px;
     }
