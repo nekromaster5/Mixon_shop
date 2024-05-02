@@ -720,7 +720,17 @@ hr {
         height: 3rem;
     }
 }
-
+.black-dot_list{
+    content: ""; /* Добавляем пустой контент для псевдоэлемента */
+    position: absolute; /* Устанавливаем позицию абсолютной */
+    left: 0; /* Размещаем псевдоэлемент слева от элемента списка */
+    top: 50%; /* Перемещаем в верхний край списка */
+    transform: translateY(-50%); /* Центрируем псевдоэлемент по вертикали */
+    width: 2.5px; /* Задаем ширину кружка */
+    height: 2.5px; /* Задаем высоту кружка */
+    background-color: black; /* Задаем цвет кружка */
+    border-radius: 50%; /* Делаем круглый кружок */
+}
 .swiper__nav--btn.swiper-button-disabled {
     background: inherit;
     color: var(--primary-color);
@@ -2171,7 +2181,12 @@ Reviev
     .product_description_high_block {
         display: block;
     }
+    .black-dot_list{
 
+        width: 2px; /* Задаем ширину кружка */
+        height: 2px; /* Задаем высоту кружка */
+
+    }
     .review_second_input_block_form {
         display: block;
         width: 287px;
@@ -6824,8 +6839,13 @@ input[type=number]::-webkit-outer-spin-button {
 .cabinet_save_button {
     width: 160px;
     height: 40px;
+    border-radius: 5px;
+    padding-bottom: 20px;
+    padding-left: 02.rem;
 }
-
+.contact_block_first{
+    padding-left: 0.2rem;
+}
 .cabinet_save_button p {
     color: white;
 }
@@ -6909,6 +6929,8 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: #FF0000;
     font-size: 16px;
     border: none;
+    border-radius: 5px;
+    margin-left:4px;
 
 }
 
@@ -7498,8 +7520,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .comparison_lists_cabinet {
-    margin-right: -0.2rem;
-    margin-left: -0.2rem;
+
+
     background-color: white;
 }
 
@@ -7514,7 +7536,9 @@ input[type=number]::-webkit-outer-spin-button {
     .news_header {
         display: none;
     }
-
+.comparison_cab_button{
+    display: none;
+}
     .big_news_buttons {
 
         height: 243px;
