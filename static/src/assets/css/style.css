@@ -700,14 +700,21 @@ hr {
     transition: var(--transition);
     z-index: 9;
 }
-
+.zakladki{
+    margin-left:-0.2 rem;
+    margin-right:-0.4 rem;
+}
 @media only screen and (max-width: 479px) {
     .swiper__nav--btn {
         width: 3rem;
         height: 3rem;
     }
 }
-.black-dot_list{
+.black-dot_list {
+    position: relative; /* Устанавливаем позицию элемента списка как относительную */
+    padding-left: 20px; /* Добавляем отступ слева для текста */
+  }
+.black-dot_list li::before{
     content: ""; /* Добавляем пустой контент для псевдоэлемента */
     position: absolute; /* Устанавливаем позицию абсолютной */
     left: 0; /* Размещаем псевдоэлемент слева от элемента списка */
@@ -1361,6 +1368,10 @@ body.overlay__active::before,
     .col-lg-23 {
         flex: 0 0 auto;
         width: 37%
+    }
+    .col-lg-24{
+        flex: 0 0 auto;
+        width: 75%
     }
 }
 
@@ -5521,8 +5532,8 @@ input[type=number]::-webkit-outer-spin-button {
 /*}*/
 
 .product__card--thumbnail {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
     position: relative;
     overflow: hidden;
     align-items: center;
@@ -6936,6 +6947,7 @@ input[type=number]::-webkit-outer-spin-button {
     min-width: 200px;
     height: 40px;
     align-self: center;
+    border-radius: 5px;
 
 }
 
@@ -6951,6 +6963,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .personal_review_high_block {
     display: flex;
+    justify-content:space-between;
 
 }
 
