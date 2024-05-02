@@ -97,13 +97,18 @@ footer {
 .icon-button_n {
 
 }
-
-.icon-button_n:active svg path {
-    fill: red;
+.icon-button_n  {
+    color: white;
+}
+.icon-button  {
+    color: white;
+}
+.icon-button_n:hover svg path {
+    color: red;
 }
 
-.icon-button:active svg path {
-    fill: red;
+.icon-button:hover svg path {
+    color: red;
 }
 
 .body__wrapper {
