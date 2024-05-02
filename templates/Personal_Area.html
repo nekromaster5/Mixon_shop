@@ -123,8 +123,8 @@
                                         </li>
                                         <li class="widget__cabinet--button"
                                             style=" display: flex;align-items: center;margin-top:10px;">
-                                            <div class="widget_button_inner">
-                                                <svg width="19" height="24" viewBox="0 0 19 24" fill="none"
+                                            <div class="widget_button_inner" style="display:flex;">
+                                                <svg style="margin-top:5px;" width="19" height="24" viewBox="0 0 19 24" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M4.60547 14.9061L7.32848 17.4372L13.4175 11.834"
                                                           stroke="#FF0000" stroke-miterlimit="10"></path>
@@ -139,7 +139,7 @@
                                                 <button onclick="switchBlock_to_orders_history(); "
                                                         style="  background-color: transparent; border:none;color: black;"
                                                         class="footer__widget--menu__text widget__cabinet--button">
-                                                    История заказов
+                                                   <span  > История заказов </span>
                                                 </button>
                                             </div>
                                         </li>
@@ -234,7 +234,7 @@
                                     {% include "product_block--characteristics.html" %}
                                 </div>
                             {% endfor %}
-                            <button class="fold-button">Развернуть</button>
+                            <button class="fold-button"><span style="color:white;">Развернуть</span></button>
                         </div>
                         <div style="position: relative;">
                             <p>Сравнение 2 универсальные краски</p>
@@ -244,15 +244,12 @@
                         </div>
                         <div class="comparison-list row">
                             <!-- Ваш цикл для вывода продуктов -->
-                            {% for i in '12'|make_list %}
-                                {% if forloop.counter0|divisibleby:3 %}
-
-                                {% endif %}
-                                <div class="col-lg-5 mb-6">
-                                    {% include "product_block--characteristics.html" %}
-                                </div>
-                            {% endfor %}
-                            <button class="fold-button">Развернуть</button>
+                            {% for i in 'abcd'|make_list %}
+                                        <div class="col-lg-8 col-md-3 col-17 mb-7 slide">
+                                            {% include "product_block.html" %}
+                                        </div>
+                                    {% endfor %}
+                            <button class="fold-button"><span style="color:white;">Развернуть</span></button>
                         </div>
                     </div>
                     <div class="orders_history col-lg-8">
