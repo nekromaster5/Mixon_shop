@@ -1997,6 +1997,7 @@ Reviev
 .first_sale_block_buttons {
     margin-left: 240px;
     display: flex;
+    justify-content: space-between;
 }
 
 
@@ -2859,6 +2860,7 @@ Header
 
 .availability_high_block {
     padding-top: 10px;
+    justify-content: space-between;
 }
 
 @media only screen   and (min-width: 768px) and (max-width: 1199px) {
@@ -6431,14 +6433,20 @@ input[type=number]::-webkit-outer-spin-button {
 
 .single__widget.widget__bg {
     padding: 2.5rem 2rem;
-    background-color: var(--bg-white-color);
+    
 }
-
+.widget-fucntions{
+    background-color: white;
+}
 .widget__title {
     font-weight: 500;
+    background-color: white;
+    padding-top: 0.3rem;
+    padding-left: 0.3rem;
+    
 
 }
-
+ 
 @media only screen and (min-width: 992px) {
     .widget__title {
 
@@ -6785,6 +6793,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .orders_history {
     background-color: #FFFFFF;
+    margin-left:0.2rem;
 }
 
 .my_review {
@@ -6856,6 +6865,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .contact_block_first{
     padding-left: 0.2rem;
+    padding-top: 0.3rem;
 }
 .cabinet_save_button p {
     color: white;
@@ -6875,8 +6885,8 @@ input[type=number]::-webkit-outer-spin-button {
 .form-control {
     background-color: #F5F5F5;
     border: none;
-    width: 270px;
-    height: 40px;
+     
+    
 }
 
 .form-control::placeholder {
@@ -6900,6 +6910,8 @@ input[type=number]::-webkit-outer-spin-button {
     height: 40px;
     border: none;
     border-radius: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 .order_history_artikyl {
@@ -6982,8 +6994,9 @@ input[type=number]::-webkit-outer-spin-button {
     }
 
     .menu_button {
-        display: block;
-        margin-left: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
 }
@@ -7082,8 +7095,9 @@ input[type=number]::-webkit-outer-spin-button {
     }
 
     .menu_button {
-        display: block;
-        margin-left: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
     }
 
     th, td {
@@ -7535,7 +7549,7 @@ input[type=number]::-webkit-outer-spin-button {
 .comparison_lists_cabinet {
 
 
-    background-color: white;
+     
 }
 
 .comparison_lists {
@@ -9395,7 +9409,7 @@ details > summary::-webkit-details-marker {
     width: 100%;
     height: 12rem;
     border-radius: 0.7rem;
-    color: var(--text-grey-color);
+    background-color: #F5F5F5;
     border: none;
     padding: 2.2rem 2rem 0.5rem;
     font-weight: 400;
@@ -9782,7 +9796,9 @@ details > summary::-webkit-details-marker {
         display: flex;
     }
 }
-
+.button-margin {
+    margin-right: 15px; /* Отступ справа между кнопками */
+  }
 .product-info__buttons a.compare--button {
     margin-right: 1.2rem;
 }
