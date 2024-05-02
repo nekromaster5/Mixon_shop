@@ -124,7 +124,8 @@
                                         <li class="widget__cabinet--button"
                                             style=" display: flex;align-items: center;margin-top:10px;">
                                             <div class="widget_button_inner" style="display:flex;">
-                                                <svg style="margin-top:5px;" width="19" height="24" viewBox="0 0 19 24" fill="none"
+                                                <svg style="margin-top:5px;" width="19" height="24" viewBox="0 0 19 24"
+                                                     fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M4.60547 14.9061L7.32848 17.4372L13.4175 11.834"
                                                           stroke="#FF0000" stroke-miterlimit="10"></path>
@@ -139,7 +140,7 @@
                                                 <button onclick="switchBlock_to_orders_history(); "
                                                         style="  background-color: transparent; border:none;color: black;"
                                                         class="footer__widget--menu__text widget__cabinet--button">
-                                                   <span  > История заказов </span>
+                                                    <span> История заказов </span>
                                                 </button>
                                             </div>
                                         </li>
@@ -223,7 +224,8 @@
                     <div class="comparison_lists_cabinet col-lg-8">
                         <div style="position: relative;">
                             <p style="margin-left:4px;">Сравнение 1 универсальные краски</p>
-                            <button class="comparison_cab_button"style="position: absolute; top: 0; right: 0;color:red; background-color:transparent; border:none;">
+                            <button class="comparison_cab_button"
+                                    style="position: absolute; top: 0; right: 0;color:red; background-color:transparent; border:none;">
                                 <p>Добавить в сравнение >></p>
                             </button>
                         </div>
@@ -238,17 +240,18 @@
                         </div>
                         <div style="position: relative;">
                             <p style="margin-left:4px;">Сравнение 2 универсальные краски</p>
-                            <button class="comparison_cab_button" style="position: absolute; top: 0; right: 0;color:red; background-color:transparent; border:none;">
+                            <button class="comparison_cab_button"
+                                    style="position: absolute; top: 0; right: 0;color:red; background-color:transparent; border:none;">
                                 <p>Добавить в сравнение >></p>
                             </button>
                         </div>
                         <div class="comparison-list row">
                             <!-- Ваш цикл для вывода продуктов -->
                             {% for i in 'abcd'|make_list %}
-                                        <div class="col-lg-8 col-md-3 col-17 mb-7 slide">
-                                            {% include "product_block.html" %}
-                                        </div>
-                                    {% endfor %}
+                                <div class="col-lg-8 col-md-3 col-17 mb-7 slide">
+                                    {% include "product_block.html" %}
+                                </div>
+                            {% endfor %}
                             <button class="fold-button"><span style="color:white;">Развернуть</span></button>
                         </div>
                     </div>
@@ -704,9 +707,9 @@
 
                                 </div>
                             </div>
-                            <button class="cabinet_save_button" style="width: ;
-                            height:40px; margin-top:10px;background-color:red;border:none;margin-right:px;"><p>
-                                Сохранить</p></button>
+                            <button class="cabinet_save_button"
+                                    style="height:40px; margin-top:10px;background-color:red;border:none;">Сохранить
+                            </button>
 
                         </div>
         </section>

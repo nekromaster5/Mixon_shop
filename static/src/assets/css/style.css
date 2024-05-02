@@ -1,4 +1,4 @@
-@charsetmain_quick_order"UTF-8";
+@charset "UTF-8";
 /*
   Template Name: Grocee - Organic Food HTML Template
   Author Name: Hook theme
@@ -878,7 +878,7 @@ hr {
 
 select {
     word-wrap: normal;
-    font-family: var(--font-lato);
+    font-family: var(--montserrat-fonts);
     font-size: var(--body-font-size);
     font-weight: var(--body-font-weight);
     line-height: var(--body-line-height);
@@ -1084,9 +1084,9 @@ select {
 .capitalize {
     text-transform: capitalize;
 }
-
-.text-ofwhite {
-    color: var(--ofwhite-color);
++
+.text-offwhite {
+    color: var(--text-grey-color);
 }
 
 .bg__primary {
@@ -2468,7 +2468,7 @@ Header
     width: 10px;
     height: 5px;
     flex-shrink: 0;
-    background: url('your_icon_url.png') no-repeat center center;
+    /*background: url('') no-repeat center center;*/
     background-size: cover;
     cursor: pointer;
 }
@@ -2679,14 +2679,14 @@ Header
 /*        padding-right: 0;*/
 /*    }*/
 /*}*/
-.avability_block {
+.availability_block {
     display: flex;
-    margin-top: 30 spx;
+    margin-top: 30px;
     justify-content: space-between;
 
 }
 
-.avability_hr {
+.availability_hr {
 
 }
 
@@ -2716,7 +2716,7 @@ Header
         height: 100%;
     }
 
-    .avability_block {
+    .availability_block {
         display: block;
 
     }
@@ -3341,21 +3341,21 @@ Header
     }
 }
 
-.offcanvas__stikcy--toolbar__btn {
+.off-canvas__sticky--toolbar__btn {
     position: relative;
     text-align: center;
 }
 
-.offcanvas__stikcy--toolbar__btn:hover .offcanvas__stikcy--toolbar__icon {
+.off-canvas__sticky--toolbar__btn:hover .offcanvas__stikcy--toolbar__icon {
     background: var(--secondary-color);
-    color: var(--white-color);
+    color: var(--text-white-color);
 }
 
-.offcanvas__stikcy--toolbar__btn > * {
+.off-canvas__sticky--toolbar__btn > * {
     pointer-events: none;
 }
 
-.offcanvas__stikcy--toolbar__btn.minicart__open--btn {
+.off-canvas__sticky--toolbar__btn.minicart__open--btn {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
@@ -6852,7 +6852,7 @@ input[type=number]::-webkit-outer-spin-button {
     height: 40px;
     border-radius: 5px;
     padding-bottom: 20px;
-    padding-left: 02.rem;
+    padding-left: 0.2rem;
 }
 .contact_block_first{
     padding-left: 0.2rem;
