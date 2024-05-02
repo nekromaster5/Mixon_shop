@@ -7158,7 +7158,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .block_about_company_heading {
     margin-left: 20px;
-    width: 460px;
+     
 }
 
 .img_ab_block {
@@ -7320,7 +7320,8 @@ input[type=number]::-webkit-outer-spin-button {
 
     .block_about_company_heading {
         width: 270px;
-
+padding-left: 25px;
+padding-right: 25px;
     }
 
     .about_company_content {
@@ -7421,7 +7422,7 @@ input[type=number]::-webkit-outer-spin-button {
 .comparison_lists {
 
     margin-right: -1.5rem;
-    margin-left: -1.5rem;
+     
 
 }
 
@@ -7436,9 +7437,13 @@ input[type=number]::-webkit-outer-spin-button {
         width: 300px;
     }
 }
-
+.block_ab_bottom_text{
+    font-weight: 400;
+}
 @media only screen   and (min-width: 768px) and (max-width: 992px) {
-
+.block_ab_bottom_text{
+    padding-left: 110px;
+}
 
     .button_array {
         display: none;
@@ -7451,7 +7456,7 @@ input[type=number]::-webkit-outer-spin-button {
     }
 
     .about_company_Heading {
-        margin-left: 170px;
+       
         font-size: 30px;
     }
 
@@ -7705,11 +7710,28 @@ details > summary::-webkit-details-marker {
 #cart--title {
     margin-bottom: 3rem;
 }
-
+.red-dot_list li {
+    position: relative; /* Устанавливаем позицию элемента списка как относительную */
+    padding-left: 20px; /* Добавляем отступ слева для текста */
+  }
+  .red-dot_list li::before {
+    content: ""; /* Добавляем пустой контент для псевдоэлемента */
+    position: absolute; /* Устанавливаем позицию абсолютной */
+    left: 0; /* Размещаем псевдоэлемент слева от элемента списка */
+    top: 50%; /* Перемещаем в верхний край списка */
+    transform: translateY(-50%); /* Центрируем псевдоэлемент по вертикали */
+    width: 10px; /* Задаем ширину кружка */
+    height: 10px; /* Задаем высоту кружка */
+    background-color: red; /* Задаем цвет кружка */
+    border-radius: 50%; /* Делаем круглый кружок */
+  }
 @media only screen and (min-width: 768px) and (max-width: 992px) {
     #cart--title {
         font-size: 2rem;
         line-height: 2.4rem;
+    }
+    .block_about_company_heading{
+        padding-right: 50px;
     }
 }
 
