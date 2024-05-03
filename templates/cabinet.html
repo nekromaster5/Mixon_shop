@@ -56,15 +56,15 @@
 
             <div class="container">
 
-
+<div style="display:flex;justify-content: center;">
                 <button class="menu_button" style=" "><span>Меню кабинета</span></button>
-
+</div>
                 <div class="row">
                     <!-- Первый блок - блок виджетов -->
                     <div class="vidget_block_cabinet col-lg-6">
                         <div class="shop__sidebar--widget widget__area d-none d-lg-block">
                             <div class="single__widget widget__bg px-0">
-                                <div class="d-flex widget__title" style="flex-direction: column; margin-left:4px;">
+                                <div class="d-flex widget__title" style="flex-direction: column;  ">
                                    <div class="widget_inner">
                                     <h2 class="h3">Ваш кабинет</h2>
                                     <div class="personal_name">Василий Иванов</div>
@@ -224,11 +224,11 @@
                         </div>
                     </div>
                     <div class="comparison_lists_cabinet col-lg-8">
-                        <div style="position: relative; background-color:white;">
-                            <p style="margin-left:4px;">Сравнение 1 универсальные краски</p>
+                        <div class="comp_list_inn"style="position: relative; background-color:white;">
+                            <span style="margin-left:4px;">Сравнение 1 универсальные краски</span>
                             <button class="comparison_cab_button"
                                     style="position: absolute; top: 0; right: 0;color:red; background-color:transparent; border:none;">
-                                <p>Добавить в сравнение >></p>
+                                <span>Добавить в сравнение >></span>
                             </button>
                         </div>
                         <div class="comparison-list row">
@@ -240,11 +240,11 @@
                             {% endfor %}
                             <button class="fold-button"><span style="color:white;">Развернуть</span></button>
                         </div>
-                        <div style="position: relative;background-color:white;">
-                            <p style="margin-left:4px;  ">Сравнение 2 универсальные краски</p>
+                        <div class="comp_list_inn" style="position: relative;background-color:white;">
+                            <span style="margin-left:4px;  ">Сравнение 2 универсальные краски</span>
                             <button class="comparison_cab_button"
                                     style="position: absolute; top: 0; right: 0;color:red; background-color:transparent; border:none;">
-                                <p>Добавить в сравнение >></p>
+                                <span>Добавить в сравнение >></span>
                             </button>
                         </div>
                         <div class="comparison-list row">
@@ -630,47 +630,47 @@
                     </div>
                     <div class="contact_information col-lg-8">
                         <div class="contact_block_first ml-6" style="">
-                            <h2 class="h3">Основные данные:</h2>
-                            <div class="row">
-                                <div class="col-lg-22 col-md-5">
+                            <h2 class="h3 contact_label">Основные данные:</h2>
+                            <div class="row mx-md-6 mx-7 ">
+                                <div class="col-lg-5 col-md-5 px-9 px-md-6"  >
                                     <!-- Первая колонка с двумя строками ввода -->
-                                    <input type="text" class="form-control mb-2" placeholder="Первая строка ввода">
+                                    <input type="text" class="form-control   mb-md-6 mb-3" placeholder="Первая строка ввода">
                                     <input type="text" class="form-control" placeholder="Вторая строка ввода">
                                 </div>
-                                <div class="col-lg-22 col-md-5">
+                                <div class="col-lg-5 col-md-5 px-9 px-md-6">
                                     <!-- Вторая колонка с двумя строками ввода -->
-                                    <input type="text" class="form-control mb-2" placeholder="Третья строка ввода">
+                                    <input type="text" class="form-control   mb-md-6 mb-3" placeholder="Третья строка ввода">
                                     <input type="text" class="form-control" placeholder="Четвертая строка ввода">
                                 </div>
                             </div>
                             <div class="contact_block_second ml-6" style="">
-                                <h2 class="h3">Адрес:</h2>
-                                <div class="row">
-                                    <div class="col-lg-22 col-md-5">
+                                <h2 class="h3 contact_label" >Адрес:</h2>
+                                <div class="row mx-md-6 mx-7">
+                                    <div class="col-lg-5 col-md-5 px-9 px-md-6 ">
                                         <!-- Первая колонка с двумя строками ввода -->
-                                        <input type="text" class="form-control mb-2" placeholder="Первая строка ввода">
+                                        <input type="text" class="form-control   mb-md-6 mb-3" placeholder="Первая строка ввода">
                                         <input type="text" class="form-control" placeholder="Вторая строка ввода">
 
 
                                     </div>
-                                    <div class="col-lg-22 col-md-5">
+                                    <div class="col-lg-5 col-md-5 px-9 px-md-6">
                                         <!-- Вторая колонка с двумя строками ввода -->
-                                        <input type="text" class="form-control mb-2" placeholder="Третья строка ввода">
+                                        <input type="text" class="form-control mb-md-6 mb-3" placeholder="Третья строка ввода">
                                         <input type="text" class="form-control" placeholder="Четвертая строка ввода">
                                     </div>
-                                    <div class="col-lg-5 col-md-5">
+                                    <div class="col-lg-5 col-md-5 px-9 px-md-6">
                                         <!-- Вторая колонка с двумя строками ввода -->
 
-                                        <input style="margin-top:45px;" type="text" class="form-control"
+                                        <input style="" type="text" class="form-control"
                                                placeholder="Четвертая строка ввода">
                                     </div>
                                 </div>
                                 <div class="contact_block_first ml-6  " style="">
-                                    <h2 class="h3">Пароль:</h2>
-                                    <div class="row">
-                                        <div class="col-lg-22 col-md-5  " style="position:relative;">
+                                    <h2 class="h3 contact_label">Пароль:</h2>
+                                    <div class="row mx-md-6 mx-7">
+                                        <div class="col-lg-5 col-md-5 px-9 px-md-6 " style="position:relative;">
                                             <!-- Первая колонка с двумя строками ввода -->
-                                            <input type="text" class="form-control mb-2 d-flex"
+                                            <input type="text" class="form-control mb-md-6 mb-3 d-flex"
                                                    placeholder="Первая строка ввода">
                                             <button style=" right:20px;width:20px;height:23px; top:5px;position:absolute; background-color:transparent; border:none;">
                                                 <svg width="13" height="8" viewBox="0 0 13 8" fill="none"
@@ -686,10 +686,10 @@
 
 
                                         </div>
-                                        <div class="col-lg-22 col-md-5" style="position:relative;padding-left:0.2rem;">
+                                        <div class="col-lg-5 col-md-5 px-9 px-md-6s" style="position:relative;padding-left:0.2rem;">
                                             <!-- Вторая колонка с двумя строками ввода -->
 
-                                            <input type="text" class="form-control mb-2 "
+                                            <input type="text" class="form-control mb-md-6 mb-3 "
                                                    placeholder="Третья строка ввода">
                                             <button style="right:20px;width:20px;height:23px; top:5px;position:absolute; background-color:transparent; border:none;">
                                                 <svg width="13" height="8" viewBox="0 0 13 8" fill="none"
@@ -710,7 +710,7 @@
                                 </div>
                             </div>
                             <button class="cabinet_save_button"
-                                    style="height:40px; margin-top:10px;background-color:red;border:none;">Сохранить
+                                    style="height:40px; margin-top:10px;background-color:red;border:none;"><span style="color:white;">Сохранить</span>
                             </button>
 
                         </div>
