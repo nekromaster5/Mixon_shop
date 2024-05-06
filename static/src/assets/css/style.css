@@ -6581,7 +6581,9 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: white;
     padding: 3rem 3rem 2.5rem;
 }
-
+.order_history_second_text{
+    color:#787878;
+}
 @media only screen and (min-width: 992px) {
     .cabinet--widget__title {
         margin-bottom: 4px;
@@ -7182,6 +7184,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .pa_high_history_block {
     display: flex;
+    justify-content: space-between;
 }
 
 .personal_review_high_block {
