@@ -7419,7 +7419,7 @@ justify-content: space-between;
         
        }
        .first_order_history_block{
-        padding-left: 17px !important;
+        padding-left: 0px !important;
         padding-right: 0px !important; 
         text-align: left !important;
        }
@@ -7432,6 +7432,7 @@ display: none;
         display: block !important;
         font-size: 12px;
         padding-right: 0px !important;
+        padding-left: 0px !important;
     }
     .order_history_button{
         padding-top:18px;
