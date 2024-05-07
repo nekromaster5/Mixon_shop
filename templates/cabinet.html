@@ -32,7 +32,7 @@
 <div class="body__wrapper">
     <header>{% include "header.html" %}</header>
     <main class="main__content_wrapper">
-        <section class="breadcrumb__section breadcrumb__bg">
+        <section class="breadcrumb__section breadcrumb__bg" style="  ">
             <div class="container">
                 <div class="breadcrumb__content text-center">
                     <ul class="breadcrumb__content--menu d-flex">
@@ -50,7 +50,7 @@
         </section>
         <section class="personal_product__section section--padding pt-0 bg__off_white">
             <div class="container">
-                <div style="display:flex; justify-content: center; margin-bottom: 3rem;">
+                <div class="menu_button_div"style=" ">
                     <button class="menu_button" style=" ">Меню кабинета</button>
                 </div>
                 <div class="row">
@@ -210,7 +210,7 @@
                         <div class="row">
                             <!-- Ваш цикл для вывода продуктов -->
                             {% for i in '12345'|make_list %}
-                                <div class="col-lg-5 col-md-4 col-6 px-lg-6 px-md-6 px-8 mb-6">
+                                <div class="col-lg-5 col-md-4 col-6 px-lg-6 px-md-6  px-8 mb-6">
                                     {% include "product_block.html" %}
                                 </div>
                             {% endfor %}
@@ -232,7 +232,7 @@
                                         {% include "product_block--characteristics.html" %}
                                     </div>
                                 {% endfor %}
-                                <div class="col-12 px-lg-6 px-md-6 px-8 row">
+                                <div class="col-12 px-lg-6 px-md-6   row">
                                     <button class="fold-button col-lg-5 col-md-4 col-6 px-0">Развернуть</button>
                                 </div>
                             </div>
@@ -261,41 +261,63 @@
                     <div class="orders_history col-lg-8" style="display: none">
                         <div class="review_personal_block ml-6" style="">
                             <div class="suported_pa_high_history_block">
-                                <div class="pa_high_history_block" style=" ">
-                                    <div class="first_order_history_block" style="display: block; ">
-                                        <div class="first_text_block" style="display:flex; ">
-                                            <p>Заказ №123</p>
-                                            <p class="order_history_second_text" style=" ">01.01.2021
+                                <div class="pa_high_history_block row" style= "">
+                                    <div class="first_order_history_block row col-lg-27 col-md-17 col-4" style="  ">
+                                        <div class="first_text_block col-lg-26 col-md-6 "  >
+                                            <span class="order_label">Заказ №123</span>
+                                            <span class="extra_span" style=" margin-left: 0;">Статус заказа:</span>
+                                            
                                         </div>
-                                        <div class="second_text_block" style="display:flex;justify-content:space-between">
-                                            <p>Статус заказа:</p>
-                                            <p class="order_history_second_text" style="">в обработке</p>
-                                        </div>
+                                        <div class="adding_mobile_labels" style="text-align: right;">
+                                            <p  style=" margin-left:0px;width:100%; display:flex;">Статус заказа:</p>
 
+                                            <p style="color:#787878;  margin-left:0; width:100%;display:flex;">Кол-во товаров:</p> 
+                                        <p class="order_history_first_text" style="color:#787878;">Итого:</p>
+                                        </div>
+                                        <div class="second_text_block  col-lg-26 col-md-6  "  >
+ 
+                                            <span class="order_history_second_text" style=" ">01.01.2021</span>
+                                                <span class="order_history_second_text" style="">в обработке</span>
+                                        </div>
+                                        
+                                         
                                     </div>
-
-                                    <div class="second_order_history_block" style="display: block; ">
-                                        <div class="first_text_block" style="display:flex;justify-content:space-between">
-                                            <p style=" ">Кол-во товаров:</p>
-                                            <p class="order_history_second_text" style=" ">24</p>
+                                    <div class="second_order_history_block row col-lg-27 col-md-17 col-4"  style=" "> 
+                                        <div class="first_text_block col-lg-26 col-md-6" style="text-align: right; "> 
+                                            <span style="color:#787878; white-space: nowrap;">Кол-во товаров:</span> 
+                                            <span class="order_history_first_text" style="color:#787878;">Итого:</span> 
+ 
+                                        </div> 
+                                        <div class="second_text_block col-lg-26 col-md-6  " style="  text-align:center;   ">
+                                            <span class="order_history_second_text" style=" white-space: nowrap;">24</span>
+                                            <span class="order_history_second_text" style="white-space: nowrap; color:#FF0000;">232.00 &#8372;</span>
+                                            
+                                        </div>
+                                        <div class="adding_mobile_labels col-lg-26 col-md-6 ">
+                                            <span class="order_history_second_text" style=" white-space: nowrap;">01.01.2021</span>
+                                            <p class="order_history_second_text" style="white-space: nowrap;">в обработке</p>
 
                                         </div>
-                                        <div class="second_text_block" style="display:flex; ">
-                                            <p style=" ">Итого:</p>
-                                            <p class="order_history_second_text" style=" color:#FF0000;">232.00
-                                                &#8372</p>
-<!-- Cabinet {% comment "" %}{% endcomment %}-->
-                                        </div>
+                                        <div class="adding_mobile_labels col-lg-26 col-md-6 " style="margin-top:12px;">
+                                            
+                                            <p class="order_history_second_text" style=" white-space: nowrap;">24</p>
 
+                                            <p class="order_history_second_text" style="white-space: nowrap; color:#FF0000;">232.00 &#8372;</p>
+
+                                        </div>
+ 
+                                    </div>
+                                    
+
+                                    <div class="order_history_button col-lg-28 col-md-23 col-4"style="  ">
+                                        <button class="order_pa_button" style="display:flex;">
+                                            <img style="margin-top:5px; "
+                                                 src="{% static '/src/assets/img/icon/repeat_button.svg' %}">
+                                            <p>Повторить</p></button>
                                     </div>
 
                                 </div>
-                                <div style=" margin-left:20px; ">
-                                    <button class="order_pa_button" style="display:flex;">
-                                        <img style="margin-top:5px; "
-                                             src="{% static '/src/assets/img/icon/repeat_button.svg' %}">
-                                        <p>Повторить</p></button>
-                                </div>
+                                 
                             </div>
 
                             <div class="open_order_bord" style="display: none">
@@ -359,206 +381,8 @@
                             <hr style="background-color: #AEADAA; height: 1px; border: none;">
 
                         </div>
-                        <div class="review_personal_block ml-6" style="">
-                            <div class="suported_pa_high_history_block">
-                                <div class="pa_high_history_block" style=" ">
-                                    <div class="first_order_history_block" style="display: block; ">
-                                        <div class="first_text_block" style="display:flex; ">
-                                            <p>Заказ №123</p>
-                                            <p class="order_history_second_text" style=" ">01.01.2021
-                                        </div>
-                                        <div class="second_text_block" style="display:flex;">
-                                            <p>Статус заказа:</p>
-                                            <p class="order_history_second_text" style=" ">в обработке</p>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="second_order_history_block" style="display: block; ">
-                                        <div class="first_text_block" style="display:flex;">
-                                            <p style=" ">Кол-во товаров:</p>
-                                            <p class="order_history_second_text" style=" ">24</p>
-
-                                        </div>
-                                        <div class="second_text_block" style="display:flex;">
-                                            <p style=" ">Итого:</p>
-                                            <p class="order_history_second_text" style=" color:#FF0000;">232.00
-                                                &#8372</p>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                                <div style=" margin-left:20px; ">
-                                    <button class="order_pa_button" style="display:flex;">
-                                        <img style="margin-top:5px; "
-                                             src="{% static '/src/assets/img/icon/repeat_button.svg' %}">
-                                        <p>Повторить</p></button>
-                                </div>
-                            </div>
-
-                            <div class="open_order_bord" style="display: none">
-                                <div class="order_table d-flex flex-column"
-                                     style="margin-bottom: 10px;  ">
-                                    <table>
-                                        <thead>
-                                        <tr style="background-color:#F5F5F5;">
-                                            <th>Наименование</th>
-                                            <th>Артикул</th>
-                                            <th>Количество</th>
-                                            <th>Цена</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td>1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td>1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td>1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td>1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <!-- Добавьте больше строк, если нужно -->
-                                        </tbody>
-                                    </table>
-
-
-                                </div>
-                                <hr style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
-
-                                <h2 class="h3">Василий Иванов<span class="pa_total" style=" ">Итого:</span>
-                                    <span style="margin-left:10px; color:red;">1 632.00₴</span></h2>
-
-                                <span>+38 098 76 54 321, example@gmail.com
-                                </span>
-                                <h2 class="h3">Доставка: <span> Самовывоз из магазина Одесса</span>
-                                </h2>
-                                <h2 class="h3">Оплата: <span style="margin-left:20px;"> Наличными в магазине</span>
-                                </h2>
-                                <h2 class="h3" style="margin-left:50px;">Коментариев нет</h2>
-                            </div>
-                            <button class="order_button" style="margin-top:20px;border:none;background-color:transparent;color:red;
-                              "><p class="button_text">Развернуть >></p></button>
-                            <hr style="background-color: #AEADAA; height: 1px; border: none;">
-
-                        </div>
-                        <div class="review_personal_block ml-6">
-                            <div class="suported_pa_high_history_block">
-                                <div class="pa_high_history_block" style=" ">
-                                    <div class="first_order_history_block">
-                                        <div class="first_text_block" style="display:flex; ">
-                                            <p>Заказ №123</p>
-                                            <p class="order_history_second_text" style=" ">01.01.2021
-                                        </div>
-                                        <div class="second_text_block" style="display:flex;">
-                                            <p>Статус заказа:</p>
-                                            <p class="order_history_second_text" style=" ">в обработке</p>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="second_order_history_block" style="display: block;">
-                                        <div class="first_text_block" style="display:flex;">
-                                            <p style=" ">Кол-во товаров:</p>
-                                            <p class="order_history_second_text" style=" ">24</p>
-
-                                        </div>
-                                        <div class="second_text_block" style="display:flex;">
-                                            <p style=" ">Итого:</p>
-                                            <p class="order_history_second_text" style=" color:#FF0000;">232.00
-                                                &#8372</p>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                                <div style=" margin-left:20px; ">
-                                    <button class="order_pa_button" style="display:flex;">
-                                        <img style="margin-top:5px; "
-                                             src="{% static '/src/assets/img/icon/repeat_button.svg' %}">
-                                        <p>Повторить</p></button>
-                                </div>
-                            </div>
-
-                            <div class="open_order_bord" style="display: none">
-                                <div class="order_table d-flex flex-column"
-                                     style="margin-bottom: 10px;  ">
-                                    <table>
-                                        <thead>
-                                        <tr style="background-color:#F5F5F5;">
-                                            <th>Наименование</th>
-                                            <th>Артикул</th>
-                                            <th>Количество</th>
-                                            <th>Цена</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td>1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td>1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td>1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td>1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <!-- Добавьте больше строк, если нужно -->
-                                        </tbody>
-                                    </table>
-
-
-                                </div>
-                                <hr style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
-
-                                <h2 class="h3">Василий Иванов<span class="pa_total" style=" ">Итого:</span>
-                                    <span style="margin-left:10px; color:red;">1 632.00₴</span></h2>
-
-                                <span>+38 098 76 54 321, example@gmail.com
-                                </span>
-                                <h2 class="h3">Доставка: <span> Самовывоз из магазина Одесса</span>
-                                </h2>
-                                <h2 class="h3">Оплата: <span style="margin-left:20px;"> Наличными в магазине</span>
-                                </h2>
-                                <h2 class="h3" style="margin-left:50px;">Коментариев нет</h2>
-                            </div>
-                            <button class="order_button" style="margin-top:20px;border:none;background-color:transparent;color:red;
-                              "><p class="button_text">Развернуть >></p></button>
-                            <hr style="fbackground-color: #AEADAA; height: 1px; border: none;">
-
-                        </div>
+                         
+                         
                     </div>
                     <div class="my_review col-lg-8" style="display: none">
                         <div class="review_personal_block  row ml-6" style=" ">

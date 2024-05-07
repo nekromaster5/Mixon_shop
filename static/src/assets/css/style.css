@@ -1417,6 +1417,19 @@ body.overlay__active::before,
         flex: 0 0 auto;
         width: 32%;
     }
+    .col-lg-26 {
+        flex: 0 0 auto;
+        width: 50%;
+    }
+    .col-lg-27{
+        flex: 0 0 auto;
+        width: 40%;
+    }
+    .col-lg-28 {
+        flex: 0 0 auto;
+        width: 20%;
+    }
+    
 }
 
 /* Section padding */
@@ -1518,7 +1531,10 @@ body.overlay__active::before,
     padding-right: 1.5rem;
     padding-left: 1.5rem;
 }
-
+.px-10{
+margin-left: -1.5rem;
+margin-right: -1.5rem;
+ }
 @media only screen and (min-width: 768px) {
     .px-md-7 {
         padding-left: 1rem;
@@ -5218,6 +5234,10 @@ input[type=number]::-webkit-outer-spin-button {
         flex: 0 0 auto;
         width: 17%;
     }
+    .col-md-23 {
+        flex: 0 0 auto;
+        width: 20%;
+    }
 }
 
 
@@ -6583,6 +6603,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .order_history_second_text{
     color:#787878;
+    display: block;
+     
 }
 @media only screen and (min-width: 992px) {
     .cabinet--widget__title {
@@ -6908,6 +6930,11 @@ input[type=number]::-webkit-outer-spin-button {
         font-size: 2rem;
         line-height: 2.4rem;
     }
+    .order_history_button{
+        padding-top:29px;
+        padding-right: 20px;
+         
+    }
 }
 
 .product__content--text {
@@ -7027,7 +7054,7 @@ input[type=number]::-webkit-outer-spin-button {
 .menu_button {
     color: white;
 }
-
+ 
 .password_hider {
     width: 12px;
     height: 8px;
@@ -7088,11 +7115,31 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .second_order_history_block {
-    margin-left: 200px;
+    display: flex;
+    padding-top: 33px;
+    padding-left: 18px;
+   justify-content: space-between;
+}
+.order_history_first_text{
+    text-align: right;
+     
+}
+.first_order_history_block {
+ display: flex;
+ padding-top: 33px;
+ padding-left: 18px;
+justify-content: space-between;
+ 
 }
 
-.first_order_history_block {
-
+.order_button{
+    padding-left:20px;
+    
+}
+.order_history_button{
+    padding-top:29px;
+    padding-right: 20px;
+     
 }
 
 .ab_butt {
@@ -7108,12 +7155,29 @@ input[type=number]::-webkit-outer-spin-button {
     border-radius: 5px;
     color: var(--text-white-color);
 }
-
+.menu_button_div{
+    display:none;
+}
 @media only screen   and (min-width: 750px) and (max-width: 1199px) {
     .cabinet--widget__block {
         display: none;
     }
-
+    .first_order_history_block {
+        display: flex;
+        padding-top: 33px;
+        padding-left: 17px;
+       justify-content: space-between;
+        
+       }
+       .second_order_history_block {
+        display: flex;
+        padding-top: 33px;
+        padding-left: 17px;
+       justify-content: space-between;
+    }
+    .menu_button_div{
+        display:flex; justify-content: center; margin-bottom: 27px;
+    }
     .ab_butt {
         margin-left: 130px;
     }
@@ -7156,16 +7220,17 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .second_text_block {
-    height: 28px;
-    justify-content: space-between;
+    display: block;
 }
 
 .first_text_block {
     height: 28px;
-    justify-content: space-between;
+    display: block;
+    font-size: 18px;
+     
 }
 
-
+ 
 .rev_but {
     border: 1px solid;
     border-color: #FF0000;
@@ -7185,6 +7250,8 @@ input[type=number]::-webkit-outer-spin-button {
 .pa_high_history_block {
     display: flex;
     justify-content: space-between;
+    width: 100%;
+ 
 }
 
 .personal_review_high_block {
@@ -7194,7 +7261,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .second_text_block {
-    display: flex;
+     display: block;
 }
 
 .pa_column {
@@ -7217,6 +7284,13 @@ input[type=number]::-webkit-outer-spin-button {
         font-size: 1.2rem;
         line-height: 1.5rem;
     }
+    .order_pa_button  {
+        padding-right: 20px !important;
+        width: 112px !important;
+    }
+    .first_text_block {
+        font-size: 14px; /* Установите желаемый размер шрифта */
+    }
 }
 
 @media only screen and (min-width: 992px) {
@@ -7231,6 +7305,7 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: #FF0000;
     border: none;
     border-radius: 5px;
+    width: 140px;
 }
 
 .order_pa_button p {
@@ -7244,7 +7319,15 @@ input[type=number]::-webkit-outer-spin-button {
 @media only screen   and (min-width: 320px) and (max-width: 760px) {
     .rev_div {
     }
-
+    .second_text_block
+    {
+         display: none;
+    }
+    .order_history_button{
+        padding-top:18px;
+        padding-right: 16px;
+         
+    }
     .fold-button {
         height: 27px;
         font-size: 12px;
@@ -7309,14 +7392,63 @@ input[type=number]::-webkit-outer-spin-button {
     }
 
     .second_text_block {
-        font-size: 12px; /* Установите желаемый размер шрифта */
+        font-size: 12px;
+        display: none; /* Установите желаемый размер шрифта */
     }
 
     .first_text_block {
-        font-size: 12px; /* Установите желаемый размер шрифта */
+        font-size: 12px !important; /* Установите желаемый размер шрифта */
+        text-align: right !important;
+        padding-left: 0px !important;
+        padding-right:0px !important;
+         
+
+    }
+    .first_text_block>.span{
+        white-space: nowrap !important;
+    }
+    .order_label{
+        white-space: nowrap !important; 
+        padding-right: 0px !important;
+    }
+    .extra_span{
+        display: none;
+    }
+    .first_order_history_block> .second_text_block {
+      display: none;
+        
+       }
+       .first_order_history_block{
+        padding-left: 17px !important;
+        padding-right: 0px !important; 
+        text-align: left !important;
+       }
+       
+       .second_order_history_block> .first_text_block {
+display: none;
+        
+    }
+    .adding_mobile_labels{
+        display: block !important;
+        font-size: 12px;
+        padding-right: 0px !important;
+    }
+    .order_history_button{
+        padding-top:18px;
+        padding-right: 16px;
+         
+    }
+    .order_pa_button{
+        width: 92px;
+        height: 30px;
+    }
+    .pa_high_history_block{
+        display: flex;
     }
 }
-
+.adding_mobile_labels{
+    display: none;
+}
 .rev_text {
 
 }
