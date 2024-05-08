@@ -6936,7 +6936,9 @@ input[type=number]::-webkit-outer-spin-button {
          
     }
 }
-
+.bottom_order_table_record{
+    font-size: 14px;
+}
 .product__content--text {
     font-size: 1.6rem;
     line-height: 2rem;
