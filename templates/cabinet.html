@@ -311,7 +311,7 @@
 
                                     <div class="order_history_button col-lg-28 col-md-23 col-4"style="  ">
                                         <button class="order_pa_button" style="display:flex;">
-                                            <img style="margin-top:5px; "
+                                            <img class="order_history_button_img"style="margin-top:5px; "
                                                  src="{% static '/src/assets/img/icon/repeat_button.svg' %}">
                                             <p>Повторить</p></button>
                                     </div>
@@ -325,35 +325,35 @@
                                      style="margin-bottom: 10px;  ">
                                     <table>
                                         <thead>
-                                        <tr style="background-color:#F5F5F5;">
+                                        <tr style="background-color:#F5F5F5;" class="high_table_labels">
                                             <th>Наименование</th>
-                                            <th>Артикул</th>
+                                            <th class="artykyl">Артикул</th>
                                             <th>Количество</th>
                                             <th>Цена</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
+                                        <tr class="table_labels">
                                             <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td>1234567890</td>
+                                            <td class="artykyl_row">1234567890</td>
                                             <td>1</td>
                                             <td>232.00₴</td>
                                         </tr>
-                                        <tr>
+                                        <tr class="table_labels">
                                             <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td>1234567890</td>
+                                            <td class="artykyl_row">1234567890</td>
                                             <td>1</td>
                                             <td>232.00₴</td>
                                         </tr>
-                                        <tr>
+                                        <tr class="table_labels">
                                             <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td>1234567890</td>
+                                            <td class="artykyl_row">1234567890</td>
                                             <td>1</td>
                                             <td>232.00₴</td>
                                         </tr>
-                                        <tr>
+                                        <tr class="table_labels">
                                             <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td>1234567890</td>
+                                            <td class="artykyl_row">1234567890</td>
                                             <td>1</td>
                                             <td>232.00₴</td>
                                         </tr>
@@ -365,30 +365,34 @@
                                 </div>
                                 <hr style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
                         <div class="bottom_order_table_records row" style="display:flex;">
-                        <div class="col-lg-26 ">
-                            <div>
-                                <p class="bottom_order_table_record"> Василий Иванов </p>
+                            <div class="high_order_label col-lg-26 col-md-6"style=" text-align:right;text-align: right;justify-content:right;">
+                                <span class=" " style="padding-right:13px;">Итого:</span>
+                                <span style="  color:red;">1 632.00₴</span>
+                            </div>
+                        <div class="col-lg-26 col-md-6 row">
+                            <div class="bottom_order_table_records_hight">
+                                <span class="bottom_order_table_record" style="font-weight: bold;"> Василий Иванов </span>
 
-                                <p>+38 098 76 54 321, example@gmail.com
+                                <p  >+38 098 76 54 321, example@gmail.com
                                 </p>
                             </div>
                             <div style="display:flex;">
-                                <div>
+                            <div class="bottom_order_table_records_left"  >
                                 <p  class="bottom_order_table_record">Доставка: 
                                 </p>
                                 <p class="bottom_order_table_record" >Оплата:  
                                 </p>
                              </div>
-                             <div>
-                                <p class="bottom_order_table_record"  style="margin-left:px;">Самовывоз из магазина, Одесса</p>
+                             <div class="bottom_order_table_records_right">
+                                <p class="bottom_order_table_record"  style="margin-left:px; white-space: nowrap;">Самовывоз из магазина, Одесса</p>
                                 <p class="bottom_order_table_record"  style="margin-left:px;"> Наличными в магазине </p>
                                 <p class="bottom_order_table_record"  style="margin-left:px;">Коментариев нет</p>
                             </div>
                         </div>
                         
                         </div>
-                        <div class="col-lg-26 "style="display:flex;text-align:right;text-align: right;justify-content:right;">
-                            <span class=" " style=" ">Итого:</span>
+                        <div class="button_order_label col-lg-26 col-md-6"style=" text-align:right;text-align: right;justify-content:right;">
+                            <span  class=" button_order_label_total" style="">Итого:</span>
                             <span style="  color:red;">1 632.00₴</span>
                         </div>
                             </div>
