@@ -1968,7 +1968,12 @@ Product page
 .product-description {
     display: block;
 }
-
+ 
+.black-dot_list_array{
+    display: block;
+    flex-direction: column;
+    width: 400px;
+}
 /*
 Product-description
 */
@@ -2217,7 +2222,10 @@ Reviev
     .carousel-buttons {
         display: none;
     }
-
+    .black-dot_list_array{
+        
+        width: 100%;
+    }
     .product_reviev_stars {
         margin-left: 550px;
         padding-top: 10px;
@@ -2389,6 +2397,10 @@ Reviev
 
     .describe_product {
         display: block;
+    }
+    .black-dot_list_array{
+        
+        width: 100%;
     }
 }
 
