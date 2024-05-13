@@ -17,22 +17,25 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from Mixon_shop.views import HomePage, CataloguePage, Personalpage, ProductPage, Erorpage, Brands, News, Aboutcompany, \
-    New, CheckoutPage, TestSlider, Test
+from Mixon_shop.views import HomePage, CataloguePage, ProductPage, Brands, News, \
+    Topic, AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomePage.as_view(), name='home'),
     path('catalogue', CataloguePage.as_view(), name='catalogue'),
     path('product/', ProductPage.as_view(), name='product'),
-    path('Personal_Area/', Personalpage.as_view(), name='personal'),
-    path('eror_page/', Erorpage.as_view(), name='eror'),
     path('brands/', Brands.as_view(), name='brands'),
     path('news/', News.as_view(), name='news'),
-    path('about_company/', Aboutcompany.as_view(), name='about_company'),
-    path('new/', New.as_view(), name='new'),
+    path('topic/', Topic.as_view(), name='topic'),
+    path('about_company/', AboutCompany.as_view(), name='about_company'),
+    path('cabinet/', PersonalPage.as_view(), name='caninet'),
     path('checkout/', CheckoutPage.as_view(), name='checkout'),
     path('slider/', TestSlider.as_view(), name='slider'),
     path('test/', Test.as_view(), name='test'),
-
+    path('error/', ErrorPage.as_view(), name='error'),
+    path('shipment&payment/', ShipmentPayment.as_view(), name='shipment_and_payment'),
+    path('contacts/', Contacts.as_view(), name='contacts'),
 ]
+
+handler404 = ErrorPage.as_view()

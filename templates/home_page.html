@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     {% load static %}
-    <title>Partsix - Auto Parts & Car Accessories Shop HTML Template</title>
+    <title></title>
     <meta name="description" content="Morden Bootstrap HTML5 Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="{% static '/src/assets/img/favicon.ico' %}">
@@ -35,173 +35,222 @@
     <main class="main__content_wrapper bg__off_white">
         <section class="slider--section mb-7">
             <div class="container">
-                <iframe src="../templates/header.html" frameborder="0" style="width: 100%; height: 300px;"></iframe>
-
-                <link rel="import" href="publuic/header.html">
-
                 <div id="app"></div>
-                <div class="vertical-block" style="margin-left: 100px; ">
-                    <div class="item" onclick="handleItemClick('Item 1') ">
-                        <img src="path/to/logo1.png" alt="Logo 1">
-                        <p>Item 1</p>
+                <div class="vertical-block" style="  ">
+                    <div class="high_main_block">
+                        <div class="main_high_buttons">
+                            <div class="item" style="position:relative;top:20px;left:15px;"
+                                 onclick="">
+                                <img style="position:absolute;margin-top:3px;left:-30px;"
+                                     src="{% static '/src/assets/img/icon/akciya 1.svg' %}" alt="">
+                                <p style="color:red;font-weight: 500;">Акции</p>
+                            </div>
+                            <div class="item" style="position:relative;top:30px;left:15px;"
+                                 onclick="">
+                                <img style="position:absolute;left:-30px;"
+                                     src="{% static '/src/assets/img/icon/lkm-stroitelstvo 1.svg' %}" alt="">
+                                <p style="font-weight: 500;position:relative; ">
+                                    ЛКМ для Строительства</p>
+                            </div>
+                            <div class="item" style="position:relative;top:40px;left:15px;"
+                                 onclick="">
+                                <img style="position:absolute;left:-30px;"
+                                     src="{% static '/src/assets/img/icon/lkm-autoremont 1.svg' %}" alt="">
+                                <p style="font-weight: 500;">ЛКМ для Авторемонта</p>
+                            </div>
+                            <div class="item" style="position:relative;top:50px;left:15px;"
+                                 onclick="">
+                                <img style="position:absolute;left:-30px;"
+                                     src="{% static '/src/assets/img/icon/lkm-derevo 1.svg' %}" alt="">
+                                <p style="font-weight: 500;">ЛКМ для Древообработки</p>
+                            </div>
+                            <div class="item" style="position:relative;top:60px;left:15px;"
+                                 onclick="">
+                                <img style="position:absolute;left:-30px;"
+                                     src="{% static '/src/assets/img/icon/lkm-industry 1.svg' %}" alt="">
+                                <p style="font-weight: 500;">ЛКМ для Промышленности</p>
+                            </div>
+                            <div class="item" style="position:relative;top:70px;left:15px;"
+                                 onclick="">
+                                <img style="position:absolute;left:-30px;"
+                                     src="{% static '/src/assets/img/icon/auto-chemikal 1.svg' %}" alt="">
+                                <p style="font-weight: 500;">Автохимия,автокосметика,<br>
+                                    оборудование для автомоек</p>
+                            </div>
+                            <div class="item" style="position:relative;top:80px;left:15px;"
+                                 onclick="">
+                                <img style="position:absolute;left:-30px;"
+                                     src="{% static '/src/assets/img/icon/instrument 1.svg' %}" alt="">
+                                <p style="font-weight: 500;">Инструменты, аксесуары,<br>
+                                    оборудование</p>
+                            </div>
+                        </div>
+                        <!-- Добавьте другие элементы по аналогии -->
+                        <div class="main_image" style=" ">
+                            <img class="main_image_img" src="{% static '/src/assets/img/icon/slaider 2.png' %}" alt="">
+                            <div class="main_image_buttons">
+                                <button class="main_image_button"></button>
+                                <button class="main_image_button "></button>
+                                <button class="main_image_button "></button>
+                                <button class="main_image_button"></button>
+                                <button class="main_image_button"></button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="item" onclick="handleItemClick('Item 2')">
-                        <img src="path/to/logo2.png" alt="Logo 2">
-                        <p>Item 2</p>
+                    <!-- Блок с кнопками "brends" -->
+                    <div class="brand_buttons-wrapper">
+                        <div class="slider-container adjustable-slider">
+                            <div class="slider" style="display:flex;">
+                                <div class="brand_buttons slide col-lg-21 col-md-22 col-19">
+                                    <div class="brand_buttons-inner">
+                                        <img class="" src="{% static 'src/assets/img/logo/logo-mixon.png' %}"
+                                             alt="Logo Mixon">
+                                    </div>
+                                </div>
+                                <div class="brand_buttons slide col-lg-21 col-md-22 col-19">
+                                    <div class="brand_buttons-inner">
+                                        <img class="" src="{% static 'src/assets/img/logo/logo-genc.png' %}"
+                                             alt="Logo Genc">
+                                    </div>
+                                </div>
+                                <div class="brand_buttons slide col-lg-21 col-md-22 col-19">
+                                    <div class="brand_buttons-inner">
+                                        <img class="" src="{% static 'src/assets/img/logo/logo-smirdex.png' %}"
+                                             alt="Logo Smirdex">
+                                    </div>
+                                </div>
+                                <div class="brand_buttons slide col-lg-21 col-md-22 col-19">
+                                    <div class="brand_buttons-inner">
+                                        <img class="" src="{% static 'src/assets/img/logo/logo-domex.png' %}"
+                                             alt="Logo Domex">
+                                    </div>
+                                </div>
+                                <div class="brand_buttons slide col-lg-21 col-md-22 col-19">
+                                    <div class="brand_buttons-inner">
+                                        <img class="" src="{% static 'src/assets/img/logo/logo-prodyver.png' %}"
+                                             alt="Logo Prodyver">
+                                    </div>
+                                </div>
+                                <div class="brand_buttons slide col-lg-21 col-md-22 col-19">
+                                    <div class="brand_buttons-inner">
+                                        <a href="/catalogue"
+                                           class="view__all--link d-inline-block text-nowrap slide">
+                                            <span>Все бренды</span>
+                                            <svg width="7%" viewBox="0 0 11 13" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M0.384766 0.764038L6.07377 6.39398L0.384766 12.024"
+                                                      stroke="currentColor"
+                                                      stroke-miterlimit="10"></path>
+                                                <path d="M4.31104 0.764038L10 6.39398L4.31104 12.024"
+                                                      stroke="currentColor"
+                                                      stroke-miterlimit="10"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- Add more items as needed -->
                 </div>
-
-                <script>
-                    function handleItemClick(itemName) {
-                        alert('Clicked on ' + itemName);
-                        // Add your custom click handling logic here
-                    }
-                </script>
-                <!-- Добавьте другие элементы по аналогии -->
-                <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-                <div class="swiper-container">
-                    <!-- Дополнительные обертки, если нужны -->
-                    <div class="swiper-wrapper">
-                        <!-- Слайды -->
-                        <div class="swiper-slide">Слайд 1</div>
-                        <div class="swiper-slide">Слайд 2</div>
-                        <div class="swiper-slide">Слайд 3</div>
-                        <!-- Добавьте нужное количество слайдов -->
-                    </div>
-                    <!-- Если нужны навигационные кнопки -->
-                    <!-- <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div> -->
-                    <!-- Если нужны индикаторы слайдов -->
-                    <div class="swiper-pagination"></div>
-                </div>
-
-                <!-- Блок с кнопками "brends" -->
-                <div class="brends">
-                    <button>Кнопка 1</button>
-                    <button>Кнопка 2</button>
-                    <button>Кнопка 3</button>
-                    <button>Кнопка 4</button>
-                    <button>Кнопка 5</button>
-                    <button>Кнопка 6</button>
-                </div>
-
-                <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-                <!-- Инициализация слайдера -->
-                <script>
-                    var swiper = new Swiper('.swiper-container', {
-                        navigation: {
-                            nextEl: '.swiper-button-next',
-                            prevEl: '.swiper-button-prev',
-                        },
-                        pagination: {
-                            el: '.swiper-pagination',
-                            clickable: true,
-                        },
-                    });
-                </script>
-                <!-- All Script JS Plugins here  -->
-                <script src="{% static '/src/assets/js/vendor/popper.js' %}" defer="defer"></script>
-                <script src="{% static '/src/assets/js/vendor/bootstrap.min.js' %}" defer="defer"></script>
-                <script src="{% static '/src/assets/js/plugins/swiper-bundle.min.js' %}"></script>
-                <script src="{% static '/src/assets/js/plugins/glightbox.min.js' %}"></script>
-                <script>
-                    function toggleDropdown() {
-                        var dropdown = document.getElementById("myDropdown");
-                        dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
-                    }
-
-                    // Закрыть выпадающий список при клике вне него
-                    window.onclick = function (event) {
-                        if (!event.target.matches('.panel button')) {
-                            var dropdowns = document.getElementsByClassName("dropdown");
-                            for (var i = 0; i < dropdowns.length; i++) {
-                                var openDropdown = dropdowns[i];
-                                if (openDropdown.style.display === "block") {
-                                    openDropdown.style.display = "none";
-                                }
-                            }
-                        }
-                    }
-                </script>
-                <!-- Customscript js -->
-                <script src="{% static '/src/assets/js/script.js' %}"></script>
             </div>
         </section>
         <section class="product__section section--padding  pt-0">
             <div class="container">
                 <div class="section__top--sellers">
                     <div class="section__heading d-flex justify-content-between mb-30 ">
-                        <h2 class="section__heading--maintitle">Лидеры продаж</h2>
-                        <a href="{% url 'catalogue' %}" class="d-flex justify-content-center text-nowrap">
-                            <span class="section__heading--maintitle--text__secondary">Посмотреть все</span>
-                            <span class="invisible">a</span>
-                            <img src="{% static '/src/assets/img/icon/two_right_arrows_red.svg' %}"
-                                 alt="two right arrows">
+                        <h2 class="section__heading--maintitle flex-grow-1 flex-shrink-0">Лидеры продаж</h2>
+                        <a href="{% url 'catalogue' %}"
+                           class="view__all--link d-flex justify-content-end text-nowrap flex-grow-0 flex-shrink-1">
+                            <span class="me-3">Посмотреть все</span>
+                            <svg width="2%" height="65%" viewBox="0 0 11 13" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.384766 0.764038L6.07377 6.39398L0.384766 12.024"
+                                      stroke="currentColor"
+                                      stroke-miterlimit="10"></path>
+                                <path d="M4.31104 0.764038L10 6.39398L4.31104 12.024" stroke="currentColor"
+                                      stroke-miterlimit="10"></path>
+                            </svg>
                         </a>
                     </div>
                     <div class="product__section--inner">
-                        <div class="row row-md-reverse">
-                            <div class="row">
-                                {% for i in 'abc'|make_list %}
-                                    <div class="col-lg-6 mb-7">
+                        <div class="slider-container adjustable-slider">
+                            <div class="slider">
+                                {% for i in 'abcd'|make_list %}
+                                    <div class="col-lg-18 col-md-17 col-17 mb-7 slide">
                                         {% include "product_block.html" %}
                                     </div>
                                 {% endfor %}
-                                <img class="col-lg-6 mb-7" src="{% static '/src/assets/img/logo/mixon_banner.png' %}"
-                                     alt="mixon banner">
+                                {#                                            <div class="col-17 slide">#}
+                                {#                                                <img style="display: block !important;"#}
+                                {#                                                     src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}"#}
+                                {#                                                     alt="mixon banner">#}
+                                {#                                            </div>#}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="section__newbies">
                     <div class="section__heading d-flex justify-content-between mb-30 ">
-                        <h2 class="section__heading--maintitle">Новинки</h2>
-                        <a href="{% url 'catalogue' %}" class="d-flex justify-content-center text-nowrap">
-                            <span class="section__heading--maintitle--text__secondary">Посмотреть все</span>
-                            <span class="invisible">a</span>
-                            <img src="{% static '/src/assets/img/icon/two_right_arrows_red.svg' %}"
-                                 alt="two right arrows">
+                        <h2 class="section__heading--maintitle flex-grow-1 flex-shrink-0">Новинки</h2>
+                        <a href="{% url 'catalogue' %}"
+                           class="view__all--link d-flex justify-content-end text-nowrap flex-grow-0 flex-shrink-1">
+                            <span class="me-3">Посмотреть все</span>
+                            <svg width="2%" height="65%" viewBox="0 0 11 13" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.384766 0.764038L6.07377 6.39398L0.384766 12.024"
+                                      stroke="currentColor"
+                                      stroke-miterlimit="10"></path>
+                                <path d="M4.31104 0.764038L10 6.39398L4.31104 12.024" stroke="currentColor"
+                                      stroke-miterlimit="10"></path>
+                            </svg>
                         </a>
                     </div>
                     <div class="product__section--inner">
-                        <div class="row row-md-reverse">
-                            <div class="row">
-                                <img class="col-lg-6 mb-7"
-                                     src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}"
-                                     alt="mixon banner">
-                                {% for i in 'abc'|make_list %}
-                                    <div class="col-lg-6 mb-7">
+                        <div class="slider-container adjustable-slider">
+                            <div class="slider">
+                                {% for i in 'abcd'|make_list %}
+                                    <div class="col-lg-18 col-md-17 col-17 mb-7 slide">
                                         {% include "product_block.html" %}
                                     </div>
                                 {% endfor %}
-
+                                {#                                            <div class="col-17 slide">#}
+                                {#                                                <img style="display: block !important;"#}
+                                {#                                                     src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}"#}
+                                {#                                                     alt="mixon banner">#}
+                                {#                                            </div>#}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="section__recommended">
                     <div class="section__heading d-flex justify-content-between mb-30 ">
-                        <h2 class="section__heading--maintitle">Рекомендуемые товары</h2>
-                        <a href="{% url 'catalogue' %}" class="d-flex justify-content-center text-nowrap">
-                            <span class="section__heading--maintitle--text__secondary">Посмотреть все</span>
-                            <span class="invisible">a</span>
-                            <img src="{% static '/src/assets/img/icon/two_right_arrows_red.svg' %}"
-                                 alt="two right arrows">
+                        <h2 class="section__heading--maintitle flex-grow-1 flex-shrink-0">Рекомендуемые товары</h2>
+                        <a href="{% url 'catalogue' %}"
+                           class="view__all--link d-flex justify-content-end text-nowrap flex-grow-0 flex-shrink-1">
+                            <span class="me-3">Посмотреть все</span>
+                            <svg width="2%" height="65%" viewBox="0 0 11 13" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.384766 0.764038L6.07377 6.39398L0.384766 12.024"
+                                      stroke="currentColor"
+                                      stroke-miterlimit="10"></path>
+                                <path d="M4.31104 0.764038L10 6.39398L4.31104 12.024" stroke="currentColor"
+                                      stroke-miterlimit="10"></path>
+                            </svg>
                         </a>
                     </div>
                     <div class="product__section--inner">
-                        <div class="row row-md-reverse">
-                            <div class="row">
-
-                                {% for i in 'abc'|make_list %}
-                                    <div class="col-lg-6 mb-7">
+                        <div class="slider-container adjustable-slider">
+                            <div class="slider">
+                                {% for i in 'abcd'|make_list %}
+                                    <div class="col-lg-18 col-md-17 col-17 mb-7 slide">
                                         {% include "product_block.html" %}
                                     </div>
                                 {% endfor %}
-                                <img class="col-lg-6 mb-7"
-                                     src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}"
-                                     alt="mixon banner">
+                                {#                                            <div class="col-17 slide">#}
+                                {#                                                <img style="display: block !important;"#}
+                                {#                                                     src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}"#}
+                                {#                                                     alt="mixon banner">#}
+                                {#                                            </div>#}
                             </div>
                         </div>
                     </div>
@@ -211,7 +260,31 @@
     </main>
     <footer>{% include "footer.html" %}</footer>
 </div>
-
-
 </body>
+<script src="{% static '/src/assets/js/slider.js' %}"></script>
+
+<!-- All Script JS Plugins here  -->
+<script src="{% static '/src/assets/js/vendor/popper.js' %}" defer="defer"></script>
+<script src="{% static '/src/assets/js/vendor/bootstrap.min.js' %}" defer="defer"></script>
+<script src="{% static '/src/assets/js/plugins/swiper-bundle.min.js' %}"></script>
+<script src="{% static '/src/assets/js/plugins/glightbox.min.js' %}"></script>
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById("myDropdown");
+        dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+    }
+
+    // Закрыть выпадающий список при клике вне него
+    window.onclick = function (event) {
+        if (!event.target.matches('.panel button')) {
+            const dropdowns = document.getElementsByClassName("dropdown");
+            for (let i = 0; i < dropdowns.length; i++) {
+                const openDropdown = dropdowns[i];
+                if (openDropdown.style.display === "block") {
+                    openDropdown.style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 </html>

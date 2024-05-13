@@ -27,19 +27,19 @@
         <div class="main__footer">
             <img src="{% static '/src/assets/img/logo/logo_mix2.svg' %}" alt="mixon-logo">
             <div class="row ">
-                <div class="col-lg-4 col-md-1 order-lg-0 order-md-2 order-1">
+                <div class="col-lg-4 col-md-13 order-lg-0 order-md-2 order-1">
                     <div class="footer__widget">
                         <h2 class="footer__widget--title">Контакты</h2>
                         <div class="footer__widget--inner">
                             <ul class="footer__widget--menu footer__widget--inner mb-4 mb-md-6 mb-lg-5">
                                 <li class="footer__widget--menu__list"><a
-                                        class="footer__widget--menu__text no-hover no-cursor_change">+38 095 295 88
+                                        class="footer__widget--menu__text">+38 095 295 88
                                     03</a></li>
                                 <li class="footer__widget--menu__list"><a
-                                        class="footer__widget--menu__text no-hover no-cursor_change">+38 097 295 88
+                                        class="footer__widget--menu__text">+38 097 295 88
                                     03</a></li>
                                 <li class="footer__widget--menu__list"><a
-                                        class="footer__widget--menu__text no-hover no-cursor_change">+38 067 888 00
+                                        class="footer__widget--menu__text">+38 067 888 00
                                     03</a></li>
                                 <li class="footer__widget--menu__list invisible"><a
                                         class="footer__widget--menu__text no-hover no-cursor_change">asd</a></li>
@@ -163,24 +163,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-1 order-lg-1 order-md-0 order-0">
+                <div class="col-lg-3 col-md-13 order-lg-1 order-md-0 order-0">
                     <div class="footer__widget">
                         <h2 class="footer__widget--title d-none d-md-block">Меню</h2>
                         <ul class="footer__widget--menu footer__widget--inner">
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
                                                                       href="">Акции</a></li>
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
-                                                                      href="">О нас</a></li>
+                                                                      href="{% url 'about_company' %}">О нас</a></li>
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
-                                                                      href="">Новости</a></li>
+                                                                      href="{% url 'news' %}">Новости</a></li>
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
-                                                                      href="">Оплата и доставка</a></li>
+                                                                      href="{% url 'shipment_and_payment' %}">Оплата и доставка</a></li>
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
-                                                                      href="">Контакты</a></li>
+                                                                      href="{% url 'contacts' %}">Контакты</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-1 col-md-2 order-lg-2 order-md-1 d-none d-md-block">
+                <div class="col-lg-1 col-md-14 order-lg-2 order-md-1 d-none d-md-block">
                     <div class="footer__widget">
                         <h2 class="footer__widget--title ">Товарные направления</h2>
                         <ul class="footer__widget--menu footer__widget--inner">
@@ -207,7 +207,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 order-lg-3 order-md-3 d-none d-md-block">
+                <div class="col-lg-2 col-md-14 order-lg-3 order-md-3 d-none d-md-block">
                     <div class="footer__widget">
                         <h2 class="footer__widget--title ">Магазины</h2>
                         <ul class="footer__widget--menu footer__widget--inner">

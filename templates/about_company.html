@@ -26,14 +26,16 @@
     <!-- Custom Style CSS -->
     <link rel="stylesheet" href="{% static '/src/assets/css/style.css' %}">
     <title></title>
+    <!-- Ulkit -->
+    <link rel="stylesheet" href="{% static '/src/assets/css/uikit.min.css' %}"/>
+
 
 </head>
 <body>
 
 <div class="body__wrapper">
     <header>{% include "header.html" %}</header>
-    <main class="main__content_wrapper" style="background:#E5E5E5;">
-
+    <main class="main__content_wrapper">
         <section class="breadcrumb__section breadcrumb__bg">
             <div class="container">
                 <div class="breadcrumb__content text-center">
@@ -47,37 +49,82 @@
 
                     </ul>
                 </div>
-                <div>
-
-                    <div style=" ">
-                        <button style="width:170px;height:63px;margin-right:20px;"></button>
-                        <button style="width:170px;height:63px;margin-right:20px;"></button>
-                        <button style="width:170px;height:63px;margin-right:20px;"></button>
-                        <button style="width:170px;height:63px;margin-right:20px;"></button>
-                        <button style="width:170px;height:63px;margin-right:20px;"></button>
-                        <button style="width:170px;height:63px;margin-right:20px;"></button>
+                <div class="brand_buttons-wrapper about_company">
+                    <div class="slider-container adjustable-slider">
+                        <div class="slider" style="display:flex;">
+                            <div class="brand_buttons slide col-lg-21 col-md-21">
+                                <div class="brand_buttons-inner about_company">
+                                    <img class="" src="{% static 'src/assets/img/logo/logo-mixon.png' %}"
+                                         alt="Logo Mixon">
+                                </div>
+                            </div>
+                            <div class="brand_buttons slide col-lg-21 col-md-21">
+                                <div class="brand_buttons-inner about_company">
+                                    <img class="" src="{% static 'src/assets/img/logo/logo-genc.png' %}"
+                                         alt="Logo Genc">
+                                </div>
+                            </div>
+                            <div class="brand_buttons slide col-lg-21 col-md-21">
+                                <div class="brand_buttons-inner about_company">
+                                    <img class="" src="{% static 'src/assets/img/logo/logo-smirdex.png' %}"
+                                         alt="Logo Smirdex">
+                                </div>
+                            </div>
+                            <div class="brand_buttons slide col-lg-21 col-md-21">
+                                <div class="brand_buttons-inner about_company">
+                                    <img class="" src="{% static 'src/assets/img/logo/logo-domex.png' %}"
+                                         alt="Logo Domex">
+                                </div>
+                            </div>
+                            <div class="brand_buttons slide col-lg-21 col-md-21">
+                                <div class="brand_buttons-inner about_company">
+                                    <img class="" src="{% static 'src/assets/img/logo/logo-prodyver.png' %}"
+                                         alt="Logo Prodyver">
+                                </div>
+                            </div>
+                            <div class="brand_buttons slide col-lg-21 col-md-21">
+                                <div class="brand_buttons-inner about_company">
+                                    <a href="/catalogue"
+                                       class="view__all--link d-inline-block text-nowrap slide">
+                                        <span class="me-3">Еще новости</span>
+                                        <svg width="5%" viewBox="0 0 11 13" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0.384766 0.764038L6.07377 6.39398L0.384766 12.024"
+                                                  stroke="currentColor"
+                                                  stroke-miterlimit="10"></path>
+                                            <path d="M4.31104 0.764038L10 6.39398L4.31104 12.024" stroke="currentColor"
+                                                  stroke-miterlimit="10"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h2 class="h3" style="margin-left:400px;font-size: 40px;">О компании MikC</h2>
+                </div>
+            </div>
         </section>
         <section>
             <div class="container">
-                <div class="" style="display: flex; flex-direction: row-reverse; flex-wrap: wrap;">
+                <span class="about_company_heading" style="">О компании MikC</span>
+                <div class="about_company_content" style=" ">
                     <div class="comparison_lists  row  ">
                         <div class="col-lg-7">
                             <div class="block_about_company" style="    ">
-                                <div style="display: flex; align-items: center; height:112px; ">
-                                    <div style=" width: 70px; height: 70px; border-radius: 50%; background-color: #e0e0e0; overflow: hidden; margin-left: 20px;">
-                                        <img style="width: 40px; height: 40px; margin-left: 15px; margin-top: 10px;"
+                                <div class="img_ab_block">
+                                    <div class="about_company_img_block flex-grow-1
+                                    flex-shrink-0 ">
+                                        <img class="about_company_img"
                                              src="{% static '/src/assets/img/icon/Group 29.png' %}" alt="Image">
                                     </div>
-                                    <div style="margin-left: 20px;  width: 460px; ">
+                                    <div class="block_about_company_heading  flex-grow-0
+                                    flex-shrink-1  " style="margin-left: 20px;    ">
                                         <h2 class="h3">MikC - это <span style="color:red;">производитель</span>
                                             лакокрасочной продукции, автохимии и автокосметики под брендами
                                             MIXON,DOMEX,MVL</h2>
                                     </div>
                                 </div>
-                                <div>Благодаря этому мы можем:
-                                    <ul>
+                                <div class="block_ab_bottom_text"><ul style="font-weight: 500;">Благодаря этому мы можем:</ul>
+                                    <ul class="red-dot_list">
                                         <li>Создавать лимитированные партии под спец-заказы</li>
                                         <li style="margin-top:10px;">Обеспечить полный ассортимент материалов и
                                             инструментов необходмых для выполнения малярных работ
@@ -87,19 +134,21 @@
                                 </div>
                             </div>
                             <div class="block_about_company" style="    ">
-                                <div style="display: flex; align-items: center; flex-direction: ">
-                                    <div style="width: 70px; height: 70px; border-radius: 50%; background-color: #e0e0e0; overflow: hidden; margin-left: 20px;">
-                                        <img style="width: 40px; height: 40px; margin-left: 15px; margin-top: 10px;"
+                                <div class="img_ab_block">
+                                    <div class="about_company_img_block flex-grow-1
+                                    flex-shrink-0 " style=" ">
+                                        <img class="about_company_img" style=" "
                                              src="{% static '/src/assets/img/icon/Path 60.png' %}" alt="Image">
                                     </div>
-                                    <div style="margin-left: 20px; width: 460px;">
+                                    <div class="block_about_company_heading  flex-grow-0
+                                    flex-shrink-1" style="margin-left: 20px;   ">
                                         <h2 class="h3">MikC - это <span style="color:red;">прямой экспортер</span>
                                             абразивных материалов SMIRDEX, ЛКМ для обработки древесины GENC, бумаги для
                                             малярок PRODYVER и т.д. </h2>
                                     </div>
                                 </div>
-                                <div>Благодаря этому мы можем:
-                                    <ul>
+                                <div class="block_ab_bottom_text"><ul style="font-weight: 500;">Благодаря этому мы можем:</ul>
+                                    <ul class="red-dot_list">
                                         <li>Доукомплектовать</li>
                                         <li style="margin-top:10px;">Обеспечить полный ассортимент материалов и
                                             инструментов необходмых для выполнения малярных работ
@@ -109,18 +158,20 @@
                                 </div>
                             </div>
                             <div class="block_about_company" style="  ">
-                                <div style="display: flex; align-items: center; flex-direction: ">
-                                    <div style="width: 70px; height: 70px; border-radius: 50%; background-color: #e0e0e0; overflow: hidden; margin-left: 20px;">
-                                        <img style="width: 40px; height: 40px; margin-left: 15px; margin-top: 10px;"
-                                             src="{% static '/src/assets/img/icon/Path 53.png' %}" alt="Image">
+                                <div class="img_ab_block ">
+                                    <div class="about_company_img_block flex-grow-1
+                                    flex-shrink-0">
+                                        <img class="about_company_img"
+                                             src="{% static '/src/assets/img/icon/about_comapny_icon.svg' %}" alt="Image">
                                     </div>
-                                    <div style="margin-left: 20px; width: 460px;">
+                                    <div class=" block_about_company_heading flex-grow-0
+                                    flex-shrink-1"style="margin-left: 20px;  ">
                                         <h2 class="h3">MikC - это <span style="color:red;">cеть магазинов</span>по
                                             продаже лакокрасочной продукции </h2>
                                     </div>
                                 </div>
-                                <div>Благодаря этому мы можем:
-                                    <ul>
+                                <div class="block_ab_bottom_text"><ul style="font-weight: 500;">Благодаря этому мы можем:</ul>
+                                    <ul class="red-dot_list">
                                         <li>Принимать оплату разными способами(наличный и безналичный расчет,в том числе
                                             и с НДС, перевод на платежную карту и т.п.)
                                         </li>
@@ -132,18 +183,20 @@
                         </div>
                         <div class="col-lg-7">
                             <div class="block_about_company" style=" ">
-                                <div style="display: flex; align-items: center; flex-direction: ">
-                                    <div style="width: 70px; height: 70px; border-radius: 50%; background-color: #e0e0e0; overflow: hidden; margin-left: 20px;">
-                                        <img style="width: 40px; height: 40px; margin-left: 15px; margin-top: 10px;"
+                                <div class="img_ab_block">
+                                    <div class="about_company_img_block flex-grow-1
+                                    flex-shrink-0">
+                                        <img class="about_company_img"
                                              src="{% static '/src/assets/img/icon/Group 33.png' %}" alt="Image">
                                     </div>
-                                    <div style="margin-left: 20px; width: 460px;">
+                                    <div class=" block_about_company_heading flex-grow-0
+                                    flex-shrink-1" style="margin-left: 20px;  ">
                                         <h2 class="h3">MikC - это структурированная система<span style="color:red;">оптовых продаж</span>
                                             и скидок</h2>
                                     </div>
                                 </div>
-                                <div>Благодаря этому мы можем:
-                                    <ul>
+                                <div class="block_ab_bottom_text"><ul style="font-weight: 500;">Благодаря этому мы можем:</ul>
+                                    <ul class="red-dot_list">
                                         <li>Предложить систему скидок в завимости от статуса клиента - професионал,
                                             диллер, дистрибьютор.
                                         </li>
@@ -155,17 +208,19 @@
                                 </div>
                             </div>
                             <div class="block_about_company" style="    ">
-                                <div style="display: flex; align-items: center; flex-direction: ">
-                                    <div style="width: 70px; height: 70px; border-radius: 50%; background-color: #e0e0e0; overflow: hidden; margin-left: 20px;">
-                                        <img style="width: 40px; height: 40px; margin-left: 15px; margin-top: 10px;"
+                                <div class="img_ab_block">
+                                    <div class="about_company_img_block  ">
+                                        <img class="about_company_img flex-grow-1
+                                        flex-shrink-0"
                                              src="{% static '/src/assets/img/icon/Path 54.png' %}" alt="Image">
                                     </div>
-                                    <div style="margin-left: 20px; width: 460px;">
+                                    <div class=" block_about_company_heading flex-grow-0
+                                    flex-shrink-1"style="margin-left: 20px;  ">
                                         <h2 class="h3">MikC - это оптовый склад, свой грузовой транспорт</h2>
                                     </div>
                                 </div>
-                                <div>Благодаря этому мы можем:
-                                    <ul>
+                                <div class="block_ab_bottom_text"><ul style="font-weight: 500;">Благодаря этому мы можем:</ul>
+                                    <ul class="red-dot_list">
                                         <li>Всегда иметь в наличии полный ассортимент продукции</li>
                                         <li style="margin-top:10px;">Организовать доставку товара на объект при сумме
                                             закупки от 3 000 грн.
@@ -183,36 +238,36 @@
         <section>
             <div class="container" style=" ">
                 <div class="">
-                    <h2 class="h3" style="margin-left:400px;font-size: 40px;">Товарные направления</h2>
+                    <span class="about_company_heading_non" style=" ">Товарные направления</span>
 
                     <div class="comparison_lists col-lg-12 row">
-                        <button class="" style="width:370px;height:190px;margin-left:20px;margin-top:20px">
-                            <img style="margin-left:150px;" src="{% static '/src/assets/img/icon/Group 37.png' %}"
+                        <button class="about_company_button">
+                            <img class="ab_butt"   src="{% static '/src/assets/img/icon/Group 37.png' %}"
                                  alt="Image">
                             <h2 class="h3" style="color:red;">CAR REFINISH</h2>
                             <h2 class="h3" style=" ">ЛКМ для покраски автомобиля</h2></button>
-                        <button style="width:370px;height:190px;margin-left:20px;margin-top:20px">
-                            <img style="margin-left:150px;" src="{% static '/src/assets/img/icon/Path 69.png' %}"
+                        <button class="about_company_button">
+                            <img class="ab_butt"  src="{% static '/src/assets/img/icon/Path 69.png' %}"
                                  alt="Image">
                             <h2 class="h3" style="color:red;">DECORATIVE COATING</h2>
                             <h2 class="h3" style=" ">ЛКМ для строительства и ремонта</h2></button>
-                        <button style="width:370px;height:190px;margin-left:20px;margin-top:20px">
-                            <img style="margin-left:150px;" src="{% static '/src/assets/img/icon/Path 68.png' %}"
+                        <button class="about_company_button">
+                            <img class="ab_butt"   src="{% static '/src/assets/img/icon/Path 68.png' %}"
                                  alt="Image">
                             <h2 class="h3" style="color:red;">WOOD COATING</h2>
                             <h2 class="h3" style=" ">ЛКМ для побработки древесины</h2></button>
-                        <button style="width:370px;height:190px;margin-left:20px;margin-top:20px">
-                            <img style="margin-left:150px;" src="{% static '/src/assets/img/icon/Group 38.png' %}"
+                        <button class="about_company_button">
+                            <img class="ab_butt"   src="{% static '/src/assets/img/icon/Group 38.png' %}"
                                  alt="Image">
                             <h2 class="h3" style="color:red;">INDUSTRIAL COATING</h2>
                             <h2 class="h3" style=" ">ЛКМ для промышленности, ремонта дорог и т.п.</h2></button>
-                        <button style="width:370px;height:190px;margin-left:20px;margin-top:20px">
-                            <img style="margin-left:150px;" src="{% static '/src/assets/img/icon/Path 66.png' %}"
+                        <button class="about_company_button">
+                            <img class="ab_butt"   src="{% static '/src/assets/img/icon/Path 66.png' %}"
                                  alt="Image">
                             <h2 class="h3" style="color:red;">CAR CARE</h2>
                             <h2 class="h3" style=" ">Автохимия, автокосметика и оборудование для моек</h2></button>
-                        <button style="width:370px;height:190px;margin-left:20px;margin-top:20px">
-                            <img style="margin-left:150px;" src="{% static '/src/assets/img/icon/Path 67.png' %}"
+                        <button class="about_company_button">
+                            <img class="ab_butt"   src="{% static '/src/assets/img/icon/Path 67.png' %}"
                                  alt="Image">
                             <h2 class="h3" style="color:red;">NON PAINT</h2>
                             <h2 class="h3" style=" ">Инструменты, оборудование и расходные материалы для малярных и
@@ -222,14 +277,9 @@
                 </div>
             </div>
         </section>
-</div>
-
-
-</div>
-
-</div>
-
-</main>
-<footer>{% include "footer.html" %}</footer>
+    </main>
+    <footer>{% include "footer.html" %}</footer>
 </div>
 </body>
+<script src="{% static '/src/assets/js/slider.js' %}"></script>
+</html>

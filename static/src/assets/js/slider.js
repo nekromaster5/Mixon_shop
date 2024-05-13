@@ -51,23 +51,51 @@ function initSlider(sliderContainer) {
     };
 
     const calculateMaxTranslate = () => {
-        const sliderWidth = slider.offsetWidth;
-        setTimeout(() => {
-            const totalSlidesWidth = Array.from(slides).reduce((total, slide) => total + slide.offsetWidth + parseInt(window.getComputedStyle(slider).columnGap), 0);
-            maxTranslate = sliderWidth - totalSlidesWidth;
-            index++;
-        }, 270);
+        const sliderContainerWidth = sliderContainer.offsetWidth;
+        if (sliderContainer.classList.contains('adjustable-slider')) {
+            let totalSlidesWidth;
+            setTimeout(() => {
+                totalSlidesWidth = Array.from(slides).reduce((total, slide) => total + slide.offsetWidth
+                    + getMarginAndPaddingSum(slide) + getGap() + 10, 0);
+                maxTranslate = sliderContainerWidth - totalSlidesWidth;
+                index++;
+            }, 270);
+        } else {
+            const sliderWidth = slider.offsetWidth;
+            maxTranslate = sliderContainerWidth - sliderWidth;
+        }
     };
 
+    function getGap() {
+        let abc = parseFloat(window.getComputedStyle(slider).columnGap);
+        console.log("columnGap", abc)
+        if (abc) {
+            return abc
+        }
+        return 0
+    }
 
-    enableSlider = function(slider) {
+    function getMarginAndPaddingSum(element) {
+        if (!element) {
+            console.error("Element not found");
+            return;
+        }
+
+        const computedStyle = window.getComputedStyle(element);
+        const margin = parseFloat(computedStyle.marginLeft) + parseFloat(computedStyle.marginRight);
+        const padding = parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight);
+
+        return margin + padding;
+    }
+
+    enableSlider = function (slider) {
         // Слушатели событий для сенсорного управления
         slider.addEventListener('touchstart', touchStart);
         slider.addEventListener('touchmove', touchMove);
         slider.addEventListener('touchend', touchEnd);
     };
 
-    disableSlider = function(slider) {
+    disableSlider = function (slider) {
         slider.removeEventListener('touchstart', touchStart);
         slider.removeEventListener('touchmove', touchMove);
         slider.removeEventListener('touchend', touchEnd);
@@ -78,7 +106,7 @@ function initSlider(sliderContainer) {
 
     // Инициализируем maxTranslate и добавляем обработчик на изменение размера окна
     calculateMaxTranslate();
-    window.addEventListener('resize',() => {
+    window.addEventListener('resize', () => {
         calculateMaxTranslate();
         currentTranslate = 0;
         setSliderPosition();

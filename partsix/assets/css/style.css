@@ -1935,21 +1935,21 @@ body.overlay__active::before,
   }
 }
 
-.offcanvas__stikcy--toolbar__btn {
+.off-canvas__sticky--toolbar__btn {
   position: relative;
   text-align: center;
 }
 
-.offcanvas__stikcy--toolbar__btn:hover .offcanvas__stikcy--toolbar__icon {
+.off-canvas__sticky--toolbar__btn:hover .offcanvas__stikcy--toolbar__icon {
   background: var(--secondary-color);
   color: var(--white-color);
 }
 
-.offcanvas__stikcy--toolbar__btn > * {
+.off-canvas__sticky--toolbar__btn > * {
   pointer-events: none;
 }
 
-.offcanvas__stikcy--toolbar__btn.minicart__open--btn {
+.off-canvas__sticky--toolbar__btn.minicart__open--btn {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;

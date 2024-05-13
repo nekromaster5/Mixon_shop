@@ -6,14 +6,14 @@
     {% load static %}
     <meta name="description" content="Morden Bootstrap HTML5 Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="{% static '/static/src/assets/img/favicon.ico' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static '/src/assets/img/favicon.ico' %}">
 
     <!-- ======= All CSS Plugins here ======== -->
     <link rel="stylesheet" href="{% static '/src/assets/css/plugins/swiper-bundle.min.css' %}">
     <link rel="stylesheet" href="{% static '/src/assets/css/plugins/glightbox.min.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500&display=swap"
           rel="stylesheet">
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
 
     <!-- Plugin css -->
     <link rel="stylesheet" href="{% static '/src/assets/css/vendor/bootstrap.min.css' %}">
@@ -29,84 +29,74 @@
 
 <!-- Start header area -->
 
-<div class="main__header header__sticky" style='background: #FFF;'>
+<div class="main__header header__sticky">
     <div class="container">
         <div class="main__header--inner position__relative d-flex justify-content-between align-items-center">
-            <div class="offcanvas__header--menu__open ">
-                <a class="offcanvas__header--menu__open--btn" href="javascript:void(0)" data-offcanvas>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="ionicon offcanvas__header--menu__open--svg"
-                         viewBox="0 0 512 512">
-                        <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
-                              stroke-width="32" d="M80 160h352M80 256h352M80 352h352"></path>
-                    </svg>
-                    <span class="visually-hidden">Offcanvas Menu Open</span>
-                </a>
+            <button class="adaptive_header_button" style="border:none;background-color:transparent;">
+                <img class="main__logo--img" src="{% static '/src/assets/img/icon/1.svg' %} " alt="logo-img"></button>
+            <div class="main__logo">
+                <a class="main__logo--link" href="{% url 'home' %}">
+                    <img class="main__logo--img" src="{% static '/src/assets/img/logo/logo_mix2.svg' %}" alt="logo-img"></a>
+
             </div>
-            <div class="main__logo" style="width: 101px;
-            height: 41px;
-                    position: relative;
-                    left: 10px;  ">
-                <h1 class="main__logo--title"><a class="main__logo--link" href="{% url 'home' %}"><img class="main__logo--img"
-                                                                                                 src="{% static '/src/assets/img/logo/logo_mix2.svg' %}"
-                                                                                                 alt="logo-img"></a>
-                </h1>
-            </div>
-            <div class="panel-container"  > 
-                <div class="header__menu-panel" 
-                     style="display: inline-flex; font-family: 'Montserrat', sans-serif;  align-items: center; gap: 15px; margin-right: 50px; width: -20px; width:600px; position:absolute;margin-left:-500px;margin-top:5px;">
-                    <button class="menu-panel__button_first"
-                            style="position:relative; font-family: 'Montserrat', sans-serif;background: none;color: #F00; font-family: Montserrat; font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px; border: none;">
-                       <p style="font-family: Montserrat; "> Акции</p>
+            <button class="header_mobile_button" style="border:none;background-color:transparent;">
+                <img src="{% static '/src/assets/img/icon/logo-korzina.svg' %}"
+                     alt="">
+
+
+            </button>
+            <div class="panel-container">
+                <div class="header__menu-panel">
+                    <button class="menu-panel__button_first">
+                        <span class="first_menu-panel__button_text"> Акции</span>
                     </button>
                     <button class="menu-panel__button"
-                            style="position:relative;right:15px;background: none;      
-                            font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px;border: none;">
-                            <p style="font-family: Montserrat; color:#787878;">     О нас</p>
+                            style=" ">
+                        <a href="{% url 'about_company' %}" class="menu-panel__button_text">О нас</a>
                     </button>
-                    <button class="menu-panel__button"
-                            style="position:relative;right:30px;background: none;  font-family: Montserrat; font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px;border: none;">
-                            <p style="font-family: Montserrat; color:#787878;">       Новости</p>
+                    <button class="menu-panel__button">
+                        <a href="{% url 'news' %}" class="menu-panel__button_text">Новости</a>
                     </button>
-                    <button class="menu-panel__button"
-                            style=" position:relative;right:40px;background: none; font-family: Montserrat; font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px;border: none;  ">
-                            <p style="font-family: Montserrat; color:#787878;">       Оплата и доставка</p>
+                    <button class="menu-panel__button">
+                        <a href="{% url 'shipment_and_payment' %}" class="menu-panel__button_text">Оплата и доставка</a>
                     </button>
-                    <button class="menu-panel__button"
-                            style="position:relative;right:50px; background: none; font-family: Montserrat; font-size: 16px; font-style: normal; font-weight: 500; line-height: normal; letter-spacing: -0.48px;border: none; ">
-                            <p style="font-family: Montserrat; color:#787878;">        Контакты </p>
+                    <button class="menu-panel__button">
+                        <a href="{% url 'contacts' %}" class="menu-panel__button_text">Контакты</a>
                     </button>
 
                     <!-- Добавьте еще кнопки, если нужно -->
                 </div>
-                <div class="panel" id="myPanel" style="relative;right:20px;"> 
+                <div class="panel" id="myPanel">
                     <img src="{% static '/src/assets/img/icon/city_mark1.svg' %}" alt="Icon">
-                    <div class="label" ><p style="font-family: Montserrat; color:#787878;">Хмельницикий</p></div>
-                    <button onclick="toggleDropdown()"    style=" width: 20px; /* ваш желаемый размер по горизонтали */
-                                            height: 10px; background-color:white;border:none;"> 
-                                            <img style="position:relative;top:-5px;"src="{% static '/src/assets/img/icon/Vector 1.svg' %}" >
-                                        </button>
+                    <div class="panel_label"><p class="panel_label_text">Хмельницикий</p></div>
+                    <button class="panel_dropdowm_button" onclick="">
+                        <img class="panel_dropdowm_button_img" src="{% static '/src/assets/img/icon/Vector 1.svg' %}"
+                             alt="">
+                    </button>
                     <div class="dropdown" id="myDropdown">
                         <button>Вариант 1</button>
                         <button>Вариант 2</button>
                         <button>Вариант 3</button>
                     </div>
+
                 </div>
-                <div class="panel-right" style="position:relative;right:30px;">
+
+                <div class="panel-right">
                     <img src="{% static '/src/assets/img/icon/phone.svg' %}" alt="Phone Icon">
                     <div class="label">+38 097 295 88 03</div>
                 </div>
                 <!-- Новая третья панель -->
-                <div class="logo-messengers" style="position:relative;right:30px;">
+                <div class="logo-messengers">
                     <img src="{% static '/src/assets/img/icon/viber-top.svg' %}" alt="Messenger Icon 1">
                     <img src="{% static '/src/assets/img/icon/wats-app-top.svg' %}" alt="Messenger Icon 2">
                     <img src="{% static '/src/assets/img/icon/telegram-top.svg' %}" alt="Messenger Icon 3">
                 </div>
-                <div class="language_panel" style="position:relative;right:30px;">
+                <div class="language_panel" style=" ">
                     <button style="background: none;
     border: none;">Укр
                     </button>
                     <button style="background: none;
-    border: none;"><p style="color:#FE0000">Рус</p>
+    border: none;"><span style="color:#FE0000">Рус</span>
                     </button>
                 </div>
 
@@ -116,61 +106,74 @@
         </div>
     </div>
 </div>
-<div class="header__bottom bg__primary" style='background: #383433; height:63px;'>
+<div class="header__bottom bg__primary" style="">
     <div class="container">
         <div class="header__bottom--inner position__relative d-flex align-items-center">
-            <div class="categories__menu mobile-v-none" style="
-                    position: relative;left: -100px; margin-left:100px; width:300px;
-                    ">
+            <div class="categories__menu  " style=" ">
                 <div class="categories__menu--header bg__secondary text-white d-flex align-items-center"
-                     data-bs-toggle="collapse" data-bs-target="#categoriesAccordion" style='background: #1F0D01; height:63px;'>
-                    <img src="{% static '/src/assets/img/icon/logo-katalog1.svg' %}" alt="Logo Katalog">
+                     data-bs-toggle="collapse" data-bs-target="#categoriesAccordion"
+                     style='background: #1F0D01; height:63px; '>
+                    <img class="categories__menu_img" src="{% static '/src/assets/img/icon/logo-katalog1.svg' %}"
+                         alt="Logo Katalog">
 
-                    <span  style="position:relative;font-family: Montserrat;font-size: 1.4em;left:20px; ">Каталог товаров</span>
-                    <svg class="categories__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355"
-                         height="8.394" viewBox="0 0 10.355 6.394">
-                        <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"
-                              transform="translate(-6 -8.59)" fill="currentColor"></path>
-                    </svg>
+                    <span class="categories__menu_text" style="  ">Каталог товаров</span>
+
                 </div>
 
             </div>
-            <div class="header__search--widget d-none d-lg-block header__sticky--none" style="
-                    position: absolute;left: -100px;margin-left:430px;width:540px; height: 40px;">
+            <div class="header__search--widget   d-lg-block header__sticky--none" style="
+                    margin-left:100px; ">
                 <form class="d-flex header__search--form border-radius-" action="#">
 
-                    <div class="header__search--box"  >
+                    <div class="header__search--box" style="display:flex;">
                         <label>
-                            <input class="header__search--input" style="height: 40px;width:540px;border-radius:0; 
-                            }"placeholder="Поиск товара" >
-                                   <img svg="{% static '/src/assets/img/icon/lupa 1.svg' %}">
+                            <input class="header__search--input" style="height: 40px; border-radius:0; 
+                            }" placeholder="Поиск товара">
+                            <img src="{% static '' %}" alt="">
                         </label>
                         <button class="header__search--button bg__primary text-white" aria-label="search button"
-                                type="submit" placeholder="Найти" style="width: 100px;left:500px; position:absolute; height: 42px;margin-top:-1px;border-radius:0;background-color:red;"  >
-                                Найти
-                          <!--    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"-->
-                                 <!-- xmlns="http://www.w3.org/2000/svg"> -->
-                           
-                            <!-- </svg> -->
+                                type="submit" style="   height: 42px;margin-top:-1px;border-radius:0;background-color:red;"> Найти
                         </button>
                     </div>
                 </form>
             </div>
 
-            <div class="frame3-panel" style="margin-left: 600px;">
-                <button class="icon-button" style="background: none;border: none;position:relative;right:30px;">
-                    <img src="{% static '/src/assets/img/icon/account-logo.svg' %}" alt="Личный кабинет">
-                </button>
-                <button class="icon-button" style="background: none;border: none;position:relative;right:10px;">
-                    <img src="{% static '/src/assets/img/icon/logo-sravnenie.svg' %}" alt="Сравнение">
-                </button>
-                <button class="icon-button" style="background: none;border: none;position:relative;left:10px;">
-                    <img src="{% static '/src/assets/img/icon/favorites-logo.svg' %}" alt="Избранное">
-                </button>
-                <button class="icon-button" style="background: none;border: none;position:relative;left:30px;">
-                  
-                    <img src="{% static '/src/assets/img/icon/cart-logo.svg' %}" alt="Корзина">
-                </button>
+            <div class="frame3-panel" style=" margin-left:30px;">
+                <a href="http://127.0.0.1:8000/cabinet/" class="icon-button_n" style="background: none;border: none;position:relative; ">
+                    <svg width="17" height="24" viewBox="0 0 17 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.2659 6.20894C3.2659 5.17871 3.55763 4.17161 4.10414 3.31501C4.65064 2.4584 5.4274 1.79076 6.3362 1.39651C7.245 1.00226 8.24505 0.899102 9.20982 1.10009C10.1746 1.30108 11.0608 1.79718 11.7563 2.52566C12.4519 3.25415 12.9256 4.18229 13.1175 5.19272C13.3094 6.20316 13.2108 7.2505 12.8344 8.20231C12.458 9.15412 11.8205 9.96764 11.0026 10.54C10.1847 11.1124 9.22316 11.4179 8.23948 11.4179C7.5863 11.418 6.93944 11.2834 6.33596 11.0216C5.73248 10.7599 5.18424 10.3762 4.72238 9.89251C4.26052 9.40879 3.89409 8.83451 3.64419 8.20247C3.39429 7.57043 3.26577 6.89302 3.2659 6.20894ZM13.6322 12.7668H11.835C10.7417 13.428 9.50148 13.7761 8.239 13.7761C6.97652 13.7761 5.73628 13.428 4.64299 12.7668H3.36968C1.79181 12.7668 0.5 15.1209 0.5 16.7745V20.9956C0.5 22.6492 1.79181 23 3.36968 23H13.6294C15.2082 23 16.5 22.6492 16.5 20.9956V16.7745C16.5029 15.1209 15.2111 12.7668 13.6322 12.7668Z"
+                              stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </a>
+                <a href="http://127.0.0.1:8000/cabinet/" class="icon-button " style="background: none;border: none;position:relative; ">
+                    <svg width="25" height="23" viewBox="0 0 25 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.81787 22.2263C7.98792 21.15 8.53361 20.1701 9.35669 19.4627C10.1798 18.7552 11.2264 18.3666 12.3085 18.3666C13.3906 18.3666 14.4372 18.7552 15.2603 19.4627C16.0833 20.1701 16.6289 21.15 16.799 22.2263H7.81787Z"
+                              stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round"></path>
+                        <path d="M0.5 12.1183C0.516368 13.1463 0.933369 14.1267 1.66101 14.8478C2.38865 15.569 3.36864 15.9732 4.38953 15.9732C5.41042 15.9732 6.3904 15.569 7.11804 14.8478C7.84568 14.1267 8.26268 13.1463 8.27905 12.1183H0.5Z"
+                              stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M0.5 12.1182L4.39001 2.4126L8.28003 12.1182H0.5Z" stroke="currentColor" stroke-linecap="round"
+                              stroke-linejoin="round"></path>
+                        <path d="M16.3369 12.1183C16.3369 13.1532 16.7468 14.1458 17.4763 14.8776C18.2058 15.6095 19.1952 16.0206 20.2269 16.0206C21.2586 16.0206 22.248 15.6095 22.9775 14.8776C23.7071 14.1458 24.1169 13.1532 24.1169 12.1183H16.3369Z"
+                              stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M16.3369 12.1182L20.2269 2.4126L24.1169 12.1182H16.3369Z" stroke="currentColor"
+                              stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M12.3081 18.366V0" stroke="currentColor" stroke-miterlimit="10"></path>
+                        <path d="M1.51318 2.11267H23.1032" stroke="currentColor" stroke-miterlimit="10"></path>
+                    </svg>
+                </a>
+                <a href="http://127.0.0.1:8000/cabinet/" class="icon-button" style="background: none;border: none;position:relative; ">
+                    <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.7115 1C15.9937 1 16.2975 1.01526 16.6168 1.04681C18.577 1.23709 20.8418 3.02598 21.1172 6.45416V7.59484C20.8613 10.8755 18.3767 14.9213 11.1172 20C3.8577 14.9223 1.37502 10.8765 1.11719 7.59484V6.45416C1.39358 3.02699 3.6565 1.23709 5.61861 1.04681C5.9409 1.01526 6.24181 1.00102 6.52504 1.00102C8.78795 1.00102 9.87493 1.97584 11.1153 3.45335C12.3595 1.97584 13.4446 1 15.7055 1"
+                              stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round"></path>
+                    </svg>
+                </a>
+                <a href="http://127.0.0.1:8000/checkout/" class="icon-button" style="background: none;border: none;position:relative; ">
+
+                    <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.13623 15.3859C8.60018 15.3859 8.07611 15.5506 7.63041 15.859C7.18471 16.1675 6.83741 16.606 6.63231 17.119C6.42722 17.632 6.37361 18.1964 6.47826 18.741C6.58291 19.2855 6.84106 19.7857 7.22018 20.1782C7.5993 20.5707 8.08233 20.838 8.60811 20.9462C9.13389 21.0544 9.67884 20.9986 10.174 20.786C10.6692 20.5734 11.0924 20.2135 11.3901 19.7517C11.6878 19.29 11.8466 18.7471 11.8464 18.1919C11.8453 17.4479 11.5594 16.7346 11.0513 16.2086C10.5433 15.6826 9.85459 15.3867 9.13623 15.3859ZM9.13623 20.2215C8.74867 20.2215 8.36985 20.1025 8.04761 19.8795C7.72537 19.6565 7.47417 19.3395 7.32585 18.9686C7.17754 18.5977 7.13871 18.1897 7.21431 17.796C7.28992 17.4022 7.47658 17.0406 7.75062 16.7568C8.02467 16.4729 8.37386 16.2796 8.75398 16.2013C9.13409 16.123 9.52803 16.1632 9.88609 16.3168C10.2442 16.4704 10.5502 16.7306 10.7656 17.0643C10.9809 17.3981 11.0958 17.7905 11.0958 18.1919C11.096 18.4587 11.0456 18.723 10.9472 18.9696C10.8489 19.2162 10.7047 19.4403 10.5227 19.6291C10.3407 19.818 10.1246 19.9679 9.8867 20.0702C9.64882 20.1726 9.39383 20.2254 9.13623 20.2257V20.2215ZM18.6547 15.3859C18.1186 15.3857 17.5945 15.5502 17.1486 15.8585C16.7028 16.1669 16.3553 16.6053 16.15 17.1183C15.9448 17.6312 15.8911 18.1957 15.9956 18.7403C16.1002 19.2849 16.3582 19.7852 16.7373 20.1778C17.1164 20.5705 17.5994 20.8378 18.1252 20.9461C18.651 21.0544 19.196 20.9987 19.6913 20.7861C20.1865 20.5735 20.6097 20.2136 20.9074 19.7518C21.2052 19.29 21.3641 18.7472 21.3639 18.1919C21.3628 17.4481 21.077 16.735 20.5692 16.209C20.0613 15.683 19.3729 15.387 18.6547 15.3859ZM18.6547 20.2215C18.2671 20.2217 17.8881 20.1029 17.5657 19.88C17.2433 19.6571 16.992 19.3402 16.8436 18.9693C16.6951 18.5985 16.6562 18.1904 16.7317 17.7966C16.8072 17.4028 16.9937 17.0411 17.2677 16.7571C17.5417 16.4732 17.891 16.2798 18.2711 16.2014C18.6512 16.123 19.0452 16.1631 19.4033 16.3167C19.7614 16.4703 20.0676 16.7304 20.2829 17.0642C20.4983 17.398 20.6133 17.7905 20.6133 18.1919C20.6138 18.7306 20.4077 19.2474 20.0404 19.6288C19.6732 20.0102 19.1748 20.2249 18.6547 20.2257V20.2215ZM4.81888 4.02606L4.56868 0.144084L0.140155 0L0.117188 0.777432L3.86513 0.898716L4.54559 11.4645L5.72951 13.6901L21.8562 12.9448L23.1172 11.5972V4.30697L4.81888 4.02606ZM22.3666 11.2821L21.5239 12.1829L6.15391 12.8929L5.28824 11.3236L4.86884 4.80453L22.3666 5.07404V11.2821Z"
+                              fill="currentColor"></path>
+                    </svg>
+                </a>
             </div>
 
 
@@ -187,16 +190,16 @@
 <script src="{% static '/src/assets/js/plugins/glightbox.min.js' %}"></script>
 <script>
     function toggleDropdown() {
-        var dropdown = document.getElementById("myDropdown");
+        const dropdown = document.getElementById("myDropdown");
         dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
     }
 
     // Закрыть выпадающий список при клике вне него
     window.onclick = function (event) {
         if (!event.target.matches('.panel button')) {
-            var dropdowns = document.getElementsByClassName("dropdown");
-            for (var i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
+            const dropdowns = document.getElementsByClassName("dropdown");
+            for (let i = 0; i < dropdowns.length; i++) {
+                const openDropdown = dropdowns[i];
                 if (openDropdown.style.display === "block") {
                     openDropdown.style.display = "none";
                 }
@@ -204,8 +207,5 @@
         }
     }
 </script>
-<!-- Customscript js -->
-<script src="{% static '/src/assets/js/script.js' %}"></script>
-
 </body>
 </html>

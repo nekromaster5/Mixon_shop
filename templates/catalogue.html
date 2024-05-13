@@ -32,8 +32,8 @@
     <main class="main__content_wrapper">
         <section class="breadcrumb__section breadcrumb__bg">
             <div class="container">
-                <div class="breadcrumb__content text-center">
-                    <ul class="breadcrumb__content--menu d-flex">
+                <div class="breadcrumb__content text-center slider-container">
+                    <ul class="breadcrumb__content--menu d-flex slider">
                         <li class="breadcrumb__content--menu__items">
                             <a href="">Главная</a>
                         </li>
@@ -46,13 +46,99 @@
                     </ul>
                 </div>
                 <h2 class="breadcrumb__content--title">ЛКМ для Строительства</h2>
+                <div class="brand_buttons-wrapper">
+                    <div class="slider-container adjustable-slider">
+                        <div class="slider" style="display:flex;">
+                            <div class="brand_buttons slide col-lg-21 col-md-22 col-19">
+                                <div class="brand_buttons-inner">
+                                    <img class="" src="{% static 'src/assets/img/logo/logo-mixon.png' %}"
+                                         alt="Logo Mixon">
+                                </div>
+                            </div>
+                            <div class="brand_buttons slide col-lg-21 col-md-22 col-19">
+                                <div class="brand_buttons-inner">
+                                    <img class="" src="{% static 'src/assets/img/logo/logo-genc.png' %}"
+                                         alt="Logo Genc">
+                                </div>
+                            </div>
+                            <div class="brand_buttons slide col-lg-21 col-md-22 col-19">
+                                <div class="brand_buttons-inner">
+                                    <img class="" src="{% static 'src/assets/img/logo/logo-smirdex.png' %}"
+                                         alt="Logo Smirdex">
+                                </div>
+                            </div>
+                            <div class="brand_buttons slide col-lg-21 col-md-22 col-19">
+                                <div class="brand_buttons-inner">
+                                    <img class="" src="{% static 'src/assets/img/logo/logo-domex.png' %}"
+                                         alt="Logo Domex">
+                                </div>
+                            </div>
+                            <div class="brand_buttons slide col-lg-21 col-md-22 col-19">
+                                <div class="brand_buttons-inner">
+                                    <img class="" src="{% static 'src/assets/img/logo/logo-prodyver.png' %}"
+                                         alt="Logo Prodyver">
+                                </div>
+                            </div>
+                            <div class="brand_buttons slide col-lg-21 col-md-22 col-19">
+                                <div class="brand_buttons-inner">
+                                    <a href="/catalogue"
+                                       class="view__all--link d-inline-block text-nowrap slide">
+                                        <span>Все бренды</span>
+                                        <svg width="7%" viewBox="0 0 11 13" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0.384766 0.764038L6.07377 6.39398L0.384766 12.024"
+                                                  stroke="currentColor"
+                                                  stroke-miterlimit="10"></path>
+                                            <path d="M4.31104 0.764038L10 6.39398L4.31104 12.024" stroke="currentColor"
+                                                  stroke-miterlimit="10"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <section class="product__section section--padding pt-0 bg__off_white">
             <div class="container">
-                <div class="row product__list">
-                    <div class="row col-lg-6" style="padding-right: 0; margin-right: -2px">
-                        <div class="shop__sidebar--widget widget__area d-none d-lg-block">
+                <div class="catalogue-sort">
+                    <span class="filters-button">Фильтры</span>
+                    <div class="">
+                        <span>Сортировать по:</span>
+                        <button class="sort-type active">популярности</button>
+                        <button class="sort-type">цене</button>
+                        <button class="sort-type">названию</button>
+                    </div>
+                    <div class="layout-buttons">
+                        <button class="layout-style active">
+                            <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.116 0H0V5.116H5.116V0Z" fill="currentColor"></path>
+                                <path d="M20.0428 0H14.9268V5.116H20.0428V0Z" fill="currentColor"></path>
+                                <path d="M12.5799 0H7.46387V5.116H12.5799V0Z" fill="currentColor"></path>
+                                <path d="M5.116 14.927H0V20.043H5.116V14.927Z" fill="currentColor"></path>
+                                <path d="M20.0428 14.927H14.9268V20.043H20.0428V14.927Z" fill="currentColor"></path>
+                                <path d="M12.5799 14.927H7.46387V20.043H12.5799V14.927Z" fill="currentColor"></path>
+                                <path d="M5.116 7.46301H0V12.579H5.116V7.46301Z" fill="currentColor"></path>
+                                <path d="M20.0428 7.46301H14.9268V12.579H20.0428V7.46301Z" fill="currentColor"></path>
+                                <path d="M12.5799 7.46301H7.46387V12.579H12.5799V7.46301Z" fill="currentColor"></path>
+                            </svg>
+                        </button>
+                        <button class="layout-style">
+                            <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9.064 0H0V9.2646H9.064V0Z" fill="currentColor"></path>
+                                <path d="M20.0708 0H11.0068V9.2646H20.0708V0Z" fill="currentColor"></path>
+                                <path d="M9.064 11.222H0V20.4866H9.064V11.222Z" fill="currentColor"></path>
+                                <path d="M20.0708 11.222H11.0068V20.4866H20.0708V11.222Z" fill="currentColor"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="row product__list br-row_1">
+                    <div class="shop__sidebar--widget__wrapper row col-lg-6 col-md-18 px-0">
+                        <div class="shop__sidebar--widget widget__area px-0">
                             <div class="single__widget widget__bg">
                                 <div class="d-flex widget__title">
                                     <img src="{% static '/src/assets/img/icon/down_arrow.svg' %}" alt="down arrow">
@@ -76,7 +162,8 @@
                                     <li class="widget__form--check__list">
                                         <input class="widget__form--check__input" id="check3" type="checkbox">
                                         <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base" for="check3">Есть в наличии</label>
+                                        <label class="widget__form--check__label--base" for="check3">Есть в
+                                            наличии</label>
 
                                     </li>
                                 </ul>
@@ -109,7 +196,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="single__widget widget__bg">
+                            <div class="single__widget widget__bg price__widget">
                                 <div class="d-flex widget__title">
                                     <img src="{% static '/src/assets/img/icon/down_arrow.svg' %}" alt="down arrow">
                                     <div class="invisible">a</div>
@@ -119,25 +206,19 @@
                                 <form class="price__filter--form" action="#">
                                     <div class="price__filter--form__inner mb-15 d-flex align-items-center">
                                         <div class="price__filter--group">
-
                                             <div class="price__filter--input border-radius-5 d-flex align-items-center">
                                                 <input class="price__filter--input__field border-0"
                                                        name="filter.v.price.gte" id="Filter-Price-GTE2" type="number"
                                                        placeholder="0" min="0" max="5000">
                                             </div>
                                         </div>
-                                        <div class="price__divider">
-
-                                        </div>
                                         <div class="price__filter--group">
-
                                             <div class="price__filter--input border-radius-5 d-flex align-items-center">
                                                 <input class="price__filter--input__field border-0"
                                                        name="filter.v.price.lte" id="Filter-Price-LTE2" type="number"
                                                        min="0" placeholder="500" max="5000">
                                             </div>
                                         </div>
-                                        <div class="invisible">as</div>
                                         <button class="price__filter--group primary__btn price__filter--btn border-radius-5"
                                                 type="submit">
                                             ОК
@@ -169,13 +250,15 @@
                                     <li class="widget__form--check__list">
                                         <input class="widget__form--check__input" id="check9" type="checkbox">
                                         <span class="widget__form--checkmark circle"></span>
-                                        <label class="widget__form--check__label--base" for="check9">Полиуретановая</label>
+                                        <label class="widget__form--check__label--base"
+                                               for="check9">Полиуретановая</label>
 
                                     </li>
                                     <li class="widget__form--check__list">
                                         <input class="widget__form--check__input" id="check10" type="checkbox">
                                         <span class="widget__form--checkmark circle"></span>
-                                        <label class="widget__form--check__label--base" for="check10">Полиэфирная</label>
+                                        <label class="widget__form--check__label--base"
+                                               for="check10">Полиэфирная</label>
 
                                     </li>
                                 </ul>
@@ -215,16 +298,17 @@
                                     <li class="widget__form--check__list">
                                         <input class="widget__form--check__input" id="check15" type="checkbox">
                                         <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base" for="check15">больше 10.0</label>
+                                        <label class="widget__form--check__label--base" for="check15">больше
+                                            10.0</label>
 
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="row col-lg-13">
+                    <div class="row col-lg-13 col-md-19 px-lg-6 px-md-6 px-8">
                         {% for i in 'abcdefghklmn'|make_list %}
-                            <div class="col-lg-5 mb-6">
+                            <div class="col-lg-5 col-6 px-lg-6 px-md-6 px-8 mb-6">
                                 {% include "product_block.html" %}
                             </div>
                         {% endfor %}
@@ -282,4 +366,57 @@
     <footer>{% include "footer.html" %}</footer>
 </div>
 </body>
+<script src="{% static '/src/assets/js/slider.js' %}"></script>
+<script>
+    function dispatchMaxTranslateEvent() {
+        const event = new Event('calculateMaxTranslateEvent');
+        document.dispatchEvent(event);
+    }
+
+    function setBreadcrumbWidth() {
+        const breadcrumbItems = document.querySelectorAll('.breadcrumb__content--menu__items');
+        let totalWidth = 0;
+
+        breadcrumbItems.forEach(function (item) {
+            const style = getComputedStyle(item);
+            totalWidth += item.offsetWidth + parseInt(style.marginLeft) + parseInt(style.marginRight);
+        });
+
+        const breadcrumb = document.querySelector('.breadcrumb__content--menu');
+        breadcrumb.style.width = totalWidth + 'px';
+        dispatchMaxTranslateEvent();
+    }
+
+    window.addEventListener('load', setBreadcrumbWidth);
+    window.addEventListener('resize', setBreadcrumbWidth);
+
+</script>
+<script>
+    // Находим все кнопки с классом "layout-style"
+    const layoutButtons = document.querySelectorAll('.layout-style');
+
+    // Добавляем обработчик события клика для каждой кнопки
+    layoutButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Удаляем класс "active" у всех кнопок
+            layoutButtons.forEach(btn => btn.classList.remove('active'));
+            // Добавляем класс "active" только к нажатой кнопке
+            button.classList.add('active');
+        });
+    });
+
+    // Находим все кнопки с классом "sort-type"
+    const sortButtons = document.querySelectorAll('.sort-type');
+
+    // Добавляем обработчик события клика для каждой кнопки
+    sortButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Удаляем класс "active" у всех кнопок
+            sortButtons.forEach(btn => btn.classList.remove('active'));
+            // Добавляем класс "active" только к нажатой кнопке
+            button.classList.add('active');
+        });
+    });
+
+</script>
 </html>

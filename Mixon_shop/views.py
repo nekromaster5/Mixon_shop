@@ -18,14 +18,14 @@ class ProductPage(View):
         return render(request, 'product.html')
 
 
-class Personalpage(View):
+class PersonalPage(View):
     def get(self, request):
-        return render(request, 'Personal_Area.html')
+        return render(request, 'cabinet.html')
 
 
-class Erorpage(View):
-    def get(self, request):
-        return render(request, 'eror_page.html')
+class ErrorPage(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'error_page.html', status=404)
 
 
 class Brands(View):
@@ -38,14 +38,14 @@ class News(View):
         return render(request, 'news.html')
 
 
-class Aboutcompany(View):
+class AboutCompany(View):
     def get(self, request):
         return render(request, 'about_company.html')
 
 
-class New(View):
+class Topic(View):
     def get(self, request):
-        return render(request, 'new.html')
+        return render(request, 'topic.html')
 
 
 class CheckoutPage(View):
@@ -61,3 +61,13 @@ class TestSlider(View):
 class Test(View):
     def get(self, request):
         return render(request, 'test.html')
+
+
+class ShipmentPayment(View):
+    def get(self, request):
+        return render(request, 'shipment_and_payment.html')
+
+
+class Contacts(View):
+    def get(self, request):
+        return render(request, 'contacts.html')
