@@ -5961,6 +5961,7 @@ input[type=number]::-webkit-outer-spin-button {
     .small__button {
         width: 4rem;
     }
+    
 }
 
 .buy__btn {
@@ -6695,14 +6696,32 @@ input[type=number]::-webkit-outer-spin-button {
 .order_pa_button {
     font-size: 16px;
 }
-
+.repeat_button
+{
+    font-size: 16px;
+    margin-left:0px;
+}
 @media only screen   and (min-width: 750px) and (max-width: 1199px) {
     .bottom_order_table_records_right {
         padding-left: 17px;
         font-size: 14px;
 
     }
-
+    .cheaper--button.main_cheaper {
+         margin-left:30px;
+        
+    }
+   .main_quick_order {
+        margin-left:30px !important;
+       
+   }
+     .second_col_product {
+        margin-right: 0px !important;
+    }
+    .repeat_button
+    {
+        font-size: 12px;
+    }
     .table_labels {
         font-size: 12px;
     }
@@ -6742,7 +6761,10 @@ input[type=number]::-webkit-outer-spin-button {
         display: flex;
         font-size: 10px;
     }
-
+    .repeat_button
+    {
+        font-size: 10px;
+    }
     .order_pa_button {
         font-size: 10px;
         text-align: center;
@@ -10523,7 +10545,7 @@ details > summary::-webkit-details-marker {
 }
 
 .main_image {
-    margin-left: 28px;
+    margin-left: 43px;
     padding-bottom: 20px;
 }
 
