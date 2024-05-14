@@ -1,211 +1,161 @@
-<!doctype html>
-<html lang="en">
+{% extends "base.html" %}
+{% load static %}
 
-<head>
-    <meta charset="utf-8">
-    {% load static %}
-    <meta name="description" content="Morden Bootstrap HTML5 Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="{% static '/src/assets/img/favicon.ico' %}">
 
-    <!-- Font link -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-          rel="stylesheet">
+{% block title %}
 
-    <!-- ======= All CSS Plugins here ======== -->
-    <link rel="stylesheet" href="{% static '/src/assets/css/plugins/swiper-bundle.min.css' %}">
-    <link rel="stylesheet" href="{% static '/src/assets/css/plugins/glightbox.min.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500&display=swap"
-          rel="stylesheet">
+{% endblock %}
 
-    <!-- Plugin css -->
-    <link rel="stylesheet" href="{% static '/src/assets/css/vendor/bootstrap.min.css' %}">
 
-    <!-- Custom Style CSS -->
-    <link rel="stylesheet" href="{% static '/src/assets/css/style.css' %}">
-    <title></title>
+{% block content %}
+    <section class="breadcrumb__section breadcrumb__bg">
+        <div class="container">
+            <div class="breadcrumb__content slider-container text-center">
+                <ul class="breadcrumb__content--menu slider d-flex">
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="">Главная</a>
+                    </li>
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="">Новости</a>
+                    </li>
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="">Как выбрать красу для стен и потолков</a>
+                    </li>
 
-</head>
-<body>
-
-<div class="body__wrapper">
-    <header>{% include "header.html" %}</header>
-    <main class="main__content_wrapper">
-
-        <section class="breadcrumb__section breadcrumb__bg">
-            <div class="container">
-                <div class="breadcrumb__content slider-container text-center">
-                    <ul class="breadcrumb__content--menu slider d-flex">
-                        <li class="breadcrumb__content--menu__items">
-                            <a href="">Главная</a>
-                        </li>
-                        <li class="breadcrumb__content--menu__items">
-                            <a href="">Новости</a>
-                        </li>
-                        <li class="breadcrumb__content--menu__items">
-                            <a href="">Как выбрать красу для стен и потолков</a>
-                        </li>
-
-                    </ul>
-                </div>
+                </ul>
             </div>
-        </section>
-        <section>
-            <div class="container">
-                <div class="topic-wrapper">
-                    <div class="topic-main_block col-lg-19 pe-lg-5 pe-0"
-                         style="overflow: hidden; word-wrap: break-word;">
-                        <h2 class="topic-title h3">Как выбрать краску для стен и потолков</h2>
-                        <span class="topic-date">01 августа 2021</span>
-                        <p class="topic-text">
-                            Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був
-                            добре запакований, помітно що ніхто до мене його не відкривав. Placerat condimentum id
-                            convallis aliquam ac. Placerat condimentum id convallis aliquam ac.
-                        </p>
-                        <p class="topic-text">
-                            Viverra sed sed ornare nibh enim. Dictum dolor ac velit, sit nisi, amet rutrum iaculis.
-                            Rhoncus eget posuere imperdiet vitae, consequat aliquam. Lacus, pulvinar vehicula nunc
-                            viverra condimentum scelerisque. Amet sit nunc risus, nunc.
-                        </p>
-                        <img style="width: 100%; margin-bottom: 1.5rem;" src="{% static '/src/assets/img/icon/Mask group.png' %}">
-                        <p class="topic-text">Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні
-                            задачі. Ноут був
-                            добре запакований, помітно що ніхто до мене його не відкривав. Placerat condimentum id
-                            convallis aliquam ac. Placerat condimentum id convallis aliquam ac. Viverra sed sed ornare
-                            nibh enim. Dictum dolor ac velit, sit nisi, amet rutrum iaculis. Rhoncus eget posuere
-                            imperdiet vitae, consequat aliquam. Lacus, pulvinar vehicula nunc viverra condimentum
-                            scelerisque. Amet sit nunc risus, nunc.
-                        </p>
-                        <p class="topic-text">Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні
-                            задачі. Ноут був
-                            добре запакований, помітно що ніхто до мене його не відкривав. Placerat condimentum id
-                            convallis aliquam ac. Placerat condimentum id convallis aliquam ac. Viverra sed sed ornare
-                            nibh enim. Dictum dolor ac velit, sit nisi, amet rutrum iaculis. Rhoncus eget posuere
-                            imperdiet vitae, consequat aliquam. Оновила ноутбук для роботи, бо стара моделька уже не
-                            тягне всі потрібні задачі. Ноут був добре запакований, помітно що ніхто до мене його не
-                            відкривав. Placerat condimentum id convallis aliquam ac. Placerat condimentum id convallis
-                            aliquam ac. Viverra sed sed ornare nibh enim. Dictum dolor ac velit, sit nisi, amet rutrum
-                            iaculis. Rhoncus eget posuere imperdiet vitae, co
-                        </p>
-                        <h2 class="subtopic-title h3">Ornare eu odio facilisi libero tempor ipsum tempus
-                        </h2>
-                        <p class="topic-text">Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні
-                            задачі. Ноут був
-                            добре запакований, помітно що ніхто до мене його не відкривав. Placerat condimentum id
-                            convallis aliquam ac. Placerat condimentum id convallis aliquam ac. Viverra sed sed ornare
-                            nibh enim. Dictum dolor ac velit, sit nisi, amet rutrum iaculis. Rhoncus eget posuere
-                            imperdiet vitae, co
-                        </p>
-                        <p class="topic-text">
-                            Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був
-                            добре запакований, помітно що ніхто до мене його не відкривав. Placerat condimentum id
-                            convallis aliquam ac.
-                        </p>
-                        <p class="topic-text">
-                            Placerat condimentum id convallis aliquam ac. Viverra sed sed ornare nibh enim. Dictum dolor
-                            ac velit, sit nisi, amet rutrum iaculis. Rhoncus eget posuere imperdiet vitae, co Оновила
-                            ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був добре
-                            запакований, помітно що ніхто до мене його не відкривав. Placerat condimentum id convallis
-                            aliquam ac. Placerat condimentum id convallis aliquam ac. Viverra sed sed ornare nibh enim.
-                            Dictum dolor ac velit, sit nisi, amet rutrum iaculis. Rhoncus eget posuere imperdiet vitae,
-                            co
-                        </p>
-                    </div>
-                    <div class="topic-additional_panel col-lg-20">
-                        <a style="" href="/catalogue"
-                           class="view__all--link d-inline-block text-nowrap">
-                            <span class="me-3">Еще новости</span>
-                            <svg width="3%" viewBox="0 0 11 13" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0.384766 0.764038L6.07377 6.39398L0.384766 12.024" stroke="currentColor"
-                                      stroke-miterlimit="10"></path>
-                                <path d="M4.31104 0.764038L10 6.39398L4.31104 12.024" stroke="currentColor"
-                                      stroke-miterlimit="10"></path>
-                            </svg>
-                        </a>
-                        <div id="news--slider" class="slider-container adjustable-slider">
-                            <div class="slider">
-                                <div class="news_buttons topic-side slide col-lg-12 col-md-20 col-18">
-                                    <a class="big_news_buttons topic-side" href="{% url 'topic' %}">
-                                        <img style="width: 100%" src="/Mixon_shop/static/src/assets/img/icon/Group%208.png">
-                                        <span>Чем растворить клей для дерева</span>
-                                    </a>
-                                </div>
-                                <div class="news_buttons topic-side slide col-lg-12 col-md-20 col-18">
-                                    <a class="big_news_buttons topic-side" href="{% url 'topic' %}">
-                                        <img style="width: 100%" src="/Mixon_shop/static/src/assets/img/icon/Group%205.png">
-                                        <span>Какой клей выбрать для дерева</span>
-                                    </a>
-                                </div>
-                                <div class="news_buttons topic-side slide col-lg-12 col-md-20 col-18">
-                                    <a class="big_news_buttons topic-side" href="{% url 'topic' %}">
-                                        <img style="width: 100%" src="/Mixon_shop/static/src/assets/img/icon/Group%202.png">
-                                        <span>Как выбрать краску для стен и потолков</span>
-                                    </a>
-                                </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="topic-wrapper">
+                <div class="topic-main_block col-lg-19 pe-lg-5 pe-0"
+                     style="overflow: hidden; word-wrap: break-word;">
+                    <h2 class="topic-title h3">Как выбрать краску для стен и потолков</h2>
+                    <span class="topic-date">01 августа 2021</span>
+                    <p class="topic-text">
+                        Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був
+                        добре запакований, помітно що ніхто до мене його не відкривав. Placerat condimentum id
+                        convallis aliquam ac. Placerat condimentum id convallis aliquam ac.
+                    </p>
+                    <p class="topic-text">
+                        Viverra sed sed ornare nibh enim. Dictum dolor ac velit, sit nisi, amet rutrum iaculis.
+                        Rhoncus eget posuere imperdiet vitae, consequat aliquam. Lacus, pulvinar vehicula nunc
+                        viverra condimentum scelerisque. Amet sit nunc risus, nunc.
+                    </p>
+                    <img style="width: 100%; margin-bottom: 1.5rem;"
+                         src="{% static '/src/assets/img/icon/Mask group.png' %}">
+                    <p class="topic-text">Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні
+                        задачі. Ноут був
+                        добре запакований, помітно що ніхто до мене його не відкривав. Placerat condimentum id
+                        convallis aliquam ac. Placerat condimentum id convallis aliquam ac. Viverra sed sed ornare
+                        nibh enim. Dictum dolor ac velit, sit nisi, amet rutrum iaculis. Rhoncus eget posuere
+                        imperdiet vitae, consequat aliquam. Lacus, pulvinar vehicula nunc viverra condimentum
+                        scelerisque. Amet sit nunc risus, nunc.
+                    </p>
+                    <p class="topic-text">Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні
+                        задачі. Ноут був
+                        добре запакований, помітно що ніхто до мене його не відкривав. Placerat condimentum id
+                        convallis aliquam ac. Placerat condimentum id convallis aliquam ac. Viverra sed sed ornare
+                        nibh enim. Dictum dolor ac velit, sit nisi, amet rutrum iaculis. Rhoncus eget posuere
+                        imperdiet vitae, consequat aliquam. Оновила ноутбук для роботи, бо стара моделька уже не
+                        тягне всі потрібні задачі. Ноут був добре запакований, помітно що ніхто до мене його не
+                        відкривав. Placerat condimentum id convallis aliquam ac. Placerat condimentum id convallis
+                        aliquam ac. Viverra sed sed ornare nibh enim. Dictum dolor ac velit, sit nisi, amet rutrum
+                        iaculis. Rhoncus eget posuere imperdiet vitae, co
+                    </p>
+                    <h2 class="subtopic-title h3">Ornare eu odio facilisi libero tempor ipsum tempus
+                    </h2>
+                    <p class="topic-text">Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні
+                        задачі. Ноут був
+                        добре запакований, помітно що ніхто до мене його не відкривав. Placerat condimentum id
+                        convallis aliquam ac. Placerat condimentum id convallis aliquam ac. Viverra sed sed ornare
+                        nibh enim. Dictum dolor ac velit, sit nisi, amet rutrum iaculis. Rhoncus eget posuere
+                        imperdiet vitae, co
+                    </p>
+                    <p class="topic-text">
+                        Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був
+                        добре запакований, помітно що ніхто до мене його не відкривав. Placerat condimentum id
+                        convallis aliquam ac.
+                    </p>
+                    <p class="topic-text">
+                        Placerat condimentum id convallis aliquam ac. Viverra sed sed ornare nibh enim. Dictum dolor
+                        ac velit, sit nisi, amet rutrum iaculis. Rhoncus eget posuere imperdiet vitae, co Оновила
+                        ноутбук для роботи, бо стара моделька уже не тягне всі потрібні задачі. Ноут був добре
+                        запакований, помітно що ніхто до мене його не відкривав. Placerat condimentum id convallis
+                        aliquam ac. Placerat condimentum id convallis aliquam ac. Viverra sed sed ornare nibh enim.
+                        Dictum dolor ac velit, sit nisi, amet rutrum iaculis. Rhoncus eget posuere imperdiet vitae,
+                        co
+                    </p>
+                </div>
+                <div class="topic-additional_panel col-lg-20">
+                    <a style="" href="/catalogue"
+                       class="view__all--link d-inline-block text-nowrap">
+                        <span class="me-3">Еще новости</span>
+                        <svg width="3%" viewBox="0 0 11 13" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0.384766 0.764038L6.07377 6.39398L0.384766 12.024" stroke="currentColor"
+                                  stroke-miterlimit="10"></path>
+                            <path d="M4.31104 0.764038L10 6.39398L4.31104 12.024" stroke="currentColor"
+                                  stroke-miterlimit="10"></path>
+                        </svg>
+                    </a>
+                    <div id="news--slider" class="slider-container adjustable-slider">
+                        <div class="slider">
+                            <div class="news_buttons topic-side slide col-lg-12 col-md-20 col-18">
+                                <a class="big_news_buttons topic-side" href="{% url 'topic' %}">
+                                    <img style="width: 100%" src="/Mixon_shop/static/src/assets/img/icon/Group%208.png">
+                                    <span>Чем растворить клей для дерева</span>
+                                </a>
+                            </div>
+                            <div class="news_buttons topic-side slide col-lg-12 col-md-20 col-18">
+                                <a class="big_news_buttons topic-side" href="{% url 'topic' %}">
+                                    <img style="width: 100%" src="/Mixon_shop/static/src/assets/img/icon/Group%205.png">
+                                    <span>Какой клей выбрать для дерева</span>
+                                </a>
+                            </div>
+                            <div class="news_buttons topic-side slide col-lg-12 col-md-20 col-18">
+                                <a class="big_news_buttons topic-side" href="{% url 'topic' %}">
+                                    <img style="width: 100%" src="/Mixon_shop/static/src/assets/img/icon/Group%202.png">
+                                    <span>Как выбрать краску для стен и потолков</span>
+                                </a>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+{% endblock %}
 
 
-    </main>
-    <footer>{% include "footer.html" %}</footer>
-</div>
-</body>
-<script src="{% static '/src/assets/js/slider.js' %}"></script>
-<script>
-    // Получаем ссылку на элемент с id payment--slider
-    const newsSliderContainer = document.getElementById('news--slider');
-    const newsSlider = newsSliderContainer.querySelector('.slider');
+{% block scripts %}
+    <script src="{% static '/src/assets/js/slider.js' %}"></script>
+    <script>
+        // Получаем ссылку на элемент с id payment--slider
+        const newsSliderContainer = document.getElementById('news--slider');
+        const newsSlider = newsSliderContainer.querySelector('.slider');
 
-    // Функция для проверки размера экрана и скрытия/отображения элемента
-    function toggleSliderContainer(sliderContainer, slider) {
-        if (window.innerWidth >= 992) {
-            sliderContainer.classList.remove('slider-container');
-            disableSlider(slider);
-        } else {
-            sliderContainer.classList.add('slider-container');
-            enableSlider(slider);
+        // Функция для проверки размера экрана и скрытия/отображения элемента
+        function toggleSliderContainer(sliderContainer, slider) {
+            if (window.innerWidth >= 992) {
+                sliderContainer.classList.remove('slider-container');
+                disableSlider(slider);
+            } else {
+                sliderContainer.classList.add('slider-container');
+                enableSlider(slider);
+            }
         }
-    }
 
 
-    setTimeout(() => {
-        toggleSliderContainer(newsSliderContainer, newsSlider)
-    }, 50);
+        setTimeout(() => {
+            toggleSliderContainer(newsSliderContainer, newsSlider)
+        }, 50);
 
-    // Добавляем обработчик события изменения размера окна браузера
-    window.addEventListener('resize', () => toggleSliderContainer(newsSliderContainer, newsSlider));
+        // Добавляем обработчик события изменения размера окна браузера
+        window.addEventListener('resize', () => toggleSliderContainer(newsSliderContainer, newsSlider));
 
-</script>
-<script>
-    function dispatchMaxTranslateEvent() {
-        const event = new Event('calculateMaxTranslateEvent');
-        document.dispatchEvent(event);
-    }
-
-    function setBreadcrumbWidth() {
-        const breadcrumbItems = document.querySelectorAll('.breadcrumb__content--menu__items');
-        let totalWidth = 0;
-
-        breadcrumbItems.forEach(function (item) {
-            const style = getComputedStyle(item);
-            totalWidth += item.offsetWidth + parseInt(style.marginLeft) + parseInt(style.marginRight);
-        });
-
-        const breadcrumb = document.querySelector('.breadcrumb__content--menu');
-        breadcrumb.style.width = totalWidth + 'px';
-        dispatchMaxTranslateEvent();
-    }
-
-    window.addEventListener('load', setBreadcrumbWidth);
-    window.addEventListener('resize', setBreadcrumbWidth);
-
-</script>
-</html>
+    </script>
+    <script src="{% static '/src/assets/js/breadcrumbSliderSetWidth.js' %}"></script>
+{% endblock %}

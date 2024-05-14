@@ -67,10 +67,9 @@ function initSlider(sliderContainer) {
     };
 
     function getGap() {
-        let abc = parseFloat(window.getComputedStyle(slider).columnGap);
-        console.log("columnGap", abc)
-        if (abc) {
-            return abc
+        let columnGap = parseFloat(window.getComputedStyle(slider).columnGap);
+        if (columnGap) {
+            return columnGap
         }
         return 0
     }

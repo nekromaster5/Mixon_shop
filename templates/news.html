@@ -1,223 +1,193 @@
-<!doctype html>
-<html lang="en">
+{% extends "base.html" %}
+{% load static %}
 
-<head>
-    <meta charset="utf-8">
-    {% load static %}
-    <meta name="description" content="Morden Bootstrap HTML5 Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="{% static '/src/assets/img/favicon.ico' %}">
 
-    <!-- Font link -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-          rel="stylesheet">
+{% block title %}
 
-    <!-- ======= All CSS Plugins here ======== -->
-    <link rel="stylesheet" href="{% static '/src/assets/css/plugins/swiper-bundle.min.css' %}">
-    <link rel="stylesheet" href="{% static '/src/assets/css/plugins/glightbox.min.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500&display=swap"
-          rel="stylesheet">
+{% endblock %}
 
-    <!-- Plugin css -->
-    <link rel="stylesheet" href="{% static '/src/assets/css/vendor/bootstrap.min.css' %}">
 
-    <!-- Custom Style CSS -->
-    <link rel="stylesheet" href="{% static '/src/assets/css/style.css' %}">
-    <title></title>
+{% block content %}
+    <section class="breadcrumb__section breadcrumb__bg">
+        <div class="container">
+            <div class="breadcrumb__content text-center">
+                <ul class="breadcrumb__content--menu d-flex">
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="">Главная</a>
+                    </li>
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="">Новости</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="news_header">
+                <h2 class="text-center" style="font-size: 40px;">Новости</h2>
+                <div class="comparison_lists row">
+                    <div class="news_header_button col-lg-5 col-md-6">
+                        <button class="new_button"><img
+                                src="{% static '/src/assets/img/icon/lkm-stroitelstvo.svg' %}"> ЛКМ для
+                            Строительства
+                        </button>
+                    </div>
+                    <div class="news_header_button col-lg-5 col-md-6">
+                        <button class="new_button"><img src="{% static '/src/assets/img/icon/Path 56.svg' %}"> ЛКМ
+                            для Авторемонта
+                        </button>
+                    </div>
+                    <div class="news_header_button col-lg-5 col-md-6">
+                        <button class="new_button">
+                            <svg width="33" height="31" viewBox="0 0 33 31" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M28.0682 17.2972L28.0485 19.1976C28.0382 19.3114 27.9825 19.4169 27.8932 19.4921C27.8038 19.5673 27.6878 19.6064 27.5692 19.601H27.3322C27.2738 19.605 27.2152 19.5978 27.1597 19.5798C27.1042 19.5618 27.0529 19.5334 27.0088 19.4962C26.9648 19.4591 26.9288 19.4139 26.9029 19.3633C26.8771 19.3126 26.8619 19.2576 26.8582 19.2013L26.8766 17.3035H25.7871L25.7597 20.026C25.7493 20.1402 25.6935 20.2461 25.6039 20.3215C25.5144 20.397 25.398 20.4361 25.2791 20.4308H25.0421C24.9839 20.4349 24.9254 20.4279 24.8701 20.4101C24.8148 20.3923 24.7636 20.3641 24.7197 20.3272C24.6757 20.2902 24.6398 20.2453 24.614 20.1949C24.5882 20.1445 24.573 20.0897 24.5694 20.0336L24.5956 17.3111L24.627 14.0552H3.57031V21.1407H29.8084V14.0615H28.8747L28.8433 17.2947L28.0682 17.2972ZM19.21 18.1534H14.1635V17.0463H19.21V18.1534Z"
+                                      stroke="#1E0E00" stroke-width="0.752735" stroke-miterlimit="10"></path>
+                                <path d="M19.1314 7.42349H14.1661V6.31757H19.1419L19.1707 3.33154H3.57031V10.4108H19.1013L19.1314 7.42349Z"
+                                      stroke="#1E0E00" stroke-width="0.752735" stroke-miterlimit="10"></path>
+                                <path d="M1 1V24.0007H2.58964V24.6312H2.94842V30.4053H6.59382V24.6312H6.95261V24.0007H26.4197V24.6312H26.7811V30.4053H30.4252V24.6312H30.784V24.0007H32.3736V1H1ZM30.653 11.2141H28.9023L28.8827 13.2418H30.653V21.9427H2.72712V13.2418H24.6363L24.6572 11.2141H22.2701L22.2623 11.9783C22.2522 12.0925 22.1965 12.1984 22.1068 12.2737C22.0171 12.349 21.9005 12.3878 21.7817 12.3818H21.5447C21.4865 12.3856 21.4281 12.3783 21.3728 12.3603C21.3175 12.3423 21.2665 12.314 21.2226 12.277C21.1787 12.2399 21.1428 12.195 21.117 12.1446C21.0911 12.0942 21.0759 12.0394 21.072 11.9833L21.0799 11.2129H20.2851L20.2681 12.431C20.2583 12.5451 20.2029 12.651 20.1134 12.7263C20.0239 12.8016 19.9075 12.8404 19.7888 12.8345H19.5492C19.491 12.8383 19.4327 12.8309 19.3775 12.8129C19.3223 12.7949 19.2713 12.7666 19.2275 12.7295C19.1837 12.6925 19.148 12.6475 19.1223 12.5972C19.0966 12.5468 19.0814 12.4921 19.0778 12.436L19.0948 11.2116H2.72712V2.51068H30.653V11.2141Z"
+                                      stroke="#1E0E00" stroke-width="0.752735" stroke-miterlimit="10"></path>
+                            </svg>
+                            ЛКМ для Деревообработки
+                        </button>
+                    </div>
+                    <div class="news_header_button col-lg-5 col-md-6">
+                        <button class="new_button"><img src="{% static '/src/assets/img/icon/lkm-industry.svg' %}">
+                            ЛКМ для Промышленности
+                        </button>
+                    </div>
+                    <div class="news_header_button col-lg-5 col-md-6">
+                        <button class="new_button">
+                            <svg width="32" height="31" viewBox="0 0 32 31" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M31.4508 14.9309H29.2477L30.3287 14.5302L29.0602 11.6636L26.9713 12.4378L28.0755 14.9309H27.8713V15.429L24.4498 11.875H7.99964L4.57942 15.429V14.9309H3.8322L4.93506 12.4366L2.84621 11.6636L1.57774 14.5302L2.65875 14.9309H1V16.9645H3.10168L1.75877 19.0863V20.5209H1V29.8598H6.56685V27.7756H25.8839V29.861H31.4508V20.5197H30.692V19.0863L29.3504 16.9645H31.4508V14.9309ZM9.1885 13.3072H23.2636L25.5835 16.4053H6.86727L9.1885 13.3072ZM3.85403 22.5651L3.5857 20.1167L10.4069 21.6675V22.5651H3.85403ZM24.4229 26.1167H8.02789L7.33845 24.0971H25.111L24.4229 26.1167ZM28.598 22.5651H22.0464V21.6675L28.8676 20.1167L28.598 22.5651Z"
+                                      stroke="#1E0E00" stroke-width="0.752735" stroke-miterlimit="10"></path>
+                                <path d="M17.2497 7.84326H14.9978V10.9355H17.2497V7.84326Z" stroke="#1E0E00"
+                                      stroke-width="0.752735" stroke-miterlimit="10"></path>
+                                <path d="M9.81106 7.713L9.23853 10.7617L11.4592 11.1109L12.0317 8.06221L9.81106 7.713Z"
+                                      stroke="#1E0E00" stroke-width="0.752735" stroke-miterlimit="10"></path>
+                                <path d="M5.07181 6.63933L3.29004 10.6592L5.37874 11.4344L7.16052 7.41459L5.07181 6.63933Z"
+                                      stroke="#1E0E00" stroke-width="0.753001" stroke-miterlimit="10"></path>
+                                <path d="M26.8374 6.64092L24.7488 7.41455L26.5263 11.4331L28.6149 10.6594L26.8374 6.64092Z"
+                                      stroke="#1E0E00" stroke-width="0.752735" stroke-miterlimit="10"></path>
+                                <path d="M7.60277 6.41258L9.14342 2.97257H10.7752L10.7072 2.98315L10.1333 6.03077L12.3544 6.38321L13.0156 2.97612H15.003V6.25396H17.2549V2.97612H18.9034L19.562 6.38321L21.7831 6.03077L21.2092 2.98315L21.1771 2.97257H22.651L24.3097 6.4114L26.3986 5.63835L25.2187 2.97376H25.9711V2.00452H25.6052V1H6.64759V2.00452H6.28168V2.97257H6.69251L5.51392 5.63717L7.60277 6.41258Z"
+                                      stroke="#1E0E00" stroke-width="0.752735" stroke-miterlimit="10"></path>
+                                <path d="M22.0944 7.71264L19.874 8.06299L20.4484 11.1114L22.6688 10.7611L22.0944 7.71264Z"
+                                      stroke="#1E0E00" stroke-width="0.752735" stroke-miterlimit="10"></path>
+                            </svg>
+                            Автохимия, автокосметика, оборудование для автомоек
+                        </button>
+                    </div>
+                    <div class="news_header_button col-lg-5 col-md-6">
+                        <button class="new_button"><img src="{% static '/src/assets/img/icon/Path 55.svg' %}">Инструменты,
+                            аксессуары, оборудование
+                        </button>
+                    </div>
 
-</head>
-<body>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="comparison_lists row">
+                <div class="news_buttons col-lg-5 col-md-6">
+                    <a class="big_news_buttons" href="{% url 'topic' %}">
+                        <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 2.png' %}">
+                        <span class="news_text">Как выбрать краску для стен и потолков</span>
+                    </a>
+                </div>
+                <div class="news_buttons col-lg-5 col-md-6">
+                    <a class="big_news_buttons" href="{% url 'topic' %}">
+                        <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 5.png' %}">
+                        <span class="news_text">Какой клей выбрать для дерева</span>
+                    </a>
+                </div>
+                <div class="news_buttons col-lg-5 col-md-6">
+                    <a class="big_news_buttons" href="{% url 'topic' %}">
+                        <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 8.png' %}">
+                        <span class="news_text">Чем растворить клей для дерева</span>
+                    </a>
+                </div>
+                <div class="news_buttons col-lg-5 col-md-6">
+                    <a class="big_news_buttons" href="{% url 'topic' %}">
+                        <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 2.png' %}">
+                        <span class="news_text">Как выбрать краску для стен и городов</span>
+                    </a>
+                </div>
+                <div class="news_buttons col-lg-5 col-md-6">
+                    <a class="big_news_buttons" href="{% url 'topic' %}">
+                        <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 5.png' %}">
+                        <span class="news_text">Какой клей выбрать для дерева</span>
+                    </a>
+                </div>
+                <div class="news_buttons col-lg-5 col-md-6">
+                    <a class="big_news_buttons" href="{% url 'topic' %}">
+                        <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 8.png' %}">
+                        <span class="news_text">Чем растворить клей для дерева</span>
+                    </a>
+                </div>
+                <div class="news_buttons col-lg-5 col-md-6">
+                    <a class="big_news_buttons" href="{% url 'topic' %}">
+                        <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 2.png' %}">
+                        <span class="news_text">Как выбрать краску для стен и городов</span>
+                    </a>
+                </div>
+                <div class="news_buttons col-lg-5 col-md-6">
+                    <a class="big_news_buttons" href="{% url 'topic' %}">
+                        <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 5.png' %}">
+                        <span class="news_text">Какой клей выбрать для дерева</span>
+                    </a>
+                </div>
+                <div class="news_buttons col-lg-5 col-md-6">
+                    <a class="big_news_buttons" href="{% url 'topic' %}">
+                        <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 8.png' %}">
+                        <span class="news_text">Чем растворить клей для дерева</span>
+                    </a>
+                </div>
+            </div>
+            <div class="pagination__area">
+                <div class="pagination refresh__page justify-content-center">
+                    <a href="" class="pagination justify-content-center">
+                        <img src="{% static '/src/assets/img/icon/refresh_page__red.svg' %}"
+                             alt="refresh page">
+                        <p class="invisible">a</p>Показать еще
+                    </a>
+                </div>
 
-<div class="body__wrapper">
-    <header>{% include "header.html" %}</header>
-    <main class="main__content_wrapper">
-
-        <section class="breadcrumb__section breadcrumb__bg">
-            <div class="container">
-                <div class="breadcrumb__content text-center">
-                    <ul class="breadcrumb__content--menu d-flex">
-                        <li class="breadcrumb__content--menu__items">
-                            <a href="">Главная</a>
+                <nav class="pagination justify-content-center">
+                    <ul class="pagination__wrapper d-flex align-items-center justify-content-center">
+                        <li class="pagination__list">
+                            <a href="" class="pagination__item--arrow  link ">
+                                <img src="{% static '/src/assets/img/icon/left_arrow.svg' %}"
+                                     alt="left arrow">
+                            </a>
                         </li>
-                        <li class="breadcrumb__content--menu__items">
-                            <a href="">Новости</a>
+                        <li class="pagination__list"><span
+                                class="pagination__item pagination__item--current">1</span></li>
+                        <li class="pagination__list">
+                            <a href="" class="pagination__item link">2</a>
+                        </li>
+                        <li class="pagination__list">
+                            <a href="" class="pagination__item link">3</a>
+                        </li>
+                        <li class="pagination__list">
+                            <a href="" class="pagination__item link">4</a>
+                        </li>
+                        <li class="pagination__list">
+                            <a href="" class="pagination__item link no-hover no-cursor_change">...</a>
+                        </li>
+                        <li class="pagination__list">
+                            <a href="" class="pagination__item link">8</a>
+                        </li>
+                        <li class="pagination__list">
+                            <a href="" class="pagination__item--arrow  link ">
+                                <img src="{% static '/src/assets/img/icon/right_arrow.svg' %}"
+                                     alt="right arrow">
+                            </a>
+                        </li>
+                        <li>
                         </li>
                     </ul>
-                </div>
-                <div class="news_header">
-                    <h2 class="text-center" style="font-size: 40px;">Новости</h2>
-                    <div class="comparison_lists row">
-                        <div class="news_header_button col-lg-5 col-md-6">
-                            <button class="new_button"><img
-                                    src="{% static '/src/assets/img/icon/lkm-stroitelstvo.svg' %}"> ЛКМ для
-                                Строительства
-                            </button>
-                        </div>
-                        <div class="news_header_button col-lg-5 col-md-6">
-                            <button class="new_button"><img src="{% static '/src/assets/img/icon/Path 56.svg' %}"> ЛКМ
-                                для Авторемонта
-                            </button>
-                        </div>
-                        <div class="news_header_button col-lg-5 col-md-6">
-                            <button class="new_button">
-                                <svg width="33" height="31" viewBox="0 0 33 31" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M28.0682 17.2972L28.0485 19.1976C28.0382 19.3114 27.9825 19.4169 27.8932 19.4921C27.8038 19.5673 27.6878 19.6064 27.5692 19.601H27.3322C27.2738 19.605 27.2152 19.5978 27.1597 19.5798C27.1042 19.5618 27.0529 19.5334 27.0088 19.4962C26.9648 19.4591 26.9288 19.4139 26.9029 19.3633C26.8771 19.3126 26.8619 19.2576 26.8582 19.2013L26.8766 17.3035H25.7871L25.7597 20.026C25.7493 20.1402 25.6935 20.2461 25.6039 20.3215C25.5144 20.397 25.398 20.4361 25.2791 20.4308H25.0421C24.9839 20.4349 24.9254 20.4279 24.8701 20.4101C24.8148 20.3923 24.7636 20.3641 24.7197 20.3272C24.6757 20.2902 24.6398 20.2453 24.614 20.1949C24.5882 20.1445 24.573 20.0897 24.5694 20.0336L24.5956 17.3111L24.627 14.0552H3.57031V21.1407H29.8084V14.0615H28.8747L28.8433 17.2947L28.0682 17.2972ZM19.21 18.1534H14.1635V17.0463H19.21V18.1534Z"
-                                          stroke="#1E0E00" stroke-width="0.752735" stroke-miterlimit="10"/>
-                                    <path d="M19.1314 7.42349H14.1661V6.31757H19.1419L19.1707 3.33154H3.57031V10.4108H19.1013L19.1314 7.42349Z"
-                                          stroke="#1E0E00" stroke-width="0.752735" stroke-miterlimit="10"/>
-                                    <path d="M1 1V24.0007H2.58964V24.6312H2.94842V30.4053H6.59382V24.6312H6.95261V24.0007H26.4197V24.6312H26.7811V30.4053H30.4252V24.6312H30.784V24.0007H32.3736V1H1ZM30.653 11.2141H28.9023L28.8827 13.2418H30.653V21.9427H2.72712V13.2418H24.6363L24.6572 11.2141H22.2701L22.2623 11.9783C22.2522 12.0925 22.1965 12.1984 22.1068 12.2737C22.0171 12.349 21.9005 12.3878 21.7817 12.3818H21.5447C21.4865 12.3856 21.4281 12.3783 21.3728 12.3603C21.3175 12.3423 21.2665 12.314 21.2226 12.277C21.1787 12.2399 21.1428 12.195 21.117 12.1446C21.0911 12.0942 21.0759 12.0394 21.072 11.9833L21.0799 11.2129H20.2851L20.2681 12.431C20.2583 12.5451 20.2029 12.651 20.1134 12.7263C20.0239 12.8016 19.9075 12.8404 19.7888 12.8345H19.5492C19.491 12.8383 19.4327 12.8309 19.3775 12.8129C19.3223 12.7949 19.2713 12.7666 19.2275 12.7295C19.1837 12.6925 19.148 12.6475 19.1223 12.5972C19.0966 12.5468 19.0814 12.4921 19.0778 12.436L19.0948 11.2116H2.72712V2.51068H30.653V11.2141Z"
-                                          stroke="#1E0E00" stroke-width="0.752735" stroke-miterlimit="10"/>
-                                </svg>
-                                ЛКМ для Деревообработки
-                            </button>
-                        </div>
-                        <div class="news_header_button col-lg-5 col-md-6">
-                            <button class="new_button"><img src="{% static '/src/assets/img/icon/lkm-industry.svg' %}">
-                                ЛКМ для Промышленности
-                            </button>
-                        </div>
-                        <div class="news_header_button col-lg-5 col-md-6">
-                            <button class="new_button">
-                                <svg width="32" height="31" viewBox="0 0 32 31" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M31.4508 14.9309H29.2477L30.3287 14.5302L29.0602 11.6636L26.9713 12.4378L28.0755 14.9309H27.8713V15.429L24.4498 11.875H7.99964L4.57942 15.429V14.9309H3.8322L4.93506 12.4366L2.84621 11.6636L1.57774 14.5302L2.65875 14.9309H1V16.9645H3.10168L1.75877 19.0863V20.5209H1V29.8598H6.56685V27.7756H25.8839V29.861H31.4508V20.5197H30.692V19.0863L29.3504 16.9645H31.4508V14.9309ZM9.1885 13.3072H23.2636L25.5835 16.4053H6.86727L9.1885 13.3072ZM3.85403 22.5651L3.5857 20.1167L10.4069 21.6675V22.5651H3.85403ZM24.4229 26.1167H8.02789L7.33845 24.0971H25.111L24.4229 26.1167ZM28.598 22.5651H22.0464V21.6675L28.8676 20.1167L28.598 22.5651Z"
-                                          stroke="#1E0E00" stroke-width="0.752735" stroke-miterlimit="10"/>
-                                    <path d="M17.2497 7.84326H14.9978V10.9355H17.2497V7.84326Z" stroke="#1E0E00"
-                                          stroke-width="0.752735" stroke-miterlimit="10"/>
-                                    <path d="M9.81106 7.713L9.23853 10.7617L11.4592 11.1109L12.0317 8.06221L9.81106 7.713Z"
-                                          stroke="#1E0E00" stroke-width="0.752735" stroke-miterlimit="10"/>
-                                    <path d="M5.07181 6.63933L3.29004 10.6592L5.37874 11.4344L7.16052 7.41459L5.07181 6.63933Z"
-                                          stroke="#1E0E00" stroke-width="0.753001" stroke-miterlimit="10"/>
-                                    <path d="M26.8374 6.64092L24.7488 7.41455L26.5263 11.4331L28.6149 10.6594L26.8374 6.64092Z"
-                                          stroke="#1E0E00" stroke-width="0.752735" stroke-miterlimit="10"/>
-                                    <path d="M7.60277 6.41258L9.14342 2.97257H10.7752L10.7072 2.98315L10.1333 6.03077L12.3544 6.38321L13.0156 2.97612H15.003V6.25396H17.2549V2.97612H18.9034L19.562 6.38321L21.7831 6.03077L21.2092 2.98315L21.1771 2.97257H22.651L24.3097 6.4114L26.3986 5.63835L25.2187 2.97376H25.9711V2.00452H25.6052V1H6.64759V2.00452H6.28168V2.97257H6.69251L5.51392 5.63717L7.60277 6.41258Z"
-                                          stroke="#1E0E00" stroke-width="0.752735" stroke-miterlimit="10"/>
-                                    <path d="M22.0944 7.71264L19.874 8.06299L20.4484 11.1114L22.6688 10.7611L22.0944 7.71264Z"
-                                          stroke="#1E0E00" stroke-width="0.752735" stroke-miterlimit="10"/>
-                                </svg>
-                                Автохимия, автокосметика, оборудование для автомоек
-                            </button>
-                        </div>
-                        <div class="news_header_button col-lg-5 col-md-6">
-                            <button class="new_button"><img src="{% static '/src/assets/img/icon/Path 55.svg' %}">Инструменты,
-                                аксессуары, оборудование
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
+                </nav>
             </div>
-        </section>
-        <section>
-            <div class="container">
-                <div class="comparison_lists row">
-                    <div class="news_buttons col-lg-5 col-md-6">
-                        <a class="big_news_buttons" href="{% url 'topic' %}">
-                            <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 2.png' %}">
-                            <span class="news_text">Как выбрать краску для стен и потолков</span>
-                        </a>
-                    </div>
-                    <div class="news_buttons col-lg-5 col-md-6">
-                        <a class="big_news_buttons" href="{% url 'topic' %}">
-                            <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 5.png' %}">
-                            <span class="news_text">Какой клей выбрать для дерева</span>
-                        </a>
-                    </div>
-                    <div class="news_buttons col-lg-5 col-md-6">
-                        <a class="big_news_buttons" href="{% url 'topic' %}">
-                            <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 8.png' %}">
-                            <span class="news_text">Чем растворить клей для дерева</span>
-                        </a>
-                    </div>
-                    <div class="news_buttons col-lg-5 col-md-6">
-                        <a class="big_news_buttons" href="{% url 'topic' %}">
-                            <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 2.png' %}">
-                            <span class="news_text">Как выбрать краску для стен и городов</span>
-                        </a>
-                    </div>
-                    <div class="news_buttons col-lg-5 col-md-6">
-                        <a class="big_news_buttons" href="{% url 'topic' %}">
-                            <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 5.png' %}">
-                            <span class="news_text">Какой клей выбрать для дерева</span>
-                        </a>
-                    </div>
-                    <div class="news_buttons col-lg-5 col-md-6">
-                        <a class="big_news_buttons" href="{% url 'topic' %}">
-                            <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 8.png' %}">
-                            <span class="news_text">Чем растворить клей для дерева</span>
-                        </a>
-                    </div>
-                    <div class="news_buttons col-lg-5 col-md-6">
-                        <a class="big_news_buttons" href="{% url 'topic' %}">
-                            <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 2.png' %}">
-                            <span class="news_text">Как выбрать краску для стен и городов</span>
-                        </a>
-                    </div>
-                    <div class="news_buttons col-lg-5 col-md-6">
-                        <a class="big_news_buttons" href="{% url 'topic' %}">
-                            <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 5.png' %}">
-                            <span class="news_text">Какой клей выбрать для дерева</span>
-                        </a>
-                    </div>
-                    <div class="news_buttons col-lg-5 col-md-6">
-                        <a class="big_news_buttons" href="{% url 'topic' %}">
-                            <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 8.png' %}">
-                            <span class="news_text">Чем растворить клей для дерева</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="pagination__area">
-                    <div class="pagination refresh__page justify-content-center">
-                        <a href="" class="pagination justify-content-center">
-                            <img src="{% static '/src/assets/img/icon/refresh_page__red.svg' %}"
-                                 alt="refresh page">
-                            <p class="invisible">a</p>Показать еще
-                        </a>
-                    </div>
-
-                    <nav class="pagination justify-content-center">
-                        <ul class="pagination__wrapper d-flex align-items-center justify-content-center">
-                            <li class="pagination__list">
-                                <a href="" class="pagination__item--arrow  link ">
-                                    <img src="{% static '/src/assets/img/icon/left_arrow.svg' %}"
-                                         alt="left arrow">
-                                </a>
-                            </li>
-                            <li class="pagination__list"><span
-                                    class="pagination__item pagination__item--current">1</span></li>
-                            <li class="pagination__list">
-                                <a href="" class="pagination__item link">2</a>
-                            </li>
-                            <li class="pagination__list">
-                                <a href="" class="pagination__item link">3</a>
-                            </li>
-                            <li class="pagination__list">
-                                <a href="" class="pagination__item link">4</a>
-                            </li>
-                            <li class="pagination__list">
-                                <a href="" class="pagination__item link no-hover no-cursor_change">...</a>
-                            </li>
-                            <li class="pagination__list">
-                                <a href="" class="pagination__item link">8</a>
-                            </li>
-                            <li class="pagination__list">
-                                <a href="" class="pagination__item--arrow  link ">
-                                    <img src="{% static '/src/assets/img/icon/right_arrow.svg' %}"
-                                         alt="right arrow">
-                                </a>
-                            </li>
-                            <li>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer>{% include "footer.html" %}</footer>
-</div>
-</body>
-</html>
+        </div>
+    </section>
+{% endblock %}

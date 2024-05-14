@@ -6604,7 +6604,23 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .single__widget.widget__bg.price__widget .widget__title {
-    margin-left: 0;
+    padding-left: 2rem;
+}
+
+.single__widget.widget__bg.price__widget .widget__title .arrow_image {
+    left: 0;
+}
+
+.arrow_image {
+    transition: all 0.3s;
+    transform: rotate(0deg);
+    position: absolute;
+    top: 35%;
+    left: -2rem;
+}
+
+.arrow_image.inactive {
+    transform: rotate(-90deg);
 }
 
 .comparison__list--inner {
@@ -6619,9 +6635,14 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .widget__title {
-    margin-left: -2rem;
     font-weight: 500;
     background-color: white;
+    cursor: pointer;
+    position: relative;
+}
+
+.widget__content {
+    margin-top: 2rem;
 }
 
 .cabinet--widget__title {

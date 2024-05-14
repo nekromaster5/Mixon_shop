@@ -1,197 +1,171 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    {% load static %}
-    <meta name="description" content="Morden Bootstrap HTML5 Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="{% static '/src/assets/img/favicon.ico' %}">
+{% extends "base.html" %}
+{% load static %}
 
-    <!-- Font link -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-          rel="stylesheet">
 
-    <!-- ======= All CSS Plugins here ======== -->
-    <link rel="stylesheet" href="{% static '/src/assets/css/plugins/swiper-bundle.min.css' %}">
-    <link rel="stylesheet" href="{% static '/src/assets/css/plugins/glightbox.min.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500&display=swap"
-          rel="stylesheet">
+{% block title %}
 
-    <!-- Plugin css -->
-    <link rel="stylesheet" href="{% static '/src/assets/css/vendor/bootstrap.min.css' %}">
+{% endblock %}
 
-    <!-- Custom Style CSS -->
-    <link rel="stylesheet" href="{% static '/src/assets/css/style.css' %}">
-    <title></title>
-</head>
-<body>
-<div class="body__wrapper">
-    <header>{% include "header.html" %}</header>
-    <main class="main__content_wrapper">
-        <section class="breadcrumb__section breadcrumb__bg">
-            <div class="container">
-                <div class="breadcrumb__content text-center px-3">
-                    <ul class="breadcrumb__content--menu d-flex">
-                        <li class="breadcrumb__content--menu__items">
-                            <a href="{% url 'home' %}">Главная</a>
+
+{% block content %}
+    <section class="breadcrumb__section breadcrumb__bg">
+        <div class="container">
+            <div class="breadcrumb__content text-center px-3">
+                <ul class="breadcrumb__content--menu d-flex">
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="{% url 'home' %}">Главная</a>
+                    </li>
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="">Контакты</a>
+                    </li>
+                </ul>
+            </div>
+            <h1 class="breadcrumb__content--title text-center">Контакты</h1>
+        </div>
+    </section>
+    <section class="contacts__call--section section--padding contacts">
+        <div class="container">
+            <h2 class="mb-lg-6 mb-4">Call-centre</h2>
+            <div class="row">
+                <div class="contacts--phone__numbers row">
+                    <div class="contacts-signs col-lg-14 col-20">
+                        <div class="justify-content-between d-flex">
+                            <svg width="30" height="32" viewBox="0 0 30 32" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14.5697 0.666517C11.9006 0.662816 9.28178 1.43204 7.0001 2.89002C4.71843 4.34801 2.86173 6.43856 1.63311 8.93292C0.404496 11.4273 -0.148655 14.2293 0.0341829 17.0325C0.21702 19.8356 1.12875 22.5317 2.6697 24.8259L2.63381 24.7912L1.53423 31.3332L7.27184 29.2804L7.22094 29.2299C9.15189 30.4188 11.3171 31.1233 13.5485 31.2889C15.78 31.4545 18.0177 31.0766 20.088 30.1847C22.1583 29.2927 24.0055 27.9106 25.4863 26.1456C26.9671 24.3806 28.0417 22.2801 28.6266 20.0073C29.2116 17.7344 29.2913 15.3502 28.8594 13.0397C28.4275 10.7292 27.4957 8.55457 26.1363 6.68445C24.7769 4.81434 23.0264 3.29907 21.0208 2.25624C19.0151 1.21341 16.8082 0.671052 14.5712 0.671255L14.5697 0.666517ZM19.3458 26.1697C15.8501 24.8015 12.6772 22.6527 10.0454 19.8709C9.24484 18.9388 8.49368 17.9609 7.79536 16.9417C7.26584 15.9296 6.51437 14.6963 5.98036 13.4568C5.55284 12.443 4.59136 10.7535 5.12687 9.40022C5.71685 8.27349 6.65995 7.39726 7.79536 6.92112C8.09484 6.80145 8.42622 6.80467 8.72355 6.93016C9.02087 7.05565 9.26251 7.29422 9.40051 7.59853C10.3605 8.95177 12.6091 11.2019 11.4316 12.6657C10.4701 13.7916 9.40041 13.4552 10.5765 16.0433C11.5335 18.1813 13.7806 20.6604 16.0277 20.9952C18.2747 21.3299 16.8813 16.4917 22.439 21.4452C22.9685 21.8936 23.5039 22.0089 23.5039 23.0242C23.5114 23.9117 21.6965 27.0619 19.3519 26.1634L19.3458 26.1697ZM14.8576 9.17916L14.9656 8.38963C15.6091 7.93961 18.5959 8.95335 19.8754 10.3019C20.5458 10.996 21.0504 11.8473 21.3482 12.7862C21.6459 13.7251 21.7283 14.7249 21.5884 15.7038C20.4169 16.0448 20.8384 14.6979 20.5249 13.4584C19.6654 9.50918 16.2453 9.62287 14.8517 9.17284L14.8576 9.17916ZM18.4938 14.9174C18.0603 13.6779 18.3858 12.7794 17.2067 12.2157C16.7807 11.9883 15.9211 11.9883 15.7171 11.7672C14.6416 10.6398 17.7422 10.414 18.8117 12.5567C19.0217 12.7731 19.9894 15.1369 18.4938 14.9111V14.9174ZM23.1919 15.8206C23.1962 14.0867 22.7377 12.3863 21.8686 10.9133C20.9994 9.44037 19.7548 8.25404 18.2763 7.48958C16.9155 7.06284 15.5223 6.76064 14.1121 6.58636C13.8961 5.35154 15.0676 5.68788 15.9211 5.79684C17.195 5.98073 18.4204 6.43426 19.5233 7.13008C20.6262 7.82591 21.5838 8.74961 22.3384 9.84552C23.5081 11.6775 24.1398 13.8313 24.1549 16.0385C24.1519 17.0491 23.1919 17.1628 23.1919 15.8143V15.8206Z"
+                                      fill="#675CAC"></path>
+                            </svg>
+                            <svg width="31" height="32" viewBox="0 0 31 32" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                      d="M15.5029 0.666517C12.8338 0.662816 10.2151 1.43204 7.93345 2.89002C5.65178 4.34801 3.79508 6.43856 2.56646 8.93292C1.33785 11.4273 0.784695 14.2293 0.967532 17.0325C1.15037 19.8356 2.0621 22.5317 3.60305 24.8259L3.56716 24.7912L2.46758 31.3332L8.20684 29.2804L8.15429 29.2299C10.0852 30.4188 12.2504 31.1233 14.4819 31.2889C16.7133 31.4545 18.951 31.0766 21.0213 30.1847C23.0916 29.2927 24.9388 27.9106 26.4196 26.1456C27.9005 24.3806 28.975 22.2801 29.56 20.0073C30.145 17.7344 30.2246 15.3502 29.7927 13.0397C29.3608 10.7292 28.4291 8.55457 27.0697 6.68445C25.7103 4.81434 23.9598 3.29907 21.9541 2.25624C19.9484 1.21341 17.7415 0.671052 15.5046 0.671255L15.5029 0.666517ZM24.2318 22.7811C23.646 23.6737 22.8052 24.3468 21.8316 24.7028C20.8349 25.0677 19.7502 25.0677 18.7535 24.7028C17.8965 24.4962 17.0575 24.2141 16.2454 23.8595C15.8849 23.6528 15.5015 23.4937 15.1039 23.3858C14.4139 22.9011 13.7314 22.5426 13.0489 22.0658L11.9059 21.1057L10.4223 19.5424C9.08915 18.0126 7.94039 16.3155 7.00215 14.4895C6.61493 13.5423 6.42028 12.5204 6.43066 11.4893C6.43418 10.4664 6.71191 9.46539 7.23177 8.60122C7.68179 7.88118 8.36733 7.03955 9.16836 7.03955C9.96938 7.03955 10.4223 6.92112 10.7644 7.40431C10.9939 7.76433 11.3358 8.84282 11.5653 9.32601C11.9188 10.1474 12.2235 10.9912 12.4774 11.8525C12.4774 12.8125 10.9938 14.0142 10.9938 14.379C11.256 15.1881 11.6842 15.9267 12.2479 16.5422L12.8179 17.2607C12.8173 17.2767 12.8197 17.2927 12.8251 17.3077C12.8305 17.3227 12.8386 17.3365 12.8491 17.3481C12.8596 17.3597 12.8723 17.369 12.8862 17.3754C12.9002 17.3819 12.9151 17.3853 12.9304 17.3855L14.6434 19.064C14.9707 19.2234 15.2776 19.4255 15.5569 19.6656C15.8974 19.7824 16.2454 20.0256 16.5814 20.1393C17.8355 20.7394 17.723 20.9825 18.5241 19.904C18.6351 19.904 18.635 19.7793 18.635 19.7793C18.7535 19.6624 18.8646 19.544 18.9771 19.4256L19.4361 18.7024C19.6596 18.5824 19.7781 18.0992 20.1186 18.0992C20.9577 18.3571 21.7636 18.7219 22.5186 19.1856C22.8871 19.4082 23.2685 19.6065 23.6603 19.7793C24.1194 20.0225 24.5737 20.1393 24.5737 20.6225C24.5774 21.3547 24.4619 22.0822 24.2318 22.7732V22.7811Z"
+                                      fill="#4CAF50"></path>
+                            </svg>
+                            <svg width="30" height="32" viewBox="0 0 30 32" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                      d="M15.4349 0.666504C12.5538 0.666192 9.73712 1.56525 7.34141 3.24998C4.94571 4.93471 3.07852 7.32943 1.97582 10.1313C0.873117 12.9332 0.584515 16.0163 1.14652 18.9908C1.70853 21.9653 3.09587 24.6976 5.13314 26.8421C7.17041 28.9866 9.76604 30.447 12.5918 31.0386C15.4176 31.6302 18.3468 31.3264 21.0085 30.1657C23.6703 29.0049 25.9452 27.0394 27.5457 24.5176C29.1462 21.9958 30.0003 19.031 30 15.9983C30 11.932 28.4655 8.03233 25.734 5.15707C23.0025 2.28181 19.2979 0.666504 15.4349 0.666504ZM22.6964 10.7135C22.4912 11.4437 22.3348 12.1881 22.2284 12.9414C22.0004 14.3056 21.6464 15.9146 21.4139 17.2709C21.2939 18.0225 21.1774 18.7667 21.0644 19.5036L20.3519 22.731C20.2319 23.222 20.0039 24.4678 19.8839 24.8326C19.6553 25.0469 19.3669 25.1776 19.0619 25.2052C18.6671 25.1662 18.2949 24.9933 18.0014 24.7126L12.7123 20.4951C12.5938 20.3767 12.0044 19.9962 11.8903 19.7641C12.2926 19.3553 12.7238 18.9795 13.1803 18.6399L15.3029 16.5319C15.4169 16.4119 15.5308 16.2809 15.6508 16.2809L19.2959 12.6951C19.5054 12.5956 19.6722 12.4178 19.764 12.1961C19.764 11.8314 19.4099 12.0761 19.1819 12.1961L13.8884 15.6619C13.6544 15.9146 13.4203 16.0393 13.3003 16.1656C12.1198 16.9046 10.8297 17.7683 9.76923 18.5199L9.53522 18.6399L5.77475 17.2772C5.42074 17.1572 4.83431 16.9046 4.83431 16.4119C4.83431 15.9193 5.66069 15.6619 6.12869 15.4267C8.35922 14.4303 10.4788 13.4324 12.7123 12.5687C12.8323 12.4487 13.0603 12.4487 13.1803 12.3224L18.8279 10.0945C19.1819 9.9745 19.5298 9.84818 20.0038 9.72187C20.7119 9.34463 21.4581 9.05278 22.2284 8.85186C23.0609 8.84712 22.6964 10.0898 22.6964 10.7087V10.7135Z"
+                                      fill="#039BE6"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <span>CEO</span>
+                        </div>
+                    </div>
+                    <ul class="contacts-numbers contacts-page col-lg-15 col-21">
+                        <li class="footer__widget--menu__list"><a class="contacts--number__text">+38 095 295 88
+                            03</a></li>
+                        <li class="footer__widget--menu__list"><a class="contacts--number__text">+38 097 295 88
+                            03</a></li>
+                        <li class="footer__widget--menu__list invisible"><a
+                                class="footer__widget--menu__text no-hover no-cursor_change">asd</a></li>
+                        <li class="footer__widget--menu__list"><a class="contacts--number__text">+38 067 888 00
+                            03</a></li>
+                    </ul>
+                </div>
+                <h3 style="text-align: center;" class="col-lg-5 col-md-19 col-12 text-right px-0">Адрес: г. Одесса,
+                    ул. Промышленная, 28</h3>
+            </div>
+        </div>
+    </section>
+    <section class="addresses__call--section section--padding contacts">
+        <div class="container">
+            <div class="row">
+                <div class="addresses--block col-lg-18 col-md-4">
+                    <div class="shop-selector">
+                        <h2 class="mb-lg-6 mb-4 pe-lg-5 pe-0">Магазины</h2>
+                        <div class="checkout__input--select select mb-lg-5 mb-4">
+                            <label for="country"></label><select
+                                class="checkout__input--select__field border-radius-5 flex-grow-0" id="country">
+                            <option value="odesa">Одесса</option>
+                            <option value="kyiv">Киев</option>
+                            <option value="lutsk">Луцк</option>
+                            <option value="rivne">Ровно</option>
+                            <option value="khmelnytskyi">Хмельницкий</option>
+                        </select>
+                        </div>
+                    </div>
+                    <h4>Днепропетровская
+                        дор. 996/1. 65126</h4>
+                    <span>Рынок “Меркурий”, Маг. №9</span>
+                    <ul class="contacts-numbers shop contacts-page ps-lg-5 ps-0 mb-5">
+                        <li class="footer__widget--menu__list"><a class="contacts--number__text">+38 097 295 88
+                            03</a></li>
+                        <li class="footer__widget--menu__list"><a class="contacts--number__text">+38 095 295 88
+                            03</a></li>
+                        <li class="footer__widget--menu__list"><a class="contacts--number__text">+38 067 888 00
+                            03</a></li>
+                        <li class="footer__widget--menu__list"><a
+                                class="contacts--number__text">mag.od.mercury@mixon.ua</a></li>
+                    </ul>
+                    <h5 class="mb-8">Время работы:</h5>
+                    <ul class="contacts-numbers shop contacts-page ps-0">
+                        <li class="footer__widget--menu__list"><a class="contacts--number__text">ПН-ПТ:
+                            09:00-17:00</a>
                         </li>
-                        <li class="breadcrumb__content--menu__items">
-                            <a href="">Контакты</a>
+                        <li class="footer__widget--menu__list"><a class="contacts--number__text">СБ: 09:00-16:00</a>
                         </li>
                     </ul>
                 </div>
-                <h1 class="breadcrumb__content--title text-center">Контакты</h1>
-            </div>
-        </section>
-        <section class="contacts__call--section section--padding contacts">
-            <div class="container">
-                <h2 class="mb-lg-6 mb-4">Call-centre</h2>
-                <div class="row">
-                    <div class="contacts--phone__numbers row">
-                        <div class="contacts-signs col-lg-14 col-20">
-                            <div class="justify-content-between d-flex">
-                                <svg width="30" height="32" viewBox="0 0 30 32" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M14.5697 0.666517C11.9006 0.662816 9.28178 1.43204 7.0001 2.89002C4.71843 4.34801 2.86173 6.43856 1.63311 8.93292C0.404496 11.4273 -0.148655 14.2293 0.0341829 17.0325C0.21702 19.8356 1.12875 22.5317 2.6697 24.8259L2.63381 24.7912L1.53423 31.3332L7.27184 29.2804L7.22094 29.2299C9.15189 30.4188 11.3171 31.1233 13.5485 31.2889C15.78 31.4545 18.0177 31.0766 20.088 30.1847C22.1583 29.2927 24.0055 27.9106 25.4863 26.1456C26.9671 24.3806 28.0417 22.2801 28.6266 20.0073C29.2116 17.7344 29.2913 15.3502 28.8594 13.0397C28.4275 10.7292 27.4957 8.55457 26.1363 6.68445C24.7769 4.81434 23.0264 3.29907 21.0208 2.25624C19.0151 1.21341 16.8082 0.671052 14.5712 0.671255L14.5697 0.666517ZM19.3458 26.1697C15.8501 24.8015 12.6772 22.6527 10.0454 19.8709C9.24484 18.9388 8.49368 17.9609 7.79536 16.9417C7.26584 15.9296 6.51437 14.6963 5.98036 13.4568C5.55284 12.443 4.59136 10.7535 5.12687 9.40022C5.71685 8.27349 6.65995 7.39726 7.79536 6.92112C8.09484 6.80145 8.42622 6.80467 8.72355 6.93016C9.02087 7.05565 9.26251 7.29422 9.40051 7.59853C10.3605 8.95177 12.6091 11.2019 11.4316 12.6657C10.4701 13.7916 9.40041 13.4552 10.5765 16.0433C11.5335 18.1813 13.7806 20.6604 16.0277 20.9952C18.2747 21.3299 16.8813 16.4917 22.439 21.4452C22.9685 21.8936 23.5039 22.0089 23.5039 23.0242C23.5114 23.9117 21.6965 27.0619 19.3519 26.1634L19.3458 26.1697ZM14.8576 9.17916L14.9656 8.38963C15.6091 7.93961 18.5959 8.95335 19.8754 10.3019C20.5458 10.996 21.0504 11.8473 21.3482 12.7862C21.6459 13.7251 21.7283 14.7249 21.5884 15.7038C20.4169 16.0448 20.8384 14.6979 20.5249 13.4584C19.6654 9.50918 16.2453 9.62287 14.8517 9.17284L14.8576 9.17916ZM18.4938 14.9174C18.0603 13.6779 18.3858 12.7794 17.2067 12.2157C16.7807 11.9883 15.9211 11.9883 15.7171 11.7672C14.6416 10.6398 17.7422 10.414 18.8117 12.5567C19.0217 12.7731 19.9894 15.1369 18.4938 14.9111V14.9174ZM23.1919 15.8206C23.1962 14.0867 22.7377 12.3863 21.8686 10.9133C20.9994 9.44037 19.7548 8.25404 18.2763 7.48958C16.9155 7.06284 15.5223 6.76064 14.1121 6.58636C13.8961 5.35154 15.0676 5.68788 15.9211 5.79684C17.195 5.98073 18.4204 6.43426 19.5233 7.13008C20.6262 7.82591 21.5838 8.74961 22.3384 9.84552C23.5081 11.6775 24.1398 13.8313 24.1549 16.0385C24.1519 17.0491 23.1919 17.1628 23.1919 15.8143V15.8206Z"
-                                          fill="#675CAC"></path>
-                                </svg>
-                                <svg width="31" height="32" viewBox="0 0 31 32" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M15.5029 0.666517C12.8338 0.662816 10.2151 1.43204 7.93345 2.89002C5.65178 4.34801 3.79508 6.43856 2.56646 8.93292C1.33785 11.4273 0.784695 14.2293 0.967532 17.0325C1.15037 19.8356 2.0621 22.5317 3.60305 24.8259L3.56716 24.7912L2.46758 31.3332L8.20684 29.2804L8.15429 29.2299C10.0852 30.4188 12.2504 31.1233 14.4819 31.2889C16.7133 31.4545 18.951 31.0766 21.0213 30.1847C23.0916 29.2927 24.9388 27.9106 26.4196 26.1456C27.9005 24.3806 28.975 22.2801 29.56 20.0073C30.145 17.7344 30.2246 15.3502 29.7927 13.0397C29.3608 10.7292 28.4291 8.55457 27.0697 6.68445C25.7103 4.81434 23.9598 3.29907 21.9541 2.25624C19.9484 1.21341 17.7415 0.671052 15.5046 0.671255L15.5029 0.666517ZM24.2318 22.7811C23.646 23.6737 22.8052 24.3468 21.8316 24.7028C20.8349 25.0677 19.7502 25.0677 18.7535 24.7028C17.8965 24.4962 17.0575 24.2141 16.2454 23.8595C15.8849 23.6528 15.5015 23.4937 15.1039 23.3858C14.4139 22.9011 13.7314 22.5426 13.0489 22.0658L11.9059 21.1057L10.4223 19.5424C9.08915 18.0126 7.94039 16.3155 7.00215 14.4895C6.61493 13.5423 6.42028 12.5204 6.43066 11.4893C6.43418 10.4664 6.71191 9.46539 7.23177 8.60122C7.68179 7.88118 8.36733 7.03955 9.16836 7.03955C9.96938 7.03955 10.4223 6.92112 10.7644 7.40431C10.9939 7.76433 11.3358 8.84282 11.5653 9.32601C11.9188 10.1474 12.2235 10.9912 12.4774 11.8525C12.4774 12.8125 10.9938 14.0142 10.9938 14.379C11.256 15.1881 11.6842 15.9267 12.2479 16.5422L12.8179 17.2607C12.8173 17.2767 12.8197 17.2927 12.8251 17.3077C12.8305 17.3227 12.8386 17.3365 12.8491 17.3481C12.8596 17.3597 12.8723 17.369 12.8862 17.3754C12.9002 17.3819 12.9151 17.3853 12.9304 17.3855L14.6434 19.064C14.9707 19.2234 15.2776 19.4255 15.5569 19.6656C15.8974 19.7824 16.2454 20.0256 16.5814 20.1393C17.8355 20.7394 17.723 20.9825 18.5241 19.904C18.6351 19.904 18.635 19.7793 18.635 19.7793C18.7535 19.6624 18.8646 19.544 18.9771 19.4256L19.4361 18.7024C19.6596 18.5824 19.7781 18.0992 20.1186 18.0992C20.9577 18.3571 21.7636 18.7219 22.5186 19.1856C22.8871 19.4082 23.2685 19.6065 23.6603 19.7793C24.1194 20.0225 24.5737 20.1393 24.5737 20.6225C24.5774 21.3547 24.4619 22.0822 24.2318 22.7732V22.7811Z"
-                                          fill="#4CAF50"></path>
-                                </svg>
-                                <svg width="30" height="32" viewBox="0 0 30 32" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M15.4349 0.666504C12.5538 0.666192 9.73712 1.56525 7.34141 3.24998C4.94571 4.93471 3.07852 7.32943 1.97582 10.1313C0.873117 12.9332 0.584515 16.0163 1.14652 18.9908C1.70853 21.9653 3.09587 24.6976 5.13314 26.8421C7.17041 28.9866 9.76604 30.447 12.5918 31.0386C15.4176 31.6302 18.3468 31.3264 21.0085 30.1657C23.6703 29.0049 25.9452 27.0394 27.5457 24.5176C29.1462 21.9958 30.0003 19.031 30 15.9983C30 11.932 28.4655 8.03233 25.734 5.15707C23.0025 2.28181 19.2979 0.666504 15.4349 0.666504ZM22.6964 10.7135C22.4912 11.4437 22.3348 12.1881 22.2284 12.9414C22.0004 14.3056 21.6464 15.9146 21.4139 17.2709C21.2939 18.0225 21.1774 18.7667 21.0644 19.5036L20.3519 22.731C20.2319 23.222 20.0039 24.4678 19.8839 24.8326C19.6553 25.0469 19.3669 25.1776 19.0619 25.2052C18.6671 25.1662 18.2949 24.9933 18.0014 24.7126L12.7123 20.4951C12.5938 20.3767 12.0044 19.9962 11.8903 19.7641C12.2926 19.3553 12.7238 18.9795 13.1803 18.6399L15.3029 16.5319C15.4169 16.4119 15.5308 16.2809 15.6508 16.2809L19.2959 12.6951C19.5054 12.5956 19.6722 12.4178 19.764 12.1961C19.764 11.8314 19.4099 12.0761 19.1819 12.1961L13.8884 15.6619C13.6544 15.9146 13.4203 16.0393 13.3003 16.1656C12.1198 16.9046 10.8297 17.7683 9.76923 18.5199L9.53522 18.6399L5.77475 17.2772C5.42074 17.1572 4.83431 16.9046 4.83431 16.4119C4.83431 15.9193 5.66069 15.6619 6.12869 15.4267C8.35922 14.4303 10.4788 13.4324 12.7123 12.5687C12.8323 12.4487 13.0603 12.4487 13.1803 12.3224L18.8279 10.0945C19.1819 9.9745 19.5298 9.84818 20.0038 9.72187C20.7119 9.34463 21.4581 9.05278 22.2284 8.85186C23.0609 8.84712 22.6964 10.0898 22.6964 10.7087V10.7135Z"
-                                          fill="#039BE6"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <span>CEO</span>
-                            </div>
-                        </div>
-                        <ul class="contacts-numbers contacts-page col-lg-15 col-21">
-                            <li class="footer__widget--menu__list"><a class="contacts--number__text">+38 095 295 88
-                                03</a></li>
-                            <li class="footer__widget--menu__list"><a class="contacts--number__text">+38 097 295 88
-                                03</a></li>
-                            <li class="footer__widget--menu__list invisible"><a
-                                    class="footer__widget--menu__text no-hover no-cursor_change">asd</a></li>
-                            <li class="footer__widget--menu__list"><a class="contacts--number__text">+38 067 888 00
-                                03</a></li>
-                        </ul>
-                    </div>
-                    <h3 style="text-align: center;" class="col-lg-5 col-md-19 col-12 text-right px-0">Адрес: г. Одесса,
-                        ул. Промышленная, 28</h3>
+                <div class="addresses--block col-lg-7 col-md-4 overflow-hidden">
+                    <img class="h-100" src="{% static 'src/assets/img/other/mix_map_lg.png' %}" alt="Map">
                 </div>
-            </div>
-        </section>
-        <section class="addresses__call--section section--padding contacts">
-            <div class="container">
-                <div class="row">
-                    <div class="addresses--block col-lg-18 col-md-4">
-                        <div class="shop-selector">
-                            <h2 class="mb-lg-6 mb-4 pe-lg-5 pe-0">Магазины</h2>
-                            <div class="checkout__input--select select mb-lg-5 mb-4">
-                                <label for="country"></label><select
-                                    class="checkout__input--select__field border-radius-5 flex-grow-0" id="country">
+                <div class="addresses--block col-lg-18 col-md-4">
+                    <div class="shop-selector">
+                        <h2 class="mb-lg-6 mb-4 pe-lg-5 pe-0">Магазины</h2>
+                        <div class="checkout__input--select select mb-lg-5 mb-4">
+                            <select class="checkout__input--select__field border-radius-5 flex-grow-0" id="country">
                                 <option value="odesa">Одесса</option>
                                 <option value="kyiv">Киев</option>
                                 <option value="lutsk">Луцк</option>
                                 <option value="rivne">Ровно</option>
                                 <option value="khmelnytskyi">Хмельницкий</option>
                             </select>
-                            </div>
                         </div>
-                        <h4>Днепропетровская
-                            дор. 996/1. 65126</h4>
-                        <span>Рынок “Меркурий”, Маг. №9</span>
-                        <ul class="contacts-numbers shop contacts-page ps-lg-5 ps-0 mb-5">
-                            <li class="footer__widget--menu__list"><a class="contacts--number__text">+38 097 295 88
-                                03</a></li>
-                            <li class="footer__widget--menu__list"><a class="contacts--number__text">+38 095 295 88
-                                03</a></li>
-                            <li class="footer__widget--menu__list"><a class="contacts--number__text">+38 067 888 00
-                                03</a></li>
-                            <li class="footer__widget--menu__list"><a
-                                    class="contacts--number__text">mag.od.mercury@mixon.ua</a></li>
-                        </ul>
-                        <h5 class="mb-8">Время работы:</h5>
-                        <ul class="contacts-numbers shop contacts-page ps-0">
-                            <li class="footer__widget--menu__list"><a class="contacts--number__text">ПН-ПТ:
-                                09:00-17:00</a>
-                            </li>
-                            <li class="footer__widget--menu__list"><a class="contacts--number__text">СБ: 09:00-16:00</a>
-                            </li>
-                        </ul>
                     </div>
-                    <div class="addresses--block col-lg-7 col-md-4 overflow-hidden">
-                        <img class="h-100" src="{% static 'src/assets/img/other/mix_map_lg.png' %}" alt="Map">
-                    </div>
-                    <div class="addresses--block col-lg-18 col-md-4">
-                        <div class="shop-selector">
-                            <h2 class="mb-lg-6 mb-4 pe-lg-5 pe-0">Магазины</h2>
-                            <div class="checkout__input--select select mb-lg-5 mb-4">
-                                <select class="checkout__input--select__field border-radius-5 flex-grow-0" id="country">
-                                    <option value="odesa">Одесса</option>
-                                    <option value="kyiv">Киев</option>
-                                    <option value="lutsk">Луцк</option>
-                                    <option value="rivne">Ровно</option>
-                                    <option value="khmelnytskyi">Хмельницкий</option>
-                                </select>
-                            </div>
-                        </div>
-                        <a class="shop_address mb-4">Промр-к «Староконный», ул. Раскидайлов. 31,</a>
-                        <a class="shop_address mb-4">Промрынок «Куяльник», пос.Большевик</a>
-                        <a class="shop_address active mb-4">Промрынок «Меркурий», Днепропетровская дор.</a>
-                        <a class="shop_address mb-4">Промрынок «Черноморец», ул.Малиновского, 67я дор.</a>
-                        <a class="shop_address mb-4">ул. 25 Чапаевской дивизии 13/1</a>
-                        <a class="shop_address mb-4">ул. Ильфа и Петрова 18а</a>
-                        <a class="shop_address mb-4">ул. Елисаветинская 4</a>
-                    </div>
+                    <a class="shop_address mb-4">Промр-к «Староконный», ул. Раскидайлов. 31,</a>
+                    <a class="shop_address mb-4">Промрынок «Куяльник», пос.Большевик</a>
+                    <a class="shop_address active mb-4">Промрынок «Меркурий», Днепропетровская дор.</a>
+                    <a class="shop_address mb-4">Промрынок «Черноморец», ул.Малиновского, 67я дор.</a>
+                    <a class="shop_address mb-4">ул. 25 Чапаевской дивизии 13/1</a>
+                    <a class="shop_address mb-4">ул. Ильфа и Петрова 18а</a>
+                    <a class="shop_address mb-4">ул. Елисаветинская 4</a>
                 </div>
+            </div>
 
-            </div>
-        </section>
-        <section class="delivery_bottom contacts">
-            <div class="container">
-                <div style="display: flex; " class="delivery_block mb-lg-7 mb-9">
-                    <div class="delivery_product_block">
-                        <div class="delivery_product_block--img flex-grow-1 flex-shrink-0">
-                            <img src="{% static '/src/assets/img/icon/Group 100.png' %}">
-                        </div>
-                        <div class="flex-shrink-1 flex-grow-0" style="flex-direction:column;margin-left:10px;">
-                            <h2 class="h3">Доставка</h2>
-                            <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
-                        </div>
+        </div>
+    </section>
+    <section class="delivery_bottom contacts">
+        <div class="container">
+            <div style="display: flex; " class="delivery_block mb-lg-7 mb-9">
+                <div class="delivery_product_block">
+                    <div class="delivery_product_block--img flex-grow-1 flex-shrink-0">
+                        <img src="{% static '/src/assets/img/icon/Group 100.png' %}">
                     </div>
-                    <div class="delivery_product_block">
-                        <div class="delivery_product_block--img flex-grow-1 flex-shrink-0">
-                            <img src="{% static '/src/assets/img/icon/Group 101.png' %}">
-                        </div>
-                        <div class="flex-shrink-1 flex-grow-0" style="flex-direction:column;margin-left:10px;">
-                            <h2 class="h3">Доставка</h2>
-                            <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
-                        </div>
+                    <div class="flex-shrink-1 flex-grow-0" style="flex-direction:column;margin-left:10px;">
+                        <h2 class="h3">Доставка</h2>
+                        <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
                     </div>
-                    <div class="delivery_product_block">
-                        <div class="delivery_product_block--img flex-grow-1 flex-shrink-0">
-                            <img src="{% static '/src/assets/img/icon/Group 102.png' %}">
-                        </div>
-                        <div class="flex-shrink-1 flex-grow-0" style="flex-direction:column;margin-left:10px;">
-                            <h2 class="h3">Доставка</h2>
-                            <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
-                        </div>
+                </div>
+                <div class="delivery_product_block">
+                    <div class="delivery_product_block--img flex-grow-1 flex-shrink-0">
+                        <img src="{% static '/src/assets/img/icon/Group 101.png' %}">
+                    </div>
+                    <div class="flex-shrink-1 flex-grow-0" style="flex-direction:column;margin-left:10px;">
+                        <h2 class="h3">Доставка</h2>
+                        <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
+                    </div>
+                </div>
+                <div class="delivery_product_block">
+                    <div class="delivery_product_block--img flex-grow-1 flex-shrink-0">
+                        <img src="{% static '/src/assets/img/icon/Group 102.png' %}">
+                    </div>
+                    <div class="flex-shrink-1 flex-grow-0" style="flex-direction:column;margin-left:10px;">
+                        <h2 class="h3">Доставка</h2>
+                        <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
-    <footer>{% include "footer.html" %}</footer>
-</div>
-</body>
-</html>
+        </div>
+    </section>
+{% endblock %}

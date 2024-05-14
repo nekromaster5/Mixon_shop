@@ -1,968 +1,911 @@
-<!doctype html>
-<html lang="en">
+{% extends "base.html" %}
+{% load static %}
 
-<head>
-    <meta charset="utf-8">
-    {% load static %}
-    <meta name="description" content="Morden Bootstrap HTML5 Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="{% static '/src/assets/img/favicon.ico' %}">
 
-    <!-- Font link -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-          rel="stylesheet">
+{% block title %}
 
-    <!-- ======= All CSS Plugins here ======== -->
-    <link rel="stylesheet" href="{% static '/src/assets/css/plugins/swiper-bundle.min.css' %}">
-    <link rel="stylesheet" href="{% static '/src/assets/css/plugins/glightbox.min.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500&display=swap"
-          rel="stylesheet">
+{% endblock %}
 
-    <!-- Plugin css -->
-    <link rel="stylesheet" href="{% static '/src/assets/css/vendor/bootstrap.min.css' %}">
 
-    <!-- Custom Style CSS -->
-    <link rel="stylesheet" href="{% static '/src/assets/css/style.css' %}">
-    <title></title>
+{% block content %}
+    <section class="breadcrumb__section breadcrumb__bg">
+        <div class="container">
+            <div class="breadcrumb__content text-center">
+                <ul class="breadcrumb__content--menu d-flex">
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="">Главная</a>
+                    </li>
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="">Кабинет</a>
+                    </li>
 
-</head>
-<body>
-<div class="body__wrapper">
-    <header>{% include "header.html" %}</header>
-    <main class="main__content_wrapper">
-        <section class="breadcrumb__section breadcrumb__bg" style="  ">
-            <div class="container">
-                <div class="breadcrumb__content text-center">
-                    <ul class="breadcrumb__content--menu d-flex">
-                        <li class="breadcrumb__content--menu__items">
-                            <a href="">Главная</a>
-                        </li>
-                        <li class="breadcrumb__content--menu__items">
-                            <a href="">Кабинет</a>
-                        </li>
-
-                    </ul>
-                </div>
-
+                </ul>
             </div>
-        </section>
-        <section class="personal_product__section section--padding pt-0 bg__off_white">
-            <div class="container">
-                <div class="menu_button_div"style=" ">
-                    <button class="menu_button" style=" ">Меню кабинета</button>
-                </div>
-                <div class="row">
-                    <!-- Первый блок - блок виджетов -->
-                    <div class="cabinet--widget__block col-lg-6">
-                        <div class="shop__sidebar--widget widget__area d-none d-lg-block">
-                            <div class="single__widget px-0">
-                                <div class="d-flex cabinet--widget__title" style="flex-direction: column;  ">
-                                    <div class="widget_inner">
-                                        <h2 class="h3">Ваш кабинет</h2>
-                                        <div class="personal_name">Василий Иванов</div>
-                                    </div>
+
+        </div>
+    </section>
+    <section class="personal_product__section section--padding pt-0 bg__off_white">
+        <div class="container">
+            <div class="menu_button_div" style=" ">
+                <button class="menu_button" style=" ">Меню кабинета</button>
+            </div>
+            <div class="row">
+                <!-- Первый блок - блок виджетов -->
+                <div class="cabinet--widget__block col-lg-6">
+                    <div class="shop__sidebar--widget widget__area d-none d-lg-block">
+                        <div class="single__widget px-0">
+                            <div class="d-flex cabinet--widget__title" style="flex-direction: column;  ">
+                                <div class="widget_inner">
+                                    <h2 class="h3">Ваш кабинет</h2>
+                                    <div class="personal_name">Василий Иванов</div>
                                 </div>
-                                <div class="widget-functions">
-                                    <ul class="widget__personal_cabinet_button">
-                                        <li class="widget__cabinet--button active"
-                                            style=" display: flex;align-items: center;">
-                                            <div class="widget_button_inner">
-                                                <svg width="22" height="20" viewBox="0 0 22 20" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M15.942 1C16.231 1 16.542 1.01531 16.869 1.04399C18.876 1.22274 21.195 2.90314 21.477 6.12343V7.19495C21.215 10.2767 18.671 14.0771 11.238 18.8478C3.80499 14.079 1.263 10.2776 1 7.19495V6.12343C1.282 2.90409 3.6 1.22274 5.608 1.04399C5.938 1.01531 6.246 1.00096 6.536 1.00096C8.853 1.00096 9.96599 1.91668 11.236 3.30459C12.51 1.91668 13.621 1 15.936 1"
-                                                          stroke="#FF0000" stroke-miterlimit="10"
-                                                          stroke-linecap="round"></path>
-                                                </svg>
+                            </div>
+                            <div class="widget-functions">
+                                <ul class="widget__personal_cabinet_button">
+                                    <li class="widget__cabinet--button active"
+                                        style=" display: flex;align-items: center;">
+                                        <div class="widget_button_inner">
+                                            <svg width="22" height="20" viewBox="0 0 22 20" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M15.942 1C16.231 1 16.542 1.01531 16.869 1.04399C18.876 1.22274 21.195 2.90314 21.477 6.12343V7.19495C21.215 10.2767 18.671 14.0771 11.238 18.8478C3.80499 14.079 1.263 10.2776 1 7.19495V6.12343C1.282 2.90409 3.6 1.22274 5.608 1.04399C5.938 1.01531 6.246 1.00096 6.536 1.00096C8.853 1.00096 9.96599 1.91668 11.236 3.30459C12.51 1.91668 13.621 1 15.936 1"
+                                                      stroke="#FF0000" stroke-miterlimit="10"
+                                                      stroke-linecap="round"></path>
+                                            </svg>
 
-                                                <button class="footer__widget--menu__text"
-                                                        onclick="switchBlock_to_zakladki(); "
-                                                        class="widget__cabinet--button"
-                                                        style="  background-color: transparent; border:none;color: black;">
-                                                    Закладки
-                                                </button>
-                                            </div>
-                                        </li>
-                                        <li class="widget__cabinet--button"
-                                            style=" display: flex;align-items: center;margin-top:10px;"
-                                        >
-                                            <div class="widget_button_inner">
-                                                <svg width="26" height="22" viewBox="0 0 26 22" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8.31836 21.1613C8.48841 20.1398 9.03399 19.2098 9.85707 18.5384C10.6802 17.8669 11.7268 17.498 12.8089 17.498C13.8909 17.498 14.9376 17.8669 15.7606 18.5384C16.5837 19.2098 17.1293 20.1398 17.2994 21.1613H8.31836Z"
-                                                          stroke="#FF0000" stroke-miterlimit="10"
-                                                          stroke-linecap="round"></path>
-                                                    <path d="M1 11.0273C1 12.0135 1.40984 12.9593 2.13936 13.6566C2.86888 14.3539 3.85831 14.7457 4.89 14.7457C5.92169 14.7457 6.91114 14.3539 7.64066 13.6566C8.37017 12.9593 8.78 12.0135 8.78 11.0273H1Z"
-                                                          stroke="#FF0000" stroke-linecap="round"
-                                                          stroke-linejoin="round"></path>
-                                                    <path d="M1 11.0272L4.89 1.7793L8.78 11.0272H1Z" stroke="#FF0000"
-                                                          stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M16.8369 11.0273C16.8369 12.0135 17.2468 12.9593 17.9763 13.6566C18.7058 14.3539 19.6952 14.7457 20.7269 14.7457C21.7586 14.7457 22.748 14.3539 23.4776 13.6566C24.2071 12.9593 24.6169 12.0135 24.6169 11.0273H16.8369Z"
-                                                          stroke="#FF0000" stroke-linecap="round"
-                                                          stroke-linejoin="round"></path>
-                                                    <path d="M16.8369 11.0272L20.7269 1.7793L24.6169 11.0272H16.8369Z"
-                                                          stroke="#FF0000" stroke-linecap="round"
-                                                          stroke-linejoin="round"></path>
-                                                    <path d="M12.8076 17.4999V0" stroke="#FF0000"
-                                                          stroke-miterlimit="10"></path>
-                                                    <path d="M2.0127 2.01367H23.6027" stroke="#FF0000"
-                                                          stroke-miterlimit="10"></path>
-                                                </svg>
+                                            <button class="footer__widget--menu__text"
+                                                    onclick="switchBlock_to_zakladki(); "
+                                                    class="widget__cabinet--button"
+                                                    style="  background-color: transparent; border:none;color: black;">
+                                                Закладки
+                                            </button>
+                                        </div>
+                                    </li>
+                                    <li class="widget__cabinet--button"
+                                        style=" display: flex;align-items: center;margin-top:10px;"
+                                    >
+                                        <div class="widget_button_inner">
+                                            <svg width="26" height="22" viewBox="0 0 26 22" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8.31836 21.1613C8.48841 20.1398 9.03399 19.2098 9.85707 18.5384C10.6802 17.8669 11.7268 17.498 12.8089 17.498C13.8909 17.498 14.9376 17.8669 15.7606 18.5384C16.5837 19.2098 17.1293 20.1398 17.2994 21.1613H8.31836Z"
+                                                      stroke="#FF0000" stroke-miterlimit="10"
+                                                      stroke-linecap="round"></path>
+                                                <path d="M1 11.0273C1 12.0135 1.40984 12.9593 2.13936 13.6566C2.86888 14.3539 3.85831 14.7457 4.89 14.7457C5.92169 14.7457 6.91114 14.3539 7.64066 13.6566C8.37017 12.9593 8.78 12.0135 8.78 11.0273H1Z"
+                                                      stroke="#FF0000" stroke-linecap="round"
+                                                      stroke-linejoin="round"></path>
+                                                <path d="M1 11.0272L4.89 1.7793L8.78 11.0272H1Z" stroke="#FF0000"
+                                                      stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M16.8369 11.0273C16.8369 12.0135 17.2468 12.9593 17.9763 13.6566C18.7058 14.3539 19.6952 14.7457 20.7269 14.7457C21.7586 14.7457 22.748 14.3539 23.4776 13.6566C24.2071 12.9593 24.6169 12.0135 24.6169 11.0273H16.8369Z"
+                                                      stroke="#FF0000" stroke-linecap="round"
+                                                      stroke-linejoin="round"></path>
+                                                <path d="M16.8369 11.0272L20.7269 1.7793L24.6169 11.0272H16.8369Z"
+                                                      stroke="#FF0000" stroke-linecap="round"
+                                                      stroke-linejoin="round"></path>
+                                                <path d="M12.8076 17.4999V0" stroke="#FF0000"
+                                                      stroke-miterlimit="10"></path>
+                                                <path d="M2.0127 2.01367H23.6027" stroke="#FF0000"
+                                                      stroke-miterlimit="10"></path>
+                                            </svg>
 
-                                                <button class="footer__widget--menu__text"
-                                                        onclick="switchBlock_to_comparison_lists(); "
-                                                        style="  background-color: transparent; border:none; color: black;"
-                                                        class="widget__cabinet--button">Списки сравнений
-                                                </button>
-                                            </div>
-                                        </li>
-                                        <li class="widget__cabinet--button"
-                                            style=" display: flex;align-items: center;margin-top:10px;">
-                                            <div class="widget_button_inner" style="display:flex;">
-                                                <svg style="margin-top:5px;" width="19" height="24" viewBox="0 0 19 24"
-                                                     fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M4.60547 14.9061L7.32848 17.4372L13.4175 11.834"
-                                                          stroke="#FF0000" stroke-miterlimit="10"></path>
-                                                    <path d="M14.1629 5.10795C14.0912 4.6147 13.8841 4.14838 13.5629 3.75636L11.0039 1.55786C10.5661 1.19794 10.0078 1 9.43036 1C8.85292 1 8.29465 1.19794 7.85687 1.55786L5.29787 3.75636C4.9766 4.14838 4.76958 4.6147 4.69786 5.10795H4.25586V7.51003H14.5969V5.10795H14.1629Z"
-                                                          stroke="#FF0000" stroke-miterlimit="10"></path>
-                                                    <path d="M14.605 5.10742V7.5095H4.26401V5.10742H1V23.091H17.869V5.10742H14.605Z"
-                                                          stroke="#FF0000" stroke-miterlimit="10"></path>
-                                                    <path d="M9.43442 4.28344C9.82213 4.28344 10.1364 3.98301 10.1364 3.61242C10.1364 3.24183 9.82213 2.94141 9.43442 2.94141C9.04672 2.94141 8.73242 3.24183 8.73242 3.61242C8.73242 3.98301 9.04672 4.28344 9.43442 4.28344Z"
-                                                          stroke="#FF0000" stroke-miterlimit="10"></path>
-                                                </svg>
+                                            <button class="footer__widget--menu__text"
+                                                    onclick="switchBlock_to_comparison_lists(); "
+                                                    style="  background-color: transparent; border:none; color: black;"
+                                                    class="widget__cabinet--button">Списки сравнений
+                                            </button>
+                                        </div>
+                                    </li>
+                                    <li class="widget__cabinet--button"
+                                        style=" display: flex;align-items: center;margin-top:10px;">
+                                        <div class="widget_button_inner" style="display:flex;">
+                                            <svg style="margin-top:5px;" width="19" height="24" viewBox="0 0 19 24"
+                                                 fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M4.60547 14.9061L7.32848 17.4372L13.4175 11.834"
+                                                      stroke="#FF0000" stroke-miterlimit="10"></path>
+                                                <path d="M14.1629 5.10795C14.0912 4.6147 13.8841 4.14838 13.5629 3.75636L11.0039 1.55786C10.5661 1.19794 10.0078 1 9.43036 1C8.85292 1 8.29465 1.19794 7.85687 1.55786L5.29787 3.75636C4.9766 4.14838 4.76958 4.6147 4.69786 5.10795H4.25586V7.51003H14.5969V5.10795H14.1629Z"
+                                                      stroke="#FF0000" stroke-miterlimit="10"></path>
+                                                <path d="M14.605 5.10742V7.5095H4.26401V5.10742H1V23.091H17.869V5.10742H14.605Z"
+                                                      stroke="#FF0000" stroke-miterlimit="10"></path>
+                                                <path d="M9.43442 4.28344C9.82213 4.28344 10.1364 3.98301 10.1364 3.61242C10.1364 3.24183 9.82213 2.94141 9.43442 2.94141C9.04672 2.94141 8.73242 3.24183 8.73242 3.61242C8.73242 3.98301 9.04672 4.28344 9.43442 4.28344Z"
+                                                      stroke="#FF0000" stroke-miterlimit="10"></path>
+                                            </svg>
 
-                                                <button onclick="switchBlock_to_orders_history(); "
-                                                        style="  background-color: transparent; border:none;color: black;"
-                                                        class="footer__widget--menu__text widget__cabinet--button">
-                                                    <span> История заказов </span>
-                                                </button>
-                                            </div>
-                                        </li>
-                                        <li class="widget__cabinet--button"
-                                            style=" display: flex;align-items: center;margin-top:10px;">
-                                            <div class="widget_button_inner">
-                                                <svg width="25" height="20" viewBox="0 0 25 20" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M22.323 1H3C2.47005 1.00151 1.96227 1.20343 1.58754 1.56162C1.21281 1.91981 1.00158 2.40517 1 2.91172V13.8736C1.00158 14.3801 1.21281 14.8655 1.58754 15.2237C1.96227 15.5818 2.47005 15.7838 3 15.7853H14.123L20.348 19.3669V15.7853H22.323C22.8529 15.7838 23.3607 15.5818 23.7355 15.2237C24.1102 14.8655 24.3214 14.3801 24.323 13.8736V2.91172C24.3214 2.40517 24.1102 1.91981 23.7355 1.56162C23.3607 1.20343 22.8529 1.00151 22.323 1Z"
-                                                          stroke="#FF0000" stroke-linecap="round"
-                                                          stroke-linejoin="round"></path>
-                                                    <path d="M4.32324 5.68359H20.8482" stroke="#FF0000"
-                                                          stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M4.32324 8.62109H20.8482" stroke="#FF0000"
-                                                          stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M4.32324 11.5605H20.8482" stroke="#FF0000"
-                                                          stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
+                                            <button onclick="switchBlock_to_orders_history(); "
+                                                    style="  background-color: transparent; border:none;color: black;"
+                                                    class="footer__widget--menu__text widget__cabinet--button">
+                                                <span> История заказов </span>
+                                            </button>
+                                        </div>
+                                    </li>
+                                    <li class="widget__cabinet--button"
+                                        style=" display: flex;align-items: center;margin-top:10px;">
+                                        <div class="widget_button_inner">
+                                            <svg width="25" height="20" viewBox="0 0 25 20" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M22.323 1H3C2.47005 1.00151 1.96227 1.20343 1.58754 1.56162C1.21281 1.91981 1.00158 2.40517 1 2.91172V13.8736C1.00158 14.3801 1.21281 14.8655 1.58754 15.2237C1.96227 15.5818 2.47005 15.7838 3 15.7853H14.123L20.348 19.3669V15.7853H22.323C22.8529 15.7838 23.3607 15.5818 23.7355 15.2237C24.1102 14.8655 24.3214 14.3801 24.323 13.8736V2.91172C24.3214 2.40517 24.1102 1.91981 23.7355 1.56162C23.3607 1.20343 22.8529 1.00151 22.323 1Z"
+                                                      stroke="#FF0000" stroke-linecap="round"
+                                                      stroke-linejoin="round"></path>
+                                                <path d="M4.32324 5.68359H20.8482" stroke="#FF0000"
+                                                      stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M4.32324 8.62109H20.8482" stroke="#FF0000"
+                                                      stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M4.32324 11.5605H20.8482" stroke="#FF0000"
+                                                      stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </svg>
 
-                                                <button class="footer__widget--menu__text"
-                                                        onclick="switchBlock_to_my_review(); "
-                                                        style="  background-color: transparent; border:none;color: black;"
-                                                        class="widget__cabinet--button">Мои отзывы
-                                                </button>
-                                            </div>
-                                        </li>
-                                        <li class="widget__cabinet--button"
-                                            style=" display: flex;align-items: center;margin-top:10px;"
-                                        >
-                                            <div class="widget_button_inner">
-                                                <svg width="25" height="23" viewBox="0 0 25 23" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8.284 9.39258H1V21.6955H8.284V9.39258Z" stroke="#FF0000"
-                                                          stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M8.28516 19.9958L10.3302 21.1514H20.5712L22.0341 19.753V17.2601H23.0511V14.4633H24.0061V11.3625H24.3232V8.38307L21.9062 7.89651H15.2281L15.8002 6.1339V2.24261L14.5002 1H12.1152V4.73932L9.44316 9.7853L8.28915 9.72509"
-                                                          stroke="#FF0000" stroke-linecap="round"
-                                                          stroke-linejoin="round"></path>
-                                                </svg>
+                                            <button class="footer__widget--menu__text"
+                                                    onclick="switchBlock_to_my_review(); "
+                                                    style="  background-color: transparent; border:none;color: black;"
+                                                    class="widget__cabinet--button">Мои отзывы
+                                            </button>
+                                        </div>
+                                    </li>
+                                    <li class="widget__cabinet--button"
+                                        style=" display: flex;align-items: center;margin-top:10px;"
+                                    >
+                                        <div class="widget_button_inner">
+                                            <svg width="25" height="23" viewBox="0 0 25 23" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8.284 9.39258H1V21.6955H8.284V9.39258Z" stroke="#FF0000"
+                                                      stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M8.28516 19.9958L10.3302 21.1514H20.5712L22.0341 19.753V17.2601H23.0511V14.4633H24.0061V11.3625H24.3232V8.38307L21.9062 7.89651H15.2281L15.8002 6.1339V2.24261L14.5002 1H12.1152V4.73932L9.44316 9.7853L8.28915 9.72509"
+                                                      stroke="#FF0000" stroke-linecap="round"
+                                                      stroke-linejoin="round"></path>
+                                            </svg>
 
-                                                <button class="footer__widget--menu__text"
-                                                        onclick="switchBlock_to_my_marks(); "
-                                                        style="  background-color: transparent; border:none;color: black;"
-                                                        class="widget__cabinet--button">Мои оценки
-                                                </button>
-                                            </div>
-                                        </li>
-                                        <li class="widget__cabinet--button"
-                                            style=" display: flex;align-items: center;margin-top:10px;">
-                                            <div class="widget_button_inner">
-                                                <svg width="18" height="22" viewBox="0 0 18 22" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.82401 5.85196C3.8242 4.89219 4.12213 3.954 4.68011 3.15607C5.2381 2.35814 6.0311 1.7363 6.95882 1.36914C7.88653 1.00198 8.90731 0.906005 9.89209 1.09336C10.8769 1.28072 11.7814 1.743 12.4913 2.42173C13.2013 3.10046 13.6847 3.96514 13.8805 4.90648C14.0763 5.84783 13.9757 6.82354 13.5914 7.71024C13.2072 8.59694 12.5564 9.3548 11.7215 9.888C10.8866 10.4212 9.90509 10.7058 8.901 10.7058C8.2342 10.7058 7.57392 10.5803 6.95789 10.3364C6.34185 10.0924 5.78213 9.73485 5.31067 9.28411C4.83921 8.83338 4.46526 8.29826 4.21017 7.70937C3.95509 7.12047 3.82387 6.48933 3.82401 5.85196ZM14.408 11.9628H12.573C11.4568 12.579 10.1905 12.9034 8.9015 12.9034C7.6125 12.9034 6.34622 12.579 5.23001 11.9628H3.93001C2.31901 11.9628 1 14.1565 1 15.6973V19.6307C1 21.1715 2.31901 21.4985 3.93001 21.4985H14.405C16.017 21.4985 17.335 21.1715 17.335 19.6307V15.6973C17.338 14.1526 16.02 11.9628 14.408 11.9628Z"
-                                                          stroke="#FF0000" stroke-linecap="round"
-                                                          stroke-linejoin="round"></path>
-                                                </svg>
+                                            <button class="footer__widget--menu__text"
+                                                    onclick="switchBlock_to_my_marks(); "
+                                                    style="  background-color: transparent; border:none;color: black;"
+                                                    class="widget__cabinet--button">Мои оценки
+                                            </button>
+                                        </div>
+                                    </li>
+                                    <li class="widget__cabinet--button"
+                                        style=" display: flex;align-items: center;margin-top:10px;">
+                                        <div class="widget_button_inner">
+                                            <svg width="18" height="22" viewBox="0 0 18 22" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M3.82401 5.85196C3.8242 4.89219 4.12213 3.954 4.68011 3.15607C5.2381 2.35814 6.0311 1.7363 6.95882 1.36914C7.88653 1.00198 8.90731 0.906005 9.89209 1.09336C10.8769 1.28072 11.7814 1.743 12.4913 2.42173C13.2013 3.10046 13.6847 3.96514 13.8805 4.90648C14.0763 5.84783 13.9757 6.82354 13.5914 7.71024C13.2072 8.59694 12.5564 9.3548 11.7215 9.888C10.8866 10.4212 9.90509 10.7058 8.901 10.7058C8.2342 10.7058 7.57392 10.5803 6.95789 10.3364C6.34185 10.0924 5.78213 9.73485 5.31067 9.28411C4.83921 8.83338 4.46526 8.29826 4.21017 7.70937C3.95509 7.12047 3.82387 6.48933 3.82401 5.85196ZM14.408 11.9628H12.573C11.4568 12.579 10.1905 12.9034 8.9015 12.9034C7.6125 12.9034 6.34622 12.579 5.23001 11.9628H3.93001C2.31901 11.9628 1 14.1565 1 15.6973V19.6307C1 21.1715 2.31901 21.4985 3.93001 21.4985H14.405C16.017 21.4985 17.335 21.1715 17.335 19.6307V15.6973C17.338 14.1526 16.02 11.9628 14.408 11.9628Z"
+                                                      stroke="#FF0000" stroke-linecap="round"
+                                                      stroke-linejoin="round"></path>
+                                            </svg>
 
-                                                <button class="footer__widget--menu__text"
-                                                        onclick="switchBlock_to_contact_information(); "
-                                                        style="  background-color: transparent; border:none;color: black;"
-                                                        class="widget__cabinet--button">Контактная информация
-                                                </button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+                                            <button class="footer__widget--menu__text"
+                                                    onclick="switchBlock_to_contact_information(); "
+                                                    style="  background-color: transparent; border:none;color: black;"
+                                                    class="widget__cabinet--button">Контактная информация
+                                            </button>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <!-- Второй блок - основной контент -->
-                    <div class="favourites col-lg-8">
-                        <div class="row">
-                            <!-- Ваш цикл для вывода продуктов -->
-                            {% for i in '12345'|make_list %}
-                                <div class="col-lg-5 col-md-4 col-6 px-lg-6 px-md-6  px-8 mb-6">
-                                    {% include "product_block.html" %}
+                </div>
+                <!-- Второй блок - основной контент -->
+                <div class="favourites col-lg-8">
+                    <div class="row">
+                        <!-- Ваш цикл для вывода продуктов -->
+                        {% for i in '12345'|make_list %}
+                            <div class="col-lg-5 col-md-4 col-6 px-lg-6 px-md-6  px-8 mb-6">
+                                {% include "product_block.html" %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="comparison_lists_cabinet col-lg-8" style="display: none">
+                    <div class="comparison_list">
+                        <div class="comparison__list--inner d-flex justify-content-between"
+                             style="position: relative; background-color:white;">
+                            <span style="margin-left:4px;">Сравнение 1 универсальные краски</span>
+                            <button class="comparison_cab_button"
+                                    style="color:red; background-color:transparent; border:none;">
+                                <span>Добавить в сравнение >></span>
+                            </button>
+                        </div>
+                        <div class="comparison-list row">
+                            {% for i in '123'|make_list %}
+                                <div class="col-lg-5 col-md-4 col-6 px-lg-6 px-md-6 px-8 mb-6">
+                                    {% include "product_block--characteristics.html" %}
                                 </div>
                             {% endfor %}
-                        </div>
-                    </div>
-                    <div class="comparison_lists_cabinet col-lg-8" style="display: none">
-                        <div class="comparison_list">
-                            <div class="comparison__list--inner d-flex justify-content-between"
-                                 style="position: relative; background-color:white;">
-                                <span style="margin-left:4px;">Сравнение 1 универсальные краски</span>
-                                <button class="comparison_cab_button"
-                                        style="color:red; background-color:transparent; border:none;">
-                                    <span>Добавить в сравнение >></span>
-                                </button>
-                            </div>
-                            <div class="comparison-list row">
-                                {% for i in '123'|make_list %}
-                                    <div class="col-lg-5 col-md-4 col-6 px-lg-6 px-md-6 px-8 mb-6">
-                                        {% include "product_block--characteristics.html" %}
-                                    </div>
-                                {% endfor %}
-                                <div class="col-12 px-lg-6 px-md-6   row">
-                                    <button class="fold-button col-lg-5 col-md-4 col-6 px-0">Развернуть</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comparison_list">
-                            <div class="comparison__list--inner d-flex justify-content-between"
-                                 style="position: relative;background-color:white;">
-                                <span style="margin-left:4px;  ">Сравнение 2 универсальные краски</span>
-                                <button class="comparison_cab_button"
-                                        style="color:red; background-color:transparent; border:none;">
-                                    <span>Добавить в сравнение >></span>
-                                </button>
-                            </div>
-                            <div class="comparison-list row">
-                                {% for i in '12'|make_list %}
-                                    <div class="col-lg-5 col-md-4 col-6 px-lg-6 px-md-6 px-8 mb-6">
-                                        {% include "product_block--characteristics.html" %}
-                                    </div>
-                                {% endfor %}
-                                <div class="col-12 px-lg-6 px-md-6 px-8 row">
-                                    <button class="fold-button col-lg-5 col-md-4 col-6 px-0">Развернуть</button>
-                                </div>
+                            <div class="col-12 px-lg-6 px-md-6   row">
+                                <button class="fold-button col-lg-5 col-md-4 col-6 px-0">Развернуть</button>
                             </div>
                         </div>
                     </div>
-                    <div class="orders_history col-lg-8" style="display: none">
-                        <div class="review_personal_block ml-6" style="">
-                            <div class="suported_pa_high_history_block">
-                                <div class="pa_high_history_block row" style= "">
-                                    <div class="first_order_history_block row col-lg-27 col-md-17 col-4" style="  ">
-                                        <div class="first_text_block col-lg-26 col-md-6 "  >
-                                            <span class="order_label">Заказ №123</span>
-                                            <span class="extra_span" style=" margin-left: 0;">Статус заказа:</span>
-                                            
-                                        </div>
-                                        <div class="adding_mobile_labels" style="text-align: right;">
-                                            <p  style=" margin-left:13px; white-space: nowrap; display:flex;font-size:12px;text-align: right;  ">Статус заказа:</p>
-
-                                            <p style="color:#787878;  margin-left:4px; white-space: nowrap; display:flex;font-size:12px;text-align: right;  ">Кол-во товаров:</p> 
-                                        <p class="order_history_first_text" style="color:#787878;">Итого:</p>
-                                        </div>
-                                        <div class="second_text_block  col-lg-26 col-md-6  "  >
- 
-                                            <span class="order_history_second_text" style=" ">01.01.2021</span>
-                                                <span class="order_history_second_text" style="">в обработке</span>
-                                        </div>
-                                        
-                                         
-                                    </div>
-                                    <div class="second_order_history_block row col-lg-27 col-md-17 col-4"  style=" "> 
-                                        <div class="first_text_block col-lg-26 col-md-6" style="text-align: right; "> 
-                                            <span style="color:#787878; white-space: nowrap;">Кол-во товаров:</span> 
-                                            <span class="order_history_first_text" style="color:#787878;">Итого:</span> 
- 
-                                        </div> 
-                                        <div class="second_text_block col-lg-26 col-md-6  " style="  text-align:center;   ">
-                                            <span class="order_history_second_text" style=" white-space: nowrap;">24</span>
-                                            <span class="order_history_second_text" style="white-space: nowrap; color:#FF0000;">232.00 &#8372;</span>
-                                            
-                                        </div>
-                                        <div class="adding_mobile_labels col-lg-26 col-md-6 ">
-                                            <span class="order_history_second_text" style=" white-space: nowrap;">01.01.2021</span>
-                                            <p class="order_history_second_text" style="white-space: nowrap;">в обработке</p>
-
-                                        </div>
-                                        <div class="adding_mobile_labels col-lg-26 col-md-6 " style="margin-top:12px;">
-                                            
-                                            <p class="order_history_second_text" style=" white-space: nowrap;">24</p>
-
-                                            <p class="order_history_second_text" style="white-space: nowrap; color:#FF0000;">232.00 &#8372;</p>
-
-                                        </div>
- 
-                                    </div>
-                                    
-
-                                    <div class="order_history_button col-lg-28 col-md-23 col-4"style="  ">
-                                        <button class="order_pa_button" style="display:flex;">
-                                            <img class="order_history_button_img"style="margin-top:5px; width:20px;height:20px;margin-left:-5px;"
-                                                 src="{% static '/src/assets/img/icon/repeat_button.svg' %}">
-                                            <p class="repeat_button">Повторить</p></button>
-                                    </div>
-
+                    <div class="comparison_list">
+                        <div class="comparison__list--inner d-flex justify-content-between"
+                             style="position: relative;background-color:white;">
+                            <span style="margin-left:4px;  ">Сравнение 2 универсальные краски</span>
+                            <button class="comparison_cab_button"
+                                    style="color:red; background-color:transparent; border:none;">
+                                <span>Добавить в сравнение >></span>
+                            </button>
+                        </div>
+                        <div class="comparison-list row">
+                            {% for i in '12'|make_list %}
+                                <div class="col-lg-5 col-md-4 col-6 px-lg-6 px-md-6 px-8 mb-6">
+                                    {% include "product_block--characteristics.html" %}
                                 </div>
-                                 
-                            </div>
-
-                            <div class="open_order_bord" style="display: none">
-                                <div class="order_table d-flex flex-column"
-                                     style="margin-bottom: 10px;  ">
-                                    <table>
-                                        <thead>
-                                        <tr style="background-color:#F5F5F5;" class="high_table_labels">
-                                            <th>Наименование</th>
-                                            <th class="artykyl">Артикул</th>
-                                            <th>Количество</th>
-                                            <th>Цена</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr class="table_labels">
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td class="artykyl_row">1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <tr class="table_labels">
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td class="artykyl_row">1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <tr class="table_labels">
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td class="artykyl_row">1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <tr class="table_labels">
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td class="artykyl_row">1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <!-- Добавьте больше строк, если нужно -->
-                                        </tbody>
-                                    </table>
-
-
-                                </div>
-                                <hr style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
-                        <div class="bottom_order_table_records row" style="display:flex;">
-                            <div class="high_order_label col-lg-26 col-md-6"style=" text-align:right;text-align: right;justify-content:right;">
-                                <span class=" " style="padding-right:13px;">Итого:</span>
-                                <span style="  color:red;">1 632.00₴</span>
-                            </div>
-                        <div class="col-lg-26 col-md-6 row">
-                            <div class="bottom_order_table_records_hight">
-                                <span class="bottom_order_table_record" style="font-weight: bold;"> Василий Иванов </span>
-
-                                <p  >+38 098 76 54 321, example@gmail.com
-                                </p>
-                            </div>
-                            <div style="display:flex;">
-                            <div class="bottom_order_table_records_left"  >
-                                <p  class="bottom_order_table_record">Доставка: 
-                                </p>
-                                <p class="bottom_order_table_record" >Оплата:  
-                                </p>
-                             </div>
-                             <div class="bottom_order_table_records_right">
-                                <p class="bottom_order_table_record"  style="margin-left:px; white-space: nowrap;">Самовывоз из магазина, Одесса</p>
-                                <p class="bottom_order_table_record"  style="margin-left:px;"> Наличными в магазине </p>
-                                <p class="bottom_order_table_record"  style="margin-left:px;">Коментариев нет</p>
+                            {% endfor %}
+                            <div class="col-12 px-lg-6 px-md-6 px-8 row">
+                                <button class="fold-button col-lg-5 col-md-4 col-6 px-0">Развернуть</button>
                             </div>
                         </div>
-                        
-                        </div>
-                        <div class="button_order_label col-lg-26 col-md-6"style=" text-align:right;text-align: right;justify-content:right;">
-                            <span  class=" button_order_label_total" style="">Итого:</span>
-                            <span style="  color:red;">1 632.00₴</span>
-                        </div>
-                            </div>
-                             
-                        </div>
-                        <button class="order_button" style="margin-top:20px;border:none;background-color:transparent;color:red;
-                              "><p class="button_text">Развернуть >></p></button>
-                            <hr style="background-color: #AEADAA; height: 1px; border: none;">
-
-                        </div>
-                        <div class="review_personal_block ml-6" style="">
-                            <div class="suported_pa_high_history_block">
-                                <div class="pa_high_history_block row" style= "">
-                                    <div class="first_order_history_block row col-lg-27 col-md-17 col-4" style="  ">
-                                        <div class="first_text_block col-lg-26 col-md-6 "  >
-                                            <span class="order_label">Заказ №123</span>
-                                            <span class="extra_span" style=" margin-left: 0;">Статус заказа:</span>
-                                            
-                                        </div>
-                                        <div class="adding_mobile_labels" style="text-align: right;">
-                                            <p  style=" margin-left:13px; white-space: nowrap; display:flex;font-size:12px;text-align: right;  ">Статус заказа:</p>
-
-                                            <p style="color:#787878;  margin-left:4px; white-space: nowrap; display:flex;font-size:12px;text-align: right;  ">Кол-во товаров:</p> 
-                                        <p class="order_history_first_text" style="color:#787878;">Итого:</p>
-                                        </div>
-                                        <div class="second_text_block  col-lg-26 col-md-6  "  >
- 
-                                            <span class="order_history_second_text" style=" ">01.01.2021</span>
-                                                <span class="order_history_second_text" style="">в обработке</span>
-                                        </div>
-                                        
-                                         
-                                    </div>
-                                    <div class="second_order_history_block row col-lg-27 col-md-17 col-4"  style=" "> 
-                                        <div class="first_text_block col-lg-26 col-md-6" style="text-align: right; "> 
-                                            <span style="color:#787878; white-space: nowrap;">Кол-во товаров:</span> 
-                                            <span class="order_history_first_text" style="color:#787878;">Итого:</span> 
- 
-                                        </div> 
-                                        <div class="second_text_block col-lg-26 col-md-6  " style="  text-align:center;   ">
-                                            <span class="order_history_second_text" style=" white-space: nowrap;">24</span>
-                                            <span class="order_history_second_text" style="white-space: nowrap; color:#FF0000;">232.00 &#8372;</span>
-                                            
-                                        </div>
-                                        <div class="adding_mobile_labels col-lg-26 col-md-6 ">
-                                            <span class="order_history_second_text" style=" white-space: nowrap;">01.01.2021</span>
-                                            <p class="order_history_second_text" style="white-space: nowrap;">в обработке</p>
-
-                                        </div>
-                                        <div class="adding_mobile_labels col-lg-26 col-md-6 " style="margin-top:12px;">
-                                            
-                                            <p class="order_history_second_text" style=" white-space: nowrap;">24</p>
-
-                                            <p class="order_history_second_text" style="white-space: nowrap; color:#FF0000;">232.00 &#8372;</p>
-
-                                        </div>
- 
-                                    </div>
-                                    
-
-                                    <div class="order_history_button col-lg-28 col-md-23 col-4"style="  ">
-                                        <button class="order_pa_button" style="display:flex;">
-                                            <img class="order_history_button_img"style="margin-top:5px; width:20px;height:20px;margin-left:-5px;"
-                                                 src="{% static '/src/assets/img/icon/repeat_button.svg' %}">
-                                            <p class="repeat_button">Повторить</p></button>
-                                    </div>
-
-                                </div>
-                                 
-                            </div>
-
-                            <div class="open_order_bord" style="display: none">
-                                <div class="order_table d-flex flex-column"
-                                     style="margin-bottom: 10px;  ">
-                                    <table>
-                                        <thead>
-                                        <tr style="background-color:#F5F5F5;" class="high_table_labels">
-                                            <th>Наименование</th>
-                                            <th class="artykyl">Артикул</th>
-                                            <th>Количество</th>
-                                            <th>Цена</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr class="table_labels">
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td class="artykyl_row">1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <tr class="table_labels">
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td class="artykyl_row">1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <tr class="table_labels">
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td class="artykyl_row">1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <tr class="table_labels">
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td class="artykyl_row">1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <!-- Добавьте больше строк, если нужно -->
-                                        </tbody>
-                                    </table>
-
-
-                                </div>
-                                <hr style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
-                        <div class="bottom_order_table_records row" style="display:flex;">
-                            <div class="high_order_label col-lg-26 col-md-6"style=" text-align:right;text-align: right;justify-content:right;">
-                                <span class=" " style="padding-right:13px;">Итого:</span>
-                                <span style="  color:red;">1 632.00₴</span>
-                            </div>
-                        <div class="col-lg-26 col-md-6 row">
-                            <div class="bottom_order_table_records_hight">
-                                <span class="bottom_order_table_record" style="font-weight: bold;"> Василий Иванов </span>
-
-                                <p  >+38 098 76 54 321, example@gmail.com
-                                </p>
-                            </div>
-                            <div style="display:flex;">
-                            <div class="bottom_order_table_records_left"  >
-                                <p  class="bottom_order_table_record">Доставка: 
-                                </p>
-                                <p class="bottom_order_table_record" >Оплата:  
-                                </p>
-                             </div>
-                             <div class="bottom_order_table_records_right">
-                                <p class="bottom_order_table_record"  style="margin-left:px; white-space: nowrap;">Самовывоз из магазина, Одесса</p>
-                                <p class="bottom_order_table_record"  style="margin-left:px;"> Наличными в магазине </p>
-                                <p class="bottom_order_table_record"  style="margin-left:px;">Коментариев нет</p>
-                            </div>
-                        </div>
-                        
-                        </div>
-                        <div class="button_order_label col-lg-26 col-md-6"style=" text-align:right;text-align: right;justify-content:right;">
-                            <span  class=" button_order_label_total" style="">Итого:</span>
-                            <span style="  color:red;">1 632.00₴</span>
-                        </div>
-                            </div>
-                             
-                        </div>
-                        <button class="order_button" style="margin-top:20px;border:none;background-color:transparent;color:red;
-                              "><p class="button_text">Развернуть >></p></button>
-                            <hr style="background-color: #AEADAA; height: 1px; border: none;">
-
-                        </div>
-                        <div class="review_personal_block ml-6" style="">
-                            <div class="suported_pa_high_history_block">
-                                <div class="pa_high_history_block row" style= "">
-                                    <div class="first_order_history_block row col-lg-27 col-md-17 col-4" style="  ">
-                                        <div class="first_text_block col-lg-26 col-md-6 "  >
-                                            <span class="order_label">Заказ №123</span>
-                                            <span class="extra_span" style=" margin-left: 0;">Статус заказа:</span>
-                                            
-                                        </div>
-                                        <div class="adding_mobile_labels" style="text-align: right;">
-                                            <p  style=" margin-left:13px; white-space: nowrap; display:flex;font-size:12px;text-align: right;  ">Статус заказа:</p>
-
-                                            <p style="color:#787878;  margin-left:4px; white-space: nowrap; display:flex;font-size:12px;text-align: right;  ">Кол-во товаров:</p> 
-                                        <p class="order_history_first_text" style="color:#787878;">Итого:</p>
-                                        </div>
-                                        <div class="second_text_block  col-lg-26 col-md-6  "  >
- 
-                                            <span class="order_history_second_text" style=" ">01.01.2021</span>
-                                                <span class="order_history_second_text" style="">в обработке</span>
-                                        </div>
-                                        
-                                         
-                                    </div>
-                                    <div class="second_order_history_block row col-lg-27 col-md-17 col-4"  style=" "> 
-                                        <div class="first_text_block col-lg-26 col-md-6" style="text-align: right; "> 
-                                            <span style="color:#787878; white-space: nowrap;">Кол-во товаров:</span> 
-                                            <span class="order_history_first_text" style="color:#787878;">Итого:</span> 
- 
-                                        </div> 
-                                        <div class="second_text_block col-lg-26 col-md-6  " style="  text-align:center;   ">
-                                            <span class="order_history_second_text" style=" white-space: nowrap;">24</span>
-                                            <span class="order_history_second_text" style="white-space: nowrap; color:#FF0000;">232.00 &#8372;</span>
-                                            
-                                        </div>
-                                        <div class="adding_mobile_labels col-lg-26 col-md-6 ">
-                                            <span class="order_history_second_text" style=" white-space: nowrap;">01.01.2021</span>
-                                            <p class="order_history_second_text" style="white-space: nowrap;">в обработке</p>
-
-                                        </div>
-                                        <div class="adding_mobile_labels col-lg-26 col-md-6 " style="margin-top:12px;">
-                                            
-                                            <p class="order_history_second_text" style=" white-space: nowrap;">24</p>
-
-                                            <p class="order_history_second_text" style="white-space: nowrap; color:#FF0000;">232.00 &#8372;</p>
-
-                                        </div>
- 
-                                    </div>
-                                    
-
-                                    <div class="order_history_button col-lg-28 col-md-23 col-4"style="  ">
-                                        <button class="order_pa_button" style="display:flex;">
-                                            <img class="order_history_button_img"style="margin-top:5px; width:20px;height:20px;margin-left:-5px;"
-                                                 src="{% static '/src/assets/img/icon/repeat_button.svg' %}">
-                                            <p class="repeat_button">Повторить</p></button>
-                                    </div>
-
-                                </div>
-                                 
-                            </div>
-
-                            <div class="open_order_bord" style="display: none">
-                                <div class="order_table d-flex flex-column"
-                                     style="margin-bottom: 10px;  ">
-                                    <table>
-                                        <thead>
-                                        <tr style="background-color:#F5F5F5;" class="high_table_labels">
-                                            <th>Наименование</th>
-                                            <th class="artykyl">Артикул</th>
-                                            <th>Количество</th>
-                                            <th>Цена</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr class="table_labels">
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td class="artykyl_row">1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <tr class="table_labels">
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td class="artykyl_row">1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <tr class="table_labels">
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td class="artykyl_row">1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <tr class="table_labels">
-                                            <td>Шпаклевка универсальная Карс 1кг UNI</td>
-                                            <td class="artykyl_row">1234567890</td>
-                                            <td>1</td>
-                                            <td>232.00₴</td>
-                                        </tr>
-                                        <!-- Добавьте больше строк, если нужно -->
-                                        </tbody>
-                                    </table>
-
-
-                                </div>
-                                <hr style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
-                        <div class="bottom_order_table_records row" style="display:flex;">
-                            <div class="high_order_label col-lg-26 col-md-6"style=" text-align:right;text-align: right;justify-content:right;">
-                                <span class=" " style="padding-right:13px;">Итого:</span>
-                                <span style="  color:red;">1 632.00₴</span>
-                            </div>
-                        <div class="col-lg-26 col-md-6 row">
-                            <div class="bottom_order_table_records_hight">
-                                <span class="bottom_order_table_record" style="font-weight: bold;"> Василий Иванов </span>
-
-                                <p  >+38 098 76 54 321, example@gmail.com
-                                </p>
-                            </div>
-                            <div style="display:flex;">
-                            <div class="bottom_order_table_records_left"  >
-                                <p  class="bottom_order_table_record">Доставка: 
-                                </p>
-                                <p class="bottom_order_table_record" >Оплата:  
-                                </p>
-                             </div>
-                             <div class="bottom_order_table_records_right">
-                                <p class="bottom_order_table_record"  style="margin-left:px; white-space: nowrap;">Самовывоз из магазина, Одесса</p>
-                                <p class="bottom_order_table_record"  style="margin-left:px;"> Наличными в магазине </p>
-                                <p class="bottom_order_table_record"  style="margin-left:px;">Коментариев нет</p>
-                            </div>
-                        </div>
-                        
-                        </div>
-                        <div class="button_order_label col-lg-26 col-md-6"style=" text-align:right;text-align: right;justify-content:right;">
-                            <span  class=" button_order_label_total" style="">Итого:</span>
-                            <span style="  color:red;">1 632.00₴</span>
-                        </div>
-                            </div>
-                             
-                        </div>
-                        <button class="order_button" style="margin-top:20px;border:none;background-color:transparent;color:red;
-                              "><p class="button_text">Развернуть >></p></button>
-                            <hr style="background-color: #AEADAA; height: 1px; border: none;">
-
-                        </div>
-                         
                     </div>
-                    <div class="my_review col-lg-8" style="display: none">
-                        <div class="review_personal_block  row ml-6" style=" ">
-                            <div class="col-lg-9 col-md-2 col-4 mb-6">
-                                <img class="rev_img" src="{% static '/src/assets/img/icon/tovar-photo 1.png' %}">
+                </div>
+                <div class="orders_history col-lg-8" style="display: none">
+                    <div class="review_personal_block ml-6" style="">
+                        <div class="suported_pa_high_history_block">
+                            <div class="pa_high_history_block row" style="">
+                                <div class="first_order_history_block row col-lg-27 col-md-17 col-4" style="  ">
+                                    <div class="first_text_block col-lg-26 col-md-6 ">
+                                        <span class="order_label">Заказ №123</span>
+                                        <span class="extra_span" style=" margin-left: 0;">Статус заказа:</span>
+
+                                    </div>
+                                    <div class="adding_mobile_labels" style="text-align: right;">
+                                        <p style=" margin-left:13px; white-space: nowrap; display:flex;font-size:12px;text-align: right;  ">
+                                            Статус заказа:</p>
+
+                                        <p style="color:#787878;  margin-left:4px; white-space: nowrap; display:flex;font-size:12px;text-align: right;  ">
+                                            Кол-во товаров:</p>
+                                        <p class="order_history_first_text" style="color:#787878;">Итого:</p>
+                                    </div>
+                                    <div class="second_text_block  col-lg-26 col-md-6  ">
+
+                                        <span class="order_history_second_text" style=" ">01.01.2021</span>
+                                        <span class="order_history_second_text" style="">в обработке</span>
+                                    </div>
+
+
+                                </div>
+                                <div class="second_order_history_block row col-lg-27 col-md-17 col-4" style=" ">
+                                    <div class="first_text_block col-lg-26 col-md-6" style="text-align: right; ">
+                                        <span style="color:#787878; white-space: nowrap;">Кол-во товаров:</span>
+                                        <span class="order_history_first_text" style="color:#787878;">Итого:</span>
+
+                                    </div>
+                                    <div class="second_text_block col-lg-26 col-md-6  " style="  text-align:center;   ">
+                                        <span class="order_history_second_text" style=" white-space: nowrap;">24</span>
+                                        <span class="order_history_second_text"
+                                              style="white-space: nowrap; color:#FF0000;">232.00 &#8372;</span>
+
+                                    </div>
+                                    <div class="adding_mobile_labels col-lg-26 col-md-6 ">
+                                        <span class="order_history_second_text"
+                                              style=" white-space: nowrap;">01.01.2021</span>
+                                        <p class="order_history_second_text" style="white-space: nowrap;">в
+                                            обработке</p>
+
+                                    </div>
+                                    <div class="adding_mobile_labels col-lg-26 col-md-6 " style="margin-top:12px;">
+
+                                        <p class="order_history_second_text" style=" white-space: nowrap;">24</p>
+
+                                        <p class="order_history_second_text"
+                                           style="white-space: nowrap; color:#FF0000;">232.00 &#8372;</p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="order_history_button col-lg-28 col-md-23 col-4" style="  ">
+                                    <button class="order_pa_button" style="display:flex;">
+                                        <img class="order_history_button_img"
+                                             style="margin-top:5px; width:20px;height:20px;margin-left:-5px;"
+                                             src="{% static '/src/assets/img/icon/repeat_button.svg' %}">
+                                        <p class="repeat_button">Повторить</p></button>
+                                </div>
 
                             </div>
-                            <div class="review_personal_block_f col-lg-10 col-md-2 col-4" style=" ">
-                                <div class="personal_review_high_block">
-                               <span class="rev_labe" style="margin-top:20px;">Шпатлевка универсальная Карс
-                                    1 кг UNI</span>
-                                    <button class="rev_but" style=" ">
-                                        <p style="color:#FF0000;">Оставить отзыв</p></button>
-                                </div>
+
+                        </div>
+
+                        <div class="open_order_bord" style="display: none">
+                            <div class="order_table d-flex flex-column"
+                                 style="margin-bottom: 10px;  ">
+                                <table>
+                                    <thead>
+                                    <tr style="background-color:#F5F5F5;" class="high_table_labels">
+                                        <th>Наименование</th>
+                                        <th class="artykyl">Артикул</th>
+                                        <th>Количество</th>
+                                        <th>Цена</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="table_labels">
+                                        <td>Шпаклевка универсальная Карс 1кг UNI</td>
+                                        <td class="artykyl_row">1234567890</td>
+                                        <td>1</td>
+                                        <td>232.00₴</td>
+                                    </tr>
+                                    <tr class="table_labels">
+                                        <td>Шпаклевка универсальная Карс 1кг UNI</td>
+                                        <td class="artykyl_row">1234567890</td>
+                                        <td>1</td>
+                                        <td>232.00₴</td>
+                                    </tr>
+                                    <tr class="table_labels">
+                                        <td>Шпаклевка универсальная Карс 1кг UNI</td>
+                                        <td class="artykyl_row">1234567890</td>
+                                        <td>1</td>
+                                        <td>232.00₴</td>
+                                    </tr>
+                                    <tr class="table_labels">
+                                        <td>Шпаклевка универсальная Карс 1кг UNI</td>
+                                        <td class="artykyl_row">1234567890</td>
+                                        <td>1</td>
+                                        <td>232.00₴</td>
+                                    </tr>
+                                    <!-- Добавьте больше строк, если нужно -->
+                                    </tbody>
+                                </table>
+
 
                             </div>
                             <hr style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
-
-                            <div class="review_personal_block row ml-6" style="">
-                                <div class="col-lg-9 col-md-2 col-4 mb-6">
-                                    <img class="rev_img" src="{% static '/src/assets/img/icon/tovar-photo 1.png' %}">
+                            <div class="bottom_order_table_records row" style="display:flex;">
+                                <div class="high_order_label col-lg-26 col-md-6"
+                                     style=" text-align:right;text-align: right;justify-content:right;">
+                                    <span class=" " style="padding-right:13px;">Итого:</span>
+                                    <span style="  color:red;">1 632.00₴</span>
                                 </div>
-                                <div class="col-lg-10 col-md-6 col-4"
-                                     style="display: flex; ">
+                                <div class="col-lg-26 col-md-6 row">
+                                    <div class="bottom_order_table_records_hight">
+                                        <span class="bottom_order_table_record" style="font-weight: bold;"> Василий Иванов </span>
 
-
-                                    <div style="display: flex; flex-direction: column;  ">
-                                        <div class="personal_rev_high_block"><h2 class="h3"
-                                                                                 style="  margin-right: 10px;">Шпатлевка
-                                            универсальная Карс 1 кг
-                                            UNI</h2>
-                                            <div class="personal_review_stars">
-                                                <img src="{% static '/src/assets/img/icon/Path 129.svg' %}">
-                                                <img src="{% static '/src/assets/img/icon/Path 129.svg' %}">
-
-                                                <img src="{% static '/src/assets/img/icon/Path 129.svg' %}">
-
-                                                <img src="{% static '/src/assets/img/icon/Path 129.svg' %}">
-
-                                                <img src="{% static '/src/assets/img/icon/Path 129.svg' %}">
-
-                                            </div>
+                                        <p>+38 098 76 54 321, example@gmail.com
+                                        </p>
+                                    </div>
+                                    <div style="display:flex;">
+                                        <div class="bottom_order_table_records_left">
+                                            <p class="bottom_order_table_record">Доставка:
+                                            </p>
+                                            <p class="bottom_order_table_record">Оплата:
+                                            </p>
                                         </div>
-                                        <div class="rev_text" style="   ">
-                                            <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні
-                                                задачі. Ноут був добре запакований, помітно що ніхто до мене його не
-                                                відкривав</p>
-                                            <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
-                                            <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
+                                        <div class="bottom_order_table_records_right">
+                                            <p class="bottom_order_table_record" style="white-space: nowrap;">Самовывоз
+                                                из магазина, Одесса</p>
+                                            <p class="bottom_order_table_record" style=""> Наличными в магазине </p>
+                                            <p class="bottom_order_table_record" style="">Коментариев нет</p>
                                         </div>
                                     </div>
 
                                 </div>
-                                <hr style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;margin-top:100px;">
+                                <div class="button_order_label col-lg-26 col-md-6"
+                                     style=" text-align:right;text-align: right;justify-content:right;">
+                                    <span class=" button_order_label_total" style="">Итого:</span>
+                                    <span style="  color:red;">1 632.00₴</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <button class="order_button" style="margin-top:20px;border:none;background-color:transparent;color:red;
+                              "><p class="button_text">Развернуть >></p></button>
+                        <hr style="background-color: #AEADAA; height: 1px; border: none;">
+
+                    </div>
+                    <div class="review_personal_block ml-6" style="">
+                        <div class="suported_pa_high_history_block">
+                            <div class="pa_high_history_block row" style="">
+                                <div class="first_order_history_block row col-lg-27 col-md-17 col-4" style="  ">
+                                    <div class="first_text_block col-lg-26 col-md-6 ">
+                                        <span class="order_label">Заказ №123</span>
+                                        <span class="extra_span" style=" margin-left: 0;">Статус заказа:</span>
+
+                                    </div>
+                                    <div class="adding_mobile_labels" style="text-align: right;">
+                                        <p style=" margin-left:13px; white-space: nowrap; display:flex;font-size:12px;text-align: right;  ">
+                                            Статус заказа:</p>
+
+                                        <p style="color:#787878;  margin-left:4px; white-space: nowrap; display:flex;font-size:12px;text-align: right;  ">
+                                            Кол-во товаров:</p>
+                                        <p class="order_history_first_text" style="color:#787878;">Итого:</p>
+                                    </div>
+                                    <div class="second_text_block  col-lg-26 col-md-6  ">
+
+                                        <span class="order_history_second_text" style=" ">01.01.2021</span>
+                                        <span class="order_history_second_text" style="">в обработке</span>
+                                    </div>
+
+
+                                </div>
+                                <div class="second_order_history_block row col-lg-27 col-md-17 col-4" style=" ">
+                                    <div class="first_text_block col-lg-26 col-md-6" style="text-align: right; ">
+                                        <span style="color:#787878; white-space: nowrap;">Кол-во товаров:</span>
+                                        <span class="order_history_first_text" style="color:#787878;">Итого:</span>
+
+                                    </div>
+                                    <div class="second_text_block col-lg-26 col-md-6  " style="  text-align:center;   ">
+                                        <span class="order_history_second_text" style=" white-space: nowrap;">24</span>
+                                        <span class="order_history_second_text"
+                                              style="white-space: nowrap; color:#FF0000;">232.00 &#8372;</span>
+
+                                    </div>
+                                    <div class="adding_mobile_labels col-lg-26 col-md-6 ">
+                                        <span class="order_history_second_text"
+                                              style=" white-space: nowrap;">01.01.2021</span>
+                                        <p class="order_history_second_text" style="white-space: nowrap;">в
+                                            обработке</p>
+
+                                    </div>
+                                    <div class="adding_mobile_labels col-lg-26 col-md-6 " style="margin-top:12px;">
+
+                                        <p class="order_history_second_text" style=" white-space: nowrap;">24</p>
+
+                                        <p class="order_history_second_text"
+                                           style="white-space: nowrap; color:#FF0000;">232.00 &#8372;</p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="order_history_button col-lg-28 col-md-23 col-4" style="  ">
+                                    <button class="order_pa_button" style="display:flex;">
+                                        <img class="order_history_button_img"
+                                             style="margin-top:5px; width:20px;height:20px;margin-left:-5px;"
+                                             src="{% static '/src/assets/img/icon/repeat_button.svg' %}">
+                                        <p class="repeat_button">Повторить</p></button>
+                                </div>
 
                             </div>
+
                         </div>
-                    </div>
-                    <div class="my_marks col-lg-8" style="display: none">
-                        <div class="row">
-                            <!-- Ваш цикл для вывода продуктов -->
-                            {% for i in '123456'|make_list %}
-                                <div class="col-lg-5 col-md-4 col-6 px-lg-6 px-md-6 px-8 mb-6">
-                                    {% include "product_block--my_mark.html" %}
+
+                        <div class="open_order_bord" style="display: none">
+                            <div class="order_table d-flex flex-column"
+                                 style="margin-bottom: 10px;  ">
+                                <table>
+                                    <thead>
+                                    <tr style="background-color:#F5F5F5;" class="high_table_labels">
+                                        <th>Наименование</th>
+                                        <th class="artykyl">Артикул</th>
+                                        <th>Количество</th>
+                                        <th>Цена</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="table_labels">
+                                        <td>Шпаклевка универсальная Карс 1кг UNI</td>
+                                        <td class="artykyl_row">1234567890</td>
+                                        <td>1</td>
+                                        <td>232.00₴</td>
+                                    </tr>
+                                    <tr class="table_labels">
+                                        <td>Шпаклевка универсальная Карс 1кг UNI</td>
+                                        <td class="artykyl_row">1234567890</td>
+                                        <td>1</td>
+                                        <td>232.00₴</td>
+                                    </tr>
+                                    <tr class="table_labels">
+                                        <td>Шпаклевка универсальная Карс 1кг UNI</td>
+                                        <td class="artykyl_row">1234567890</td>
+                                        <td>1</td>
+                                        <td>232.00₴</td>
+                                    </tr>
+                                    <tr class="table_labels">
+                                        <td>Шпаклевка универсальная Карс 1кг UNI</td>
+                                        <td class="artykyl_row">1234567890</td>
+                                        <td>1</td>
+                                        <td>232.00₴</td>
+                                    </tr>
+                                    <!-- Добавьте больше строк, если нужно -->
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                            <hr style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
+                            <div class="bottom_order_table_records row" style="display:flex;">
+                                <div class="high_order_label col-lg-26 col-md-6"
+                                     style=" text-align:right;text-align: right;justify-content:right;">
+                                    <span class=" " style="padding-right:13px;">Итого:</span>
+                                    <span style="  color:red;">1 632.00₴</span>
                                 </div>
-                            {% endfor %}
+                                <div class="col-lg-26 col-md-6 row">
+                                    <div class="bottom_order_table_records_hight">
+                                        <span class="bottom_order_table_record" style="font-weight: bold;"> Василий Иванов </span>
+
+                                        <p>+38 098 76 54 321, example@gmail.com
+                                        </p>
+                                    </div>
+                                    <div style="display:flex;">
+                                        <div class="bottom_order_table_records_left">
+                                            <p class="bottom_order_table_record">Доставка:
+                                            </p>
+                                            <p class="bottom_order_table_record">Оплата:
+                                            </p>
+                                        </div>
+                                        <div class="bottom_order_table_records_right">
+                                            <p class="bottom_order_table_record" style="white-space: nowrap;">Самовывоз
+                                                из магазина, Одесса</p>
+                                            <p class="bottom_order_table_record"> Наличными в магазине </p>
+                                            <p class="bottom_order_table_record">Коментариев нет</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="button_order_label col-lg-26 col-md-6"
+                                     style=" text-align:right;text-align: right;justify-content:right;">
+                                    <span class=" button_order_label_total" style="">Итого:</span>
+                                    <span style="  color:red;">1 632.00₴</span>
+                                </div>
+                            </div>
+
                         </div>
+                        <button class="order_button" style="margin-top:20px;border:none;background-color:transparent;color:red;
+                              "><p class="button_text">Развернуть >></p></button>
+                        <hr style="background-color: #AEADAA; height: 1px; border: none;">
+
                     </div>
-                    <div class="contact_information col-lg-8" style="display: none">
-                        <div class="contact_blocks ml-6" style="">
-                            <div class="contact_block">
-                                <h2 class="h3 contact_label">Основные данные:</h2>
-                                <div class="row mx-md-6 mx-7 ">
-                                    <div class="col-lg-5 col-md-5 px-9 px-md-7">
-                                        <!-- Первая колонка с двумя строками ввода -->
-                                        <input type="text" class="form-control mb-md-6 mb-3"
-                                               placeholder="Василий">
-                                        <input type="text" class="form-control" placeholder="E-mail">
+                    <div class="review_personal_block ml-6" style="">
+                        <div class="suported_pa_high_history_block">
+                            <div class="pa_high_history_block row" style="">
+                                <div class="first_order_history_block row col-lg-27 col-md-17 col-4" style="  ">
+                                    <div class="first_text_block col-lg-26 col-md-6 ">
+                                        <span class="order_label">Заказ №123</span>
+                                        <span class="extra_span" style=" margin-left: 0;">Статус заказа:</span>
+
                                     </div>
-                                    <div class="col-lg-5 col-md-5 px-9 px-md-7 pt-md-0 pt-6">
-                                        <!-- Вторая колонка с двумя строками ввода -->
-                                        <input type="text" class="form-control mb-md-6 mb-3"
-                                               placeholder="Иванов">
-                                        <input type="text" class="form-control" placeholder="Телефон">
+                                    <div class="adding_mobile_labels" style="text-align: right;">
+                                        <p style=" margin-left:13px; white-space: nowrap; display:flex;font-size:12px;text-align: right;  ">
+                                            Статус заказа:</p>
+
+                                        <p style="color:#787878;  margin-left:4px; white-space: nowrap; display:flex;font-size:12px;text-align: right;  ">
+                                            Кол-во товаров:</p>
+                                        <p class="order_history_first_text" style="color:#787878;">Итого:</p>
                                     </div>
+                                    <div class="second_text_block  col-lg-26 col-md-6  ">
+
+                                        <span class="order_history_second_text" style=" ">01.01.2021</span>
+                                        <span class="order_history_second_text" style="">в обработке</span>
+                                    </div>
+
+
+                                </div>
+                                <div class="second_order_history_block row col-lg-27 col-md-17 col-4" style=" ">
+                                    <div class="first_text_block col-lg-26 col-md-6" style="text-align: right; ">
+                                        <span style="color:#787878; white-space: nowrap;">Кол-во товаров:</span>
+                                        <span class="order_history_first_text" style="color:#787878;">Итого:</span>
+
+                                    </div>
+                                    <div class="second_text_block col-lg-26 col-md-6  " style="  text-align:center;   ">
+                                        <span class="order_history_second_text" style=" white-space: nowrap;">24</span>
+                                        <span class="order_history_second_text"
+                                              style="white-space: nowrap; color:#FF0000;">232.00 &#8372;</span>
+
+                                    </div>
+                                    <div class="adding_mobile_labels col-lg-26 col-md-6 ">
+                                        <span class="order_history_second_text"
+                                              style=" white-space: nowrap;">01.01.2021</span>
+                                        <p class="order_history_second_text" style="white-space: nowrap;">в
+                                            обработке</p>
+
+                                    </div>
+                                    <div class="adding_mobile_labels col-lg-26 col-md-6 " style="margin-top:12px;">
+
+                                        <p class="order_history_second_text" style=" white-space: nowrap;">24</p>
+
+                                        <p class="order_history_second_text"
+                                           style="white-space: nowrap; color:#FF0000;">232.00 &#8372;</p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="order_history_button col-lg-28 col-md-23 col-4" style="  ">
+                                    <button class="order_pa_button" style="display:flex;">
+                                        <img class="order_history_button_img"
+                                             style="margin-top:5px; width:20px;height:20px;margin-left:-5px;"
+                                             src="{% static '/src/assets/img/icon/repeat_button.svg' %}">
+                                        <p class="repeat_button">Повторить</p></button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="open_order_bord" style="display: none">
+                            <div class="order_table d-flex flex-column"
+                                 style="margin-bottom: 10px;  ">
+                                <table>
+                                    <thead>
+                                    <tr style="background-color:#F5F5F5;" class="high_table_labels">
+                                        <th>Наименование</th>
+                                        <th class="artykyl">Артикул</th>
+                                        <th>Количество</th>
+                                        <th>Цена</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="table_labels">
+                                        <td>Шпаклевка универсальная Карс 1кг UNI</td>
+                                        <td class="artykyl_row">1234567890</td>
+                                        <td>1</td>
+                                        <td>232.00₴</td>
+                                    </tr>
+                                    <tr class="table_labels">
+                                        <td>Шпаклевка универсальная Карс 1кг UNI</td>
+                                        <td class="artykyl_row">1234567890</td>
+                                        <td>1</td>
+                                        <td>232.00₴</td>
+                                    </tr>
+                                    <tr class="table_labels">
+                                        <td>Шпаклевка универсальная Карс 1кг UNI</td>
+                                        <td class="artykyl_row">1234567890</td>
+                                        <td>1</td>
+                                        <td>232.00₴</td>
+                                    </tr>
+                                    <tr class="table_labels">
+                                        <td>Шпаклевка универсальная Карс 1кг UNI</td>
+                                        <td class="artykyl_row">1234567890</td>
+                                        <td>1</td>
+                                        <td>232.00₴</td>
+                                    </tr>
+                                    <!-- Добавьте больше строк, если нужно -->
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                            <hr style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
+                            <div class="bottom_order_table_records row" style="display:flex;">
+                                <div class="high_order_label col-lg-26 col-md-6"
+                                     style=" text-align:right;text-align: right;justify-content:right;">
+                                    <span class=" " style="padding-right:13px;">Итого:</span>
+                                    <span style="  color:red;">1 632.00₴</span>
+                                </div>
+                                <div class="col-lg-26 col-md-6 row">
+                                    <div class="bottom_order_table_records_hight">
+                                        <span class="bottom_order_table_record" style="font-weight: bold;"> Василий Иванов </span>
+
+                                        <p>+38 098 76 54 321, example@gmail.com
+                                        </p>
+                                    </div>
+                                    <div style="display:flex;">
+                                        <div class="bottom_order_table_records_left">
+                                            <p class="bottom_order_table_record">Доставка:
+                                            </p>
+                                            <p class="bottom_order_table_record">Оплата:
+                                            </p>
+                                        </div>
+                                        <div class="bottom_order_table_records_right">
+                                            <p class="bottom_order_table_record" style="white-space: nowrap;">Самовывоз
+                                                из магазина, Одесса</p>
+                                            <p class="bottom_order_table_record"> Наличными в магазине </p>
+                                            <p class="bottom_order_table_record">Коментариев нет</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="button_order_label col-lg-26 col-md-6"
+                                     style=" text-align:right;text-align: right;justify-content:right;">
+                                    <span class=" button_order_label_total" style="">Итого:</span>
+                                    <span style="  color:red;">1 632.00₴</span>
                                 </div>
                             </div>
-                            <div class="contact_block ml-6" style="">
-                                <h2 class="h3 contact_label">Адрес:</h2>
-                                <div class="row mx-md-6 mx-7">
-                                    <div class="col-lg-5 col-md-5 px-9 px-md-7 ">
-                                        <!-- Первая колонка с двумя строками ввода -->
-                                        <input type="text" class="form-control mb-md-6 mb-3"
-                                               placeholder="Компания">
-                                        <input type="text" class="form-control" placeholder="Область">
+
+                        </div>
+                        <button class="order_button" style="margin-top:20px;border:none;background-color:transparent;color:red;
+                              "><p class="button_text">Развернуть >></p></button>
+                        <hr style="background-color: #AEADAA; height: 1px; border: none;">
+
+                    </div>
+
+                </div>
+                <div class="my_review col-lg-8" style="display: none">
+                    <div class="review_personal_block  row ml-6" style=" ">
+                        <div class="col-lg-9 col-md-2 col-4 mb-6">
+                            <img class="rev_img" src="{% static '/src/assets/img/icon/tovar-photo 1.png' %}">
+
+                        </div>
+                        <div class="review_personal_block_f col-lg-10 col-md-2 col-4" style=" ">
+                            <div class="personal_review_high_block">
+                               <span class="rev_labe" style="margin-top:20px;">Шпатлевка универсальная Карс
+                                    1 кг UNI</span>
+                                <button class="rev_but" style=" ">
+                                    <p style="color:#FF0000;">Оставить отзыв</p></button>
+                            </div>
+
+                        </div>
+                        <hr style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
+
+                        <div class="review_personal_block row ml-6" style="">
+                            <div class="col-lg-9 col-md-2 col-4 mb-6">
+                                <img class="rev_img" src="{% static '/src/assets/img/icon/tovar-photo 1.png' %}">
+                            </div>
+                            <div class="col-lg-10 col-md-6 col-4"
+                                 style="display: flex; ">
+
+
+                                <div style="display: flex; flex-direction: column;  ">
+                                    <div class="personal_rev_high_block"><h2 class="h3"
+                                                                             style="  margin-right: 10px;">Шпатлевка
+                                        универсальная Карс 1 кг
+                                        UNI</h2>
+                                        <div class="personal_review_stars">
+                                            <img src="{% static '/src/assets/img/icon/Path 129.svg' %}">
+                                            <img src="{% static '/src/assets/img/icon/Path 129.svg' %}">
+
+                                            <img src="{% static '/src/assets/img/icon/Path 129.svg' %}">
+
+                                            <img src="{% static '/src/assets/img/icon/Path 129.svg' %}">
+
+                                            <img src="{% static '/src/assets/img/icon/Path 129.svg' %}">
+
+                                        </div>
                                     </div>
-                                    <div class="col-lg-5 col-md-5 px-9 px-md-7 pt-md-0 pt-6">
-                                        <!-- Вторая колонка с двумя строками ввода -->
-                                        <input type="text" class="form-control mb-md-6 mb-3"
-                                               placeholder="Регистрационный номер">
-                                        <input type="text" class="form-control" placeholder="Город">
-                                    </div>
-                                    <div class="col-lg-5 col-md-5 px-9 px-md-7 pt-lg-0 pt-md-6 pt-6 pos-lg-relative pos-initial">
-                                        <!-- Вторая колонка с двумя строками ввода -->
-                                        <input style="bottom: 0;" type="text"
-                                               class="form-control pos-lg-absolute pos-initial"
-                                               placeholder="Индекс">
+                                    <div class="rev_text" style="   ">
+                                        <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні
+                                            задачі. Ноут був добре запакований, помітно що ніхто до мене його не
+                                            відкривав</p>
+                                        <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
+                                        <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
                                     </div>
                                 </div>
+
                             </div>
-                            <div class="contact_block ml-6  " style="">
-                                <h2 class="h3 contact_label">Пароль:</h2>
-                                <div class="row mx-md-6 mx-7">
-                                    <div class="col-lg-5 col-md-5 px-9 px-md-7 " style="position:relative;">
-                                        <input type="text" class="form-control mb-md-6 mb-3 d-flex"
-                                               placeholder="Пароль">
-                                        <button style=" right:20px;width:20px;height:23px; top:5px;position:absolute; background-color:transparent; border:none;">
-                                            <svg width="13" height="8" viewBox="0 0 13 8" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6.27081 5.14848C7.03738 5.14848 7.65881 4.55166 7.65881 3.81545C7.65881 3.07924 7.03738 2.48242 6.27081 2.48242C5.50424 2.48242 4.88281 3.07924 4.88281 3.81545C4.88281 4.55166 5.50424 5.14848 6.27081 5.14848Z"
-                                                      fill="#787878"></path>
-                                                <path d="M6.271 0C2.808 0 0 3.81661 0 3.81661C0 3.81661 2.808 7.63229 6.271 7.63229C9.734 7.63229 12.542 3.81661 12.542 3.81661C12.542 3.81661 9.735 0 6.271 0ZM6.271 6.72277C5.67235 6.72258 5.08726 6.55193 4.5896 6.23237C4.09194 5.91282 3.70411 5.45873 3.47516 4.92751C3.24621 4.39629 3.18637 3.81179 3.30328 3.24793C3.42019 2.68407 3.70858 2.16615 4.13196 1.75968C4.55533 1.35321 5.09467 1.07642 5.68182 0.964323C6.26898 0.852229 6.87755 0.909858 7.4306 1.12992C7.98366 1.34998 8.45637 1.72261 8.78894 2.20066C9.12151 2.67872 9.29901 3.24074 9.29901 3.81568C9.29901 4.19757 9.22071 4.57571 9.06854 4.92854C8.91637 5.28136 8.69328 5.60195 8.41211 5.87199C8.13093 6.14203 7.79712 6.35622 7.42975 6.50237C7.06237 6.64851 6.66864 6.72374 6.271 6.72374V6.72277Z"
-                                                      fill="#787878"></path>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div class="col-lg-5 col-md-5 px-9 px-md-7"
-                                         style="position:relative;">
-                                        <input type="text" class="form-control mb-md-6 mb-3 "
-                                               placeholder="Подтверждение пароля">
-                                        <button style="right:20px;width:20px;height:23px; top:5px;position:absolute; background-color:transparent; border:none;">
-                                            <svg width="13" height="8" viewBox="0 0 13 8" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6.27081 5.14848C7.03738 5.14848 7.65881 4.55166 7.65881 3.81545C7.65881 3.07924 7.03738 2.48242 6.27081 2.48242C5.50424 2.48242 4.88281 3.07924 4.88281 3.81545C4.88281 4.55166 5.50424 5.14848 6.27081 5.14848Z"
-                                                      fill="#787878"></path>
-                                                <path d="M6.271 0C2.808 0 0 3.81661 0 3.81661C0 3.81661 2.808 7.63229 6.271 7.63229C9.734 7.63229 12.542 3.81661 12.542 3.81661C12.542 3.81661 9.735 0 6.271 0ZM6.271 6.72277C5.67235 6.72258 5.08726 6.55193 4.5896 6.23237C4.09194 5.91282 3.70411 5.45873 3.47516 4.92751C3.24621 4.39629 3.18637 3.81179 3.30328 3.24793C3.42019 2.68407 3.70858 2.16615 4.13196 1.75968C4.55533 1.35321 5.09467 1.07642 5.68182 0.964323C6.26898 0.852229 6.87755 0.909858 7.4306 1.12992C7.98366 1.34998 8.45637 1.72261 8.78894 2.20066C9.12151 2.67872 9.29901 3.24074 9.29901 3.81568C9.29901 4.19757 9.22071 4.57571 9.06854 4.92854C8.91637 5.28136 8.69328 5.60195 8.41211 5.87199C8.13093 6.14203 7.79712 6.35622 7.42975 6.50237C7.06237 6.64851 6.66864 6.72374 6.271 6.72374V6.72277Z"
-                                                      fill="#787878"></path>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="cabinet_save_button">Сохранить</button>
+                            <hr style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;margin-top:100px;">
+
                         </div>
                     </div>
                 </div>
+                <div class="my_marks col-lg-8" style="display: none">
+                    <div class="row">
+                        <!-- Ваш цикл для вывода продуктов -->
+                        {% for i in '123456'|make_list %}
+                            <div class="col-lg-5 col-md-4 col-6 px-lg-6 px-md-6 px-8 mb-6">
+                                {% include "product_block--my_mark.html" %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="contact_information col-lg-8" style="display: none">
+                    <div class="contact_blocks ml-6" style="">
+                        <div class="contact_block">
+                            <h2 class="h3 contact_label">Основные данные:</h2>
+                            <div class="row mx-md-6 mx-7 ">
+                                <div class="col-lg-5 col-md-5 px-9 px-md-7">
+                                    <!-- Первая колонка с двумя строками ввода -->
+                                    <input type="text" class="form-control mb-md-6 mb-3"
+                                           placeholder="Василий">
+                                    <input type="text" class="form-control" placeholder="E-mail">
+                                </div>
+                                <div class="col-lg-5 col-md-5 px-9 px-md-7 pt-md-0 pt-6">
+                                    <!-- Вторая колонка с двумя строками ввода -->
+                                    <input type="text" class="form-control mb-md-6 mb-3"
+                                           placeholder="Иванов">
+                                    <input type="text" class="form-control" placeholder="Телефон">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact_block ml-6" style="">
+                            <h2 class="h3 contact_label">Адрес:</h2>
+                            <div class="row mx-md-6 mx-7">
+                                <div class="col-lg-5 col-md-5 px-9 px-md-7 ">
+                                    <!-- Первая колонка с двумя строками ввода -->
+                                    <input type="text" class="form-control mb-md-6 mb-3"
+                                           placeholder="Компания">
+                                    <input type="text" class="form-control" placeholder="Область">
+                                </div>
+                                <div class="col-lg-5 col-md-5 px-9 px-md-7 pt-md-0 pt-6">
+                                    <!-- Вторая колонка с двумя строками ввода -->
+                                    <input type="text" class="form-control mb-md-6 mb-3"
+                                           placeholder="Регистрационный номер">
+                                    <input type="text" class="form-control" placeholder="Город">
+                                </div>
+                                <div class="col-lg-5 col-md-5 px-9 px-md-7 pt-lg-0 pt-md-6 pt-6 pos-lg-relative pos-initial">
+                                    <!-- Вторая колонка с двумя строками ввода -->
+                                    <input style="bottom: 0;" type="text"
+                                           class="form-control pos-lg-absolute pos-initial"
+                                           placeholder="Индекс">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact_block ml-6  " style="">
+                            <h2 class="h3 contact_label">Пароль:</h2>
+                            <div class="row mx-md-6 mx-7">
+                                <div class="col-lg-5 col-md-5 px-9 px-md-7 " style="position:relative;">
+                                    <input type="text" class="form-control mb-md-6 mb-3 d-flex"
+                                           placeholder="Пароль">
+                                    <button style=" right:20px;width:20px;height:23px; top:5px;position:absolute; background-color:transparent; border:none;">
+                                        <svg width="13" height="8" viewBox="0 0 13 8" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.27081 5.14848C7.03738 5.14848 7.65881 4.55166 7.65881 3.81545C7.65881 3.07924 7.03738 2.48242 6.27081 2.48242C5.50424 2.48242 4.88281 3.07924 4.88281 3.81545C4.88281 4.55166 5.50424 5.14848 6.27081 5.14848Z"
+                                                  fill="#787878"></path>
+                                            <path d="M6.271 0C2.808 0 0 3.81661 0 3.81661C0 3.81661 2.808 7.63229 6.271 7.63229C9.734 7.63229 12.542 3.81661 12.542 3.81661C12.542 3.81661 9.735 0 6.271 0ZM6.271 6.72277C5.67235 6.72258 5.08726 6.55193 4.5896 6.23237C4.09194 5.91282 3.70411 5.45873 3.47516 4.92751C3.24621 4.39629 3.18637 3.81179 3.30328 3.24793C3.42019 2.68407 3.70858 2.16615 4.13196 1.75968C4.55533 1.35321 5.09467 1.07642 5.68182 0.964323C6.26898 0.852229 6.87755 0.909858 7.4306 1.12992C7.98366 1.34998 8.45637 1.72261 8.78894 2.20066C9.12151 2.67872 9.29901 3.24074 9.29901 3.81568C9.29901 4.19757 9.22071 4.57571 9.06854 4.92854C8.91637 5.28136 8.69328 5.60195 8.41211 5.87199C8.13093 6.14203 7.79712 6.35622 7.42975 6.50237C7.06237 6.64851 6.66864 6.72374 6.271 6.72374V6.72277Z"
+                                                  fill="#787878"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="col-lg-5 col-md-5 px-9 px-md-7"
+                                     style="position:relative;">
+                                    <input type="text" class="form-control mb-md-6 mb-3 "
+                                           placeholder="Подтверждение пароля">
+                                    <button style="right:20px;width:20px;height:23px; top:5px;position:absolute; background-color:transparent; border:none;">
+                                        <svg width="13" height="8" viewBox="0 0 13 8" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.27081 5.14848C7.03738 5.14848 7.65881 4.55166 7.65881 3.81545C7.65881 3.07924 7.03738 2.48242 6.27081 2.48242C5.50424 2.48242 4.88281 3.07924 4.88281 3.81545C4.88281 4.55166 5.50424 5.14848 6.27081 5.14848Z"
+                                                  fill="#787878"></path>
+                                            <path d="M6.271 0C2.808 0 0 3.81661 0 3.81661C0 3.81661 2.808 7.63229 6.271 7.63229C9.734 7.63229 12.542 3.81661 12.542 3.81661C12.542 3.81661 9.735 0 6.271 0ZM6.271 6.72277C5.67235 6.72258 5.08726 6.55193 4.5896 6.23237C4.09194 5.91282 3.70411 5.45873 3.47516 4.92751C3.24621 4.39629 3.18637 3.81179 3.30328 3.24793C3.42019 2.68407 3.70858 2.16615 4.13196 1.75968C4.55533 1.35321 5.09467 1.07642 5.68182 0.964323C6.26898 0.852229 6.87755 0.909858 7.4306 1.12992C7.98366 1.34998 8.45637 1.72261 8.78894 2.20066C9.12151 2.67872 9.29901 3.24074 9.29901 3.81568C9.29901 4.19757 9.22071 4.57571 9.06854 4.92854C8.91637 5.28136 8.69328 5.60195 8.41211 5.87199C8.13093 6.14203 7.79712 6.35622 7.42975 6.50237C7.06237 6.64851 6.66864 6.72374 6.271 6.72374V6.72277Z"
+                                                  fill="#787878"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="cabinet_save_button">Сохранить</button>
+                    </div>
+                </div>
             </div>
-        </section>
-    </main>
-    <footer>{% include "footer.html" %}</footer>
-</div>
-</body>
-<script>
-    function switchBlock_to_zakladki() {
-        document.querySelector('.favourites  ').style.display = 'block';
-        document.querySelector('.comparison_lists_cabinet').style.display = 'none';
-        document.querySelector('.orders_history').style.display = 'none';
-        document.querySelector('.my_review ').style.display = 'none';
-        document.querySelector('.my_marks').style.display = 'none';
-        document.querySelector(".contact_information").style.display = 'none';
-    }
+        </div>
+    </section>
+{% endblock %}
 
-    function switchBlock_to_comparison_lists() {
-        document.querySelector('.favourites  ').style.display = 'none';
-        document.querySelector('.comparison_lists_cabinet').style.display = 'block';
-        document.querySelector('.orders_history').style.display = 'none';
-        document.querySelector('.my_review ').style.display = 'none';
-        document.querySelector('.my_marks').style.display = 'none';
-        document.querySelector(".contact_information").style.display = 'none';
-    }
 
-    function switchBlock_to_orders_history() {
-        document.querySelector('.favourites  ').style.display = 'none';
-        document.querySelector('.comparison_lists_cabinet').style.display = 'none';
-        document.querySelector('.orders_history').style.display = 'block';
-        document.querySelector('.my_review ').style.display = 'none';
-        document.querySelector('.my_marks').style.display = 'none';
-        document.querySelector(".contact_information").style.display = 'none';
-    }
-
-    function switchBlock_to_my_review() {
-        document.querySelector('.favourites').style.display = 'none';
-        document.querySelector('.comparison_lists_cabinet').style.display = 'none';
-        document.querySelector('.orders_history').style.display = 'none';
-        document.querySelector('.my_review').style.display = 'block';
-        document.querySelector('.my_marks').style.display = 'none';
-        document.querySelector(".contact_information").style.display = 'none';
-    }
-
-    function switchBlock_to_my_marks() {
-        document.querySelector('.favourites  ').style.display = 'none';
-        document.querySelector('.comparison_lists_cabinet').style.display = 'none';
-        document.querySelector('.orders_history').style.display = 'none';
-        document.querySelector('.my_review ').style.display = 'none';
-        document.querySelector('.my_marks').style.display = 'block';
-        document.querySelector(".contact_information").style.display = 'none';
-    }
-
-    function switchBlock_to_contact_information() {
-        document.querySelector('.favourites  ').style.display = 'none';
-        document.querySelector('.comparison_lists_cabinet').style.display = 'none';
-        document.querySelector('.orders_history').style.display = 'none';
-        document.querySelector('.my_review ').style.display = 'none';
-        document.querySelector('.my_marks').style.display = 'none';
-        document.querySelector(".contact_information").style.display = 'block';
-    }
-</script>
-<script>
-    const buttons = document.querySelectorAll('.widget__cabinet--button');
-
-    // Добавляем обработчик события клика для каждой кнопки
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Удаляем класс "active" у всех кнопок
-            buttons.forEach(btn => btn.classList.remove('active'));
-            // Добавляем класс "active" только к нажатой кнопке
-            button.classList.add('active');
-        });
-    });
-</script>
-<script>
-    // Находим все блоки на странице с классом review_personal_block
-    const reviewBlocks = document.querySelectorAll('.review_personal_block');
-
-    // Для каждого блока добавляем обработчик событий на кнопку
-    reviewBlocks.forEach(block => {
-        const button = block.querySelector('.order_button');
-        button.addEventListener('click', () => toggleReviewBlock(block));
-    });
-
-    // Функция toggleBlock работает с переданным блоком
-    function toggleReviewBlock(block) {
-        const table = block.querySelector('.open_order_bord'); // Получаем таблицу заказов
-        const text = block.querySelector('.button_text'); // Получаем кнопку
-
-        const computedStyle = window.getComputedStyle(table);
-        if (computedStyle.display === 'none') {
-            table.style.display = 'block';
-            text.textContent = 'Свернуть >>'; // Текст при открытом состоянии
-        } else {
-            table.style.display = 'none';
-            text.textContent = 'Детально >>'; // Текст при закрытом состоянии
+{% block scripts %}
+    <script>
+        function switchBlock_to_zakladki() {
+            document.querySelector('.favourites  ').style.display = 'block';
+            document.querySelector('.comparison_lists_cabinet').style.display = 'none';
+            document.querySelector('.orders_history').style.display = 'none';
+            document.querySelector('.my_review ').style.display = 'none';
+            document.querySelector('.my_marks').style.display = 'none';
+            document.querySelector(".contact_information").style.display = 'none';
         }
-    }
-</script>
-<script>
-    const comparisonLists = document.querySelectorAll('.comparison-list');
 
-    // Для каждого блока добавляем обработчик событий на кнопку
-    comparisonLists.forEach(block => {
-        const button = block.querySelector('.fold-button');
-        button.addEventListener('click', () => toggleCharacteristicsBlock(block, button));
-    });
-
-    // Функция toggleBlock работает с переданным блоком
-    function toggleCharacteristicsBlock(block, button) {
-        const characteristicsBlocks = block.querySelectorAll('.product__card--characteristics'); // Получаем таблицу заказов
-        characteristicsBlocks.forEach(characteristicBlock => {
-            const computedStyle = window.getComputedStyle(characteristicBlock);
-            if (computedStyle.display === 'none') {
-                characteristicBlock.style.display = 'block';
-            } else {
-                characteristicBlock.style.display = 'none';
-            }
-        });
-        if (button.textContent === 'Развернуть') {
-            button.textContent = 'Свернуть';
-        } else {
-            button.textContent = 'Развернуть';
+        function switchBlock_to_comparison_lists() {
+            document.querySelector('.favourites  ').style.display = 'none';
+            document.querySelector('.comparison_lists_cabinet').style.display = 'block';
+            document.querySelector('.orders_history').style.display = 'none';
+            document.querySelector('.my_review ').style.display = 'none';
+            document.querySelector('.my_marks').style.display = 'none';
+            document.querySelector(".contact_information").style.display = 'none';
         }
-    }
-</script>
-</html>
 
+        function switchBlock_to_orders_history() {
+            document.querySelector('.favourites  ').style.display = 'none';
+            document.querySelector('.comparison_lists_cabinet').style.display = 'none';
+            document.querySelector('.orders_history').style.display = 'block';
+            document.querySelector('.my_review ').style.display = 'none';
+            document.querySelector('.my_marks').style.display = 'none';
+            document.querySelector(".contact_information").style.display = 'none';
+        }
+
+        function switchBlock_to_my_review() {
+            document.querySelector('.favourites').style.display = 'none';
+            document.querySelector('.comparison_lists_cabinet').style.display = 'none';
+            document.querySelector('.orders_history').style.display = 'none';
+            document.querySelector('.my_review').style.display = 'block';
+            document.querySelector('.my_marks').style.display = 'none';
+            document.querySelector(".contact_information").style.display = 'none';
+        }
+
+        function switchBlock_to_my_marks() {
+            document.querySelector('.favourites  ').style.display = 'none';
+            document.querySelector('.comparison_lists_cabinet').style.display = 'none';
+            document.querySelector('.orders_history').style.display = 'none';
+            document.querySelector('.my_review ').style.display = 'none';
+            document.querySelector('.my_marks').style.display = 'block';
+            document.querySelector(".contact_information").style.display = 'none';
+        }
+
+        function switchBlock_to_contact_information() {
+            document.querySelector('.favourites  ').style.display = 'none';
+            document.querySelector('.comparison_lists_cabinet').style.display = 'none';
+            document.querySelector('.orders_history').style.display = 'none';
+            document.querySelector('.my_review ').style.display = 'none';
+            document.querySelector('.my_marks').style.display = 'none';
+            document.querySelector(".contact_information").style.display = 'block';
+        }
+    </script>
+    <script src="{% static '/src/assets/js/cabinetWidgetButtons.js' %}"></script>
+    <script src="{% static '/src/assets/js/cabinetOrderInfoCollapse.js' %}"></script>
+    <script src="{% static '/src/assets/js/cabinetProductBlocksCollapse.js' %}"></script>
+{% endblock %}
