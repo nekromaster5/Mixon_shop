@@ -3,7 +3,7 @@
 
 
 {% block title %}
-
+    Шпатлевка универсальная 2 кг Mixon Uni
 {% endblock %}
 
 
@@ -1799,72 +1799,72 @@
 
 {% block scripts %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{% static '/src/assets/js/slider.js' %}"></script>
-<script src="{% static '/src/assets/js/breadcrumbSliderSetWidth.js' %}"></script>
-<script>
-    $(document).ready(function () {
-        // Скрываем все слайды, кроме первого
-        $(".carousel-item:not(:first)").hide();
+    <script src="{% static '/src/assets/js/slider.js' %}"></script>
+    <script src="{% static '/src/assets/js/breadcrumbSliderSetWidth.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            // Скрываем все слайды, кроме первого
+            $(".carousel-item:not(:first)").hide();
 
-        // Обработчик клика по кнопкам
-        $(".carousel-buttons button").click(function () {
-            // Получаем индекс слайда из атрибута data-item-index
-            var index = $(this).data("item-index");
+            // Обработчик клика по кнопкам
+            $(".carousel-buttons button").click(function () {
+                // Получаем индекс слайда из атрибута data-item-index
+                var index = $(this).data("item-index");
 
-            // Скрываем все слайды
-            $(".carousel-item").hide();
+                // Скрываем все слайды
+                $(".carousel-item").hide();
 
-            // Показываем выбранный слайд
-            $(".carousel-item").eq(index).show();
+                // Показываем выбранный слайд
+                $(".carousel-item").eq(index).show();
+            });
         });
-    });
 
-    function switchBorder(button) {
-        // Удаляем класс у всех кнопок
-        $(".product_navigation_button").removeClass("active");
-        // Добавляем класс "active" к текущей кнопке
-        $(button).addClass("active");
-    }
+        function switchBorder(button) {
+            // Удаляем класс у всех кнопок
+            $(".product_navigation_button").removeClass("active");
+            // Добавляем класс "active" к текущей кнопке
+            $(button).addClass("active");
+        }
 
-    function switchBlockToProductDescription() {
-        document.querySelector('.product_description').style.display = 'block';
-        document.querySelector('.characteristics').style.display = 'none';
-        document.querySelector('.buy_together').style.display = 'none';
-        document.querySelector('.review').style.display = 'none';
-        document.querySelector('.availability').style.display = 'none';
-    }
+        function switchBlockToProductDescription() {
+            document.querySelector('.product_description').style.display = 'block';
+            document.querySelector('.characteristics').style.display = 'none';
+            document.querySelector('.buy_together').style.display = 'none';
+            document.querySelector('.review').style.display = 'none';
+            document.querySelector('.availability').style.display = 'none';
+        }
 
-    function switchBlockToCharacteristics() {
-        document.querySelector('.characteristics').style.display = 'block';
-        document.querySelector('.product_description').style.display = 'none';
-        document.querySelector('.buy_together').style.display = 'none';
-        document.querySelector('.review').style.display = 'none';
-        document.querySelector('.availability').style.display = 'none';
-        dispatchMaxTranslateEvent();
-    }
+        function switchBlockToCharacteristics() {
+            document.querySelector('.characteristics').style.display = 'block';
+            document.querySelector('.product_description').style.display = 'none';
+            document.querySelector('.buy_together').style.display = 'none';
+            document.querySelector('.review').style.display = 'none';
+            document.querySelector('.availability').style.display = 'none';
+            dispatchMaxTranslateEvent();
+        }
 
-    function switchBlockToBuyTogether() {
-        document.querySelector('.characteristics').style.display = 'none';
-        document.querySelector('.product_description').style.display = 'none';
-        document.querySelector('.buy_together').style.display = 'block';
-        document.querySelector('.review').style.display = 'none';
-        document.querySelector('.availability').style.display = 'none';
-    }
+        function switchBlockToBuyTogether() {
+            document.querySelector('.characteristics').style.display = 'none';
+            document.querySelector('.product_description').style.display = 'none';
+            document.querySelector('.buy_together').style.display = 'block';
+            document.querySelector('.review').style.display = 'none';
+            document.querySelector('.availability').style.display = 'none';
+        }
 
-    function switchBlockToReview() {
-        document.querySelector('.characteristics').style.display = 'none';
-        document.querySelector('.product_description').style.display = 'none';
-        document.querySelector('.buy_together').style.display = 'none';
-        document.querySelector('.review').style.display = 'block';
-        document.querySelector('.availability').style.display = 'none';
-    }
+        function switchBlockToReview() {
+            document.querySelector('.characteristics').style.display = 'none';
+            document.querySelector('.product_description').style.display = 'none';
+            document.querySelector('.buy_together').style.display = 'none';
+            document.querySelector('.review').style.display = 'block';
+            document.querySelector('.availability').style.display = 'none';
+        }
 
-    function switchBlockToAvailability() {
-        document.querySelector('.characteristics').style.display = 'none';
-        document.querySelector('.product_description').style.display = 'none';
-        document.querySelector('.buy_together').style.display = 'none';
-        document.querySelector('.review').style.display = 'none';
-        document.querySelector('.availability').style.display = 'block';
-    }
-</script>
+        function switchBlockToAvailability() {
+            document.querySelector('.characteristics').style.display = 'none';
+            document.querySelector('.product_description').style.display = 'none';
+            document.querySelector('.buy_together').style.display = 'none';
+            document.querySelector('.review').style.display = 'none';
+            document.querySelector('.availability').style.display = 'block';
+        }
+    </script>
 {% endblock %}
