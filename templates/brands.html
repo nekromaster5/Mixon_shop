@@ -9,37 +9,81 @@
 
 {% block content %}
     <section class="breadcrumb__section breadcrumb__bg">
-    <div class="container">
-        <div class="breadcrumb__content text-center">
-            <ul class="breadcrumb__content--menu d-flex">
-                <li class="breadcrumb__content--menu__items">
-                    <a href="">Главная</a>
-                </li>
-                <li class="breadcrumb__content--menu__items">
-                    <a href="">Бренды</a>
-                </li>
+        <div class="container">
+            <div class="breadcrumb__content text-center">
+                <ul class="breadcrumb__content--menu d-flex">
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="">Главная</a>
+                    </li>
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="">Бренды</a>
+                    </li>
 
-            </ul>
-        </div>
-        <div><h2 class="h3" style="margin-left:500px;font-size: 40px;">Бренды</h2>
-            <div class="brands_main_block">
-                <div class="brands_line">
-                    <button class="brands_cell"></button>
-                    <button class="brands_cell"></button>
-                    <button class="brands_cell"></button>
-                    <button class="brands_cell"></button>
-                    <button class="brands_cell"></button>
-                    <button class="brands_cell"></button>
-                </div>
-                <div class="brands_line">
-                    <button class="brands_cell"></button>
-                    <button class="brands_cell"></button>
-                    <button class="brands_cell"></button>
+                </ul>
+            </div>
+            <h2 class="breadcrumb__content--title text-center mb-5">Бренды</h2>
+            <div id="brands--slider" class="slider-container adjustable-slider">
+                <div class="brands-page slider">
+                    <div class="brand_buttons brands-page slide">
+                        <div class="brand_buttons-inner">
+                            <img class="" src="/static/src/assets/img/logo/logo-mixon.png" alt="Logo Mixon">
+                        </div>
+                    </div>
+                    <div class="brand_buttons brands-page slide">
+                        <div class="brand_buttons-inner">
+                            <img class="" src="/static/src/assets/img/logo/logo-genc.png" alt="Logo Genc">
+                        </div>
+                    </div>
+                    <div class="brand_buttons brands-page slide">
+                        <div class="brand_buttons-inner">
+                            <img class="" src="/static/src/assets/img/logo/logo-smirdex.png" alt="Logo Smirdex">
+                        </div>
+                    </div>
+                    <div class="brand_buttons brands-page slide">
+                        <div class="brand_buttons-inner">
+                            <img class="" src="/static/src/assets/img/logo/logo-domex.png" alt="Logo Domex">
+                        </div>
+                    </div>
+                    <div class="brand_buttons brands-page slide">
+                        <div class="brand_buttons-inner">
+                            <img class="" src="/static/src/assets/img/logo/logo-prodyver.png"
+                                 alt="Logo Prodyver">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+{% endblock %}
+
+
+{% block scripts %}
+    <script src="{% static '/src/assets/js/slider.js' %}"></script>
+    <script>
+        // Получаем ссылку на элемент с id payment--slider
+        const paymentSliderContainer = document.getElementById('brands--slider');
+        const paymentSlider = paymentSliderContainer.querySelector('.slider');
+
+        // Функция для проверки размера экрана и скрытия/отображения элемента
+        function toggleSliderContainer(sliderContainer, slider) {
+            if (window.innerWidth <= 540) {
+                sliderContainer.classList.remove('slider-container');
+                disableSlider(slider);
+            } else {
+                sliderContainer.classList.add('slider-container');
+                enableSlider(slider);
+            }
+        }
+
+
+        setTimeout(() => {
+            toggleSliderContainer(paymentSliderContainer, paymentSlider)
+        }, 50);
+
+        // Добавляем обработчик события изменения размера окна браузера
+        window.addEventListener('resize', () => toggleSliderContainer(paymentSliderContainer, paymentSlider));
+
+    </script>
 {% endblock %}
 
 

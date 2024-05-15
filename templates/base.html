@@ -5,7 +5,7 @@
     {% load static %}
     <meta name="description" content="Morden Bootstrap HTML5 Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="{% static '/src/assets/img/favicon.ico' %}">
+    <link rel="icon" href="/src/assets/img/favicon-16x16.png">
 
     <!-- Font link -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +29,7 @@
 <div class="body__wrapper">
     <header>{% include "header.html" %}</header>
     <main class="main__content_wrapper">
-    {% block content %} {% endblock %}
+        {% block content %} {% endblock %}
     </main>
     <footer>{% include "footer.html" %}</footer>
 </div>
