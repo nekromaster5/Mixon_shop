@@ -7185,7 +7185,7 @@ input[type=number]::-webkit-outer-spin-button {
     font-size: 1.6rem;
     line-height: 2rem;
 }
-
+ 
 @media only screen and (min-width: 768px) {
     .product__content--title__text {
         margin: 3rem 0 3rem 3rem;
@@ -10292,8 +10292,11 @@ details > summary::-webkit-details-marker {
     width: 170px;
     height: 63px;
     margin-right: 20px;
+    
 }
-
+.brands_img{
+    margin-left:20px !important;
+}
 .brands_line {
     display: flex;
     margin-top: 20px;
