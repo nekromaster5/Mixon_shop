@@ -10543,6 +10543,7 @@ details > summary::-webkit-details-marker {
 .standart_about_product_table {
 
     display: flex;
+     
 }
 
 .view__all--link:hover {
@@ -10584,14 +10585,21 @@ details > summary::-webkit-details-marker {
     }
 
 }
-
+.main_table_l{
+    margin-left:37px !important;
+}
+.main_table_r{
+    margin-right:15px !important;
+}
 .characteristic-title {
     width: 500px;
 }
-
+.characteristic-title_main{
+    width: 350px;
+}
 @media only screen and (max-width: 540px) {
     .characteristic-title {
-        width: 200px;
+        width: 100px;
     }
 }
 
@@ -10740,7 +10748,9 @@ details > summary::-webkit-details-marker {
         display: none;
 
     }
-
+    .adaptive_about_product_table {
+        display: block;
+    }
     .main_image_buttons {
         display: flex;
         padding-bottom: 10px;
