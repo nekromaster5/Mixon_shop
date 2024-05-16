@@ -6227,7 +6227,10 @@ input[type=number]::-webkit-outer-spin-button {
     padding-left: 1rem;
     padding-bottom: 1rem;
 }
-
+.main_text{
+    font-size: 30px !important;
+    font-weight: Medium !important;
+}
 @media only  screen and (min-width: 768px) {
     .product__card--characteristics {
         padding-left: 1.5rem;
@@ -6848,7 +6851,10 @@ input[type=number]::-webkit-outer-spin-button {
         display: flex;
         font-size: 10px;
     }
-
+    .main_text{
+        font-size: 16px !important;
+        
+    }
     .repeat_button {
         font-size: 10px;
     }
@@ -10551,6 +10557,8 @@ details > summary::-webkit-details-marker {
 .standart_about_product_table {
 
     display: flex;
+    padding-bottom: 5rem !important;
+    padding-top: 3rem !important;
      
 }
 
@@ -10595,9 +10603,11 @@ details > summary::-webkit-details-marker {
 }
 .main_table_l{
     margin-left:37px !important;
+    
 }
 .main_table_r{
     margin-right:15px !important;
+    
 }
 .characteristic-title {
     width: 500px;
