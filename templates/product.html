@@ -13,16 +13,16 @@
             <div class="breadcrumb__content text-center slider-container" style="width:100%;">
                 <ul class="breadcrumb__content--menu slider d-flex">
                     <li class="breadcrumb__content--menu__items">
-                        <a href="">Главная</a>
+                        <a href="{% url 'home' %}">Главная</a>
                     </li>
                     <li class="breadcrumb__content--menu__items">
-                        <a href="">ЛКМ для Строительства</a>
+                        <a href="{% url 'catalogue' %}">ЛКМ для Строительства</a>
                     </li>
                     <li class="breadcrumb__content--menu__items">
-                        <a href="">Шпатлевка универсальная</a>
+                        <a href="{% url 'catalogue' %}">Шпатлевка универсальная</a>
                     </li>
                     <li class="breadcrumb__content--menu__items">
-                        <a href="">Шпатлевка универсальная 2 кг Mixon Uni</a>
+                        <a href="{% url 'product' %}">Шпатлевка универсальная 2 кг Mixon Uni</a>
                     </li>
                 </ul>
 
@@ -1404,7 +1404,7 @@
 
                                     <div class="review_second_input_block">
                                         <div style="position: relative;">
-                                        <textarea class="comments--text__field"
+                                        <textarea class="comments--text__field bg__off_white"
                                                   placeholder="Напишите отзыв"></textarea>
                                         </div>
                                         <button style="background-color:white;border-style: solid; border-color: red;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);  width: 200px; height: 40px; margin-top:20px; border-radius:5px;">

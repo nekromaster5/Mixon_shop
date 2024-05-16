@@ -165,13 +165,14 @@
                         <h2 class="footer__widget--title d-none d-md-block">Меню</h2>
                         <ul class="footer__widget--menu footer__widget--inner">
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
-                                                                      href="">Акции</a></li>
+                                                                      >Акции</a></li>
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
                                                                       href="{% url 'about_company' %}">О нас</a></li>
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
                                                                       href="{% url 'news' %}">Новости</a></li>
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
-                                                                      href="{% url 'shipment_and_payment' %}">Оплата и доставка</a></li>
+                                                                      href="{% url 'shipment_and_payment' %}">Оплата и
+                                доставка</a></li>
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
                                                                       href="{% url 'contacts' %}">Контакты</a></li>
                         </ul>
@@ -209,79 +210,87 @@
                         <h2 class="footer__widget--title ">Магазины</h2>
                         <ul class="footer__widget--menu footer__widget--inner">
                             <li class="footer__widget--menu__list"><a
-                                    class="footer__widget--menu__text no-cursor_change no-hover"
-                                    href="">г. Одесса</a>
+                                    class="footer__widget--menu__text no-cursor_change no-hover">г. Одесса</a>
                                 <ul class="footer__widget--menu footer__widget--inner locations_list">
                                     <li class="footer__widget--menu__list"><a
                                             class="footer__widget--menu__text locations_text"
-                                            href="">ул. Елисаветинская 4,<br> +38 (097) 295 88 03, 38 (095) 295 88
+                                            href="{% url 'contacts' %}">ул. Елисаветинская 4,<br> +38 (097) 295 88 03,
+                                        38 (095) 295 88
                                         03</a></li>
                                     <li class="footer__widget--menu__list"><a
                                             class="footer__widget--menu__text locations_text"
-                                            href="">ул. Ильфа и Петрова 18а,<br> +38(067) 524 51 66, 38(095) 230 51
+                                            href="{% url 'contacts' %}">ул. Ильфа и Петрова 18а,<br> +38(067) 524 51 66,
+                                        38(095) 230 51
                                         66</a></li>
                                     <li class="footer__widget--menu__list"><a
                                             class="footer__widget--menu__text locations_text"
-                                            href="">ул. 25 чапаевской дивизии 13/1,<br> +38(067) 523 97 34, 38(099) 523
+                                            href="{% url 'contacts' %}">ул. 25 чапаевской дивизии 13/1,<br> +38(067) 523
+                                        97 34, 38(099) 523
                                         97 34</a></li>
                                     <li class="footer__widget--menu__list"><a
                                             class="footer__widget--menu__text locations_text"
-                                            href="">Промр-к «Черноморец», ул. Малиновского, 67,<br>+38 (067) 524 51 67,
+                                            href="{% url 'contacts' %}">Промр-к «Черноморец», ул. Малиновского, 67,<br>+38
+                                        (067) 524 51 67,
                                         38 (095) 014 54 67</a></li>
                                     <li class="footer__widget--menu__list"><a
                                             class="footer__widget--menu__text locations_text"
-                                            href="">Промрынок «Меркурий», Днепро дорога,<br>+38(067) 524 41 56, 38(099)
+                                            href="{% url 'contacts' %}">Промрынок «Меркурий», Днепро дорога,<br>+38(067)
+                                        524 41 56, 38(099)
                                         024 41 56</a></li>
                                     <li class="footer__widget--menu__list"><a
                                             class="footer__widget--menu__text locations_text"
-                                            href="">Промр-к «Староконный», ул. Раскидайлов. 31,<br>+38(067) 524 97, 38
+                                            href="{% url 'contacts' %}">Промр-к «Староконный», ул. Раскидайлов. 31,<br>+38(067)
+                                        524 97, 38
                                         38(095) 523 97 38</a></li>
                                     <li class="footer__widget--menu__list"><a
                                             class="footer__widget--menu__text locations_text"
-                                            href="">ул. Раскидайловская 34,<br>+38(067) 888 00 34</a>
+                                            href="{% url 'contacts' %}">ул. Раскидайловская 34,<br>+38(067) 888 00
+                                        34</a>
                                     </li>
                                 </ul>
                             </li>
                             <li class="footer__widget--menu__list"><a
-                                    class="footer__widget--menu__text no-cursor_change no-hover"
-                                    href="">г. Киев</a>
+                                    class="footer__widget--menu__text no-cursor_change no-hover">г. Киев</a>
                                 <ul class="footer__widget--menu footer__widget--inner locations_list">
                                     <li class="footer__widget--menu__list"><a
                                             class="footer__widget--menu__text locations_text"
-                                            href="">пр-т Глушкова 40, корп. 3,<br>+38(096) 295 88 09</a></li>
+                                            href="{% url 'contacts' %}">пр-т Глушкова 40, корп. 3,<br>+38(096) 295 88 09</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="footer__widget--menu__list"><a
-                                    class="footer__widget--menu__text no-cursor_change no-hover"
-                                    href="">г. Луцк</a>
+                                    class="footer__widget--menu__text no-cursor_change no-hover">г. Луцк</a>
                                 <ul class="footer__widget--menu footer__widget--inner locations_list">
                                     <li class="footer__widget--menu__list"><a
                                             class="footer__widget--menu__text locations_text"
-                                            href="">ул. Ровенская 44,<br>+38(098) 295 33 19, 38(095) 295 33 19</a></li>
+                                            href="{% url 'contacts' %}">ул. Ровенская 44,<br>+38(098) 295 33 19, 38(095)
+                                        295 33 19</a></li>
                                     <li class="footer__widget--menu__list"><a
                                             class="footer__widget--menu__text locations_text"
-                                            href="">пр-т Победы 18,<br>+38(098) 295 33 19, 38(095) 295 33 19</a></li>
+                                            href="{% url 'contacts' %}">пр-т Победы 18,<br>+38(098) 295 33 19, 38(095)
+                                        295 33 19</a></li>
                                     <li class="footer__widget--menu__list"><a
                                             class="footer__widget--menu__text locations_text"
-                                            href="">ул. Кравчука 44а,<br>+38(098) 295 33 19, 38(095) 295 33 19</a></li>
+                                            href="{% url 'contacts' %}">ул. Кравчука 44а,<br>+38(098) 295 33 19, 38(095)
+                                        295 33 19</a></li>
                                 </ul>
                             </li>
                             <li class="footer__widget--menu__list"><a
-                                    class="footer__widget--menu__text no-cursor_change no-hover"
-                                    href="">г. Ровно</a>
+                                    class="footer__widget--menu__text no-cursor_change no-hover">г. Ровно</a>
                                 <ul class="footer__widget--menu footer__widget--inner locations_list">
                                     <li class="footer__widget--menu__list"><a
                                             class="footer__widget--menu__text locations_text"
-                                            href="">ул. Бородина 4,<br>+38(096) 295 33 12, 38(095) 295 33 12</a></li>
+                                            href="{% url 'contacts' %}">ул. Бородина 4,<br>+38(096) 295 33 12, 38(095)
+                                        295 33 12</a></li>
                                 </ul>
                             </li>
                             <li class="footer__widget--menu__list"><a
-                                    class="footer__widget--menu__text no-cursor_change no-hover"
-                                    href="">г. Хмельницкий</a>
+                                    class="footer__widget--menu__text no-cursor_change no-hover">г. Хмельницкий</a>
                                 <ul class="footer__widget--menu footer__widget--inner locations_list">
                                     <li class="footer__widget--menu__list"><a
                                             class="footer__widget--menu__text locations_text"
-                                            href="">ул. Побужская 11,<br>+38(098) 295 33 13 38(095) 295 33 13</a></li>
+                                            href="{% url 'contacts' %}">ул. Побужская 11,<br>+38(098) 295 33 13 38(095)
+                                        295 33 13</a></li>
                                 </ul>
                             </li>
                         </ul>

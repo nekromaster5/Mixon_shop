@@ -16,7 +16,7 @@
                         <a href="{% url 'home' %}">Главная</a>
                     </li>
                     <li class="breadcrumb__content--menu__items">
-                        <a href="">Оплата и доставка</a>
+                        <a href="{% url 'shipment_and_payment' %}">Оплата и доставка</a>
                     </li>
                 </ul>
             </div>
@@ -188,7 +188,7 @@
                             </div>
                         </div>
                         <div class="row mb-8 pe-7 pe-md-0" style="position: relative; overflow: hidden;">
-                            <div class="shipment__method__addresses px-0">
+                            <div class="shipment__method__addresses only-one px-0">
                                 <ul class="widget__form--check">
                                     <li class="widget__form--check__list align-items-start">
                                         <input class="widget__form--check__input flex-shrink-0"
@@ -325,7 +325,7 @@
                     </div>
                 </div>
             </div>
-            <div class="shipping__info no-line row position-relative width-100 ps-8 ps-md-0">
+            <div class="shipping__info no-line row position-relative width-100 ps-8 ps-md-0 mb-10">
                 <div class="col-14 ps-0 position-relative flex-grow-1">
                     <div id="payment--items__large" class="checkout--shipping__information">
                         <div id="payment--slider" class="slider-container mt-5 pe-7 pe-md-0">
@@ -405,4 +405,5 @@
     <script src="{% static 'src/assets/js/independentCounters.js' %}"></script>
     <script src="{% static 'src/assets/js/toggleButtonOutline.js' %}"></script>
     <script src="{% static 'src/assets/js/checkoutButtons.js' %}"></script>
+    <script src="{% static '/src/assets/js/oneOptionCheckInput.js' %}"></script>
 {% endblock %}

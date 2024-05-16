@@ -13,10 +13,10 @@
             <div class="breadcrumb__content text-center">
                 <ul class="breadcrumb__content--menu d-flex">
                     <li class="breadcrumb__content--menu__items">
-                        <a href="">Главная</a>
+                        <a href="{% url 'home' %}">Главная</a>
                     </li>
                     <li class="breadcrumb__content--menu__items">
-                        <a href="">О компании</a>
+                        <a href="{% url 'about_company' %}">О компании</a>
                     </li>
 
                 </ul>
@@ -56,7 +56,7 @@
                         </div>
                         <div class="brand_buttons slide col-lg-21 col-md-21">
                             <div class="brand_buttons-inner about_company">
-                                <a href="/catalogue"
+                                <a href="{% url 'brands' %}"
                                    class="view__all--link d-inline-block text-nowrap slide">
                                     <span class="me-3">Еще новости</span>
                                     <svg width="5%" viewBox="0 0 11 13" fill="none"

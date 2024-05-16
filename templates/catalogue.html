@@ -13,13 +13,13 @@
             <div class="breadcrumb__content text-center slider-container">
                 <ul class="breadcrumb__content--menu d-flex slider">
                     <li class="breadcrumb__content--menu__items">
-                        <a href="">Главная</a>
+                        <a href="{% url 'home' %}">Главная</a>
                     </li>
                     <li class="breadcrumb__content--menu__items">
-                        <a href="">ЛКМ для Строительства</a>
+                        <a href="{% url 'catalogue' %}">ЛКМ для Строительства</a>
                     </li>
                     <li class="breadcrumb__content--menu__items">
-                        <a href="">Шпатлевка универсальная</a>
+                        <a href="{% url 'catalogue' %}">Шпатлевка универсальная</a>
                     </li>
                 </ul>
             </div>
@@ -59,7 +59,7 @@
                         </div>
                         <div class="brand_buttons slide col-lg-21 col-md-22 col-19">
                             <div class="brand_buttons-inner">
-                                <a href="/catalogue"
+                                <a href="{% url 'brands' %}"
                                    class="view__all--link d-inline-block text-nowrap slide">
                                     <span>Все бренды</span>
                                     <svg width="7%" viewBox="0 0 11 13" fill="none"
