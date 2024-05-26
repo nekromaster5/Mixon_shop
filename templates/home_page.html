@@ -8,6 +8,29 @@
 
 
 {% block content %}
+<style>
+
+    .main_image_buttons{
+        display:flex !important; 
+        padding-top:10px;
+        width: 100% !important;
+        justify-content:center;
+    }
+    .main_image_button{
+width:30px !important;
+height:2px;
+border:none;
+margin-left:10px !important;
+background-color:red !important; 
+    }
+    @media only screen and (min-width: 768px) and (max-width: 992px) {.main_image_buttons{
+        margin-left:0px !important;
+    }}
+    @media only screen   and (min-width: 320px) and (max-width: 760px){
+        .main_image_buttons{
+            margin-left:0px !important;
+    }
+</style>
     <section class="slider--section mb-7">
         <div class="container">
             <div id="app"></div>
@@ -66,9 +89,10 @@
                         <div class="main_image_buttons">
                             <button class="main_image_button"></button>
                             <button class="main_image_button "></button>
+                            <button class="main_image_button"></button>
                             <button class="main_image_button "></button>
-                            <button class="main_image_button"></button>
-                            <button class="main_image_button"></button>
+                            <button class="main_image_button "></button>
+                           
                         </div>
                     </div>
                 </div>

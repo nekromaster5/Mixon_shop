@@ -18,7 +18,59 @@
     <!-- Custom Style CSS -->
     <link rel="stylesheet" href="{% static '/src/assets/css/style.css' %}">
     <title></title>
-
+    <style>
+        @media only screen   and (min-width: 320px) and (max-width: 760px)  {
+            .main_header {
+                background-color: #383433 !important;
+            }
+            .header__sticky {
+                background-color: #383433 !important;
+            }
+        }
+        @media only screen and (min-width: 768px) and (max-width: 992px) {
+            .adaptive_icon_button{
+              display:block  !important;
+            }
+            .frame3-panel{
+                display:flex !important;
+            }
+            .panel-container{
+                margin-left:-400px !important;
+                padding-right: 60px;
+            }
+            .logo-messengers{
+                display: none !important;
+            }
+            .language_panel{
+                padding-left:30px !important;
+            }
+            .main__logo{
+                margin-left:-260px !important;
+            }
+            .categories__menu{
+                width: 115px;
+                 
+            }
+            .frame3-panel{
+                margin-left:30px !important;
+            }
+            .header__search--widget{
+                margin-left:10px !important;
+            }
+            .adaptive_header_button{
+                padding-left:20px;
+            }
+            .categories__menu--header{
+                justify-content:center;
+                display:flex;
+            }
+        }
+        
+        .adaptive_main_logo{
+            width: 49px !important;
+            height: 33px !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -26,11 +78,11 @@
 
 <!-- Start header area -->
 
-<div class="main__header header__sticky">
-    <div class="container">
+<div class="main__header header__sticky"  >
+    <div class="container" >
         <div class="main__header--inner position__relative d-flex justify-content-between align-items-center">
             <button class="adaptive_header_button" style="border:none;background-color:transparent;">
-                <img class="main__logo--img" src="{% static '/src/assets/img/icon/1.svg' %} " alt="logo-img"></button>
+                <img class="main__logo--img adaptive_main_logo" src="{% static '/src/assets/img/icon/1.svg' %} " alt="logo-img"></button>
             <div class="main__logo">
                 <a class="main__logo--link" href="{% url 'home' %}">
                     <img class="main__logo--img" src="{% static '/src/assets/img/logo/logo_mix2.svg' %}" alt="logo-img"></a>
@@ -165,7 +217,7 @@
                               stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round"></path>
                     </svg>
                 </a>
-                <a href="{% url 'checkout' %}" class="icon-button" style="background: none;border: none;position:relative; ">
+                <a href="{% url 'checkout' %}" class="icon-button adaptive_icon_button" style="background: none;border: none;position:relative; ">
 
                     <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9.13623 15.3859C8.60018 15.3859 8.07611 15.5506 7.63041 15.859C7.18471 16.1675 6.83741 16.606 6.63231 17.119C6.42722 17.632 6.37361 18.1964 6.47826 18.741C6.58291 19.2855 6.84106 19.7857 7.22018 20.1782C7.5993 20.5707 8.08233 20.838 8.60811 20.9462C9.13389 21.0544 9.67884 20.9986 10.174 20.786C10.6692 20.5734 11.0924 20.2135 11.3901 19.7517C11.6878 19.29 11.8466 18.7471 11.8464 18.1919C11.8453 17.4479 11.5594 16.7346 11.0513 16.2086C10.5433 15.6826 9.85459 15.3867 9.13623 15.3859ZM9.13623 20.2215C8.74867 20.2215 8.36985 20.1025 8.04761 19.8795C7.72537 19.6565 7.47417 19.3395 7.32585 18.9686C7.17754 18.5977 7.13871 18.1897 7.21431 17.796C7.28992 17.4022 7.47658 17.0406 7.75062 16.7568C8.02467 16.4729 8.37386 16.2796 8.75398 16.2013C9.13409 16.123 9.52803 16.1632 9.88609 16.3168C10.2442 16.4704 10.5502 16.7306 10.7656 17.0643C10.9809 17.3981 11.0958 17.7905 11.0958 18.1919C11.096 18.4587 11.0456 18.723 10.9472 18.9696C10.8489 19.2162 10.7047 19.4403 10.5227 19.6291C10.3407 19.818 10.1246 19.9679 9.8867 20.0702C9.64882 20.1726 9.39383 20.2254 9.13623 20.2257V20.2215ZM18.6547 15.3859C18.1186 15.3857 17.5945 15.5502 17.1486 15.8585C16.7028 16.1669 16.3553 16.6053 16.15 17.1183C15.9448 17.6312 15.8911 18.1957 15.9956 18.7403C16.1002 19.2849 16.3582 19.7852 16.7373 20.1778C17.1164 20.5705 17.5994 20.8378 18.1252 20.9461C18.651 21.0544 19.196 20.9987 19.6913 20.7861C20.1865 20.5735 20.6097 20.2136 20.9074 19.7518C21.2052 19.29 21.3641 18.7472 21.3639 18.1919C21.3628 17.4481 21.077 16.735 20.5692 16.209C20.0613 15.683 19.3729 15.387 18.6547 15.3859ZM18.6547 20.2215C18.2671 20.2217 17.8881 20.1029 17.5657 19.88C17.2433 19.6571 16.992 19.3402 16.8436 18.9693C16.6951 18.5985 16.6562 18.1904 16.7317 17.7966C16.8072 17.4028 16.9937 17.0411 17.2677 16.7571C17.5417 16.4732 17.891 16.2798 18.2711 16.2014C18.6512 16.123 19.0452 16.1631 19.4033 16.3167C19.7614 16.4703 20.0676 16.7304 20.2829 17.0642C20.4983 17.398 20.6133 17.7905 20.6133 18.1919C20.6138 18.7306 20.4077 19.2474 20.0404 19.6288C19.6732 20.0102 19.1748 20.2249 18.6547 20.2257V20.2215ZM4.81888 4.02606L4.56868 0.144084L0.140155 0L0.117188 0.777432L3.86513 0.898716L4.54559 11.4645L5.72951 13.6901L21.8562 12.9448L23.1172 11.5972V4.30697L4.81888 4.02606ZM22.3666 11.2821L21.5239 12.1829L6.15391 12.8929L5.28824 11.3236L4.86884 4.80453L22.3666 5.07404V11.2821Z"

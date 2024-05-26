@@ -3769,8 +3769,16 @@ Header
 */
 .main__header {
     padding: 11px 0;
+    
 }
-
+@media only screen   and (min-width: 320px){
+    .main_header{
+        background-color: #383433 !important;
+    }
+    .header__sticky{
+        background-color: #383433 !important;
+    }
+}
 @media only screen and (min-width: 768px) {
     .main__header {
         padding: 12px 0;
@@ -3790,7 +3798,10 @@ Header
 .main__logo--link {
     display: block;
 }
-
+.adaptive_main_logo{
+    width: 49px !important;
+    height: 33px !important;
+}
 .main__logo--img {
     max-width: 145px;
     display: block;
@@ -6048,7 +6059,7 @@ input[type=number]::-webkit-outer-spin-button {
     .second_col_product {
         margin-left: 0px !important;
     }
-
+    main__header
     .first_sale_block_buttons {
         display: flex;
     }
