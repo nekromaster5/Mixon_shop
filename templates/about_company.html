@@ -8,6 +8,64 @@
 
 
 {% block content %}
+<style>
+    .about_company_heading_div{
+        display: flex;
+        justify-content: center;
+         
+    }
+    .red-dot_list_li{
+        padding-top:10px;
+        line-height:27px;
+    }
+    .comparison_class_first{
+        color:red;
+        margin-top:34px !important;
+    }
+    .comparison_class_second{
+        margin-top:26px !important;
+    }
+    .block_about_company{
+        padding-top:30px;
+        padding-left:30px;
+        padding-bottom:76px;
+    }
+    .about_company_heading{
+        font-size:40px;
+        padding-top:3px;
+    }
+    .block_ab_bottom_text{
+        padding-top:40px !important;
+    }
+    .block_about_company_heading{
+        line-height: 33px !important;
+        font-size:22px !important;
+    }
+    .red_dot_second_class{
+        padding-top:24px !important;
+        font-size:18px !important;
+        line-height:27px !important;
+    }
+    .high_red_dot_ul{
+        font-weight: 500;font-size:18px;
+    }
+    .img_ab_block{
+        display: flex !important;
+         align-items: flex-start !important;
+    }
+    .ab_text{
+        line-height: 33px !important;
+        font-size:22px !important;
+    }
+    @media only screen and (min-width: 768px) and (max-width: 992px) { .ab_text{
+        line-height: 33px !important;
+        font-size:18px !important;
+    }}
+    @media only screen   and (min-width: 320px) and (max-width: 760px){ .ab_text{
+        line-height: 20px !important;
+        font-size:14px !important;
+    }}
+</style>
     <section class="breadcrumb__section breadcrumb__bg">
         <div class="container">
             <div class="breadcrumb__content text-center">
@@ -77,12 +135,13 @@
     </section>
     <section>
         <div class="container">
-            <span class="about_company_heading" style="">О компании MikC</span>
+            <div class="about_company_heading_div"> 
+            <span class="about_company_heading" style="">О компании MikC</span></div>
             <div class="about_company_content" style=" ">
                 <div class="comparison_lists  row  ">
                     <div class="col-lg-7">
                         <div class="block_about_company" style="    ">
-                            <div class="img_ab_block">
+                            <div class="img_ab_block" style=" ">
                                 <div class="about_company_img_block flex-grow-1
                                     flex-shrink-0 ">
                                     <img class="about_company_img"
@@ -90,16 +149,16 @@
                                 </div>
                                 <div class="block_about_company_heading  flex-grow-0
                                     flex-shrink-1  " style="margin-left: 20px;    ">
-                                    <h2 class="h3">MikC - это <span style="color:red;">производитель</span>
+                                    <h2 class="h3 ab_text" style="  ">MikC - это <span style="color:red;">производитель</span>
                                         лакокрасочной продукции, автохимии и автокосметики под брендами
-                                        MIXON,DOMEX,MVL</h2>
+                                        MIXON,DOMEX,MVL                           </h2>
                                 </div>
                             </div>
-                            <div class="block_ab_bottom_text">
-                                <ul style="font-weight: 500;">Благодаря этому мы можем:</ul>
-                                <ul class="red-dot_list">
-                                    <li>Создавать лимитированные партии под спец-заказы</li>
-                                    <li style="margin-top:10px;">Обеспечить полный ассортимент материалов и
+                            <div class="block_ab_bottom_text"  style=" ">
+                                <ul class="high_red_dot_ul"style=" ">Благодаря этому мы можем:</ul>
+                                <ul class="red-dot_list red_dot_second_class" style=" ">
+                                    <li class="red-dot_list_li">Создавать лимитированные партии под спец-заказы</li>
+                                    <li class="red-dot_list_li" style=" ">Обеспечить полный ассортимент материалов и
                                         инструментов необходмых для выполнения малярных работ
                                     </li>
 
@@ -115,16 +174,16 @@
                                 </div>
                                 <div class="block_about_company_heading  flex-grow-0
                                     flex-shrink-1" style="margin-left: 20px;   ">
-                                    <h2 class="h3">MikC - это <span style="color:red;">прямой экспортер</span>
+                                    <h2 class="h3 ab_text">MikC - это <span style="color:red;">прямой экспортер</span>
                                         абразивных материалов SMIRDEX, ЛКМ для обработки древесины GENC, бумаги для
                                         малярок PRODYVER и т.д. </h2>
                                 </div>
                             </div>
                             <div class="block_ab_bottom_text">
-                                <ul style="font-weight: 500;">Благодаря этому мы можем:</ul>
-                                <ul class="red-dot_list">
-                                    <li>Доукомплектовать</li>
-                                    <li style="margin-top:10px;">Обеспечить полный ассортимент материалов и
+                                <ul class="high_red_dot_ul">Благодаря этому мы можем:</ul>
+                                <ul class="red-dot_list red_dot_second_class">
+                                    <li class="red-dot_list_li">Доукомплектовать</li>
+                                    <li class="red-dot_list_li"style="">Обеспечить полный ассортимент материалов и
                                         инструментов необходмых для выполнения малярных работ
                                     </li>
 
@@ -140,17 +199,17 @@
                                 </div>
                                 <div class=" block_about_company_heading flex-grow-0
                                     flex-shrink-1" style="margin-left: 20px;  ">
-                                    <h2 class="h3">MikC - это <span style="color:red;">cеть магазинов</span>по
+                                    <h2 class="h3 ab_text">MikC - это <span style="color:red;">cеть магазинов</span>по
                                         продаже лакокрасочной продукции </h2>
                                 </div>
                             </div>
                             <div class="block_ab_bottom_text">
-                                <ul style="font-weight: 500;">Благодаря этому мы можем:</ul>
-                                <ul class="red-dot_list">
-                                    <li>Принимать оплату разными способами(наличный и безналичный расчет,в том числе
+                                <ul class="high_red_dot_ul">Благодаря этому мы можем:</ul>
+                                <ul class="red-dot_list red_dot_second_class">
+                                    <li class="red-dot_list_li ">Принимать оплату разными способами(наличный и безналичный расчет,в том числе
                                         и с НДС, перевод на платежную карту и т.п.)
                                     </li>
-                                    <li style="margin-top:10px;">Обслуживать клиентов в различных частях города</li>
+                                    <li class="red-dot_list_li">Обслуживать клиентов в различных частях города</li>
 
                                 </ul>
                             </div>
@@ -166,17 +225,17 @@
                                 </div>
                                 <div class=" block_about_company_heading flex-grow-0
                                     flex-shrink-1" style="margin-left: 20px;  ">
-                                    <h2 class="h3">MikC - это структурированная система<span style="color:red;">оптовых продаж</span>
+                                    <h2 class="h3 ab_text">MikC - это структурированная система<span style="color:red;">оптовых продаж</span>
                                         и скидок</h2>
                                 </div>
                             </div>
                             <div class="block_ab_bottom_text">
-                                <ul style="font-weight: 500;">Благодаря этому мы можем:</ul>
-                                <ul class="red-dot_list">
-                                    <li>Предложить систему скидок в завимости от статуса клиента - професионал,
+                                <ul class="high_red_dot_ul">Благодаря этому мы можем:</ul>
+                                <ul class="red-dot_list red_dot_second_class">
+                                    <li class="red-dot_list_li">Предложить систему скидок в завимости от статуса клиента - професионал,
                                         диллер, дистрибьютор.
                                     </li>
-                                    <li style="margin-top:10px;">Давать скидки в зависимости от объема закупок при
+                                    <li class="red-dot_list_li">Давать скидки в зависимости от объема закупок при
                                         условии предоставлении информации клиента о себе.
                                     </li>
 
@@ -192,14 +251,14 @@
                                 </div>
                                 <div class=" block_about_company_heading flex-grow-0
                                     flex-shrink-1" style="margin-left: 20px;  ">
-                                    <h2 class="h3">MikC - это оптовый склад, свой грузовой транспорт</h2>
+                                    <h2 class="h3 ab_text">MikC - это оптовый склад, свой грузовой транспорт</h2>
                                 </div>
                             </div>
                             <div class="block_ab_bottom_text">
-                                <ul style="font-weight: 500;">Благодаря этому мы можем:</ul>
-                                <ul class="red-dot_list">
-                                    <li>Всегда иметь в наличии полный ассортимент продукции</li>
-                                    <li style="margin-top:10px;">Организовать доставку товара на объект при сумме
+                                <ul class="high_red_dot_ul">Благодаря этому мы можем:</ul>
+                                <ul class="red-dot_list red_dot_second_class">
+                                    <li class="red-dot_list_li">Всегда иметь в наличии полный ассортимент продукции</li>
+                                    <li class="red-dot_list_li">Организовать доставку товара на объект при сумме
                                         закупки от 3 000 грн.
                                     </li>
 
@@ -220,34 +279,34 @@
                 <div class="comparison_lists col-lg-12 row">
                     <button class="about_company_button">
                         <img class="ab_butt" src="{% static '/src/assets/img/icon/Group 37.png' %}"
-                             alt="Image">
-                        <h2 class="h3" style="color:red;">CAR REFINISH</h2>
-                        <h2 class="h3" style=" ">ЛКМ для покраски автомобиля</h2></button>
+                             alt="Image" style=" ">
+                        <h2 class="h3 comparison_class_first" style=" ">CAR REFINISH</h2>
+                        <h2 class="h3 comparison_class_second" style=" ">ЛКМ для покраски автомобиля</h2></button>
                     <button class="about_company_button">
                         <img class="ab_butt" src="{% static '/src/assets/img/icon/Path 69.png' %}"
                              alt="Image">
-                        <h2 class="h3" style="color:red;">DECORATIVE COATING</h2>
-                        <h2 class="h3" style=" ">ЛКМ для строительства и ремонта</h2></button>
+                        <h2 class="h3 comparison_class_first" style="color:red;">DECORATIVE COATING</h2>
+                        <h2 class="h3 comparison_class_second" style=" ">ЛКМ для строительства и ремонта</h2></button>
                     <button class="about_company_button">
                         <img class="ab_butt" src="{% static '/src/assets/img/icon/Path 68.png' %}"
                              alt="Image">
-                        <h2 class="h3" style="color:red;">WOOD COATING</h2>
-                        <h2 class="h3" style=" ">ЛКМ для побработки древесины</h2></button>
+                        <h2 class="h3 comparison_class_first" style="color:red;">WOOD COATING</h2>
+                        <h2 class="h3 comparison_class_second" style=" ">ЛКМ для побработки древесины</h2></button>
                     <button class="about_company_button">
                         <img class="ab_butt" src="{% static '/src/assets/img/icon/Group 38.png' %}"
                              alt="Image">
-                        <h2 class="h3" style="color:red;">INDUSTRIAL COATING</h2>
-                        <h2 class="h3" style=" ">ЛКМ для промышленности, ремонта дорог и т.п.</h2></button>
+                        <h2 class="h3 comparison_class_first" style="color:red;">INDUSTRIAL COATING</h2>
+                        <h2 class="h3 comparison_class_second" style=" ">ЛКМ для промышленности, ремонта дорог и т.п.</h2></button>
                     <button class="about_company_button">
                         <img class="ab_butt" src="{% static '/src/assets/img/icon/Path 66.png' %}"
                              alt="Image">
-                        <h2 class="h3" style="color:red;">CAR CARE</h2>
-                        <h2 class="h3" style=" ">Автохимия, автокосметика и оборудование для моек</h2></button>
+                        <h2 class="h3 comparison_class_first" style="color:red;">CAR CARE</h2>
+                        <h2 class="h3 comparison_class_second" style=" ">Автохимия, автокосметика и оборудование для моек</h2></button>
                     <button class="about_company_button">
                         <img class="ab_butt" src="{% static '/src/assets/img/icon/Path 67.png' %}"
                              alt="Image">
-                        <h2 class="h3" style="color:red;">NON PAINT</h2>
-                        <h2 class="h3" style=" ">Инструменты, оборудование и расходные материалы для малярных и
+                        <h2 class="h3 comparison_class_first" style="color:red;">NON PAINT</h2>
+                        <h2 class="h3 comparison_class_second" style=" ">Инструменты, оборудование и расходные материалы для малярных и
                             покрасочных работ</h2></button>
                 </div>
                 <div style="height:40px;"></div>

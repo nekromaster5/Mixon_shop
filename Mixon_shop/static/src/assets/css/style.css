@@ -6135,7 +6135,10 @@ input[type=number]::-webkit-outer-spin-button {
     height: 40px;
     margin-top: 20px;
 }
-
+.about_company_heading_div{
+    display: flex;
+    justify-content: center;
+}
 .buy__btn:hover {
     color: var(--bg-white-color);
     background: var(--grey-color);
@@ -7906,13 +7909,13 @@ input[type=number]::-webkit-outer-spin-button {
     border-radius: 50%;
     background-color: #FFFFFF;
     overflow: hidden;
-    margin-left: 20px;
+     
 }
 
 .about_company_img {
     width: 40px;
     height: 40px;
-    margin-left: 15px;
+ 
     margin-top: 10px;
 }
 
@@ -7933,6 +7936,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .block_about_company_heading {
     margin-left: 20px;
+    line-height: 33px;
 
 }
 
@@ -8150,7 +8154,7 @@ input[type=number]::-webkit-outer-spin-button {
         border-radius: 50%;
         background-color: #FFFFFF;
         overflow: hidden;
-        margin-left: 20px;
+      
     }
 
     .about_company_img {
@@ -8220,7 +8224,10 @@ input[type=number]::-webkit-outer-spin-button {
 
     text-align: left;
 }
-
+.news_buton_text{
+    font-size: 22px;
+    margin-left:10px;
+}
 .news_text {
 
     font-family: Montserrat;

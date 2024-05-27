@@ -8,6 +8,12 @@
 
 
 {% block content %}
+<style>
+    .news_buton_text{
+        font-size: 22px;
+        margin-left:10px;
+    }
+</style>
     <section class="breadcrumb__section breadcrumb__bg">
         <div class="container">
             <div class="breadcrumb__content text-center">
@@ -21,17 +27,19 @@
                 </ul>
             </div>
             <div class="news_header">
-                <h2 class="text-center" style="font-size: 40px;">Новости</h2>
+                <div style="display:flex;justify-content:center;">
+                <span class="text-center" style="font-size: 40px;">Новости</span>
+                </div>
                 <div class="comparison_lists row">
                     <div class="news_header_button col-lg-5 col-md-6">
                         <button class="new_button"><img
-                                src="{% static '/src/assets/img/icon/lkm-stroitelstvo.svg' %}"> ЛКМ для
-                            Строительства
+                                src="{% static '/src/assets/img/icon/lkm-stroitelstvo.svg' %}"> <span class="news_buton_text" >ЛКМ для
+                            Строительства</span>
                         </button>
                     </div>
                     <div class="news_header_button col-lg-5 col-md-6">
-                        <button class="new_button"><img src="{% static '/src/assets/img/icon/Path 56.svg' %}"> ЛКМ
-                            для Авторемонта
+                        <button class="new_button"><img src="{% static '/src/assets/img/icon/Path 56.svg' %}"><span class="news_buton_text" > ЛКМ
+                            для Авторемонта </span>
                         </button>
                     </div>
                     <div class="news_header_button col-lg-5 col-md-6">
@@ -45,12 +53,12 @@
                                 <path d="M1 1V24.0007H2.58964V24.6312H2.94842V30.4053H6.59382V24.6312H6.95261V24.0007H26.4197V24.6312H26.7811V30.4053H30.4252V24.6312H30.784V24.0007H32.3736V1H1ZM30.653 11.2141H28.9023L28.8827 13.2418H30.653V21.9427H2.72712V13.2418H24.6363L24.6572 11.2141H22.2701L22.2623 11.9783C22.2522 12.0925 22.1965 12.1984 22.1068 12.2737C22.0171 12.349 21.9005 12.3878 21.7817 12.3818H21.5447C21.4865 12.3856 21.4281 12.3783 21.3728 12.3603C21.3175 12.3423 21.2665 12.314 21.2226 12.277C21.1787 12.2399 21.1428 12.195 21.117 12.1446C21.0911 12.0942 21.0759 12.0394 21.072 11.9833L21.0799 11.2129H20.2851L20.2681 12.431C20.2583 12.5451 20.2029 12.651 20.1134 12.7263C20.0239 12.8016 19.9075 12.8404 19.7888 12.8345H19.5492C19.491 12.8383 19.4327 12.8309 19.3775 12.8129C19.3223 12.7949 19.2713 12.7666 19.2275 12.7295C19.1837 12.6925 19.148 12.6475 19.1223 12.5972C19.0966 12.5468 19.0814 12.4921 19.0778 12.436L19.0948 11.2116H2.72712V2.51068H30.653V11.2141Z"
                                       stroke="#1E0E00" stroke-width="0.752735" stroke-miterlimit="10"></path>
                             </svg>
-                            ЛКМ для Деревообработки
+                            <span class="news_buton_text" >   ЛКМ для Деревообработки</span>
                         </button>
                     </div>
                     <div class="news_header_button col-lg-5 col-md-6">
                         <button class="new_button"><img src="{% static '/src/assets/img/icon/lkm-industry.svg' %}">
-                            ЛКМ для Промышленности
+                            <span class="news_buton_text" >  ЛКМ для Промышленности</span>
                         </button>
                     </div>
                     <div class="news_header_button col-lg-5 col-md-6">
@@ -72,12 +80,12 @@
                                 <path d="M22.0944 7.71264L19.874 8.06299L20.4484 11.1114L22.6688 10.7611L22.0944 7.71264Z"
                                       stroke="#1E0E00" stroke-width="0.752735" stroke-miterlimit="10"></path>
                             </svg>
-                            Автохимия, автокосметика, оборудование для автомоек
+                            <span class="news_buton_text" > Автохимия, автокосметика, оборудование для автомоек </span>
                         </button>
                     </div>
                     <div class="news_header_button col-lg-5 col-md-6">
-                        <button class="new_button"><img src="{% static '/src/assets/img/icon/Path 55.svg' %}">Инструменты,
-                            аксессуары, оборудование
+                        <button class="new_button"><img src="{% static '/src/assets/img/icon/Path 55.svg' %}"><span class="news_buton_text" >Инструменты,
+                            аксессуары, оборудование</span>
                         </button>
                     </div>
 
