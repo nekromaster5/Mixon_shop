@@ -9,6 +9,22 @@
 
 {% block content %}
 <style>
+    @media only screen and (min-width: 768px) and (max-width: 992px) {
+        .product_reviev_stars{
+ 
+ margin-left:0px !important;
+ margin-right:100px !important;
+        }
+        .high_review_block{
+            justify-content:none !important;
+        }
+    }
+    .high_review_block{
+        justify-content:space-between !important;
+    }
+    .delivery{
+        padding-top:20px;
+    }
     .first_sale_block_buttons {
         margin-left: 300px !important;
     }
@@ -19,9 +35,21 @@
         .carousel-container{
             justify-content:center !important;
         }
+        .delivery{
+            padding-top:80px;
+        }
         .carousel-item{
             margin-left:0px !important;
             margin-right:30px !important;
+        }
+        .about_product_avability{
+            margin-left:90px !important;
+        }
+        .product-info__text--price{
+   font-size:22px !important;
+        }
+        .product-info__text--price-old{
+            font-size:16px !important;
         }
     }
 </style>
@@ -485,7 +513,7 @@
 
                             </div>
                             <div class="delivery"
-                             style="padding-top:20px;">
+                             style=" ">
                                 <p><span style="color:red;"> Доставка</span> в Хмельницикий</p>
                                 <div style=" margin-top:10px;display:flex;">
                                     <img class="delivery_img" src="{% static '/src/assets/img/icon/Group 42.png' %}"
@@ -1310,7 +1338,7 @@
                         <div style="display:flex;">
                             <div class="main_review_block">
                                 <div class="review_block" style="    ">
-                                    <div class="high_review_block d-flex justify-content-between">
+                                    <div class="high_review_block d-flex  ">
                                         <p>Дмитрий Александрович</p>
                                         <div class="product_reviev_stars"
                                         >
