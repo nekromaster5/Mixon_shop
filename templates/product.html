@@ -8,6 +8,23 @@
 
 
 {% block content %}
+<style>
+    .first_sale_block_buttons {
+        margin-left: 300px !important;
+    }
+    .carousel-item{
+        margin-left:40px;
+    }
+    @media only screen   and (min-width: 320px) and (max-width: 760px)  {
+        .carousel-container{
+            justify-content:center !important;
+        }
+        .carousel-item{
+            margin-left:0px !important;
+            margin-right:30px !important;
+        }
+    }
+</style>
     <section class="breadcrumb__section breadcrumb__bg">
         <div class="container">
             <div class="breadcrumb__content text-center slider-container" style="width:100%;">
@@ -361,27 +378,25 @@
                                 <div style="width:40px; height: 20px; position:relative; font-weight: 500;">
                                     Упаковка:
                                 </div>
-                                <div style="display: flex;   margin-top: 5px;">
-                                    <button class="button_0"
-                                            style="border-radius:2px;border: 1px solid #E9E7E6;box-shadow:none;background-color: white;border-color:#E9E7E6;width: 40px; height: 40px;">
+                                <div style="display: flex; margin-top: 5px; gap: 20px;">
+                                    <button class="button_0" style="border-radius:2px;border: 1px solid #E9E7E6;box-shadow:none;background-color: white;border-color:#E9E7E6;width: 40px; height: 40px;">
                                         1л.
                                     </button>
-                                    <button class="button_1"
-                                            style="border-radius:2px;border: 1px solid #E9E7E6;background-color: white;border-color:#E9E7E6;width: 40px; height: 40px;margin-left:10px;">
+                                    <button class="button_1" style="border-radius:2px;border: 1px solid #E9E7E6;background-color: white;border-color:#E9E7E6;width: 40px; height: 40px;">
                                         3л.
                                     </button>
-                                    <button class="button_2"
-                                            style="border-radius:2px;border: 1px solid #E9E7E6;background-color: white;border-color:#E9E7E6;width: 40px; height: 40px;margin-left:10px;">
+                                    <button class="button_2" style="border-radius:2px;border: 1px solid #E9E7E6;background-color: white;border-color:#E9E7E6;width: 40px; height: 40px;">
                                         10л.
                                     </button>
                                 </div>
+                                
                             </div>
                         </div>
                         <div class="right_second_block">
                             <div style="width: 70px; height: 20px; border-width: 2px; margin-top: 30px;">Цвет:
                             </div>
                             <div class="product_table"
-                                 style=" ">
+                                 style="">
 
                                 <div class="table_columns">
                                     <div>Артикул</div>
@@ -422,11 +437,55 @@
 
 
                                 </div>
+                                <div class="table_cell">
+                                    <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
+                                    <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
+                                        MA603BAL
+                                        <span>Хаки603</span>
+                                    </p>
+                                    <div class="table_sphere"></div>
+                                    <p class="table_quantity">0</p>
+
+
+                                </div>
+                                <div class="table_cell">
+                                    <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
+                                    <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
+                                        MA603BAL
+                                        <span>Хаки603</span>
+                                    </p>
+                                    <div class="table_sphere"></div>
+                                    <p class="table_quantity">0</p>
+
+
+                                </div>
+                                <div class="table_cell">
+                                    <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
+                                    <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
+                                        MA603BAL
+                                        <span>Хаки603</span>
+                                    </p>
+                                    <div class="table_sphere"></div>
+                                    <p class="table_quantity">0</p>
+
+
+                                </div>
+                                <div class="table_cell">
+                                    <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
+                                    <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
+                                        MA603BAL
+                                        <span>Хаки603</span>
+                                    </p>
+                                    <div class="table_sphere"></div>
+                                    <p class="table_quantity">0</p>
+
+
+                                </div>
 
 
                             </div>
                             <div class="delivery"
-                            >
+                             style="padding-top:20px;">
                                 <p><span style="color:red;"> Доставка</span> в Хмельницикий</p>
                                 <div style=" margin-top:10px;display:flex;">
                                     <img class="delivery_img" src="{% static '/src/assets/img/icon/Group 42.png' %}"
