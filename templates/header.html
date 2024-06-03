@@ -83,12 +83,55 @@
 </head>
 
 <body>
-
+<style>
+    .open-menu-button {
+        cursor: pointer;
+    }
+    
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 10;
+    }
+    .item{
+        display:flex !important;
+        padding-top:15px;
+    }
+    .menu {
+        display: none;
+        
+       /* Rectangle 410 */
+position: absolute;
+width: 900px;
+height: 420px;
+left: 0px;
+right: 405px;
+top: 63px;
+bottom: 129px;
+        background: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        z-index: 20;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    
+    
+    .close-menu-button {
+        display: block;
+        margin-bottom: 20px;
+    }
+</style>
 
 <!-- Start header area -->
 
 <div class="main__header header__sticky"  >
     <div class="container" >
+         
         <div class="main__header--inner position__relative d-flex justify-content-between align-items-center">
             <button class="adaptive_header_button" style="border:none;background-color:transparent;">
                 <img class="main__logo--img adaptive_main_logo" src="{% static '/src/assets/img/icon/1.svg' %} " alt="logo-img" style="color:#F5F5F5;"></button>
@@ -170,7 +213,7 @@
             <div class="categories__menu  " style=" ">
                 <div class="categories__menu--header bg__secondary text-white d-flex align-items-center"
                      data-bs-toggle="collapse" data-bs-target="#categoriesAccordion"
-                     style='background: #1F0D01; height:63px; '>
+                     style='background: #1F0D01; height:63px; '  id="openMenuButton">
                     <img class="categories__menu_img" src="{% static '/src/assets/img/icon/logo-katalog1.svg' %}"
                          alt="Logo Katalog">
 
@@ -178,6 +221,57 @@
 
                 </div>
 
+            </div>
+            <div id="menu" class="menu">
+                <div><div class="main_high_buttons" >
+                    <div class="item" style="padding-top:10px;"
+                         onclick="">
+                        <img 
+                             src="{% static '/src/assets/img/icon/akciya 1.svg' %}" alt="">
+                        <p style="color:red;font-weight: 500;">Акции</p>
+                    </div>
+                    <div class="item" style=" "
+                         onclick="">
+                        <img style=" "
+                             src="{% static '/src/assets/img/icon/lkm-stroitelstvo 1.svg' %}" alt="">
+                        <p style="font-weight: 500;position:relative; ">
+                            ЛКМ для Строительства</p>
+                    </div>
+                    <div class="item" style=" "
+                         onclick="">
+                        <img style=" "
+                             src="{% static '/src/assets/img/icon/lkm-autoremont 1.svg' %}" alt="">
+                        <p style="font-weight: 500;">ЛКМ для Авторемонта</p>
+                    </div>
+                    <div class="item" style=" "
+                         onclick="">
+                        <img style=" "
+                             src="{% static '/src/assets/img/icon/lkm-derevo 1.svg' %}" alt="">
+                        <p style="font-weight: 500;">ЛКМ для Древообработки</p>
+                    </div>
+                    <div class="item" style=" "
+                         onclick="">
+                        <img style=" "
+                             src="{% static '/src/assets/img/icon/lkm-industry 1.svg' %}" alt="">
+                        <p style="font-weight: 500;">ЛКМ для Промышленности</p>
+                    </div>
+                    <div class="item" style=" "
+                         onclick="">
+                        <img style=" "
+                             src="{% static '/src/assets/img/icon/auto-chemikal 1.svg' %}" alt="">
+                        <p style="font-weight: 500;">Автохимия,автокосметика,<br>
+                            оборудование для автомоек</p>
+                    </div>
+                    <div class="item" style=" "
+                         onclick="">
+                        <img style=" "
+                             src="{% static '/src/assets/img/icon/instrument 1.svg' %}" alt="">
+                        <p style="font-weight: 500;">Инструменты, аксесуары,<br>
+                            оборудование</p>
+                    </div>
+                </div></div>
+                <div></div>
+                <div></div>
             </div>
             <div class="header__search--widget   d-lg-block header__sticky--none" style="
                     margin-left:100px; ">
@@ -265,6 +359,36 @@
             }
         }
     }
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const openMenuButton = document.getElementById('openMenuButton');
+        const closeMenuButton = document.getElementById('closeMenuButton');
+        const overlay = document.getElementById('overlay');
+        const menu = document.getElementById('menu');
+        const mainContent = document.getElementById('mainContent');
+    
+        openMenuButton.addEventListener('click', () => {
+            overlay.style.display = 'block';
+            menu.style.display = 'block';
+            mainContent.classList.add('inactive-overlay');
+            document.body.style.overflow = 'hidden';
+        });
+    
+        closeMenuButton.addEventListener('click', () => {
+            overlay.style.display = 'none';
+            menu.style.display = 'none';
+            mainContent.classList.remove('inactive-overlay');
+            document.body.style.overflow = 'auto';
+        });
+    
+        overlay.addEventListener('click', () => {
+            overlay.style.display = 'none';
+            menu.style.display = 'none';
+            mainContent.classList.remove('inactive-overlay');
+            document.body.style.overflow = 'auto';
+        });
+    });
+    
+    
 </script>
 </body>
 </html>
