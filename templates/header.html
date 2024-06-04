@@ -358,7 +358,35 @@ bottom: 129px;
                 }
             }
         }
-     
+    }
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const openMenuButton = document.getElementById('openMenuButton');
+        const closeMenuButton = document.getElementById('closeMenuButton');
+        const overlay = document.getElementById('overlay');
+        const menu = document.getElementById('menu');
+        const mainContent = document.getElementById('mainContent');
+    
+        openMenuButton.addEventListener('click', () => {
+            overlay.style.display = 'block';
+            menu.style.display = 'block';
+            mainContent.classList.add('inactive-overlay');
+            document.body.style.overflow = 'hidden';
+        });
+    
+        closeMenuButton.addEventListener('click', () => {
+            overlay.style.display = 'none';
+            menu.style.display = 'none';
+            mainContent.classList.remove('inactive-overlay');
+            document.body.style.overflow = 'auto';
+        });
+    
+        overlay.addEventListener('click', () => {
+            overlay.style.display = 'none';
+            menu.style.display = 'none';
+            mainContent.classList.remove('inactive-overlay');
+            document.body.style.overflow = 'auto';
+        });
+    });
     
     
 </script>
