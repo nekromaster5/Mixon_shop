@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY", "empty_secret_key")
+SECRET_KEY = os.getenv("SECRET_KEY", "empty_secret_key")
 
 # Application definition
 
@@ -74,9 +77,17 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv("DB_NAME", "empty_db_name"),
+        'USER': os.getenv("DB_USER", "empty_db_user"),
+        'PASSWORD': os.getenv("DB_PASSWORD", "empty_db_password"),
+        'HOST': os.getenv("DB_HOST", "empty_db_host"),
+        'PORT': os.getenv("DB_PORT", "empty_db_port"),
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
 }
 
 MEDIA_URL = '/media/'
@@ -124,7 +135,6 @@ MODELTRANSLATION_PREPOPULATE_LANGUAGE = 'ru'
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [BASE_DIR / 'Mixon_shop/static/']
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
