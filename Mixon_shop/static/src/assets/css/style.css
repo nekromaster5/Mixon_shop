@@ -3776,7 +3776,7 @@ Header
         background-color: #383433 !important;
     }
     .header__sticky{
-        background-color: #383433 !important;
+      
     }
 }
 @media only screen and (min-width: 768px) {
