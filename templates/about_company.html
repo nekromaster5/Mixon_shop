@@ -68,6 +68,8 @@
 </style>
     <section class="breadcrumb__section breadcrumb__bg">
         <div class="container">
+            <div id="overlay" class="overlay" ></div>
+            <div id="app"></div>
             <div class="breadcrumb__content text-center">
                 <ul class="breadcrumb__content--menu d-flex">
                     <li class="breadcrumb__content--menu__items">
@@ -317,5 +319,78 @@
 
 
 {% block scripts %}
-    <script src="{% static '/src/assets/js/slider.js' %}"></script>
+    <script src="{% static '/src/assets/js/slider.js' %}">
+        function toggleDropdown() {
+            const dropdown = document.getElementById("myDropdown");
+            dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+        }
+
+        // Закрыть выпадающий список при клике вне него
+        window.onclick = function (event) {
+            if (!event.target.matches('.panel button')) {
+                const dropdowns = document.getElementsByClassName("dropdown");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
+       
+        // Закрыть выпадающий список при клике вне него
+        window.onclick = function (event) {
+            if (!event.target.matches('.panel button')) {
+                const dropdowns = document.getElementsByClassName("dropdown");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const openMenuButton = document.getElementById('openMenuButton');
+            const closeMenuButton = document.getElementById('closeMenuButton');
+            const overlay = document.getElementById('overlay');
+            const menu = document.getElementById('menu');
+            const mainContent = document.getElementById('mainContent');
+            const header = document.querySelector('header'); // Найти header
+        
+            openMenuButton.addEventListener('click', () => {
+                overlay.style.display = 'block';
+                menu.style.display = 'block';
+                mainContent.classList.add('inactive-overlay');
+                document.body.style.overflow = 'hidden';
+                
+                // Сделать header активным
+                header.style.zIndex = 20; // Или любое число выше, чем у overlay
+                header.style.pointerEvents = 'auto';
+            });
+        
+          
+        
+            overlay.addEventListener('click', () => {
+                overlay.style.display = 'none';
+                menu.style.display = 'none';
+                mainContent.classList.remove('inactive-overlay');
+                document.body.style.overflow = 'auto';
+        
+                // Вернуть header в исходное состояние
+                header.style.zIndex = '';
+                header.style.pointerEvents = '';
+            });
+        });
+        document.addEventListener('click', (event) => {
+            if (!menu.contains(event.target) && !openMenuButton.contains(event.target)) {
+                overlay.style.display = 'none';
+                menu.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+      
+    </script>
+    
 {% endblock %}

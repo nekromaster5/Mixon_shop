@@ -58,6 +58,7 @@
 </style>
     <section class="breadcrumb__section breadcrumb__bg">
         <div class="container">
+           
             <div class="breadcrumb__content text-center slider-container" style="width:100%;">
                 <ul class="breadcrumb__content--menu slider d-flex">
                     <li class="breadcrumb__content--menu__items">
@@ -102,6 +103,8 @@
     </section>
     <section>
         <div class="container">
+            <div id="overlay" class="overlay"></div>
+            <div id="app"></div>
             <div class="product_navigation_panel--wrapper slider-container">
                 <div class="product_navigation_panel slider" style=" ">
                     <button class="product_navigation_button active"
@@ -565,7 +568,23 @@
                         <div class="black-dot_list_array" style="display: block;
                             flex-direction: column; ">
                              <span class="black-dot_list_block">
+                                <style>
+                                    @media only screen   and (min-width: 320px) and (max-width: 760px){
+                                        .black-dot_list_array{
+                                            font-size: 16px !important;
+                                        }
+                                        .product_list_w{
+                                            white-space: normal !important;
+                                        }
+                                        
+                                    }
+                                    .black-dot_list_block{
+                                        padding-top:10px;
+                                    }
+                                </style>
+                                <span class="product_list_w"style="white-space: nowrap;">
                                 Средство Аквастоп смешивается с водой для приготовления растворов:
+                                </span>
                             <ul class="black-dot_list">
                                 <li>штукатурка:1:5 -1:20;</li>
                                 <li>Цементные известковые растворы</li>
@@ -1956,6 +1975,36 @@
             document.querySelector('.review').style.display = 'none';
             document.querySelector('.availability').style.display = 'block';
         }
+        function toggleDropdown() {
+            const dropdown = document.getElementById("myDropdown");
+            dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+        }
+
+        // Закрыть выпадающий список при клике вне него
+        window.onclick = function (event) {
+            if (!event.target.matches('.panel button')) {
+                const dropdowns = document.getElementsByClassName("dropdown");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
+       
+        // Закрыть выпадающий список при клике вне него
+        window.onclick = function (event) {
+            if (!event.target.matches('.panel button')) {
+                const dropdowns = document.getElementsByClassName("dropdown");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
         document.addEventListener('DOMContentLoaded', (event) => {
             const openMenuButton = document.getElementById('openMenuButton');
             const closeMenuButton = document.getElementById('closeMenuButton');
@@ -1975,16 +2024,7 @@
                 header.style.pointerEvents = 'auto';
             });
         
-            closeMenuButton.addEventListener('click', () => {
-                overlay.style.display = 'none';
-                menu.style.display = 'none';
-                mainContent.classList.remove('inactive-overlay');
-                document.body.style.overflow = 'auto';
-        
-                // Вернуть header в исходное состояние
-                header.style.zIndex = '';
-                header.style.pointerEvents = '';
-            });
+          
         
             overlay.addEventListener('click', () => {
                 overlay.style.display = 'none';
@@ -1997,5 +2037,13 @@
                 header.style.pointerEvents = '';
             });
         });
+        document.addEventListener('click', (event) => {
+            if (!menu.contains(event.target) && !openMenuButton.contains(event.target)) {
+                overlay.style.display = 'none';
+                menu.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
     </script>
 {% endblock %}
