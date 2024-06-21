@@ -2312,6 +2312,7 @@ Reviev
 
     .product_buttons {
         display: flex;
+        margin-left: 100px !important;
     }
 
     .product_left_path {
@@ -2331,7 +2332,7 @@ Reviev
 
 
     .first_sale_block_buttons {
-        margin-left: 100px;
+        margin-left: 100px !important;
     }
 
     .product_carousel-button {
@@ -6820,11 +6821,13 @@ input[type=number]::-webkit-outer-spin-button {
 
     .cheaper--button.main_cheaper {
         margin-left: 30px;
+        width: 150px!important;
 
     }
 
     .main_quick_order {
         margin-left: 30px !important;
+        width: 150px!important;
 
     }
 
