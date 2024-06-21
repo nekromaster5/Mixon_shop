@@ -1,0 +1,30 @@
+{% extends "product_block--base.html" %}
+
+{% block short_info %}
+    <ul class="rating__review--text d-flex">
+        <li class="d-flex align-items-center">
+            <svg class="rating__review--text--svg--like" width="15" height="15" viewBox="0 0 15 15" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.32222 5.49304L6.48406 4.27002L7.04843 1.03406L9.04888 1V5.49304H13.2508L13.8171 6.85596V12.113L12.2979 14.37H6.23666L5.78536 13.033L4.31836 12.921L4.32222 5.49304Z"
+                      stroke="#787878" stroke-miterlimit="10"></path>
+                <path d="M4.32211 4.85803H1.42871V14.079H4.32211V4.85803Z" stroke="#787878"
+                      stroke-miterlimit="10"></path>
+            </svg>
+            <span>67</span>
+        </li>
+        <li class="d-flex align-items-center">
+            <svg class="rating__review--text--svg--comment" width="16" height="14" viewBox="0 0 16 14" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.2058 1H3.44631C2.67811 1.00237 1.94203 1.31925 1.39882 1.88135C0.855615 2.44344 0.549413 3.20508 0.547119 4V8.64697C0.549963 9.13641 0.670169 9.61748 0.896955 10.047L0.8554 10.072L1.00616 10.254C1.14836 10.4821 1.31968 10.6893 1.51546 10.87L4.60795 12.928L5.14429 11.652H12.199C12.9672 11.6496 13.7033 11.3327 14.2465 10.7706C14.7897 10.2085 15.0959 9.4469 15.0982 8.65198V4.005C15.0972 3.21043 14.7925 2.44847 14.2506 1.8855C13.7087 1.32252 12.9736 1.00422 12.2058 1Z"
+                      stroke="#787878" stroke-miterlimit="10"></path>
+                <path d="M4.49487 5.51904H11.1572" stroke="#787878" stroke-miterlimit="10"></path>
+                <path d="M4.49487 8.02197H11.1572" stroke="#787878" stroke-miterlimit="10"></path>
+            </svg>
+            <span>23</span>
+        </li>
+    </ul>
+    <div class="product__card--price d-flex">
+        <span class="current__price">232.00₴</span>
+        <span class="is__in_stock">Есть в наличии</span>
+    </div>
+{% endblock %}
