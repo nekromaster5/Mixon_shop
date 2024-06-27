@@ -370,6 +370,19 @@
                 }
             }
         }
+       
+        // Закрыть выпадающий список при клике вне него
+        window.onclick = function (event) {
+            if (!event.target.matches('.panel button')) {
+                const dropdowns = document.getElementsByClassName("dropdown");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
         document.addEventListener('DOMContentLoaded', (event) => {
             const openMenuButton = document.getElementById('openMenuButton');
             const closeMenuButton = document.getElementById('closeMenuButton');
@@ -377,35 +390,26 @@
             const menu = document.getElementById('menu');
             const mainContent = document.getElementById('mainContent');
             const header = document.querySelector('header'); // Найти header
-
+        
             openMenuButton.addEventListener('click', () => {
                 overlay.style.display = 'block';
                 menu.style.display = 'block';
                 mainContent.classList.add('inactive-overlay');
                 document.body.style.overflow = 'hidden';
-
+                
                 // Сделать header активным
                 header.style.zIndex = 20; // Или любое число выше, чем у overlay
                 header.style.pointerEvents = 'auto';
             });
-
-            closeMenuButton.addEventListener('click', () => {
-                overlay.style.display = 'none';
-                menu.style.display = 'none';
-                mainContent.classList.remove('inactive-overlay');
-                document.body.style.overflow = 'auto';
-
-                // Вернуть header в исходное состояние
-                header.style.zIndex = '';
-                header.style.pointerEvents = '';
-            });
-
+        
+          
+        
             overlay.addEventListener('click', () => {
                 overlay.style.display = 'none';
                 menu.style.display = 'none';
                 mainContent.classList.remove('inactive-overlay');
                 document.body.style.overflow = 'auto';
-
+        
                 // Вернуть header в исходное состояние
                 header.style.zIndex = '';
                 header.style.pointerEvents = '';
@@ -418,7 +422,6 @@
                 document.body.style.overflow = 'auto';
             }
         });
-
 
     </script>
 {% endblock %}

@@ -131,7 +131,8 @@ bottom: 129px;
 
 <div class="main__header header__sticky"  >
     <div class="container" >
-         
+        <div id="overlay" class="overlay"></div>
+        <div id="app"></div>
         <div class="main__header--inner position__relative d-flex justify-content-between align-items-center">
             <button class="adaptive_header_button" style="border:none;background-color:transparent;">
                 <img class="main__logo--img adaptive_main_logo" src="{% static '/src/assets/img/icon/1.svg' %} " alt="logo-img" style="color:#F5F5F5;"></button>
@@ -222,8 +223,8 @@ bottom: 129px;
                 </div>
 
             </div>
-            <div id="menu" class="menu">
-                <div><div class="main_high_buttons" >
+            <div id="menu" class="menu"   >
+                <div style="display:flex;" ><div class="main_high_buttons" >
                     <div class="item" style="padding-top:10px;"
                          onclick="">
                         <img 
@@ -269,9 +270,67 @@ bottom: 129px;
                         <p style="font-weight: 500;">Инструменты, аксесуары,<br>
                             оборудование</p>
                     </div>
-                </div></div>
-                <div></div>
-                <div></div>
+                </div>
+           <div class="second_main_high_button" style="padding-left:20px; width:230px;">
+           <div class="item" style="padding-top:10px;"
+                onclick="">
+         
+               <p style="font-weight: 500;position:relative; ">
+                  Краски и грунты для стен и потолка</p>
+           </div>
+           <div class="item" style=" "
+                onclick="">
+      
+               <p style="font-weight: 500;">Фасадные краски и грунты</p>
+           </div>
+           <div class="item" style=" "
+                onclick="">
+            
+               <p style="font-weight: 500;">Отдлелочные материалы для фасадов</p>
+           </div>
+           <div class="item" style=" "
+                onclick="">
+            
+               <p style="font-weight: 500;">Универсальные грунты и краски</p>
+           </div>
+           <div class="item" style=" "
+                onclick="">
+       
+               <p style="font-weight: 500;">Грунты, краски и материалы Спец назначения</p>
+           </div>
+           <div class="item" style=" "
+                onclick="">
+             
+               <p style="font-weight: 500;">Аэрозольные эмали</p>
+           </div></div> <div><div class="third_main_high_button"style="padding-left:60px; "><div class="item" style="padding-top:10px;"
+            onclick="">
+     
+           <p style="font-weight: 500;position:relative; ">
+              Древозащитные средства</p>
+       </div>
+       <div class="item" style=" "
+            onclick="">
+  
+           <p style="font-weight: 500;">Лаки для дерева</p>
+       </div>
+       <div class="item" style=" "
+            onclick="">
+        
+           <p style="font-weight: 500;">Декоративные материалы</p>
+       </div>
+       <div class="item" style=" "
+            onclick="">
+        
+           <p style="font-weight: 500;">Пена монтажная</p>
+       </div>
+       <div class="item" style=" "
+            onclick="">
+   
+           <p style="font-weight: 500;">Растворители</p>
+       </div>
+       </div></div>
+                </div>
+                 
             </div>
             <div class="header__search--widget   d-lg-block header__sticky--none" style="
                     margin-left:100px; ">
@@ -359,38 +418,57 @@ bottom: 129px;
             }
         }
     }
+   
+    // Закрыть выпадающий список при клике вне него
+    window.onclick = function (event) {
+        if (!event.target.matches('.panel button')) {
+            const dropdowns = document.getElementsByClassName("dropdown");
+            for (let i = 0; i < dropdowns.length; i++) {
+                const openDropdown = dropdowns[i];
+                if (openDropdown.style.display === "block") {
+                    openDropdown.style.display = "none";
+                }
+            }
+        }
+    }
     document.addEventListener('DOMContentLoaded', (event) => {
         const openMenuButton = document.getElementById('openMenuButton');
         const closeMenuButton = document.getElementById('closeMenuButton');
         const overlay = document.getElementById('overlay');
         const menu = document.getElementById('menu');
+        const mainContent = document.getElementById('mainContent');
+        const header = document.querySelector('header'); // Найти header
     
         openMenuButton.addEventListener('click', () => {
             overlay.style.display = 'block';
             menu.style.display = 'block';
+            mainContent.classList.add('inactive-overlay');
             document.body.style.overflow = 'hidden';
+            
+            // Сделать header активным
+            header.style.zIndex = 20; // Или любое число выше, чем у overlay
+            header.style.pointerEvents = 'auto';
         });
     
-        closeMenuButton.addEventListener('click', () => {
-            overlay.style.display = 'none';
-            menu.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
+      
     
         overlay.addEventListener('click', () => {
             overlay.style.display = 'none';
             menu.style.display = 'none';
+            mainContent.classList.remove('inactive-overlay');
             document.body.style.overflow = 'auto';
-        });
     
-        // Закрытие меню при клике за его пределами
-        document.addEventListener('click', (event) => {
-            if (!menu.contains(event.target) && !openMenuButton.contains(event.target)) {
-                overlay.style.display = 'none';
-                menu.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
+            // Вернуть header в исходное состояние
+            header.style.zIndex = '';
+            header.style.pointerEvents = '';
         });
+    });
+    document.addEventListener('click', (event) => {
+        if (!menu.contains(event.target) && !openMenuButton.contains(event.target)) {
+            overlay.style.display = 'none';
+            menu.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
     });
     
     
