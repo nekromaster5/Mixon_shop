@@ -72,6 +72,12 @@
                 justify-content:center;
                 display:flex;
             }
+          
+            .menu{
+                width: 700px !important;
+                
+            }
+            
         }
         
         .adaptive_main_logo{
@@ -79,6 +85,21 @@
             height: 33px !important;
             color:white !important;
         }
+        .mobile_open_menu {
+            display: none;
+            position: fixed;
+            top: 62px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 62px);
+            background-color: white;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+    
+             
+        
     </style>
 </head>
 
@@ -141,7 +162,7 @@ bottom: 129px;
                     <img class="main__logo--img" src="{% static '/src/assets/img/logo/logo_mix2.svg' %}" alt="logo-img"></a>
 
             </div>
-            <button class="header_mobile_button" style="border:none;background-color:transparent;">
+            <button class="header_mobile_button" style="border:none;background-color:transparent;" id="mobile_menu_Button">
                 <img src="{% static '/src/assets/img/icon/logo-korzina.svg' %}"
                      alt="">
 
@@ -223,8 +244,11 @@ bottom: 129px;
                 </div>
 
             </div>
+            <div id="mobile_open_menu" class="mobile_open_menu" style="background-color:white;">
+
+            </div>
             <div id="menu" class="menu"   >
-                <div style="display:flex;" ><div class="main_high_buttons" >
+                <div style="display:flex;" ><div class="main_high_button" >
                     <div class="item" style="padding-top:10px;"
                          onclick="">
                         <img 
@@ -418,59 +442,45 @@ bottom: 129px;
             }
         }
     }
-   
-    // Закрыть выпадающий список при клике вне него
-    window.onclick = function (event) {
-        if (!event.target.matches('.panel button')) {
-            const dropdowns = document.getElementsByClassName("dropdown");
-            for (let i = 0; i < dropdowns.length; i++) {
-                const openDropdown = dropdowns[i];
-                if (openDropdown.style.display === "block") {
-                    openDropdown.style.display = "none";
-                }
-            }
-        }
-    }
+
     document.addEventListener('DOMContentLoaded', (event) => {
         const openMenuButton = document.getElementById('openMenuButton');
-        const closeMenuButton = document.getElementById('closeMenuButton');
         const overlay = document.getElementById('overlay');
         const menu = document.getElementById('menu');
-        const mainContent = document.getElementById('mainContent');
-        const header = document.querySelector('header'); // Найти header
-    
+
         openMenuButton.addEventListener('click', () => {
             overlay.style.display = 'block';
             menu.style.display = 'block';
-            mainContent.classList.add('inactive-overlay');
             document.body.style.overflow = 'hidden';
-            
-            // Сделать header активным
-            header.style.zIndex = 20; // Или любое число выше, чем у overlay
-            header.style.pointerEvents = 'auto';
         });
-    
-      
-    
+
         overlay.addEventListener('click', () => {
             overlay.style.display = 'none';
             menu.style.display = 'none';
-            mainContent.classList.remove('inactive-overlay');
             document.body.style.overflow = 'auto';
-    
-            // Вернуть header в исходное состояние
-            header.style.zIndex = '';
-            header.style.pointerEvents = '';
+        });
+
+        // Закрыть меню при клике вне его
+        document.addEventListener('click', (event) => {
+            if (!menu.contains(event.target) && !openMenuButton.contains(event.target)) {
+                overlay.style.display = 'none';
+                menu.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
         });
     });
-    document.addEventListener('click', (event) => {
-        if (!menu.contains(event.target) && !openMenuButton.contains(event.target)) {
-            overlay.style.display = 'none';
-            menu.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-    });
+    document.addEve     aantListener('DOMContentLoaded', function() {
+        const menuButton = document.getElementById('mobile_menu_Button');
+        const mobileMenu = document.getElementById('mobile_open_menu');
     
+        menuButton.addEventListener('click', function() {
+            if (mobileMenu.style.display === 'block') {
+                mobileMenu.style.display = 'none';
+            } else {
+                mobileMenu.style.display = 'block';
+            }
+        });
+    });
     
     
 </script>
