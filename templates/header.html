@@ -123,6 +123,21 @@
         display:flex !important;
         padding-top:15px;
     }
+    .user_menu{
+        display: none;
+        
+       /* Rectangle 410 */
+position: absolute;
+ width:400px;height:400px;
+background: white;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+z-index: 20;
+padding: 20px;
+box-sizing: border-box;
+justify-content:center;
+margin-top:200px;
+margin-left:400px;
+    }
     .menu {
         display: none;
         
@@ -145,6 +160,51 @@ bottom: 129px;
     .close-menu-button {
         display: block;
         margin-bottom: 20px;
+        
+    }
+  
+
+    .user_menu input {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .user_menu button {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+    }
+
+    .user_menu button:hover {
+        background-color: #45a049;
+    }
+
+    .user_menu .forgot-password {
+        text-align: right;
+        display: block;
+        margin: 10px 0;
+        color: #007BFF;
+        text-decoration: none;
+    }
+
+    .user_menu .forgot-password:hover {
+        text-decoration: underline;
+    }
+
+    .register_form, .login_form {
+        display: none;
+    }
+
+    .active {
+        display: block;
     }
 </style>
 
@@ -153,6 +213,7 @@ bottom: 129px;
 <div class="main__header header__sticky"  >
     <div class="container" >
         <div id="overlay" class="overlay"></div>
+        <div id="second_overlay" class="overlay"></div>
         <div id="app"></div>
         <div class="main__header--inner position__relative d-flex justify-content-between align-items-center">
             <button class="adaptive_header_button" style="border:none;background-color:transparent;">
@@ -244,6 +305,22 @@ bottom: 129px;
                 </div>
 
             </div>
+              <div id="user_menu" class="user_menu">
+        <div id="login_form" class="login_form active">
+            <input type="text" placeholder="Username" class="user_menu_input">
+            <input type="password" placeholder="Password" class="user_menu_input">
+            <button class="register_button" onclick="showRegisterForm()">Регистрация</button>
+            <button class="login_button">Вход</button>
+            <a href="#" class="forgot-password">Забыли пароль?</a>
+        </div>
+
+        <div id="register_form" class="register_form">
+            <input type="text" placeholder="Name" class="user_menu_input">
+            <input type="password" placeholder="Password" class="user_menu_input">
+            <input type="email" placeholder="Email" class="user_menu_input">
+            <button class="back_button" onclick="showLoginForm()">Назад</button>
+        </div>
+    </div>
             <div id="mobile_open_menu" class="mobile_open_menu" style="background-color:white;">
 
             </div>
@@ -375,7 +452,7 @@ bottom: 129px;
             </div>
 
             <div class="frame3-panel" style=" margin-left:72px;">
-                <a href="{% url 'cabinet' %}" class="icon-button_n" style="background: none;border: none;position:relative; ">
+                <a   id="icon-button_n" class="icon-button_n" style="background: none;border: none;position:relative; ">
                     <svg width="17" height="24" viewBox="0 0 17 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.2659 6.20894C3.2659 5.17871 3.55763 4.17161 4.10414 3.31501C4.65064 2.4584 5.4274 1.79076 6.3362 1.39651C7.245 1.00226 8.24505 0.899102 9.20982 1.10009C10.1746 1.30108 11.0608 1.79718 11.7563 2.52566C12.4519 3.25415 12.9256 4.18229 13.1175 5.19272C13.3094 6.20316 13.2108 7.2505 12.8344 8.20231C12.458 9.15412 11.8205 9.96764 11.0026 10.54C10.1847 11.1124 9.22316 11.4179 8.23948 11.4179C7.5863 11.418 6.93944 11.2834 6.33596 11.0216C5.73248 10.7599 5.18424 10.3762 4.72238 9.89251C4.26052 9.40879 3.89409 8.83451 3.64419 8.20247C3.39429 7.57043 3.26577 6.89302 3.2659 6.20894ZM13.6322 12.7668H11.835C10.7417 13.428 9.50148 13.7761 8.239 13.7761C6.97652 13.7761 5.73628 13.428 4.64299 12.7668H3.36968C1.79181 12.7668 0.5 15.1209 0.5 16.7745V20.9956C0.5 22.6492 1.79181 23 3.36968 23H13.6294C15.2082 23 16.5 22.6492 16.5 20.9956V16.7745C16.5029 15.1209 15.2111 12.7668 13.6322 12.7668Z"
                               stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -469,20 +546,45 @@ bottom: 129px;
             }
         });
     });
-    document.addEve     aantListener('DOMContentLoaded', function() {
-        const menuButton = document.getElementById('mobile_menu_Button');
-        const mobileMenu = document.getElementById('mobile_open_menu');
+  
     
-        menuButton.addEventListener('click', function() {
-            if (mobileMenu.style.display === 'block') {
-                mobileMenu.style.display = 'none';
-            } else {
-                mobileMenu.style.display = 'block';
+    
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const openMenuButton = document.getElementById('icon-button_n');
+        const overlay = document.getElementById('second_overlay');
+        const menu = document.getElementById('user_menu');
+
+        openMenuButton.addEventListener('click', () => {
+            overlay.style.display = 'block';
+            menu.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+
+        overlay.addEventListener('click', () => {
+            overlay.style.display = 'none';
+            menu.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Закрыть меню при клике вне его
+        document.addEventListener('click', (event) => {
+            if (!menu.contains(event.target) && !openMenuButton.contains(event.target)) {
+                overlay.style.display = 'none';
+                menu.style.display = 'none';
+                document.body.style.overflow = 'auto';
             }
         });
     });
-    
-    
+    function showRegisterForm() {
+        document.getElementById('login_form').classList.remove('active');
+        document.getElementById('register_form').classList.add('active');
+    }
+
+    function showLoginForm() {
+        document.getElementById('register_form').classList.remove('active');
+        document.getElementById('login_form').classList.add('active');
+    }
 </script>
+
 </body>
 </html>
