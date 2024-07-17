@@ -206,6 +206,67 @@ bottom: 129px;
     .active {
         display: block;
     }
+    .cheaper_menu {
+            width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            position: relative;
+        }
+
+        .cheaper_menu h2 {
+            margin-top: 0;
+        }
+
+        .cheaper_menu input, .cheaper_menu select, .cheaper_menu textarea {
+            width: calc(50% - 10px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .cheaper_menu input.full-width, .cheaper_menu textarea {
+            width: calc(100% - 20px);
+        }
+
+        .cheaper_menu textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        .cheaper_menu button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #FF4C4C;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .cheaper_menu button:hover {
+            background-color: #FF0000;
+        }
+
+        .cheaper_menu .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .cheaper_menu .close-button:hover {
+            color: #FF0000;
+        }
 </style>
 
 <!-- Start header area -->
@@ -214,6 +275,8 @@ bottom: 129px;
     <div class="container" >
         <div id="overlay" class="overlay"></div>
         <div id="second_overlay" class="overlay"></div>
+        <div id="third_overlay" class="overlay"></div>
+        
         <div id="app"></div>
         <div class="main__header--inner position__relative d-flex justify-content-between align-items-center">
             <button class="adaptive_header_button" style="border:none;background-color:transparent;">
@@ -305,6 +368,8 @@ bottom: 129px;
                 </div>
 
             </div>
+           
+            
               <div id="user_menu" class="user_menu">
         <div id="login_form" class="login_form active">
             <input type="text" placeholder="Username" class="user_menu_input">
@@ -313,7 +378,19 @@ bottom: 129px;
             <button class="login_button">Вход</button>
             <a href="#" class="forgot-password">Забыли пароль?</a>
         </div>
-
+        <div id="cheaper_menu" class="cheaper_menu">
+            <button class="close-button">&times;</button>
+            <h2>Хочу дешевле</h2>
+            <p>Узнать цену: Шпатлевка универсальная Карс 1 кг UNI</p>
+            <input type="text" placeholder="Имя" class="full-width">
+            <input type="text" placeholder="Фамилия" class="full-width">
+            <input type="text" placeholder="Область">
+            <input type="text" placeholder="Город">
+            <input type="email" placeholder="E-mail">
+            <input type="text" placeholder="Телефон">
+            <textarea placeholder="Вопрос"></textarea>
+            <button>Свяжитесь со мной</button>
+        </div>
         <div id="register_form" class="register_form">
             <input type="text" placeholder="Name" class="user_menu_input">
             <input type="password" placeholder="Password" class="user_menu_input">
@@ -547,8 +624,38 @@ bottom: 129px;
         });
     });
   
-    
-    
+     
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const openMenuButton = document.getElementById('want_cheaper');
+        const overlay = document.getElementById('third_overlay');
+        const menu = document.getElementById('cheaper_menu');
+
+        openMenuButton.addEventListener('click', () => {
+            overlay.style.display = 'block';
+            menu.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+
+        overlay.addEventListener('click', () => {
+            overlay.style.display = 'none';
+            menu.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Закрыть меню при клике вне его
+        document.addEventListener('click', (event) => {
+            if (!menu.contains(event.target) && !openMenuButton.contains(event.target)) {
+                overlay.style.display = 'none';
+                menu.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    });
+
+
+
+
+
     document.addEventListener('DOMContentLoaded', (event) => {
         const openMenuButton = document.getElementById('icon-button_n');
         const overlay = document.getElementById('second_overlay');
