@@ -5,7 +5,68 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from .forms import UserRegisterForm, UserLoginForm
+from django.shortcuts import render, redirect
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.template.loader import render_to_string
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.models import User
+from django.core.mail import EmailMessage
+from django.contrib import messages
+from django.http import JsonResponse
+from django.contrib.auth import views as auth_views
+from .forms import UserRegisterForm
 
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = False  # Делаем пользователя неактивным до подтверждения почты
+            user.save()
+
+            # Создаем профиль пользователя
+            UserProfile.objects.create(
+                user=user,
+                phone=form.cleaned_data.get('phone', ''),
+                city=form.cleaned_data.get('city', ''),
+                postal_code=form.cleaned_data.get('postal_code', ''),
+                region=form.cleaned_data.get('region', None)
+            )
+
+            # Отправка письма с подтверждением
+            current_site = get_current_site(request)
+            mail_subject = 'Activate your account.'
+            message = render_to_string('acc_active_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': default_token_generator.make_token(user),
+            })
+            to_email = form.cleaned_data.get('email')
+            email = EmailMessage(mail_subject, message, to=[to_email])
+            email.send()
+
+            return JsonResponse({'success': True, 'message': 'Please confirm your email address to complete the registration'})
+        else:
+            errors = form.errors.as_json()
+            return JsonResponse({'success': False, 'message': 'Form is invalid. Please check the entered data.', 'errors': errors})
+    return JsonResponse({'success': False, 'message': 'Invalid request method.'})
+def activate(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        messages.success(request, 'Your account has been confirmed.')
+        return redirect('login')
+    else:
+        messages.warning(request, 'Activation link is invalid!')
+        return redirect('home')
 class HomePage(View):
     def get(self, request):
         return render(request, 'home_page.html')
@@ -75,17 +136,7 @@ class Contacts(View):
     def get(self, request):
         return render(request, 'contacts.html')
 
-def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}!')
-            return redirect('login')
-    else:
-        form = UserRegisterForm()
-    return render(request, 'your_app/register.html', {'form': form})
+ 
 
 def login_view(request):
     if request.method == 'POST':

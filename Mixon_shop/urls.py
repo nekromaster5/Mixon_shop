@@ -18,7 +18,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
+from django.urls import path
+from django.contrib.auth import views as auth_views
+from .views import register, activate
+from django.urls import path
+from django.contrib.auth import views as auth_views
+from .views import register, activate
 
+ 
 from Mixon_shop.views import HomePage, CataloguePage, ProductPage, Brands, News, \
     Topic, AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts
 
@@ -38,6 +45,15 @@ urlpatterns = [
     path('error/', ErrorPage.as_view(), name='error'),
     path('shipment&payment/', ShipmentPayment.as_view(), name='shipment_and_payment'),
     path('contacts/', Contacts.as_view(), name='contacts'),
+    path('register/', register, name='register'),
+    path('activate/<uidb64>/<token>/', activate, name='activate'),
+    path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+  
+    path('activate/<uidb64>/<token>/', activate, name='activate'),
+    
 
  
 ]

@@ -127,8 +127,11 @@
         display: none;
         
        /* Rectangle 410 */
-position: absolute;
- width:400px;height:400px;
+       position: fixed;
+       top: 50%;
+       left: 50%;
+       transform: translate(-140%, -100%);
+ width:400px;height:450px;
 background: white;
 box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 z-index: 20;
@@ -188,10 +191,10 @@ bottom: 129px;
     }
 
     .user_menu .forgot-password {
-        text-align: right;
+        text-align: left;
         display: block;
         margin: 10px 0;
-        color: #007BFF;
+        color: red;
         text-decoration: none;
     }
 
@@ -201,8 +204,21 @@ bottom: 129px;
 
     .register_form, .login_form {
         display: none;
+        
     }
-
+    .register_form {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 700px; /* Увеличиваем ширину для формы регистрации */
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        z-index: 20;
+        box-sizing: border-box;
+        transition: width 0.5s ease;
+    }
     .active {
         display: block;
     }
@@ -372,11 +388,15 @@ bottom: 129px;
             
               <div id="user_menu" class="user_menu">
         <div id="login_form" class="login_form active">
-            <input type="text" placeholder="Username" class="user_menu_input">
-            <input type="password" placeholder="Password" class="user_menu_input">
-            <button class="register_button" onclick="showRegisterForm()">Регистрация</button>
-            <button class="login_button">Вход</button>
-            <a href="#" class="forgot-password">Забыли пароль?</a>
+            <h2> Вход</h2>
+            <span>Войти в личный кабинет</span>
+            <input type="text" placeholder="E-mail" class="user_menu_input">
+            <input type="password" placeholder="Пароль" class="user_menu_input">
+            <a href="#" class="forgot-password">Напомнить пароль</a>
+            <button class="login_button" style="background-color:red;" >Вход</button>
+            <button class="register_button" style="background-color: transparent;"onclick="showRegisterForm()"><span style="color: red;">Регистрация</span></button>
+             
+            
         </div>
         <div id="cheaper_menu" class="cheaper_menu">
             <button class="close-button">&times;</button>
@@ -391,11 +411,38 @@ bottom: 129px;
             <textarea placeholder="Вопрос"></textarea>
             <button>Свяжитесь со мной</button>
         </div>
-        <div id="register_form" class="register_form">
-            <input type="text" placeholder="Name" class="user_menu_input">
-            <input type="password" placeholder="Password" class="user_menu_input">
-            <input type="email" placeholder="Email" class="user_menu_input">
-            <button class="back_button" onclick="showLoginForm()">Назад</button>
+        <div id="register_form" class="register_form"  >
+            <div class="modal-content">
+                <span class="close" onclick="toggleUserMenu()">&times;</span>
+                <h2>Регистрация</h2>
+                <form method="post" action="{% url 'register' %}">
+                    {% csrf_token %}
+                    <div style="display:flex;">
+                        <div>
+                            <input type="text" name="username" placeholder="Имя" class="user_menu_input" required>
+                            <input type="password" name="password1" placeholder="Пароль" class="user_menu_input" required>
+                            <input type="email" name="email" placeholder="Email" class="user_menu_input" required>
+                        </div>
+                        <div>
+                            <input type="text" placeholder="Фамилия" class="user_menu_input">
+                            <input type="password" name="password2" placeholder="Подтвердите пароль" class="user_menu_input" required>
+                            <input type="text" placeholder="Телефон" class="user_menu_input">
+                            
+                        </div>
+                        
+                    </div>
+                    <div>
+                        <input type="text" name="city" placeholder="Город" class="user_menu_input" required>
+                        <input type="text" name="postal_code" placeholder="Почтовый индекс" class="user_menu_input">
+                        
+                        </select>
+                    </div>
+                    <p>Регистрируясь, вы соглашаетесь с <a href="#">пользовательским соглашением</a></p>
+                    <button type="submit" class="btn-primary">Зарегистрироваться</button>
+                    <button class="back_button" type="button" onclick="showLoginForm()">Назад</button>
+                </form>
+                <div id="registrationErrors" style="color: red;"></div> <!-- Добавим блок для вывода ошибок -->
+            </div>
         </div>
     </div>
             <div id="mobile_open_menu" class="mobile_open_menu" style="background-color:white;">
@@ -685,11 +732,49 @@ bottom: 129px;
     function showRegisterForm() {
         document.getElementById('login_form').classList.remove('active');
         document.getElementById('register_form').classList.add('active');
+        document.getElementById('user_menu').style.width = '500px'; // Увеличиваем ширину для формы регистрации
+        document.getElementById('user_menu').style.height = '500px';
+        
     }
-
+ 
     function showLoginForm() {
         document.getElementById('register_form').classList.remove('active');
         document.getElementById('login_form').classList.add('active');
+        document.getElementById('user_menu').style.width = '500px';
+    }
+    
+    function submitRegistrationForm() {
+        var form = document.getElementById('registrationForm');
+        var formData = new FormData(form);
+
+        fetch("{% url 'register' %}", {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+                'Accept': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Регистрация прошла успешно. Пожалуйста, подтвердите ваш email.');
+                toggleUserMenu(); // Закрыть форму регистрации
+            } else {
+                var errorDiv = document.getElementById('registrationErrors');
+                errorDiv.innerHTML = '';
+                var errors = JSON.parse(data.errors);
+                for (var field in errors) {
+                    if (errors.hasOwnProperty(field)) {
+                        var errorMessage = errors[field].map(function(error) {
+                            return error.message;
+                        }).join(' ');
+                        errorDiv.innerHTML += `<p>${field}: ${errorMessage}</p>`;
+                    }
+                }
+            }
+        })
+        .catch(error => console.error('Error:', error));
     }
 </script>
 
