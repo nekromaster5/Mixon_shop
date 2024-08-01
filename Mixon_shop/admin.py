@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from .models import (
     Region, UserProfile, PhoneNumber, Branch, Product, Review,
     OrderStatus, Order, FavoriteProduct, ProductComparison,
-    NewsCategory, News, ErrorMessages, InfoMessages, City, ProductStock, Volume, Color
+    NewsCategory, News, ErrorMessages, InfoMessages, City, ProductStock, Volume, Color, ProductImage
 )
 
 
@@ -49,6 +49,7 @@ class CustomUserAdmin(BaseUserAdmin):
     @staticmethod
     def user_info(instance):
         return f'{instance.last_name} {instance.first_name} {instance.username}'
+
     user_info.short_description = 'User Info'
 
 
@@ -105,12 +106,23 @@ class ProductStockAdmin(admin.ModelAdmin):
 
 
 # Регистрация модели Product
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 1
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'is_new', 'is_discounted', 'average_rating')
-    search_fields = ('description',)
+    search_fields = ('name', 'average_rating')
+    inlines = [ProductImageInline]
     list_filter = ('is_discounted', 'is_new')
     filter_horizontal = ('related_products', 'similar_products')
+
+
+@admin.register(ProductImage)
+class ProductImageAdmin(admin.ModelAdmin):
+    list_display = ('product', 'image')
 
 
 # Регистрация модели Review
