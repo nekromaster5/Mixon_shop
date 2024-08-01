@@ -3,7 +3,7 @@ from random import choice
 
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
@@ -103,6 +103,7 @@ class Product(models.Model):
     discount_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     is_discounted = models.BooleanField(default=False)
     is_new = models.BooleanField(default=True)
+    is_in_stock = models.BooleanField(default=False)
     related_products = models.ManyToManyField('self', blank=True)
     similar_products = models.ManyToManyField('self', blank=True)
     average_rating = models.DecimalField(max_digits=3, decimal_places=2, default=0.0)
@@ -132,6 +133,18 @@ class ProductStock(models.Model):
 
     def __str__(self):
         return f'{self.product} - {self.branch} - {self.volume} - {self.color} - {self.quantity}'
+
+
+@receiver(post_save, sender=ProductStock)
+@receiver(post_delete, sender=ProductStock)
+def update_product_stock_status(sender, instance, **kwargs):
+    product = instance.product
+    # Проверка наличия товаров на складе
+    if ProductStock.objects.filter(product=product).exists():
+        product.is_in_stock = True
+    else:
+        product.is_in_stock = False
+    product.save()
 
 
 # Review model
