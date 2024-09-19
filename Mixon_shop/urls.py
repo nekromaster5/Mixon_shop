@@ -14,11 +14,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import admin_tools
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import staticfrom django.urls import path
 from django.contrib.auth import views as auth_views
 from .views import register, activate
 from django.urls import path
@@ -30,6 +32,7 @@ from Mixon_shop.views import HomePage, CataloguePage, ProductPage, Brands, News,
     Topic, AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts
 
 urlpatterns = [
+    path('admin_tools/', include('admin_tools.urls')),
     path('admin/', admin.site.urls),
     path('', HomePage.as_view(), name='home'),
     path('catalogue', CataloguePage.as_view(), name='catalogue'),
@@ -45,6 +48,8 @@ urlpatterns = [
     path('error/', ErrorPage.as_view(), name='error'),
     path('shipment&payment/', ShipmentPayment.as_view(), name='shipment_and_payment'),
     path('contacts/', Contacts.as_view(), name='contacts'),
+    path('product/<int:product_id>/', ProductPage.as_view(), name='product_detail'),
+
     path('register/', register, name='register'),
     path('activate/<uidb64>/<token>/', activate, name='activate'),
     path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),

@@ -1,11 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 
-
 {% block title %}
-    Шпатлевка универсальная 2 кг Mixon Uni
+    {{ product.name }}
 {% endblock %}
-
 
 {% block content %}
 <style>
@@ -147,22 +145,22 @@
                             <div class="carousel-buttons" style="   ">
                                 <button data-item-index="0"
                                         style="display: flex; flex-direction: column; align-items: center; width: 100px; height: 100px; margin-top: 30px;">
-                                    <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}"
+                                    <img src="{{ product.images.url }}"
                                          alt="Thumb 1">
                                 </button>
                                 <button data-item-index="1"
                                         style="display: flex; flex-direction: column; align-items: center; width: 100px; height: 100px; margin-top: 20px;">
-                                    <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 2.png' %}"
+                                    <img src="{{ product.images.url }}"
                                          alt="Thumb 2">
                                 </button>
                             </div>
                             <div class="carousel-container" style="display:flex;">
                                 <div class="carousel-item" style=" ">
-                                    <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
+                                    <img src="{{ product.images.url }}" 
                                          alt="Slide 1">
                                 </div>
                                 <div class="carousel-item" style=" ">
-                                    <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
+                                    <img src="{{ product.images.url }}" 
                                          alt="Slide 2">
                                 </div>
                             </div>
@@ -302,10 +300,21 @@
                                 <!-- Первая колонка -->
                                 <div class="col-md-6 first_prtoduct_col" style="">
                                     <div class="product_texts" style="width: 160px;  flex-direction: row;  ">
-                                        <span class="product-info__text--price" Style="white-space: nowrap;">232.00 &#8372;</span>
-                                        <span class="product-info__text--price-old about_product_info"
-                                              style="white-space: nowrap;display:block;">265.00 &#8372;</span>
+                                        {% if product.is_discounted %}
+                                            <span class="product-info__text--price" style="white-space: nowrap;">
+                                                {{ product.discount_price }} &#8372;
+                                            </span>
+                                            <span class="product-info__text--price-old about_product_info"
+                                                  style="white-space: nowrap; display:block;">
+                                                {{ product.price }} &#8372;
+                                            </span>
+                                        {% else %}
+                                            <span class="product-info__text--price" style="white-space: nowrap;">
+                                                {{ product.price }} &#8372;
+                                            </span>
+                                        {% endif %}
                                     </div>
+                                    
 
                                     <a class="primary__btn product__card--action__btn buy__btn big-button d-flex justify-content-evenly no_scale"
                                        title="Add to cart">
@@ -550,57 +559,8 @@
                 </div>
                 <div class="description_block" style="background-color:#FFFFFF;">
                     <div class="inner_description_block">
-                        <p style="font-size: 1.5em;"> Описание</p>
-                        <p>Грунтовка влагоизолятор Mixon Аквастоп - это простой в применении высокоэфективный
-                            продукт,который, впитываясь глубоко в <br> основание,
-                            укрепляют его и в результате улучшает сцепление отделочных материалов с основой.<br>
-                            Аквастоп повышает влагостойкость покрытия и скоращает расход покровных красок.</p>
-                        <p style="font-size: 1.2em;">
-                            Нанесение:
-                        </p>
-                        <p>
-                            Грунтование пористых т чуствительных к влаге поверхностей, улучшение свойств цементных и
-                            известковых строительных материалов.<br>
-                            Применяется для внутренних работ.
-                        </p>
-                        <p style="font-size: 1.2em;">
-                            Сфера применения:
-                        </p>
-                        <div class="black-dot_list_array" style="display: block;
-                            flex-direction: column; ">
-                             <span class="black-dot_list_block">
-                                <style>
-                                    @media only screen   and (min-width: 320px) and (max-width: 760px){
-                                        .black-dot_list_array{
-                                            font-size: 16px !important;
-                                        }
-                                        .product_list_w{
-                                            white-space: normal !important;
-                                        }
-                                        
-                                    }
-                                    .black-dot_list_block{
-                                        padding-top:10px;
-                                    }
-                                </style>
-                                <span class="product_list_w"style="white-space: nowrap;">
-                                Средство Аквастоп смешивается с водой для приготовления растворов:
-                                </span>
-                            <ul class="black-dot_list">
-                                <li>штукатурка:1:5 -1:20;</li>
-                                <li>Цементные известковые растворы</li>
-                                <li>Цементные самовыравнивающиеся смеси</li>
-                            </ul>
-                        </span>
-                            <span class="black-dot_list_block" style="">
-                                Для нанесения на поверхность Аквастопа:
-                            <ul type="disc" class="black-dot_list">
-                                <li>бетон,цемент,газобетон,штукатурка;</li>
-                                <li>гипсовые плиты</li>
-                                <li>основа для пола</li>
-                            </ul>
-                        </span>
-                        </div>
+                        <p style="font-size: 1.5em;">Описание</p>
+                    <p>{{ product.description }}</p>
                     </div>
                 </div>
                 <div class="describe_block mb-7">

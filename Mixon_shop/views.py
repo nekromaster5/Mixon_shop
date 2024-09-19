@@ -1,7 +1,9 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy as _
 from django.views import View
-from django.shortcuts import render, redirect
+# Existing import statements
+from django.shortcuts import render, get_object_or_404
+from .models import Productfrom django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from .forms import UserRegisterForm, UserLoginForm
@@ -78,8 +80,9 @@ class CataloguePage(View):
 
 
 class ProductPage(View):
-    def get(self, request):
-        return render(request, 'product.html')
+   def get(self, request, product_id):
+        product = get_object_or_404(Product, id=product_id)
+        return render(request, 'product.html', {'product': product})
 
 
 class PersonalPage(View):
