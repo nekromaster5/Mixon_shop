@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 from .models import (
     Region, UserProfile, PhoneNumber, Branch, Product, Review,
     OrderStatus, Order, FavoriteProduct, ProductComparison,
-    NewsCategory, News, ErrorMessages, InfoMessages, City, ProductStock, Volume, Color, ProductImage
+    NewsCategory, News, ErrorMessages, InfoMessages, City, ProductStock, Volume, Color, ProductImage, BindingSubstance,
+    ProductType
 )
 
 
@@ -97,6 +98,20 @@ class ColorAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 
+# Регистрация модели BindingSubstance
+@admin.register(BindingSubstance)
+class BindingSubstanceAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)
+
+
+# Регистрация модели ProductType
+@admin.register(ProductType)
+class ProductTypeAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)
+
+
 # Регистрация модели ProductStock
 @admin.register(ProductStock)
 class ProductStockAdmin(admin.ModelAdmin):
@@ -113,10 +128,10 @@ class ProductImageInline(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'is_new', 'is_discounted', 'average_rating')
+    list_display = ('name', 'price', 'is_new', 'is_discounted', 'is_in_stock', 'average_rating')
     search_fields = ('name', 'average_rating')
     inlines = [ProductImageInline]
-    list_filter = ('is_discounted', 'is_new')
+    list_filter = ('is_discounted', 'is_new', 'is_in_stock')
     filter_horizontal = ('related_products', 'similar_products')
 
 

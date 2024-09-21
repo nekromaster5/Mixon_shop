@@ -1,23 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% load static %}
-    <meta name="description" content="Morden Bootstrap HTML5 Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- ======= All CSS Plugins here ======== -->
-    <link rel="stylesheet" href="{% static '/src/assets/css/plugins/swiper-bundle.min.css' %}">
-    <link rel="stylesheet" href="{% static '/src/assets/css/plugins/glightbox.min.css' %}">
-
-    <!-- Plugin css -->
-    <link rel="stylesheet" href="{% static '/src/assets/css/vendor/bootstrap.min.css' %}">
-
-    <!-- Custom Style CSS -->
-    <link rel="stylesheet" href="{% static '/src/assets/css/style.css' %}">
-    <title>Title</title>
-</head>
-<body>
+{% load static %}
 
 <div class="footer__section footer__bg">
     <div class="container">
@@ -165,7 +146,7 @@
                         <h2 class="footer__widget--title d-none d-md-block">Меню</h2>
                         <ul class="footer__widget--menu footer__widget--inner">
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
-                                                                      >Акции</a></li>
+                            >Акции</a></li>
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
                                                                       href="{% url 'about_company' %}">О нас</a></li>
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
@@ -305,5 +286,3 @@
 <script src="{% static '/src/assets/js/vendor/bootstrap.min.js' %}" defer="defer"></script>
 <script src="{% static '/src/assets/js/plugins/swiper-bundle.min.js' %}"></script>
 <script src="{% static '/src/assets/js/plugins/glightbox.min.js' %}"></script>
-</body>
-</html>

@@ -16,14 +16,16 @@
                         <a href="{% url 'home' %}">Главная</a>
                     </li>
                     <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'catalogue' %}">ЛКМ для Строительства</a>
-                    </li>
-                    <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'catalogue' %}">Шпатлевка универсальная</a>
+                        Поиск
                     </li>
                 </ul>
             </div>
-            <h2 class="breadcrumb__content--title">ЛКМ для Строительства</h2>
+            <h2 class="breadcrumb__content--title">
+                {% if query %}
+                    {{ query }}
+                {% else %}
+                {% endif %}
+            </h2>
             <div class="brand_buttons-wrapper">
                 <div class="slider-container adjustable-slider">
                     <div class="slider" style="display:flex;">
@@ -116,291 +118,86 @@
     </section>
     <section class="product__section section--padding pt-0 bg__off_white">
         <div class="container">
-            <div class="catalogue-sort">
-                <span class="filters-button">Фильтры</span>
-                <div class="">
-                    <span>Сортировать по:</span>
-                    <button class="sort-type active">популярности</button>
-                    <button class="sort-type">цене</button>
-                    <button class="sort-type">названию</button>
-                </div>
-                <div class="layout-buttons">
-                    <button class="layout-style active">
-                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.116 0H0V5.116H5.116V0Z" fill="currentColor"></path>
-                            <path d="M20.0428 0H14.9268V5.116H20.0428V0Z" fill="currentColor"></path>
-                            <path d="M12.5799 0H7.46387V5.116H12.5799V0Z" fill="currentColor"></path>
-                            <path d="M5.116 14.927H0V20.043H5.116V14.927Z" fill="currentColor"></path>
-                            <path d="M20.0428 14.927H14.9268V20.043H20.0428V14.927Z" fill="currentColor"></path>
-                            <path d="M12.5799 14.927H7.46387V20.043H12.5799V14.927Z" fill="currentColor"></path>
-                            <path d="M5.116 7.46301H0V12.579H5.116V7.46301Z" fill="currentColor"></path>
-                            <path d="M20.0428 7.46301H14.9268V12.579H20.0428V7.46301Z" fill="currentColor"></path>
-                            <path d="M12.5799 7.46301H7.46387V12.579H12.5799V7.46301Z" fill="currentColor"></path>
-                        </svg>
-                    </button>
-                    <button class="layout-style">
-                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9.064 0H0V9.2646H9.064V0Z" fill="currentColor"></path>
-                            <path d="M20.0708 0H11.0068V9.2646H20.0708V0Z" fill="currentColor"></path>
-                            <path d="M9.064 11.222H0V20.4866H9.064V11.222Z" fill="currentColor"></path>
-                            <path d="M20.0708 11.222H11.0068V20.4866H20.0708V11.222Z" fill="currentColor"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
             <div class="row product__list br-row_1">
-                <div class="shop__sidebar--widget__wrapper row col-lg-6 col-md-18 px-0">
-                    <div class="shop__sidebar--widget widget__area px-0">
-                        <div class="single__widget widget__bg">
-                            <div class="d-flex widget__title">
-                                <svg class="arrow_image" width="11" height="7" viewBox="0 0 11 7" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10.572 1.17676L5.78601 6.1535L1 1.17676" stroke="black"
-                                          stroke-miterlimit="10"></path>
-                                </svg>
-                                <h2 class="h3">Выбрать</h2>
-                            </div>
-                            <div class="widget__content">
-                                <ul class="widget__form--check">
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check1" type="checkbox">
-                                        <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base"
-                                               for="check1">Акционные</label>
+                {% load custom_tags %}
 
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check2" type="checkbox">
-                                        <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base" for="check2">Новинки</label>
-
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check3" type="checkbox">
-                                        <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base" for="check3">Есть в
-                                            наличии</label>
-
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single__widget widget__bg">
-                            <div class="d-flex widget__title">
-                                <svg class="arrow_image" width="11" height="7" viewBox="0 0 11 7" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10.572 1.17676L5.78601 6.1535L1 1.17676" stroke="black"
-                                          stroke-miterlimit="10"></path>
-                                </svg>
-                                <h2 class="h3">Вид</h2>
-                            </div>
-                            <div class="widget__content">
-                                <ul class="widget__form--check">
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check4" type="checkbox">
-                                        <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base" for="check4">Краска</label>
-
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check5" type="checkbox">
-                                        <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base"
-                                               for="check5">Грунтовка</label>
-
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check6" type="checkbox">
-                                        <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base" for="check6">Лак</label>
-
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single__widget widget__bg price__widget">
-                            <div class="d-flex widget__title">
-                                <svg class="arrow_image" width="11" height="7" viewBox="0 0 11 7" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10.572 1.17676L5.78601 6.1535L1 1.17676" stroke="black"
-                                          stroke-miterlimit="10"></path>
-                                </svg>
-                                <h2 class="h3">Цена</h2>
-                            </div>
-                            <div class="widget__content">
-                                <form class="price__filter--form" action="#">
-                                    <div class="price__filter--form__inner mb-15 d-flex align-items-center">
-                                        <div class="price__filter--group">
-                                            <div class="price__filter--input border-radius-5 d-flex align-items-center">
-                                                <input class="price__filter--input__field border-0"
-                                                       name="filter.v.price.gte" id="Filter-Price-GTE2"
-                                                       type="number"
-                                                       placeholder="0" min="0" max="5000">
-                                            </div>
-                                        </div>
-                                        <div class="price__filter--group">
-                                            <div class="price__filter--input border-radius-5 d-flex align-items-center">
-                                                <input class="price__filter--input__field border-0"
-                                                       name="filter.v.price.lte" id="Filter-Price-LTE2"
-                                                       type="number"
-                                                       min="0" placeholder="500" max="5000">
-                                            </div>
-                                        </div>
-                                        <button class="price__filter--group primary__btn price__filter--btn border-radius-5"
-                                                type="submit">
-                                            ОК
-                                        </button>
-                                    </div>
-
-                                </form>
-                            </div>
-                        </div>
-                        <div class="single__widget widget__bg only-one">
-                            <div class="d-flex widget__title">
-                                <svg class="arrow_image" width="11" height="7" viewBox="0 0 11 7" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10.572 1.17676L5.78601 6.1535L1 1.17676" stroke="black"
-                                          stroke-miterlimit="10"></path>
-                                </svg>
-                                <h2 class="h3">Основа</h2>
-                            </div>
-                            <div class="widget__content">
-                                <ul class="widget__form--check">
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check7" type="checkbox">
-                                        <span class="widget__form--checkmark circle"></span>
-                                        <label class="widget__form--check__label--base"
-                                               for="check7">Акриловая</label>
-
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check8" type="checkbox">
-                                        <span class="widget__form--checkmark circle"></span>
-                                        <label class="widget__form--check__label--base"
-                                               for="check8">Алкидная</label>
-
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check9" type="checkbox">
-                                        <span class="widget__form--checkmark circle"></span>
-                                        <label class="widget__form--check__label--base"
-                                               for="check9">Полиуретановая</label>
-
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check10" type="checkbox">
-                                        <span class="widget__form--checkmark circle"></span>
-                                        <label class="widget__form--check__label--base"
-                                               for="check10">Полиэфирная</label>
-
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single__widget widget__bg">
-                            <div class="d-flex widget__title">
-                                <svg class="arrow_image" width="11" height="7" viewBox="0 0 11 7" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10.572 1.17676L5.78601 6.1535L1 1.17676" stroke="black"
-                                          stroke-miterlimit="10"></path>
-                                </svg>
-                                <h2 class="h3">Объем (вес)</h2>
-                            </div>
-                            <div class="widget__content">
-                                <ul class="widget__form--check">
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check11" type="checkbox">
-                                        <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base" for="check11">до 1.0</label>
-
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check12" type="checkbox">
-                                        <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base"
-                                               for="check12">1.1-3.0</label>
-
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check13" type="checkbox">
-                                        <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base"
-                                               for="check13">3.1-5.0</label>
-
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check14" type="checkbox">
-                                        <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base"
-                                               for="check14">5.1-10.0</label>
-
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check15" type="checkbox">
-                                        <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base" for="check15">больше
-                                            10.0</label>
-
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                {% if products %}
+                    <div id="products-container" class="row col-lg-13 col-md-19 px-lg-6 px-md-6 px-8">
+                        {% include 'products_partial.html' %}
                     </div>
-                </div>
-                <div class="row col-lg-13 col-md-19 px-lg-6 px-md-6 px-8">
-                    {% for product in products %}
-                        <div class="col-lg-5 col-6 px-lg-6 px-md-6 px-8 mb-6">
-                            {% include "product_block--standard.html" with product=product %}
-                        </div>
-                    {% endfor %}
-                    <div class="pagination__area">
-                        <div class="pagination refresh__page justify-content-center">
-                            <a href="" class="pagination justify-content-center">
-                                <img src="{% static '/src/assets/img/icon/refresh_page__red.svg' %}"
-                                     alt="refresh page">
-                                <p class="invisible">a</p>Показать еще
-                            </a>
-                        </div>
+                    {% if products.paginator.num_pages > 1 %}
+                        <div class="pagination__area">
+                            <div class="pagination refresh__page justify-content-center">
+                                {% if products.has_next %}
+                                    <button id="load-more" class="pagination justify-content-center no-border no-background"
+                                            data-url="{% url 'search' %}"
+                                            data-current-page="{{ products.number }}"
+                                            data-total-pages="{{ products.paginator.num_pages }}"
+                                            data-query="{{ query|escapejs }}">
+                                        <img class="pagination--load_more--image"
+                                             src="{% static 'src/assets/img/icon/refresh_page__red.svg' %}"
+                                             alt="refresh page">
+                                        Показать еще
+                                    </button>
 
-                        <nav class="pagination justify-content-center">
-                            <ul class="pagination__wrapper d-flex align-items-center justify-content-center">
-                                <li class="pagination__list">
-                                    <a href="" class="pagination__item--arrow  link ">
-                                        <img src="{% static '/src/assets/img/icon/left_arrow.svg' %}"
-                                             alt="left arrow">
-                                    </a>
-                                </li>
-                                <li class="pagination__list"><span
-                                        class="pagination__item pagination__item--current">1</span></li>
-                                <li class="pagination__list">
-                                    <a href="" class="pagination__item link">2</a>
-                                </li>
-                                <li class="pagination__list">
-                                    <a href="" class="pagination__item link">3</a>
-                                </li>
-                                <li class="pagination__list">
-                                    <a href="" class="pagination__item link">4</a>
-                                </li>
-                                <li class="pagination__list">
-                                    <a href="" class="pagination__item link no-hover no-cursor_change">...</a>
-                                </li>
-                                <li class="pagination__list">
-                                    <a href="" class="pagination__item link">8</a>
-                                </li>
-                                <li class="pagination__list">
-                                    <a href="" class="pagination__item--arrow  link ">
-                                        <img src="{% static '/src/assets/img/icon/right_arrow.svg' %}"
-                                             alt="right arrow">
-                                    </a>
-                                </li>
-                                <li>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
+                                {% endif %}
+                            </div>
+
+                            <nav class="pagination justify-content-center">
+                                <ul class="pagination__wrapper d-flex align-items-center justify-content-center">
+                                    {% if products.has_previous %}
+                                        <li class="pagination__list">
+                                            <a href="?{% if query %}query={{ query }}&{% endif %}page={{ products.previous_page_number }}"
+                                               class="pagination__item--arrow link">
+                                                <img src="{% static 'src/assets/img/icon/left_arrow.svg' %}"
+                                                     alt="left arrow">
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {#                                        <li class="pagination__list"><span class="pagination__item">...</span></li>#}
+                                    {##}
+                                    {##}
+                                    {#                                        <li class="pagination__list">#}
+                                    {#                                            <a href="#}
+                                    {##}
+                                    {#                                                    {% if query %}{% url 'search_result' query=query page=num %}{% else %}{% url 'search_result_no_query' page=num %}{% endif %}"#}
+                                    {#                                               class="pagination__item link">{{ num }}</a>#}
+                                    {#                                        </li>#}
+                                    {##}
+                                    {##}
+                                    {#                                        <!-- Display the current page -->#}
+                                    {#                                        <li class="pagination__list"><span#}
+                                    {#                                                class="pagination__item pagination__item--current">{{ products.number }}</span>#}
+                                    {#                                        </li>#}
+                                    {% for num in products.paginator.page_range %}
+                                        {% if num == products.number %}
+                                            <li class="pagination__list"><span
+                                                    class="pagination__item pagination__item--current">{{ num }}</span>
+                                            </li>
+                                        {% else %}
+                                            <li class="pagination__list">
+                                                <a href="?{% if query %}query={{ query }}&{% endif %}page={{ num }}"
+                                                   class="pagination__item link">{{ num }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% if products.has_next %}
+                                        <li class="pagination__list">
+                                            <a href="?{% if query %}query={{ query }}&{% endif %}page={{ products.next_page_number }}"
+                                               class="pagination__item--arrow link">
+                                                <img src="{% static 'src/assets/img/icon/right_arrow.svg' %}"
+                                                     alt="right arrow">
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <p>Нет результатов{% if query %} для "{{ query }}"{% endif %}</p>
+                {% endif %}
             </div>
         </div>
     </section>
@@ -414,4 +211,5 @@
     <script src="{% static '/src/assets/js/sortButtonsToggle.js' %}"></script>
     <script src="{% static '/src/assets/js/widgetBlockCollapse.js' %}"></script>
     <script src="{% static '/src/assets/js/oneOptionCheckInput.js' %}"></script>
+    <script src="{% static '/src/assets/js/pagination.js' %}"></script>
 {% endblock %}

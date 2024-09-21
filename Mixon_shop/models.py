@@ -85,12 +85,27 @@ class Volume(models.Model):
         return f'{self.size}'
 
 
+class BindingSubstance(models.Model):
+    name = models.CharField(max_length=256)
+
+    def __str__(self):
+        return f'{self.name} основа'
+
+
+class ProductType(models.Model):
+    name = models.CharField(max_length=256)
+
+    def __str__(self):
+        return f'{self.name}'
+
+
 # Product model
 class Product(models.Model):
     name = models.CharField(max_length=256)
     description = models.TextField()
+    type = models.ForeignKey(ProductType, on_delete=models.CASCADE)
     usage = models.CharField(max_length=256)
-    binding_substance = models.CharField(max_length=256)
+    binding_substance = models.ForeignKey(BindingSubstance, on_delete=models.CASCADE)
     dry_residue = models.CharField(max_length=256)
     density = models.CharField(max_length=256)
     drying_time = models.CharField(max_length=256)
