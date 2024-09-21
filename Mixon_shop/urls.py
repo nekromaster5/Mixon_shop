@@ -22,14 +22,17 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from Mixon_shop.views import HomePage, CataloguePage, ProductPage, Brands, News, \
-    Topic, AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts
+    Topic, AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts, SearchPage
 
 urlpatterns = [
     path('admin_tools/', include('admin_tools.urls')),
     path('admin/', admin.site.urls),
     path('', HomePage.as_view(), name='home'),
     path('catalogue', CataloguePage.as_view(), name='catalogue'),
-    path('product/', ProductPage.as_view(), name='product'),
+    path('search/', SearchPage.as_view(), name='search'),
+    path('search/<str:query>/page/<int:page>/', SearchPage.as_view(), name='search_result'),
+    path('search/page/<int:page>/', SearchPage.as_view(), name='search_result_no_query'),
+    path('product/<int:product_id>/', ProductPage.as_view(), name='product'),
     path('brands/', Brands.as_view(), name='brands'),
     path('news/', News.as_view(), name='news'),
     path('topic/', Topic.as_view(), name='topic'),

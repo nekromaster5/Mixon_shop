@@ -367,7 +367,7 @@
                             <img class="lupa" src="{% static '/src/assets/img/icon/lupa.svg' %}" alt="">
                             <input class="header__search--input" style="height: 40px; border-radius:0;
                             padding-left:30px;" name="query"
-                                   placeholder="{% if query %}{{ query }}{% else %}Поиск товара{% endif %}">
+                                   placeholder="Поиск товара" value="{% if query %} {{ query }}{% endif %}">
                         </label>
                         <button class="header__search--button bg__primary text-white" aria-label="search button"
                                 type="submit"
