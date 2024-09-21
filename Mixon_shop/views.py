@@ -3,7 +3,9 @@ from django.urls import reverse_lazy as _
 from django.views import View
 # Existing import statements
 from django.shortcuts import render, get_object_or_404
-from .models import Productfrom django.shortcuts import render, redirect
+from .models import Product
+from django.shortcuts import render, redirect
+
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from .forms import UserRegisterForm, UserLoginForm
@@ -78,7 +80,21 @@ class CataloguePage(View):
     def get(self, request):
         return render(request, 'catalogue.html')
 
-
+def home(request):
+    # Продукты-лидеры продаж
+    top_selling_products = Product.objects.filter(is_in_stock=True).order_by('-average_rating')[:5]
+    
+    # Новинки
+    new_products = Product.objects.filter(is_new=True, is_in_stock=True).order_by('-id')[:5]
+    
+    # Рекомендуемые товары
+    recommended_products = Product.objects.filter(is_in_stock=True).order_by('-id')[:5]
+    
+    return render(request, 'home_page.html', {
+        'top_selling_products': top_selling_products,
+        'new_products': new_products,
+        'recommended_products': recommended_products,
+    })
 class ProductPage(View):
    def get(self, request, product_id):
         product = get_object_or_404(Product, id=product_id)
