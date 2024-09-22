@@ -24,7 +24,15 @@
         </li>
     </ul>
     <div class="product__card--price d-flex">
-        <span class="current__price">232.00₴</span>
-        <span class="is__in_stock">Есть в наличии</span>
+        {% if product.is_discounted %}
+            <span class="current__price">{{ product.discount_price }}₴</span>
+        {% else %}
+            <span class="current__price">{{ product.price }}₴</span>
+        {% endif %}
+        {% if product.is_in_stock %}
+            <span class="is__in_stock">Есть в наличии</span>
+        {% else %}
+            <span class="is__in_stock">Нет в наличии</span>
+        {% endif %}
     </div>
 {% endblock %}

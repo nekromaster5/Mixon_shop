@@ -1,34 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    {% load static %}
-    <meta name="description" content="Morden Bootstrap HTML5 Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Font link -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-          rel="stylesheet">
-
-    <!-- ======= All CSS Plugins here ======== -->
-    <link rel="stylesheet" href="{% static '/src/assets/css/plugins/swiper-bundle.min.css' %}">
-    <link rel="stylesheet" href="{% static '/src/assets/css/plugins/glightbox.min.css' %}">
-
-    <!-- Plugin css -->
-    <link rel="stylesheet" href="{% static '/src/assets/css/vendor/bootstrap.min.css' %}">
-
-    <!-- Custom Style CSS -->
-    <link rel="stylesheet" href="{% static '/src/assets/css/style.css' %}">
-    <title></title>
-</head>
-<body>
+{% load static %}
 <article class="product__card bg__white">
     <div class="product__card--thumbnail mb-6">
-        <a href="{% url 'product' %}"><img class="product__card--thumbnail__img product__primary--img"
-                                           src="{% static '/src/assets/img/other/temp_product250.png' %}"
-                                           alt="product image"></a>
+        {% if product %}
+            <a href="{% url 'product' product_id=product.id %}"><img
+                    class="product__card--thumbnail__img product__primary--img"
+                    src="{{ product.images.first.image.url }}" alt="{{ product.name }} image"></a>
+        {% else %}
+            <a href="{% url 'product' product_id=3 %}"><img
+                    class="product__card--thumbnail__img product__primary--img"
+                    src="{{ product.images.first.image.url }}" alt="{{ product.name }} image"></a>
+        {% endif %}
+
         <div class="product__card--action">
             <ul class="product__card--action--inner__list align-items-center justify-content-center">
                 <li class="product__card--action__list mb-3">
@@ -98,10 +80,14 @@
                 </li>
             </ul>
         </div>
-
     </div>
     <div class="product__card--content">
-        <h3 class="product__card--title"><a href="{% url 'product' %}">Шпатлевка универсальная Карс 1 кг UNI</a>
+        <h3 class="product__card--title">
+            {% if product %}
+                <a href="{% url 'product' product_id=product.id %}">{{ product.name }}</a>
+            {% else %}
+                <a href="{% url 'product' product_id=3 %}">{{ product.name }}</a>
+            {% endif %}
         </h3>
         <ul class="rating product__card--rating d-flex">
             <li class="rating__list">
@@ -134,5 +120,3 @@
     </div>
     {% block additional %}{% endblock %}
 </article>
-</body>
-</html>
