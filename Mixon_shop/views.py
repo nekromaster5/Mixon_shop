@@ -5,7 +5,6 @@ from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 from django.views import View
-
 from .models import Product
 
 
@@ -13,6 +12,18 @@ class HomePage(View):
     def get(self, request):
         return render(request, 'home_page.html')
 
+class ProductPage(View):
+    def get(self, request, product_id):
+        # Получаем продукт по его ID
+        product = get_object_or_404(Product, id=product_id)
+        
+        # Получаем изображения продукта через related_name 'images'
+        images = product.images.all()  # Все изображения продукта
+
+        return render(request, 'product.html', {
+            'product': product,
+            'images': images,
+        })
 
 class CataloguePage(View):
     def get(self, request):
