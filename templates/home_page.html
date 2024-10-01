@@ -223,12 +223,14 @@
                 </div>
                 <div class="product__section--inner">
                     <div class="slider-container adjustable-slider">
-                        <div class="slider">
-                            {% for i in 'abcd'|make_list %}
-                                <div class="col-lg-18 col-md-17 col-17 mb-lg-8 md-md-7 mb-5 slide">
-                                    {% include "product_block--base.html" %}
-                                </div>
-                            {% endfor %}
+                        <div class="row">
+                            {% for product in products %}
+                            {% if forloop.counter <= 4 %}
+                            <div class="col-lg-18 col-md-17 col-17 mb-lg-8 md-md-7 mb-5 slide">
+                                {% include "product_block--standard.html" with product=product %}
+                            </div>
+                            {% endif %}
+                        {% endfor %}
                             {#                                            <div class="col-17 slide">#}
                             {#                                                <img style="display: block !important;"#}
                             {#                                                     src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}"#}
