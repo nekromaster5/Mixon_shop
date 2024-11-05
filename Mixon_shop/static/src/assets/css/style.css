@@ -11148,7 +11148,7 @@ details > summary::-webkit-details-marker {
     }
 
     .layout-buttons {
-        display: none;
+        display: none !important;
     }
 
     .filters-button {
