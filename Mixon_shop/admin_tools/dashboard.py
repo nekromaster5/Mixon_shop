@@ -17,7 +17,8 @@ class CustomIndexDashboard(Dashboard):
             models=('Mixon_shop.models.Product', 'Mixon_shop.models.ProductStock',
                     'Mixon_shop.models.Color', 'Mixon_shop.models.Volume',
                     'Mixon_shop.models.BindingSubstance', 'Mixon_shop.models.ProductType',
-                    'Mixon_shop.models.PromoCode',)
+                    'Mixon_shop.models.PromoCode', 'Mixon_shop.models.RecommendedProducts',
+                    'Mixon_shop.models.SalesLeaders')
         ))
 
         self.children.append(modules.ModelList(

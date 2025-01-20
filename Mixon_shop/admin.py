@@ -6,7 +6,7 @@ from .models import (
     Region, UserProfile, PhoneNumber, Branch, Product, Review,
     OrderStatus, Order, FavoriteProduct, ProductComparison,
     NewsCategory, News, ErrorMessages, InfoMessages, City, ProductStock, Volume, Color, ProductImage, BindingSubstance,
-    ProductType, PromoCode,
+    ProductType, PromoCode, SalesLeaders, RecommendedProducts,
 )
 
 
@@ -154,6 +154,20 @@ class PromoCodeAdmin(admin.ModelAdmin):
             'fields': ('max_usage_count', 'expiry_date', 'usage_count')
         }),
     )
+
+
+@admin.register(SalesLeaders)
+class SalesLeadersAdmin(admin.ModelAdmin):
+    list_display = ('product',)  # Отображаем только продукт
+    search_fields = ('product__name',)  # Позволяет искать по имени продукта
+    autocomplete_fields = ('product',)  # Удобный поиск по связанным продуктам
+
+
+@admin.register(RecommendedProducts)
+class RecommendedProductsAdmin(admin.ModelAdmin):
+    list_display = ('product',)  # Отображаем только продукт
+    search_fields = ('product__name',)  # Позволяет искать по имени продукта
+    autocomplete_fields = ('product',)  # Удобный поиск по связанным продуктам
 
 
 # Регистрация модели Review
