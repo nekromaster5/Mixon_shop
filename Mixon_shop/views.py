@@ -74,13 +74,14 @@ class SearchPage(View):
         query = request.GET.get('query', '').strip()
         # Поточна «офіційна» сторінка, з якої формується view
         page = request.GET.get('page', 1)
-
+        print('query:', query)
+        print('page:', page)
         if query:
-            products_list = Product.objects.filter(name__icontains=query).prefetch_related('images')
+            products_list = Product.objects.filter(name__icontains=query).prefetch_related('images').order_by('name')
         else:
-            products_list = Product.objects.prefetch_related('images').all()
+            products_list = Product.objects.prefetch_related('images').all().order_by('name')
 
-        paginator = Paginator(products_list, 1)  # Приклад: 2 товари на сторінку
+        paginator = Paginator(products_list, 1)  # Приклад: 1 товари на сторінку
         try:
             products = paginator.page(page)
         except PageNotAnInteger:
