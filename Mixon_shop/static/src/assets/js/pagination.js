@@ -2,7 +2,8 @@ $(function() {
   $('#load-more-btn').on('click', function() {
     let $btn = $(this);
     let currentPage = parseInt($btn.data('current-page'));
-    let query = $btn.data('query');
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get('query');
     let url = $btn.data('url');
 
     let nextPage = currentPage + 1;
