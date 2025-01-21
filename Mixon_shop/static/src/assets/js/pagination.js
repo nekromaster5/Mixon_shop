@@ -1,27 +1,37 @@
-$(document).ready(function () {
-    var currentPage = parseInt($('#load-more').data('current-page'));
-    var totalPages = parseInt($('#load-more').data('total-pages'));
-    var query = $('#load-more').data('query');
+$(function() {
+  $('#load-more-btn').on('click', function() {
+    let $btn = $(this);
+    let currentPage = parseInt($btn.data('current-page'));
+    let query = $btn.data('query');
+    let url = $btn.data('url');
 
-    $('#load-more').on('click', function () {
-        if (currentPage < totalPages) {
-            currentPage++;
-            var url = $(this).data('url') + '?page=' + currentPage;
-            if (query) {
-                url += '&query=' + query;
-            }
+    let nextPage = currentPage + 1;
 
-            $.ajax({
-                url: url,
-                success: function (data) {
-                    $('#products-container').append(data.html);
-                    if (currentPage >= totalPages) {
-                        $('#load-more').hide();
-                    }
-                    // Update the data attribute for the current page
-                    $('#load-more').data('current-page', currentPage);
-                }
-            });
+    $.ajax({
+      url: url,
+      type: 'GET',
+      data: {
+        page: currentPage,   // «офіційно» зараз на currentPage
+        load_more: 1,        // сигнал для view, що це «показати ще»
+        query: query
+      },
+      success: function(response) {
+        // Додаємо новий html у контейнер товарів
+        $('#products-container').append(response.new_items_html);
+
+        // Якщо прийшла порожня відповідач, отже більше сторінок нема
+        if (!response.new_items_html.trim()) {
+          $btn.hide();  // ховаємо кнопку
         }
+
+        // Оновлюємо пагінацію
+        if (response.new_pagination_html) {
+          $('#pagination-container').html(response.new_pagination_html);
+        }
+
+        // Зсув «віртуальної» поточної сторінки (тепер уже на nextPage)
+        $btn.data('current-page', nextPage);
+      }
     });
+  });
 });
