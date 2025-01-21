@@ -5,7 +5,6 @@ from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 from django.views import View
-
 from .models import Product
 from django.shortcuts import render, redirect
 
@@ -13,6 +12,20 @@ class HomePage(View):
     def get(self, request):
         products = Product.objects.prefetch_related('images').all()
         return render(request, 'home_page.html', {'products': products})
+
+
+class ProductPage(View):
+    def get(self, request, product_id):
+        # Получаем продукт по его ID
+        product = get_object_or_404(Product, id=product_id)
+
+        # Получаем изображения продукта через related_name 'images'
+        images = product.images.all()  # Все изображения продукта
+
+        return render(request, 'product.html', {
+            'product': product,
+            'images': images,
+        })
 
 
 class CataloguePage(View):
@@ -30,17 +43,44 @@ def activate(request):
     # Логика для активации аккаунта
     return render(request, 'activation_success.html')
 
+def get_pages_to_display(current_page, total_pages):
+    """
+    Повертає список, наприклад: [2,3,4,5,'...',13]
+    за принципом:
+      - Якщо total_pages <= 6: показати всі (1..total_pages).
+      - Якщо (current_page + 5) < total_pages:
+          -> [current_page, current_page+1, current_page+2, current_page+3, '...', total_pages]
+      - Інакше (ми «близько» до кінця): показати останні 6 сторінок [total_pages-5..total_pages].
+    """
+    current_page = int(current_page)
+    total_pages = int(total_pages)
+
+    if total_pages <= 6:
+        # Всі сторінки від 1 до total_pages
+        return list(range(1, total_pages + 1))
+
+    # Якщо ще далеко до кінця: перший кубик = поточна сторінка
+    # показуємо 4 сторінки підряд (current_page.. +3), потім '...' і останню
+    if current_page + 5 < total_pages:
+        return list(range(current_page, current_page + 4)) + ['...', total_pages]
+    else:
+        # «Близько» до кінця — показуємо останні 6 сторінок
+        start = total_pages - 5
+        return list(range(start, total_pages + 1))
+
+
 class SearchPage(View):
     def get(self, request):
         query = request.GET.get('query', '').strip()
-        page = request.GET.get('page', 1)  # Отримуємо номер сторінки з параметра GET
+        # Поточна «офіційна» сторінка, з якої формується view
+        page = request.GET.get('page', 1)
 
         if query:
             products_list = Product.objects.filter(name__icontains=query).prefetch_related('images')
         else:
             products_list = Product.objects.prefetch_related('images').all()
 
-        paginator = Paginator(products_list, 20)  # Пагінація по 1 продукту на сторінку
+        paginator = Paginator(products_list, 1)  # Приклад: 2 товари на сторінку
         try:
             products = paginator.page(page)
         except PageNotAnInteger:
@@ -48,24 +88,61 @@ class SearchPage(View):
         except EmptyPage:
             products = paginator.page(paginator.num_pages)
 
-        print(f'current page number:{products.number}')  # Друк поточного номера сторінки
+        # Список сторінок, які треба відобразити у пагінації (з урахуванням «…»)
+        pages_to_display = get_pages_to_display(products.number, paginator.num_pages)
 
         is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
-        if is_ajax:
-            html = render_to_string('products_partial.html', {'products': products})
-            return JsonResponse({'html': html})
+        load_more = request.GET.get('load_more')  # параметр для "Показать ещё"
 
+        if is_ajax and load_more:
+            # Логіка «показати наступну сторінку» (тобто products.number + 1)
+            next_page_num = products.number + 1
+            if next_page_num <= paginator.num_pages:
+                next_page = paginator.page(next_page_num)
+                # HTML нового "шматка" товарів
+                new_items_html = render_to_string('products_partial.html', {
+                    'products': next_page
+                }, request=request)
+
+                # Переформовуємо пагінацію так, ніби тепер користувач «знаходиться» на next_page
+                new_pages_to_display = get_pages_to_display(next_page.number, paginator.num_pages)
+                # Рендеримо (наприклад) окремий шаблон з pagination чи навіть той самий 'search.html'
+                # але зазвичай краще зробити окремий "pagination_partial.html":
+                new_pagination_html = render_to_string('pagination_partial.html', {
+                    'products': next_page,
+                    'query': query,
+                    'pages_to_display': new_pages_to_display,
+                    'num_pages': paginator.num_pages
+                }, request=request)
+
+                return JsonResponse({
+                    'new_items_html': new_items_html,
+                    'new_pagination_html': new_pagination_html
+                })
+            else:
+                # Вже немає наступної сторінки — можна повернути щось, щоб приховати кнопку "Показать ещё"
+                return JsonResponse({
+                    'new_items_html': '',
+                    'new_pagination_html': ''
+                })
+
+        # Якщо не AJAX або не натиснута "Показать ещё", рендеримо звичайну сторінку
         context = {
             'products': products,
             'query': query,
-            'page': page,
+            'page': products.number,
             'num_pages': paginator.num_pages,
+            'pages_to_display': pages_to_display
         }
         return render(request, 'search.html', context)
 
     def post(self, request):
-        query = request.POST.get('query')
-        return redirect(f'/search/?query={query}&page=1') if query else redirect(f'/search/?page=1')
+        query = request.POST.get('query', '')
+        # Відправляємо на сторінку 1 пошуку
+        if query:
+            return redirect(f'/search/?query={query}&page=1')
+        else:
+            return redirect(f'/search/?page=1')
 
 def home(request):
     # Продукты-лидеры продаж

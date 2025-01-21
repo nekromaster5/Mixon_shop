@@ -125,76 +125,9 @@
                     <div id="products-container" class="row col-lg-13 col-md-19 px-lg-6 px-md-6 px-8">
                         {% include 'products_partial.html' %}
                     </div>
-                    {% if products.paginator.num_pages > 1 %}
-                        <div class="pagination__area">
-                            <div class="pagination refresh__page justify-content-center">
-                                {% if products.has_next %}
-                                    <button id="load-more" class="pagination justify-content-center no-border no-background"
-                                            data-url="{% url 'search' %}"
-                                            data-current-page="{{ products.number }}"
-                                            data-total-pages="{{ products.paginator.num_pages }}"
-                                            data-query="{{ query|escapejs }}">
-                                        <img class="pagination--load_more--image"
-                                             src="{% static 'src/assets/img/icon/refresh_page__red.svg' %}"
-                                             alt="refresh page">
-                                        Показать еще
-                                    </button>
+                    <!-- Кнопка "Показать ещё", якщо є наступна сторінка -->
+                    {% include 'pagination.html' %}
 
-                                {% endif %}
-                            </div>
-
-                            <nav class="pagination justify-content-center">
-                                <ul class="pagination__wrapper d-flex align-items-center justify-content-center">
-                                    {% if products.has_previous %}
-                                        <li class="pagination__list">
-                                            <a href="?{% if query %}query={{ query }}&{% endif %}page={{ products.previous_page_number }}"
-                                               class="pagination__item--arrow link">
-                                                <img src="{% static 'src/assets/img/icon/left_arrow.svg' %}"
-                                                     alt="left arrow">
-                                            </a>
-                                        </li>
-                                    {% endif %}
-                                    {#                                        <li class="pagination__list"><span class="pagination__item">...</span></li>#}
-                                    {##}
-                                    {##}
-                                    {#                                        <li class="pagination__list">#}
-                                    {#                                            <a href="#}
-                                    {##}
-                                    {#                                                    {% if query %}{% url 'search_result' query=query page=num %}{% else %}{% url 'search_result_no_query' page=num %}{% endif %}"#}
-                                    {#                                               class="pagination__item link">{{ num }}</a>#}
-                                    {#                                        </li>#}
-                                    {##}
-                                    {##}
-                                    {#                                        <!-- Display the current page -->#}
-                                    {#                                        <li class="pagination__list"><span#}
-                                    {#                                                class="pagination__item pagination__item--current">{{ products.number }}</span>#}
-                                    {#                                        </li>#}
-                                    {% for num in products.paginator.page_range %}
-                                        {% if num == products.number %}
-                                            <li class="pagination__list"><span
-                                                    class="pagination__item pagination__item--current">{{ num }}</span>
-                                            </li>
-                                        {% else %}
-                                            <li class="pagination__list">
-                                                <a href="?{% if query %}query={{ query }}&{% endif %}page={{ num }}"
-                                                   class="pagination__item link">{{ num }}</a>
-                                            </li>
-                                        {% endif %}
-                                    {% endfor %}
-
-                                    {% if products.has_next %}
-                                        <li class="pagination__list">
-                                            <a href="?{% if query %}query={{ query }}&{% endif %}page={{ products.next_page_number }}"
-                                               class="pagination__item--arrow link">
-                                                <img src="{% static 'src/assets/img/icon/right_arrow.svg' %}"
-                                                     alt="right arrow">
-                                            </a>
-                                        </li>
-                                    {% endif %}
-                                </ul>
-                            </nav>
-                        </div>
-                    {% endif %}
                 {% else %}
                     <p>Нет результатов{% if query %} для "{{ query }}"{% endif %}</p>
                 {% endif %}

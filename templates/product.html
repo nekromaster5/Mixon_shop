@@ -70,7 +70,7 @@
                         <a href="{% url 'catalogue' %}">Шпатлевка универсальная</a>
                     </li>
                     <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'product' %}">Шпатлевка универсальная 2 кг Mixon Uni</a>
+                        <a href="{% url 'product' product_id=product.id %}">Плитка универсальная 2 кг Mixon Uni</a>
                     </li>
                 </ul>
 
@@ -135,50 +135,49 @@
             <div class="product_description" style="display: block;">
                 <div class="product_description_high_block" style="background-color:#FFFFFF">
                     <!-- Левый блок -->
-                    <div class="left_block" style=" ">
+                    <div class="left_block">
                         <div class="left_flex_display" style="display:flex;">
                             <div class="product_left_path">
-                                <button style="border:none;background-color:transparent"><img
-                                        src="{% static '/src/assets/img/icon/Path 1623.svg' %}"></button>
-                            </div>
-
-                            <div class="carousel-buttons" style="   ">
-                                <button data-item-index="0"
-                                        style="display: flex; flex-direction: column; align-items: center; width: 100px; height: 100px; margin-top: 30px;">
-                                    <img src="{{ product.images.url }}"
-                                         alt="Thumb 1">
-                                </button>
-                                <button data-item-index="1"
-                                        style="display: flex; flex-direction: column; align-items: center; width: 100px; height: 100px; margin-top: 20px;">
-                                    <img src="{{ product.images.url }}"
-                                         alt="Thumb 2">
+                                <button style="border:none;background-color:transparent">
+                                    <img src="{% static '/src/assets/img/icon/Path 1623.svg' %}">
                                 </button>
                             </div>
+                    
+                            <!-- Карусель миниатюр -->
+                            <div class="carousel-buttons">
+                                {% for image in images %}
+                                <button data-item-index="{{ forloop.counter0 }}" style="display: flex; flex-direction: column; align-items: center; width: 100px; height: 100px; margin-top: 20px;">
+                                    <img src="{{ image.image.url }}" alt="Thumb {{ forloop.counter }}">
+                                </button>
+                                {% endfor %}
+                            </div>
+                            
+                            <!-- Основная карусель -->
                             <div class="carousel-container" style="display:flex;">
-                                <div class="carousel-item" style=" ">
-                                    <img src="{{ product.images.url }}" 
-                                         alt="Slide 1">
+                                {% for image in images %}
+                                <div class="carousel-item">
+                                    <img src="{{ image.image.url }}" alt="Slide {{ forloop.counter }}">
                                 </div>
-                                <div class="carousel-item" style=" ">
-                                    <img src="{{ product.images.url }}" 
-                                         alt="Slide 2">
-                                </div>
+                                {% endfor %}
                             </div>
+                    
                             <div class="product_right_path">
-                                <button style="border:none;background-color:transparent"><img
-                                        src="{% static '/src/assets/img/icon/Path 1622.svg' %}"></button>
-
+                                <button style="border:none;background-color:transparent">
+                                    <img src="{% static '/src/assets/img/icon/Path 1622.svg' %}">
+                                </button>
                             </div>
                         </div>
-                        <div class="product_buttons" style=" ">
+                        
+                        <!-- Кнопки карусели -->
+                        <div class="product_buttons">
                             <button class="product_carousel-button"></button>
                             <button class="product_carousel-button"></button>
                             <button class="product_carousel-button"></button>
                             <button class="product_carousel-button"></button>
                             <button class="product_carousel-button"></button>
                         </div>
-
                     </div>
+                    
 
                     <!-- Правый блок -->
                     <div class="product-rating-mobile d-flex">

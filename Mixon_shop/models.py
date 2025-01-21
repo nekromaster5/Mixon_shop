@@ -1,5 +1,5 @@
 import string
-from random import choice
+import random
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -102,18 +102,18 @@ class ProductType(models.Model):
 # Product model
 class Product(models.Model):
     name = models.CharField(max_length=256)
-    description = models.TextField()
-    type = models.ForeignKey(ProductType, on_delete=models.CASCADE)
-    usage = models.CharField(max_length=256)
-    binding_substance = models.ForeignKey(BindingSubstance, on_delete=models.CASCADE)
-    dry_residue = models.CharField(max_length=256)
-    density = models.CharField(max_length=256)
-    drying_time = models.CharField(max_length=256)
-    consumption = models.CharField(max_length=256)
-    solvent = models.CharField(max_length=256)
-    working_tools = models.CharField(max_length=256)
-    tool_cleaning = models.CharField(max_length=256)
-    storage = models.CharField(max_length=256)
+    description = models.TextField(null=True, blank=True)
+    type = models.ForeignKey(ProductType, on_delete=models.CASCADE, null=True, blank=True)
+    usage = models.CharField(max_length=256, null=True, blank=True)
+    binding_substance = models.ForeignKey(BindingSubstance, on_delete=models.CASCADE, null=True, blank=True)
+    dry_residue = models.CharField(max_length=256, null=True, blank=True)
+    density = models.CharField(max_length=256, null=True, blank=True)
+    drying_time = models.CharField(max_length=256, null=True, blank=True)
+    consumption = models.CharField(max_length=256, null=True, blank=True)
+    solvent = models.CharField(max_length=256, null=True, blank=True)
+    working_tools = models.CharField(max_length=256, null=True, blank=True)
+    tool_cleaning = models.CharField(max_length=256, null=True, blank=True)
+    storage = models.CharField(max_length=256, null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     discount_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     is_discounted = models.BooleanField(default=False)
@@ -138,10 +138,10 @@ class ProductImage(models.Model):
 
 class ProductStock(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
-    volume = models.ForeignKey(Volume, on_delete=models.CASCADE)
-    color = models.ForeignKey(Color, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField()
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE, null=True, blank=True)
+    volume = models.ForeignKey(Volume, on_delete=models.CASCADE, null=True, blank=True)
+    color = models.ForeignKey(Color, on_delete=models.CASCADE, null=True, blank=True)
+    quantity = models.PositiveIntegerField(null=True, blank=True)
 
     class Meta:
         unique_together = ('product', 'branch', 'volume', 'color')
@@ -160,6 +160,51 @@ def update_product_stock_status(sender, instance, **kwargs):
     else:
         product.is_in_stock = False
     product.save()
+
+
+class SalesLeaders(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='sales_leaders')
+
+    def __str__(self):
+        return f'{self.product}'
+
+
+class RecommendedProducts(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='recommended_products')
+
+    def __str__(self):
+        return f'{self.product}'
+
+
+class PromoCode(models.Model):
+    DISCOUNT_TYPE_CHOICES = [
+        ('percentage', 'Percentage'),  # Знижка у відсотках
+        ('amount', 'Amount'),          # Знижка на певну суму
+    ]
+
+    code = models.CharField(max_length=50, unique=True, blank=True, null=True)
+    discount_type = models.CharField(max_length=10, choices=DISCOUNT_TYPE_CHOICES)
+    discount_value = models.DecimalField(max_digits=10, decimal_places=2)
+    max_usage_count = models.PositiveIntegerField(null=True, blank=True)
+    expiry_date = models.DateTimeField(null=True, blank=True)
+    usage_count = models.PositiveIntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        if not self.code:  # Генеруємо код, якщо поле пусте
+            self.code = self.generate_random_code()
+        super().save(*args, **kwargs)
+
+    @staticmethod
+    def generate_random_code(length=16):
+        """
+        Генерує випадковий код з вказаною кількістю символів.
+        """
+        characters = string.ascii_letters + string.digits
+        return ''.join(random.choices(characters, k=length))
+
+    def __str__(self):
+        discount_info = f"{self.discount_value}% off" if self.discount_type == 'percentage' else f"${self.discount_value} off"
+        return f"{self.code} - {discount_info}"
 
 
 # Review model
@@ -226,10 +271,3 @@ class ErrorMessages(models.Model):
 class InfoMessages(models.Model):
     name = models.CharField(verbose_name=_('message`s short name'), max_length=100, unique=True)
     message = models.CharField(verbose_name=_('message`s full text'), max_length=255)
-
-# def rand_slug():
-#     return ''.join(choice(string.ascii_letters + string.digits) for _ in range(12))
-#
-#
-# def rand_title_chars(value):
-#     return ''.join(choice(value) for _ in range(int(len(value)/2)))

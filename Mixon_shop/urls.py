@@ -52,7 +52,6 @@ urlpatterns = [
     path('error/', ErrorPage.as_view(), name='error'),
     path('shipment&payment/', ShipmentPayment.as_view(), name='shipment_and_payment'),
     path('contacts/', Contacts.as_view(), name='contacts'),
-    path('product/<int:product_id>/', ProductPage.as_view(), name='product_detail'),
 
     path('register/', register, name='register'),
     path('activate/<uidb64>/<token>/', activate, name='activate'),

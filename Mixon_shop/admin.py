@@ -7,7 +7,7 @@ from .models import (
     Region, UserProfile, PhoneNumber, Branch, Product, Review,
     OrderStatus, Order, FavoriteProduct, ProductComparison,
     NewsCategory, News, ErrorMessages, InfoMessages, City, ProductStock, Volume, Color, ProductImage, BindingSubstance,
-    ProductType
+    ProductType, PromoCode, SalesLeaders, RecommendedProducts,
 )
 
 
@@ -141,6 +141,36 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(ProductImage)
 class ProductImageAdmin(admin.ModelAdmin):
     list_display = ('product', 'image')
+
+
+@admin.register(PromoCode)
+class PromoCodeAdmin(admin.ModelAdmin):
+    list_display = ('code', 'discount_type', 'discount_value', 'max_usage_count', 'usage_count', 'expiry_date')
+    list_filter = ('discount_type', 'expiry_date')
+    search_fields = ('code',)
+    readonly_fields = ('usage_count',)
+    fieldsets = (
+        (None, {
+            'fields': ('code', 'discount_type', 'discount_value')
+        }),
+        ('Restrictions', {
+            'fields': ('max_usage_count', 'expiry_date', 'usage_count')
+        }),
+    )
+
+
+@admin.register(SalesLeaders)
+class SalesLeadersAdmin(admin.ModelAdmin):
+    list_display = ('product',)  # Отображаем только продукт
+    search_fields = ('product__name',)  # Позволяет искать по имени продукта
+    autocomplete_fields = ('product',)  # Удобный поиск по связанным продуктам
+
+
+@admin.register(RecommendedProducts)
+class RecommendedProductsAdmin(admin.ModelAdmin):
+    list_display = ('product',)  # Отображаем только продукт
+    search_fields = ('product__name',)  # Позволяет искать по имени продукта
+    autocomplete_fields = ('product',)  # Удобный поиск по связанным продуктам
 
 
 # Регистрация модели Review
