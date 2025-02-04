@@ -22,9 +22,16 @@ class CustomMenu(Menu):
                             'Mixon_shop.models.SalesLeaders')
                 ),
             ]),
-            items.MenuItem('Продукты и категории', children=[
+            items.MenuItem('Главная страница', children=[
                 items.ModelList(
-                    'Продукты и категории',
+                    'Главная страница',
+                    models=('Mixon_shop.models.MainPageSections', 'Mixon_shop.models.MainPageBanner',
+                            'Mixon_shop.models.RecommendedProducts', 'Mixon_shop.models.SalesLeaders')
+                ),
+            ]),
+            items.MenuItem('Новости', children=[
+                items.ModelList(
+                    'Новости',
                     models=('Mixon_shop.models.News', 'Mixon_shop.models.NewsCategory')
                 ),
             ]),

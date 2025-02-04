@@ -179,7 +179,7 @@ class RecommendedProducts(models.Model):
 class PromoCode(models.Model):
     DISCOUNT_TYPE_CHOICES = [
         ('percentage', 'Percentage'),  # Знижка у відсотках
-        ('amount', 'Amount'),          # Знижка на певну суму
+        ('amount', 'Amount'),  # Знижка на певну суму
     ]
 
     code = models.CharField(max_length=50, unique=True, blank=True, null=True)
@@ -225,10 +225,31 @@ class OrderStatus(models.Model):
     name = models.CharField(max_length=256)
 
 
+class ShipmentMethod(models.Model):
+    name = models.CharField(max_length=256)
+    image = models.ImageField(upload_to='shipment_methods/images/')
+
+
+class PaymentMethod(models.Model):
+    name = models.CharField(max_length=256)
+    image = models.ImageField(upload_to='payment_methods/images/')
+
+
 # Order model
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     products = models.ManyToManyField(Product)
+    name = models.CharField(max_length=256)
+    phone = models.CharField(max_length=256, blank=True, null=True)
+    email = models.CharField(max_length=256, blank=True, null=True)
+    shipment_method = models.ForeignKey(ShipmentMethod, on_delete=models.CASCADE)
+    order_place = models.ForeignKey(Branch, on_delete=models.CASCADE)
+    payment_method = models.ForeignKey(PaymentMethod, on_delete=models.CASCADE)
+    comment = models.TextField(blank=True, null=True)
+    goods_cost = models.DecimalField(max_digits=20, decimal_places=2)
+    shipment_cost = models.DecimalField(max_digits=10, decimal_places=2)
+    promo_applied = models.BooleanField(default=False)
+    promo = models.ForeignKey(PromoCode, on_delete=models.CASCADE, related_name='promo_code', blank=True, null=True)
     status = models.ForeignKey(OrderStatus, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -261,6 +282,41 @@ class News(models.Model):
     text = models.TextField()
     category = models.ForeignKey(NewsCategory, on_delete=models.CASCADE)
     date_published = models.DateTimeField(auto_now_add=True)
+
+
+class Cart(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def get_total_price(self):
+        return sum(item.total_price() for item in self.items.all())
+
+    def __str__(self):
+        return f"Корзина пользователя {self.user.username}"
+
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="items")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def total_price(self):
+        return self.quantity * self.product.price
+
+    def __str__(self):
+        return f"{self.product.name} ({self.quantity})"
+
+
+class MainPageSections(models.Model):
+    image = models.ImageField(upload_to='sections/images/')
+    name = models.CharField(max_length=256)
+    is_used = models.BooleanField(default=False)
+
+
+class MainPageBanner(models.Model):
+    image = models.ImageField(upload_to='banners/images/')
+    description = models.TextField()
+    is_used = models.BooleanField(default=False)
 
 
 class ErrorMessages(models.Model):
