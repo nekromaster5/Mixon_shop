@@ -2725,6 +2725,9 @@ Header
     margin-top: 30px;
     left: 0;
 }
+.dropdown.visible {
+    display: block;
+}
 
 .adaptive_header_button {
     display: none;

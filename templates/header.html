@@ -327,7 +327,7 @@ margin-left:400px;
                 <div class="panel" id="myPanel">
                     <img src="{% static '/src/assets/img/icon/city_mark1.svg' %}" alt="Icon">
                     <div class="panel_label"><p class="panel_label_text">Хмельницикий</p></div>
-                    <button class="panel_dropdowm_button" onclick="">
+                    <button class="panel_dropdowm_button"  >
                         <img class="panel_dropdowm_button_img" src="{% static '/src/assets/img/icon/Vector 1.svg' %}"
                              alt="">
                     </button>
@@ -782,6 +782,20 @@ margin-left:400px;
         })
         .catch(error => console.error('Error:', error));
     }
+    const dropdownButton = document.querySelector(".panel_dropdowm_button");
+    const dropdown = document.querySelector("#myDropdown");
+
+    // Функция для переключения видимости
+    function toggleDropdown() {
+        dropdown.classList.toggle("visible");
+    }
+
+    // Назначаем обработчик события на кнопку
+    dropdownButton.addEventListener("click", toggleDropdown);
+ 
+       
+    
+    
 </script>
 
 </body>
