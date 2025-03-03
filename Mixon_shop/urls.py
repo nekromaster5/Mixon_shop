@@ -33,7 +33,10 @@ from .views import product_detail
 from Mixon_shop.views import HomePage, CataloguePage, ProductPage, Brands, News, \
     Topic, AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts, SearchPage
 from .views import product_detail, submit_review
+from .views import home_page
 urlpatterns = [
+    path('', home_page, name='home_page'),  # Указываем главную страницу
+
     path('admin_tools/', include('admin_tools.urls')),
     path('admin/', admin.site.urls),
     path('product/<int:product_id>/', product_detail, name='product_detail'),
