@@ -103,6 +103,8 @@ DATABASES = {
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+CART_SESSION_ID = 'cart'
+
 ADMIN_TOOLS_MENU = 'Mixon_shop.admin_tools.menu.CustomMenu'
 ADMIN_TOOLS_INDEX_DASHBOARD = 'Mixon_shop.admin_tools.dashboard.CustomIndexDashboard'
 ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'Mixon_shop.admin_tools.dashboard.CustomAppIndexDashboard'

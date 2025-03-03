@@ -1,36 +1,21 @@
+from decimal import Decimal
+
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import JsonResponse
-from django.shortcuts import redirect
 # Existing import statements
-from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 from django.views import View
-from .models import Product
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
-from django.shortcuts import render, redirect
 import math
-from .models import Product, Review
-from .models import RecommendedProducts
-from .models import SalesLeaders
 
-def home_page(request):
-    sales_leaders = SalesLeaders.objects.all()[:4]  # Берем только 4 лидера продаж
+from .admin import ProductImageInline
+from .forms import UserLoginForm
+from .models import Product, Review, RecommendedProducts, SalesLeaders, City, Branch, ErrorMessages
 
-    context = {
-        'sales_leaders': sales_leaders,  # Передаем их в шаблон
-    }
-    return render(request, 'home_page.html', context)  # Убедитесь, что рендерится нужный шаблон
-
-def home_page(request):
-    recommended_products = RecommendedProducts.objects.all()  # Загружаем рекомендованные продукты
-    print("DEBUG: recommended_products count =", recommended_products.count())  # Отладка
-
-    context = {
-        'recommended_products': recommended_products,  # Передаем в шаблон
-    }
-    return render(request, 'home_page.html', context)  # Убедитесь, что рендерится правильный шаблон
-from .models import Product, City, Branch
 
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
@@ -55,10 +40,17 @@ def product_detail(request, product_id):
     }
     return render(request, 'product.html', context)
 
+
 class HomePage(View):
     def get(self, request):
-        products = Product.objects.prefetch_related('images').all()
-        return render(request, 'home_page.html', {'products': products})
+        recommended_products = RecommendedProducts.objects.select_related('product').all()
+        sales_leaders = SalesLeaders.objects.select_related('product').all()
+        novelty = Product.objects.all().filter(is_new=True)
+        return render(request, 'home_page.html', {
+            'recommended_products': recommended_products,
+            'sales_leaders': sales_leaders,
+            'novelty': novelty,
+        })
 
 
 class ProductPage(View):
@@ -79,16 +71,16 @@ class CataloguePage(View):
     def get(self, request):
         products = Product.objects.prefetch_related('images').all()
         return render(request, 'catalogue.html', {'products': products})
-from django.shortcuts import render
+
 
 def register(request):
     return render(request, 'register.html')
 
-from django.shortcuts import render
 
 def activate(request):
     # Логика для активации аккаунта
     return render(request, 'activation_success.html')
+
 
 def get_pages_to_display(current_page, total_pages):
     """
@@ -192,26 +184,6 @@ class SearchPage(View):
         else:
             return redirect(f'/search/?page=1')
 
-def home(request):
-    # Продукты-лидеры продаж
-    top_selling_products = Product.objects.filter(is_in_stock=True).order_by('-average_rating')[:5]
-
-    # Новинки
-    new_products = Product.objects.filter(is_new=True, is_in_stock=True).order_by('-id')[:5]
-
-    # Рекомендуемые товары
-    recommended_products = Product.objects.filter(is_in_stock=True).order_by('-id')[:5]
-
-    return render(request, 'home_page.html', {
-        'top_selling_products': top_selling_products,
-        'new_products': new_products,
-        'recommended_products': recommended_products,
-    })
-class ProductPage(View):
-    def get(self, request, product_id):
-        product = get_object_or_404(Product, id=product_id)
-        return render(request, 'product.html', {'product': product})
-
 
 class PersonalPage(View):
     def get(self, request):
@@ -265,7 +237,7 @@ def get_branches(request):
     branches = Branch.objects.filter(city_id=city_id)
     print("branches:", branches)
 
-    html = render(request, "partials/branches_list.html", {"branches": branches}).content.decode("utf-8")
+    html = render(request, "partials/branches_list-checkout.html", {"branches": branches}).content.decode("utf-8")
     return JsonResponse({"html": html})
 
 
@@ -287,6 +259,8 @@ class ShipmentPayment(View):
 class Contacts(View):
     def get(self, request):
         return render(request, 'contacts.html')
+
+
 def branch_list(request):
     """
     Отображает список всех филиалов (Branch),
@@ -313,14 +287,16 @@ def login_view(request):
                 login(request, user)
                 return redirect('home')
             else:
-                messages.error(request, 'Invalid username or password')
+                messages.error(request, ErrorMessages.objects.get(name='invalid_auth').message)
     else:
         form = UserLoginForm()
     return render(request, 'your_app/login.html', {'form': form})
 
+
 def logout_view(request):
     logout(request)
     return redirect('login')
+
 
 def get_session_cart(request):
     """
@@ -331,6 +307,7 @@ def get_session_cart(request):
     if not cart:
         cart = request.session[settings.CART_SESSION_ID] = {}
     return cart
+
 
 def cart_add(request, product_id):
     cart = get_session_cart(request)
@@ -344,6 +321,7 @@ def cart_add(request, product_id):
     request.session.modified = True
     return redirect('cart_detail')
 
+
 def cart_remove(request, product_id):
     cart = get_session_cart(request)
     product_id_str = str(product_id)
@@ -351,6 +329,7 @@ def cart_remove(request, product_id):
         del cart[product_id_str]
         request.session.modified = True
     return redirect('cart_detail')
+
 
 def cart_detail(request):
     cart = get_session_cart(request)
@@ -371,6 +350,7 @@ def cart_detail(request):
         'total_price': total_price
     }
     return render(request, 'cart/detail.html', context)
+
 
 @require_POST
 def submit_review(request, product_id):

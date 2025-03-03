@@ -15,31 +15,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 import admin_tools
-from django.conf import settings
-from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import register, activate
-from django.urls import path
-from django.contrib.auth import views as auth_views
-from .views import register, activate
-from .views import branch_list
 from . import views
-from .views import product_detail
+
 from Mixon_shop.views import HomePage, CataloguePage, ProductPage, Brands, News, \
-    Topic, AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts, SearchPage
-from .views import product_detail, submit_review
-from .views import home_page
-    Topic, AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts, SearchPage, \
-    get_branches
+    Topic, AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts, \
+    SearchPage, product_detail, submit_review, get_branches, register, activate, branch_list
 
 urlpatterns = [
-    path('', home_page, name='home_page'),  # Указываем главную страницу
-
     path('admin_tools/', include('admin_tools.urls')),
     path('admin/', admin.site.urls),
     path('product/<int:product_id>/', product_detail, name='product_detail'),
@@ -62,7 +49,7 @@ urlpatterns = [
     path('error/', ErrorPage.as_view(), name='error'),
     path('shipment&payment/', ShipmentPayment.as_view(), name='shipment_and_payment'),
     path('contacts/', Contacts.as_view(), name='contacts'),
-path('branches/', branch_list, name='branch_list'),
+    path('branches/', branch_list, name='branch_list'),
     path('register/', register, name='register'),
     path('activate/<uidb64>/<token>/', activate, name='activate'),
     path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
@@ -73,9 +60,7 @@ path('branches/', branch_list, name='branch_list'),
     path('cart/remove/<int:product_id>/', views.cart_remove, name='cart_remove'),
     path('cart/', views.cart_detail, name='cart_detail'),
     path('activate/<uidb64>/<token>/', activate, name='activate'),
-
     path('get-branches/', get_branches, name='get_branches'),
-
 
 ]
 

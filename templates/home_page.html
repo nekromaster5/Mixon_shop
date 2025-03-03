@@ -221,18 +221,20 @@
                         </svg>
                     </a>
                 </div>
-                <div class="product__section--inner"> 
+                <div class="product__section--inner">
                     <div class="slider-container adjustable-slider">
-                        <div class="row">
+                        <div class="slider">
                             {% for leader in sales_leaders %}
-                                <div class="col-lg-18 col-md-17 col-17 mb-lg-8 md-md-7 mb-5 slide">
+                                <div class="col-lg-18 col-md-17 col-17 mb-lg-8 mb-md-7 mb-5 slide">
                                     {% include "product_block--standard.html" with product=leader.product %}
                                 </div>
+                                {% empty %}
+                                <p>Нет рекомендованных продуктов</p>
                             {% endfor %}
                         </div>
                     </div>
                 </div>
-                
+            </div>
             <div class="section__newbies">
                 <div class="section__heading d-flex justify-content-between mb-md-8 mb-0">
                     <h2 class="section__heading--maintitle flex-grow-1 flex-shrink-0">Новинки</h2>
@@ -252,16 +254,13 @@
                 <div class="product__section--inner">
                     <div class="slider-container adjustable-slider">
                         <div class="slider">
-                            {% for i in 'abcd'|make_list %}
-                                <div class="col-lg-18 col-md-17 col-17 mb-lg-8 md-md-7 mb-5 slide">
-                                    {% include "product_block--standard.html" %}
+                            {% for newbie in novelty %}
+                                <div class="col-lg-18 col-md-17 col-17 mb-lg-8 mb-md-7 mb-5 slide">
+                                    {% include "product_block--standard.html" with product=newbie %}
                                 </div>
+                                {% empty %}
+                                <p>Нет новинок</p>
                             {% endfor %}
-                            {#                                            <div class="col-17 slide">#}
-                            {#                                                <img style="display: block !important;"#}
-                            {#                                                     src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}"#}
-                            {#                                                     alt="mixon banner">#}
-                            {#                                            </div>#}
                         </div>
                     </div>
                 </div>
@@ -282,20 +281,20 @@
                         </svg>
                     </a>
                 </div>
-                <div class="product__section--inner"> 
+                <div class="product__section--inner">
                     <div class="slider-container adjustable-slider">
                         <div class="slider">
-                            {% for rec in recommended_products %}
-                                <div class="col-lg-18 col-md-17 col-17 mb-lg-8 md-md-7 mb-5 slide">
-                                    {% include "product_block--standard.html" with product=rec.product %}
+                            {% for recommendation in recommended_products %}
+                                <div class="col-lg-18 col-md-17 col-17 mb-lg-8 mb-md-7 mb-5 slide">
+                                    {% include "product_block--standard.html" with product=recommendation.product %}
                                 </div>
-                            {% empty %}
+                                {% empty %}
                                 <p>Нет рекомендованных продуктов</p>
                             {% endfor %}
                         </div>
                     </div>
                 </div>
-                
+
             </div>
             <div class="section__news">
                 <div class="section__heading d-flex justify-content-between mb-md-8 mb-0">
@@ -363,7 +362,7 @@
                 }
             }
         }
-       
+
         // Закрыть выпадающий список при клике вне него
         window.onclick = function (event) {
             if (!event.target.matches('.panel button')) {
@@ -383,26 +382,25 @@
             const menu = document.getElementById('menu');
             const mainContent = document.getElementById('mainContent');
             const header = document.querySelector('header'); // Найти header
-        
+
             openMenuButton.addEventListener('click', () => {
                 overlay.style.display = 'block';
                 menu.style.display = 'block';
                 mainContent.classList.add('inactive-overlay');
                 document.body.style.overflow = 'hidden';
-                
+
                 // Сделать header активным
                 header.style.zIndex = 20; // Или любое число выше, чем у overlay
                 header.style.pointerEvents = 'auto';
             });
-        
-          
-        
+
+
             overlay.addEventListener('click', () => {
                 overlay.style.display = 'none';
                 menu.style.display = 'none';
                 mainContent.classList.remove('inactive-overlay');
                 document.body.style.overflow = 'auto';
-        
+
                 // Вернуть header в исходное состояние
                 header.style.zIndex = '';
                 header.style.pointerEvents = '';
