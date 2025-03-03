@@ -2170,7 +2170,7 @@ Reviev
 }
 
 .product_left_path {
-    display: none;
+     margin-left:40px;
 }
 
 .product_right_path {
@@ -2217,6 +2217,7 @@ Reviev
     margin-left: 300px;
     display: flex;
     justify-content: space-between;
+    margin-top:20px;
 }
 
 

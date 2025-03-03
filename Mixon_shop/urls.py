@@ -28,13 +28,17 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from .views import register, activate
 from .views import branch_list
- 
+from . import views
+from .views import product_detail
 from Mixon_shop.views import HomePage, CataloguePage, ProductPage, Brands, News, \
     Topic, AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts, SearchPage
-
+from .views import product_detail, submit_review
 urlpatterns = [
     path('admin_tools/', include('admin_tools.urls')),
     path('admin/', admin.site.urls),
+    path('product/<int:product_id>/', product_detail, name='product_detail'),
+    path('product/<int:product_id>/submit_review/', submit_review, name='submit_review'),
+    path('product/<int:product_id>/', product_detail, name='product_detail'),
     path('', HomePage.as_view(), name='home'),
     path('catalogue', CataloguePage.as_view(), name='catalogue'),
     path('search/', SearchPage.as_view(), name='search'),
@@ -59,7 +63,9 @@ path('branches/', branch_list, name='branch_list'),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
-  
+    path('cart/add/<int:product_id>/', views.cart_add, name='cart_add'),
+    path('cart/remove/<int:product_id>/', views.cart_remove, name='cart_remove'),
+    path('cart/', views.cart_detail, name='cart_detail'),
     path('activate/<uidb64>/<token>/', activate, name='activate'),
     
 

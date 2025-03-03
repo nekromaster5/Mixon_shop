@@ -6,7 +6,34 @@ from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 from django.views import View
 from .models import Product
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.http import require_POST
 from django.shortcuts import render, redirect
+import math
+from .models import Product, Review
+
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    
+    # Вычисляем рейтинг
+    # Округляем рейтинг до ближайшего 0.5 в большую сторону
+    rounded_rating = math.ceil(product.average_rating * 2) / 2
+    full_stars = int(rounded_rating)  # целое число полных звезд
+    half_star = 1 if (rounded_rating - full_stars) == 0.5 else 0
+    empty_stars = 5 - full_stars - half_star
+
+    # Формируем список звезд, где:
+    # 'full'  - полная звезда,
+    # 'half'  - половинчатая,
+    # 'empty' - пустая звезда.
+    star_list = ['full'] * full_stars + ['half'] * half_star + ['empty'] * empty_stars
+    # Для отладки
+    print("DEBUG star_list =", star_list)
+    context = {
+        'product': product,
+        'stars': star_list,  # передаем готовый список звезд в шаблон
+    }
+    return render(request, 'product.html', context)
 
 class HomePage(View):
     def get(self, request):
@@ -253,3 +280,85 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+def get_session_cart(request):
+    """
+    Возвращает словарь корзины из сессии.
+    Если корзины нет, создаёт пустую.
+    """
+    cart = request.session.get(settings.CART_SESSION_ID)
+    if not cart:
+        cart = request.session[settings.CART_SESSION_ID] = {}
+    return cart
+
+def cart_add(request, product_id):
+    cart = get_session_cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    product_id_str = str(product.id)
+
+    if product_id_str not in cart:
+        cart[product_id_str] = {'quantity': 0, 'price': str(product.price)}
+    # Добавляем 1 штуку товара, можно расширить логику для указания количества
+    cart[product_id_str]['quantity'] += 1
+    request.session.modified = True
+    return redirect('cart_detail')
+
+def cart_remove(request, product_id):
+    cart = get_session_cart(request)
+    product_id_str = str(product_id)
+    if product_id_str in cart:
+        del cart[product_id_str]
+        request.session.modified = True
+    return redirect('cart_detail')
+
+def cart_detail(request):
+    cart = get_session_cart(request)
+    cart_items = []
+    total_price = 0
+    product_ids = cart.keys()
+    products = Product.objects.filter(id__in=product_ids)
+
+    for product in products:
+        item = cart[str(product.id)]
+        item['product'] = product
+        item['total_price'] = Decimal(item['price']) * item['quantity']
+        total_price += item['total_price']
+        cart_items.append(item)
+
+    context = {
+        'cart_items': cart_items,
+        'total_price': total_price
+    }
+    return render(request, 'cart/detail.html', context)
+
+@require_POST
+def submit_review(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    
+    # Получаем данные из POST-запроса
+    rating = request.POST.get('rating', '0')
+    pros = request.POST.get('pros', '')
+    cons = request.POST.get('cons', '')
+    review_text = request.POST.get('review_text', '')
+    reviewer_name = request.POST.get('name', '')
+    phone = request.POST.get('phone', '')
+    
+    try:
+        rating_int = int(round(float(rating)))
+    except ValueError:
+        rating_int = 0
+
+    # Здесь user = None, так как авторизация отсутствует
+    Review.objects.create(
+        product=product,
+        user=None,  # или можно установить специального анонимного пользователя, если требуется
+        reviewer_name=reviewer_name,
+        phone=phone,
+        rating=rating_int,
+        pros=pros,
+        cons=cons,
+        review_text=review_text
+    )
+    
+    # Перенаправляем пользователя обратно на страницу продукта
+    return render(request, 'product.html', context)
