@@ -67,24 +67,32 @@
                         <a href="{% url 'catalogue' %}">ЛКМ для Строительства</a>
                     </li>
                     <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'catalogue' %}">Шпатлевка универсальная</a>
+                        <a href="{% url 'catalogue' %}">{{ product.type.name }}</a>
                     </li>
                     <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'product' product_id=product.id %}">Плитка универсальная 2 кг Mixon Uni</a>
+                        <a href="{% url 'product' product_id=product.id %}">{{ product.name }}</a>
                     </li>
+                    
                 </ul>
 
             </div>
-            <span class="breadcrumb__content--title" style="font-size:30px;">Шпатлевка универсальная 2 кг Mixon Uni</span>
+            <span class="breadcrumb__content--title" style="font-size:30px;">{{ product.name }}</span>
+
             <div class="product-rating__wrapper d-inline-flex justify-content-between align-items-center">
-                <div class="product-rating d-flex">
-                    <div class="product_top_stars">
-                        <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                        <img src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                    </div>
+             <div class="product-rating d-flex">
+    <div class="product_top_stars">
+        {% for star in stars %}
+            {% if star == "full" %}
+                <img src="{% static 'src/assets/img/icon/Path 131.png' %}" alt="Полная звезда">
+            {% elif star == "half" %}
+                <img src="{% static 'src/assets/img/icon/Path 132.png' %}" alt="Половинчатая звезда">
+            {% else %}
+                <img src="{% static 'src/assets/img/icon/Path 133.png' %}" alt="Пустая звезда">
+            {% endif %}
+        {% endfor %}
+    </div>
+ 
+
                     <div class="product_top_icons" style="margin-top:10px;">
                         <div class="product_top_icon">
                             <img style="width:18px;height:19px;"src="{% static '/src/assets/img/icon/like_icon.png' %}">
@@ -137,29 +145,31 @@
                     <!-- Левый блок -->
                     <div class="left_block">
                         <div class="left_flex_display" style="display:flex;">
-                            <div class="product_left_path">
-                                <button style="border:none;background-color:transparent">
-                                    <img src="{% static '/src/assets/img/icon/Path 1623.svg' %}">
-                                </button>
-                            </div>
-                    
-                            <!-- Карусель миниатюр -->
                             <div class="carousel-buttons">
-                                {% for image in images %}
-                                <button data-item-index="{{ forloop.counter0 }}" style="display: flex; flex-direction: column; align-items: center; width: 100px; height: 100px; margin-top: 20px;">
-                                    <img src="{{ image.image.url }}" alt="Thumb {{ forloop.counter }}">
+                                {% for _ in "1111"|make_list %}
+                                <button data-item-index="{{ forloop.counter0 }}" style="display: flex; flex-direction: column; align-items: center; width: 100px; height: 100px; margin-top: 20px; border: none; background: transparent;">
+                                    <img src="{% if product.images.all %}{{ product.images.first.image.url }}{% else %}{% static '/src/assets/img/icon/Path 1623.svg' %}{% endif %}" alt="Thumb {{ forloop.counter }}" width="100" height="100">
                                 </button>
                                 {% endfor %}
                             </div>
                             
-                            <!-- Основная карусель -->
-                            <div class="carousel-container" style="display:flex;">
+                            <div class="product_left_path" >
+                                <button style="border:none;background-color:transparent; width: 400px; height: 400px;">
+                                    <img src="{% if product.images.all %}{{ product.images.first.image.url }}{% else %}{% static '/src/assets/img/icon/Path 1623.svg' %}{% endif %}" alt="{{ product.name }}" width="400" height="400">
+                                </button>
+                            </div>
+                            
+                            
+                            
+                             <!-- Основная карусель -->
+                             <div class="carousel-container" style="display:flex;">
                                 {% for image in images %}
                                 <div class="carousel-item">
                                     <img src="{{ image.image.url }}" alt="Slide {{ forloop.counter }}">
                                 </div>
                                 {% endfor %}
                             </div>
+                            
                     
                             <div class="product_right_path">
                                 <button style="border:none;background-color:transparent">
@@ -578,7 +588,7 @@
                                         </div>
                                     </td>
                                     <td class="col-6">
-                                        Внутри помещений
+                                        {{ product.usage }}
                                     </td>
                                 </tr>
                                 <tr class="product__content--text">
@@ -589,7 +599,7 @@
                                         </div>
                                     </td>
                                     <td class="col-6">
-                                        Сополимер
+                                        {{ product.binding_substance}}
                                     </td>
                                 </tr>
                                 <tr class="product__content--text">
@@ -600,7 +610,7 @@
                                         </div>
                                     </td>
                                     <td class="col-6">
-                                        10 %
+                                        {{ product.dry_residue}}
                                     </td>
                                 </tr>
                                 <tr class="product__content--text">
@@ -610,20 +620,20 @@
                                         </div>
                                     </td>
                                     <td class="col-6">
-                                        1,05 кг/л
+                                        {{ product.density}}
                                     </td>
                                 </tr>
                                 <tr class="product__content--text">
                                     <td class="col-6 text-nowrap overflow-hidden">
                                         <div class="characteristic-title_main">
-                                            Время высыхания, 23°С 50%
-                                            RH.................................................................................................................................................................................
+                                            Время высыхания, 23°С 50% RH ................................................................................................................................................................................. 
                                         </div>
                                     </td>
                                     <td class="col-6">
-                                        2-6 часов
+                                        {{ product.drying_time }}
                                     </td>
                                 </tr>
+                                
                                 </tbody>
                             </table>
                             <table class="characteristics__content--table table_ab main_table_r" style="  margin-left: 0rem;">
@@ -637,7 +647,7 @@
                                         </div>
                                     </td>
                                     <td class="col-6">
-                                        10-12 м2/л в 1 слой
+                                        {{ product.consumption }}
                                     </td>
                                 </tr>
                                 <tr class="product__content--text">
@@ -647,7 +657,7 @@
                                         </div>
                                     </td>
                                     <td class="col-6">
-                                        Вода
+                                        {{ product.solvent }}
                                     </td>
                                 </tr>
                                 <tr class="product__content--text">
@@ -658,7 +668,7 @@
                                         </div>
                                     </td>
                                     <td class="col-6">
-                                        Валик, кисть
+                                        {{ product.working_tools}}
                                     </td>
                                 </tr>
                                 <tr class="product__content--text">
@@ -669,7 +679,7 @@
                                         </div>
                                     </td>
                                     <td class="col-6">
-                                        Вода
+                                        {{ product.tool_cleaning }}
                                     </td>
                                 </tr>
                                 <tr class="product__content--text">
@@ -679,7 +689,7 @@
                                         </div>
                                     </td>
                                     <td class="col-6">
-                                        3 года t > 0оC
+                                        {{ product.storage}}
                                     </td>
                                 </tr>
 
@@ -876,115 +886,109 @@
                         <span class="product__content--title__text">Характеристики</span>
                         <table class="characteristics__content--table">
                             <tbody class="characteristics__content--table__body position-relative">
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        Использование...........................................................................................................................................
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    Внутри помещений
-                                </td>
-                            </tr>
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        Связующее
-                                        вещество..................................................................................................................................................
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    Сополимер
-                                </td>
-                            </tr>
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        Сухой
-                                        остаток...................................................................................................................................................................
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    10 %
-                                </td>
-                            </tr>
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        Плотность...............................................................................................................................................................................
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    1,05 кг/л
-                                </td>
-                            </tr>
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        Время высыхания, 23°С 50%
-                                        RH.................................................................................................................................................................................
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    2-6 часов
-                                </td>
-                            </tr>
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        Расход готовой
-                                        смеси..........................................................................................................................................................................................
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    10-12 м2/л в 1 слой
-                                </td>
-                            </tr>
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        Разбавитель..................................................................................................................................................................................................
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    Вода
-                                </td>
-                            </tr>
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        Рабочие
-                                        инструменты...........................................................................................................................................................................................
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    Валик, кисть
-                                </td>
-                            </tr>
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        Очистка рабочих
-                                        инструментов...............................................................................................................................................................................................
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    Вода
-                                </td>
-                            </tr>
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        Хранение......................................................................................................................................................................................................
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    3 года t > 0оC
-                                </td>
-                            </tr>
-
+                                <tr class="product__content--text">
+                                    <td class="col-6 text-nowrap overflow-hidden">
+                                        <div class="characteristic-title">
+                                            Использование...........................................................................................................................................
+                                        </div>
+                                    </td>
+                                    <td class="col-6">
+                                        {{ product.usage }}
+                                    </td>
+                                </tr>
+                                <tr class="product__content--text">
+                                    <td class="col-6 text-nowrap overflow-hidden">
+                                        <div class="characteristic-title">
+                                            Связующее вещество..................................................................................................................................................
+                                        </div>
+                                    </td>
+                                    <td class="col-6">
+                                        {{ product.binding_substance }}
+                                    </td>
+                                </tr>
+                                <tr class="product__content--text">
+                                    <td class="col-6 text-nowrap overflow-hidden">
+                                        <div class="characteristic-title">
+                                            Сухой остаток...................................................................................................................................................................
+                                        </div>
+                                    </td>
+                                    <td class="col-6">
+                                        {{ product.dry_residue }}
+                                    </td>
+                                </tr>
+                                <tr class="product__content--text">
+                                    <td class="col-6 text-nowrap overflow-hidden">
+                                        <div class="characteristic-title">
+                                            Плотность............................................................................................................................................................................... 
+                                        </div>
+                                    </td>
+                                    <td class="col-6">
+                                        {{ product.density }}
+                                    </td>
+                                </tr>
+                                <tr class="product__content--text">
+                                    <td class="col-6 text-nowrap overflow-hidden">
+                                        <div class="characteristic-title">
+                                            Время высыхания, 23°С 50% RH................................................................................................................................................................................. 
+                                        </div>
+                                    </td>
+                                    <td class="col-6">
+                                        {{ product.drying_time }}
+                                    </td>
+                                </tr>
+                                <tr class="product__content--text">
+                                    <td class="col-6 text-nowrap overflow-hidden">
+                                        <div class="characteristic-title">
+                                            Расход готовой смеси..........................................................................................................................................................................................
+                                        </div>
+                                    </td>
+                                    <td class="col-6">
+                                        {{ product.consumption }}
+                                    </td>
+                                </tr>
+                                <tr class="product__content--text">
+                                    <td class="col-6 text-nowrap overflow-hidden">
+                                        <div class="characteristic-title">
+                                            Разбавитель..................................................................................................................................................................................................
+                                        </div>
+                                    </td>
+                                    <td class="col-6">
+                                        {{ product.solvent }}
+                                    </td>
+                                </tr>
+                                <tr class="product__content--text">
+                                    <td class="col-6 text-nowrap overflow-hidden">
+                                        <div class="characteristic-title">
+                                            Рабочие инструменты...........................................................................................................................................................................................
+                                        </div>
+                                    </td>
+                                    <td class="col-6">
+                                        {{ product.working_tools }}
+                                    </td>
+                                </tr>
+                                <tr class="product__content--text">
+                                    <td class="col-6 text-nowrap overflow-hidden">
+                                        <div class="characteristic-title">
+                                            Очистка рабочих инструментов...............................................................................................................................................................................................
+                                        </div>
+                                    </td>
+                                    <td class="col-6">
+                                        {{ product.tool_cleaning }}
+                                    </td>
+                                </tr>
+                                <tr class="product__content--text">
+                                    <td class="col-6 text-nowrap overflow-hidden">
+                                        <div class="characteristic-title">
+                                            Хранение......................................................................................................................................................................................................
+                                        </div>
+                                    </td>
+                                    <td class="col-6">
+                                        {{ product.storage }}
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
+                        
                     </div>
                     <div class="characteristics-slider__section px-0">
                         <div class="section__buying--together">
@@ -1076,12 +1080,13 @@
                                     </div>
                                     <span class="product-info__title">Шпатлевка универсальная 2 кг Mixon Uni</span>
                                     <span class="product-info__text--price-old">265.00 &#8372;</span>
-                                    <span class="product-info__text--price">232.00 &#8372;</span>
+                                    <span class="product-info__text--price">{{ product.price|floatformat:2 }} &#8372;</span>
                                 </div>
                                 <div class="product-info__image col-lg-7 col-md-15 col-15">
-                                    <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
-                                         alt="Spackling150">
+                                    <img src="{% if product.images.all %}{{ product.images.first.image.url }}{% else %}{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}{% endif %}"
+                                         alt="{{ product.name }}">
                                 </div>
+                                
                             </div>
                             <div class="product-info__buttons align-content-start flex-shrink-0 flex-grow-1 row">
                                 <a class="product__card--action__btn cheaper--button no_scale box_shadow-3_1"
@@ -1202,12 +1207,13 @@
                                     </div>
                                     <span class="product-info__title">Шпатлевка универсальная 2 кг Mixon Uni</span>
                                     <span class="product-info__text--price-old">265.00 &#8372;</span>
-                                    <span class="product-info__text--price">232.00 &#8372;</span>
+                                    <span class="product-info__text--price">{{ product.price|floatformat:2 }} &#8372;</span>
                                 </div>
                                 <div class="product-info__image col-lg-7 col-md-15 col-15">
-                                    <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
-                                         alt="Spackling150">
+                                    <img src="{% if product.images.all %}{{ product.images.first.image.url }}{% else %}{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}{% endif %}"
+                                         alt="{{ product.name }}">
                                 </div>
+                                
                             </div>
                             <div class="product-info__buttons align-content-start flex-shrink-0 flex-grow-1 row">
                                 <a class="product__card--action__btn cheaper--button no_scale box_shadow-3_1"
@@ -1301,185 +1307,121 @@
                         <div class="f_block">
                             <span class="product__content--title__text">Отзывы</span>
                             <div class="d-flex">
+                            
+
                                 <div class="review_high_stars">
-                                    <img class="review_high_star"
-                                         src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                    <img class="review_high_star"
-                                         src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                    <img class="review_high_star"
-                                         src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                    <img class="review_high_star"
-                                         src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                    <img class="review_high_star"
-                                         src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                                    
+                                    <!-- DEBUG: RATING STARS HERE -->
+                                    {% for star in stars %}
+                                    <!-- DEBUG: RATING STARS HERE -->
+                                        {% if star == "full" %}
+                                            <img class="review_high_star" src="{% static 'src/assets/img/icon/Path 131.png' %}" alt="Полная звезда">
+                                        {% elif star == "half" %}
+                                            <img class="review_high_star" src="{% static 'src/assets/img/icon/Path 132.png' %}" alt="Половинка звезды">
+                                        {% else %}
+                                        <!-- DEBUG: RATING STARS HERE -->
+                                            <img class="review_high_star" src="{% static 'src/assets/img/icon/Path 133.png' %}" alt="Пустая звезда">
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
-                                <span style="margin-left:10px">Рейтинг 4.0</span>
+                                <span style="margin-left:10px">Рейтинг {{ product.average_rating|floatformat:1 }}</span>
                             </div>
-
                         </div>
+                        
+                        
                         <div style="display:flex;">
+                            {% load static %}
+                            {% if product.reviews.all %}
                             <div class="main_review_block">
-                                <div class="review_block" style="    ">
-                                    <div class="high_review_block d-flex  ">
-                                        <p>Дмитрий Александрович</p>
-                                        <div class="product_reviev_stars"
-                                        >
-                                            <img class="review_star"
-                                                 src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                            <img class="review_star"
-                                                 src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                            <img class="review_star"
-                                                 src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                            <img class="review_star"
-                                                 src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                            <img class="review_star"
-                                                 src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                                {% for review in product.reviews.all %}
+                                <div class="review_block">
+                                    <div class="high_review_block d-flex">
+                                        <!-- Выводим имя пользователя: можно использовать get_full_name или username -->
+                                        <p>{{ review.user.get_full_name|default:review.user.username }}</p>
+                                        <div class="product_reviev_stars">
+                                            {% for i in "12345"|make_list %}
+                                                {% if forloop.counter <= review.rating %}
+                                                    <img class="review_star" src="{% static 'src/assets/img/icon/Path 131.png' %}" alt="Полная звезда">
+                                                {% else %}
+                                                    <img class="review_star" src="{% static 'src/assets/img/icon/Path 133.png' %}" alt="Пустая звезда">
+                                                {% endif %}
+                                            {% endfor %}
                                         </div>
-
                                     </div>
-
                                     <div style="margin-bottom:10px;">
-                                        <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні
-                                            задачі. Ноут
-                                            був
-                                            добре запакований, помітно що ніхто до мене його не відкривав</p>
-
+                                        <p>{{ review.review_text }}</p>
                                     </div>
-                                    <div style=" ;">
-                                        <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
+                                    {% if review.pros %}
+                                    <div>
+                                        <p>Плюсы: {{ review.pros }}</p>
                                     </div>
-                                    <div style=" ">
-                                        <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
+                                    {% endif %}
+                                    {% if review.cons %}
+                                    <div>
+                                        <p>Минусы: {{ review.cons }}</p>
                                     </div>
-                                    <hr class="availability_hr"
-                                        style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
-
+                                    {% endif %}
+                                    <hr class="availability_hr" style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
                                 </div>
-                                <div class="review_block" style="     ">
-                                    <div class="d-flex justify-content-between" style=" ">
-                                        <p>Дмитрий Александрович</p>
-                                        <div class="product_reviev_stars">
-                                            <img class="review_star"
-                                                 src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                            <img class="review_star"
-                                                 src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                            <img class="review_star"
-                                                 src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                            <img class="review_star"
-                                                 src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                            <img class="review_star"
-                                                 src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                                        </div>
-                                    </div>
-                                    <div style=" ">
-                                        <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні
-                                            задачі. Ноут
-                                            був
-                                            добре запакований, помітно що ніхто до мене його не відкривав</p>
-                                    </div>
-                                    <div style=" ">
-                                        <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
-                                    </div>
-                                    <div style=" ">
-                                        <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
-                                    </div>
-                                    <hr class="availability_hr"
-                                        style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
-
-                                </div>
-                                <div class="review_block" style="   ">
-                                    <div class="d-flex justify-content-between">
-                                        <p>Дмитрий Александрович</p>
-                                        <div class="product_reviev_stars">
-                                            <img class="review_star"
-                                                 src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                            <img class="review_star"
-                                                 src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                            <img class="review_star"
-                                                 src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                            <img class="review_star"
-                                                 src="{% static '/src/assets/img/icon/Path 131.png' %}">
-                                            <img class="review_star"
-                                                 src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                                        </div>
-                                    </div>
-                                    <div style=" ">
-                                        <p>Оновила ноутбук для роботи, бо стара моделька уже не тягне всі потрібні
-                                            задачі. Ноут
-                                            був
-                                            добре запакований, помітно що ніхто до мене його не відкривав</p>
-                                    </div>
-                                    <div style=" ">
-                                        <p>Плюси: афафіафіафафіафіаіфа фівфівфі вфівфів</p>
-                                    </div>
-                                    <div style=" ">
-                                        <p>Мінуси: фівіфвфі вфівфів фівфівфів</p>
-                                    </div>
-                                    <hr class="availability_hr"
-                                        style="color: #AEADAA; background-color: #AEADAA; height: 1px; border: none;">
-
-                                </div>
-
-
-                                <button style="border: none; background-color: white;  width: 200px; height: 30px;">
-                                    <img src="{% static '/src/assets/img/icon/vectorgorupr.png' %}">
+                                {% endfor %}
+                            
+                                <!-- Кнопка "Показать еще" может быть реализована, если отзывов много и используется пагинация -->
+                                <button style="border: none; background-color: white; width: 200px; height: 30px;">
+                                    <img src="{% static 'src/assets/img/icon/vectorgorupr.png' %}" alt="Показать еще">
                                     <p style="position: relative; bottom: 30px;">Показать еще</p>
                                 </button>
+                            </div>
+                            {% endif %}
+                            
 
                                 <div class="revier" style="   ">
-                                    <div style="display: flex;
-                            flex-direction: column;">
+                                    <div style="display: flex; flex-direction: column; margin-left:30px;">
                                         <p style="font-weight: 500;">Написать отзыв</p>
-                                        <div style="display: flex;margin-top:-15px;">
-                                            <div style="display: flex; align-items: center;">
-                                                <img style="width: 30px; height: 30px; "
-                                                     src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                                                <img style="width: 30px; height: 30px;  "
-                                                     src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                                                <img style="width: 30px; height: 30px;  "
-                                                     src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                                                <img style="width: 30px; height: 30px;  "
-                                                     src="{% static '/src/assets/img/icon/Path 133.png' %}">
-                                                <img style="width: 30px; height: 30px;  "
-                                                     src="{% static '/src/assets/img/icon/Path 133.png' %}">
+                                        <form id="review-form" method="post" action="{% url 'submit_review' product.id %}">
+                                            {% csrf_token %}
+                                            <div style="display: flex; margin-top:-15px;">
+                                                <div style="display: flex; align-items: center;">
+                                                    <div id="star-rating" style="display: flex; margin-top: -15px;">
+                                                        <div style="display: flex; align-items: center;">
+                                                            <img class="star" data-index="1" style="width: 30px; height: 30px;" src="{% static 'src/assets/img/icon/Path 133.png' %}" alt="star">
+                                                            <img class="star" data-index="2" style="width: 30px; height: 30px;" src="{% static 'src/assets/img/icon/Path 133.png' %}" alt="star">
+                                                            <img class="star" data-index="3" style="width: 30px; height: 30px;" src="{% static 'src/assets/img/icon/Path 133.png' %}" alt="star">
+                                                            <img class="star" data-index="4" style="width: 30px; height: 30px;" src="{% static 'src/assets/img/icon/Path 133.png' %}" alt="star">
+                                                            <img class="star" data-index="5" style="width: 30px; height: 30px;" src="{% static 'src/assets/img/icon/Path 133.png' %}" alt="star">
+                                                        </div>
+                                                    </div>
+                                                    <!-- Скрытое поле для отправки значения рейтинга -->
+                                                    <input type="hidden" id="rating-value" name="rating" value="0">
+                                                    <p style="font-family: Montserrat; color: #000000; margin-left: 10px; margin-top:10px;">Ваша оценка</p>
+                                                </div>
                                             </div>
-
-                                            <p style="font-family: Montserrat; color: #000000; margin-left: 10px;margin-top:10px;">
-                                                Ваша
-                                                оценка</p>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="contact_block ml-6" style="margin-top:20px;">
-                                        <div class="row">
-                                            <div class="col-lg-23 col-md-6 col-8">
-                                                <!-- Первая колонка с двумя строками ввода -->
-                                                <input type="text" class="form-control form-control-lg mb-3   "
-                                                       placeholder="Первая строка ввода">
-                                                <input type="text" class="form-control form-control-lg  "
-                                                       placeholder="Вторая строка ввода">
+                                            
+                                            <!-- Блок ввода имени, плюсов, телефона и минусов -->
+                                            <div class="contact_block ml-6" style="margin-top:20px; margin-left:30px;">
+                                                <div class="row">
+                                                    <div class="col-lg-23 col-md-6 col-8">
+                                                        <input type="text" class="form-control form-control-lg mb-3" name="reviewer_name" placeholder="Имя">
+                                                        <input type="text" class="form-control form-control-lg" name="pros" placeholder="Плюсы">
+                                                    </div>
+                                                    <div class="col-lg-23 col-md-6 col-8">
+                                                        <input type="text" class="form-control form-control-lg mb-3" name="phone" placeholder="Телефон">
+                                                        <input type="text" class="form-control form-control-lg" name="cons" placeholder="Минусы">
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-23 col-md-6 col-8">
-                                                <!-- Вторая колонка с двумя строками ввода -->
-                                                <input type="text" class="form-control form-control-lg mb-3 "
-                                                       placeholder="Третья строка ввода">
-                                                <input type="text" class="form-control form-control-lg  "
-                                                       placeholder="Четвертая строка ввода">
+                                            
+                                            <!-- Блок ввода текста отзыва и кнопка отправки -->
+                                            <div class="review_second_input_block" style="margin-left:30px;">
+                                                <div style="position: relative;">
+                                                    <textarea class="comments--text__field bg__off_white" name="review_text" placeholder="Напишите отзыв"></textarea>
+                                                </div>
+                                                <button type="submit" style="background-color:white; border-style: solid; border-color: red; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); width: 200px; height: 40px; margin-top:20px; border-radius:5px;">
+                                                    <p style="font-family: Montserrat; color: red;">Оставить отзыв</p>
+                                                </button>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
-
-
-                                    <div class="review_second_input_block">
-                                        <div style="position: relative;">
-                                        <textarea class="comments--text__field bg__off_white"
-                                                  placeholder="Напишите отзыв"></textarea>
-                                        </div>
-                                        <button style="background-color:white;border-style: solid; border-color: red;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);  width: 200px; height: 40px; margin-top:20px; border-radius:5px;">
-                                            <p style="font-family: Montserrat; color: red;">Оставить отзыв</p>
-                                        </button>
-                                    </div>
+                                    
                                 </div>
                             </div>
 
@@ -1505,12 +1447,13 @@
                                     </div>
                                     <span class="product-info__title">Шпатлевка универсальная 2 кг Mixon Uni</span>
                                     <span class="product-info__text--price-old">265.00 &#8372;</span>
-                                    <span class="product-info__text--price">232.00 &#8372;</span>
+                                    <span class="product-info__text--price">{{ product.price|floatformat:2 }} &#8372;</span>
                                 </div>
                                 <div class="product-info__image col-lg-7 col-md-15 col-15">
-                                    <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
-                                         alt="Spackling150">
+                                    <img src="{% if product.images.all %}{{ product.images.first.image.url }}{% else %}{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}{% endif %}"
+                                         alt="{{ product.name }}">
                                 </div>
+                                
                             </div>
                             <div class="product-info__buttons align-content-start flex-shrink-0 flex-grow-1 row">
                                 <a class="product__card--action__btn cheaper--button no_scale box_shadow-3_1"
@@ -1737,12 +1680,13 @@
                                     </div>
                                     <span class="product-info__title">Шпатлевка универсальная 2 кг Mixon Uni</span>
                                     <span class="product-info__text--price-old">265.00 &#8372;</span>
-                                    <span class="product-info__text--price">232.00 &#8372;</span>
+                                    <span class="product-info__text--price">{{ product.price|floatformat:2 }} &#8372;</span>
                                 </div>
                                 <div class="product-info__image col-lg-7 col-md-15 col-15">
-                                    <img src="{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}"
-                                         alt="Spackling150">
+                                    <img src="{% if product.images.all %}{{ product.images.first.image.url }}{% else %}{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}{% endif %}"
+                                         alt="{{ product.name }}">
                                 </div>
+                                
                             </div>
                             <div class="product-info__buttons align-content-start flex-shrink-0 flex-grow-1 row">
                                 <a class="product__card--action__btn cheaper--button no_scale box_shadow-3_1"
@@ -2006,4 +1950,60 @@
         });
 
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            const stars = document.querySelectorAll('#star-rating .star');
+            const ratingInput = document.getElementById('rating-value');
+            let currentRating = 0; // Зафиксированный рейтинг (число с шагом 0.5)
+            let tempRating = 0;    // Рейтинг, определяемый на основе положения курсора
+        
+            stars.forEach(star => {
+                // Обработка движения мыши над звездой для определения половины/целой звезды
+                star.addEventListener('mousemove', function(event){
+                    const starWidth = this.offsetWidth; // 30px
+                    const index = parseInt(this.getAttribute('data-index'));
+                    // Если курсор находится в левой половине звезды, считается, что выбрана половина
+                    if (event.offsetX < starWidth / 2) {
+                        tempRating = index - 0.5;
+                    } else {
+                        tempRating = index;
+                    }
+                    updateStars(tempRating);
+                });
+                // При уходе мыши возвращаем отображение зафиксированного рейтинга
+                star.addEventListener('mouseout', function(){
+                    updateStars(currentRating);
+                });
+                // При клике фиксируем рейтинг (также с возможной половинкой)
+                star.addEventListener('click', function(event){
+                    const starWidth = this.offsetWidth;
+                    const index = parseInt(this.getAttribute('data-index'));
+                    if (event.offsetX < starWidth / 2) {
+                        currentRating = index - 0.5;
+                    } else {
+                        currentRating = index;
+                    }
+                    ratingInput.value = currentRating;
+                    updateStars(currentRating);
+                });
+            });
+        
+            // Функция обновления отображения звезд по значению rating (число с шагом 0.5)
+            function updateStars(rating) {
+                stars.forEach(star => {
+                    const index = parseInt(star.getAttribute('data-index'));
+                    if(index <= rating) {
+                        // Если порядковый номер звезды меньше или равен рейтингу – полная звезда
+                        star.src = "{% static 'src/assets/img/icon/Path 131.png' %}";
+                    } else if(index - 0.5 === rating) {
+                        // Если рейтинг равен (индекс - 0.5) – отображаем половинчатую звезду
+                        star.src = "{% static 'src/assets/img/icon/Path 132.png' %}";
+                    } else {
+                        // Иначе – пустая звезда
+                        star.src = "{% static 'src/assets/img/icon/Path 133.png' %}";
+                    }
+                });
+            }
+        });
+        </script>
 {% endblock %}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    
+    h2 {
+        color: #333;
+    }
+    
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    li {
+        margin: 10px 0;
+    }
+    
+    button {
+        padding: 5px 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color: #45a049;
+    }
+    
+    input[type="number"] {
+        width: 50px;
+        padding: 5px;
+    }
+    
+</style>
+<body>
+    <h2>Корзина</h2>
+    {% if cart.items.all %}
+        <ul>
+            {% for item in cart.items.all %}
+            <li>
+                {{ item.product.name }} - {{ item.quantity }} шт. - {{ item.get_total_price }} $
+                <form method="POST" action="{% url 'update_cart_item' item.id %}">
+                    {% csrf_token %}
+                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+                    <button type="submit">Обновить</button>
+                </form>
+                <a href="{% url 'remove_cart_item' item.id %}">Удалить</a>
+            </li>
+            {% endfor %}
+        </ul>
+        <h3>Итоговая сумма: {{ cart.items.all|sum:"get_total_price" }} $</h3>
+        <a href="/checkout/">Перейти к оформлению</a>
+    {% else %}
+        <p>Ваша корзина пуста.</p>
+        <a href="/products/">Вернуться к покупкам</a>
+    {% endif %}
+</body>
+</html>

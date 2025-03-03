@@ -116,7 +116,24 @@
         display: flex !important;
         padding-top: 15px;
     }
-
+    .user_menu{
+        display: none;
+        
+       /* Rectangle 410 */
+       position: fixed;
+       top: 50%;
+       left: 50%;
+       transform: translate(-140%, -100%);
+ width:400px;height:450px;
+background: white;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+z-index: 20;
+padding: 20px;
+box-sizing: border-box;
+justify-content:center;
+margin-top:200px;
+margin-left:400px;
+    }
     .menu {
         display: none;
 
@@ -139,7 +156,126 @@
     .close-menu-button {
         display: block;
         margin-bottom: 20px;
+        
     }
+  
+
+    .user_menu input {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .user_menu button {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+    }
+
+    .user_menu button:hover {
+        background-color: #45a049;
+    }
+
+    .user_menu .forgot-password {
+        text-align: left;
+        display: block;
+        margin: 10px 0;
+        color: red;
+        text-decoration: none;
+    }
+
+    .user_menu .forgot-password:hover {
+        text-decoration: underline;
+    }
+
+    .register_form, .login_form {
+        display: none;
+        
+    }
+    .register_form {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 700px; /* Увеличиваем ширину для формы регистрации */
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        z-index: 20;
+        box-sizing: border-box;
+        transition: width 0.5s ease;
+    }
+    .active {
+        display: block;
+    }
+    .cheaper_menu {
+            width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            position: relative;
+        }
+
+        .cheaper_menu h2 {
+            margin-top: 0;
+        }
+
+        .cheaper_menu input, .cheaper_menu select, .cheaper_menu textarea {
+            width: calc(50% - 10px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .cheaper_menu input.full-width, .cheaper_menu textarea {
+            width: calc(100% - 20px);
+        }
+
+        .cheaper_menu textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        .cheaper_menu button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #FF4C4C;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .cheaper_menu button:hover {
+            background-color: #FF0000;
+        }
+
+        .cheaper_menu .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .cheaper_menu .close-button:hover {
+            color: #FF0000;
+        }
 </style>
 
 <!-- Start header area -->
@@ -147,6 +283,9 @@
 <div class="main__header header__sticky">
     <div class="container">
         <div id="overlay" class="overlay"></div>
+        <div id="second_overlay" class="overlay"></div>
+        <div id="third_overlay" class="overlay"></div>
+        
         <div id="app"></div>
         <div class="main__header--inner position__relative d-flex justify-content-between align-items-center">
             <button class="adaptive_header_button" style="border:none;background-color:transparent;">
@@ -185,20 +324,30 @@
 
                     <!-- Добавьте еще кнопки, если нужно -->
                 </div>
-                <div class="panel" id="myPanel">
-                    <img src="{% static '/src/assets/img/icon/city_mark1.svg' %}" alt="Icon">
-                    <div class="panel_label"><p class="panel_label_text">Хмельницикий</p></div>
-                    <button class="panel_dropdowm_button" onclick="">
-                        <img class="panel_dropdowm_button_img" src="{% static '/src/assets/img/icon/Vector 1.svg' %}"
-                             alt="">
-                    </button>
-                    <div class="dropdown" id="myDropdown">
-                        <button>Вариант 1</button>
-                        <button>Вариант 2</button>
-                        <button>Вариант 3</button>
+                <div class="panel" id="myPanel" style="position: relative; display: inline-flex; align-items: center;">
+                    <img src="{% static 'src/assets/img/icon/city_mark1.svg' %}" alt="Icon">
+                    
+                    <div class="panel_label">
+                      <p class="panel_label_text" id="selectedBranch"></p>
                     </div>
-
-                </div>
+                    
+                    <button class="panel_dropdowm_button" id="dropdownToggle" style="background: none; border: none; margin-left: 5px;">
+                      <img class="panel_dropdowm_button_img" src="{% static 'src/assets/img/icon/Vector 1.svg' %}" alt="">
+                    </button>
+                    
+                    <!-- Выпадающее меню -->
+                    <div class="dropdown" id="dropdownMenu" style="display: none; position: absolute; background-color: #f9f9f9; min-width: 200px; border: 1px solid #ccc; z-index: 100; top: 100%; left: 0;">
+                      {% for branch in branches %}
+                        <button type="button" style="width: 100%; padding: 8px; border: none; background: none; text-align: left; cursor: pointer;"
+                                onclick="selectBranch('{{ branch.city.name }} — {{ branch.address }}')">
+                          {{ branch.city.name }} — {{ branch.address }}
+                        </button>
+                      {% empty %}
+                        <p style="padding: 8px;">Нет филиалов</p>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  
 
                 <div class="panel-right">
                     <img src="{% static '/src/assets/img/icon/phone.svg' %}" alt="Phone Icon">
@@ -240,6 +389,67 @@
                 </div>
 
             </div>
+           
+            
+              <div id="user_menu" class="user_menu">
+        <div id="login_form" class="login_form active">
+            <h2> Вход</h2>
+            <span>Войти в личный кабинет</span>
+            <input type="text" placeholder="E-mail" class="user_menu_input">
+            <input type="password" placeholder="Пароль" class="user_menu_input">
+            <a href="#" class="forgot-password">Напомнить пароль</a>
+            <button class="login_button" style="background-color:red;" >Вход</button>
+            <button class="register_button" style="background-color: transparent;"onclick="showRegisterForm()"><span style="color: red;">Регистрация</span></button>
+             
+            
+        </div>
+        <div id="cheaper_menu" class="cheaper_menu">
+            <button class="close-button">&times;</button>
+            <h2>Хочу дешевле</h2>
+            <p>Узнать цену: Шпатлевка универсальная Карс 1 кг UNI</p>
+            <input type="text" placeholder="Имя" class="full-width">
+            <input type="text" placeholder="Фамилия" class="full-width">
+            <input type="text" placeholder="Область">
+            <input type="text" placeholder="Город">
+            <input type="email" placeholder="E-mail">
+            <input type="text" placeholder="Телефон">
+            <textarea placeholder="Вопрос"></textarea>
+            <button>Свяжитесь со мной</button>
+        </div>
+        <div id="register_form" class="register_form"  >
+            <div class="modal-content">
+                <span class="close" onclick="toggleUserMenu()">&times;</span>
+                <h2>Регистрация</h2>
+                <form method="post" action="{% url 'register' %}">
+                    {% csrf_token %}
+                    <div style="display:flex;">
+                        <div>
+                            <input type="text" name="username" placeholder="Имя" class="user_menu_input" required>
+                            <input type="password" name="password1" placeholder="Пароль" class="user_menu_input" required>
+                            <input type="email" name="email" placeholder="Email" class="user_menu_input" required>
+                        </div>
+                        <div>
+                            <input type="text" placeholder="Фамилия" class="user_menu_input">
+                            <input type="password" name="password2" placeholder="Подтвердите пароль" class="user_menu_input" required>
+                            <input type="text" placeholder="Телефон" class="user_menu_input">
+                            
+                        </div>
+                        
+                    </div>
+                    <div>
+                        <input type="text" name="city" placeholder="Город" class="user_menu_input" required>
+                        <input type="text" name="postal_code" placeholder="Почтовый индекс" class="user_menu_input">
+                        
+                        </select>
+                    </div>
+                    <p>Регистрируясь, вы соглашаетесь с <a href="#">пользовательским соглашением</a></p>
+                    <button type="submit" class="btn-primary">Зарегистрироваться</button>
+                    <button class="back_button" type="button" onclick="showLoginForm()">Назад</button>
+                </form>
+                <div id="registrationErrors" style="color: red;"></div> <!-- Добавим блок для вывода ошибок -->
+            </div>
+        </div>
+    </div>
             <div id="mobile_open_menu" class="mobile_open_menu" style="background-color:white;">
 
             </div>
@@ -378,8 +588,7 @@
             </div>
 
             <div class="frame3-panel" style=" margin-left:72px;">
-                <a href="{% url 'cabinet' %}" class="icon-button_n"
-                   style="background: none;border: none;position:relative; ">
+                <a   id="icon-button_n" class="icon-button_n" style="background: none;border: none;position:relative; ">
                     <svg width="17" height="24" viewBox="0 0 17 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.2659 6.20894C3.2659 5.17871 3.55763 4.17161 4.10414 3.31501C4.65064 2.4584 5.4274 1.79076 6.3362 1.39651C7.245 1.00226 8.24505 0.899102 9.20982 1.10009C10.1746 1.30108 11.0608 1.79718 11.7563 2.52566C12.4519 3.25415 12.9256 4.18229 13.1175 5.19272C13.3094 6.20316 13.2108 7.2505 12.8344 8.20231C12.458 9.15412 11.8205 9.96764 11.0026 10.54C10.1847 11.1124 9.22316 11.4179 8.23948 11.4179C7.5863 11.418 6.93944 11.2834 6.33596 11.0216C5.73248 10.7599 5.18424 10.3762 4.72238 9.89251C4.26052 9.40879 3.89409 8.83451 3.64419 8.20247C3.39429 7.57043 3.26577 6.89302 3.2659 6.20894ZM13.6322 12.7668H11.835C10.7417 13.428 9.50148 13.7761 8.239 13.7761C6.97652 13.7761 5.73628 13.428 4.64299 12.7668H3.36968C1.79181 12.7668 0.5 15.1209 0.5 16.7745V20.9956C0.5 22.6492 1.79181 23 3.36968 23H13.6294C15.2082 23 16.5 22.6492 16.5 20.9956V16.7745C16.5029 15.1209 15.2111 12.7668 13.6322 12.7668Z"
                               stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -477,19 +686,162 @@
             }
         });
     });
-    document.addEve
-    aantListener('DOMContentLoaded', function () {
-        const menuButton = document.getElementById('mobile_menu_Button');
-        const mobileMenu = document.getElementById('mobile_open_menu');
+  
+     
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const openMenuButton = document.getElementById('want_cheaper');
+        const overlay = document.getElementById('third_overlay');
+        const menu = document.getElementById('cheaper_menu');
 
-        menuButton.addEventListener('click', function () {
-            if (mobileMenu.style.display === 'block') {
-                mobileMenu.style.display = 'none';
-            } else {
-                mobileMenu.style.display = 'block';
+        openMenuButton.addEventListener('click', () => {
+            overlay.style.display = 'block';
+            menu.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+
+        overlay.addEventListener('click', () => {
+            overlay.style.display = 'none';
+            menu.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Закрыть меню при клике вне его
+        document.addEventListener('click', (event) => {
+            if (!menu.contains(event.target) && !openMenuButton.contains(event.target)) {
+                overlay.style.display = 'none';
+                menu.style.display = 'none';
+                document.body.style.overflow = 'auto';
             }
         });
     });
 
 
+
+
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const openMenuButton = document.getElementById('icon-button_n');
+        const overlay = document.getElementById('second_overlay');
+        const menu = document.getElementById('user_menu');
+
+        openMenuButton.addEventListener('click', () => {
+            overlay.style.display = 'block';
+            menu.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+
+        overlay.addEventListener('click', () => {
+            overlay.style.display = 'none';
+            menu.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Закрыть меню при клике вне его
+        document.addEventListener('click', (event) => {
+            if (!menu.contains(event.target) && !openMenuButton.contains(event.target)) {
+                overlay.style.display = 'none';
+                menu.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    });
+    function showRegisterForm() {
+        document.getElementById('login_form').classList.remove('active');
+        document.getElementById('register_form').classList.add('active');
+        document.getElementById('user_menu').style.width = '500px'; // Увеличиваем ширину для формы регистрации
+        document.getElementById('user_menu').style.height = '500px';
+        
+    }
+ 
+    function showLoginForm() {
+        document.getElementById('register_form').classList.remove('active');
+        document.getElementById('login_form').classList.add('active');
+        document.getElementById('user_menu').style.width = '500px';
+    }
+    
+    function submitRegistrationForm() {
+        var form = document.getElementById('registrationForm');
+        var formData = new FormData(form);
+
+        fetch("{% url 'register' %}", {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+                'Accept': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Регистрация прошла успешно. Пожалуйста, подтвердите ваш email.');
+                toggleUserMenu(); // Закрыть форму регистрации
+            } else {
+                var errorDiv = document.getElementById('registrationErrors');
+                errorDiv.innerHTML = '';
+                var errors = JSON.parse(data.errors);
+                for (var field in errors) {
+                    if (errors.hasOwnProperty(field)) {
+                        var errorMessage = errors[field].map(function(error) {
+                            return error.message;
+                        }).join(' ');
+                        errorDiv.innerHTML += `<p>${field}: ${errorMessage}</p>`;
+                    }
+                }
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+    const dropdownButton = document.querySelector(".panel_dropdowm_button");
+    const dropdown = document.querySelector("#myDropdown");
+
+    // Функция для переключения видимости
+    function toggleDropdown() {
+        dropdown.classList.toggle("visible");
+    }
+
+    // Назначаем обработчик события на кнопку
+    dropdownButton.addEventListener("click", toggleDropdown);
+ 
+       
+    
+    
 </script>
+<script>
+    // Получаем элементы
+    const dropdownToggle = document.getElementById('dropdownToggle');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const selectedBranch = document.getElementById('selectedBranch');
+  
+    // Функция выбора филиала
+    function selectBranch(branchText) {
+      selectedBranch.innerText = branchText; // Обновляем выбранный текст
+      dropdownMenu.style.display = 'none';     // Закрываем меню
+      // При необходимости можно сохранить выбор в сессии через AJAX
+    }
+  
+    // Переключение отображения меню по клику на кнопку
+    dropdownToggle.addEventListener('click', function(e) {
+      e.stopPropagation(); // Предотвращаем всплытие события
+      // Переключаем видимость
+      if (dropdownMenu.style.display === 'block') {
+        dropdownMenu.style.display = 'none';
+      } else {
+        dropdownMenu.style.display = 'block';
+      }
+    });
+  
+    // Закрытие меню при клике вне его области
+    document.addEventListener('click', function() {
+      dropdownMenu.style.display = 'none';
+    });
+  
+    // Останавливаем всплытие, если клик внутри панели (чтобы меню не закрывалось при клике по самому меню)
+    document.getElementById('myPanel').addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  </script>
+  
+  
+</body>
+</html>
