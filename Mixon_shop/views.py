@@ -11,6 +11,25 @@ from django.views.decorators.http import require_POST
 from django.shortcuts import render, redirect
 import math
 from .models import Product, Review
+from .models import RecommendedProducts
+from .models import SalesLeaders
+
+def home_page(request):
+    sales_leaders = SalesLeaders.objects.all()[:4]  # Берем только 4 лидера продаж
+
+    context = {
+        'sales_leaders': sales_leaders,  # Передаем их в шаблон
+    }
+    return render(request, 'home_page.html', context)  # Убедитесь, что рендерится нужный шаблон
+
+def home_page(request):
+    recommended_products = RecommendedProducts.objects.all()  # Загружаем рекомендованные продукты
+    print("DEBUG: recommended_products count =", recommended_products.count())  # Отладка
+
+    context = {
+        'recommended_products': recommended_products,  # Передаем в шаблон
+    }
+    return render(request, 'home_page.html', context)  # Убедитесь, что рендерится правильный шаблон
 
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
