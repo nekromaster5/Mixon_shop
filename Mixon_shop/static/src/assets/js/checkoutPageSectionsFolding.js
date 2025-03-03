@@ -161,9 +161,54 @@ cartEditElementButton.addEventListener('click', activateCart);
 cartNextElementButton.addEventListener('click', activateContacts);
 contactsEditElementButton.addEventListener('click', activateContacts);
 contactsNextElementButton.addEventListener('click', activateShipping);
+contactsNextElementButton.addEventListener('click', function () {
+    document.querySelectorAll(".span_name").forEach(element => {
+    element.textContent = document.getElementById("input_name").value;});
+    document.querySelectorAll(".span_phone").forEach(element => {
+    element.textContent = document.getElementById("input_phone").value;});
+    document.querySelectorAll(".span_email").forEach(element => {
+    element.textContent = document.getElementById("input_email").value;});
+});
 shippingEditElementButton.addEventListener('click', activateShipping);
 shippingNextElementButton.addEventListener('click', activatePayment);
+shippingNextElementButton.addEventListener('click', function () {
+    document.querySelectorAll(".span_city").forEach(element => {
+    element.textContent =
+        document.getElementById("input_city").options[document.getElementById("input_city").selectedIndex].text;});
+
+    let activeShippingButton = document.querySelector(".shipment__page--list--item.shipping.active");
+    if (activeShippingButton) {
+        document.querySelectorAll(".span_shipment-method").forEach(element => {
+    element.textContent =
+            activeShippingButton.querySelector(".shipment__method--type__description").textContent;});
+    } else {
+        document.querySelectorAll(".span_shipment-method").forEach(element => {
+    element.textContent = "Способ доставки не выбран";});
+    }
+});
 paymentEditElementButton.addEventListener('click', activatePayment);
 paymentNextElementButton.addEventListener('click', activateComments);
+paymentNextElementButton.addEventListener('click', function () {
+    let activePaymentButton = document.querySelector(".shipment__page--list--item.payment.active");
+    if (activePaymentButton) {
+        document.querySelectorAll(".span_payment-method").forEach(element => {
+    element.textContent =
+            activePaymentButton.querySelector(".shipment__method--type__description").textContent;});
+    } else {
+        document.querySelectorAll(".span_payment-method").forEach(element => {
+    element.textContent = "Способ оплаты не выбран";});
+    }
+});
 commentsEditElementButton.addEventListener('click', activateComments);
 commentsNextElementButton.addEventListener('click', activateConfirmation);
+commentsNextElementButton.addEventListener('click', function () {
+    let text_comment = document.getElementById("text_comment").value;
+    if (text_comment) {
+        document.querySelectorAll(".span_comments").forEach(element => {
+    element.textContent = text_comment});
+    } else {
+        document.querySelectorAll(".span_comments").forEach(element => {
+    element.textContent = "Комментариев нет"});
+    }
+
+});

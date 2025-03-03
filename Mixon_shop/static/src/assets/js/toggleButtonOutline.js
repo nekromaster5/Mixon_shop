@@ -13,6 +13,7 @@ function initShipmentButtons(shipmentList) {
             if (button !== activeElement) {
                 button.style.border = ''; // Убираем красный контур
                 button.style.boxShadow = ''; // Убираем тень
+                button.classList.remove('active'); // Убираем класс active
             }
         });
     };
@@ -23,7 +24,7 @@ function initShipmentButtons(shipmentList) {
             removeStyles(this); // Удаляем стили у всех кнопок, кроме текущей
             this.style.border = '1.5px solid rgb(255, 0, 0)'; // Добавляем красный контур текущей кнопке
             this.style.boxShadow = '5px 5px 10px rgba(174, 173, 170, 0.5), -5px 5px 10px rgba(174, 173, 170, 0.5), 0px 10px 10px rgba(174, 173, 170, 0.5)';
-
+            this.classList.add('active'); // Добавляем класс "active" текущей кнопке
         });
     });
 }

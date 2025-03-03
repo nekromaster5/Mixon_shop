@@ -174,7 +174,14 @@ class Topic(View):
 
 class CheckoutPage(View):
     def get(self, request):
-        return render(request, 'checkout.html')
+        products = Product.objects.prefetch_related('images').filter(id__in=[1, 2])
+        total_price = sum(
+            product.discount_price if product.is_discounted and product.discount_price is not None else product.price
+            for product in products
+        )
+
+        return render(request, 'checkout.html', {'products': products,
+                                                 'total_price': total_price})
 
 
 class TestSlider(View):
