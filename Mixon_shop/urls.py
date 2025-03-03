@@ -22,7 +22,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from Mixon_shop.views import HomePage, CataloguePage, ProductPage, Brands, News, \
-    Topic, AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts, SearchPage
+    Topic, AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts, SearchPage, \
+    get_branches
 
 urlpatterns = [
     path('admin_tools/', include('admin_tools.urls')),
@@ -44,6 +45,7 @@ urlpatterns = [
     path('error/', ErrorPage.as_view(), name='error'),
     path('shipment&payment/', ShipmentPayment.as_view(), name='shipment_and_payment'),
     path('contacts/', Contacts.as_view(), name='contacts'),
+    path('get-branches/', get_branches, name='get_branches'),
 
 ]
 

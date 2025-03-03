@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 from django.views import View
-from .models import Product
+from .models import Product, City, Branch
 
 
 class HomePage(View):
@@ -91,7 +91,7 @@ class SearchPage(View):
             if next_page_num <= paginator.num_pages:
                 next_page = paginator.page(next_page_num)
                 # HTML нового "шматка" товарів
-                new_items_html = render_to_string('products_partial.html', {
+                new_items_html = render_to_string('partials/products_partial.html', {
                     'products': next_page
                 }, request=request)
 
@@ -179,9 +179,23 @@ class CheckoutPage(View):
             product.discount_price if product.is_discounted and product.discount_price is not None else product.price
             for product in products
         )
+        cities = City.objects.all()
 
-        return render(request, 'checkout.html', {'products': products,
-                                                 'total_price': total_price})
+        return render(request, 'checkout.html', {
+            'products': products,
+            'total_price': total_price,
+            'cities': cities,
+        })
+
+
+def get_branches(request):
+    city_id = request.GET.get("city_id")
+    print("city_id:", city_id)
+    branches = Branch.objects.filter(city_id=city_id)
+    print("branches:", branches)
+
+    html = render(request, "partials/branches_list.html", {"branches": branches}).content.decode("utf-8")
+    return JsonResponse({"html": html})
 
 
 class TestSlider(View):
