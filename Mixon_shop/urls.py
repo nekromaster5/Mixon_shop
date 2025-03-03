@@ -27,7 +27,7 @@ from .views import register, activate
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from .views import register, activate
-
+from .views import branch_list
  
 from Mixon_shop.views import HomePage, CataloguePage, ProductPage, Brands, News, \
     Topic, AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts, SearchPage
@@ -52,7 +52,7 @@ urlpatterns = [
     path('error/', ErrorPage.as_view(), name='error'),
     path('shipment&payment/', ShipmentPayment.as_view(), name='shipment_and_payment'),
     path('contacts/', Contacts.as_view(), name='contacts'),
-
+path('branches/', branch_list, name='branch_list'),
     path('register/', register, name='register'),
     path('activate/<uidb64>/<token>/', activate, name='activate'),
     path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),

@@ -219,7 +219,19 @@ class ShipmentPayment(View):
 class Contacts(View):
     def get(self, request):
         return render(request, 'contacts.html')
+def branch_list(request):
+    """
+    Отображает список всех филиалов (Branch),
+    включая связанные города и номера телефонов.
+    """
+    branches = Branch.objects.select_related('city').prefetch_related('phone_numbers').all()
+    # select_related('city') - подгрузит связанную запись City
+    # prefetch_related('phone_numbers') - подгрузит связанные номера телефонов
 
+    context = {
+        'branches': branches,
+    }
+    return render(request, 'locations/branch_list.html', context)
  
 
 def login_view(request):

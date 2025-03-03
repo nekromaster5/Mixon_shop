@@ -324,20 +324,30 @@ margin-left:400px;
 
                     <!-- Добавьте еще кнопки, если нужно -->
                 </div>
-                <div class="panel" id="myPanel">
-                    <img src="{% static '/src/assets/img/icon/city_mark1.svg' %}" alt="Icon">
-                    <div class="panel_label"><p class="panel_label_text">Хмельницикий</p></div>
-                    <button class="panel_dropdowm_button"  >
-                        <img class="panel_dropdowm_button_img" src="{% static '/src/assets/img/icon/Vector 1.svg' %}"
-                             alt="">
-                    </button>
-                    <div class="dropdown" id="myDropdown">
-                        <button>Вариант 1</button>
-                        <button>Вариант 2</button>
-                        <button>Вариант 3</button>
+                <div class="panel" id="myPanel" style="position: relative; display: inline-flex; align-items: center;">
+                    <img src="{% static 'src/assets/img/icon/city_mark1.svg' %}" alt="Icon">
+                    
+                    <div class="panel_label">
+                      <p class="panel_label_text" id="selectedBranch">Выберите филиал</p>
                     </div>
-
-                </div>
+                    
+                    <button class="panel_dropdowm_button" id="dropdownToggle" style="background: none; border: none; margin-left: 5px;">
+                      <img class="panel_dropdowm_button_img" src="{% static 'src/assets/img/icon/Vector 1.svg' %}" alt="">
+                    </button>
+                    
+                    <!-- Выпадающее меню -->
+                    <div class="dropdown" id="dropdownMenu" style="display: none; position: absolute; background-color: #f9f9f9; min-width: 200px; border: 1px solid #ccc; z-index: 100; top: 100%; left: 0;">
+                      {% for branch in branches %}
+                        <button type="button" style="width: 100%; padding: 8px; border: none; background: none; text-align: left; cursor: pointer;"
+                                onclick="selectBranch('{{ branch.city.name }} — {{ branch.address }}')">
+                          {{ branch.city.name }} — {{ branch.address }}
+                        </button>
+                      {% empty %}
+                        <p style="padding: 8px;">Нет филиалов</p>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  
 
                 <div class="panel-right">
                     <img src="{% static '/src/assets/img/icon/phone.svg' %}" alt="Phone Icon">
@@ -797,6 +807,41 @@ margin-left:400px;
     
     
 </script>
-
+<script>
+    // Получаем элементы
+    const dropdownToggle = document.getElementById('dropdownToggle');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const selectedBranch = document.getElementById('selectedBranch');
+  
+    // Функция выбора филиала
+    function selectBranch(branchText) {
+      selectedBranch.innerText = branchText; // Обновляем выбранный текст
+      dropdownMenu.style.display = 'none';     // Закрываем меню
+      // При необходимости можно сохранить выбор в сессии через AJAX
+    }
+  
+    // Переключение отображения меню по клику на кнопку
+    dropdownToggle.addEventListener('click', function(e) {
+      e.stopPropagation(); // Предотвращаем всплытие события
+      // Переключаем видимость
+      if (dropdownMenu.style.display === 'block') {
+        dropdownMenu.style.display = 'none';
+      } else {
+        dropdownMenu.style.display = 'block';
+      }
+    });
+  
+    // Закрытие меню при клике вне его области
+    document.addEventListener('click', function() {
+      dropdownMenu.style.display = 'none';
+    });
+  
+    // Останавливаем всплытие, если клик внутри панели (чтобы меню не закрывалось при клике по самому меню)
+    document.getElementById('myPanel').addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  </script>
+  
+  
 </body>
 </html>
