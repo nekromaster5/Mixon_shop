@@ -34,6 +34,9 @@ from Mixon_shop.views import HomePage, CataloguePage, ProductPage, Brands, News,
     Topic, AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts, SearchPage
 from .views import product_detail, submit_review
 from .views import home_page
+    Topic, AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts, SearchPage, \
+    get_branches
+
 urlpatterns = [
     path('', home_page, name='home_page'),  # Указываем главную страницу
 
@@ -70,9 +73,10 @@ path('branches/', branch_list, name='branch_list'),
     path('cart/remove/<int:product_id>/', views.cart_remove, name='cart_remove'),
     path('cart/', views.cart_detail, name='cart_detail'),
     path('activate/<uidb64>/<token>/', activate, name='activate'),
-    
 
- 
+    path('get-branches/', get_branches, name='get_branches'),
+
+
 ]
 
 handler404 = ErrorPage.as_view()

@@ -1,0 +1,21 @@
+{% for branch in branches %}
+<li class="widget__form--check__list align-items-start">
+    <input class="widget__form--check__input flex-shrink-0"
+           id="{{ branch.id }}"
+           type="checkbox">
+    <span class="widget__form--checkmark circle flex-shrink-0 me-3"></span>
+    <div>
+        <label class="widget__form--check__label--title flex-grow-0 bg-inherit"
+               for="{{ branch.id }}">{{ branch.address }}
+            <span class="widget__form--check__label--small">
+                Забрать сегодня {{ branch.working_hours }}
+            </span>
+        </label>
+        <button id="show--map" class="show--map--btn primary__btn">
+            Посмотреть на карте
+        </button>
+    </div>
+</li>
+{% empty %}
+<li>Нет доступных филиалов</li>
+{% endfor %}

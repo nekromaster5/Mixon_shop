@@ -30,10 +30,11 @@ def home_page(request):
         'recommended_products': recommended_products,  # Передаем в шаблон
     }
     return render(request, 'home_page.html', context)  # Убедитесь, что рендерится правильный шаблон
+from .models import Product, City, Branch
 
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    
+
     # Вычисляем рейтинг
     # Округляем рейтинг до ближайшего 0.5 в большую сторону
     rounded_rating = math.ceil(product.average_rating * 2) / 2
@@ -147,7 +148,7 @@ class SearchPage(View):
             if next_page_num <= paginator.num_pages:
                 next_page = paginator.page(next_page_num)
                 # HTML нового "шматка" товарів
-                new_items_html = render_to_string('products_partial.html', {
+                new_items_html = render_to_string('partials/products_partial.html', {
                     'products': next_page
                 }, request=request)
 
@@ -194,13 +195,13 @@ class SearchPage(View):
 def home(request):
     # Продукты-лидеры продаж
     top_selling_products = Product.objects.filter(is_in_stock=True).order_by('-average_rating')[:5]
-    
+
     # Новинки
     new_products = Product.objects.filter(is_new=True, is_in_stock=True).order_by('-id')[:5]
-    
+
     # Рекомендуемые товары
     recommended_products = Product.objects.filter(is_in_stock=True).order_by('-id')[:5]
-    
+
     return render(request, 'home_page.html', {
         'top_selling_products': top_selling_products,
         'new_products': new_products,
@@ -249,9 +250,23 @@ class CheckoutPage(View):
             product.discount_price if product.is_discounted and product.discount_price is not None else product.price
             for product in products
         )
+        cities = City.objects.all()
 
-        return render(request, 'checkout.html', {'products': products,
-                                                 'total_price': total_price})
+        return render(request, 'checkout.html', {
+            'products': products,
+            'total_price': total_price,
+            'cities': cities,
+        })
+
+
+def get_branches(request):
+    city_id = request.GET.get("city_id")
+    print("city_id:", city_id)
+    branches = Branch.objects.filter(city_id=city_id)
+    print("branches:", branches)
+
+    html = render(request, "partials/branches_list.html", {"branches": branches}).content.decode("utf-8")
+    return JsonResponse({"html": html})
 
 
 class TestSlider(View):
@@ -285,7 +300,7 @@ def branch_list(request):
         'branches': branches,
     }
     return render(request, 'locations/branch_list.html', context)
- 
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -360,7 +375,7 @@ def cart_detail(request):
 @require_POST
 def submit_review(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    
+
     # Получаем данные из POST-запроса
     rating = request.POST.get('rating', '0')
     pros = request.POST.get('pros', '')
@@ -368,7 +383,7 @@ def submit_review(request, product_id):
     review_text = request.POST.get('review_text', '')
     reviewer_name = request.POST.get('name', '')
     phone = request.POST.get('phone', '')
-    
+
     try:
         rating_int = int(round(float(rating)))
     except ValueError:
@@ -385,6 +400,6 @@ def submit_review(request, product_id):
         cons=cons,
         review_text=review_text
     )
-    
+
     # Перенаправляем пользователя обратно на страницу продукта
     return render(request, 'product.html', context)
