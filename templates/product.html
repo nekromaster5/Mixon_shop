@@ -2005,5 +2005,28 @@
                 });
             }
         });
+
+        <script>
+            const cart = [];
+          
+            document.addEventListener("DOMContentLoaded", function () {
+              const buyButtons = document.querySelectorAll(".buy__btn");
+          
+              buyButtons.forEach((btn) => {
+                btn.addEventListener("click", (e) => {
+                  e.preventDefault(); // Чтобы не было перехода по ссылке
+                  const productName = btn.getAttribute("data-product-name");
+                  
+                  cart.push(productName);
+          
+                  console.clear();
+                  console.log("%c🛒 Корзина:", "font-weight: bold; font-size: 16px");
+                  cart.forEach((item, index) => {
+                    console.log(`${index + 1}. ${item}`);
+                  });
+                });
+              });
+            });
+          </script>
         </script>
 {% endblock %}
