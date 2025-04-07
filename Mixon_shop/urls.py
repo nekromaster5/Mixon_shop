@@ -24,7 +24,8 @@ from . import views
 
 from Mixon_shop.views import HomePage, CataloguePage, ProductPage, Brands, News, \
     Topic, AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts, \
-    SearchPage, product_detail, submit_review, get_branches, register, activate, branch_list
+    SearchPage, product_detail, submit_review, get_branches, register, activate, branch_list, create_order, \
+    apply_promo_code
 
 urlpatterns = [
     path('admin_tools/', include('admin_tools.urls')),
@@ -59,6 +60,8 @@ urlpatterns = [
     path('cart/add/<int:product_id>/', views.cart_add, name='cart_add'),
     path('cart/remove/<int:product_id>/', views.cart_remove, name='cart_remove'),
     path('cart/', views.cart_detail, name='cart_detail'),
+    path('apply-promo/', apply_promo_code, name='apply_promo_code'),
+    path('create-order/', create_order, name='create_order'),
     path('activate/<uidb64>/<token>/', activate, name='activate'),
     path('get-branches/', get_branches, name='get_branches'),
 

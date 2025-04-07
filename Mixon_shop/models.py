@@ -99,10 +99,18 @@ class ProductType(models.Model):
         return f'{self.name}'
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
 # Product model
 class Product(models.Model):
     name = models.CharField(max_length=256)
     description = models.TextField(null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     type = models.ForeignKey(ProductType, on_delete=models.CASCADE, null=True, blank=True)
     usage = models.CharField(max_length=256, null=True, blank=True)
     binding_substance = models.ForeignKey(BindingSubstance, on_delete=models.CASCADE, null=True, blank=True)
@@ -224,21 +232,43 @@ class Review(models.Model):
 class OrderStatus(models.Model):
     name = models.CharField(max_length=256)
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 class ShipmentMethod(models.Model):
     name = models.CharField(max_length=256)
     image = models.ImageField(upload_to='shipment_methods/images/')
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class PaymentMethod(models.Model):
     name = models.CharField(max_length=256)
     image = models.ImageField(upload_to='payment_methods/images/')
 
+    def __str__(self):
+        return f'{self.name}'
+
+
+# Промежуточная модель для связи Order и Product с количеством
+class OrderProduct(models.Model):
+    order = models.ForeignKey('Order', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)  # Количество товара в заказе
+
+    class Meta:
+        unique_together = ('order', 'product')  # Гарантируем уникальность комбинации order + product
+
+    def __str__(self):
+        return f"{self.product.name} (x{self.quantity})"
+
 
 # Order model
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    products = models.ManyToManyField(Product)
+    products = models.ManyToManyField(Product, through='OrderProduct')
     name = models.CharField(max_length=256)
     phone = models.CharField(max_length=256, blank=True, null=True)
     email = models.CharField(max_length=256, blank=True, null=True)

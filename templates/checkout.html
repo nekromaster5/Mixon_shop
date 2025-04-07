@@ -45,7 +45,7 @@
                             <table class="cart__table--inner">
                                 <tbody class="cart__table--body">
                                 {% for product in products %}
-                                    <tr class="cart__table--body__items" data-index="{{ forloop.counter0 }}">
+                                    <tr class="cart__table--body__items">
                                         <td class="cart__table--body__list">
                                             <div class="cart__product--desc d-block d-md-flex align-items-center">
                                                 <div class="product__description order-md-1">
@@ -64,10 +64,11 @@
                                             </div>
                                         </td>
                                         <td class="cart__table--body__list position-relative">
-                                            <div class="cart__product--value d-block d-md-flex bottom-0">
+                                            <div class="cart__product--value d-block d-md-flex bottom-0"
+                                                 data-product-id="{{ product.id }}"
+                                                 data-index="{{ forloop.counter0 }}">
                                                 <div class="product--amount d-flex align-items-center pe-0 pe-md-5">
-                                                    <button class="product--amount__btn increase"
-                                                            data-index="{{ forloop.counter0 }}">
+                                                    <button class="product--amount__btn increase">
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                                                             <line x1="0" y1="10" x2="20" y2="10" stroke="currentColor"
                                                                   stroke-width="2"></line>
@@ -77,10 +78,9 @@
                                                     </button>
                                                     <label>
                                                         <input size="1" type="text" class="product--amount__input"
-                                                               value="1" data-index="{{ forloop.counter0 }}">
+                                                               value="1">
                                                     </label>
-                                                    <button class="product--amount__btn decrease"
-                                                            data-index="{{ forloop.counter0 }}">
+                                                    <button class="product--amount__btn decrease">
                                                         <svg width="20" height="2" viewBox="0 0 20 2" fill="none">
                                                             <line x1="0" y1="1" x2="20" y2="1" stroke="currentColor"
                                                                   stroke-width="2"></line>
@@ -89,12 +89,10 @@
                                                 </div>
                                                 <div class="product--price">
                                                     {% if product.discount_price %}
-                                                        <span class="cart__price"
-                                                              data-index="{{ forloop.counter0 }}">{{ product.discount_price }}₴</span>
+                                                        <span class="cart__price">{{ product.discount_price }}₴</span>
                                                         <span class="cart__price--old text-decoration-line-through">{{ product.price }}₴</span>
                                                     {% else %}
-                                                        <span class="cart__price"
-                                                              data-index="{{ forloop.counter0 }}">{{ product.price }}₴</span>
+                                                        <span class="cart__price">{{ product.price }}₴</span>
                                                     {% endif %}
                                                 </div>
                                             </div>
@@ -127,7 +125,8 @@
                                             <td class="checkout__total--footer__title checkout__total--amount checkout__total--footer__list text-left">
                                                 К оплате
                                             </td>
-                                            <td class="checkout-total checkout__total--amount checkout__total--footer__list text-right">
+                                            <td class="checkout-total checkout__total--amount checkout__total--footer__list text-right"
+                                                id="total-price-with-discount">
                                                 {{ total_price }}₴
                                             </td>
                                         </tr>
@@ -248,7 +247,7 @@
                                         </div>
                                         <div class="slider-container mt-5">
                                             <div class="shipment--types__list shipment slider d-flex mb-5">
-                                                <button id="pickup" class="slide shipment__page--list--item shipping">
+                                                <button id="pickup" data-id="1" class="slide shipment__page--list--item shipping">
                                                     <div class="shipment__method--type__thumbnail">
                                                         <svg width="39" height="37" viewBox="0 0 39 37"
                                                              fill="none"
@@ -284,7 +283,7 @@
                                                     <h4 class="shipment__method--type__description">Самовывоз из
                                                         магазина</h4>
                                                 </button>
-                                                <button id="meest" class="slide shipment__page--list--item shipping">
+                                                <button id="meest" data-id="2" class="slide shipment__page--list--item shipping">
                                                     <div class="shipment__method--type__thumbnail">
                                                         <svg width="127.000000" height="41.000000"
                                                              viewBox="0 0 127 41"
@@ -313,7 +312,7 @@
                                                         Express на
                                                         отделение</h4>
                                                 </button>
-                                                <button id="nova_office"
+                                                <button id="nova_office" data-id="3"
                                                         class="slide shipment__page--list--item shipping">
                                                     <div class="shipment__method--type__thumbnail">
                                                         <svg width="40.000000" height="40.000000"
@@ -343,7 +342,7 @@
                                                         Почтой на
                                                         отделение</h4>
                                                 </button>
-                                                <button id="nova_courier"
+                                                <button id="nova_courier" data-id="4"
                                                         class="slide shipment__page--list--item shipping">
                                                     <div class="shipment__method--type__thumbnail">
                                                         <svg width="31.000000" height="41.000000"
@@ -388,9 +387,13 @@
                                                     {% include 'partials/branches_list-checkout.html' %}
                                                 </ul>
                                             </div>
-                                            <div class="shipment__method__map">
-                                                <img class="map__img"
-                                                     src="{% static 'src/assets/img/other/mix_map.png' %}" alt="map">
+                                            <div class="shipment__method__map map__img">
+                                                <gmp-map id="map" center="46.48167419433594,30.68355941772461" zoom="14"
+                                                         map-id="DEMO_MAP_ID">
+                                                    <gmp-advanced-marker id="marker"
+                                                                         position="46.48167419433594,30.68355941772461"
+                                                                         title="My location"></gmp-advanced-marker>
+                                                </gmp-map>
                                             </div>
                                         </div>
 
@@ -424,7 +427,7 @@
                                          style="display: none;">
                                         <div id="payment--slider" class="slider-container mt-5">
                                             <div class="shipment--types__list payment slider mb-5">
-                                                <button id="cod" class="slide shipment__page--list--item payment">
+                                                <button id="cod" data-id="1" class="slide shipment__page--list--item payment">
                                                     <h4 class="shipment__method--type__description payment">Наложеный
                                                         платеж при
                                                         получении
@@ -432,23 +435,23 @@
                                                         заказа от 200
                                                         грн.)</h4>
                                                 </button>
-                                                <button id="card" class="slide shipment__page--list--item payment">
+                                                <button id="card" data-id="2" class="slide shipment__page--list--item payment">
                                                     <h4 class="shipment__method--type__description payment">Оплата на
                                                         карту</h4>
                                                 </button>
-                                                <button id="cash__store"
+                                                <button id="cash__store" data-id="3"
                                                         class="slide shipment__page--list--item payment">
                                                     <h4 class="shipment__method--type__description payment">Наличными
                                                         (при
                                                         самовывозе
                                                         из магазина)</h4>
                                                 </button>
-                                                <button id="bank__transfer--vat"
+                                                <button id="bank__transfer--vat" data-id="4"
                                                         class="slide shipment__page--list--item payment">
                                                     <h4 class="shipment__method--type__description payment">Безналичный
                                                         расчет с НДС</h4>
                                                 </button>
-                                                <button id="bank__transfer"
+                                                <button id="bank__transfer" data-id="5"
                                                         class="slide shipment__page--list--item payment">
                                                     <h4 class="shipment__method--type__description payment">Безналичный
                                                         расчет без
@@ -620,5 +623,13 @@
     <script src="{% static 'src/assets/js/toggleButtonOutline.js' %}"></script>
     <script src="{% static 'src/assets/js/checkoutButtons.js' %}"></script>
     <script src="{% static 'src/assets/js/oneOptionCheckInput.js' %}"></script>
+    <script defer src="{% static 'src/assets/js/mapCreator.js' %}"></script>
     <script src="{% static 'src/assets/js/getBranches.js' %}"></script>
+    <script src="{% static 'src/assets/js/applyPromo.js' %}"></script>
+    <script src="{% static 'src/assets/js/confirmOrder.js' %}"></script>
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMnDGy6nqzX36bSjyh3Kzdts7wvwqTMY0&loading=async&libraries=marker&v=beta&solution_channel=GMP_CCS_complexmarkers_v3"
+            defer
+    ></script>
+
 {% endblock %}

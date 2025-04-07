@@ -18,8 +18,8 @@ class CustomMenu(Menu):
                     models=('Mixon_shop.models.Product', 'Mixon_shop.models.ProductStock',
                             'Mixon_shop.models.Color', 'Mixon_shop.models.Volume',
                             'Mixon_shop.models.BindingSubstance', 'Mixon_shop.models.ProductType',
-                            'Mixon_shop.models.PromoCode', 'Mixon_shop.models.RecommendedProducts',
-                            'Mixon_shop.models.SalesLeaders')
+                            'Mixon_shop.models.Category', 'Mixon_shop.models.PromoCode',
+                            'Mixon_shop.models.RecommendedProducts', 'Mixon_shop.models.SalesLeaders')
                 ),
             ]),
             items.MenuItem('Главная страница', children=[

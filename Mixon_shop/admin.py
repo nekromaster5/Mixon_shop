@@ -6,7 +6,7 @@ from .models import (
     Region, UserProfile, PhoneNumber, Branch, Product, Review,
     OrderStatus, Order, FavoriteProduct, ProductComparison,
     NewsCategory, News, ErrorMessages, InfoMessages, City, ProductStock, Volume, Color, ProductImage, BindingSubstance,
-    ProductType, PromoCode, SalesLeaders, RecommendedProducts, MainPageSections, MainPageBanner,
+    ProductType, PromoCode, SalesLeaders, RecommendedProducts, MainPageSections, MainPageBanner, Category, OrderProduct,
 )
 
 
@@ -114,13 +114,29 @@ class ProductImageInline(admin.TabularInline):
     extra = 1
 
 
+# Inline для OrderProduct
+class OrderProductInline(admin.TabularInline):
+    model = OrderProduct
+    extra = 1  # Показывать одну пустую строку для добавления нового товара
+    # Убираем readonly_fields и can_delete, чтобы можно было редактировать
+    # readonly_fields = ('product', 'quantity')  # Удаляем
+    # can_delete = False  # Удаляем
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'is_new', 'is_discounted', 'is_in_stock', 'average_rating')
+    list_display = ('name', 'category', 'price', 'is_new', 'is_discounted', 'is_in_stock', 'average_rating')
     search_fields = ('name', 'average_rating')
     inlines = [ProductImageInline]
-    list_filter = ('is_discounted', 'is_new', 'is_in_stock')
+    list_filter = ('category', 'is_discounted', 'is_new', 'is_in_stock')
     filter_horizontal = ('related_products', 'similar_products')
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',)  # Отображаем имя категории
+    search_fields = ('name',)  # Позволяем искать по имени
+    list_filter = ()  # Фильтры не нужны, но можно добавить, если потребуется
 
 
 @admin.register(ProductImage)
@@ -173,10 +189,10 @@ class OrderStatusAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('user', 'status', 'created_at')
-    search_fields = ('user__username',)
+    list_display = ('id', 'name', 'created_at', 'status')
     list_filter = ('status', 'created_at')
-    filter_horizontal = ('products',)
+    search_fields = ('name', 'phone', 'email')
+    inlines = [OrderProductInline]
 
 
 @admin.register(FavoriteProduct)

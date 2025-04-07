@@ -1,5 +1,5 @@
 {% for branch in branches %}
-<li class="widget__form--check__list align-items-start">
+<li class="widget__form--check__list align-items-start" data-map-info="{{ branch.map_info }}">
     <input class="widget__form--check__input flex-shrink-0"
            id="{{ branch.id }}"
            type="checkbox">
@@ -11,7 +11,7 @@
                 Забрать сегодня {{ branch.working_hours }}
             </span>
         </label>
-        <button id="show--map" class="show--map--btn primary__btn">
+        <button id="show--map-{{ branch.id }}" class="show--map--btn primary__btn" data-map-info="{{ branch.map_info }}">
             Посмотреть на карте
         </button>
     </div>

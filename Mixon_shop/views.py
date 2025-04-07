@@ -1,3 +1,4 @@
+import json
 from decimal import Decimal
 
 from django.conf import settings
@@ -7,6 +8,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import JsonResponse
 # Existing import statements
 from django.template.loader import render_to_string
+from django.utils.timezone import now
 from django.views import View
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
@@ -14,7 +16,8 @@ import math
 
 from .admin import ProductImageInline
 from .forms import UserLoginForm
-from .models import Product, Review, RecommendedProducts, SalesLeaders, City, Branch, ErrorMessages
+from .models import Product, Review, RecommendedProducts, SalesLeaders, City, Branch, ErrorMessages, PromoCode, Order, \
+    ShipmentMethod, PaymentMethod, OrderStatus, OrderProduct
 
 
 def product_detail(request, product_id):
@@ -113,8 +116,7 @@ class SearchPage(View):
         query = request.GET.get('query', '').strip()
         # Поточна «офіційна» сторінка, з якої формується view
         page = request.GET.get('page', 1)
-        print('query:', query)
-        print('page:', page)
+
         if query:
             products_list = Product.objects.filter(name__icontains=query).prefetch_related('images').order_by('name')
         else:
@@ -230,15 +232,168 @@ class CheckoutPage(View):
             'cities': cities,
         })
 
+    def post(self, request):
+        # Получаем данные из AJAX-запроса
+        data = json.loads(request.body)
+        product_counts = data.get('products', {})
+
+        # Получаем товары из базы данных
+        products = Product.objects.filter(id__in=product_counts.keys())
+
+        # Пересчитываем общую сумму
+        total_price = 0
+        for product in products:
+            count = int(product_counts.get(str(product.id), 1))
+            price = product.discount_price if product.is_discounted and product.discount_price is not None else product.price
+            total_price += float(price) * count  # Приводим price к float
+
+        # Возвращаем результат как JSON, убедившись, что total_price — это число
+        return JsonResponse({'total_price': float(total_price)})  # Приводим к float
+
 
 def get_branches(request):
     city_id = request.GET.get("city_id")
-    print("city_id:", city_id)
     branches = Branch.objects.filter(city_id=city_id)
-    print("branches:", branches)
 
     html = render(request, "partials/branches_list-checkout.html", {"branches": branches}).content.decode("utf-8")
     return JsonResponse({"html": html})
+
+
+def apply_promo_code(request):
+    if request.method == "POST":
+        code = request.POST.get("code", "").strip()
+
+        if not code:
+            return JsonResponse({"success": False, "error": "Введите промокод."}, status=400)
+
+        applied_promo = request.session.get('applied_promo_code')
+        if applied_promo == code:
+            return JsonResponse({"success": False, "error": "Этот промокод уже применен."}, status=400)
+
+        try:
+            promo = PromoCode.objects.get(code=code)
+
+            if promo.expiry_date and promo.expiry_date < now():
+                return JsonResponse({"success": False, "error": "Срок действия промокода истек."}, status=400)
+
+            if promo.max_usage_count is not None and promo.usage_count >= promo.max_usage_count:
+                return JsonResponse(
+                    {"success": False, "error": "Этот промокод уже использован максимальное количество раз."},
+                    status=400)
+
+            discount = promo.discount_value if promo.discount_type == "amount" else f"{promo.discount_value}%"
+
+            promo.usage_count += 1
+            promo.save()
+
+            # Сохраняем промокод в сессии
+            request.session['applied_promo_code'] = code
+            request.session['discount'] = {
+                'type': promo.discount_type,
+                'value': float(promo.discount_value)
+            }
+            request.session.modified = True  # Гарантируем сохранение сессии
+            print(f"Сохранен промокод в сессии: {request.session['applied_promo_code']}")  # Отладочный вывод
+
+            return JsonResponse({"success": True, "discount": discount})
+
+        except PromoCode.DoesNotExist:
+            return JsonResponse({"success": False, "error": "Неверный промокод."}, status=400)
+
+    return JsonResponse({"success": False, "error": "Неверный метод запроса."}, status=405)
+
+
+def create_order(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+
+        # Проверяем обязательные поля
+        required_fields = ['name', 'shipment_method', 'order_place', 'payment_method', 'goods_cost', 'shipment_cost']
+        for field in required_fields:
+            if field not in data or data[field] is None:
+                return JsonResponse({"success": False, "error": f"Поле '{field}' обязательно для заполнения."},
+                                    status=400)
+
+        # Проверяем, что хотя бы одно из полей phone или email заполнено
+        phone = data.get('phone', '').strip()
+        email = data.get('email', '').strip()
+        if not phone and not email:
+            return JsonResponse({"success": False, "error": "Необходимо указать хотя бы телефон или email для связи."},
+                                status=400)
+
+        try:
+            # Получаем данные
+            name = data.get('name')
+            shipment_method_id = int(data.get('shipment_method'))
+            order_place_id = int(data.get('order_place'))
+            payment_method_id = int(data.get('payment_method'))
+            comment = data.get('comment', '')
+            goods_cost = float(data.get('goods_cost'))
+            shipment_cost = float(data.get('shipment_cost'))
+            product_counts = data.get('products', {})  # Формат: {product_id: quantity}
+            promo_code = data.get('promo_code')
+
+            # Получаем объекты из базы данных
+            shipment_method = ShipmentMethod.objects.get(id=shipment_method_id)
+            order_place = Branch.objects.get(id=order_place_id)
+            payment_method = PaymentMethod.objects.get(id=payment_method_id)
+            status = OrderStatus.objects.get(id=1)  # Статус "Заказ принят"
+
+            # Получаем продукты
+            products = Product.objects.filter(id__in=product_counts.keys())
+            if not products:
+                return JsonResponse({"success": False, "error": "Не выбрано ни одного товара."}, status=400)
+
+            # Проверяем промокод
+            promo_applied = False
+            promo = None
+            if promo_code:
+                try:
+                    promo = PromoCode.objects.get(code=promo_code)
+                    promo_applied = True
+                    print(f"Промокод найден: {promo.code}, promo_applied: {promo_applied}")
+                except PromoCode.DoesNotExist:
+                    print(f"Промокод {promo_code} не найден в базе данных")
+                    pass
+
+            # Создаем заказ
+            order = Order.objects.create(
+                user=request.user if request.user.is_authenticated else None,
+                name=name,
+                phone=phone,
+                email=email,
+                shipment_method=shipment_method,
+                order_place=order_place,
+                payment_method=payment_method,
+                comment=comment,
+                goods_cost=goods_cost,
+                shipment_cost=shipment_cost,
+                promo_applied=promo_applied,
+                promo=promo,
+                status=status,
+            )
+
+            # Добавляем продукты в заказ с количеством через OrderProduct
+            for product_id, quantity in product_counts.items():
+                product = Product.objects.get(id=int(product_id))
+                OrderProduct.objects.create(
+                    order=order,
+                    product=product,
+                    quantity=int(quantity)
+                )
+
+            # Очищаем сессию (если она используется)
+            if 'applied_promo_code' in request.session:
+                del request.session['applied_promo_code']
+            if 'discount' in request.session:
+                del request.session['discount']
+
+            return JsonResponse({"success": True, "message": "Заказ успешно создан!"})
+
+        except Exception as e:
+            return JsonResponse({"success": False, "error": str(e)}, status=500)
+
+    return JsonResponse({"success": False, "error": "Неверный метод запроса."}, status=405)
 
 
 class TestSlider(View):
