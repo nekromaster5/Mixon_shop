@@ -339,7 +339,7 @@ class CartItem(models.Model):
 
 class MainPageSections(models.Model):
     image = models.ImageField(upload_to='sections/images/')
-    name = models.CharField(max_length=256)
+    name = models.ForeignKey(Category, on_delete=models.CASCADE)
     is_used = models.BooleanField(default=False)
 
 
