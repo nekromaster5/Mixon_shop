@@ -35,10 +35,10 @@
 
                 {% if products %}
                     <div id="products-container" class="row px-0">
-                        {% include 'partials/products_partial.html' %}
+                        {% include 'partials/products_partial.html' with products=products page_type=page_type %}
                     </div>
                     <!-- Кнопка "Показать ещё", якщо є наступна сторінка -->
-                    {% include 'pagination.html' %}
+                    {% include 'pagination_search.html' %}
 
                 {% else %}
                     <p>Нет результатов{% if query %} для "{{ query }}"{% endif %}</p>
@@ -52,9 +52,5 @@
 {% block scripts %}
     <script src="{% static '/src/assets/js/slider.js' %}"></script>
     <script src="{% static '/src/assets/js/breadcrumbSliderSetWidth.js' %}"></script>
-    <script src="{% static '/src/assets/js/layoutButtonsToggle.js' %}"></script>
-    <script src="{% static '/src/assets/js/sortButtonsToggle.js' %}"></script>
-    <script src="{% static '/src/assets/js/widgetBlockCollapse.js' %}"></script>
-    <script src="{% static '/src/assets/js/oneOptionCheckInput.js' %}"></script>
-    <script src="{% static '/src/assets/js/pagination.js' %}"></script>
+    <script src="{% static '/src/assets/js/pagination_search.js' %}"></script>
 {% endblock %}

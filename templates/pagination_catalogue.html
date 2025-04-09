@@ -1,0 +1,192 @@
+{% load static %}
+
+<div class="pagination__area">
+    <div id="load-more-container">
+        {% if products.has_next %}
+            <div class="pagination refresh__page justify-content-center">
+                <a class="pagination justify-content-center"
+                   id="load-more-btn"
+                   data-current-page="{{ products.number }}"
+                   data-url="{{ page_url }}"
+                   data-query="{{ query|urlencode }}"
+                   data-product-type="
+                           {% if product_type and product_type != 'None' and product_type|striptags|length > 0 %}{{ product_type|urlencode }}{% endif %}"
+                   data-page-type="catalogue">
+                    <img src="{% static '/src/assets/img/icon/refresh_page__red.svg' %}" alt="refresh page"
+                         class="me-3">
+                    Показать ещё
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+    <div id="pagination-container">
+        {% if num_pages > 1 %}
+            <nav class="pagination justify-content-center">
+                <ul class="pagination__wrapper d-flex align-items-center justify-content-center">
+                    <!-- Попередня сторінка -->
+                    {% if products.has_previous %}
+                        <li class="pagination__list">
+                            <a href="{{ page_url }}?page=
+                                    
+                                    
+                                    {{ products.previous_page_number }}{% if query_params %}&{{ query_params }}{% endif %}"
+                               class="pagination__item--arrow link ajax-page-link"
+                               data-page="{{ products.previous_page_number }}">
+                                <img src="{% static '/src/assets/img/icon/left_arrow.svg' %}" alt="left arrow">
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="pagination__list">
+                            <span class="pagination__item--arrow disabled">
+                                <img src="{% static '/src/assets/img/icon/left_arrow.svg' %}" alt="left arrow">
+                            </span>
+                        </li>
+                    {% endif %}
+
+                    <!-- Номери сторінок -->
+                    {% for p in pages_to_display %}
+                        {% if p == '...' %}
+                            <li class="pagination__list">
+                                <span class="pagination__item">...</span>
+                            </li>
+                        {% elif p == products.number %}
+                            <li class="pagination__list">
+                                <span class="pagination__item pagination__item--current">{{ p }}</span>
+                            </li>
+                        {% else %}
+                            <li class="pagination__list">
+                                <a href="{{ page_url }}?page={{ p }}{% if query_params %}&{{ query_params }}{% endif %}"
+                                   class="pagination__item link ajax-page-link"
+                                   data-page="{{ p }}">
+                                    {{ p }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </nav>
+        {% endif %}
+    </div>
+
+    <!-- Формуємо query string із параметрами фільтрів -->
+    {% with needs_ampersand='0' %}
+        {% with query_params_list='' %}
+            <!-- Ініціалізуємо query_params_list як порожній рядок -->
+            {% if selected_types %}
+                {% for type_id in selected_types %}
+                    {% if needs_ampersand == '1' %}
+                        {% with param='&type='|add:type_id %}
+                            {% with query_params_list=query_params_list|add:param %}
+                            {% endwith %}
+                        {% endwith %}
+                    {% else %}
+                        {% with param='type='|add:type_id %}
+                            {% with query_params_list=query_params_list|add:param needs_ampersand='1' %}
+                            {% endwith %}
+                        {% endwith %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% if selected_binding_substance %}
+                {% if needs_ampersand == '1' %}
+                    {% with param='&binding_substance='|add:selected_binding_substance %}
+                        {% with query_params_list=query_params_list|add:param %}
+                        {% endwith %}
+                    {% endwith %}
+                {% else %}
+                    {% with param='binding_substance='|add:selected_binding_substance %}
+                        {% with query_params_list=query_params_list|add:param needs_ampersand='1' %}
+                        {% endwith %}
+                    {% endwith %}
+                {% endif %}
+            {% endif %}
+            {% if selected_volumes %}
+                {% for volume_id in selected_volumes %}
+                    {% if needs_ampersand == '1' %}
+                        {% with param='&volume='|add:volume_id %}
+                            {% with query_params_list=query_params_list|add:param %}
+                            {% endwith %}
+                        {% endwith %}
+                    {% else %}
+                        {% with param='volume='|add:volume_id %}
+                            {% with query_params_list=query_params_list|add:param needs_ampersand='1' %}
+                            {% endwith %}
+                        {% endwith %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% if is_discounted %}
+                {% if needs_ampersand == '1' %}
+                    {% with param='&is_discounted=true' %}
+                        {% with query_params_list=query_params_list|add:param %}
+                        {% endwith %}
+                    {% endwith %}
+                {% else %}
+                    {% with param='is_discounted=true' %}
+                        {% with query_params_list=query_params_list|add:param needs_ampersand='1' %}
+                        {% endwith %}
+                    {% endwith %}
+                {% endif %}
+            {% endif %}
+            {% if is_new %}
+                {% if needs_ampersand == '1' %}
+                    {% with param='&is_new=true' %}
+                        {% with query_params_list=query_params_list|add:param %}
+                        {% endwith %}
+                    {% endwith %}
+                {% else %}
+                    {% with param='is_new=true' %}
+                        {% with query_params_list=query_params_list|add:param needs_ampersand='1' %}
+                        {% endwith %}
+                    {% endwith %}
+                {% endif %}
+            {% endif %}
+            {% if is_in_stock %}
+                {% if needs_ampersand == '1' %}
+                    {% with param='&is_in_stock=true' %}
+                        {% with query_params_list=query_params_list|add:param %}
+                        {% endwith %}
+                    {% endwith %}
+                {% else %}
+                    {% with param='is_in_stock=true' %}
+                        {% with query_params_list=query_params_list|add:param needs_ampersand='1' %}
+                        {% endwith %}
+                    {% endwith %}
+                {% endif %}
+            {% endif %}
+            {% if product_type and product_type != 'None' and product_type|striptags|length > 0 %}
+                {% if needs_ampersand == '1' %}
+                    {% with param='&product_type='|add:product_type|urlencode %}
+                        {% with query_params_list=query_params_list|add:param %}
+                        {% endwith %}
+                    {% endwith %}
+                {% else %}
+                    {% with param='product_type='|add:product_type|urlencode %}
+                        {% with query_params_list=query_params_list|add:param needs_ampersand='1' %}
+                        {% endwith %}
+                    {% endwith %}
+                {% endif %}
+            {% endif %}
+            {% if sort_type %}
+                {% if needs_ampersand == '1' %}
+                    {% with param='&sort_type='|add:sort_type %}
+                        {% with query_params_list=query_params_list|add:param %}
+                        {% endwith %}
+                    {% endwith %}
+                {% else %}
+                    {% with param='sort_type='|add:sort_type %}
+                        {% with query_params_list=query_params_list|add:param needs_ampersand='1' %}
+                        {% endwith %}
+                    {% endwith %}
+                {% endif %}
+            {% endif %}
+
+            <!-- Присвоюємо query_params кінцеве значення -->
+            {% with query_params=query_params_list %}
+                <!-- Дебаг: виводимо query_params -->
+                <p>Query params: {{ query_params }}</p>
+            {% endwith %}
+        {% endwith %}
+    {% endwith %}
+</div>

@@ -16,7 +16,11 @@
                         <a href="{% url 'home' %}">Главная</a>
                     </li>
                     <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'catalogue' %}">ЛКМ для Строительства</a>
+                        <a href="{% url 'catalogue' %}">{% if product_category %}
+                            {{ product_category }}</a>
+                        {% else %}
+                            Все товары
+                        {% endif %}
                     </li>
                     <li class="breadcrumb__content--menu__items">
                         <a href="{% url 'catalogue' %}">Шпатлевка универсальная</a>
@@ -118,11 +122,11 @@
         <div class="container">
             <div class="catalogue-sort">
                 <span class="filters-button">Фильтры</span>
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center sort-buttons">
                     <span>Сортировать по:</span>
-                    <button class="sort-type active">популярности</button>
-                    <button class="sort-type">цене</button>
-                    <button class="sort-type">названию</button>
+                    <button class="sort-type active" id="sort_type_popularity">популярности</button>
+                    <button class="sort-type" id="sort_type_price">цене</button>
+                    <button class="sort-type" id="sort_type_name">названию</button>
                 </div>
                 <div class="layout-buttons d-flex">
                     <button class="layout-style active">
@@ -165,24 +169,37 @@
                             <div class="widget__content">
                                 <ul class="widget__form--check">
                                     <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check1" type="checkbox">
+                                        <input class="widget__form--check__input"
+                                               id="check_modifier_1"
+                                               type="checkbox"
+                                               name="is_discounted"
+                                               value="true"
+                                               {% if is_discounted %}checked{% endif %}>
                                         <span class="widget__form--checkmark"></span>
                                         <label class="widget__form--check__label--base"
-                                               for="check1">Акционные</label>
-
+                                               for="check_modifier_1">Акционные</label>
                                     </li>
                                     <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check2" type="checkbox">
+                                        <input class="widget__form--check__input"
+                                               id="check_modifier_2"
+                                               type="checkbox"
+                                               name="is_new"
+                                               value="true"
+                                               {% if is_new %}checked{% endif %}>
                                         <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base" for="check2">Новинки</label>
-
+                                        <label class="widget__form--check__label--base"
+                                               for="check_modifier_2">Новинки</label>
                                     </li>
                                     <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check3" type="checkbox">
+                                        <input class="widget__form--check__input"
+                                               id="check_modifier_3"
+                                               type="checkbox"
+                                               name="is_in_stock"
+                                               value="true"
+                                               {% if is_in_stock %}checked{% endif %}>
                                         <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base" for="check3">Есть в
-                                            наличии</label>
-
+                                        <label class="widget__form--check__label--base"
+                                               for="check_modifier_3">Есть в наличии</label>
                                     </li>
                                 </ul>
                             </div>
@@ -198,25 +215,21 @@
                             </div>
                             <div class="widget__content">
                                 <ul class="widget__form--check">
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check4" type="checkbox">
-                                        <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base" for="check4">Краска</label>
-
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check5" type="checkbox">
-                                        <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base"
-                                               for="check5">Грунтовка</label>
-
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check6" type="checkbox">
-                                        <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base" for="check6">Лак</label>
-
-                                    </li>
+                                    {% for product_type in product_types %}
+                                        <li class="widget__form--check__list">
+                                            <input class="widget__form--check__input"
+                                                   id="check_type_{{ product_type.id }}"
+                                                   type="checkbox"
+                                                   name="type"
+                                                   value="{{ product_type.id }}"
+                                                   {% if product_type.id|stringformat:"s" in selected_types %}checked{% endif %}>
+                                            <span class="widget__form--checkmark"></span>
+                                            <label class="widget__form--check__label--base"
+                                                   for="check_type_{{ product_type.id }}">
+                                                {{ product_type.name }}
+                                            </label>
+                                        </li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
@@ -268,34 +281,21 @@
                             </div>
                             <div class="widget__content">
                                 <ul class="widget__form--check">
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check7" type="checkbox">
-                                        <span class="widget__form--checkmark circle"></span>
-                                        <label class="widget__form--check__label--base"
-                                               for="check7">Акриловая</label>
-
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check8" type="checkbox">
-                                        <span class="widget__form--checkmark circle"></span>
-                                        <label class="widget__form--check__label--base"
-                                               for="check8">Алкидная</label>
-
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check9" type="checkbox">
-                                        <span class="widget__form--checkmark circle"></span>
-                                        <label class="widget__form--check__label--base"
-                                               for="check9">Полиуретановая</label>
-
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check10" type="checkbox">
-                                        <span class="widget__form--checkmark circle"></span>
-                                        <label class="widget__form--check__label--base"
-                                               for="check10">Полиэфирная</label>
-
-                                    </li>
+                                    {% for binding_substance in binding_substances %}
+                                        <li class="widget__form--check__list">
+                                            <input class="widget__form--check__input binding-substance-checkbox"
+                                                   id="check_base_{{ binding_substance.id }}"
+                                                   type="checkbox"
+                                                   name="binding_substance"
+                                                   value="{{ binding_substance.id }}"
+                                                   {% if binding_substance.id|stringformat:"s" == selected_binding_substance %}checked{% endif %}>
+                                            <span class="widget__form--checkmark circle"></span>
+                                            <label class="widget__form--check__label--base"
+                                                   for="check_base_{{ binding_substance.id }}">
+                                                {{ binding_substance.name }}
+                                            </label>
+                                        </li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
@@ -310,52 +310,32 @@
                             </div>
                             <div class="widget__content">
                                 <ul class="widget__form--check">
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check11" type="checkbox">
-                                        <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base" for="check11">до 1.0</label>
-
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check12" type="checkbox">
-                                        <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base"
-                                               for="check12">1.1-3.0</label>
-
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check13" type="checkbox">
-                                        <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base"
-                                               for="check13">3.1-5.0</label>
-
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check14" type="checkbox">
-                                        <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base"
-                                               for="check14">5.1-10.0</label>
-
-                                    </li>
-                                    <li class="widget__form--check__list">
-                                        <input class="widget__form--check__input" id="check15" type="checkbox">
-                                        <span class="widget__form--checkmark"></span>
-                                        <label class="widget__form--check__label--base" for="check15">больше
-                                            10.0</label>
-
-                                    </li>
+                                    {% for product_volume in product_volumes %}
+                                        <li class="widget__form--check__list">
+                                            <input class="widget__form--check__input"
+                                                   id="check_volume_{{ product_volume.id }}"
+                                                   type="checkbox"
+                                                   name="volume"
+                                                   value="{{ product_volume.id }}"
+                                                   {% if product_volume.id|stringformat:"s" in selected_volumes %}checked{% endif %}>
+                                            <span class="widget__form--checkmark"></span>
+                                            <label class="widget__form--check__label--base"
+                                                   for="check_volume_{{ product_volume.id }}">
+                                                {{ product_volume.size }}
+                                            </label>
+                                        </li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row col-lg-13 col-md-19 px-lg-6 px-md-6 px-8">
-                    {% for product in products %}
-                        <div class="col-lg-5 col-6 px-lg-6 px-md-6 px-8 mb-6">
-                            {% include "product_block--standard.html" with product=product %}
-                        </div>
-                    {% endfor %}
-                    {% include 'pagination.html' %}
+                <div class="col-lg-13 col-md-19 px-lg-6 px-md-6 px-8">
+                    <div id="products-container" class="row">
+                        {% include 'partials/products_partial.html' with products=products page_type=page_type %}
+                    </div>
+                    <!-- Пагінація -->
+                    {% include 'pagination_catalogue.html' with products=products num_pages=num_pages pages_to_display=pages_to_display query=query product_type=product_type selected_types=selected_types selected_binding_substance=selected_binding_substance selected_volumes=selected_volumes is_discounted=is_discounted is_new=is_new is_in_stock=is_in_stock %}
                 </div>
             </div>
         </div>
@@ -370,4 +350,6 @@
     <script src="{% static '/src/assets/js/sortButtonsToggle.js' %}"></script>
     <script src="{% static '/src/assets/js/widgetBlockCollapse.js' %}"></script>
     <script src="{% static '/src/assets/js/oneOptionCheckInput.js' %}"></script>
+    <script src="{% static '/src/assets/js/pagination_catalogue.js' %}"></script>
+    <script src="{% static '/src/assets/js/catalogue_filters.js' %}"></script>
 {% endblock %}

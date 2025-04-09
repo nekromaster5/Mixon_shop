@@ -1,11 +1,10 @@
 import json
 from decimal import Decimal
+from urllib.parse import unquote
 
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import JsonResponse
 # Existing import statements
 from django.template.loader import render_to_string
 from django.utils.timezone import now
@@ -14,10 +13,16 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 import math
 
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http import JsonResponse
+from django.db.models import F, Case, When, Value, DecimalField
+from django.db.models.functions import Coalesce
+
 from .admin import ProductImageInline
 from .forms import UserLoginForm
 from .models import Product, Review, RecommendedProducts, SalesLeaders, City, Branch, ErrorMessages, PromoCode, Order, \
-    ShipmentMethod, PaymentMethod, OrderStatus, OrderProduct
+    ShipmentMethod, PaymentMethod, OrderStatus, OrderProduct, Category, BindingSubstance, ProductType, Volume, \
+    ProductStock
 
 
 def product_detail(request, product_id):
@@ -70,12 +75,6 @@ class ProductPage(View):
         })
 
 
-class CataloguePage(View):
-    def get(self, request):
-        products = Product.objects.prefetch_related('images').all()
-        return render(request, 'catalogue.html', {'products': products})
-
-
 def register(request):
     return render(request, 'register.html')
 
@@ -111,80 +110,190 @@ def get_pages_to_display(current_page, total_pages):
         return list(range(start, total_pages + 1))
 
 
+class UniversalPaginator:
+    def __init__(self, object_list, per_page):
+        self.paginator = Paginator(object_list, per_page)
+        self.per_page = per_page
+
+    def get_page(self, number):
+        try:
+            return self.paginator.page(number)
+        except PageNotAnInteger:
+            return self.paginator.page(1)
+        except EmptyPage:
+            return self.paginator.page(self.paginator.num_pages)
+
+    def handle_pagination(self, request, template_name, partial_template, context_extras=None):
+        print(f"Pagination request GET: {request.GET}")
+        page = request.GET.get('page', 1)
+        load_more = request.GET.get('load_more', 'false') == 'true'
+
+        # Декодуємо query
+        query = request.GET.get('query', '')
+        if query:
+            query = unquote(query)
+        print(f"Decoded query: {query}")
+
+        # Отримуємо товари
+        products = self.paginator.object_list
+        print(f"Filtered products count: {products.count()}")
+
+        # Пагінація
+        paginated_products = self.get_page(page)
+        current_page = paginated_products.number
+        total_pages = self.paginator.num_pages
+        next_page = current_page + 1 if paginated_products.has_next() else None
+
+        print(f"AJAX request: current_page={current_page}, next_page={next_page}, total_pages={total_pages}")
+
+        # Отримуємо список сторінок для пагінації
+        pages_to_display = get_pages_to_display(current_page, total_pages)
+
+        context = {
+            'products': paginated_products,
+            'num_pages': total_pages,
+            'pages_to_display': pages_to_display,
+            'query': query,
+            'page_url': request.path,
+        }
+        if context_extras:
+            context.update(context_extras)
+
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            new_items_html = render_to_string(partial_template, context, request=request)
+            # Якщо це запит load_more, повертаємо пагінацію для поточної сторінки
+            if load_more:
+                context['products'] = paginated_products  # Залишаємо поточну сторінку
+            else:
+                # Для звичайного AJAX-запиту (наприклад, при кліку на номер сторінки) оновлюємо пагінацію
+                if paginated_products.has_next():
+                    context['products'] = self.get_page(current_page + 1)
+                else:
+                    context['products'] = paginated_products
+            new_pagination_html = render_to_string('pagination_catalogue.html', context, request=request)
+            print(f"Returning pagination HTML: \n{new_pagination_html[:100]}...")
+            return JsonResponse({
+                'new_items_html': new_items_html,
+                'new_pagination_html': new_pagination_html,
+            })
+
+        return render(request, template_name, context)
+
+
+class CataloguePage(View):
+    def get(self, request):
+        print("Request GET:", request.GET)
+        product_type_ids = request.GET.getlist('type')
+        binding_substance_id = request.GET.get('binding_substance')
+        volume_ids = request.GET.getlist('volume')
+        is_discounted = request.GET.get('is_discounted', 'false') == 'true'
+        is_new = request.GET.get('is_new', 'false') == 'true'
+        is_in_stock = request.GET.get('is_in_stock', 'false') == 'true'
+        sort_type = request.GET.get('sort_type', 'popularity')
+
+        print(f"product_type_ids: {product_type_ids}")
+        print(f"binding_substance_id: {binding_substance_id}")
+        print(f"volume_ids: {volume_ids}")
+        print(f"is_discounted: {is_discounted}, is_new: {is_new}, is_in_stock: {is_in_stock}")
+        print(f"sort_type: {sort_type}")
+
+        products = Product.objects.prefetch_related('images').all()
+
+        # Фільтрація
+        if product_type_ids:
+            products = products.filter(type__id__in=product_type_ids)
+        if binding_substance_id:
+            products = products.filter(binding_substance__id=binding_substance_id)
+        if volume_ids:
+            product_ids_with_volumes = ProductStock.objects.filter(
+                volume__id__in=volume_ids
+            ).values_list('product__id', flat=True).distinct()
+            products = products.filter(id__in=product_ids_with_volumes)
+        if is_discounted:
+            products = products.filter(is_discounted=True)
+        if is_new:
+            products = products.filter(is_new=True)
+        if is_in_stock:
+            products = products.filter(is_in_stock=True)
+
+        # Сортування
+        if sort_type == 'popularity':
+            products = products.order_by('-average_rating')
+        elif sort_type == 'price':
+            products = products.annotate(
+                effective_price=Coalesce(
+                    Case(
+                        When(is_discounted=True, then=F('discount_price')),
+                        default=F('price'),
+                        output_field=DecimalField()
+                    ),
+                    Value(0.0, output_field=DecimalField())
+                )
+            ).order_by('-effective_price')
+        elif sort_type == 'name':
+            products = products.order_by('name')
+
+        product_types = ProductType.objects.all()
+        binding_substances = BindingSubstance.objects.all()
+        product_volumes = Volume.objects.all()
+
+        print(f"Product types count: {product_types.count()}")
+        print(f"Binding substances count: {binding_substances.count()}")
+        print(f"Product volumes count: {product_volumes.count()}")
+
+        print(f"Catalogue products count: {products.count()}")
+        paginator = UniversalPaginator(products, per_page=1)
+        page = request.GET.get('page', 1)
+        paginated_products = paginator.get_page(page)
+        print(f"Has next page: {paginated_products.has_next()}")
+
+        context_extras = {
+            'product_type': None,
+            'page_type': 'catalogue',
+            'product_types': product_types,
+            'binding_substances': binding_substances,
+            'product_volumes': product_volumes,
+            'selected_types': product_type_ids,
+            'selected_binding_substance': binding_substance_id,
+            'selected_volumes': volume_ids,
+            'is_discounted': is_discounted,
+            'is_new': is_new,
+            'is_in_stock': is_in_stock,
+            'sort_type': sort_type,
+        }
+
+        response = paginator.handle_pagination(
+            request,
+            template_name='catalogue.html',
+            partial_template='partials/products_partial.html',
+            context_extras=context_extras
+        )
+        return response
+
+
 class SearchPage(View):
     def get(self, request):
         query = request.GET.get('query', '').strip()
-        # Поточна «офіційна» сторінка, з якої формується view
-        page = request.GET.get('page', 1)
-
         if query:
             products_list = Product.objects.filter(name__icontains=query).prefetch_related('images').order_by('name')
         else:
             products_list = Product.objects.prefetch_related('images').all().order_by('name')
 
-        paginator = Paginator(products_list, 1)  # Приклад: 1 товари на сторінку
-        try:
-            products = paginator.page(page)
-        except PageNotAnInteger:
-            products = paginator.page(1)
-        except EmptyPage:
-            products = paginator.page(paginator.num_pages)
-
-        # Список сторінок, які треба відобразити у пагінації (з урахуванням «…»)
-        pages_to_display = get_pages_to_display(products.number, paginator.num_pages)
-
-        is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
-        load_more = request.GET.get('load_more')  # параметр для "Показать ещё"
-
-        if is_ajax and load_more:
-            # Логіка «показати наступну сторінку» (тобто products.number + 1)
-            next_page_num = products.number + 1
-            if next_page_num <= paginator.num_pages:
-                next_page = paginator.page(next_page_num)
-                # HTML нового "шматка" товарів
-                new_items_html = render_to_string('partials/products_partial.html', {
-                    'products': next_page
-                }, request=request)
-
-                # Переформовуємо пагінацію так, ніби тепер користувач «знаходиться» на next_page
-                new_pages_to_display = get_pages_to_display(next_page.number, paginator.num_pages)
-                # Рендеримо (наприклад) окремий шаблон з pagination чи навіть той самий 'search.html'
-                # але зазвичай краще зробити окремий "pagination_partial.html":
-                new_pagination_html = render_to_string('pagination_partial.html', {
-                    'products': next_page,
-                    'query': query,
-                    'pages_to_display': new_pages_to_display,
-                    'num_pages': paginator.num_pages
-                }, request=request)
-
-                return JsonResponse({
-                    'new_items_html': new_items_html,
-                    'new_pagination_html': new_pagination_html
-                })
-            else:
-                # Вже немає наступної сторінки — можна повернути щось, щоб приховати кнопку "Показать ещё"
-                return JsonResponse({
-                    'new_items_html': '',
-                    'new_pagination_html': ''
-                })
-
-        # Якщо не AJAX або не натиснута "Показать ещё", рендеримо звичайну сторінку
-        context = {
-            'products': products,
-            'query': query,
-            'page': products.number,
-            'num_pages': paginator.num_pages,
-            'pages_to_display': pages_to_display
-        }
-        return render(request, 'search.html', context)
+        paginator = UniversalPaginator(products_list, per_page=1)
+        page = request.GET.get('page', 1)
+        paginated_products = paginator.get_page(page)
+        print(f"Search products count: {products_list.count()}")
+        print(f"Has next page: {paginated_products.has_next()}")
+        return paginator.handle_pagination(
+            request,
+            template_name='search.html',
+            partial_template='partials/products_partial.html',
+            context_extras={'query': query, 'page_type': 'search'}  # Додаємо page_type
+        )
 
     def post(self, request):
         query = request.POST.get('query', '')
-        # Відправляємо на сторінку 1 пошуку
-        if query:
-            return redirect(f'/search/?query={query}&page=1')
-        else:
-            return redirect(f'/search/?page=1')
+        return redirect(f'/search/?query={query}&page=1' if query else '/search/?page=1')
 
 
 class PersonalPage(View):
