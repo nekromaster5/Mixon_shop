@@ -224,9 +224,9 @@
                 <div class="product__section--inner">
                     <div class="slider-container adjustable-slider">
                         <div class="slider">
-                            {% for leader in sales_leaders %}
+                            {% for item in sales_leaders %}
                                 <div class="col-lg-18 col-md-17 col-17 mb-lg-8 mb-md-7 mb-5 slide">
-                                    {% include "product_block--standard.html" with product=leader.product %}
+                                    {% include "product_block--standard.html" with item=item %}
                                 </div>
                                 {% empty %}
                                 <p>Нет рекомендованных продуктов</p>
@@ -254,9 +254,9 @@
                 <div class="product__section--inner">
                     <div class="slider-container adjustable-slider">
                         <div class="slider">
-                            {% for newbie in novelty %}
+                            {% for item in novelty %}
                                 <div class="col-lg-18 col-md-17 col-17 mb-lg-8 mb-md-7 mb-5 slide">
-                                    {% include "product_block--standard.html" with product=newbie %}
+                                    {% include "product_block--standard.html" with item=item %}
                                 </div>
                                 {% empty %}
                                 <p>Нет новинок</p>
@@ -284,9 +284,9 @@
                 <div class="product__section--inner">
                     <div class="slider-container adjustable-slider">
                         <div class="slider">
-                            {% for recommendation in recommended_products %}
+                            {% for item in recommended_products %}
                                 <div class="col-lg-18 col-md-17 col-17 mb-lg-8 mb-md-7 mb-5 slide">
-                                    {% include "product_block--standard.html" with product=recommendation.product %}
+                                    {% include "product_block--standard.html" with item=item %}
                                 </div>
                                 {% empty %}
                                 <p>Нет рекомендованных продуктов</p>

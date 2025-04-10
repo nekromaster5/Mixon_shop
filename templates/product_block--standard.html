@@ -10,7 +10,7 @@
                 <path d="M4.32211 4.85803H1.42871V14.079H4.32211V4.85803Z" stroke="#787878"
                       stroke-miterlimit="10"></path>
             </svg>
-            <span>67</span>
+            <span>{{ item.likes_count }}</span>
         </li>
         <li class="d-flex align-items-center">
             <svg class="rating__review--text--svg--comment" width="16" height="14" viewBox="0 0 16 14" fill="none"
@@ -20,16 +20,16 @@
                 <path d="M4.49487 5.51904H11.1572" stroke="#787878" stroke-miterlimit="10"></path>
                 <path d="M4.49487 8.02197H11.1572" stroke="#787878" stroke-miterlimit="10"></path>
             </svg>
-            <span>23</span>
+            <span>{{ item.comments_count }}</span>
         </li>
     </ul>
     <div class="product__card--price d-flex">
-        {% if product.is_discounted %}
-            <span class="current__price">{{ product.discount_price }}₴</span>
+        {% if item.product.is_discounted %}
+            <span class="current__price">{{ item.product.discount_price }}₴</span>
         {% else %}
-            <span class="current__price">{{ product.price }}₴</span>
+            <span class="current__price">{{ item.product.price }}₴</span>
         {% endif %}
-        {% if product.is_in_stock %}
+        {% if item.product.is_in_stock %}
             <span class="is__in_stock">Есть в наличии</span>
         {% else %}
             <span class="is__in_stock">Нет в наличии</span>

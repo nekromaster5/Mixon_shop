@@ -2,7 +2,7 @@
 
 <div class="pagination__area">
     <div id="load-more-container">
-        {% if products.has_next %}
+        {% if has_items and has_next %}
             <div class="pagination refresh__page justify-content-center">
                 <a class="pagination justify-content-center"
                    id="load-more-btn"
@@ -24,7 +24,6 @@
         {% if num_pages > 1 %}
             <nav class="pagination justify-content-center">
                 <ul class="pagination__wrapper d-flex align-items-center justify-content-center">
-                    <!-- Попередня сторінка -->
                     {% if products.has_previous %}
                         <li class="pagination__list">
                             <a href="{{ page_url }}?page=
@@ -36,15 +35,8 @@
                                 <img src="{% static '/src/assets/img/icon/left_arrow.svg' %}" alt="left arrow">
                             </a>
                         </li>
-                    {% else %}
-                        <li class="pagination__list">
-                            <span class="pagination__item--arrow disabled">
-                                <img src="{% static '/src/assets/img/icon/left_arrow.svg' %}" alt="left arrow">
-                            </span>
-                        </li>
                     {% endif %}
 
-                    <!-- Номери сторінок -->
                     {% for p in pages_to_display %}
                         {% if p == '...' %}
                             <li class="pagination__list">
@@ -64,6 +56,17 @@
                             </li>
                         {% endif %}
                     {% endfor %}
+
+                    {% if has_next %}
+                        <li class="pagination__list">
+                            <a href="{{ page_url }}?page=
+                                    {{ products.next_page_number }}{% if query_params %}&{{ query_params }}{% endif %}"
+                               class="pagination__item--arrow link ajax-page-link"
+                               data-page="{{ products.next_page_number }}">
+                                <img src="{% static '/src/assets/img/icon/right_arrow.svg' %}" alt="right arrow">
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
             </nav>
         {% endif %}
@@ -72,7 +75,6 @@
     <!-- Формуємо query string із параметрами фільтрів -->
     {% with needs_ampersand='0' %}
         {% with query_params_list='' %}
-            <!-- Ініціалізуємо query_params_list як порожній рядок -->
             {% if selected_types %}
                 {% for type_id in selected_types %}
                     {% if needs_ampersand == '1' %}
@@ -181,12 +183,6 @@
                     {% endwith %}
                 {% endif %}
             {% endif %}
-
-            <!-- Присвоюємо query_params кінцеве значення -->
-            {% with query_params=query_params_list %}
-                <!-- Дебаг: виводимо query_params -->
-                <p>Query params: {{ query_params }}</p>
-            {% endwith %}
         {% endwith %}
     {% endwith %}
 </div>

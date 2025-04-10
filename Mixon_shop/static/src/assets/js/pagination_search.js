@@ -1,8 +1,5 @@
-$(function() {
-    // Зберігаємо початковий HTML кнопки "Показать ще" для відновлення
+$(function () {
     let initialLoadMoreHtml = $('#load-more-container').html();
-
-    // Зберігаємо початкові значення url, query і pageType
     let globalUrl = $('#load-more-btn').data('url') || '/search/';
     let globalQuery = decodeURIComponent($('#load-more-btn').data('query') || '');
     let globalPageType = $('#load-more-btn').data('page-type') || 'search';
@@ -11,18 +8,18 @@ $(function() {
     console.log('Initial globalQuery (search):', globalQuery);
     console.log('Initial globalPageType (search):', globalPageType);
 
-    // Обробка "Показать ще"
-    $(document).on('click', '#load-more-btn', function(e) {
+    $(document).on('click', '#load-more-btn', function (e) {
         e.preventDefault();
         let $btn = $(this);
         let currentPage = parseInt($btn.data('current-page'));
+        let nextPage = currentPage + 1;  // Завантажуємо наступну сторінку
         let url = $btn.data('url') || globalUrl;
         let query = decodeURIComponent($btn.data('query') || globalQuery);
         let productType = $btn.data('product-type') || '';
         let pageType = $btn.data('page-type') || globalPageType;
 
         let data = {
-            page: currentPage,
+            page: nextPage,  // Змінено з currentPage на nextPage
             load_more: 1,
             query: query,
             page_type: pageType
@@ -38,43 +35,37 @@ $(function() {
         let queryString = $.param(data, true);
         console.log('Query string for load more (search):', queryString);
 
-        let nextPage = currentPage + 1;
-
         $.ajax({
             url: url,
             type: 'GET',
             data: queryString,
-            success: function(response) {
+            success: function (response) {
                 console.log('Response (search):', response);
                 $('#products-container').append(response.new_items_html);
                 if (!response.new_items_html.trim()) {
-                    $('#load-more-container').html(''); // Прибираємо кнопку, якщо більше немає сторінок
+                    $('#load-more-container').html('');
                 }
                 if (response.new_pagination_html) {
-                    // Оновлюємо #pagination-container
                     let $newPagination = $(response.new_pagination_html);
                     let $newPaginationContainer = $newPagination.find('#pagination-container').html() || '';
                     $('#pagination-container').html($newPaginationContainer);
 
-                    // Перевіряємо, чи є наступна сторінка, і відновлюємо кнопку, якщо потрібно
                     let $newLoadMoreContainer = $newPagination.find('#load-more-container').html() || '';
                     if ($newLoadMoreContainer.trim()) {
                         $('#load-more-container').html($newLoadMoreContainer);
                     }
 
-                    // Оновлюємо data-current-page у кнопці
                     $('#load-more-btn').data('current-page', nextPage);
                     console.log('Updated data-current-page to (search):', nextPage);
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error('AJAX error (search):', status, error);
             }
         });
     });
 
-    // Обробка стрілок і номерів сторінок
-    $(document).on('click', '.ajax-page-link', function(e) {
+    $(document).on('click', '.ajax-page-link', function (e) {
         e.preventDefault();
         let $btn = $(this);
         let page = parseInt($btn.data('page'));
@@ -103,27 +94,24 @@ $(function() {
             url: url,
             type: 'GET',
             data: queryString,
-            success: function(response) {
+            success: function (response) {
                 console.log('Response (ajax-page-link, search):', response);
                 $('#products-container').html(response.new_items_html);
                 if (response.new_pagination_html) {
-                    // Оновлюємо #pagination-container
                     let $newPagination = $(response.new_pagination_html);
                     let $newPaginationContainer = $newPagination.find('#pagination-container').html() || '';
                     $('#pagination-container').html($newPaginationContainer);
 
-                    // Перевіряємо, чи є наступна сторінка, і відновлюємо кнопку, якщо потрібно
                     let $newLoadMoreContainer = $newPagination.find('#load-more-container').html() || '';
                     if ($newLoadMoreContainer.trim()) {
                         $('#load-more-container').html($newLoadMoreContainer);
                     }
 
-                    // Оновлюємо data-current-page у кнопці
                     $('#load-more-btn').data('current-page', page);
                     console.log('Updated data-current-page to (ajax-page-link, search):', page);
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error('AJAX error (ajax-page-link, search):', status, error);
             }
         });

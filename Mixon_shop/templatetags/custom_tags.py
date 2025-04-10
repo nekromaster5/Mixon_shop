@@ -23,3 +23,11 @@ def split_by(value, separator):
         {% endfor %}
     """
     return value.split(separator)
+
+
+@register.filter
+def get_fraction(value):
+    try:
+        return float(value) - int(float(value))
+    except (ValueError, TypeError):
+        return 0

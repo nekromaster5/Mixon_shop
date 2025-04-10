@@ -1,24 +1,27 @@
-$(function() {
-    // Глобальна змінна для відстеження кількості завантажених сторінок
-    let loadedPages = 1;
+$(function () {
+    let loadedPages = parseInt($('#load-more-btn').data('current-page')) || 1;
 
-    $(document).on('click', '#load-more-btn', function(e) {
+    $(document).on('click', '#load-more-btn', function (e) {
         e.preventDefault();
 
-        let currentPage = loadedPages;  // Використовуємо глобальну змінну
+        // Синхронізуємо фільтри перед завантаженням
+        if (typeof updateProducts === 'function') {
+            updateProducts();
+        }
+
+        let currentPage = loadedPages;
+        let nextPage = currentPage + 1;
         let url = $(this).data('url');
         let query = $(this).data('query') || '';
         let productType = $(this).data('product-type') || '';
         let pageType = $(this).data('page-type');
 
-        // Отримуємо тип сортування
         let sortType = $('.sort-type.active').attr('id')?.replace('sort_type_', '') || 'popularity';
-
-        // Отримуємо параметри фільтрів із глобальної змінної
         let filterParams = window.filterParams || {};
+        console.log('Filter params before load more:', filterParams);
 
         let data = {
-            page: currentPage + 1,
+            page: nextPage,
             load_more: true,
             type: filterParams.type || [],
             binding_substance: filterParams.binding_substance || '',
@@ -27,6 +30,8 @@ $(function() {
             is_new: filterParams.is_new || false,
             is_in_stock: filterParams.is_in_stock || false,
             sort_type: sortType,
+            price_gte: filterParams.price_gte || '',
+            price_lte: filterParams.price_lte || ''
         };
 
         if (query) {
@@ -42,11 +47,11 @@ $(function() {
             url: url,
             type: 'GET',
             data: data,
-            success: function(response) {
-                console.log('Response (ajax-page-link, ' + pageType + '):', response);
+            traditional: true,  // Додаємо для коректної серіалізації масивів
+            success: function (response) {
+                console.log('Response (load-more, ' + pageType + '):', response);
                 $('#products-container').append(response.new_items_html);
 
-                // Оновлюємо пагінацію, але враховуємо, що ми щойно додали сторінку
                 let $newPagination = $(response.new_pagination_html);
                 let $newPaginationContainer = $newPagination.find('#pagination-container').html() || '';
                 $('#pagination-container').html($newPaginationContainer);
@@ -54,19 +59,19 @@ $(function() {
                 let $newLoadMoreContainer = $newPagination.find('#load-more-container').html() || '';
                 if ($newLoadMoreContainer.trim()) {
                     $('#load-more-container').html($newLoadMoreContainer);
-                    loadedPages = currentPage + 1;  // Оновлюємо кількість завантажених сторінок
+                    loadedPages = nextPage;
                     $('#load-more-btn').data('current-page', loadedPages);
                 } else {
                     $('#load-more-container').html('');
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error('AJAX error:', status, error);
             }
         });
     });
 
-    $(document).on('click', '.ajax-page-link', function(e) {
+    $(document).on('click', '.ajax-page-link', function (e) {
         e.preventDefault();
 
         let page = $(this).data('page');
@@ -75,10 +80,7 @@ $(function() {
         let productType = $('#load-more-btn').data('product-type') || '';
         let pageType = $('#load-more-btn').data('page-type');
 
-        // Отримуємо тип сортування
         let sortType = $('.sort-type.active').attr('id')?.replace('sort_type_', '') || 'popularity';
-
-        // Отримуємо параметри фільтрів із глобальної змінної
         let filterParams = window.filterParams || {};
 
         let data = {
@@ -90,6 +92,8 @@ $(function() {
             is_new: filterParams.is_new || false,
             is_in_stock: filterParams.is_in_stock || false,
             sort_type: sortType,
+            price_gte: filterParams.price_gte || '',
+            price_lte: filterParams.price_lte || ''
         };
 
         if (query) {
@@ -105,7 +109,8 @@ $(function() {
             url: url,
             type: 'GET',
             data: data,
-            success: function(response) {
+            traditional: true,  // Додаємо для коректної серіалізації масивів
+            success: function (response) {
                 console.log('Response (ajax-page-link, ' + pageType + '):', response);
                 $('#products-container').html(response.new_items_html);
 
@@ -116,24 +121,23 @@ $(function() {
                 let $newLoadMoreContainer = $newPagination.find('#load-more-container').html() || '';
                 if ($newLoadMoreContainer.trim()) {
                     $('#load-more-container').html($newLoadMoreContainer);
-                    loadedPages = page;  // Оновлюємо кількість завантажених сторінок
+                    loadedPages = page;
                     $('#load-more-btn').data('current-page', loadedPages);
                 } else {
                     $('#load-more-container').html('');
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error('AJAX error:', status, error);
             }
         });
     });
 
-    // Скидаємо loadedPages при зміні фільтрів або сортування
-    $(document).on('change', 'input[type="checkbox"]', function() {
-        loadedPages = 1;  // Скидаємо до 1 при зміні фільтрів
+    $(document).on('change', 'input[type="checkbox"]', function () {
+        loadedPages = 1;
     });
 
-    $(document).on('click', '.sort-type', function() {
-        loadedPages = 1;  // Скидаємо до 1 при зміні сортування
+    $(document).on('click', '.sort-type', function () {
+        loadedPages = 1;
     });
 });

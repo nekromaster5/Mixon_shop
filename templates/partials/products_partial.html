@@ -1,5 +1,5 @@
-{% for product in products %}
+{% for item in products %}
     <div class="{% if page_type == 'search' %}col-lg-6 col-md-4 col-6 px-lg-6 px-md-6 px-8 mb-6{% else %}col-lg-5 col-6 px-lg-6 px-md-6 px-8 mb-6{% endif %}">
-        {% include "product_block--standard.html" with product=product %}
+        {% include "product_block--standard.html" with item=item %}
     </div>
 {% endfor %}

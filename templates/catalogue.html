@@ -16,14 +16,12 @@
                         <a href="{% url 'home' %}">Главная</a>
                     </li>
                     <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'catalogue' %}">{% if product_category %}
-                            {{ product_category }}</a>
-                        {% else %}
-                            Все товары
-                        {% endif %}
-                    </li>
-                    <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'catalogue' %}">Шпатлевка универсальная</a>
+                        <a href="{% url 'catalogue' %}">
+                            {% if product_category %}
+                                {{ product_category }}</a>
+                            {% else %}
+                                Все товары</a>
+                            {% endif %}
                     </li>
                 </ul>
             </div>
@@ -248,17 +246,19 @@
                                         <div class="price__filter--group">
                                             <div class="price__filter--input border-radius-5 d-flex align-items-center">
                                                 <input class="price__filter--input__field border-0"
-                                                       name="filter.v.price.gte" id="Filter-Price-GTE2"
+                                                       name="filter.v.price.gte" id="filter_price_gte"
                                                        type="number"
-                                                       placeholder="0" min="0" max="5000">
+                                                       placeholder="{{ min_price }}" min="{{ min_price }}"
+                                                       max="{{ max_price }}">
                                             </div>
                                         </div>
                                         <div class="price__filter--group">
                                             <div class="price__filter--input border-radius-5 d-flex align-items-center">
                                                 <input class="price__filter--input__field border-0"
-                                                       name="filter.v.price.lte" id="Filter-Price-LTE2"
+                                                       name="filter.v.price.lte" id="filter_price_lte"
                                                        type="number"
-                                                       min="0" placeholder="500" max="5000">
+                                                       min="{{ min_price }}" placeholder="{{ max_price }}"
+                                                       max="{{ max_price }}">
                                             </div>
                                         </div>
                                         <button class="price__filter--group primary__btn price__filter--btn border-radius-5"
@@ -266,7 +266,14 @@
                                             ОК
                                         </button>
                                     </div>
-
+                                    <div class="price__slider" data-global-min-price="{{ min_price }}"
+                                         data-global-max-price="{{ max_price }}">
+                                        <div class="slider-track"></div>
+                                        <input type="range" min="{{ min_price }}" max="{{ max_price }}"
+                                               value="{{ min_price }}" id="slider-low" class="price-range">
+                                        <input type="range" min="{{ min_price }}" max="{{ max_price }}"
+                                               value="{{ max_price }}" id="slider-high" class="price-range">
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -352,4 +359,5 @@
     <script src="{% static '/src/assets/js/oneOptionCheckInput.js' %}"></script>
     <script src="{% static '/src/assets/js/pagination_catalogue.js' %}"></script>
     <script src="{% static '/src/assets/js/catalogue_filters.js' %}"></script>
+    <script src="{% static '/src/assets/js/priceRange.js' %}"></script>
 {% endblock %}

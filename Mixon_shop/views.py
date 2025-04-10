@@ -15,13 +15,12 @@ import math
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import JsonResponse
-from django.db.models import F, Case, When, Value, DecimalField
+from django.db.models import F, Case, When, Value, DecimalField, Count, Min, Max
 from django.db.models.functions import Coalesce
 
-from .admin import ProductImageInline
 from .forms import UserLoginForm
 from .models import Product, Review, RecommendedProducts, SalesLeaders, City, Branch, ErrorMessages, PromoCode, Order, \
-    ShipmentMethod, PaymentMethod, OrderStatus, OrderProduct, Category, BindingSubstance, ProductType, Volume, \
+    ShipmentMethod, PaymentMethod, OrderStatus, OrderProduct, BindingSubstance, ProductType, Volume, \
     ProductStock
 
 
@@ -49,11 +48,29 @@ def product_detail(request, product_id):
     return render(request, 'product.html', context)
 
 
+class ProductSelfWrapper:
+    def __init__(self, product):
+        self.product = product
+        self.likes_count = product.likes_count
+        self.comments_count = product.comments_count
+
+
 class HomePage(View):
     def get(self, request):
-        recommended_products = RecommendedProducts.objects.select_related('product').all()
-        sales_leaders = SalesLeaders.objects.select_related('product').all()
-        novelty = Product.objects.all().filter(is_new=True)
+        recommended_products = RecommendedProducts.objects.select_related('product').annotate(
+            likes_count=Count('product__favoriteproduct'),  # Кількість вподобайок
+            comments_count=Count('product__reviews')  # Кількість коментарів
+        ).all()
+        sales_leaders = SalesLeaders.objects.select_related('product').annotate(
+            likes_count=Count('product__favoriteproduct'),  # Кількість вподобайок
+            comments_count=Count('product__reviews')  # Кількість коментарів
+        ).all()
+        # Новинки із кількістю вподобайок і коментарів
+        novelty = Product.objects.filter(is_new=True).annotate(
+            likes_count=Count('favoriteproduct'),  # Кількість вподобайок
+            comments_count=Count('reviews')  # Кількість коментарів
+        ).all()
+        novelty = [ProductSelfWrapper(item) for item in novelty]
         return render(request, 'home_page.html', {
             'recommended_products': recommended_products,
             'sales_leaders': sales_leaders,
@@ -97,23 +114,29 @@ def get_pages_to_display(current_page, total_pages):
     total_pages = int(total_pages)
 
     if total_pages <= 6:
-        # Всі сторінки від 1 до total_pages
         return list(range(1, total_pages + 1))
 
-    # Якщо ще далеко до кінця: перший кубик = поточна сторінка
-    # показуємо 4 сторінки підряд (current_page.. +3), потім '...' і останню
-    if current_page + 5 < total_pages:
-        return list(range(current_page, current_page + 4)) + ['...', total_pages]
+    # # Якщо ще далеко до кінця: перший кубик = поточна сторінка
+    # # показуємо 4 сторінки підряд (current_page.. +3), потім '...' і останню
+    # if current_page + 5 < total_pages:
+    #     return list(range(current_page, current_page + 4)) + ['...', total_pages]
+    # else:
+    #     # «Близько» до кінця — показуємо останні 6 сторінок
+    #     start = total_pages - 5
+    #     return list(range(start, total_pages + 1))
+    if current_page + 3 < total_pages:
+        return [current_page, current_page + 1, current_page + 2, current_page + 3, '...', total_pages]
     else:
-        # «Близько» до кінця — показуємо останні 6 сторінок
-        start = total_pages - 5
+        start = max(1, total_pages - 5)
         return list(range(start, total_pages + 1))
 
 
 class UniversalPaginator:
     def __init__(self, object_list, per_page):
-        self.paginator = Paginator(object_list, per_page)
+        wrapped_list = [ProductSelfWrapper(item) for item in object_list]
+        self.paginator = Paginator(wrapped_list, per_page)
         self.per_page = per_page
+        self.has_items = len(wrapped_list) > 0  # Перевіряємо, чи є товари
 
     def get_page(self, number):
         try:
@@ -124,30 +147,26 @@ class UniversalPaginator:
             return self.paginator.page(self.paginator.num_pages)
 
     def handle_pagination(self, request, template_name, partial_template, context_extras=None):
-        print(f"Pagination request GET: {request.GET}")
         page = request.GET.get('page', 1)
         load_more = request.GET.get('load_more', 'false') == 'true'
 
-        # Декодуємо query
         query = request.GET.get('query', '')
         if query:
             query = unquote(query)
-        print(f"Decoded query: {query}")
 
-        # Отримуємо товари
-        products = self.paginator.object_list
-        print(f"Filtered products count: {products.count()}")
-
-        # Пагінація
         paginated_products = self.get_page(page)
         current_page = paginated_products.number
-        total_pages = self.paginator.num_pages
-        next_page = current_page + 1 if paginated_products.has_next() else None
+        total_pages = self.paginator.num_pages if self.has_items else 0  # Якщо немає товарів, total_pages = 0
 
-        print(f"AJAX request: current_page={current_page}, next_page={next_page}, total_pages={total_pages}")
+        # Якщо немає товарів, примусово встановлюємо has_next = False
+        has_next = paginated_products.has_next() if self.has_items else False
 
-        # Отримуємо список сторінок для пагінації
-        pages_to_display = get_pages_to_display(current_page, total_pages)
+        print('Has items:', self.has_items)
+        print('Products object list:', paginated_products.object_list)
+        print('Has next:', has_next)
+        print('Total pages:', total_pages)
+
+        pages_to_display = get_pages_to_display(current_page, total_pages) if self.has_items else []
 
         context = {
             'products': paginated_products,
@@ -155,23 +174,15 @@ class UniversalPaginator:
             'pages_to_display': pages_to_display,
             'query': query,
             'page_url': request.path,
+            'has_items': self.has_items,
+            'has_next': has_next,  # Додаємо явний has_next у контекст
         }
         if context_extras:
             context.update(context_extras)
 
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             new_items_html = render_to_string(partial_template, context, request=request)
-            # Якщо це запит load_more, повертаємо пагінацію для поточної сторінки
-            if load_more:
-                context['products'] = paginated_products  # Залишаємо поточну сторінку
-            else:
-                # Для звичайного AJAX-запиту (наприклад, при кліку на номер сторінки) оновлюємо пагінацію
-                if paginated_products.has_next():
-                    context['products'] = self.get_page(current_page + 1)
-                else:
-                    context['products'] = paginated_products
             new_pagination_html = render_to_string('pagination_catalogue.html', context, request=request)
-            print(f"Returning pagination HTML: \n{new_pagination_html[:100]}...")
             return JsonResponse({
                 'new_items_html': new_items_html,
                 'new_pagination_html': new_pagination_html,
@@ -182,7 +193,6 @@ class UniversalPaginator:
 
 class CataloguePage(View):
     def get(self, request):
-        print("Request GET:", request.GET)
         product_type_ids = request.GET.getlist('type')
         binding_substance_id = request.GET.get('binding_substance')
         volume_ids = request.GET.getlist('volume')
@@ -190,46 +200,79 @@ class CataloguePage(View):
         is_new = request.GET.get('is_new', 'false') == 'true'
         is_in_stock = request.GET.get('is_in_stock', 'false') == 'true'
         sort_type = request.GET.get('sort_type', 'popularity')
+        price_gte = request.GET.get('price_gte')
+        price_lte = request.GET.get('price_lte')
 
-        print(f"product_type_ids: {product_type_ids}")
-        print(f"binding_substance_id: {binding_substance_id}")
-        print(f"volume_ids: {volume_ids}")
-        print(f"is_discounted: {is_discounted}, is_new: {is_new}, is_in_stock: {is_in_stock}")
-        print(f"sort_type: {sort_type}")
+        print('Request GET params:', dict(request.GET))  # Логування всіх параметрів
 
-        products = Product.objects.prefetch_related('images').all()
+        products = Product.objects.prefetch_related('images').annotate(
+            likes_count=Count('favoriteproduct'),
+            comments_count=Count('reviews'),
+            effective_price=Coalesce(
+                Case(
+                    When(is_discounted=True, then=F('discount_price')),
+                    default=F('price'),
+                    output_field=DecimalField()
+                ),
+                Value(0.0, output_field=DecimalField())
+            )
+        ).all()
 
-        # Фільтрація
         if product_type_ids:
+            print('Applying type filter:', product_type_ids)
             products = products.filter(type__id__in=product_type_ids)
         if binding_substance_id:
+            print('Applying binding substance filter:', binding_substance_id)
             products = products.filter(binding_substance__id=binding_substance_id)
         if volume_ids:
+            print('Applying volume filter:', volume_ids)
             product_ids_with_volumes = ProductStock.objects.filter(
                 volume__id__in=volume_ids
             ).values_list('product__id', flat=True).distinct()
             products = products.filter(id__in=product_ids_with_volumes)
         if is_discounted:
+            print('Applying is_discounted filter')
             products = products.filter(is_discounted=True)
         if is_new:
+            print('Applying is_new filter')
             products = products.filter(is_new=True)
         if is_in_stock:
+            print('Applying is_in_stock filter')
             products = products.filter(is_in_stock=True)
 
-        # Сортування
+        price_range = products.aggregate(
+            min_price=Min('effective_price'),
+            max_price=Max('effective_price')
+        )
+        min_price = int(price_range['min_price']) if price_range['min_price'] is not None else 0
+        max_price = int(price_range['max_price']) if price_range['max_price'] is not None else 500
+
+        if price_gte is not None and price_lte is not None:
+            try:
+                price_gte = float(price_gte)
+                price_lte = float(price_lte)
+                if price_gte < min_price:
+                    price_gte = min_price
+                if price_lte > max_price:
+                    price_lte = max_price
+                print('Applying price filter:', price_gte, price_lte)
+                products = products.filter(effective_price__gte=price_gte, effective_price__lte=price_lte)
+            except (ValueError, TypeError):
+                pass
+
+        final_price_range = products.aggregate(
+            min_price=Min('effective_price'),
+            max_price=Max('effective_price')
+        )
+        final_min_price = int(final_price_range['min_price']) if final_price_range[
+                                                                     'min_price'] is not None else min_price
+        final_max_price = int(final_price_range['max_price']) if final_price_range[
+                                                                     'max_price'] is not None else max_price
+
         if sort_type == 'popularity':
             products = products.order_by('-average_rating')
         elif sort_type == 'price':
-            products = products.annotate(
-                effective_price=Coalesce(
-                    Case(
-                        When(is_discounted=True, then=F('discount_price')),
-                        default=F('price'),
-                        output_field=DecimalField()
-                    ),
-                    Value(0.0, output_field=DecimalField())
-                )
-            ).order_by('-effective_price')
+            products = products.order_by('-effective_price')
         elif sort_type == 'name':
             products = products.order_by('name')
 
@@ -237,15 +280,7 @@ class CataloguePage(View):
         binding_substances = BindingSubstance.objects.all()
         product_volumes = Volume.objects.all()
 
-        print(f"Product types count: {product_types.count()}")
-        print(f"Binding substances count: {binding_substances.count()}")
-        print(f"Product volumes count: {product_volumes.count()}")
-
-        print(f"Catalogue products count: {products.count()}")
         paginator = UniversalPaginator(products, per_page=1)
-        page = request.GET.get('page', 1)
-        paginated_products = paginator.get_page(page)
-        print(f"Has next page: {paginated_products.has_next()}")
 
         context_extras = {
             'product_type': None,
@@ -260,6 +295,12 @@ class CataloguePage(View):
             'is_new': is_new,
             'is_in_stock': is_in_stock,
             'sort_type': sort_type,
+            'min_price': min_price,
+            'max_price': max_price,
+            'final_min_price': final_min_price,
+            'final_max_price': final_max_price,
+            'global_min_price': min_price,
+            'global_max_price': max_price,
         }
 
         response = paginator.handle_pagination(
@@ -275,20 +316,23 @@ class SearchPage(View):
     def get(self, request):
         query = request.GET.get('query', '').strip()
         if query:
-            products_list = Product.objects.filter(name__icontains=query).prefetch_related('images').order_by('name')
+            products_list = Product.objects.filter(name__icontains=query).prefetch_related('images').annotate(
+                likes_count=Count('favoriteproduct'),
+                comments_count=Count('reviews')
+            ).order_by('name')
         else:
-            products_list = Product.objects.prefetch_related('images').all().order_by('name')
+            products_list = Product.objects.prefetch_related('images').annotate(
+                likes_count=Count('favoriteproduct'),
+                comments_count=Count('reviews')
+            ).all().order_by('name')
 
         paginator = UniversalPaginator(products_list, per_page=1)
-        page = request.GET.get('page', 1)
-        paginated_products = paginator.get_page(page)
-        print(f"Search products count: {products_list.count()}")
-        print(f"Has next page: {paginated_products.has_next()}")
+
         return paginator.handle_pagination(
             request,
             template_name='search.html',
             partial_template='partials/products_partial.html',
-            context_extras={'query': query, 'page_type': 'search'}  # Додаємо page_type
+            context_extras={'query': query, 'page_type': 'search'}
         )
 
     def post(self, request):
@@ -402,7 +446,6 @@ def apply_promo_code(request):
                 'value': float(promo.discount_value)
             }
             request.session.modified = True  # Гарантируем сохранение сессии
-            print(f"Сохранен промокод в сессии: {request.session['applied_promo_code']}")  # Отладочный вывод
 
             return JsonResponse({"success": True, "discount": discount})
 
@@ -460,9 +503,7 @@ def create_order(request):
                 try:
                     promo = PromoCode.objects.get(code=promo_code)
                     promo_applied = True
-                    print(f"Промокод найден: {promo.code}, promo_applied: {promo_applied}")
                 except PromoCode.DoesNotExist:
-                    print(f"Промокод {promo_code} не найден в базе данных")
                     pass
 
             # Создаем заказ

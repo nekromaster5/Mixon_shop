@@ -1,14 +1,15 @@
 {% load static %}
+{% load custom_tags %}
 <article class="product__card bg__white">
     <div class="product__card--thumbnail mb-6">
-        {% if product %}
-            <a href="{% url 'product' product_id=product.id %}"><img
+        {% if item.product %}
+            <a href="{% url 'product' product_id=item.product.id %}"><img
                     class="product__card--thumbnail__img product__primary--img"
-                    src="{{ product.images.first.image.url }}" alt="{{ product.name }} image"></a>
+                    src="{{ item.product.images.first.image.url }}" alt="{{ item.product.name }} image"></a>
         {% else %}
             <a href="{% url 'product' product_id=3 %}"><img
                     class="product__card--thumbnail__img product__primary--img"
-                    src="{{ product.images.first.image.url }}" alt="{{ product.name }} image"></a>
+                    src="{{ item.product.images.first.image.url }}" alt="{{ item.product.name }} image"></a>
         {% endif %}
 
         <div class="product__card--action">
@@ -62,7 +63,7 @@
                         <span class="visually-hidden">Add to cart</span>
                     </a>
                 </li>
-                <li class="product__card--action__list d-flex justify-content-center" >
+                <li class="product__card--action__list d-flex justify-content-center">
                     <a class="product__card--action__btn cheaper--button d-flex justify-content-evenly"
                        title="Want Cheaper" id="want_cheaper">
                         <svg width="21.776123" height="24.913086" viewBox="0 0 21.7761 24.9131" fill="none"
@@ -83,40 +84,19 @@
     </div>
     <div class="product__card--content">
         <h3 class="product__card--title">
-            {% if product %}
-                <a href="{% url 'product' product_id=product.id %}">{{ product.name }}</a>
+            {% if item.product %}
+                <a href="{% url 'product' product_id=item.product.id %}">{{ item.product.name }}</a>
             {% else %}
-                <a href="{% url 'product' product_id=3 %}">{{ product.name }}</a>
+                <a href="{% url 'product' product_id=3 %}">{{ item.product.name }}</a>
             {% endif %}
         </h3>
-        <ul class="rating product__card--rating d-flex">
-            <li class="rating__list">
-                <span class="rating__icon">
-                    <img src="{% static '/src/assets/img/other/rating_star_filled.png' %}" alt="filled star">
-                </span>
-            </li>
-            <li class="rating__list">
-                <span class="rating__icon">
-                    <img src="{% static '/src/assets/img/other/rating_star_filled.png' %}" alt="filled star">
-                </span>
-            </li>
-            <li class="rating__list">
-                <span class="rating__icon">
-                    <img src="{% static '/src/assets/img/other/rating_star_filled.png' %}" alt="filled star">
-                </span>
-            </li>
-            <li class="rating__list">
-                <span class="rating__icon">
-                    <img src="{% static '/src/assets/img/other/rating_star_filled.png' %}" alt="filled star">
-                </span>
-            </li>
-            <li class="rating__list">
-                <span class="rating__icon">
-                    <img src="{% static '/src/assets/img/other/rating_star_void.png' %}" alt="void star">
-                </span>
-            </li>
+        <ul class="rating product__card--rating d-flex" data-rating="{{ item.product.average_rating }}">
+            <!-- Зірки будуть додані через JavaScript -->
         </ul>
         {% block short_info %}{% endblock %}
     </div>
     {% block additional %}{% endblock %}
 </article>
+
+
+<script src="{% static '/src/assets/js/ratingStarsGeneration.js' %}"></script>
