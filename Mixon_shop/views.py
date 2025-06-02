@@ -784,3 +784,28 @@ def submit_review(request, product_id):
 
     # Перенаправляем пользователя обратно на страницу продукта
     return render(request, 'product.html', context)
+
+@require_POST
+def add_to_cart(request):
+    data = json.loads(request.body)
+    product_id = data.get('product_id')
+    quantity = int(data.get('quantity', 1))
+
+    if not product_id:
+        return JsonResponse({'success': False, 'error': 'Не указан ID товара'}, status=400)
+
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Товар не найден'}, status=404)
+
+    # Инициализируем корзину, если ее нет
+    cart = request.session.get('cart', {})
+
+    if str(product_id) in cart:
+        cart[str(product_id)] += quantity
+    else:
+        cart[str(product_id)] = quantity
+
+    request.session['cart'] = cart  # сохраняем в сессии
+    return JsonResponse({'success': True, 'cart': cart})
