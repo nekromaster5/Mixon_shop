@@ -31,23 +31,21 @@
                         доставки</h2>
                 </div>
                 <p class="shipment--payment__text">Доставка грузоперевозчиками осуществляется за счет
-                    покупателясогласно тарифам грузоперевозчика. Заказ
-                    отправляется в течении2-х рабочих дней после оформления заказа.</p>
+                    покупателя согласно тарифам грузоперевозчика. Заказ
+                    отправляется в течении 2-х рабочих дней после оформления заказа.</p>
             </div>
             <div class="shipping__info no-line row position-relative width-100 ps-8 ps-md-0">
                 <div class="col-14 ps-0 position-relative flex-grow-1">
                     <div id="shipping--items__large" class="checkout--shipping__information">
-                        <div class="checkout__input--select__list pe-7 pe-md-0">
-                            <label class="checkout__input--label me-0 me-md-5" for="country">Доставка
+                        <div class="checkout__input--select__list">
+                            <label class="checkout__input--label me-0 me-md-5" for="input_city">Доставка
                                 в</label>
                             <div class="checkout__input--select select">
                                 <select class="checkout__input--select__field border-radius-5 flex-grow-0"
-                                        id="country">
-                                    <option value="odesa">Одесса</option>
-                                    <option value="kyiv">Киев</option>
-                                    <option value="lutsk">Луцк</option>
-                                    <option value="rivne">Ровно</option>
-                                    <option value="khmelnytskyi">Хмельницкий</option>
+                                        id="input_city">
+                                    {% for city in cities %}
+                                        <option value="{{ city.id }}">{{ city.name }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                         </div>
@@ -187,134 +185,19 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="row mb-8 pe-7 pe-md-0" style="position: relative; overflow: hidden;">
-                            <div class="shipment__method__addresses only-one px-0">
-                                <ul class="widget__form--check">
-                                    <li class="widget__form--check__list align-items-start">
-                                        <input class="widget__form--check__input flex-shrink-0"
-                                               id="check1"
-                                               type="checkbox">
-                                        <span class="widget__form--checkmark circle flex-shrink-0"></span>
-
-                                        <div class="address_text">
-                                            <label class="widget__form--check__label--title flex-grow-0 bg-inherit"
-                                                   for="check1">Промрынок «Староконный»,
-                                                ул.Раскидайловская 31<span
-                                                        class="widget__form--check__label--small">
-                                                                    Забрать сегодня с 8:00 до 18:00
-                                                            </span></label>
-                                            <button id="show--map" class="show--map--btn primary__btn">
-                                                Посмотреть на карте
-                                            </button>
-                                        </div>
-                                    </li>
-                                    <li class="widget__form--check__list align-items-start">
-                                        <input class="widget__form--check__input flex-shrink-0"
-                                               id="check2"
-                                               type="checkbox">
-                                        <span class="widget__form--checkmark circle flex-shrink-0"></span>
-                                        <div class="address_text">
-                                            <label class="widget__form--check__label--title flex-grow-0 bg-inherit"
-                                                   for="check2">Промрынок «Куяльник», пос.
-                                                Большевик<span
-                                                        class="widget__form--check__label--small">
-                                                                    Забрать сегодня с 8:00 до 18:00
-                                                                </span></label>
-                                            <button id="show--map" class="show--map--btn primary__btn">
-                                                Посмотреть на карте
-                                            </button>
-                                        </div>
-                                    </li>
-                                    <li class="widget__form--check__list align-items-start">
-                                        <input class="widget__form--check__input flex-shrink-0"
-                                               id="check3"
-                                               type="checkbox">
-                                        <span class="widget__form--checkmark circle flex-shrink-0"></span>
-                                        <div class="address_text">
-                                            <label class="widget__form--check__label--title flex-grow-0 bg-inherit"
-                                                   for="check3">Промрынок
-                                                «Меркурий»,
-                                                Днепропетровская дор.<span
-                                                        class="widget__form--check__label--small">
-                                                                    Забрать сегодня с 8:00 до 18:00
-                                                                </span></label>
-                                            <button id="show--map" class="show--map--btn primary__btn">
-                                                Посмотреть на карте
-                                            </button>
-                                        </div>
-                                    </li>
-                                    <li class="widget__form--check__list align-items-start">
-                                        <input class="widget__form--check__input flex-shrink-0"
-                                               id="check4"
-                                               type="checkbox">
-                                        <span class="widget__form--checkmark circle flex-shrink-0"></span>
-                                        <div class="address_text">
-                                            <label class="widget__form--check__label--title flex-grow-0 bg-inherit"
-                                                   for="check4">Промрынок «Черноморец», ул.
-                                                Малиновского, 67я дор.<span
-                                                        class="widget__form--check__label--small">
-                                                                    Забрать сегодня с 8:00 до 18:00
-                                                                </span></label>
-                                            <button id="show--map" class="show--map--btn primary__btn">
-                                                Посмотреть на карте
-                                            </button>
-                                        </div>
-                                    </li>
-                                    <li class="widget__form--check__list align-items-start">
-                                        <input class="widget__form--check__input flex-shrink-0"
-                                               id="check5"
-                                               type="checkbox">
-                                        <span class="widget__form--checkmark circle flex-shrink-0"></span>
-                                        <div class="address_text">
-                                            <label class="widget__form--check__label--title flex-grow-0 bg-inherit"
-                                                   for="check5">ул. 25 Чапаевской дивизии 13/1<span
-                                                    class="widget__form--check__label--small">
-                                                                Забрать сегодня с 8:00 до 18:00
-                                                            </span></label>
-                                            <button id="show--map" class="show--map--btn primary__btn">
-                                                Посмотреть на карте
-                                            </button>
-                                        </div>
-
-                                    </li>
-                                    <li class="widget__form--check__list align-items-start">
-                                        <input class="widget__form--check__input flex-shrink-0"
-                                               id="check6"
-                                               type="checkbox">
-                                        <span class="widget__form--checkmark circle flex-shrink-0"></span>
-                                        <div class="address_text">
-                                            <label class="widget__form--check__label--title flex-grow-0 bg-inherit"
-                                                   for="check6">ул. Ильфа и
-                                                Петрова 18а<span
-                                                        class="widget__form--check__label--small">
-                                                                    Забрать сегодня с 8:00 до 18:00
-                                                                </span></label>
-                                            <button id="show--map" class="show--map--btn primary__btn">
-                                                Посмотреть на карте
-                                            </button>
-                                        </div>
-                                    </li>
-                                    <li class="widget__form--check__list align-items-start">
-                                        <input class="widget__form--check__input flex-shrink-0"
-                                               id="check7"
-                                               type="checkbox">
-                                        <span class="widget__form--checkmark circle flex-shrink-0"></span>
-                                        <div class="address_text">
-                                            <label class="widget__form--check__label--title flex-grow-0 bg-inherit"
-                                                   for="check7">ул. Елисаветинская 4<span
-                                                    class="widget__form--check__label--small">
-                                                                Забрать сегодня с 8:00 до 18:00
-                                                            </span></label>
-                                            <button id="show--map" class="show--map--btn primary__btn">
-                                                Посмотреть на карте
-                                            </button>
-                                        </div>
-                                    </li>
+                        <div class="row mb-8" style="position: relative;">
+                            <div class="shipment__method__addresses shipment-and-payment">
+                                <ul class="widget__form--check only-one">
+                                    {% include 'partials/branches_list-checkout.html' %}
                                 </ul>
                             </div>
-                            <div class="shipment__method__map">
-                                <img class="map__img"
-                                     src="{% static 'src/assets/img/other/mix_map.png' %}" alt="map">
+                            <div class="shipment__method__map shipment-and-payment">
+                                <gmp-map id="map" center="46.48167419433594,30.68355941772461" zoom="14"
+                                         map-id="DEMO_MAP_ID">
+                                    <gmp-advanced-marker id="marker"
+                                                         position="46.48167419433594,30.68355941772461"
+                                                         title="My location"></gmp-advanced-marker>
+                                </gmp-map>
                             </div>
                         </div>
 
@@ -410,4 +293,10 @@
     <script src="{% static 'src/assets/js/toggleButtonOutline.js' %}"></script>
     <script src="{% static 'src/assets/js/checkoutButtons.js' %}"></script>
     <script src="{% static '/src/assets/js/oneOptionCheckInput.js' %}"></script>
+    <script defer src="{% static 'src/assets/js/mapCreator.js' %}"></script>
+    <script src="{% static 'src/assets/js/getBranches.js' %}"></script>
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMnDGy6nqzX36bSjyh3Kzdts7wvwqTMY0&loading=async&libraries=marker&v=beta&solution_channel=GMP_CCS_complexmarkers_v3"
+            defer
+    ></script>
 {% endblock %}

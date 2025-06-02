@@ -38,15 +38,18 @@ class CustomIndexDashboard(Dashboard):
 
         self.children.append(modules.ModelList(
             title='Местоположения и филиалы',
-            models=('Mixon_shop.models.Branch', 'Mixon_shop.models.City', 'Mixon_shop.models.PhoneNumber')
+            models=('Mixon_shop.models.Branch', 'Mixon_shop.models.City', 'Mixon_shop.models.PhoneNumber',
+                    'Mixon_shop.models.ScheduleTemplate',
+                    'Mixon_shop.models.ScheduleTemplateItem',
+                    'Mixon_shop.models.BranchSchedule',
+                    'Mixon_shop.models.BranchScheduleException',
+                    )
         ))
 
         self.children.append(modules.ModelList(
             title='Сообщения и уведомления',
             models=('Mixon_shop.models.ErrorMessages', 'Mixon_shop.models.InfoMessages')
         ))
-
-
 
 
 class CustomAppIndexDashboard(AppIndexDashboard):

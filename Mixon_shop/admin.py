@@ -1,12 +1,15 @@
 from django.contrib import admin
+from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
+from django.db import models
 
 from .models import (
     Region, UserProfile, PhoneNumber, Branch, Product, Review,
     OrderStatus, Order, FavoriteProduct, ProductComparison,
     NewsCategory, News, ErrorMessages, InfoMessages, City, ProductStock, Volume, Color, ProductImage, BindingSubstance,
     ProductType, PromoCode, SalesLeaders, RecommendedProducts, MainPageSections, MainPageBanner, Category, OrderProduct,
+    BranchSchedule, BranchScheduleException, ScheduleTemplateItem, ScheduleTemplate,
 )
 
 
@@ -70,12 +73,81 @@ class PhoneNumberAdmin(admin.ModelAdmin):
     search_fields = ('number',)
 
 
+# Инлайн для расписания филиала
+class BranchScheduleInline(admin.TabularInline):
+    model = BranchSchedule
+    extra = 0
+    fields = ('day_of_week', 'is_closed', 'open_time', 'close_time')
+
+    def get_extra(self, request, obj=None, **kwargs):
+        if obj is None:
+            return 7
+        return 0
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.order_by('order')  # Сортировка по полю order
+
+
+# Инлайн для исключений расписания
+class BranchScheduleExceptionInline(admin.TabularInline):
+    model = BranchScheduleException
+    extra = 1
+    fields = ('date', 'is_closed', 'open_time', 'close_time')
+
+
+# Инлайн для элементов шаблона расписания
+class ScheduleTemplateItemInline(admin.TabularInline):
+    model = ScheduleTemplateItem
+    extra = 0
+    fields = ('day_of_week', 'is_closed', 'open_time', 'close_time')
+
+    def get_extra(self, request, obj=None, **kwargs):
+        if obj is None:
+            return 7
+        return 0
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.order_by('order')  # Сортировка по полю order
+
+
+# @admin.register(Branch)
+# class BranchAdmin(admin.ModelAdmin):
+#     list_display = ('city', 'address', 'working_hours')
+#     list_filter = ('city',)
+#     search_fields = ('address', 'working_hours')
+#     filter_horizontal = ('phone_numbers',)
+
+
+# Админка для филиала
 @admin.register(Branch)
 class BranchAdmin(admin.ModelAdmin):
-    list_display = ('city', 'address', 'working_hours')
+    list_display = ('city', 'address', 'schedule_template')
     list_filter = ('city',)
-    search_fields = ('address', 'working_hours')
-    filter_horizontal = ('phone_numbers',)
+    search_fields = ('address', 'city__name')
+    inlines = [BranchScheduleInline, BranchScheduleExceptionInline]
+    fieldsets = (
+        (None, {
+            'fields': ('city', 'address', 'phone_numbers', 'map_info')
+        }),
+        ('Schedule', {
+            'fields': ('schedule_template',),
+            'description': 'Select a template for standard hours or define custom schedule below.'
+        }),
+    )
+    # Настройка виджета для phone_numbers
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': FilteredSelectMultiple('Phone Numbers', is_stacked=False)},
+    }
+
+
+# Админка для шаблона расписания
+@admin.register(ScheduleTemplate)
+class ScheduleTemplateAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)
+    inlines = [ScheduleTemplateItemInline]
 
 
 @admin.register(Volume)

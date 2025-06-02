@@ -57,16 +57,190 @@ class City(models.Model):
         return self.name
 
 
-# Branch model
+# # Branch model
+# class Branch(models.Model):
+#     city = models.ForeignKey(City, on_delete=models.CASCADE)
+#     address = models.CharField(max_length=512)
+#     working_hours = models.CharField(max_length=256)
+#     phone_numbers = models.ManyToManyField(PhoneNumber)
+#     map_info = models.TextField()
+#
+#     def __str__(self):
+#         return f'{self.city.name}, {self.address}'
+
 class Branch(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     address = models.CharField(max_length=512)
-    working_hours = models.CharField(max_length=256)
-    phone_numbers = models.ManyToManyField(PhoneNumber)
+    phone_numbers = models.ManyToManyField(PhoneNumber, blank=True)
     map_info = models.TextField()
+    schedule_template = models.ForeignKey(
+        'ScheduleTemplate',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        help_text=_('Optional template for standard schedule')
+    )
 
     def __str__(self):
         return f'{self.city.name}, {self.address}'
+
+    def get_schedule(self, specific_date=None, day_of_week=None):
+        """
+        Получить расписание:
+        - для конкретной даты (с учетом исключений),
+        - для дня недели,
+        - или всё расписание филиала.
+        """
+        from datetime import datetime
+        if specific_date:
+            exception = self.schedule_exceptions.filter(date=specific_date).first()
+            if exception:
+                return exception
+            # Если исключения нет, продолжаем с обычным расписанием для дня недели
+            weekday = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'][specific_date.weekday()]
+            day_of_week = weekday
+
+        if day_of_week:
+            # Сначала ищем индивидуальное расписание
+            schedule = self.schedules.filter(day_of_week=day_of_week).first()
+            if schedule:
+                return schedule
+            # Если индивидуального расписания нет, ищем в шаблоне
+            if self.schedule_template:
+                template_schedule = self.schedule_template.items.filter(day_of_week=day_of_week).first()
+                return template_schedule
+            return None
+
+        # Полное расписание, сгруппированное по дням
+        schedules = self.schedules.order_by('order')
+        if not schedules.exists() and self.schedule_template:
+            schedules = self.schedule_template.items.order_by('order')
+        return schedules
+
+    def get_today_schedule(self):
+        """Получить расписание на сегодня."""
+        from datetime import datetime
+        today = datetime.now().date()
+        return self.get_schedule(specific_date=today)
+
+
+# Модель шаблона расписания
+class ScheduleTemplate(models.Model):
+    name = models.CharField(max_length=256, help_text=_('E.g., "Standard office hours"'))
+
+    def __str__(self):
+        return self.name
+
+
+# Модель для элементов шаблона расписания
+class ScheduleTemplateItem(models.Model):
+    class DayOfWeek(models.TextChoices):
+        MONDAY = 'MON', _('Monday')
+        TUESDAY = 'TUE', _('Tuesday')
+        WEDNESDAY = 'WED', _('Wednesday')
+        THURSDAY = 'THU', _('Thursday')
+        FRIDAY = 'FRI', _('Friday')
+        SATURDAY = 'SAT', _('Saturday')
+        SUNDAY = 'SUN', _('Sunday')
+
+    # Порядок дней недели
+    DAY_ORDER = {
+        'MON': 1,  # Понедельник
+        'TUE': 2,  # Вторник
+        'WED': 3,  # Среда
+        'THU': 4,  # Четверг
+        'FRI': 5,  # Пятница
+        'SAT': 6,  # Суббота
+        'SUN': 7,  # Воскресенье
+    }
+
+    template = models.ForeignKey(ScheduleTemplate, on_delete=models.CASCADE, related_name='items')
+    day_of_week = models.CharField(max_length=3, choices=DayOfWeek.choices)
+    is_closed = models.BooleanField(default=False)
+    open_time = models.TimeField(null=True, blank=True)
+    close_time = models.TimeField(null=True, blank=True)
+    order = models.IntegerField(default=0, editable=False)  # Поле для порядка
+
+    class Meta:
+        unique_together = ('template', 'day_of_week')
+        verbose_name = _('Schedule Template Item')
+        verbose_name_plural = _('Schedule Template Items')
+        ordering = ['order']  # Сортировка по числовому полю order
+
+    def __str__(self):
+        if self.is_closed:
+            return f'{self.get_day_of_week_display()}: Closed'
+        return f'{self.get_day_of_week_display()}: {self.open_time} - {self.close_time}'
+
+    def save(self, *args, **kwargs):
+        # Устанавливаем порядок на основе DAY_ORDER перед сохранением
+        self.order = self.DAY_ORDER.get(self.day_of_week, 0)
+        super().save(*args, **kwargs)
+
+
+# Расписание филиала
+class BranchSchedule(models.Model):
+    class DayOfWeek(models.TextChoices):
+        MONDAY = 'MON', _('Monday')
+        TUESDAY = 'TUE', _('Tuesday')
+        WEDNESDAY = 'WED', _('Wednesday')
+        THURSDAY = 'THU', _('Thursday')
+        FRIDAY = 'FRI', _('Friday')
+        SATURDAY = 'SAT', _('Saturday')
+        SUNDAY = 'SUN', _('Sunday')
+
+    # Порядок дней недели
+    DAY_ORDER = {
+        'MON': 1,
+        'TUE': 2,
+        'WED': 3,
+        'THU': 4,
+        'FRI': 5,
+        'SAT': 6,
+        'SUN': 7,
+    }
+
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE, related_name='schedules')
+    day_of_week = models.CharField(max_length=3, choices=DayOfWeek.choices)
+    is_closed = models.BooleanField(default=False)
+    open_time = models.TimeField(null=True, blank=True)
+    close_time = models.TimeField(null=True, blank=True)
+    order = models.IntegerField(default=0, editable=False)  # Поле для порядка
+
+    class Meta:
+        unique_together = ('branch', 'day_of_week')
+        verbose_name = _('Branch Schedule')
+        verbose_name_plural = _('Branch Schedules')
+        ordering = ['order']  # Сортировка по числовому полю order
+
+    def __str__(self):
+        if self.is_closed:
+            return f'{self.get_day_of_week_display()}: Closed'
+        return f'{self.get_day_of_week_display()}: {self.open_time} - {self.close_time}'
+
+    def save(self, *args, **kwargs):
+        # Устанавливаем порядок на основе DAY_ORDER перед сохранением
+        self.order = self.DAY_ORDER.get(self.day_of_week, 0)
+        super().save(*args, **kwargs)
+
+
+# Исключения в расписании
+class BranchScheduleException(models.Model):
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE, related_name='schedule_exceptions')
+    date = models.DateField()
+    is_closed = models.BooleanField(default=False)
+    open_time = models.TimeField(null=True, blank=True)
+    close_time = models.TimeField(null=True, blank=True)
+
+    class Meta:
+        unique_together = ('branch', 'date')
+        verbose_name = _('Branch Schedule Exception')
+        verbose_name_plural = _('Branch Schedule Exceptions')
+
+    def __str__(self):
+        if self.is_closed:
+            return f'{self.date}: Closed'
+        return f'{self.date}: {self.open_time} - {self.close_time}'
 
 
 class Color(models.Model):

@@ -10309,21 +10309,48 @@ details > summary::-webkit-details-marker {
     width: 33.5rem;
 }
 
+.shipment__method__addresses.shipment-and-payment {
+    width: 35%;
+    padding-right: 6rem;
+}
+
 @media only screen and (max-width: 520px) {
     .shipment__method__addresses {
         width: 100%;
     }
 }
 
-/*.shipment__method__map {*/
-/*    position: relative;*/
-/*}*/
+.shipment__method__map.shipment-and-payment {
+    width: 65%;
+}
+
+@media only screen and (max-width: 767px) {
+    .shipment__method__map.shipment-and-payment {
+        display: none;
+    }
+    .shipment__method__addresses.shipment-and-payment {
+        width: 100%;
+    }
+}
+
 .map__img {
     position: absolute;
     top: 0;
     right: -40rem;
     width: 100%;
     height: 100%;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .map__img {
+        right: -30rem;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .map__img {
+        display: none;
+    }
 }
 
 .bg-inherit {

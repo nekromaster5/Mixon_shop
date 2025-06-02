@@ -44,7 +44,12 @@ class CustomMenu(Menu):
             items.MenuItem('Местоположения и филиалы', children=[
                 items.ModelList(
                     'Местоположения и филиалы',
-                    models=('Mixon_shop.models.Branch', 'Mixon_shop.models.City', 'Mixon_shop.models.PhoneNumber')
+                    models=('Mixon_shop.models.Branch', 'Mixon_shop.models.City', 'Mixon_shop.models.PhoneNumber',
+                            'Mixon_shop.models.ScheduleTemplate',
+                            'Mixon_shop.models.ScheduleTemplateItem',
+                            'Mixon_shop.models.BranchSchedule',
+                            'Mixon_shop.models.BranchScheduleException',
+                            )
                 ),
             ]),
             items.MenuItem('Сообщения и уведомления', children=[

@@ -1,4 +1,5 @@
 import json
+from datetime import timedelta, datetime
 from decimal import Decimal
 from urllib.parse import unquote
 
@@ -404,11 +405,103 @@ class CheckoutPage(View):
         return JsonResponse({'total_price': float(total_price)})  # Приводим к float
 
 
+from django.http import JsonResponse
+from django.shortcuts import render
+from datetime import datetime, timedelta
+from Mixon_shop.models import Branch
+
+
 def get_branches(request):
     city_id = request.GET.get("city_id")
     branches = Branch.objects.filter(city_id=city_id)
 
-    html = render(request, "partials/branches_list-checkout.html", {"branches": branches}).content.decode("utf-8")
+    # Текущая дата и время
+    now = datetime.now()
+    current_time = now.time()
+
+    # Список дней недели для отображения
+    DAYS_OF_WEEK_DISPLAY = {
+        'MON': 'понедельник',
+        'TUE': 'вторник',
+        'WED': 'среда',
+        'THU': 'четверг',
+        'FRI': 'пятница',
+        'SAT': 'суббота',
+        'SUN': 'воскресенье',
+    }
+
+    # Подготовка данных для каждого филиала
+    branches_data = []
+    for branch in branches:
+        # Получаем расписание на сегодня
+        today_schedule = branch.get_today_schedule()
+
+        # Флаг, можно ли забрать сегодня
+        can_pickup_today = False
+        pickup_message = ""
+        pickup_hours = ""
+
+        # Проверяем, есть ли расписание на сегодня и работает ли филиал
+        if today_schedule and not today_schedule.is_closed:
+            # Проверяем, работает ли филиал сейчас
+            if today_schedule.open_time <= current_time <= today_schedule.close_time:
+                can_pickup_today = True
+                pickup_message = "Забрать сегодня"
+                pickup_hours = f"{today_schedule.open_time.strftime('%H:%M')} - {today_schedule.close_time.strftime('%H:%M')}"
+            else:
+                # Если сегодня уже поздно, ищем следующий рабочий день
+                next_day = now
+                next_schedule = None
+                for i in range(7):  # Проверяем до 7 дней вперед
+                    next_day += timedelta(days=1)
+                    next_weekday = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'][next_day.weekday()]
+                    next_schedule = branch.get_schedule(specific_date=next_day.date())
+                    if next_schedule and not next_schedule.is_closed:
+                        break
+                    next_schedule = None
+
+                if next_schedule:
+                    day_display = DAYS_OF_WEEK_DISPLAY[next_weekday]
+                    if next_day.date() == now.date() + timedelta(days=1):
+                        pickup_message = "Забрать завтра"
+                    else:
+                        pickup_message = f"Забрать в {day_display}"
+                    pickup_hours = f"{next_schedule.open_time.strftime('%H:%M')} - {next_schedule.close_time.strftime('%H:%M')}"
+                else:
+                    pickup_message = "Филиал не работает"
+                    pickup_hours = ""
+        else:
+            # Если сегодня филиал закрыт, ищем следующий рабочий день
+            next_day = now
+            next_schedule = None
+            for i in range(7):
+                next_day += timedelta(days=1)
+                next_weekday = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'][next_day.weekday()]
+                next_schedule = branch.get_schedule(specific_date=next_day.date())
+                if next_schedule and not next_schedule.is_closed:
+                    break
+                next_schedule = None
+
+            if next_schedule:
+                day_display = DAYS_OF_WEEK_DISPLAY[next_weekday]
+                if next_day.date() == now.date() + timedelta(days=1):
+                    pickup_message = "Забрать завтра"
+                else:
+                    pickup_message = f"Забрать в {day_display}"
+                pickup_hours = f"{next_schedule.open_time.strftime('%H:%M')} - {next_schedule.close_time.strftime('%H:%M')}"
+            else:
+                pickup_message = "Филиал не работает"
+                pickup_hours = ""
+
+        branches_data.append({
+            'branch': branch,
+            'pickup_message': pickup_message,
+            'pickup_hours': pickup_hours,
+        })
+
+    html = render(request, "partials/branches_list-checkout.html", {
+        "branches_data": branches_data,
+    }).content.decode("utf-8")
     return JsonResponse({"html": html})
 
 
@@ -558,7 +651,10 @@ class Test(View):
 
 class ShipmentPayment(View):
     def get(self, request):
-        return render(request, 'shipment_and_payment.html')
+        cities = City.objects.all()
+        return render(request, 'shipment_and_payment.html', {
+            'cities': cities,
+        })
 
 
 class Contacts(View):

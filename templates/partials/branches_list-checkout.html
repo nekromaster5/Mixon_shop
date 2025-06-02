@@ -1,21 +1,23 @@
-{% for branch in branches %}
-<li class="widget__form--check__list align-items-start" data-map-info="{{ branch.map_info }}">
-    <input class="widget__form--check__input flex-shrink-0"
-           id="{{ branch.id }}"
-           type="checkbox">
-    <span class="widget__form--checkmark circle flex-shrink-0 me-3"></span>
-    <div>
-        <label class="widget__form--check__label--title flex-grow-0 bg-inherit"
-               for="{{ branch.id }}">{{ branch.address }}
-            <span class="widget__form--check__label--small">
-                Забрать сегодня {{ branch.working_hours }}
-            </span>
-        </label>
-        <button id="show--map-{{ branch.id }}" class="show--map--btn primary__btn" data-map-info="{{ branch.map_info }}">
-            Посмотреть на карте
-        </button>
-    </div>
-</li>
-{% empty %}
-<li>Нет доступных филиалов</li>
+{% for data in branches_data %}
+    <li class="widget__form--check__list align-items-start" data-map-info="{{ data.branch.map_info }}">
+        <input class="widget__form--check__input flex-shrink-0"
+               id="{{ data.branch.id }}"
+               type="checkbox">
+        <span class="widget__form--checkmark circle flex-shrink-0 me-3"></span>
+        <div class="d-flex flex-column width-100">
+            <label class="widget__form--check__label--title flex-grow-0 bg-inherit"
+                   for="{{ data.branch.id }}">{{ data.branch.address }}
+                <br>
+                <span class="widget__form--check__label--small">
+                {{ data.pickup_message }} {% if data.pickup_hours %}{{ data.pickup_hours }}{% endif %}
+                </span>
+            </label>
+            <button id="show--map-{{ data.branch.id }}" class="show--map--btn primary__btn"
+                    data-map-info="{{ data.branch.map_info }}">
+                Посмотреть на карте
+            </button>
+        </div>
+    </li>
+    {% empty %}
+    <li>Нет доступных филиалов</li>
 {% endfor %}
