@@ -3,7 +3,11 @@
 
 
 {% block title %}
-    ЛКМ для Строительства
+    {% if product_category %}
+        {{ product_category }}
+    {% else %}
+        Все товары
+    {% endif %}
 {% endblock %}
 
 

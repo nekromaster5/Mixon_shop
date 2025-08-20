@@ -1,3 +1,4 @@
+from adminsortable2.admin import SortableInlineAdminMixin, SortableAdminBase
 from django.contrib import admin
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
@@ -9,7 +10,7 @@ from .models import (
     OrderStatus, Order, FavoriteProduct, ProductComparison,
     NewsCategory, News, ErrorMessages, InfoMessages, City, ProductStock, Volume, Color, ProductImage, BindingSubstance,
     ProductType, PromoCode, SalesLeaders, RecommendedProducts, MainPageSections, MainPageBanner, Category, OrderProduct,
-    BranchSchedule, BranchScheduleException, ScheduleTemplateItem, ScheduleTemplate,
+    BranchSchedule, BranchScheduleException, ScheduleTemplateItem, ScheduleTemplate, ContentBlock,
 )
 
 
@@ -280,17 +281,24 @@ class ProductComparisonAdmin(admin.ModelAdmin):
     filter_horizontal = ('products',)
 
 
+class ContentBlockInline(SortableInlineAdminMixin, admin.TabularInline):
+    model = ContentBlock
+    extra = 1
+    fields = ('content_type', 'text', 'image', 'order')
+    ordering = ['order']
+
+@admin.register(News)
+class NewsAdmin(SortableAdminBase, admin.ModelAdmin):  # Изменено на SortableAdminBase
+    list_display = ('title', 'category', 'date_published')
+    list_filter = ('category', 'date_published')
+    search_fields = ('title',)
+    prepopulated_fields = {'slug': ('title',)}
+    inlines = [ContentBlockInline]
+
 @admin.register(NewsCategory)
 class NewsCategoryAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
-
-
-@admin.register(News)
-class NewsAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'date_published')
-    search_fields = ('title', 'text')
-    list_filter = ('category', 'date_published')
 
 
 @admin.register(MainPageSections)

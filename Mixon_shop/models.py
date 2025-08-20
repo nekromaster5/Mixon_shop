@@ -275,6 +275,7 @@ class ProductType(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
+    image = models.ImageField(upload_to='category/images/', blank=True)
 
     def __str__(self):
         return self.name
@@ -475,17 +476,60 @@ class ProductComparison(models.Model):
 
 # News category model
 class NewsCategory(models.Model):
-    name = models.CharField(max_length=256)
+    name = models.CharField(max_length=256, verbose_name="Название категории")
+
+    class Meta:
+        verbose_name = "Категория новостей"
+        verbose_name_plural = "Категории новостей"
+
+    def __str__(self):
+        return self.name
 
 
 # News model
 class News(models.Model):
-    title = models.CharField(max_length=256)
-    main_image = models.ImageField(upload_to='news/main_images/')
-    images = models.ImageField(upload_to='news/images/', blank=True, null=True)
-    text = models.TextField()
-    category = models.ForeignKey(NewsCategory, on_delete=models.CASCADE)
-    date_published = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=256, verbose_name="Заголовок")
+    main_image = models.ImageField(upload_to='news/main_images/', verbose_name="Главное изображение")
+    category = models.ForeignKey(NewsCategory, on_delete=models.CASCADE, verbose_name="Категория")
+    date_published = models.DateTimeField(auto_now_add=True, verbose_name="Дата публикации")
+    slug = models.SlugField(max_length=256, unique=True, blank=True, verbose_name="URL-имя")
+
+    class Meta:
+        verbose_name = "Новость"
+        verbose_name_plural = "Новости"
+        ordering = ['-date_published']
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            from django.utils.text import slugify
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+
+# News ContentBlock model
+class ContentBlock(models.Model):
+    CONTENT_TYPES = (
+        ('paragraph', 'Абзац'),
+        ('subheader', 'Подзаголовок'),
+        ('image', 'Изображение'),
+    )
+
+    news = models.ForeignKey(News, related_name='content_blocks', on_delete=models.CASCADE, verbose_name="Новость")
+    content_type = models.CharField(max_length=20, choices=CONTENT_TYPES, verbose_name="Тип контента")
+    text = models.TextField(blank=True, null=True, verbose_name="Текст")
+    image = models.ImageField(upload_to='news/content_images/', blank=True, null=True, verbose_name="Изображение")
+    order = models.PositiveIntegerField(default=0, verbose_name="Порядок")
+
+    class Meta:
+        verbose_name = "Блок контента"
+        verbose_name_plural = "Блоки контента"
+        ordering = ['order']
+
+    def __str__(self):
+        return f"{self.content_type} для {self.news.title}"
 
 
 class Cart(models.Model):

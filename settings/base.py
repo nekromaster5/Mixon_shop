@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'admin_tools.theming',
     'admin_tools.menu',
     'admin_tools.dashboard',
+    'adminsortable2',
 
     'django.contrib.admin',
     'django.contrib.auth',
