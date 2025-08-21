@@ -45,7 +45,7 @@ urlpatterns = [
 
     # инфо-страницы
     path('brands/', Brands.as_view(), name='brands'),
-    path('news/', NewsPage.as_view(), name='news'),
+    path('news/', NewsPage.as_view(), name='news_list'),
     path('topic/<slug:slug>/', Topic.as_view(), name='topic'),
     path('about_company/', AboutCompany.as_view(), name='about_company'),
     path('cabinet/', PersonalPage.as_view(), name='cabinet'),
