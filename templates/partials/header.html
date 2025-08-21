@@ -429,9 +429,11 @@ margin-left:400px;
                             <input type="email" name="email" placeholder="Email" class="user_menu_input" required>
                         </div>
                         <div>
-                            <input type="text" placeholder="Фамилия" class="user_menu_input">
+                          <input type="text" name="last_name" placeholder="Фамилия" class="user_menu_input">
+
                             <input type="password" name="password2" placeholder="Подтвердите пароль" class="user_menu_input" required>
-                            <input type="text" placeholder="Телефон" class="user_menu_input">
+                            <input type="text" name="phone" placeholder="Телефон" class="user_menu_input">
+
                             
                         </div>
                         
@@ -446,7 +448,13 @@ margin-left:400px;
                     <button type="submit" class="btn-primary">Зарегистрироваться</button>
                     <button class="back_button" type="button" onclick="showLoginForm()">Назад</button>
                 </form>
-                <div id="registrationErrors" style="color: red;"></div> <!-- Добавим блок для вывода ошибок -->
+                {% if form.errors %}
+    <ul class="errorlist">
+        {% for field, errors in form.errors.items %}
+            <li>{{ field }}: {{ errors|join:", " }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
             </div>
         </div>
     </div>
@@ -588,7 +596,8 @@ margin-left:400px;
             </div>
 
             <div class="frame3-panel" style=" margin-left:72px;">
-                <a   id="icon-button_n" class="icon-button_n" style="background: none;border: none;position:relative; ">
+                <a   id="icon-button_n" class="icon-button_n" style="background: none;border: none;position:relative; " href="{% if user.is_authenticated %}{% url 'cabinet' %}{% else %}#{% endif %}">
+                    
                     <svg width="17" height="24" viewBox="0 0 17 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.2659 6.20894C3.2659 5.17871 3.55763 4.17161 4.10414 3.31501C4.65064 2.4584 5.4274 1.79076 6.3362 1.39651C7.245 1.00226 8.24505 0.899102 9.20982 1.10009C10.1746 1.30108 11.0608 1.79718 11.7563 2.52566C12.4519 3.25415 12.9256 4.18229 13.1175 5.19272C13.3094 6.20316 13.2108 7.2505 12.8344 8.20231C12.458 9.15412 11.8205 9.96764 11.0026 10.54C10.1847 11.1124 9.22316 11.4179 8.23948 11.4179C7.5863 11.418 6.93944 11.2834 6.33596 11.0216C5.73248 10.7599 5.18424 10.3762 4.72238 9.89251C4.26052 9.40879 3.89409 8.83451 3.64419 8.20247C3.39429 7.57043 3.26577 6.89302 3.2659 6.20894ZM13.6322 12.7668H11.835C10.7417 13.428 9.50148 13.7761 8.239 13.7761C6.97652 13.7761 5.73628 13.428 4.64299 12.7668H3.36968C1.79181 12.7668 0.5 15.1209 0.5 16.7745V20.9956C0.5 22.6492 1.79181 23 3.36968 23H13.6294C15.2082 23 16.5 22.6492 16.5 20.9956V16.7745C16.5029 15.1209 15.2111 12.7668 13.6322 12.7668Z"
                               stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
