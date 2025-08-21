@@ -18,8 +18,15 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import JsonResponse
 from django.db.models import F, Case, When, Value, DecimalField, Count, Min, Max
 from django.db.models.functions import Coalesce
-
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate, logout
+from django.contrib import messages
+from .forms import UserRegisterForm, UserLoginForm
+from .models import UserProfile
 from .forms import UserLoginForm
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from .models import Order
 from .models import Product, Review, RecommendedProducts, SalesLeaders, City, Branch, ErrorMessages, PromoCode, Order, \
     ShipmentMethod, PaymentMethod, OrderStatus, OrderProduct, BindingSubstance, ProductType, Volume, \
     ProductStock
@@ -55,7 +62,12 @@ class ProductSelfWrapper:
         self.likes_count = product.likes_count
         self.comments_count = product.comments_count
 
-
+@login_required
+def cabinet_view(request):
+    orders = Order.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'cabinet.html', {
+        'orders': orders,
+    })
 class HomePage(View):
     def get(self, request):
         recommended_products = RecommendedProducts.objects.select_related('product').annotate(
@@ -93,13 +105,7 @@ class ProductPage(View):
         })
 
 
-def register(request):
-    return render(request, 'register.html')
-
-
-def activate(request):
-    # Логика для активации аккаунта
-    return render(request, 'activation_success.html')
+ 
 
 
 def get_pages_to_display(current_page, total_pages):
@@ -677,27 +683,58 @@ def branch_list(request):
     return render(request, 'locations/branch_list.html', context)
 
 
+# ---------------- LOGIN ----------------
 def login_view(request):
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('home')
-            else:
-                messages.error(request, ErrorMessages.objects.get(name='invalid_auth').message)
-    else:
-        form = UserLoginForm()
-    return render(request, 'your_app/login.html', {'form': form})
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, "Вы успешно вошли!")
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
+# ---------------- LOGOUT ----------------
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    messages.info(request, "Вы вышли из аккаунта")
+    return redirect('home')
 
+
+# ---------------- REGISTER ----------------
+def register_view(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+
+            # обновляем профиль, если есть поля
+            profile_fields = ['phone', 'company', 'registration_number', 'city', 'postal_code', 'region']
+            if hasattr(user, 'userprofile'):
+                for field in profile_fields:
+                    if field in form.cleaned_data:
+                        setattr(user.userprofile, field, form.cleaned_data.get(field))
+                user.userprofile.save()
+
+            login(request, user)
+            messages.success(request, "Регистрация прошла успешно!")
+        else:
+            # собираем ошибки и передаем через messages
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
+
+    # После обработки всегда редирект на ту же страницу, где есть модалка
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+# ---------------- EMAIL ACTIVATE ----------------
+def activate(request):
+    return render(request, 'activation_success.html')
 
 def get_session_cart(request):
     """

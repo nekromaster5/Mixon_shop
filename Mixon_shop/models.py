@@ -7,7 +7,8 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
-
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
 
 # Region model
 class Region(models.Model):
@@ -485,6 +486,27 @@ class NewsCategory(models.Model):
     def __str__(self):
         return self.name
 
+@login_required
+def cabinet_view(request):
+    user = request.user
+
+    # Все отзывы юзера
+    reviews = Review.objects.filter(user=user).select_related('product')
+
+    # Все купленные товары (предположим, у тебя есть Order → Product связь)
+    ordered_products = Product.objects.filter(order__user=user).distinct()
+
+    # Уже отрецензированные товары
+    reviewed_products = reviews.values_list('product_id', flat=True)
+
+    # Товары без отзывов
+    products_without_review = ordered_products.exclude(id__in=reviewed_products)
+
+    context = {
+        "reviews": reviews,
+        "products_without_review": products_without_review,
+    }
+    return render(request, "cabinet.html", context)
 
 # News model
 class News(models.Model):
