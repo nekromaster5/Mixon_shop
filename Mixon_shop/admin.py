@@ -303,8 +303,7 @@ class NewsCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(MainPageSections)
 class MainPageSectionsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'is_used')
-    list_filter = ('is_used',)
+    list_display = ('id', 'name')
     search_fields = ('name',)
 
 

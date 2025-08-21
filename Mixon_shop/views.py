@@ -29,7 +29,7 @@ from django.shortcuts import render
 from .models import Order
 from .models import Product, Review, RecommendedProducts, SalesLeaders, City, Branch, ErrorMessages, PromoCode, Order, \
     ShipmentMethod, PaymentMethod, OrderStatus, OrderProduct, BindingSubstance, ProductType, Volume, \
-    ProductStock
+    ProductStock, News, NewsCategory
 
 
 def product_detail(request, product_id):
@@ -362,19 +362,47 @@ class Brands(View):
         return render(request, 'brands.html')
 
 
-class News(View):
+class NewsPage(View):
     def get(self, request):
-        return render(request, 'news.html')
+        category_slug = request.GET.get('category')
+        if category_slug:
+            news = News.objects.filter(category__slug=category_slug).order_by('-date_published')
+        else:
+            news = News.objects.all().order_by('-date_published')
+        categories = NewsCategory.objects.all()
+        return render(request, 'news.html', {
+            'news': news,
+            'categories': categories,
+            'selected_category': category_slug,
+        })
+
+
+class Topic(View):
+    def get(self, request, slug):
+        news = get_object_or_404(News, slug=slug)
+
+        # Получаем 3 последние новости из той же категории, исключая текущую
+        related_news = News.objects.filter(category=news.category).exclude(slug=slug).order_by('-date_published')[:3]
+
+        # Если новостей меньше 3, дополняем последними новостями из других категорий
+        if related_news.count() < 3:
+            additional_count = 3 - related_news.count()
+            additional_news = News.objects.exclude(slug=slug).exclude(category=news.category).order_by(
+                '-date_published')[
+                              :additional_count]
+            related_news = list(related_news) + list(additional_news)
+        else:
+            related_news = list(related_news)
+
+        return render(request, 'topic.html', {
+            'news': news,
+            'related_news': related_news
+        })
 
 
 class AboutCompany(View):
     def get(self, request):
         return render(request, 'about_company.html')
-
-
-class Topic(View):
-    def get(self, request):
-        return render(request, 'topic.html')
 
 
 class CheckoutPage(View):
@@ -821,6 +849,7 @@ def submit_review(request, product_id):
 
     # Перенаправляем пользователя обратно на страницу продукта
     return render(request, 'product.html', context)
+
 
 @require_POST
 def add_to_cart(request):

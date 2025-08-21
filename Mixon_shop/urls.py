@@ -1,11 +1,31 @@
+"""
+URL configuration for Mixon_shop project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.0/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
 import admin_tools
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+from . import views
 
-from . import views  # используем только это!
+from Mixon_shop.views import HomePage, CataloguePage, ProductPage, Brands, NewsPage, \
+    AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts, \
+    SearchPage, product_detail, submit_review, get_branches, register, activate, branch_list, create_order, \
+    apply_promo_code, Topic
 
 urlpatterns = [
     path('admin_tools/', include('admin_tools.urls')),
@@ -26,8 +46,8 @@ urlpatterns = [
 
     # инфо-страницы
     path('brands/', views.Brands.as_view(), name='brands'),
-    path('news/', views.News.as_view(), name='news'),
-    path('topic/', views.Topic.as_view(), name='topic'),
+    path('news/', views.NewsPage.as_view(), name='news'),
+    path('topic/<slug:slug>/', views.Topic.as_view(), name='topic'),
     path('about_company/', views.AboutCompany.as_view(), name='about_company'),
     path('cabinet/', views.PersonalPage.as_view(), name='cabinet'),
     path('checkout/', views.CheckoutPage.as_view(), name='checkout'),
@@ -55,10 +75,10 @@ urlpatterns = [
     path('cart/', views.cart_detail, name='cart_detail'),
     path('apply-promo/', views.apply_promo_code, name='apply_promo_code'),
     path('create-order/', views.create_order, name='create_order'),
+
 ]
 
-# кастомная 404
-handler404 = views.ErrorPage.as_view()
+handler404 = ErrorPage.as_view()
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
