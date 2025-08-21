@@ -22,10 +22,10 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from . import views
 
-from Mixon_shop.views import HomePage, CataloguePage, ProductPage, Brands, News, \
-    Topic, AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts, \
+from Mixon_shop.views import HomePage, CataloguePage, ProductPage, Brands, NewsPage, \
+    AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts, \
     SearchPage, product_detail, submit_review, get_branches, register, activate, branch_list, create_order, \
-    apply_promo_code
+    apply_promo_code, Topic
 
 urlpatterns = [
     path('admin_tools/', include('admin_tools.urls')),
@@ -40,8 +40,8 @@ urlpatterns = [
     path('search/page/<int:page>/', SearchPage.as_view(), name='search_result_no_query'),
     path('product/<int:product_id>/', ProductPage.as_view(), name='product'),
     path('brands/', Brands.as_view(), name='brands'),
-    path('news/', News.as_view(), name='news'),
-    path('topic/', Topic.as_view(), name='topic'),
+    path('news/', NewsPage.as_view(), name='news_list'),
+    path('topic/<slug:slug>/', Topic.as_view(), name='topic'),
     path('about_company/', AboutCompany.as_view(), name='about_company'),
     path('cabinet/', PersonalPage.as_view(), name='cabinet'),
     path('checkout/', CheckoutPage.as_view(), name='checkout'),

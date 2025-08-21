@@ -1,5 +1,6 @@
 import string
 import random
+from random import choice
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -7,6 +8,7 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
+from unidecode import unidecode
 
 
 # Region model
@@ -470,13 +472,24 @@ class FavoriteProduct(models.Model):
 
 # Product comparison model
 class ProductComparison(models.Model):
+    list_number = models.IntegerField(blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product)
+
+
+def rand_slug():
+    return ''.join(choice(string.ascii_letters + string.digits) for _ in range(12))
+
+
+def rand_title_chars(value):
+    return ''.join(choice(value) for _ in range(int(len(value) / 2)))
 
 
 # News category model
 class NewsCategory(models.Model):
     name = models.CharField(max_length=256, verbose_name="Название категории")
+    slug = models.SlugField(max_length=256, unique=True, blank=True, verbose_name="URL-имя")
+    image = models.FileField(upload_to='news_category/images/', blank=True, null=True, verbose_name="Иконка категории")
 
     class Meta:
         verbose_name = "Категория новостей"
@@ -484,6 +497,27 @@ class NewsCategory(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        update_slug = False
+        if not self.slug:
+            update_slug = True
+            print('no slug')
+        elif self.pk:
+            try:
+                old_instance = NewsCategory.objects.get(pk=self.pk)
+                if old_instance.name != self.name:
+                    update_slug = True
+                    print('name changed')
+            except NewsCategory.DoesNotExist:
+                update_slug = True
+
+        if update_slug:
+            print(f"self.name: {self.name}")
+            self.slug = slugify(unidecode(self.name))
+            print(f"slugified: {self.slug}")
+
+        super().save(*args, **kwargs)
 
 
 # News model
@@ -503,9 +537,22 @@ class News(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
+        update_slug = False
         if not self.slug:
-            from django.utils.text import slugify
-            self.slug = slugify(self.title)
+            update_slug = True
+        elif self.pk:
+            try:
+                old_instance = NewsCategory.objects.get(pk=self.pk)
+                if old_instance.title != self.title:
+                    update_slug = True
+            except NewsCategory.DoesNotExist:
+                update_slug = True
+
+        if update_slug:
+            print(f"self.name: {self.title}")
+            self.slug = slugify(unidecode(self.title))
+            print(f"slugified: {self.title}")
+
         super().save(*args, **kwargs)
 
 
@@ -556,9 +603,7 @@ class CartItem(models.Model):
 
 
 class MainPageSections(models.Model):
-    image = models.ImageField(upload_to='sections/images/')
     name = models.ForeignKey(Category, on_delete=models.CASCADE)
-    is_used = models.BooleanField(default=False)
 
 
 class MainPageBanner(models.Model):

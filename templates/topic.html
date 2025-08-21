@@ -3,108 +3,109 @@
 
 
 {% block title %}
-{{ news.title }}
+    {{ news.title }}
 {% endblock %}
 
 
 {% block content %}
-<section class="breadcrumb__section breadcrumb__bg">
-    <div class="container">
-        <div class="breadcrumb__content slider-container text-center">
-            <ul class="breadcrumb__content--menu slider d-flex">
-                <li class="breadcrumb__content--menu__items">
-                    <a href="{% url 'home' %}">Главная</a>
-                </li>
-                <li class="breadcrumb__content--menu__items">
-                    <a href="{% url 'news_list' %}">Новости</a>
-                </li>
-                <li class="breadcrumb__content--menu__items">
-                    <a href="{% url 'news_detail' news.slug %}">{{ news.title }}</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</section>
-<section>
-    <div class="container">
-        <div class="topic-wrapper">
-            <div class="topic-main_block col-lg-19 pe-lg-5 pe-0"
-                 style="overflow: hidden; word-wrap: break-word;">
-                <h2 class="topic-title h3">{{ news.title }}</h2>
-                <span class="topic-date">{{ news.date_published }}</span>
-                {% for block in news.content_blocks.all %}
-                    {% if block.content_type == 'paragraph' %}
-                        <p class="topic-text">{{ block.text|linebreaks }}</p>
-                    {% elif block.content_type == 'subheader' %}
-                        <h2 class="subtopic-title h3">{{ block.text }}</h2>
-                    {% elif block.content_type == 'image' %}
-                        <img style="width: 100%; margin-bottom: 1.5rem;" src="{{ block.image.url }}" alt="Изображение">
-                    {% endif %}
-                {% endfor %}
+    <section class="breadcrumb__section breadcrumb__bg">
+        <div class="container">
+            <div class="breadcrumb__content slider-container text-center">
+                <ul class="breadcrumb__content--menu slider d-flex">
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="{% url 'home' %}">Главная</a>
+                    </li>
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="{% url 'news_list' %}">Новости</a>
+                    </li>
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="{% url 'topic' news.slug %}">{{ news.title }}</a>
+                    </li>
+                </ul>
             </div>
-            <div class="topic-additional_panel col-lg-20">
-                <a style="" href="{% url 'news_list' %}" class="view__all--link d-inline-block text-nowrap">
-                    <span class="me-3">Ещё новости</span>
-                    <svg width="3%" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.384766 0.764038L6.07377 6.39398L0.384766 12.024" stroke="currentColor"
-                              stroke-miterlimit="10"></path>
-                        <path d="M4.31104 0.764038L10 6.39398L4.31104 12.024" stroke="currentColor"
-                              stroke-miterlimit="10"></path>
-                    </svg>
-                </a>
-                <div id="news--slider" class="slider-container adjustable-slider">
-                    <div class="slider">
-                        {% for related in related_news %}
-                        <div class="news_buttons topic-side slide col-lg-12 col-md-20 col-18">
-                            <a class="big_news_buttons topic-side" href="{% url 'news_detail' related.slug %}">
-                                <img style="width: 100%" src="{{ related.main_image.url }}" alt="{{ related.title }}">
-                                <span>{{ related.title }}</span>
-                            </a>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="topic-wrapper">
+                <div class="topic-main_block col-lg-19 pe-lg-5 pe-0"
+                     style="overflow: hidden; word-wrap: break-word;">
+                    <h2 class="topic-title h3">{{ news.title }}</h2>
+                    <span class="topic-date">{{ news.date_published|date:"d.m.Y" }}</span>
+                    {% for block in news.content_blocks.all %}
+                        {% if block.content_type == 'paragraph' %}
+                            <p class="topic-text">{{ block.text|linebreaks }}</p>
+                        {% elif block.content_type == 'subheader' %}
+                            <h2 class="subtopic-title h3">{{ block.text }}</h2>
+                        {% elif block.content_type == 'image' %}
+                            <img style="width: 100%; margin-bottom: 1.5rem;" src="{{ block.image.url }}"
+                                 alt="Изображение">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="topic-additional_panel col-lg-20">
+                    <a style="" href="{% url 'news_list' %}" class="view__all--link d-inline-block text-nowrap">
+                        <span class="me-3">Ещё новости</span>
+                        <svg width="3%" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0.384766 0.764038L6.07377 6.39398L0.384766 12.024" stroke="currentColor"
+                                  stroke-miterlimit="10"></path>
+                            <path d="M4.31104 0.764038L10 6.39398L4.31104 12.024" stroke="currentColor"
+                                  stroke-miterlimit="10"></path>
+                        </svg>
+                    </a>
+                    <div id="news--slider" class="slider-container adjustable-slider">
+                        <div class="slider">
+                            {% for related in related_news %}
+                                <div class="news_buttons topic-side slide col-lg-12 col-md-20 col-18">
+                                    <a class="big_news_buttons topic-side" href="{% url 'topic' related.slug %}">
+                                        <img style="width: 100%" src="{{ related.main_image.url }}"
+                                             alt="{{ related.title }}">
+                                        <span>{{ related.title }}</span>
+                                    </a>
+                                </div>
+                                {% empty %}
+                                <!-- Если новостей нет, можно показать заглушку -->
+                                <div class="news_buttons topic-side slide col-lg-12 col-md-20 col-18">
+                                    <a class="big_news_buttons topic-side" href="#">                                        
+                                        <span>Нет доступных новостей</span>
+                                    </a>
+                                </div>
+                            {% endfor %}
                         </div>
-                        {% empty %}
-                        <!-- Если новостей нет, можно показать заглушку -->
-                        <div class="news_buttons topic-side slide col-lg-12 col-md-20 col-18">
-                            <a class="big_news_buttons topic-side" href="#">
-                                <img style="width: 100%" src="{% static '/src/assets/img/icon/placeholder.png' %}">
-                                <span>Нет доступных новостей</span>
-                            </a>
-                        </div>
-                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock %}
 
 
 {% block scripts %}
-<script src="{% static '/src/assets/js/slider.js' %}"></script>
-<script>
-    // Получаем ссылку на элемент с id payment--slider
-    const newsSliderContainer = document.getElementById('news--slider');
-    const newsSlider = newsSliderContainer.querySelector('.slider');
+    <script src="{% static '/src/assets/js/slider.js' %}"></script>
+    <script>
+        // Получаем ссылку на элемент с id payment--slider
+        const newsSliderContainer = document.getElementById('news--slider');
+        const newsSlider = newsSliderContainer.querySelector('.slider');
 
-    // Функция для проверки размера экрана и скрытия/отображения элемента
-    function toggleSliderContainer(sliderContainer, slider) {
-        if (window.innerWidth >= 992) {
-            sliderContainer.classList.remove('slider-container');
-            disableSlider(slider);
-        } else {
-            sliderContainer.classList.add('slider-container');
-            enableSlider(slider);
+        // Функция для проверки размера экрана и скрытия/отображения элемента
+        function toggleSliderContainer(sliderContainer, slider) {
+            if (window.innerWidth >= 992) {
+                sliderContainer.classList.remove('slider-container');
+                disableSlider(slider);
+            } else {
+                sliderContainer.classList.add('slider-container');
+                enableSlider(slider);
+            }
         }
-    }
 
 
-    setTimeout(() => {
-        toggleSliderContainer(newsSliderContainer, newsSlider)
-    }, 50);
+        setTimeout(() => {
+            toggleSliderContainer(newsSliderContainer, newsSlider)
+        }, 50);
 
-    // Добавляем обработчик события изменения размера окна браузера
-    window.addEventListener('resize', () => toggleSliderContainer(newsSliderContainer, newsSlider));
+        // Добавляем обработчик события изменения размера окна браузера
+        window.addEventListener('resize', () => toggleSliderContainer(newsSliderContainer, newsSlider));
 
-</script>
-<script src="{% static '/src/assets/js/breadcrumbSliderSetWidth.js' %}"></script>
+    </script>
+    <script src="{% static '/src/assets/js/breadcrumbSliderSetWidth.js' %}"></script>
 {% endblock %}
