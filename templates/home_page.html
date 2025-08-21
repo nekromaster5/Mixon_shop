@@ -22,8 +22,16 @@
             height: 2px;
             border: none;
             margin-left: 10px !important;
-            background-color: red !important;
+            
         }
+
+        .main_image_button:hover {
+        background-color: gray;
+    }
+
+    .main_image_button.active {
+        background-color: red; /* Активная кнопка тоже красная для выделения */
+    }
 
         @media only screen and (min-width: 768px) and (max-width: 992px) {
             .main_image_buttons {
@@ -413,6 +421,41 @@
                 document.body.style.overflow = 'auto';
             }
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.slide_img');
+        const buttons = document.querySelectorAll('.main_image_button');
+        let currentIndex = 0;
+        let intervalId;
+
+        function showSlide(index) {
+            slides[currentIndex].classList.remove('active');
+            buttons[currentIndex].classList.remove('active');
+
+            currentIndex = index;
+
+            slides[currentIndex].classList.add('active');
+            buttons[currentIndex].classList.add('active');
+        }
+
+        buttons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                clearInterval(intervalId); // Остановить авто-переключение при клике
+                showSlide(index);
+                startAutoSlide(); // Перезапустить авто-переключение
+            });
+        });
+
+        function startAutoSlide() {
+            intervalId = setInterval(() => {
+                let nextIndex = (currentIndex + 1) % slides.length;
+                showSlide(nextIndex);
+            }, 5000); // Смена каждые 5 секунд
+        }
+
+        showSlide(0); // Инициализация первого слайда
+        startAutoSlide(); // Запуск авто-переключения
+    });
 
     </script>
 {% endblock %}

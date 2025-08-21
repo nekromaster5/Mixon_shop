@@ -11046,7 +11046,7 @@ details > summary::-webkit-details-marker {
 .main_image_img {
 
 }
-
+ 
 @media only screen and (max-width: 991px) {
     .main_image {
         margin-left: 0;
@@ -11064,6 +11064,7 @@ details > summary::-webkit-details-marker {
         width: 768px;
         height: 368px;
     }
+
 
     .main_image_buttons {
         display: flex;
