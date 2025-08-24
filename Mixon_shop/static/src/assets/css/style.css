@@ -7478,7 +7478,9 @@ input[type=number]::-webkit-outer-spin-button {
 .order_table.hidden {
     display: none;
 }
-
+.hidden {
+    display: none;
+}
 .widget__cabinet--button img {
     margin-right: 10px; /* Добавляем отступ справа для изображения */
 }

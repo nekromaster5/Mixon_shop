@@ -58,66 +58,101 @@
             <div id="app"></div>
             <div class="vertical-block" style="  ">
                 <div class="high_main_block">
-                    <div class="main_high_buttons">
-                        <div class="item" style="position:relative;top:20px;left:15px;"
-                             onclick="">
-                            <img style="position:absolute;margin-top:3px;left:-30px;"
-                                 src="{% static '/src/assets/img/icon/akciya 1.svg' %}" alt="">
-                            <p style="color:red;font-weight: 500;">Акции</p>
-                        </div>
-                        <div class="item" style="position:relative;top:30px;left:15px;"
-                             onclick="">
-                            <img style="position:absolute;left:-30px;"
-                                 src="{% static '/src/assets/img/icon/lkm-stroitelstvo 1.svg' %}" alt="">
-                            <p style="font-weight: 500;position:relative; ">
-                                ЛКМ для Строительства</p>
-                        </div>
-                        <div class="item" style="position:relative;top:40px;left:15px;"
-                             onclick="">
-                            <img style="position:absolute;left:-30px;"
-                                 src="{% static '/src/assets/img/icon/lkm-autoremont 1.svg' %}" alt="">
-                            <p style="font-weight: 500;">ЛКМ для Авторемонта</p>
-                        </div>
-                        <div class="item" style="position:relative;top:50px;left:15px;"
-                             onclick="">
-                            <img style="position:absolute;left:-30px;"
-                                 src="{% static '/src/assets/img/icon/lkm-derevo 1.svg' %}" alt="">
-                            <p style="font-weight: 500;">ЛКМ для Древообработки</p>
-                        </div>
-                        <div class="item" style="position:relative;top:60px;left:15px;"
-                             onclick="">
-                            <img style="position:absolute;left:-30px;"
-                                 src="{% static '/src/assets/img/icon/lkm-industry 1.svg' %}" alt="">
-                            <p style="font-weight: 500;">ЛКМ для Промышленности</p>
-                        </div>
-                        <div class="item" style="position:relative;top:70px;left:15px;"
-                             onclick="">
-                            <img style="position:absolute;left:-30px;"
-                                 src="{% static '/src/assets/img/icon/auto-chemikal 1.svg' %}" alt="">
-                            <p style="font-weight: 500;">Автохимия,автокосметика,<br>
-                                оборудование для автомоек</p>
-                        </div>
-                        <div class="item" style="position:relative;top:80px;left:15px;"
-                             onclick="">
-                            <img style="position:absolute;left:-30px;"
-                                 src="{% static '/src/assets/img/icon/instrument 1.svg' %}" alt="">
-                            <p style="font-weight: 500;">Инструменты, аксесуары,<br>
-                                оборудование</p>
-                        </div>
-                    </div>
-                    <!-- Добавьте другие элементы по аналогии -->
-                    <div class="main_image" style=" ">
-                        <img class="main_image_img" src="{% static '/src/assets/img/icon/slaider 2.png' %}" alt="">
-                        <div class="main_image_buttons">
-                            <button class="main_image_button"></button>
-                            <button class="main_image_button "></button>
-                            <button class="main_image_button"></button>
-                            <button class="main_image_button "></button>
-                            <button class="main_image_button "></button>
+<div class="main_high_buttons">
+    <div class="categories">
+        {% for section in sections %}
+            <div class="item" style="position:relative; top:{{ forloop.counter0|add:20 }}px; left:15px;">
+                
+                {% if section.name.image %}
+                    <img src="{{ section.name.image.url }}"
+                         alt="{{ section.name.name }}"
+                         style="position:absolute; left:-30px;">
+                {% else %}
+                    <p>[Нет картинки]</p>
+                {% endif %}
+                
+                <p class="category-name" style="font-weight: 500;">
+                    {{ section.name.name }}
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 
-                        </div>
+<style>
+    .category-name {
+        color: black; /* Default color */
+        transition: color 0.3s ease; /* Smooth color transition */
+    }
+    .category-name:hover {
+        color: red; /* Red color on hover */
+    }
+</style>
                     </div>
+                   <div class="main_image">
+    <div class="main_image_slides">
+        {% for banner in banners %}
+            <div class="main_image_slide {% if not forloop.first %}hidden{% endif %}">
+                <img class="main_image_img" 
+                     src="{{ banner.image.url }}" 
+                     alt="{{ banner.description|truncatewords:5 }}" 
+                     loading="lazy">
+                <div class="main_image_description">{{ banner.description }}</div>
+            </div>
+        {% empty %}
+            <!-- Заглушка, если баннеров нет -->
+            {% for i in "12345" %}
+                <div class="main_image_slide {% if not forloop.first %}hidden{% endif %}">
+                    <img class="main_image_img" 
+                         src="{% static '/src/assets/img/icon/slaider 2.png' %}" 
+                         alt="Placeholder" 
+                         loading="lazy">
+                    <div class="main_image_description">Placeholder description</div>
                 </div>
+            {% endfor %}
+        {% endfor %}
+        <!-- Добавление заглушек, если баннеров меньше 5 -->
+        {% if banners|length < 5 %}
+            {% with extra_slides=5|add:banners|length|add:-5 %}
+                {% for i in "12345" %}
+                    {% if forloop.counter0 < extra_slides %}
+                        <div class="main_image_slide hidden">
+                            <img class="main_image_img" 
+                                 src="{% static '/src/assets/img/icon/slaider 2.png' %}" 
+                                 alt="Placeholder" 
+                                 loading="lazy">
+                            <div class="main_image_description">Placeholder description</div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endwith %}
+        {% endif %}
+    </div>
+    <div class="main_image_buttons">
+        {% for banner in banners %}
+            <button class="main_image_button {% if forloop.first %}active{% endif %}" 
+                    aria-label="Slide {{ forloop.counter }}"></button>
+        {% empty %}
+            <!-- Кнопки для заглушек, если баннеров нет -->
+            {% for i in "12345" %}
+                <button class="main_image_button {% if forloop.first %}active{% endif %}" 
+                        aria-label="Placeholder slide {{ forloop.counter }}"></button>
+            {% endfor %}
+        {% endfor %}
+        <!-- Добавление кнопок для заглушек, если баннеров меньше 5 -->
+        {% if banners|length < 5 %}
+            {% with extra_slides=5|add:banners|length|add:-5 %}
+                {% for i in "12345" %}
+                    {% if forloop.counter0 < extra_slides %}
+                        <button class="main_image_button" 
+                                aria-label="Placeholder slide {{ forloop.counter0|add:banners|length|add:1 }}"></button>
+                    {% endif %}
+                {% endfor %}
+            {% endwith %}
+        {% endif %}
+    </div>
+</div>
+</div>
                 <!-- Блок с кнопками "brends" -->
                 <div class="brand_buttons-wrapper">
                     <div class="slider-container adjustable-slider">
@@ -422,40 +457,57 @@
             }
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
-        const slides = document.querySelectorAll('.slide_img');
-        const buttons = document.querySelectorAll('.main_image_button');
-        let currentIndex = 0;
-        let intervalId;
+        document.addEventListener("DOMContentLoaded", function () {
+    const slides = document.querySelectorAll(".main_image_slide");
+    const buttons = document.querySelectorAll(".main_image_button");
+    let currentIndex = 0;
+    let intervalId = null;
 
-        function showSlide(index) {
-            slides[currentIndex].classList.remove('active');
-            buttons[currentIndex].classList.remove('active');
+    // Проверка на пустой слайдер
+    if (slides.length === 0) {
+        console.warn("No slides found for the slider.");
+        return;
+    }
 
-            currentIndex = index;
+    function showSlide(index) {
+        if (index >= slides.length || index < 0) return;
 
-            slides[currentIndex].classList.add('active');
-            buttons[currentIndex].classList.add('active');
-        }
-
-        buttons.forEach((button, index) => {
-            button.addEventListener('click', () => {
-                clearInterval(intervalId); // Остановить авто-переключение при клике
-                showSlide(index);
-                startAutoSlide(); // Перезапустить авто-переключение
-            });
+        // Удаляем классы у всех слайдов и кнопок
+        slides.forEach(slide => slide.classList.add("hidden"));
+        buttons.forEach(btn => {
+            btn.classList.remove("active");
+            btn.setAttribute("aria-selected", "false");
         });
 
-        function startAutoSlide() {
-            intervalId = setInterval(() => {
-                let nextIndex = (currentIndex + 1) % slides.length;
-                showSlide(nextIndex);
-            }, 5000); // Смена каждые 5 секунд
+        // Показываем текущий слайд и активируем кнопку
+        slides[index].classList.remove("hidden");
+        if (buttons[index]) {
+            buttons[index].classList.add("active");
+            buttons[index].setAttribute("aria-selected", "true");
         }
+        currentIndex = index;
+    }
 
-        showSlide(0); // Инициализация первого слайда
-        startAutoSlide(); // Запуск авто-переключения
+    // Обработчики кликов по кнопкам
+    buttons.forEach((btn, i) => {
+        btn.addEventListener("click", () => {
+            clearInterval(intervalId); // Остановить автопрокрутку
+            showSlide(i);
+        });
     });
+
+    // Автопрокрутка каждые 5 секунд
+    function startAutoSlide() {
+        intervalId = setInterval(() => {
+            let next = (currentIndex + 1) % slides.length;
+            showSlide(next);
+        }, 5000);
+    }
+
+    // Инициализация
+    showSlide(0);
+    startAutoSlide();
+});
 
     </script>
 {% endblock %}

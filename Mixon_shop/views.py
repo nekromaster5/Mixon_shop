@@ -13,7 +13,7 @@ from django.views import View
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 import math
-
+from .models import MainPageSections
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import JsonResponse
 from django.db.models import F, Case, When, Value, DecimalField, Count, Min, Max
@@ -24,13 +24,15 @@ from django.contrib import messages
 from .forms import UserRegisterForm, UserLoginForm
 from .models import UserProfile
 from .forms import UserLoginForm
+from .models import MainPageBanner
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Order
 from .models import Product, Review, RecommendedProducts, SalesLeaders, City, Branch, ErrorMessages, PromoCode, Order, \
     ShipmentMethod, PaymentMethod, OrderStatus, OrderProduct, BindingSubstance, ProductType, Volume, \
     ProductStock, News, NewsCategory
-
+import logging
+logger = logging.getLogger(__name__)
 
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
@@ -70,25 +72,46 @@ def cabinet_view(request):
     })
 class HomePage(View):
     def get(self, request):
+        # 🔹 Блок рекомендуемых товаров
         recommended_products = RecommendedProducts.objects.select_related('product').annotate(
-            likes_count=Count('product__favoriteproduct'),  # Кількість вподобайок
-            comments_count=Count('product__reviews')  # Кількість коментарів
+            likes_count=Count('product__favoriteproduct'),
+            comments_count=Count('product__reviews')
         ).all()
+
+        # 🔹 Блок лидеров продаж
         sales_leaders = SalesLeaders.objects.select_related('product').annotate(
-            likes_count=Count('product__favoriteproduct'),  # Кількість вподобайок
-            comments_count=Count('product__reviews')  # Кількість коментарів
+            likes_count=Count('product__favoriteproduct'),
+            comments_count=Count('product__reviews')
         ).all()
-        # Новинки із кількістю вподобайок і коментарів
+
+        # 🔹 Новинки
         novelty = Product.objects.filter(is_new=True).annotate(
-            likes_count=Count('favoriteproduct'),  # Кількість вподобайок
-            comments_count=Count('reviews')  # Кількість коментарів
+            likes_count=Count('favoriteproduct'),
+            comments_count=Count('reviews')
         ).all()
         novelty = [ProductSelfWrapper(item) for item in novelty]
+
+        # 🔹 Категории (MainPageSections + Category)
+        sections = MainPageSections.objects.select_related("name").all()
+
+        # 🔹 Баннеры
+        banners = MainPageBanner.objects.filter(is_used=True)
+        if not banners:
+            logger.warning("No active banners found for the main page.")
+
+        # 🔹 Логирование секций для отладки
+        for s in sections:
+            logger.debug(f"SECTION: {s.id} -> {s.name.name} | image: {s.name.image.url if s.name.image else 'нет картинки'}")
+
+        # 🔹 Передаём всё в шаблон
         return render(request, 'home_page.html', {
             'recommended_products': recommended_products,
             'sales_leaders': sales_leaders,
             'novelty': novelty,
+            'sections': sections,
+            'banners': banners,
         })
+ 
 
 
 class ProductPage(View):
@@ -106,8 +129,7 @@ class ProductPage(View):
 
 
  
-
-
+ 
 def get_pages_to_display(current_page, total_pages):
     """
     Повертає список, наприклад: [2,3,4,5,'...',13]
