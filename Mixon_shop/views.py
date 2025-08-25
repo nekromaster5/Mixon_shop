@@ -224,7 +224,7 @@ class UniversalPaginator:
 
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             new_items_html = render_to_string(partial_template, context, request=request)
-            new_pagination_html = render_to_string('pagination_catalogue.html', context, request=request)
+            new_pagination_html = render_to_string('partials/pagination_catalogue.html', context, request=request)
             return JsonResponse({
                 'new_items_html': new_items_html,
                 'new_pagination_html': new_pagination_html,
@@ -427,7 +427,35 @@ class SearchPage(View):
 
 class PersonalPage(View):
     def get(self, request):
-        return render(request, 'cabinet.html')
+
+        favorite_products_raw = Product.objects.filter(favoriteproduct__user=request.user).prefetch_related('images').annotate(
+            likes_count=Count('favoriteproduct'),
+            comments_count=Count('reviews'),
+            is_favorite=Exists(
+                FavoriteProduct.objects.filter(
+                    user=request.user,
+                    product=OuterRef('id')
+                )
+            )
+        ).all().order_by('name')
+        favorite_products = [ProductSelfWrapper(item) for item in favorite_products_raw]
+        rated_products_raw = Product.objects.filter(reviews__user=request.user).prefetch_related('images').annotate(
+            likes_count=Count('favoriteproduct'),
+            comments_count=Count('reviews'),
+            is_favorite=Exists(
+                FavoriteProduct.objects.filter(
+                    user=request.user,
+                    product=OuterRef('id')
+                )
+            ),
+            user_rating=F('reviews__rating')
+        ).all().order_by('name')
+        rated_products = [ProductSelfWrapper(item) for item in rated_products_raw]
+
+        return render(request, 'cabinet.html', {
+            'favorite_products': favorite_products,
+            'rated_products': rated_products,
+        })
 
 
 class ErrorPage(View):

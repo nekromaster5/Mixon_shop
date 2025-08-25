@@ -388,9 +388,9 @@
                                                 </ul>
                                             </div>
                                             <div class="shipment__method__map map__img">
-                                                <gmp-map id="map" center="46.48167419433594,30.68355941772461" zoom="14"
+                                                <gmp-map id="map-regular" center="46.48167419433594,30.68355941772461" zoom="14"
                                                          map-id="DEMO_MAP_ID">
-                                                    <gmp-advanced-marker id="marker"
+                                                    <gmp-advanced-marker id="marker-regular"
                                                                          position="46.48167419433594,30.68355941772461"
                                                                          title="My location"></gmp-advanced-marker>
                                                 </gmp-map>
@@ -588,6 +588,16 @@
             </div>
         </section>
     {% endif %}
+    
+    <div class="map-modal" id="mapModal">
+        <div class="map-modal-content">
+            <span class="map-modal-close">&times;</span>
+            <gmp-map id="map-modal" center="46.48167419433594,30.68355941772461" zoom="14" map-id="DEMO_MAP_ID">
+                <gmp-advanced-marker id="marker-modal" position="46.48167419433594,30.68355941772461" title="My location"></gmp-advanced-marker>
+            </gmp-map>
+        </div>
+    </div>
+    
 {% endblock %}
 
 

@@ -189,11 +189,11 @@
                 <div class="favourites col-lg-8">
                     <div class="row">
                         <!-- Ваш цикл для вывода продуктов -->
-                        {% for i in '12345'|make_list %}
+                        {% for item in favorite_products %}
                             <div class="col-lg-5 col-md-4 col-6 px-lg-6 px-md-6  px-8 mb-6">
-                                {% include "product_block--standard.html" %}
+                                {% include "product_block--standard.html" with item=item %}
                             </div>
-                        {% endfor %}
+                        {% endfor %}                      
                     </div>
                 </div>
                 <div class="comparison_lists_cabinet col-lg-8" style="display: none">
@@ -209,7 +209,7 @@
                         <div class="comparison-list row">
                             {% for i in '123'|make_list %}
                                 <div class="col-lg-5 col-md-4 col-6 px-lg-6 px-md-6 px-8 mb-6">
-                                    {% include "product_block--characteristics.html" %}
+                                    {% include "product_block--characteristics.html" with item=item %}
                                 </div>
                             {% endfor %}
                             <div class="col-12 px-lg-6 px-md-6   row">
@@ -229,7 +229,7 @@
                         <div class="comparison-list row">
                             {% for i in '12'|make_list %}
                                 <div class="col-lg-5 col-md-4 col-6 px-lg-6 px-md-6 px-8 mb-6">
-                                    {% include "product_block--characteristics.html" %}
+                                    {% include "product_block--characteristics.html" with item=item %}
                                 </div>
                             {% endfor %}
                             <div class="col-12 px-lg-6 px-md-6 px-8 row">
@@ -413,9 +413,9 @@
                 <div class="my_marks col-lg-8" style="display: none">
                     <div class="row">
                         <!-- Ваш цикл для вывода продуктов -->
-                        {% for i in '123456'|make_list %}
+                        {% for item in rated_products %}
                             <div class="col-lg-5 col-md-4 col-6 px-lg-6 px-md-6 px-8 mb-6">
-                                {% include "product_block--my_mark.html" %}
+                                {% include "product_block--my_mark.html" with item=item %}
                             </div>
                         {% endfor %}
                     </div>

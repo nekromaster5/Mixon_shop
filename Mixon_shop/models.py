@@ -22,7 +22,7 @@ class Region(models.Model):
 
 # UserProfile model
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='')
     phone = models.CharField(max_length=18, null=True, blank=True)
     company = models.CharField(max_length=256, null=True, blank=True)
     registration_number = models.CharField(max_length=256, null=True, blank=True)

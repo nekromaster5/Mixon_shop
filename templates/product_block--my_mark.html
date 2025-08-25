@@ -8,7 +8,11 @@
 
 {% block short_info %}
     <div class="product__card--price d-flex">
-        <span class="current__price">232.00₴</span>
+        {% if item.product.is_discounted %}
+            <span class="current__price">{{ item.product.discount_price }}₴</span>
+        {% else %}
+            <span class="current__price">{{ item.product.price }}₴</span>
+        {% endif %}
         <div class="d-flex align-items-center secondary-text">
             <svg class="rating__review--text--svg--like" width="15" height="15" viewBox="0 0 15 15" fill="none"
                  xmlns="http://www.w3.org/2000/svg">
@@ -17,7 +21,7 @@
                 <path d="M4.32211 4.85803H1.42871V14.079H4.32211V4.85803Z" stroke="currentColor"
                       stroke-miterlimit="10"></path>
             </svg>
-            <span>67</span>
+            <span>{{ item.likes_count }}</span>
         </div>
     </div>
 {% endblock %}

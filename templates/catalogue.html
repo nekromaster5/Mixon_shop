@@ -356,7 +356,7 @@
                         {% include 'partials/products_partial.html' with products=products page_type=page_type %}
                     </div>
                     <!-- Пагінація -->
-                    {% include 'pagination_catalogue.html' with products=products num_pages=num_pages pages_to_display=pages_to_display query=query product_type=product_type selected_types=selected_types selected_binding_substance=selected_binding_substance selected_volumes=selected_volumes is_discounted=is_discounted is_new=is_new is_in_stock=is_in_stock %}
+                    {% include 'partials/pagination_catalogue.html' with products=products num_pages=num_pages pages_to_display=pages_to_display query=query product_type=product_type selected_types=selected_types selected_binding_substance=selected_binding_substance selected_volumes=selected_volumes is_discounted=is_discounted is_new=is_new is_in_stock=is_in_stock %}
                 </div>
             </div>
         </div>

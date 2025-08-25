@@ -38,7 +38,7 @@
                         {% include 'partials/products_partial.html' with products=products page_type=page_type %}
                     </div>
                     <!-- Кнопка "Показать ещё", якщо є наступна сторінка -->
-                    {% include 'pagination_search.html' %}
+                    {% include 'partials/pagination_search.html' %}
 
                 {% else %}
                     <p>Нет результатов{% if query %} для "{{ query }}"{% endif %}</p>

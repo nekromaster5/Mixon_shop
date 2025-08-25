@@ -10358,12 +10358,6 @@ details > summary::-webkit-details-marker {
     }
 }
 
-@media only screen and (max-width: 767px) {
-    .map__img {
-        display: none;
-    }
-}
-
 .bg-inherit {
     background: inherit;
 }
@@ -11057,7 +11051,7 @@ details > summary::-webkit-details-marker {
 .main_image_img {
 
 }
- 
+
 @media only screen and (max-width: 991px) {
     .main_image {
         margin-left: 0;
@@ -11427,6 +11421,45 @@ details > summary::-webkit-details-marker {
     }
 }
 
+.map-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-modal-content {
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    width: 90%;
+    height: 100vh;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.map-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 540px) {
+    .map-modal.active {
+        display: flex;
+    }
+}
+
+
 .addresses--block {
     padding-left: 0;
     padding-right: 0;
@@ -11467,6 +11500,11 @@ details > summary::-webkit-details-marker {
 
     .addresses--block {
         order: 1;
+    }
+
+    .addresses--block gmp-map {
+        height: 420px;
+        width: 100%;
     }
 }
 
