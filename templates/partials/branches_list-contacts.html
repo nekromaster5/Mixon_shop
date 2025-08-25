@@ -1,0 +1,15 @@
+{% for data in branches_data %}
+    <li class="widget__form--check__list align-items-start" data-map-info="{{ data.branch.map_info }}">
+        <input class="widget__form--check__input flex-shrink-0"
+               id="{{ data.branch.id }}"
+               type="checkbox">
+        <div class="d-flex flex-column width-100">
+            <label class="shop_address mb-4"
+                   for="{{ data.branch.id }}">{{ data.branch.address_short }}
+                <br>
+            </label>
+        </div>
+    </li>
+    {% empty %}
+    <li>Нет доступных филиалов</li>
+{% endfor %}

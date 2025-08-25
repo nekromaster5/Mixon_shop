@@ -4,8 +4,6 @@ from decimal import Decimal
 from urllib.parse import unquote
 
 from django.conf import settings
-from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
 # Existing import statements
 from django.template.loader import render_to_string
 from django.utils.timezone import now
@@ -16,20 +14,18 @@ import math
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import JsonResponse
-from django.db.models import F, Case, When, Value, DecimalField, Count, Min, Max
+from django.db.models import F, Case, When, Value, DecimalField, Count, Min, Max, Exists, OuterRef
 from django.db.models.functions import Coalesce
-from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
+from unicodedata import category
+
 from .forms import UserRegisterForm, UserLoginForm
-from .models import UserProfile
-from .forms import UserLoginForm
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-from .models import Order
-from .models import Product, Review, RecommendedProducts, SalesLeaders, City, Branch, ErrorMessages, PromoCode, Order, \
+from .models import Product, Review, UserProfile, RecommendedProducts, SalesLeaders, City, ErrorMessages, PromoCode, \
+    Order, \
     ShipmentMethod, PaymentMethod, OrderStatus, OrderProduct, BindingSubstance, ProductType, Volume, \
-    ProductStock, News, NewsCategory
+    ProductStock, News, NewsCategory, Branch, FavoriteProduct, Category
 
 
 def product_detail(request, product_id):
@@ -62,26 +58,69 @@ class ProductSelfWrapper:
         self.likes_count = product.likes_count
         self.comments_count = product.comments_count
 
+
 @login_required
 def cabinet_view(request):
     orders = Order.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'cabinet.html', {
         'orders': orders,
     })
+
+
+@login_required
+def manage_favorites(request, product_id):
+    product = Product.objects.get(
+        id=product_id if product_id else request.GET.get('product_id')
+    )
+    user = request.user
+
+    favorite = FavoriteProduct.objects.filter(user=user, product=product).first()
+    if favorite:
+        favorite.delete()
+        status = "removed"
+    else:
+        FavoriteProduct.objects.create(user=user, product=product)
+        status = "added"
+
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
+        # если вызов через AJAX — вернём JSON
+        return JsonResponse({"status": status})
+
+    return redirect(request.META.get("HTTP_REFERER", "/"))
+
+
 class HomePage(View):
     def get(self, request):
         recommended_products = RecommendedProducts.objects.select_related('product').annotate(
             likes_count=Count('product__favoriteproduct'),  # Кількість вподобайок
-            comments_count=Count('product__reviews')  # Кількість коментарів
+            comments_count=Count('product__reviews'),
+            is_favorite=Exists(
+                FavoriteProduct.objects.filter(
+                    user=request.user,
+                    product=OuterRef('product__id')
+                )
+            )
         ).all()
         sales_leaders = SalesLeaders.objects.select_related('product').annotate(
             likes_count=Count('product__favoriteproduct'),  # Кількість вподобайок
-            comments_count=Count('product__reviews')  # Кількість коментарів
+            comments_count=Count('product__reviews'),
+            is_favorite=Exists(
+                FavoriteProduct.objects.filter(
+                    user=request.user,
+                    product=OuterRef('product__id')
+                )
+            )
         ).all()
         # Новинки із кількістю вподобайок і коментарів
         novelty = Product.objects.filter(is_new=True).annotate(
             likes_count=Count('favoriteproduct'),  # Кількість вподобайок
-            comments_count=Count('reviews')  # Кількість коментарів
+            comments_count=Count('reviews'),
+            is_favorite=Exists(
+                FavoriteProduct.objects.filter(
+                    user=request.user,
+                    product=OuterRef('id')
+                )
+            )
         ).all()
         novelty = [ProductSelfWrapper(item) for item in novelty]
         return render(request, 'home_page.html', {
@@ -103,9 +142,6 @@ class ProductPage(View):
             'product': product,
             'images': images,
         })
-
-
- 
 
 
 def get_pages_to_display(current_page, total_pages):
@@ -154,7 +190,7 @@ class UniversalPaginator:
             return self.paginator.page(self.paginator.num_pages)
 
     def handle_pagination(self, request, template_name, partial_template, context_extras=None):
-        page = request.GET.get('page', 1)
+        page = request.GET.get('page', '1')
         load_more = request.GET.get('load_more', 'false') == 'true'
 
         query = request.GET.get('query', '')
@@ -163,15 +199,10 @@ class UniversalPaginator:
 
         paginated_products = self.get_page(page)
         current_page = paginated_products.number
-        total_pages = self.paginator.num_pages if self.has_items else 0  # Якщо немає товарів, total_pages = 0
-
-        # Якщо немає товарів, примусово встановлюємо has_next = False
+        total_pages = self.paginator.num_pages if self.has_items else 0
         has_next = paginated_products.has_next() if self.has_items else False
 
-        print('Has items:', self.has_items)
-        print('Products object list:', paginated_products.object_list)
-        print('Has next:', has_next)
-        print('Total pages:', total_pages)
+        print(f'Current page: {current_page}, Total pages: {total_pages}, Has next: {has_next}')
 
         pages_to_display = get_pages_to_display(current_page, total_pages) if self.has_items else []
 
@@ -182,7 +213,7 @@ class UniversalPaginator:
             'query': query,
             'page_url': request.path,
             'has_items': self.has_items,
-            'has_next': has_next,  # Додаємо явний has_next у контекст
+            'has_next': has_next,
         }
         if context_extras:
             context.update(context_extras)
@@ -193,26 +224,46 @@ class UniversalPaginator:
             return JsonResponse({
                 'new_items_html': new_items_html,
                 'new_pagination_html': new_pagination_html,
+                'current_url': f"{request.path}?{request.GET.urlencode()}",
+                'global_min_price': context.get('global_min_price'),
+                'global_max_price': context.get('global_max_price'),
+                'min_price': context.get('final_min_price'),
+                'max_price': context.get('final_max_price'),
             })
 
         return render(request, template_name, context)
 
 
 class CataloguePage(View):
-    def get(self, request):
+    def get(self, request, filters=None):
+        product_category_id = request.GET.get('product_category_id')
         product_type_ids = request.GET.getlist('type')
         binding_substance_id = request.GET.get('binding_substance')
         volume_ids = request.GET.getlist('volume')
-        is_discounted = request.GET.get('is_discounted', 'false') == 'true'
-        is_new = request.GET.get('is_new', 'false') == 'true'
+        is_discounted = True if filters == "discounted-goods" else request.GET.get('is_discounted', 'false') == 'true'
+        is_new = True if filters == "new-goods" else request.GET.get('is_new', 'false') == 'true'
         is_in_stock = request.GET.get('is_in_stock', 'false') == 'true'
         sort_type = request.GET.get('sort_type', 'popularity')
         price_gte = request.GET.get('price_gte')
         price_lte = request.GET.get('price_lte')
+        product_category = None
+
+        try:
+            product_category = Category.objects.get(id=product_category_id)
+        except:
+            print('no cat')
+
 
         print('Request GET params:', dict(request.GET))  # Логування всіх параметрів
 
-        products = Product.objects.prefetch_related('images').annotate(
+        if product_category:
+            product_types = ProductType.objects.filter(categories=product_category.id)
+            print('\n\n\nтолько определенные типы\n\n\n')
+        else:
+            product_types = ProductType.objects.all()
+            print('\n\n\nвообще все типы\n\n\n')
+
+        products = Product.objects.filter(type__in=product_types).prefetch_related('images').annotate(
             likes_count=Count('favoriteproduct'),
             comments_count=Count('reviews'),
             effective_price=Coalesce(
@@ -222,6 +273,12 @@ class CataloguePage(View):
                     output_field=DecimalField()
                 ),
                 Value(0.0, output_field=DecimalField())
+            ),
+            is_favorite=Exists(
+                FavoriteProduct.objects.filter(
+                    user=request.user,
+                    product=OuterRef('id')
+                )
             )
         ).all()
 
@@ -283,15 +340,20 @@ class CataloguePage(View):
         elif sort_type == 'name':
             products = products.order_by('name')
 
-        product_types = ProductType.objects.all()
+
         binding_substances = BindingSubstance.objects.all()
         product_volumes = Volume.objects.all()
 
         paginator = UniversalPaginator(products, per_page=1)
 
+        # Извлекаем page из request.GET
+        page = request.GET.get('page', '1')  # По умолчанию первая страница
+        paginated_products = paginator.get_page(page)  # Передаем page в paginator
+
         context_extras = {
             'product_type': None,
             'page_type': 'catalogue',
+            'product_category': product_category,
             'product_types': product_types,
             'binding_substances': binding_substances,
             'product_volumes': product_volumes,
@@ -325,12 +387,24 @@ class SearchPage(View):
         if query:
             products_list = Product.objects.filter(name__icontains=query).prefetch_related('images').annotate(
                 likes_count=Count('favoriteproduct'),
-                comments_count=Count('reviews')
+                comments_count=Count('reviews'),
+                is_favorite=Exists(
+                    FavoriteProduct.objects.filter(
+                        user=request.user,
+                        product=OuterRef('id')
+                    )
+                )
             ).order_by('name')
         else:
             products_list = Product.objects.prefetch_related('images').annotate(
                 likes_count=Count('favoriteproduct'),
-                comments_count=Count('reviews')
+                comments_count=Count('reviews'),
+                is_favorite=Exists(
+                    FavoriteProduct.objects.filter(
+                        user=request.user,
+                        product=OuterRef('id')
+                    )
+                )
             ).all().order_by('name')
 
         paginator = UniversalPaginator(products_list, per_page=1)
@@ -439,21 +513,14 @@ class CheckoutPage(View):
         return JsonResponse({'total_price': float(total_price)})  # Приводим к float
 
 
-from django.http import JsonResponse
-from django.shortcuts import render
-from datetime import datetime, timedelta
-from Mixon_shop.models import Branch
-
-
 def get_branches(request):
     city_id = request.GET.get("city_id")
+    template_name = request.GET.get("template", "checkout")
     branches = Branch.objects.filter(city_id=city_id)
 
-    # Текущая дата и время
     now = datetime.now()
     current_time = now.time()
 
-    # Список дней недели для отображения
     DAYS_OF_WEEK_DISPLAY = {
         'MON': 'понедельник',
         'TUE': 'вторник',
@@ -464,29 +531,22 @@ def get_branches(request):
         'SUN': 'воскресенье',
     }
 
-    # Подготовка данных для каждого филиала
     branches_data = []
     for branch in branches:
-        # Получаем расписание на сегодня
         today_schedule = branch.get_today_schedule()
-
-        # Флаг, можно ли забрать сегодня
         can_pickup_today = False
         pickup_message = ""
         pickup_hours = ""
 
-        # Проверяем, есть ли расписание на сегодня и работает ли филиал
         if today_schedule and not today_schedule.is_closed:
-            # Проверяем, работает ли филиал сейчас
             if today_schedule.open_time <= current_time <= today_schedule.close_time:
                 can_pickup_today = True
                 pickup_message = "Забрать сегодня"
                 pickup_hours = f"{today_schedule.open_time.strftime('%H:%M')} - {today_schedule.close_time.strftime('%H:%M')}"
             else:
-                # Если сегодня уже поздно, ищем следующий рабочий день
                 next_day = now
                 next_schedule = None
-                for i in range(7):  # Проверяем до 7 дней вперед
+                for i in range(7):
                     next_day += timedelta(days=1)
                     next_weekday = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'][next_day.weekday()]
                     next_schedule = branch.get_schedule(specific_date=next_day.date())
@@ -505,7 +565,6 @@ def get_branches(request):
                     pickup_message = "Филиал не работает"
                     pickup_hours = ""
         else:
-            # Если сегодня филиал закрыт, ищем следующий рабочий день
             next_day = now
             next_schedule = None
             for i in range(7):
@@ -533,8 +592,70 @@ def get_branches(request):
             'pickup_hours': pickup_hours,
         })
 
-    html = render(request, "partials/branches_list-checkout.html", {
+    template_path = "partials/branches_list-checkout.html" if template_name == "checkout" else "partials/branches_list-contacts.html"
+
+    html = render(request, template_path, {
         "branches_data": branches_data,
+    }).content.decode("utf-8")
+    return JsonResponse({"html": html})
+
+
+def get_branch_details(request):
+    branch_id = request.GET.get("branch_id")
+    branch = Branch.objects.get(id=branch_id)
+
+    # Формирование списка телефонных номеров
+    phone_numbers = [phone.number for phone in branch.phone_numbers.all()]
+
+    # Формирование списка email
+    emails = [email.address for email in branch.email.all()]
+
+    # Формирование расписания с объединением дней с одинаковым временем
+    DAY_ORDER = {
+        'MON': 1, 'TUE': 2, 'WED': 3, 'THU': 4, 'FRI': 5, 'SAT': 6, 'SUN': 7
+    }
+    DAYS_SHORT = {
+        'MON': 'ПН', 'TUE': 'ВТ', 'WED': 'СР', 'THU': 'ЧТ', 'FRI': 'ПТ', 'SAT': 'СБ', 'SUN': 'ВС'
+    }
+
+    # Получаем полное расписание
+    schedules = branch.get_schedule()
+    schedule_dict = {}
+    for schedule in schedules:
+        if schedule.is_closed:
+            key = "closed"
+        else:
+            key = f"{schedule.open_time.strftime('%H:%M')}-{schedule.close_time.strftime('%H:%M')}"
+        if key not in schedule_dict:
+            schedule_dict[key] = []
+        schedule_dict[key].append(schedule.day_of_week)
+
+    # Формируем строки расписания
+    schedule_lines = []
+    print('\n\n\n', branch.address_base, '\n', branch.address_detail, '\n\n\n')
+    for key, days in schedule_dict.items():
+        # Сортируем дни по порядку
+        days.sort(key=lambda x: DAY_ORDER[x])
+        if key == "closed":
+            schedule_lines.append(f"{', '.join(DAYS_SHORT[day] for day in days)}: Закрыто")
+        else:
+            # Объединяем последовательные дни в диапазоны
+            ranges = []
+            start = 0
+            for i in range(1, len(days) + 1):
+                if i == len(days) or DAY_ORDER[days[i]] != DAY_ORDER[days[i - 1]] + 1:
+                    if i - start > 1:
+                        ranges.append(f"{DAYS_SHORT[days[start]]}-{DAYS_SHORT[days[i - 1]]}")
+                    else:
+                        ranges.append(DAYS_SHORT[days[start]])
+                    start = i
+            schedule_lines.append(f"{', '.join(ranges)}: {key}")
+
+    html = render(request, "partials/branch_details.html", {
+        "branch": branch,
+        "phone_numbers": phone_numbers,
+        "emails": emails,
+        "schedule": schedule_lines
     }).content.decode("utf-8")
     return JsonResponse({"html": html})
 
@@ -693,7 +814,10 @@ class ShipmentPayment(View):
 
 class Contacts(View):
     def get(self, request):
-        return render(request, 'contacts.html')
+        cities = City.objects.all()
+        return render(request, 'contacts.html', {
+            'cities': cities,
+        })
 
 
 def branch_list(request):
@@ -760,9 +884,11 @@ def register_view(request):
     # После обработки всегда редирект на ту же страницу, где есть модалка
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
+
 # ---------------- EMAIL ACTIVATE ----------------
 def activate(request):
     return render(request, 'activation_success.html')
+
 
 def get_session_cart(request):
     """

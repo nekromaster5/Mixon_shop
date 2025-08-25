@@ -306,7 +306,7 @@ margin-left:400px;
             <div class="panel-container">
                 <div class="header__menu-panel">
                     <button class="menu-panel__button_first">
-                        <span class="first_menu-panel__button_text">Акции</span>
+                        <a href="{% url 'catalogue' filters='discounted-goods' %}" class="first_menu-panel__button_text">Акции</a>
                     </button>
                     <button class="menu-panel__button"
                             style=" ">
@@ -339,8 +339,8 @@ margin-left:400px;
                     <div class="dropdown" id="dropdownMenu" style="display: none; position: absolute; background-color: #f9f9f9; min-width: 200px; border: 1px solid #ccc; z-index: 100; top: 100%; left: 0;">
                       {% for branch in branches %}
                         <button type="button" style="width: 100%; padding: 8px; border: none; background: none; text-align: left; cursor: pointer;"
-                                onclick="selectBranch('{{ branch.city.name }} — {{ branch.address }}')">
-                          {{ branch.city.name }} — {{ branch.address }}
+                                onclick="selectBranch('{{ branch.city.name }} — {{ branch.address_short }}')">
+                          {{ branch.city.name }} — {{ branch.address_short }}
                         </button>
                       {% empty %}
                         <p style="padding: 8px;">Нет филиалов</p>

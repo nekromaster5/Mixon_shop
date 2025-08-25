@@ -40,12 +40,16 @@
                             </a>
                         </li>
                         <li class="product__card--action__list">
-                            <a class="product__card--action__btn small__button" title="Wishlist">
+                            <a href="{% url 'manage_favorites' product_id=item.product.id %}"
+                               class="product__card--action__btn wishlist small__button"
+                               title="Wishlist"
+                               data-product-id="{{ item.product.id }}"
+                               data-is-favorite="{% if item.product.is_favorite %}true{% else %}false{% endif %}">
                                 <svg class="product__card--action__btn--svg" width="22" height="20" viewBox="0 0 22 20"
-                                     fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
+                                     fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M15.6219 0.58197C15.9109 0.58197 16.222 0.597991 16.549 0.627991C18.556 0.815991 20.8749 2.57399 21.1569 5.94299V7.06396C20.8949 10.288 18.351 14.264 10.918 19.254C3.48497 14.265 0.942932 10.289 0.679932 7.06396V5.94299C0.961932 2.57499 3.27996 0.815991 5.28796 0.627991C5.61796 0.597991 5.92594 0.583008 6.21594 0.583008C8.53294 0.583008 9.64595 1.54102 10.916 2.99402C12.19 1.54102 13.301 0.58197 15.616 0.58197"
-                                          stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round"></path>
+                                          stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round"
+                                            {% if item.product.is_favorite %} fill="red" {% endif %}></path>
                                 </svg>
                                 <span class="visually-hidden">Wishlist</span>
                             </a>
@@ -90,9 +94,11 @@
                 <a href="{% url 'product' product_id=3 %}">{{ item.product.name }}</a>
             {% endif %}
         </h3>
-        <ul class="rating product__card--rating d-flex" data-rating="{{ item.product.average_rating }}">
-            <!-- Зірки будуть додані через JavaScript -->
-        </ul>
+        {% block rating-stars %}
+            <ul class="rating product__card--rating d-flex" data-rating="{{ item.product.average_rating }}">
+                <!-- Зірки будуть додані через JavaScript -->
+            </ul>
+        {% endblock %}
         {% block short_info %}{% endblock %}
     </div>
     {% block additional %}{% endblock %}

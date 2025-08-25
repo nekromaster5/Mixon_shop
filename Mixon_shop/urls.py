@@ -16,7 +16,7 @@ Including another URLconf
 """
 import admin_tools
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -24,7 +24,7 @@ from django.contrib.auth import views as auth_views
 from Mixon_shop.views import HomePage, CataloguePage, ProductPage, Brands, NewsPage, \
     AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts, \
     SearchPage, product_detail, submit_review, get_branches, activate, branch_list, create_order, \
-    apply_promo_code, Topic, register_view, cart_add, cart_remove, cart_detail
+    apply_promo_code, Topic, register_view, cart_add, cart_remove, cart_detail, get_branch_details, manage_favorites
 
 urlpatterns = [
     path('admin_tools/', include('admin_tools.urls')),
@@ -33,10 +33,11 @@ urlpatterns = [
     # продукты
     path('product/<int:product_id>/', ProductPage.as_view(), name='product'),
     path('product/<int:product_id>/submit_review/', submit_review, name='submit_review'),
+    path('manage-favorites/<int:product_id>', manage_favorites, name='manage_favorites'),
 
     # главная и каталоги
     path('', HomePage.as_view(), name='home'),
-    path('catalogue/', CataloguePage.as_view(), name='catalogue'),
+    re_path(r'^catalogue(?:/(?P<filters>[\w/-]+))?/$', CataloguePage.as_view(), name='catalogue'),
 
     # поиск
     path('search/', SearchPage.as_view(), name='search'),
@@ -59,6 +60,7 @@ urlpatterns = [
     # филиалы
     path('branches/', branch_list, name='branch_list'),
     path('get-branches/', get_branches, name='get_branches'),
+    path('get-branch-details/', get_branch_details, name='get_branch_details'),
 
     # аутентификация
     path('register/', register_view, name='register'),

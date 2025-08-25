@@ -1,16 +1,23 @@
 {% extends "partials/product_block--base.html" %}
 
+{% block rating-stars %}
+    <ul class="rating product__card--rating d-flex" data-rating="{{ item.product.user_rating }}">
+        <!-- Зірки будуть додані через JavaScript -->
+    </ul>
+{% endblock %}
+
 {% block short_info %}
-        <div class="product__card--price d-flex">
-            <span class="current__price">232.00₴</span>
-            <div class="d-flex align-items-center secondary-text">
-                <svg class="rating__review--text--svg--like" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4.32222 5.49304L6.48406 4.27002L7.04843 1.03406L9.04888 1V5.49304H13.2508L13.8171 6.85596V12.113L12.2979 14.37H6.23666L5.78536 13.033L4.31836 12.921L4.32222 5.49304Z"
-                          stroke="currentColor" stroke-miterlimit="10"></path>
-                    <path d="M4.32211 4.85803H1.42871V14.079H4.32211V4.85803Z" stroke="currentColor"
-                          stroke-miterlimit="10"></path>
-                </svg>
-                <span>67</span>
-            </div>
+    <div class="product__card--price d-flex">
+        <span class="current__price">232.00₴</span>
+        <div class="d-flex align-items-center secondary-text">
+            <svg class="rating__review--text--svg--like" width="15" height="15" viewBox="0 0 15 15" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.32222 5.49304L6.48406 4.27002L7.04843 1.03406L9.04888 1V5.49304H13.2508L13.8171 6.85596V12.113L12.2979 14.37H6.23666L5.78536 13.033L4.31836 12.921L4.32222 5.49304Z"
+                      stroke="currentColor" stroke-miterlimit="10"></path>
+                <path d="M4.32211 4.85803H1.42871V14.079H4.32211V4.85803Z" stroke="currentColor"
+                      stroke-miterlimit="10"></path>
+            </svg>
+            <span>67</span>
         </div>
+    </div>
 {% endblock %}

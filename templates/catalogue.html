@@ -19,17 +19,27 @@
                     <li class="breadcrumb__content--menu__items">
                         <a href="{% url 'home' %}">Главная</a>
                     </li>
-                    <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'catalogue' %}">
-                            {% if product_category %}
-                                {{ product_category }}</a>
-                            {% else %}
-                                Все товары</a>
-                            {% endif %}
-                    </li>
+                    {% if product_category %}
+                        <li class="breadcrumb__content--menu__items">
+                            <a href="{% url 'catalogue' %}">Все товары</a>
+                        </li>
+                        <li class="breadcrumb__content--menu__items">
+                            <a href="{% url 'catalogue' %}?product_category_id={{ product_category.id }}">{{ product_category.name }}</a>
+                        </li>
+                    {% else %}
+                        <li class="breadcrumb__content--menu__items">
+                            <a href="{% url 'catalogue' %}">Все товары</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
-            <h2 class="breadcrumb__content--title">ЛКМ для Строительства</h2>
+            <h2 class="breadcrumb__content--title">
+                {% if product_category %}
+                    {{ product_category.name }}
+                {% else %}
+                    Все товары
+                {% endif %}
+            </h2>
             <div class="brand_buttons-wrapper">
                 <div class="slider-container adjustable-slider">
                     <div class="slider" style="display:flex;">

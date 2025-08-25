@@ -17,7 +17,9 @@ class CustomIndexDashboard(Dashboard):
             models=('Mixon_shop.models.Product', 'Mixon_shop.models.ProductStock',
                     'Mixon_shop.models.Color', 'Mixon_shop.models.Volume',
                     'Mixon_shop.models.BindingSubstance', 'Mixon_shop.models.ProductType',
-                    'Mixon_shop.models.Category', 'Mixon_shop.models.PromoCode',)
+                    'Mixon_shop.models.Category', 'Mixon_shop.models.PromoCode',
+                    'Mixon_shop.models.RecommendedProducts', 'Mixon_shop.models.SalesLeaders',
+                    'Mixon_shop.models.FavoriteProduct',)
         ))
 
         self.children.append(modules.ModelList(
@@ -39,6 +41,7 @@ class CustomIndexDashboard(Dashboard):
         self.children.append(modules.ModelList(
             title='Местоположения и филиалы',
             models=('Mixon_shop.models.Branch', 'Mixon_shop.models.City', 'Mixon_shop.models.PhoneNumber',
+                    'Mixon_shop.models.EmailAddress',
                     'Mixon_shop.models.ScheduleTemplate',
                     'Mixon_shop.models.ScheduleTemplateItem',
                     'Mixon_shop.models.BranchSchedule',
