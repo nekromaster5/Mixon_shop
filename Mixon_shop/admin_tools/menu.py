@@ -19,7 +19,8 @@ class CustomMenu(Menu):
                             'Mixon_shop.models.Color', 'Mixon_shop.models.Volume',
                             'Mixon_shop.models.BindingSubstance', 'Mixon_shop.models.ProductType',
                             'Mixon_shop.models.Category', 'Mixon_shop.models.PromoCode',
-                            'Mixon_shop.models.RecommendedProducts', 'Mixon_shop.models.SalesLeaders')
+                            'Mixon_shop.models.RecommendedProducts', 'Mixon_shop.models.SalesLeaders',
+                            'Mixon_shop.models.FavoriteProduct',)
                 ),
             ]),
             items.MenuItem('Главная страница', children=[
@@ -45,6 +46,7 @@ class CustomMenu(Menu):
                 items.ModelList(
                     'Местоположения и филиалы',
                     models=('Mixon_shop.models.Branch', 'Mixon_shop.models.City', 'Mixon_shop.models.PhoneNumber',
+                            'Mixon_shop.models.EmailAddress',
                             'Mixon_shop.models.ScheduleTemplate',
                             'Mixon_shop.models.ScheduleTemplateItem',
                             'Mixon_shop.models.BranchSchedule',

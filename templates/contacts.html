@@ -75,64 +75,43 @@
                     <div class="shop-selector">
                         <h2 class="mb-lg-6 mb-4 pe-lg-5 pe-0">Магазины</h2>
                         <div class="checkout__input--select select mb-lg-5 mb-4">
-                            <label for="country"></label><select
-                                class="checkout__input--select__field border-radius-5 flex-grow-0" id="country">
-                            <option value="odesa">Одесса</option>
-                            <option value="kyiv">Киев</option>
-                            <option value="lutsk">Луцк</option>
-                            <option value="rivne">Ровно</option>
-                            <option value="khmelnytskyi">Хмельницкий</option>
-                        </select>
+                            <label for="input_city"></label>
+                            <select class="checkout__input--select__field border-radius-5 flex-grow-0" id="input_city">
+                                {% for city in cities %}
+                                    <option value="{{ city.id }}">{{ city.name }}</option>
+                                {% endfor %}
+                            </select>
                         </div>
                     </div>
-                    <h4>Днепропетровская
-                        дор. 996/1. 65126</h4>
-                    <span>Рынок “Меркурий”, Маг. №9</span>
-                    <ul class="contacts-numbers shop contacts-page ps-lg-5 ps-0 mb-5">
-                        <li class="footer__widget--menu__list"><a class="contacts--number__text">+38 097 295 88
-                            03</a></li>
-                        <li class="footer__widget--menu__list"><a class="contacts--number__text">+38 095 295 88
-                            03</a></li>
-                        <li class="footer__widget--menu__list"><a class="contacts--number__text">+38 067 888 00
-                            03</a></li>
-                        <li class="footer__widget--menu__list"><a
-                                class="contacts--number__text">mag.od.mercury@mixon.ua</a></li>
-                    </ul>
-                    <h5 class="mb-8">Время работы:</h5>
-                    <ul class="contacts-numbers shop contacts-page ps-0">
-                        <li class="footer__widget--menu__list"><a class="contacts--number__text">ПН-ПТ:
-                            09:00-17:00</a>
-                        </li>
-                        <li class="footer__widget--menu__list"><a class="contacts--number__text">СБ: 09:00-16:00</a>
-                        </li>
-                    </ul>
+                    <div class="branch-info">
+
+                    </div>
                 </div>
                 <div class="addresses--block col-lg-7 col-md-4 overflow-hidden">
-                    <img class="h-100" src="{% static 'src/assets/img/other/mix_map_lg.png' %}" alt="Map">
+                    <gmp-map id="map" center="46.48167419433594,30.68355941772461" zoom="14"
+                             map-id="DEMO_MAP_ID">
+                        <gmp-advanced-marker id="marker"
+                                             position="46.48167419433594,30.68355941772461"
+                                             title="My location"></gmp-advanced-marker>
+                    </gmp-map>
                 </div>
                 <div class="addresses--block col-lg-18 col-md-4">
                     <div class="shop-selector">
                         <h2 class="mb-lg-6 mb-4 pe-lg-5 pe-0">Магазины</h2>
+                        <label for="input_city2"></label>
                         <div class="checkout__input--select select mb-lg-5 mb-4">
-                            <select class="checkout__input--select__field border-radius-5 flex-grow-0" id="country">
-                                <option value="odesa">Одесса</option>
-                                <option value="kyiv">Киев</option>
-                                <option value="lutsk">Луцк</option>
-                                <option value="rivne">Ровно</option>
-                                <option value="khmelnytskyi">Хмельницкий</option>
+                            <select class="checkout__input--select__field border-radius-5 flex-grow-0" id="input_city2">
+                                {% for city in cities %}
+                                    <option value="{{ city.id }}">{{ city.name }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>
-                    <a class="shop_address mb-4">Промр-к «Староконный», ул. Раскидайлов. 31,</a>
-                    <a class="shop_address mb-4">Промрынок «Куяльник», пос.Большевик</a>
-                    <a class="shop_address active mb-4">Промрынок «Меркурий», Днепропетровская дор.</a>
-                    <a class="shop_address mb-4">Промрынок «Черноморец», ул.Малиновского, 67я дор.</a>
-                    <a class="shop_address mb-4">ул. 25 Чапаевской дивизии 13/1</a>
-                    <a class="shop_address mb-4">ул. Ильфа и Петрова 18а</a>
-                    <a class="shop_address mb-4">ул. Елисаветинская 4</a>
+                    <ul class="widget__form--check only-one">
+                        {% include 'partials/branches_list-contacts.html' %}
+                    </ul>
                 </div>
             </div>
-
         </div>
     </section>
     <section class="delivery_bottom contacts">
@@ -168,4 +147,14 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block scripts %}
+    <script defer src="{% static 'src/assets/js/mapCreator.js' %}"></script>
+    <script src="{% static '/src/assets/js/oneOptionCheckInput.js' %}"></script>
+    <script src="{% static 'src/assets/js/getBranches.js' %}"></script>
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMnDGy6nqzX36bSjyh3Kzdts7wvwqTMY0&loading=async&libraries=marker&v=beta&solution_channel=GMP_CCS_complexmarkers_v3"
+            defer
+    ></script>
 {% endblock %}

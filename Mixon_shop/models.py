@@ -53,6 +53,14 @@ class PhoneNumber(models.Model):
         return self.number
 
 
+# EmailAddress model
+class EmailAddress(models.Model):
+    address = models.EmailField(max_length=254, unique=True)
+
+    def __str__(self):
+        return self.address
+
+
 class City(models.Model):
     name = models.CharField(max_length=256)
 
@@ -73,8 +81,11 @@ class City(models.Model):
 
 class Branch(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
-    address = models.CharField(max_length=512)
+    address_base = models.CharField(max_length=512, verbose_name='Основной адрес', blank=True, null=True)
+    address_detail = models.CharField(max_length=512, verbose_name='Уточняющий адрес', blank=True, null=True)
+    address_short = models.CharField(max_length=512, verbose_name='Сокращенный адрес')
     phone_numbers = models.ManyToManyField(PhoneNumber, blank=True)
+    email = models.ManyToManyField(EmailAddress, blank=True)
     map_info = models.TextField()
     schedule_template = models.ForeignKey(
         'ScheduleTemplate',
@@ -85,7 +96,7 @@ class Branch(models.Model):
     )
 
     def __str__(self):
-        return f'{self.city.name}, {self.address}'
+        return f'{self.address_short}, {self.city.name}'
 
     def get_schedule(self, specific_date=None, day_of_week=None):
         """
@@ -269,19 +280,20 @@ class BindingSubstance(models.Model):
         return f'{self.name} основа'
 
 
-class ProductType(models.Model):
-    name = models.CharField(max_length=256)
-
-    def __str__(self):
-        return f'{self.name}'
-
-
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
     image = models.ImageField(upload_to='category/images/', blank=True)
 
     def __str__(self):
         return self.name
+
+
+class ProductType(models.Model):
+    name = models.CharField(max_length=256)
+    categories = models.ManyToManyField(Category, related_name='product_types', blank=True)
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 # Product model

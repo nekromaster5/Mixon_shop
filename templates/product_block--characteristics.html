@@ -10,7 +10,7 @@
                         Использование
                     </li>
                     <li>
-                        Внутри помещений
+                        {{ product.usage }}
                     </li>
                 </ul>
                 <ul class="characteristics__list--element">
@@ -18,7 +18,7 @@
                         Связующее вещество
                     </li>
                     <li>
-                        Сополимер
+                        {{ product.binding_substance }}
                     </li>
                 </ul>
                 <ul class="characteristics__list--element">
@@ -26,7 +26,7 @@
                         Сухой остаток
                     </li>
                     <li>
-                        10 %
+                        {{ product.dry_residue }}
                     </li>
                 </ul>
                 <ul class="characteristics__list--element">
@@ -34,7 +34,7 @@
                         Плотность
                     </li>
                     <li>
-                        1,05 кг/л
+                        {{ product.density }}
                     </li>
                 </ul>
                 <ul class="characteristics__list--element">
@@ -42,7 +42,7 @@
                         Время высыхания, 23°С 50% RH
                     </li>
                     <li>
-                        2-6 часов
+                        {{ product.drying_time }}
                     </li>
                 </ul>
                 <ul class="characteristics__list--element">
@@ -50,7 +50,7 @@
                         Расход готовой смеси
                     </li>
                     <li>
-                        10-12 м2/л в 1 слой
+                        {{ product.consumption }}
                     </li>
                 </ul>
                 <ul class="characteristics__list--element">
@@ -58,7 +58,7 @@
                         Разбавитель
                     </li>
                     <li>
-                        Вода
+                        {{ product.solvent }}
                     </li>
                 </ul>
                 <ul class="characteristics__list--element">
@@ -66,7 +66,7 @@
                         Рабочие инструменты
                     </li>
                     <li>
-                        Валик, кисть
+                        {{ product.working_tools }}
                     </li>
                 </ul>
                 <ul class="characteristics__list--element">
@@ -74,7 +74,7 @@
                         Очистка рабочих инструментов
                     </li>
                     <li>
-                        Вода
+                        {{ product.tool_cleaning }}
                     </li>
                 </ul>
                 <ul class="characteristics__list--element">
@@ -82,7 +82,7 @@
                         Хранение
                     </li>
                     <li>
-                        3 года t > 0оC
+                        {{ product.storage }}
                     </li>
                 </ul>
             </li>

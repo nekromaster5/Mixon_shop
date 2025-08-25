@@ -1,24 +1,20 @@
-$(function() {
-    // Глобальна змінна для зберігання параметрів фільтрів
+$(function () {
     let filterParams = {};
 
-    // Змінні для зберігання глобальних меж
     let globalMinPrice = 0;
     let globalMaxPrice = 500;
 
-    function updateProducts() {
+    function updateProducts(page = 1) {
         let url = '/catalogue/';
         let data = {
-            page: 1,
+            page: page,
             type: [],
             volume: [],
         };
 
-        // Отримуємо тип сортування
         let sortType = $('.sort-type.active').attr('id')?.replace('sort_type_', '') || 'popularity';
         data.sort_type = sortType;
 
-        // Отримуємо значення фільтрів
         let typeInputs = $('input[name="type"]:checked');
         console.log('Type inputs found:', typeInputs.length);
         typeInputs.each(function() {
@@ -45,7 +41,13 @@ $(function() {
         data.is_new = $('input[name="is_new"]').is(':checked');
         data.is_in_stock = $('input[name="is_in_stock"]').is(':checked');
 
-        // Додаємо параметри ціни з глобальної змінної filterParams, якщо вони є
+        // Добавляем product_category_id из URL
+        let params = new URLSearchParams(window.location.search);
+        let productCategoryId = params.get('product_category_id');
+        if (productCategoryId) {
+            data.product_category_id = productCategoryId;
+        }
+
         if (filterParams.price_gte !== undefined) {
             data.price_gte = filterParams.price_gte;
         }
@@ -55,7 +57,6 @@ $(function() {
 
         console.log('Final filter data:', data);
 
-        // Зберігаємо параметри фільтрів у глобальну змінну
         filterParams = { ...data };
         delete filterParams.page;
         delete filterParams.load_more;
@@ -69,54 +70,52 @@ $(function() {
             url: url,
             type: 'GET',
             data: queryString,
+            traditional: true,
             success: function(response) {
                 $('#products-container').html(response.new_items_html || response);
                 if (response.new_pagination_html) {
-                    // Оновлюємо #pagination-container
                     let $newPagination = $(response.new_pagination_html);
                     let $newPaginationContainer = $newPagination.find('#pagination-container').html() || '';
                     $('#pagination-container').html($newPaginationContainer);
 
-                    // Перевіряємо, чи є наступна сторінка, і відновлюємо кнопку, якщо потрібно
                     let $newLoadMoreContainer = $newPagination.find('#load-more-container').html() || '';
                     if ($newLoadMoreContainer.trim()) {
                         $('#load-more-container').html($newLoadMoreContainer);
+                    } else {
+                        $('#load-more-container').html('');
                     }
-
                     console.log('Updated pagination after filter update');
                 } else {
                     $('#pagination-container').html('');
                 }
 
-                // Оновлюємо глобальні межі
                 if (response.global_min_price !== undefined && response.global_max_price !== undefined) {
                     globalMinPrice = response.global_min_price;
                     globalMaxPrice = response.global_max_price;
 
-                    // Оновлюємо межі в коді слайдерів
                     if (window.sliderUtils) {
                         window.sliderUtils.setGlobalMinPrice(globalMinPrice);
                         window.sliderUtils.setGlobalMaxPrice(globalMaxPrice);
                     }
 
-                    // Оновлюємо атрибути min і max у слайдерів
                     $('#slider-low').attr('min', globalMinPrice).attr('max', globalMaxPrice);
                     $('#slider-high').attr('min', globalMinPrice).attr('max', globalMaxPrice);
                 }
 
-                // Оновлюємо поля введення на основі мінімальної і максимальної ціни
                 if (response.min_price !== undefined && response.max_price !== undefined) {
                     $('#filter_price_gte').val(response.min_price);
                     $('#filter_price_lte').val(response.max_price);
 
-                    // Оновлюємо слайдери
                     $('#slider-low').val(response.min_price);
                     $('#slider-high').val(response.max_price);
 
-                    // Викликаємо updateFill для оновлення червоної лінії
                     if (window.sliderUtils) {
                         window.sliderUtils.updateFill();
                     }
+                }
+
+                if (window.updatePageState) {
+                    window.updatePageState(1);
                 }
             },
             error: function(xhr, status, error) {
@@ -125,30 +124,25 @@ $(function() {
         });
     }
 
-    // Обробка зміни фільтрів (чекбокси)
     $('input[type="checkbox"]').on('change', function() {
         if ($(this).hasClass('binding-substance-checkbox')) {
             $('.binding-substance-checkbox').not(this).prop('checked', false);
         }
-        updateProducts();
+        updateProducts(1);
     });
 
-    // Обробка кліку на кнопках сортування
     $('.sort-type').on('click', function() {
         $('.sort-type').removeClass('active');
         $(this).addClass('active');
-        updateProducts();
+        updateProducts(1);
     });
 
-    // Обробка натискання кнопки "ОК" для фільтрації за ціною
     $('.price__filter--form').on('submit', function(e) {
-        e.preventDefault(); // Запобігаємо стандартному відправленню форми
+        e.preventDefault();
 
-        // Отримуємо значення з полів введення
         let priceGte = parseInt($('#filter_price_gte').val()) || globalMinPrice;
         let priceLte = parseInt($('#filter_price_lte').val()) || globalMaxPrice;
 
-        // Перевірка меж на основі globalMinPrice і globalMaxPrice
         if (priceGte < globalMinPrice) {
             priceGte = globalMinPrice;
             $('#filter_price_gte').val(priceGte);
@@ -162,14 +156,15 @@ $(function() {
             $('#filter_price_gte').val(priceGte);
         }
 
-        // Оновлюємо глобальні параметри фільтрів
         filterParams.price_gte = priceGte;
         filterParams.price_lte = priceLte;
 
-        // Оновлюємо товари
-        updateProducts();
+        updateProducts(1);
     });
 
-    // Ініціалізація: Викликаємо updateProducts при завантаженні сторінки
-    updateProducts();
+    $(document).ready(function() {
+        let params = new URLSearchParams(window.location.search);
+        let page = params.get('page') || '1';
+        updateProducts(parseInt(page));
+    });
 });

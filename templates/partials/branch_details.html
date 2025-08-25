@@ -1,0 +1,27 @@
+<h4>
+    {% if branch.address_base %}
+        {{ branch.address_base }}
+    {% else %}
+        Нет данных
+    {% endif %}
+</h4>
+<span>
+    {% if branch.address_detail %}
+        {{ branch.address_detail }}
+    {% else %}
+        Нет данных
+    {% endif %}</span>
+<ul class="contacts-numbers shop contacts-page ps-lg-5 ps-0 mb-5">
+    {% for phone in phone_numbers %}
+        <li class="footer__widget--menu__list"><a class="contacts--number__text">{{ phone }}</a></li>
+    {% endfor %}
+    {% for email in emails %}
+        <li class="footer__widget--menu__list"><a class="contacts--number__text">{{ email }}</a></li>
+    {% endfor %}
+</ul>
+<h5 class="mb-8">Время работы:</h5>
+<ul class="contacts-numbers shop contacts-page ps-0">
+    {% for schedule_item in schedule %}
+        <li class="footer__widget--menu__list"><a class="contacts--number__text">{{ schedule_item }}</a></li>
+    {% endfor %}
+</ul>

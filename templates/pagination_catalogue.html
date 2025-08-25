@@ -9,8 +9,7 @@
                    data-current-page="{{ products.number }}"
                    data-url="{{ page_url }}"
                    data-query="{{ query|urlencode }}"
-                   data-product-type="
-                           {% if product_type and product_type != 'None' and product_type|striptags|length > 0 %}{{ product_type|urlencode }}{% endif %}"
+                   data-product-category-id="{% if product_category %}{{ product_category.id }}{% else %}''{% endif %}"
                    data-page-type="catalogue">
                     <img src="{% static '/src/assets/img/icon/refresh_page__red.svg' %}" alt="refresh page"
                          class="me-3">
@@ -26,10 +25,7 @@
                 <ul class="pagination__wrapper d-flex align-items-center justify-content-center">
                     {% if products.has_previous %}
                         <li class="pagination__list">
-                            <a href="{{ page_url }}?page=
-                                    
-                                    
-                                    {{ products.previous_page_number }}{% if query_params %}&{{ query_params }}{% endif %}"
+                            <a href="{{ page_url }}?page={{ products.previous_page_number }}{% if query_params %}&{{ query_params }}{% endif %}"
                                class="pagination__item--arrow link ajax-page-link"
                                data-page="{{ products.previous_page_number }}">
                                 <img src="{% static '/src/assets/img/icon/left_arrow.svg' %}" alt="left arrow">
@@ -59,8 +55,7 @@
 
                     {% if has_next %}
                         <li class="pagination__list">
-                            <a href="{{ page_url }}?page=
-                                    {{ products.next_page_number }}{% if query_params %}&{{ query_params }}{% endif %}"
+                            <a href="{{ page_url }}?page={{ products.next_page_number }}{% if query_params %}&{{ query_params }}{% endif %}"
                                class="pagination__item--arrow link ajax-page-link"
                                data-page="{{ products.next_page_number }}">
                                 <img src="{% static '/src/assets/img/icon/right_arrow.svg' %}" alt="right arrow">
@@ -157,20 +152,20 @@
                     {% endwith %}
                 {% endif %}
             {% endif %}
-            {% if product_type and product_type != 'None' and product_type|striptags|length > 0 %}
+            {% if product_category and product_category.id %}
                 {% if needs_ampersand == '1' %}
-                    {% with param='&product_type='|add:product_type|urlencode %}
+                    {% with param='&product_category_id='|add:product_category.id %}
                         {% with query_params_list=query_params_list|add:param %}
                         {% endwith %}
                     {% endwith %}
                 {% else %}
-                    {% with param='product_type='|add:product_type|urlencode %}
+                    {% with param='product_category_id='|add:product_category.id %}
                         {% with query_params_list=query_params_list|add:param needs_ampersand='1' %}
                         {% endwith %}
                     {% endwith %}
                 {% endif %}
             {% endif %}
-            {% if sort_type %}
+            {% if sort_type and sort_type != 'popularity' %}
                 {% if needs_ampersand == '1' %}
                     {% with param='&sort_type='|add:sort_type %}
                         {% with query_params_list=query_params_list|add:param %}

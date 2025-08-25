@@ -10,7 +10,7 @@ from .models import (
     OrderStatus, Order, FavoriteProduct, ProductComparison,
     NewsCategory, News, ErrorMessages, InfoMessages, City, ProductStock, Volume, Color, ProductImage, BindingSubstance,
     ProductType, PromoCode, SalesLeaders, RecommendedProducts, MainPageSections, MainPageBanner, Category, OrderProduct,
-    BranchSchedule, BranchScheduleException, ScheduleTemplateItem, ScheduleTemplate, ContentBlock,
+    BranchSchedule, BranchScheduleException, ScheduleTemplateItem, ScheduleTemplate, ContentBlock, EmailAddress,
 )
 
 
@@ -74,6 +74,12 @@ class PhoneNumberAdmin(admin.ModelAdmin):
     search_fields = ('number',)
 
 
+@admin.register(EmailAddress)
+class EmailAddressAdmin(admin.ModelAdmin):
+    list_display = ('address',)
+    search_fields = ('address',)
+
+
 # Инлайн для расписания филиала
 class BranchScheduleInline(admin.TabularInline):
     model = BranchSchedule
@@ -124,13 +130,13 @@ class ScheduleTemplateItemInline(admin.TabularInline):
 # Админка для филиала
 @admin.register(Branch)
 class BranchAdmin(admin.ModelAdmin):
-    list_display = ('city', 'address', 'schedule_template')
-    list_filter = ('city',)
-    search_fields = ('address', 'city__name')
+    list_display = ('address_short', 'city', 'schedule_template')
+    list_filter = ('city', 'schedule_template')
+    search_fields = ('address_short', 'city__name')
     inlines = [BranchScheduleInline, BranchScheduleExceptionInline]
     fieldsets = (
         (None, {
-            'fields': ('city', 'address', 'phone_numbers', 'map_info')
+            'fields': ('city', 'address_short', 'address_base', 'address_detail', 'phone_numbers', 'email', 'map_info')
         }),
         ('Schedule', {
             'fields': ('schedule_template',),
@@ -178,7 +184,7 @@ class ProductTypeAdmin(admin.ModelAdmin):
 @admin.register(ProductStock)
 class ProductStockAdmin(admin.ModelAdmin):
     list_display = ('product', 'branch', 'volume', 'color', 'quantity')
-    search_fields = ('product__description', 'branch__address', 'volume__size', 'color__name')
+    search_fields = ('product__description', 'branch__address_short', 'volume__size', 'color__name')
     list_filter = ('branch', 'volume', 'color')
 
 
