@@ -145,7 +145,9 @@
                     <div class="footer__widget">
                         <h2 class="footer__widget--title d-none d-md-block">Меню</h2>
                         <ul class="footer__widget--menu footer__widget--inner">
-                            <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
+                            <li class="footer__widget--menu__list"><a
+                                    href="{% url 'catalogue' filters='discounted-goods' %}"
+                                    class="footer__widget--menu__text"
                             >Акции</a></li>
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
                                                                       href="{% url 'about_company' %}">О нас</a></li>
