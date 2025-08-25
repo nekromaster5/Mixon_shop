@@ -123,10 +123,14 @@ class HomePage(View):
             )
         ).all()
         novelty = [ProductSelfWrapper(item) for item in novelty]
+
+        news = News.objects.all().order_by('-date_published')[:3]
+
         return render(request, 'home_page.html', {
             'recommended_products': recommended_products,
             'sales_leaders': sales_leaders,
             'novelty': novelty,
+            'news': news,
         })
 
 

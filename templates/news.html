@@ -28,7 +28,7 @@
                     {% for category in categories %}
                         <div class="news_header_button col-lg-5 col-md-6">
                             <a href="?category={{ category.slug|urlencode }}"
-                               class="new_button {% if selected_category == category.slug %}active{% endif %}">
+                               class="news_button {% if selected_category == category.slug %}active{% endif %} d-flex">
                                 {% if category.image %}
                                     <img src="{{ category.image.url }}" alt="{{ category.name }}">
                                 {% else %}

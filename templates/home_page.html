@@ -69,7 +69,8 @@
                              onclick="">
                             <img style="position:absolute;left:-30px;"
                                  src="{% static '/src/assets/img/icon/lkm-stroitelstvo 1.svg' %}" alt="">
-                            <a href="{% url 'catalogue' %}?product_category_id=3 " style="font-weight: 500;position:relative; ">
+                            <a href="{% url 'catalogue' %}?product_category_id=3 "
+                               style="font-weight: 500;position:relative; ">
                                 ЛКМ для Строительства</a>
                         </div>
                         <div class="item" style="position:relative;top:40px;left:15px;"
@@ -330,24 +331,15 @@
                     </a>
                 </div>
                 <div class="comparison_lists main_page row">
-                    <div class="news_buttons main_page col-lg-5 col-md-6 col-6">
-                        <a class="big_news_buttons" href="">
-                            <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 2.png' %}">
-                            <span class="news_text">Как выбрать краску для стен и потолков</span>
-                        </a>
-                    </div>
-                    <div class="news_buttons main_page col-lg-5 col-md-6 col-6">
-                        <a class="big_news_buttons" href="">
-                            <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 5.png' %}">
-                            <span class="news_text">Какой клей выбрать для дерева</span>
-                        </a>
-                    </div>
-                    <div class="news_buttons main_page last col-lg-5 col-md-6 col-6">
-                        <a class="big_news_buttons" href="">
-                            <img style="width: 100%" src="{% static '/src/assets/img/icon/Group 8.png' %}">
-                            <span class="news_text">Чем растворить клей для дерева</span>
-                        </a>
-                    </div>
+                    {% for news_item in news %}
+                        <div class="news_buttons main_page col-lg-5 col-md-6 col-6">
+                            <a class="big_news_buttons" href="{% url 'topic' news_item.slug %}">
+                                <img style="width: 100%" src="{{ news_item.main_image.url }}"
+                                     alt="{{ news_item.title|truncatechars:50 }}">
+                                <span class="news_text">{{ news_item.title }}</span>
+                            </a>
+                        </div>
+                    {% endfor %}                    
                 </div>
             </div>
         </div>
