@@ -138,9 +138,9 @@ class BranchAdmin(admin.ModelAdmin):
         (None, {
             'fields': ('city', 'address_short', 'address_base', 'address_detail', 'phone_numbers', 'email', 'map_info')
         }),
-        ('Schedule', {
+        ('Раскладки расписания', {
             'fields': ('schedule_template',),
-            'description': 'Select a template for standard hours or define custom schedule below.'
+            'description': 'Выберите одну из ранее созданных раскладок либо составьте новую'
         }),
     )
     # Настройка виджета для phone_numbers
@@ -179,6 +179,7 @@ class BindingSubstanceAdmin(admin.ModelAdmin):
 class ProductTypeAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
+    filter_horizontal = ('categories',)
 
 
 @admin.register(ProductStock)
