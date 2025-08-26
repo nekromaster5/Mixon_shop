@@ -26,7 +26,7 @@
     </section>
     <section class="personal_product__section section--padding pt-0 bg__off_white">
         <div class="container">
-            <div id="overlay" class="overlay" ></div>
+            <div id="overlay" class="overlay"></div>
             <div id="app"></div>
             <div class="menu_button_div" style=" ">
                 <button class="menu_button" style=" ">Меню кабинета</button>
@@ -39,9 +39,11 @@
                             <div class="d-flex cabinet--widget__title" style="flex-direction: column;  ">
                                 <div class="widget_inner">
                                     <h2 class="h3">Ваш кабинет</h2>
-                                 <div class="personal_name">
-    {{ user.first_name }} {{ user.last_name }}{% if not user.first_name and not user.last_name %}{{ user.username }}{% endif %}
-</div>
+                                    <div class="personal_name">
+                                        {{ user.first_name }}
+                                        {{ user.last_name }}{% if not user.first_name and not user.last_name %}
+                                            {{ user.username }}{% endif %}
+                                    </div>
                                 </div>
                             </div>
                             <div class="widget-functions">
@@ -193,7 +195,10 @@
                             <div class="col-lg-5 col-md-4 col-6 px-lg-6 px-md-6  px-8 mb-6">
                                 {% include "product_block--standard.html" with item=item %}
                             </div>
-                        {% endfor %}                      
+                        {% endfor %}
+                        <script>
+                            initWishlistButtons(document);
+                        </script>
                     </div>
                 </div>
                 <div class="comparison_lists_cabinet col-lg-8" style="display: none">
@@ -212,6 +217,9 @@
                                     {% include "product_block--characteristics.html" with item=item %}
                                 </div>
                             {% endfor %}
+                            <script>
+                                initWishlistButtons(document);
+                            </script>
                             <div class="col-12 px-lg-6 px-md-6   row">
                                 <button class="fold-button col-lg-5 col-md-4 col-6 px-0">Развернуть</button>
                             </div>
@@ -232,6 +240,9 @@
                                     {% include "product_block--characteristics.html" with item=item %}
                                 </div>
                             {% endfor %}
+                            <script>
+                                initWishlistButtons(document);
+                            </script>
                             <div class="col-12 px-lg-6 px-md-6 px-8 row">
                                 <button class="fold-button col-lg-5 col-md-4 col-6 px-0">Развернуть</button>
                             </div>
@@ -239,176 +250,182 @@
                     </div>
                 </div>
                 <div class="orders_history col-lg-8">
-    {% for order in orders %}
-    <div class="review_personal_block ml-6">
-        <div class="suported_pa_high_history_block">
-            <div class="pa_high_history_block row">
+                    {% for order in orders %}
+                        <div class="review_personal_block ml-6">
+                            <div class="suported_pa_high_history_block">
+                                <div class="pa_high_history_block row">
 
-                <div class="first_order_history_block row col-lg-27 col-md-17 col-4">
-                    <div class="first_text_block col-lg-26 col-md-6">
-                        <span class="order_label">Заказ №{{ order.id }}</span>
-                        <span class="extra_span" style="margin-left: 0;">Статус заказа:</span>
-                    </div>
-                    <div class="adding_mobile_labels" style="text-align: right;">
-                        <p style="font-size:12px;">Статус заказа:</p>
-                        <p style="color:#787878;font-size:12px;">Кол-во товаров:</p>
-                        <p class="order_history_first_text" style="color:#787878;">Итого:</p>
-                    </div>
+                                    <div class="first_order_history_block row col-lg-27 col-md-17 col-4">
+                                        <div class="first_text_block col-lg-26 col-md-6">
+                                            <span class="order_label">Заказ №{{ order.id }}</span>
+                                            <span class="extra_span" style="margin-left: 0;">Статус заказа:</span>
+                                        </div>
+                                        <div class="adding_mobile_labels" style="text-align: right;">
+                                            <p style="font-size:12px;">Статус заказа:</p>
+                                            <p style="color:#787878;font-size:12px;">Кол-во товаров:</p>
+                                            <p class="order_history_first_text" style="color:#787878;">Итого:</p>
+                                        </div>
 
-                    <div class="second_text_block col-lg-26 col-md-6">
-                        <span class="order_history_second_text">{{ order.created_at|date:"d.m.Y" }}</span>
-                        <span class="order_history_second_text">{{ order.status.name }}</span>
-                    </div>
-                </div>
+                                        <div class="second_text_block col-lg-26 col-md-6">
+                                            <span class="order_history_second_text">{{ order.created_at|date:"d.m.Y" }}</span>
+                                            <span class="order_history_second_text">{{ order.status.name }}</span>
+                                        </div>
+                                    </div>
 
-                <div class="second_order_history_block row col-lg-27 col-md-17 col-4">
-                    <div class="first_text_block col-lg-26 col-md-6" style="text-align: right;">
-                        <span style="color:#787878;">Кол-во товаров:</span>
-                        <span class="order_history_first_text" style="color:#787878;">Итого:</span>
-                    </div>
-                    <div class="second_text_block col-lg-26 col-md-6" style="text-align:center;">
-                        <span class="order_history_second_text">{{ order.products.count }}</span>
-                        <span class="order_history_second_text" style="color:#FF0000;">
+                                    <div class="second_order_history_block row col-lg-27 col-md-17 col-4">
+                                        <div class="first_text_block col-lg-26 col-md-6" style="text-align: right;">
+                                            <span style="color:#787878;">Кол-во товаров:</span>
+                                            <span class="order_history_first_text" style="color:#787878;">Итого:</span>
+                                        </div>
+                                        <div class="second_text_block col-lg-26 col-md-6" style="text-align:center;">
+                                            <span class="order_history_second_text">{{ order.products.count }}</span>
+                                            <span class="order_history_second_text" style="color:#FF0000;">
                             {{ order.goods_cost }} ₴
                         </span>
-                    </div>
-                </div>
+                                        </div>
+                                    </div>
 
-                <div class="order_history_button col-lg-28 col-md-23 col-4">
-                    <button class="order_pa_button" style="display:flex;">
-                        <img class="order_history_button_img"
-                             src="{% static '/src/assets/img/icon/repeat_button.svg' %}">
-                        <p class="repeat_button">Повторить</p>
-                    </button>
-                </div>
-            </div>
-        </div>
+                                    <div class="order_history_button col-lg-28 col-md-23 col-4">
+                                        <button class="order_pa_button" style="display:flex;">
+                                            <img class="order_history_button_img"
+                                                 src="{% static '/src/assets/img/icon/repeat_button.svg' %}">
+                                            <p class="repeat_button">Повторить</p>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
 
-        <div class="open_order_bord" style="display: none">
-            <div class="order_table d-flex flex-column">
-                <table>
-                    <thead>
-                        <tr class="high_table_labels" style="background-color:#F5F5F5;">
-                            <th>Наименование</th>
-                            <th class="artykyl">Артикул</th>
-                            <th>Количество</th>
-                            <th>Цена</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for op in order.orderproduct_set.all %}
-                        <tr class="table_labels">
-                            <td>{{ op.product.name }}</td>
-                            <td class="artykyl_row">{{ op.product.article }}</td>
-                            <td>{{ op.quantity }}</td>
-                            <td>{{ op.product.price }}₴</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                            <div class="open_order_bord" style="display: none">
+                                <div class="order_table d-flex flex-column">
+                                    <table>
+                                        <thead>
+                                        <tr class="high_table_labels" style="background-color:#F5F5F5;">
+                                            <th>Наименование</th>
+                                            <th class="artykyl">Артикул</th>
+                                            <th>Количество</th>
+                                            <th>Цена</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for op in order.orderproduct_set.all %}
+                                            <tr class="table_labels">
+                                                <td>{{ op.product.name }}</td>
+                                                <td class="artykyl_row">{{ op.product.article }}</td>
+                                                <td>{{ op.quantity }}</td>
+                                                <td>{{ op.product.price }}₴</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
 
-            <hr style="background:#AEADAA; height:1px; border:none;">
-            <div class="bottom_order_table_records row">
-                <div class="high_order_label col-lg-26 col-md-6" style="text-align:right;">
-                    <span>Итого:</span>
-                    <span style="color:red;">{{ order.goods_cost }}₴</span>
-                </div>
-                <div class="col-lg-26 col-md-6 row">
-                    <div class="bottom_order_table_records_hight">
+                                <hr style="background:#AEADAA; height:1px; border:none;">
+                                <div class="bottom_order_table_records row">
+                                    <div class="high_order_label col-lg-26 col-md-6" style="text-align:right;">
+                                        <span>Итого:</span>
+                                        <span style="color:red;">{{ order.goods_cost }}₴</span>
+                                    </div>
+                                    <div class="col-lg-26 col-md-6 row">
+                                        <div class="bottom_order_table_records_hight">
                         <span class="bottom_order_table_record" style="font-weight: bold;">
                             {{ order.name }}
                         </span>
-                        <p>{{ order.phone }}, {{ order.email }}</p>
-                    </div>
-                    <div style="display:flex;">
-                        <div class="bottom_order_table_records_left">
-                            <p class="bottom_order_table_record">Доставка:</p>
-                            <p class="bottom_order_table_record">Оплата:</p>
-                        </div>
-                        <div class="bottom_order_table_records_right">
-                            <p class="bottom_order_table_record">{{ order.shipment_method.name }}, {{ order.order_place.name }}</p>
-                            <p class="bottom_order_table_record">{{ order.payment_method.name }}</p>
-                            <p class="bottom_order_table_record">{{ order.comment|default:"Коментариев нет" }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="button_order_label col-lg-26 col-md-6" style="text-align:right;">
-                    <span class="button_order_label_total">Итого:</span>
-                    <span style="color:red;">{{ order.goods_cost }}₴</span>
-                </div>
-            </div>
-        </div>
-
-        <button class="order_button" style="margin-top:20px;border:none;background:transparent;color:red;">
-            <p class="button_text">Развернуть >></p>
-        </button>
-        <hr style="background:#AEADAA; height:1px; border:none;">
-    </div>
-    {% empty %}
-    <p>У вас пока нет заказов.</p>
-    {% endfor %}
-</div>
-               <div class="my_review col-lg-8" style="display: none">
-    <div class="review_personal_block row ml-6">
-
-        <!-- Блок "оставить отзыв" -->
-        {% for product in products_without_review %}
-            <div class="col-lg-9 col-md-2 col-4 mb-6">
-                {% if product.images.first %}
-                    <img class="rev_img" src="{{ product.images.first.image.url }}" alt="{{ product.name }}">
-                {% else %}
-                    <img class="rev_img" src="{% static 'src/assets/img/icon/tovar-photo 1.png' %}" alt="Нет фото">
-                {% endif %}
-            </div>
-            <div class="review_personal_block_f col-lg-10 col-md-2 col-4">
-                <div class="personal_review_high_block">
-                    <span class="rev_labe">{{ product.name }}</span>
-                    <button class="rev_but">
-                        <p style="color:#FF0000;">Оставить отзыв</p>
-                    </button>
-                </div>
-            </div>
-            <hr>
-        {% endfor %}
-
-        <!-- Блок "мои отзывы" -->
-        {% for review in reviews %}
-            <div class="review_personal_block row ml-6">
-                <div class="col-lg-9 col-md-2 col-4 mb-6">
-                    {% if review.product.images.first %}
-                        <img class="rev_img" src="{{ review.product.images.first.image.url }}" alt="{{ review.product.name }}">
-                    {% else %}
-                        <img class="rev_img" src="{% static 'src/assets/img/icon/tovar-photo 1.png' %}" alt="Нет фото">
-                    {% endif %}
-                </div>
-                <div class="col-lg-10 col-md-6 col-4">
-                    <div style="display: flex; flex-direction: column;">
-                        <div class="personal_rev_high_block">
-                            <h2 class="h3">{{ review.product.name }}</h2>
-                            <div class="personal_review_stars">
-                                {% for i in "12345" %}
-                                    {% if forloop.counter <= review.rating %}
-                                        <img src="{% static 'src/assets/img/icon/Path 129.svg' %}">
-                                    {% else %}
-                                        <img src="{% static 'src/assets/img/icon/Path 130.svg' %}">
-                                    {% endif %}
-                                {% endfor %}
+                                            <p>{{ order.phone }}, {{ order.email }}</p>
+                                        </div>
+                                        <div style="display:flex;">
+                                            <div class="bottom_order_table_records_left">
+                                                <p class="bottom_order_table_record">Доставка:</p>
+                                                <p class="bottom_order_table_record">Оплата:</p>
+                                            </div>
+                                            <div class="bottom_order_table_records_right">
+                                                <p class="bottom_order_table_record">{{ order.shipment_method.name }}, {{ order.order_place.name }}</p>
+                                                <p class="bottom_order_table_record">{{ order.payment_method.name }}</p>
+                                                <p class="bottom_order_table_record">
+                                                    {{ order.comment|default:"Коментариев нет" }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="button_order_label col-lg-26 col-md-6" style="text-align:right;">
+                                        <span class="button_order_label_total">Итого:</span>
+                                        <span style="color:red;">{{ order.goods_cost }}₴</span>
+                                    </div>
+                                </div>
                             </div>
+
+                            <button class="order_button"
+                                    style="margin-top:20px;border:none;background:transparent;color:red;">
+                                <p class="button_text">Развернуть >></p>
+                            </button>
+                            <hr style="background:#AEADAA; height:1px; border:none;">
                         </div>
-                        <div class="rev_text">
-                            {% if review.review_text %}<p>{{ review.review_text }}</p>{% endif %}
-                            {% if review.pros %}<p>Плюсы: {{ review.pros }}</p>{% endif %}
-                            {% if review.cons %}<p>Минусы: {{ review.cons }}</p>{% endif %}
-                        </div>
+                        {% empty %}
+                        <p>У вас пока нет заказов.</p>
+                    {% endfor %}
+                </div>
+                <div class="my_review col-lg-8" style="display: none">
+                    <div class="review_personal_block row ml-6">
+
+                        <!-- Блок "оставить отзыв" -->
+                        {% for product in products_without_review %}
+                            <div class="col-lg-9 col-md-2 col-4 mb-6">
+                                {% if product.images.first %}
+                                    <img class="rev_img" src="{{ product.images.first.image.url }}"
+                                         alt="{{ product.name }}">
+                                {% else %}
+                                    <img class="rev_img" src="{% static 'src/assets/img/icon/tovar-photo 1.png' %}"
+                                         alt="Нет фото">
+                                {% endif %}
+                            </div>
+                            <div class="review_personal_block_f col-lg-10 col-md-2 col-4">
+                                <div class="personal_review_high_block">
+                                    <span class="rev_labe">{{ product.name }}</span>
+                                    <button class="rev_but">
+                                        <p style="color:#FF0000;">Оставить отзыв</p>
+                                    </button>
+                                </div>
+                            </div>
+                            <hr>
+                        {% endfor %}
+
+                        <!-- Блок "мои отзывы" -->
+                        {% for review in reviews %}
+                            <div class="review_personal_block row ml-6">
+                                <div class="col-lg-9 col-md-2 col-4 mb-6">
+                                    {% if review.product.images.first %}
+                                        <img class="rev_img" src="{{ review.product.images.first.image.url }}"
+                                             alt="{{ review.product.name }}">
+                                    {% else %}
+                                        <img class="rev_img" src="{% static 'src/assets/img/icon/tovar-photo 1.png' %}"
+                                             alt="Нет фото">
+                                    {% endif %}
+                                </div>
+                                <div class="col-lg-10 col-md-6 col-4">
+                                    <div style="display: flex; flex-direction: column;">
+                                        <div class="personal_rev_high_block">
+                                            <h2 class="h3">{{ review.product.name }}</h2>
+                                            <div class="personal_review_stars">
+                                                {% for i in "12345" %}
+                                                    {% if forloop.counter <= review.rating %}
+                                                        <img src="{% static 'src/assets/img/icon/Path 129.svg' %}">
+                                                    {% else %}
+                                                        <img src="{% static 'src/assets/img/icon/Path 130.svg' %}">
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="rev_text">
+                                            {% if review.review_text %}<p>{{ review.review_text }}</p>{% endif %}
+                                            {% if review.pros %}<p>Плюсы: {{ review.pros }}</p>{% endif %}
+                                            {% if review.cons %}<p>Минусы: {{ review.cons }}</p>{% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                        {% endfor %}
+
                     </div>
                 </div>
-            </div>
-            <hr>
-        {% endfor %}
-
-    </div>
-</div>
 
                 <div class="my_marks col-lg-8" style="display: none">
                     <div class="row">
@@ -418,6 +435,9 @@
                                 {% include "product_block--my_mark.html" with item=item %}
                             </div>
                         {% endfor %}
+                        <script>
+                            initWishlistButtons(document);
+                        </script>
                     </div>
                 </div>
                 <div class="contact_information col-lg-8" style="display: none">
@@ -579,7 +599,7 @@
             }
         }
     }
-   
+
     // Закрыть выпадающий список при клике вне него
     window.onclick = function (event) {
         if (!event.target.matches('.panel button')) {
@@ -599,26 +619,25 @@
         const menu = document.getElementById('menu');
         const mainContent = document.getElementById('mainContent');
         const header = document.querySelector('header'); // Найти header
-    
+
         openMenuButton.addEventListener('click', () => {
             overlay.style.display = 'block';
             menu.style.display = 'block';
             mainContent.classList.add('inactive-overlay');
             document.body.style.overflow = 'hidden';
-            
+
             // Сделать header активным
             header.style.zIndex = 20; // Или любое число выше, чем у overlay
             header.style.pointerEvents = 'auto';
         });
-    
-      
-    
+
+
         overlay.addEventListener('click', () => {
             overlay.style.display = 'none';
             menu.style.display = 'none';
             mainContent.classList.remove('inactive-overlay');
             document.body.style.overflow = 'auto';
-    
+
             // Вернуть header в исходное состояние
             header.style.zIndex = '';
             header.style.pointerEvents = '';
@@ -631,5 +650,5 @@
             document.body.style.overflow = 'auto';
         }
     });
-</script>
+    </script>
 {% endblock %}

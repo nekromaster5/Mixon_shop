@@ -31,7 +31,9 @@ from .models import Product, Review, UserProfile, RecommendedProducts, SalesLead
     ProductStock, News, NewsCategory, Branch, FavoriteProduct, Category
 
 import logging
+
 logger = logging.getLogger(__name__)
+
 
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
@@ -135,9 +137,8 @@ class HomePage(View):
             logger.warning("No active banners found for the main page.")
 
         for s in sections:
-            logger.debug(f"SECTION: {s.id} -> {s.name.name} | image: {s.name.image.url if s.name.image else 'нет картинки'}")
-
-
+            logger.debug(
+                f"SECTION: {s.id} -> {s.name.name} | image: {s.name.image.url if s.name.image else 'нет картинки'}")
 
         news = News.objects.all().order_by('-date_published')[:3]
 
@@ -149,7 +150,6 @@ class HomePage(View):
             'sections': sections,
             'banners': banners,
         })
-
 
 
 class ProductPage(View):
@@ -275,7 +275,6 @@ class CataloguePage(View):
         except:
             print('no cat')
 
-
         print('Request GET params:', dict(request.GET))  # Логування всіх параметрів
 
         if product_category:
@@ -362,7 +361,6 @@ class CataloguePage(View):
         elif sort_type == 'name':
             products = products.order_by('name')
 
-
         binding_substances = BindingSubstance.objects.all()
         product_volumes = Volume.objects.all()
 
@@ -445,8 +443,8 @@ class SearchPage(View):
 
 class PersonalPage(View):
     def get(self, request):
-
-        favorite_products_raw = Product.objects.filter(favoriteproduct__user=request.user).prefetch_related('images').annotate(
+        favorite_products_raw = Product.objects.filter(favoriteproduct__user=request.user).prefetch_related(
+            'images').annotate(
             likes_count=Count('favoriteproduct'),
             comments_count=Count('reviews'),
             is_favorite=Exists(
@@ -853,7 +851,7 @@ class Test(View):
     def get(self, request):
         categories = Category.objects.filter(mainpagesections__isnull=False)
         print(categories)
-        print('\nКатегория 1 id', categories[0].id,'\nКатегория 2 id', categories[1].id,'\n')
+        print('\nКатегория 1 id', categories[0].id, '\nКатегория 2 id', categories[1].id, '\n')
         return render(request, 'test.html')
 
 
