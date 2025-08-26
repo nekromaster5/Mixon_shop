@@ -620,7 +620,7 @@ class MainPageSections(models.Model):
 
 
 class MainPageBanner(models.Model):
-    image = models.ImageField(upload_to='banners/images/')
+    image = models.ImageField(upload_to='main_page/images/')
     description = models.TextField()
     is_used = models.BooleanField(default=False)
 
