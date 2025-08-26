@@ -11,7 +11,7 @@ from django.views import View
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 import math
-
+from .models import MainPageSections
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import JsonResponse
 from django.db.models import F, Case, When, Value, DecimalField, Count, Min, Max, Exists, OuterRef
@@ -21,12 +21,17 @@ from django.contrib import messages
 from unicodedata import category
 
 from .forms import UserRegisterForm, UserLoginForm
+from .models import UserProfile
+from .forms import UserLoginForm
+from .models import MainPageBanner
 from django.contrib.auth.decorators import login_required
 from .models import Product, Review, UserProfile, RecommendedProducts, SalesLeaders, City, ErrorMessages, PromoCode, \
     Order, \
     ShipmentMethod, PaymentMethod, OrderStatus, OrderProduct, BindingSubstance, ProductType, Volume, \
     ProductStock, News, NewsCategory, Branch, FavoriteProduct, Category
 
+import logging
+logger = logging.getLogger(__name__)
 
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
@@ -124,6 +129,16 @@ class HomePage(View):
         ).all()
         novelty = [ProductSelfWrapper(item) for item in novelty]
 
+        sections = MainPageSections.objects.select_related("name").all()
+        banners = MainPageBanner.objects.filter(is_used=True)
+        if not banners:
+            logger.warning("No active banners found for the main page.")
+
+        for s in sections:
+            logger.debug(f"SECTION: {s.id} -> {s.name.name} | image: {s.name.image.url if s.name.image else 'нет картинки'}")
+
+
+
         news = News.objects.all().order_by('-date_published')[:3]
 
         return render(request, 'home_page.html', {
@@ -131,7 +146,10 @@ class HomePage(View):
             'sales_leaders': sales_leaders,
             'novelty': novelty,
             'news': news,
+            'sections': sections,
+            'banners': banners,
         })
+
 
 
 class ProductPage(View):

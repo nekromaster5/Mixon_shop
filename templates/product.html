@@ -2037,6 +2037,7 @@
         fetch(`/cart/add/${productId}/`, {
           method: "POST",
           headers: {
+          
             "X-CSRFToken": getCookie("csrftoken"),
           },
         })
