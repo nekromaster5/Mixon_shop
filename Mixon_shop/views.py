@@ -833,6 +833,9 @@ class TestSlider(View):
 
 class Test(View):
     def get(self, request):
+        categories = Category.objects.filter(mainpagesections__isnull=False)
+        print(categories)
+        print('\nКатегория 1 id', categories[0].id,'\nКатегория 2 id', categories[1].id,'\n')
         return render(request, 'test.html')
 
 
