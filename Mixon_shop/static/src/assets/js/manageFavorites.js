@@ -41,7 +41,7 @@ function initWishlistButtons(context = document) {
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('An error occurred while updating the wishlist.');
+                    alert('Нужно быть зарегистрированным пользователем, чтобы добавлять в закладки');
                 });
             });
             btn.dataset.bound = 'true';

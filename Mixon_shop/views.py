@@ -101,34 +101,46 @@ class HomePage(View):
         recommended_products = RecommendedProducts.objects.select_related('product').annotate(
             likes_count=Count('product__favoriteproduct'),  # Кількість вподобайок
             comments_count=Count('product__reviews'),
-            is_favorite=Exists(
-                FavoriteProduct.objects.filter(
-                    user=request.user,
-                    product=OuterRef('product__id')
+        ).all()
+        if request.user.is_authenticated:
+            recommended_products = recommended_products.annotate(
+                is_favorite=Exists(
+                    FavoriteProduct.objects.filter(
+                        user=request.user,
+                        product=OuterRef('product__id')
+                    )
                 )
             )
-        ).all()
+
         sales_leaders = SalesLeaders.objects.select_related('product').annotate(
             likes_count=Count('product__favoriteproduct'),  # Кількість вподобайок
             comments_count=Count('product__reviews'),
-            is_favorite=Exists(
-                FavoriteProduct.objects.filter(
-                    user=request.user,
-                    product=OuterRef('product__id')
+        ).all()
+        if request.user.is_authenticated:
+            sales_leaders = sales_leaders.annotate(
+                is_favorite=Exists(
+                    FavoriteProduct.objects.filter(
+                        user=request.user,
+                        product=OuterRef('product__id')
+                    )
                 )
             )
-        ).all()
+
         # Новинки із кількістю вподобайок і коментарів
         novelty = Product.objects.filter(is_new=True).annotate(
             likes_count=Count('favoriteproduct'),  # Кількість вподобайок
             comments_count=Count('reviews'),
-            is_favorite=Exists(
-                FavoriteProduct.objects.filter(
-                    user=request.user,
-                    product=OuterRef('id')
+        ).all()
+        if request.user.is_authenticated:
+            novelty = novelty.annotate(
+                is_favorite=Exists(
+                    FavoriteProduct.objects.filter(
+                        user=request.user,
+                        product=OuterRef('id')
+                    )
                 )
             )
-        ).all()
+
         novelty = [ProductSelfWrapper(item) for item in novelty]
 
         sections = MainPageSections.objects.select_related("name").all()
@@ -295,13 +307,16 @@ class CataloguePage(View):
                 ),
                 Value(0.0, output_field=DecimalField())
             ),
-            is_favorite=Exists(
-                FavoriteProduct.objects.filter(
-                    user=request.user,
-                    product=OuterRef('id')
+        ).all()
+        if request.user.is_authenticated:
+            products = products.annotate(
+                is_favorite=Exists(
+                    FavoriteProduct.objects.filter(
+                        user=request.user,
+                        product=OuterRef('id')
+                    )
                 )
             )
-        ).all()
 
         if product_type_ids:
             print('Applying type filter:', product_type_ids)
@@ -408,24 +423,22 @@ class SearchPage(View):
             products_list = Product.objects.filter(name__icontains=query).prefetch_related('images').annotate(
                 likes_count=Count('favoriteproduct'),
                 comments_count=Count('reviews'),
-                is_favorite=Exists(
-                    FavoriteProduct.objects.filter(
-                        user=request.user,
-                        product=OuterRef('id')
-                    )
-                )
             ).order_by('name')
         else:
             products_list = Product.objects.prefetch_related('images').annotate(
                 likes_count=Count('favoriteproduct'),
                 comments_count=Count('reviews'),
+            ).all().order_by('name')
+
+        if request.user.is_authenticated:
+            products_list = products_list.annotate(
                 is_favorite=Exists(
                     FavoriteProduct.objects.filter(
                         user=request.user,
                         product=OuterRef('id')
                     )
                 )
-            ).all().order_by('name')
+            )
 
         paginator = UniversalPaginator(products_list, per_page=1)
 
@@ -447,25 +460,33 @@ class PersonalPage(View):
             'images').annotate(
             likes_count=Count('favoriteproduct'),
             comments_count=Count('reviews'),
-            is_favorite=Exists(
-                FavoriteProduct.objects.filter(
-                    user=request.user,
-                    product=OuterRef('id')
+        ).all().order_by('name')
+        if request.user.is_authenticated:
+            favorite_products_raw = favorite_products_raw.annotate(
+                is_favorite=Exists(
+                    FavoriteProduct.objects.filter(
+                        user=request.user,
+                        product=OuterRef('id')
+                    )
                 )
             )
-        ).all().order_by('name')
+
         favorite_products = [ProductSelfWrapper(item) for item in favorite_products_raw]
         rated_products_raw = Product.objects.filter(reviews__user=request.user).prefetch_related('images').annotate(
             likes_count=Count('favoriteproduct'),
             comments_count=Count('reviews'),
-            is_favorite=Exists(
-                FavoriteProduct.objects.filter(
-                    user=request.user,
-                    product=OuterRef('id')
-                )
-            ),
             user_rating=F('reviews__rating')
         ).all().order_by('name')
+        if request.user.is_authenticated:
+            rated_products_raw = rated_products_raw.annotate(
+                is_favorite=Exists(
+                    FavoriteProduct.objects.filter(
+                        user=request.user,
+                        product=OuterRef('id')
+                    )
+                )
+            )
+
         rated_products = [ProductSelfWrapper(item) for item in rated_products_raw]
 
         return render(request, 'cabinet.html', {
