@@ -28,8 +28,8 @@
         <div class="container">
             <div id="overlay" class="overlay"></div>
             <div id="app"></div>
-            <div class="menu_button_div" style=" ">
-                <button class="menu_button" style=" ">Меню кабинета</button>
+            <div class="menu_button_div">
+                <button class="menu_button">Меню кабинета</button>
             </div>
             <div class="row">
                 <!-- Первый блок - блок виджетов -->
@@ -408,7 +408,7 @@
                                                     {% if forloop.counter <= review.rating %}
                                                         <img src="{% static 'src/assets/img/icon/Path 129.svg' %}">
                                                     {% else %}
-                                                        <img src="{% static 'src/assets/img/icon/Path 130.svg' %}">
+                                                        <img src="{% static 'src/assets/img/icon/Path 133.svg' %}">
                                                     {% endif %}
                                                 {% endfor %}
                                             </div>
@@ -441,80 +441,86 @@
                     </div>
                 </div>
                 <div class="contact_information col-lg-8" style="display: none">
-                    <div class="contact_blocks ml-6" style="">
-                        <div class="contact_block">
-                            <h2 class="h3 contact_label">Основные данные:</h2>
-                            <div class="row mx-md-6 mx-7 ">
-                                <div class="col-lg-5 col-md-5 px-9 px-md-7">
-                                    <!-- Первая колонка с двумя строками ввода -->
-                                    <input type="text" class="form-control mb-md-6 mb-3"
-                                           placeholder="Василий">
-                                    <input type="text" class="form-control" placeholder="E-mail">
-                                </div>
-                                <div class="col-lg-5 col-md-5 px-9 px-md-7 pt-md-0 pt-6">
-                                    <!-- Вторая колонка с двумя строками ввода -->
-                                    <input type="text" class="form-control mb-md-6 mb-3"
-                                           placeholder="Иванов">
-                                    <input type="text" class="form-control" placeholder="Телефон">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="contact_block ml-6" style="">
-                            <h2 class="h3 contact_label">Адрес:</h2>
-                            <div class="row mx-md-6 mx-7">
-                                <div class="col-lg-5 col-md-5 px-9 px-md-7 ">
-                                    <!-- Первая колонка с двумя строками ввода -->
-                                    <input type="text" class="form-control mb-md-6 mb-3"
-                                           placeholder="Компания">
-                                    <input type="text" class="form-control" placeholder="Область">
-                                </div>
-                                <div class="col-lg-5 col-md-5 px-9 px-md-7 pt-md-0 pt-6">
-                                    <!-- Вторая колонка с двумя строками ввода -->
-                                    <input type="text" class="form-control mb-md-6 mb-3"
-                                           placeholder="Регистрационный номер">
-                                    <input type="text" class="form-control" placeholder="Город">
-                                </div>
-                                <div class="col-lg-5 col-md-5 px-9 px-md-7 pt-lg-0 pt-md-6 pt-6 pos-lg-relative pos-initial">
-                                    <!-- Вторая колонка с двумя строками ввода -->
-                                    <input style="bottom: 0;" type="text"
-                                           class="form-control pos-lg-absolute pos-initial"
-                                           placeholder="Индекс">
+                    <div class="contact_blocks ml-6">
+                        <form method="post" action="{% url 'profile_update' %}">
+                            {% csrf_token %}
+                            <div class="contact_block">
+                                <h2 class="h3 contact_label">Основные данные:</h2>
+                                <div class="row mx-md-6 mx-7 ">
+                                    <div class="col-lg-5 col-md-5 px-9 px-md-7">
+                                        <input type="text" name="first_name" class="form-control mb-md-6 mb-3"
+                                               value="{{ profile_form.first_name.value|default_if_none:'' }}"
+                                               placeholder="Имя">
+                                        <input type="email" name="email" required class="form-control"
+                                               value="{{ profile_form.email.value|default_if_none:'' }}"
+                                               placeholder="E-mail">
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 px-9 px-md-7 pt-md-0 pt-6">
+                                        <input type="text" name="last_name" class="form-control mb-md-6 mb-3"
+                                               value="{{ profile_form.last_name.value|default_if_none:'' }}"
+                                               placeholder="Фамилия">
+                                        <input type="text" name="phone" class="form-control"
+                                               value="{{ profile_form.phone.value|default_if_none:'' }}"
+                                               placeholder="Телефон">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="contact_block ml-6  " style="">
+                            <div class="contact_block ml-6">
+                                <h2 class="h3 contact_label">Адрес:</h2>
+                                <div class="row mx-md-6 mx-7">
+                                    <div class="col-lg-5 col-md-5 px-9 px-md-7 ">
+                                        <input type="text" name="company" class="form-control mb-md-6 mb-3"
+                                               value="{{ profile_form.company.value|default_if_none:'' }}"
+                                               placeholder="Компания">
+                                        <select name="region" class="form-control">
+                                            <option value="">Область не выбрана</option>
+                                            {% for region in regions %}
+                                                <option value="{{ region.id }}"
+                                                        {% if profile_form.region.value == region.id %}selected{% endif %}>
+                                                    {{ region.name }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 px-9 px-md-7 pt-md-0 pt-6">
+                                        <input type="text" name="registration_number"
+                                               class="form-control mb-md-6 mb-3"
+                                               value="{{ profile_form.registration_number.value|default_if_none:'' }}"
+                                               placeholder="Регистрационный номер">
+                                        <input type="text" name="city" required class="form-control"
+                                               value="{{ profile_form.city.value|default_if_none:'' }}"
+                                               placeholder="Город">
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 px-9 px-md-7 pt-lg-0 pt-md-6 pt-6 pos-lg-relative pos-initial">
+                                        <input style="bottom: 0;" type="text" name="postal_code"
+                                               class="form-control pos-lg-absolute pos-initial"
+                                               value="{{ profile_form.postal_code.value|default_if_none:'' }}"
+                                               placeholder="Индекс">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="cabinet_save_button">Сохранить</button>
+                        </form>
+
+                        <form method="post" action="{% url 'change_password' %}" class="contact_block ml-6">
+                            {% csrf_token %}
                             <h2 class="h3 contact_label">Пароль:</h2>
                             <div class="row mx-md-6 mx-7">
-                                <div class="col-lg-5 col-md-5 px-9 px-md-7 " style="position:relative;">
-                                    <input type="text" class="form-control mb-md-6 mb-3 d-flex"
-                                           placeholder="Пароль">
-                                    <button style=" right:20px;width:20px;height:23px; top:5px;position:absolute; background-color:transparent; border:none;">
-                                        <svg width="13" height="8" viewBox="0 0 13 8" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M6.27081 5.14848C7.03738 5.14848 7.65881 4.55166 7.65881 3.81545C7.65881 3.07924 7.03738 2.48242 6.27081 2.48242C5.50424 2.48242 4.88281 3.07924 4.88281 3.81545C4.88281 4.55166 5.50424 5.14848 6.27081 5.14848Z"
-                                                  fill="#787878"></path>
-                                            <path d="M6.271 0C2.808 0 0 3.81661 0 3.81661C0 3.81661 2.808 7.63229 6.271 7.63229C9.734 7.63229 12.542 3.81661 12.542 3.81661C12.542 3.81661 9.735 0 6.271 0ZM6.271 6.72277C5.67235 6.72258 5.08726 6.55193 4.5896 6.23237C4.09194 5.91282 3.70411 5.45873 3.47516 4.92751C3.24621 4.39629 3.18637 3.81179 3.30328 3.24793C3.42019 2.68407 3.70858 2.16615 4.13196 1.75968C4.55533 1.35321 5.09467 1.07642 5.68182 0.964323C6.26898 0.852229 6.87755 0.909858 7.4306 1.12992C7.98366 1.34998 8.45637 1.72261 8.78894 2.20066C9.12151 2.67872 9.29901 3.24074 9.29901 3.81568C9.29901 4.19757 9.22071 4.57571 9.06854 4.92854C8.91637 5.28136 8.69328 5.60195 8.41211 5.87199C8.13093 6.14203 7.79712 6.35622 7.42975 6.50237C7.06237 6.64851 6.66864 6.72374 6.271 6.72374V6.72277Z"
-                                                  fill="#787878"></path>
-                                        </svg>
-                                    </button>
+                                <div class="col-lg-5 col-md-5 px-9 px-md-7">
+                                    <input type="password" name="old_password" class="form-control mb-md-6 mb-3"
+                                           autocomplete="current-password" placeholder="Текущий пароль">
+                                    <input type="password" name="new_password1" class="form-control"
+                                           autocomplete="new-password" placeholder="Новый пароль">
                                 </div>
-                                <div class="col-lg-5 col-md-5 px-9 px-md-7"
-                                     style="position:relative;">
-                                    <input type="text" class="form-control mb-md-6 mb-3 "
-                                           placeholder="Подтверждение пароля">
-                                    <button style="right:20px;width:20px;height:23px; top:5px;position:absolute; background-color:transparent; border:none;">
-                                        <svg width="13" height="8" viewBox="0 0 13 8" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M6.27081 5.14848C7.03738 5.14848 7.65881 4.55166 7.65881 3.81545C7.65881 3.07924 7.03738 2.48242 6.27081 2.48242C5.50424 2.48242 4.88281 3.07924 4.88281 3.81545C4.88281 4.55166 5.50424 5.14848 6.27081 5.14848Z"
-                                                  fill="#787878"></path>
-                                            <path d="M6.271 0C2.808 0 0 3.81661 0 3.81661C0 3.81661 2.808 7.63229 6.271 7.63229C9.734 7.63229 12.542 3.81661 12.542 3.81661C12.542 3.81661 9.735 0 6.271 0ZM6.271 6.72277C5.67235 6.72258 5.08726 6.55193 4.5896 6.23237C4.09194 5.91282 3.70411 5.45873 3.47516 4.92751C3.24621 4.39629 3.18637 3.81179 3.30328 3.24793C3.42019 2.68407 3.70858 2.16615 4.13196 1.75968C4.55533 1.35321 5.09467 1.07642 5.68182 0.964323C6.26898 0.852229 6.87755 0.909858 7.4306 1.12992C7.98366 1.34998 8.45637 1.72261 8.78894 2.20066C9.12151 2.67872 9.29901 3.24074 9.29901 3.81568C9.29901 4.19757 9.22071 4.57571 9.06854 4.92854C8.91637 5.28136 8.69328 5.60195 8.41211 5.87199C8.13093 6.14203 7.79712 6.35622 7.42975 6.50237C7.06237 6.64851 6.66864 6.72374 6.271 6.72374V6.72277Z"
-                                                  fill="#787878"></path>
-                                        </svg>
-                                    </button>
+                                <div class="col-lg-5 col-md-5 px-9 px-md-7">
+                                    <input type="password" name="new_password2" class="form-control"
+                                           autocomplete="new-password" placeholder="Подтверждение нового пароля">
                                 </div>
                             </div>
-                        </div>
-                        <button class="cabinet_save_button">Сохранить</button>
+                            <button type="submit" class="cabinet_save_button" style="margin-top:16px;">
+                                Сменить пароль
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -578,6 +584,15 @@
             document.querySelector('.my_marks').style.display = 'none';
             document.querySelector(".contact_information").style.display = 'block';
         }
+
+        // После сохранения профиля/пароля сервер возвращает сюда же с
+        // ?tab=contact_information — сразу открываем нужную вкладку.
+        document.addEventListener('DOMContentLoaded', () => {
+            const tab = new URLSearchParams(window.location.search).get('tab');
+            if (tab === 'contact_information') {
+                switchBlock_to_contact_information();
+            }
+        });
     </script>
     <script src="{% static '/src/assets/js/cabinetWidgetButtons.js' %}"></script>
     <script src="{% static '/src/assets/js/cabinetOrderInfoCollapse.js' %}"></script>

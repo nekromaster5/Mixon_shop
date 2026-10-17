@@ -51,6 +51,7 @@ function adjustCounter(input, increase) {
         }
     });
     updateConfirmOrder(input);
+    syncCartQuantity(input);
 }
 
 function updatePrice(input) {
@@ -96,6 +97,24 @@ function getCsrfToken() {
     return cookieValue || '';
 }
 
+// Сохраняет изменённое на странице оформления количество товара в корзине
+// сессии, чтобы она не "отставала" от того, что видит покупатель на чекауте.
+function syncCartQuantity(input) {
+    const productId = input.closest('.cart__product--value')?.dataset.productId;
+    if (!productId) return;
+    const quantity = parseInt(input.value, 10) || 1;
+
+    fetch(`/cart/update/${productId}/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': getCsrfToken(),
+            'X-Requested-With': 'XMLHttpRequest',
+        },
+        body: `quantity=${quantity}`,
+    }).catch(error => console.error('Не удалось обновить корзину:', error));
+}
+
 // Обработчики для счетчиков
 document.querySelectorAll('.product--amount').forEach(counter => {
     const numberInput = counter.querySelector('.product--amount__input');
@@ -124,6 +143,7 @@ document.querySelectorAll('.product--amount').forEach(counter => {
             }
         });
         updateConfirmOrder(numberInput);
+        syncCartQuantity(numberInput);
     });
 });
 

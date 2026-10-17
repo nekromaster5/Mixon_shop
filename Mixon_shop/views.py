@@ -1,9 +1,7 @@
 import json
 from datetime import timedelta, datetime
-from decimal import Decimal
 from urllib.parse import unquote
 
-from django.conf import settings
 # Existing import statements
 from django.template.loader import render_to_string
 from django.utils.timezone import now
@@ -16,15 +14,25 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import JsonResponse
 from django.db.models import F, Case, When, Value, DecimalField, Count, Min, Max, Exists, OuterRef
 from django.db.models.functions import Coalesce
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
 from django.contrib import messages
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordChangeForm
+from django.core.mail import send_mail
+from django.urls import reverse
+from django.utils.encoding import force_bytes, force_str
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode, url_has_allowed_host_and_scheme
+from django.conf import settings
 from unicodedata import category
 
-from .forms import UserRegisterForm, UserLoginForm
-from .models import UserProfile
+from .forms import UserRegisterForm, UserLoginForm, ProfileUpdateForm
+from .models import UserProfile, Region
 from .forms import UserLoginForm
 from .models import MainPageBanner
+from .session_cart import SessionCart
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from .models import Product, Review, UserProfile, RecommendedProducts, SalesLeaders, City, ErrorMessages, PromoCode, \
     Order, \
     ShipmentMethod, PaymentMethod, OrderStatus, OrderProduct, BindingSubstance, ProductType, Volume, \
@@ -35,28 +43,14 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def product_detail(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-
-    # Вычисляем рейтинг
-    # Округляем рейтинг до ближайшего 0.5 в большую сторону
-    rounded_rating = math.ceil(product.average_rating * 2) / 2
-    full_stars = int(rounded_rating)  # целое число полных звезд
+def rating_to_stars(rating):
+    """Превращает числовой рейтинг (0..5) в список 'full'/'half'/'empty' —
+    ровно 5 элементов — для отрисовки звёзд в шаблоне."""
+    rounded_rating = math.ceil(float(rating) * 2) / 2
+    full_stars = int(rounded_rating)
     half_star = 1 if (rounded_rating - full_stars) == 0.5 else 0
     empty_stars = 5 - full_stars - half_star
-
-    # Формируем список звезд, где:
-    # 'full'  - полная звезда,
-    # 'half'  - половинчатая,
-    # 'empty' - пустая звезда.
-    star_list = ['full'] * full_stars + ['half'] * half_star + ['empty'] * empty_stars
-    # Для отладки
-    print("DEBUG star_list =", star_list)
-    context = {
-        'product': product,
-        'stars': star_list,  # передаем готовый список звезд в шаблон
-    }
-    return render(request, 'product.html', context)
+    return ['full'] * full_stars + ['half'] * half_star + ['empty'] * empty_stars
 
 
 class ProductSelfWrapper:
@@ -64,14 +58,6 @@ class ProductSelfWrapper:
         self.product = product
         self.likes_count = product.likes_count
         self.comments_count = product.comments_count
-
-
-@login_required
-def cabinet_view(request):
-    orders = Order.objects.filter(user=request.user).order_by('-created_at')
-    return render(request, 'cabinet.html', {
-        'orders': orders,
-    })
 
 
 @login_required
@@ -93,17 +79,18 @@ def manage_favorites(request, product_id):
         # если вызов через AJAX — вернём JSON
         return JsonResponse({"status": status})
 
-    return redirect(request.META.get("HTTP_REFERER", "/"))
+    return redirect(_safe_redirect_target(request))
 
 
 class HomePage(View):
     def get(self, request):
+        user_id = request.user.pk if request.user.is_authenticated else None
         recommended_products = RecommendedProducts.objects.select_related('product').annotate(
             likes_count=Count('product__favoriteproduct'),  # Кількість вподобайок
             comments_count=Count('product__reviews'),
             is_favorite=Exists(
                 FavoriteProduct.objects.filter(
-                    user=request.user,
+                    user_id=user_id,
                     product=OuterRef('product__id')
                 )
             )
@@ -113,7 +100,7 @@ class HomePage(View):
             comments_count=Count('product__reviews'),
             is_favorite=Exists(
                 FavoriteProduct.objects.filter(
-                    user=request.user,
+                    user_id=user_id,
                     product=OuterRef('product__id')
                 )
             )
@@ -124,7 +111,7 @@ class HomePage(View):
             comments_count=Count('reviews'),
             is_favorite=Exists(
                 FavoriteProduct.objects.filter(
-                    user=request.user,
+                    user_id=user_id,
                     product=OuterRef('id')
                 )
             )
@@ -160,9 +147,26 @@ class ProductPage(View):
         # Получаем изображения продукта через related_name 'images'
         images = product.images.all()  # Все изображения продукта
 
+        user_id = request.user.pk if request.user.is_authenticated else None
+
+        def annotate_products(queryset):
+            return queryset.prefetch_related('images').annotate(
+                likes_count=Count('favoriteproduct'),
+                comments_count=Count('reviews'),
+                is_favorite=Exists(
+                    FavoriteProduct.objects.filter(user_id=user_id, product=OuterRef('id'))
+                )
+            )
+
+        related_products = [ProductSelfWrapper(p) for p in annotate_products(product.related_products.all())]
+        similar_products = [ProductSelfWrapper(p) for p in annotate_products(product.similar_products.all())]
+
         return render(request, 'product.html', {
             'product': product,
             'images': images,
+            'stars': rating_to_stars(product.average_rating),
+            'related_products': related_products,
+            'similar_products': similar_products,
         })
 
 
@@ -224,8 +228,6 @@ class UniversalPaginator:
         total_pages = self.paginator.num_pages if self.has_items else 0
         has_next = paginated_products.has_next() if self.has_items else False
 
-        print(f'Current page: {current_page}, Total pages: {total_pages}, Has next: {has_next}')
-
         pages_to_display = get_pages_to_display(current_page, total_pages) if self.has_items else []
 
         context = {
@@ -268,21 +270,21 @@ class CataloguePage(View):
         sort_type = request.GET.get('sort_type', 'popularity')
         price_gte = request.GET.get('price_gte')
         price_lte = request.GET.get('price_lte')
+        # request.user для гостя — AnonymousUser, а не модель с pk; ORM-фильтр
+        # по user=request.user на нём падает с TypeError. Берём id напрямую.
+        user_id = request.user.pk if request.user.is_authenticated else None
         product_category = None
 
-        try:
-            product_category = Category.objects.get(id=product_category_id)
-        except:
-            print('no cat')
-
-        print('Request GET params:', dict(request.GET))  # Логування всіх параметрів
+        if product_category_id:
+            try:
+                product_category = Category.objects.get(id=product_category_id)
+            except (Category.DoesNotExist, ValueError, TypeError):
+                product_category = None
 
         if product_category:
             product_types = ProductType.objects.filter(categories=product_category.id)
-            print('\n\n\nтолько определенные типы\n\n\n')
         else:
             product_types = ProductType.objects.all()
-            print('\n\n\nвообще все типы\n\n\n')
 
         products = Product.objects.filter(type__in=product_types).prefetch_related('images').annotate(
             likes_count=Count('favoriteproduct'),
@@ -297,32 +299,26 @@ class CataloguePage(View):
             ),
             is_favorite=Exists(
                 FavoriteProduct.objects.filter(
-                    user=request.user,
+                    user_id=user_id,
                     product=OuterRef('id')
                 )
             )
         ).all()
 
         if product_type_ids:
-            print('Applying type filter:', product_type_ids)
             products = products.filter(type__id__in=product_type_ids)
         if binding_substance_id:
-            print('Applying binding substance filter:', binding_substance_id)
             products = products.filter(binding_substance__id=binding_substance_id)
         if volume_ids:
-            print('Applying volume filter:', volume_ids)
             product_ids_with_volumes = ProductStock.objects.filter(
                 volume__id__in=volume_ids
             ).values_list('product__id', flat=True).distinct()
             products = products.filter(id__in=product_ids_with_volumes)
         if is_discounted:
-            print('Applying is_discounted filter')
             products = products.filter(is_discounted=True)
         if is_new:
-            print('Applying is_new filter')
             products = products.filter(is_new=True)
         if is_in_stock:
-            print('Applying is_in_stock filter')
             products = products.filter(is_in_stock=True)
 
         price_range = products.aggregate(
@@ -340,7 +336,6 @@ class CataloguePage(View):
                     price_gte = min_price
                 if price_lte > max_price:
                     price_lte = max_price
-                print('Applying price filter:', price_gte, price_lte)
                 products = products.filter(effective_price__gte=price_gte, effective_price__lte=price_lte)
             except (ValueError, TypeError):
                 pass
@@ -364,7 +359,7 @@ class CataloguePage(View):
         binding_substances = BindingSubstance.objects.all()
         product_volumes = Volume.objects.all()
 
-        paginator = UniversalPaginator(products, per_page=1)
+        paginator = UniversalPaginator(products, per_page=12)
 
         # Извлекаем page из request.GET
         page = request.GET.get('page', '1')  # По умолчанию первая страница
@@ -404,13 +399,16 @@ class CataloguePage(View):
 class SearchPage(View):
     def get(self, request):
         query = request.GET.get('query', '').strip()
+        # request.user для гостя — AnonymousUser без pk; фильтр user=request.user
+        # на нём падает с TypeError, поэтому берём id напрямую.
+        user_id = request.user.pk if request.user.is_authenticated else None
         if query:
             products_list = Product.objects.filter(name__icontains=query).prefetch_related('images').annotate(
                 likes_count=Count('favoriteproduct'),
                 comments_count=Count('reviews'),
                 is_favorite=Exists(
                     FavoriteProduct.objects.filter(
-                        user=request.user,
+                        user_id=user_id,
                         product=OuterRef('id')
                     )
                 )
@@ -421,13 +419,13 @@ class SearchPage(View):
                 comments_count=Count('reviews'),
                 is_favorite=Exists(
                     FavoriteProduct.objects.filter(
-                        user=request.user,
+                        user_id=user_id,
                         product=OuterRef('id')
                     )
                 )
             ).all().order_by('name')
 
-        paginator = UniversalPaginator(products_list, per_page=1)
+        paginator = UniversalPaginator(products_list, per_page=12)
 
         return paginator.handle_pagination(
             request,
@@ -441,8 +439,24 @@ class SearchPage(View):
         return redirect(f'/search/?query={query}&page=1' if query else '/search/?page=1')
 
 
+@method_decorator(login_required, name='dispatch')
 class PersonalPage(View):
     def get(self, request):
+        orders = Order.objects.filter(user=request.user).prefetch_related(
+            'orderproduct_set__product').order_by('-created_at')
+
+        reviews = Review.objects.filter(user=request.user).select_related('product').order_by('-id')
+        reviewed_product_ids = reviews.values_list('product_id', flat=True)
+
+        # Предлагаем оставить отзыв только на товары, которые пользователь
+        # действительно заказывал и ещё не оценил.
+        ordered_product_ids = OrderProduct.objects.filter(
+            order__user=request.user
+        ).values_list('product_id', flat=True).distinct()
+        products_without_review = Product.objects.filter(
+            id__in=ordered_product_ids
+        ).exclude(id__in=reviewed_product_ids).prefetch_related('images')
+
         favorite_products_raw = Product.objects.filter(favoriteproduct__user=request.user).prefetch_related(
             'images').annotate(
             likes_count=Count('favoriteproduct'),
@@ -468,9 +482,27 @@ class PersonalPage(View):
         ).all().order_by('name')
         rated_products = [ProductSelfWrapper(item) for item in rated_products_raw]
 
+        profile = request.user.userprofile
+        profile_form = ProfileUpdateForm(user=request.user, initial={
+            'first_name': request.user.first_name,
+            'last_name': request.user.last_name,
+            'email': request.user.email,
+            'phone': profile.phone,
+            'company': profile.company,
+            'registration_number': profile.registration_number,
+            'city': profile.city,
+            'postal_code': profile.postal_code,
+            'region': profile.region,
+        })
+
         return render(request, 'cabinet.html', {
+            'orders': orders,
+            'reviews': reviews,
+            'products_without_review': products_without_review,
             'favorite_products': favorite_products,
             'rated_products': rated_products,
+            'profile_form': profile_form,
+            'regions': Region.objects.all(),
         })
 
 
@@ -529,15 +561,13 @@ class AboutCompany(View):
 
 class CheckoutPage(View):
     def get(self, request):
-        products = Product.objects.prefetch_related('images').filter(id__in=[1, 2])
-        total_price = sum(
-            product.discount_price if product.is_discounted and product.discount_price is not None else product.price
-            for product in products
-        )
+        cart = SessionCart(request)
+        cart_items = list(cart)
+        total_price = cart.get_total_price()
         cities = City.objects.all()
 
         return render(request, 'checkout.html', {
-            'products': products,
+            'cart_items': cart_items,
             'total_price': total_price,
             'cities': cities,
         })
@@ -680,7 +710,6 @@ def get_branch_details(request):
 
     # Формируем строки расписания
     schedule_lines = []
-    print('\n\n\n', branch.address_base, '\n', branch.address_detail, '\n\n\n')
     for key, days in schedule_dict.items():
         # Сортируем дни по порядку
         days.sort(key=lambda x: DAY_ORDER[x])
@@ -822,11 +851,25 @@ def create_order(request):
             # Добавляем продукты в заказ с количеством через OrderProduct
             for product_id, quantity in product_counts.items():
                 product = Product.objects.get(id=int(product_id))
+                quantity = int(quantity)
                 OrderProduct.objects.create(
                     order=order,
                     product=product,
-                    quantity=int(quantity)
+                    quantity=quantity
                 )
+
+                # Списываем остаток на складе — только для товаров без вариаций
+                # (объём/цвет не заданы) на филиале, откуда оформлен заказ.
+                # Для вариативных складов (свой объём/цвет) покупатель пока нигде
+                # не выбирает конкретный вариант, поэтому автосписание для них
+                # не выполняется — остаток по ним корректируется вручную.
+                stock = ProductStock.objects.filter(
+                    product=product, branch=order_place,
+                    volume__isnull=True, color__isnull=True,
+                ).first()
+                if stock is not None and stock.quantity is not None:
+                    stock.quantity = max(0, stock.quantity - quantity)
+                    stock.save(update_fields=['quantity'])
 
             # Очищаем сессию (если она используется)
             if 'applied_promo_code' in request.session:
@@ -834,10 +877,19 @@ def create_order(request):
             if 'discount' in request.session:
                 del request.session['discount']
 
+            # Заказ создан — корзина больше не нужна.
+            SessionCart(request).clear()
+
             return JsonResponse({"success": True, "message": "Заказ успешно создан!"})
 
-        except Exception as e:
-            return JsonResponse({"success": False, "error": str(e)}, status=500)
+        except Exception:
+            # Подробности — только в серверный лог; клиенту незачем видеть
+            # внутренний текст исключения (могут утечь детали реализации).
+            logger.exception("Ошибка при создании заказа")
+            return JsonResponse(
+                {"success": False, "error": "Не удалось оформить заказ. Попробуйте ещё раз."},
+                status=500,
+            )
 
     return JsonResponse({"success": False, "error": "Неверный метод запроса."}, status=405)
 
@@ -886,6 +938,35 @@ def branch_list(request):
     return render(request, 'locations/branch_list.html', context)
 
 
+def _safe_redirect_target(request):
+    """HTTP_REFERER — заголовок, который присылает браузер клиента, доверять ему
+    напрямую в redirect() нельзя (open redirect). Разрешаем редирект только на
+    свой же хост, иначе — на главную."""
+    referer = request.META.get('HTTP_REFERER')
+    if referer and url_has_allowed_host_and_scheme(
+            url=referer, allowed_hosts={request.get_host()}, require_https=request.is_secure()):
+        return referer
+    return '/'
+
+
+def _send_activation_email(request, user):
+    uid = urlsafe_base64_encode(force_bytes(user.pk))
+    token = default_token_generator.make_token(user)
+    message = render_to_string('acc_active_email.html', {
+        'user': user,
+        'domain': request.get_host(),
+        'uid': uid,
+        'token': token,
+    })
+    send_mail(
+        "Подтверждение регистрации — Mixon Shop",
+        message,
+        settings.DEFAULT_FROM_EMAIL,
+        [user.email],
+        fail_silently=True,
+    )
+
+
 # ---------------- LOGIN ----------------
 def login_view(request):
     if request.method == 'POST':
@@ -899,7 +980,7 @@ def login_view(request):
                 for error in errors:
                     messages.error(request, f"{field}: {error}")
 
-    return redirect(request.META.get('HTTP_REFERER', '/'))
+    return redirect(_safe_redirect_target(request))
 
 
 # ---------------- LOGOUT ----------------
@@ -914,9 +995,12 @@ def register_view(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            # commit=False: активируем аккаунт только после подтверждения email,
+            # поэтому не пользуемся авто-сохранением формы целиком.
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
 
-            # обновляем профиль, если есть поля
             profile_fields = ['phone', 'company', 'registration_number', 'city', 'postal_code', 'region']
             if hasattr(user, 'userprofile'):
                 for field in profile_fields:
@@ -924,8 +1008,12 @@ def register_view(request):
                         setattr(user.userprofile, field, form.cleaned_data.get(field))
                 user.userprofile.save()
 
-            login(request, user)
-            messages.success(request, "Регистрация прошла успешно!")
+            _send_activation_email(request, user)
+            messages.success(
+                request,
+                "Регистрация почти завершена — мы отправили письмо со ссылкой "
+                "для подтверждения на указанный email."
+            )
         else:
             # собираем ошибки и передаем через messages
             for field, errors in form.errors.items():
@@ -933,64 +1021,116 @@ def register_view(request):
                     messages.error(request, f"{field}: {error}")
 
     # После обработки всегда редирект на ту же страницу, где есть модалка
-    return redirect(request.META.get('HTTP_REFERER', '/'))
+    return redirect(_safe_redirect_target(request))
 
 
 # ---------------- EMAIL ACTIVATE ----------------
-def activate(request):
-    return render(request, 'activation_success.html')
+def activate(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        login(request, user)
+        return render(request, 'activation_result.html', {'success': True})
+
+    return render(request, 'activation_result.html', {'success': False})
 
 
-def get_session_cart(request):
-    """
-    Возвращает словарь корзины из сессии.
-    Если корзины нет, создаёт пустую.
-    """
-    cart = request.session.get(settings.CART_SESSION_ID)
-    if not cart:
-        cart = request.session[settings.CART_SESSION_ID] = {}
-    return cart
+def _back_to_cabinet_tab(tab):
+    return redirect(reverse('cabinet') + f'?tab={tab}')
+
+
+@login_required
+@require_POST
+def profile_update(request):
+    form = ProfileUpdateForm(request.POST, user=request.user)
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Данные профиля обновлены.")
+    else:
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(request, f"{field}: {error}")
+    return _back_to_cabinet_tab('contact_information')
+
+
+@login_required
+@require_POST
+def change_password_view(request):
+    form = PasswordChangeForm(user=request.user, data=request.POST)
+    if form.is_valid():
+        user = form.save()
+        # Иначе смена пароля разлогинит пользователя прямо в его кабинете.
+        update_session_auth_hash(request, user)
+        messages.success(request, "Пароль изменён.")
+    else:
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(request, f"{field}: {error}")
+    return _back_to_cabinet_tab('contact_information')
 
 
 def cart_add(request, product_id):
-    cart = get_session_cart(request)
     product = get_object_or_404(Product, id=product_id)
-    product_id_str = str(product.id)
+    SessionCart(request).add(product, quantity=1)
 
-    if product_id_str not in cart:
-        cart[product_id_str] = {'quantity': 0, 'price': str(product.price)}
-    # Добавляем 1 штуку товара, можно расширить логику для указания количества
-    cart[product_id_str]['quantity'] += 1
-    request.session.modified = True
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({'success': True})
     return redirect('cart_detail')
 
 
 def cart_remove(request, product_id):
-    cart = get_session_cart(request)
-    product_id_str = str(product_id)
-    if product_id_str in cart:
-        del cart[product_id_str]
-        request.session.modified = True
+    product = get_object_or_404(Product, id=product_id)
+    SessionCart(request).remove(product)
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({'success': True})
+    return redirect('cart_detail')
+
+
+@require_POST
+def cart_update(request, product_id):
+    """Выставляет точное количество товара в корзине (используется страницей
+    корзины и счётчиком количества на странице оформления заказа)."""
+    product = get_object_or_404(Product, id=product_id)
+
+    try:
+        quantity = int(request.POST.get('quantity', 1))
+    except (TypeError, ValueError):
+        quantity = 1
+
+    cart = SessionCart(request)
+    cart.set_quantity(product, quantity)
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({
+            'success': True,
+            'quantity': quantity,
+            'total_price': float(cart.get_total_price()),
+            'total_quantity': cart.get_total_quantity(),
+        })
+    return redirect('cart_detail')
+
+
+@require_POST
+def cart_clear(request):
+    SessionCart(request).clear()
     return redirect('cart_detail')
 
 
 def cart_detail(request):
-    cart = get_session_cart(request)
-    cart_items = []
-    total_price = 0
-    product_ids = cart.keys()
-    products = Product.objects.filter(id__in=product_ids)
-
-    for product in products:
-        item = cart[str(product.id)]
-        item['product'] = product
-        item['total_price'] = Decimal(item['price']) * item['quantity']
-        total_price += item['total_price']
-        cart_items.append(item)
+    cart = SessionCart(request)
+    cart_items = list(cart)
 
     context = {
         'cart_items': cart_items,
-        'total_price': total_price
+        'total_price': cart.get_total_price(),
+        'total_quantity': cart.get_total_quantity(),
     }
     return render(request, 'cart/detail.html', context)
 
@@ -999,56 +1139,49 @@ def cart_detail(request):
 def submit_review(request, product_id):
     product = get_object_or_404(Product, id=product_id)
 
-    # Получаем данные из POST-запроса
     rating = request.POST.get('rating', '0')
     pros = request.POST.get('pros', '')
     cons = request.POST.get('cons', '')
     review_text = request.POST.get('review_text', '')
-    reviewer_name = request.POST.get('name', '')
-    phone = request.POST.get('phone', '')
+    reviewer_name = request.POST.get('reviewer_name', '').strip()
+    phone = request.POST.get('phone', '').strip()
 
     try:
         rating_int = int(round(float(rating)))
     except ValueError:
         rating_int = 0
 
-    # Здесь user = None, так как авторизация отсутствует
-    Review.objects.create(
-        product=product,
-        user=None,  # или можно установить специального анонимного пользователя, если требуется
-        reviewer_name=reviewer_name,
-        phone=phone,
-        rating=rating_int,
-        pros=pros,
-        cons=cons,
-        review_text=review_text
-    )
+    if not 1 <= rating_int <= 5:
+        messages.error(request, "Пожалуйста, поставьте оценку от 1 до 5 звёзд.")
+        return redirect('product', product_id=product.id)
 
-    # Перенаправляем пользователя обратно на страницу продукта
-    return render(request, 'product.html', context)
-
-
-@require_POST
-def add_to_cart(request):
-    data = json.loads(request.body)
-    product_id = data.get('product_id')
-    quantity = int(data.get('quantity', 1))
-
-    if not product_id:
-        return JsonResponse({'success': False, 'error': 'Не указан ID товара'}, status=400)
-
-    try:
-        product = Product.objects.get(id=product_id)
-    except Product.DoesNotExist:
-        return JsonResponse({'success': False, 'error': 'Товар не найден'}, status=404)
-
-    # Инициализируем корзину, если ее нет
-    cart = request.session.get('cart', {})
-
-    if str(product_id) in cart:
-        cart[str(product_id)] += quantity
+    if request.user.is_authenticated:
+        # Повторный отзыв того же пользователя на тот же товар обновляет
+        # прежний, а не падает на unique_together('product', 'user').
+        Review.objects.update_or_create(
+            product=product,
+            user=request.user,
+            defaults={
+                'rating': rating_int,
+                'pros': pros,
+                'cons': cons,
+                'review_text': review_text,
+            },
+        )
     else:
-        cart[str(product_id)] = quantity
+        if not reviewer_name:
+            messages.error(request, "Пожалуйста, укажите ваше имя, чтобы оставить отзыв без входа в аккаунт.")
+            return redirect('product', product_id=product.id)
+        Review.objects.create(
+            product=product,
+            user=None,
+            reviewer_name=reviewer_name,
+            phone=phone,
+            rating=rating_int,
+            pros=pros,
+            cons=cons,
+            review_text=review_text,
+        )
 
-    request.session['cart'] = cart  # сохраняем в сессии
-    return JsonResponse({'success': True, 'cart': cart})
+    messages.success(request, "Спасибо, ваш отзыв опубликован!")
+    return redirect('product', product_id=product.id)

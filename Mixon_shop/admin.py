@@ -4,6 +4,7 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from django.db import models
+from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
 from .models import (
     Region, UserProfile, PhoneNumber, Branch, Product, Review,
@@ -170,13 +171,13 @@ class ColorAdmin(admin.ModelAdmin):
 
 
 @admin.register(BindingSubstance)
-class BindingSubstanceAdmin(admin.ModelAdmin):
+class BindingSubstanceAdmin(TranslationAdmin):
     list_display = ('name',)
     search_fields = ('name',)
 
 
 @admin.register(ProductType)
-class ProductTypeAdmin(admin.ModelAdmin):
+class ProductTypeAdmin(TranslationAdmin):
     list_display = ('name',)
     search_fields = ('name',)
     filter_horizontal = ('categories',)
@@ -204,16 +205,16 @@ class OrderProductInline(admin.TabularInline):
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'price', 'is_new', 'is_discounted', 'is_in_stock', 'average_rating')
-    search_fields = ('name', 'average_rating')
+class ProductAdmin(TranslationAdmin):
+    list_display = ('name', 'article', 'category', 'price', 'is_new', 'is_discounted', 'is_in_stock', 'average_rating')
+    search_fields = ('name', 'article', 'average_rating')
     inlines = [ProductImageInline]
     list_filter = ('category', 'is_discounted', 'is_new', 'is_in_stock')
     filter_horizontal = ('related_products', 'similar_products')
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslationAdmin):
     list_display = ('name',)  # Отображаем имя категории
     search_fields = ('name',)  # Позволяем искать по имени
     list_filter = ()  # Фильтры не нужны, но можно добавить, если потребуется
@@ -256,8 +257,8 @@ class RecommendedProductsAdmin(admin.ModelAdmin):
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('product', 'user', 'rating')
-    search_fields = ('product__description', 'user__username', 'review_text')
+    list_display = ('product', 'display_name', 'user', 'rating')
+    search_fields = ('product__description', 'user__username', 'reviewer_name', 'review_text')
     list_filter = ('rating',)
 
 
@@ -288,14 +289,14 @@ class ProductComparisonAdmin(admin.ModelAdmin):
     filter_horizontal = ('products',)
 
 
-class ContentBlockInline(SortableInlineAdminMixin, admin.TabularInline):
+class ContentBlockInline(TranslationTabularInline, SortableInlineAdminMixin, admin.TabularInline):
     model = ContentBlock
     extra = 1
     fields = ('content_type', 'text', 'image', 'order')
     ordering = ['order']
 
 @admin.register(News)
-class NewsAdmin(SortableAdminBase, admin.ModelAdmin):  # Изменено на SortableAdminBase
+class NewsAdmin(SortableAdminBase, TranslationAdmin):  # Изменено на SortableAdminBase
     list_display = ('title', 'category', 'date_published')
     list_filter = ('category', 'date_published')
     search_fields = ('title',)
@@ -303,7 +304,7 @@ class NewsAdmin(SortableAdminBase, admin.ModelAdmin):  # Изменено на S
     inlines = [ContentBlockInline]
 
 @admin.register(NewsCategory)
-class NewsCategoryAdmin(admin.ModelAdmin):
+class NewsCategoryAdmin(TranslationAdmin):
     list_display = ('name',)
     search_fields = ('name',)
 

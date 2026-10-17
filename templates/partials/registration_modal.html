@@ -1,0 +1,60 @@
+<div class="registration-modal" id="registration-modal" hidden>
+    <div class="registration-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="registration-modal-title">
+        <button class="registration-modal__close" type="button" data-registration-close aria-label="Закрыть окно входа">&times;</button>
+        <div class="registration-modal__header">
+            <p class="registration-modal__eyebrow">Личный кабинет</p>
+            <h2 class="registration-modal__title" id="registration-modal-title">Вход и регистрация</h2>
+            <p class="registration-modal__subtitle">Войдите, чтобы видеть заказы и избранное, либо создайте новый аккаунт.</p>
+        </div>
+
+        <div class="registration-modal__tabs" role="tablist">
+            <button type="button" class="registration-modal__tab is-active" data-auth-tab="login"
+                    role="tab" aria-selected="true" aria-controls="login-form">Вход</button>
+            <button type="button" class="registration-modal__tab" data-auth-tab="register"
+                    role="tab" aria-selected="false" aria-controls="registration-form">Регистрация</button>
+        </div>
+
+        <form class="registration-modal__form" method="post" action="{% url 'login' %}"
+              id="login-form" data-auth-panel="login">
+            {% csrf_token %}
+            <label class="registration-modal__field"><span>Имя пользователя</span>
+                <input type="text" name="username" autocomplete="username" required placeholder="Например, ivan">
+            </label>
+            <label class="registration-modal__field"><span>Пароль</span>
+                <input type="password" name="password" autocomplete="current-password" required placeholder="Ваш пароль">
+            </label>
+            <button class="registration-modal__submit" type="submit">Войти</button>
+        </form>
+
+        <form class="registration-modal__form" method="post" action="{% url 'register' %}"
+              id="registration-form" data-auth-panel="register" hidden>
+            {% csrf_token %}
+            <div class="registration-modal__grid">
+                <label class="registration-modal__field"><span>Имя пользователя *</span>
+                    <input type="text" name="username" autocomplete="username" minlength="3" maxlength="150" required placeholder="Например, ivan">
+                </label>
+                <label class="registration-modal__field"><span>E-mail *</span>
+                    <input type="email" name="email" autocomplete="email" required placeholder="name@example.com">
+                </label>
+                <label class="registration-modal__field"><span>Телефон</span>
+                    <input type="tel" name="phone" autocomplete="tel" maxlength="18" placeholder="+38 097 000 00 00">
+                </label>
+                <label class="registration-modal__field"><span>Город *</span>
+                    <input type="text" name="city" autocomplete="address-level2" maxlength="256" required placeholder="Ваш город">
+                </label>
+                <label class="registration-modal__field"><span>Пароль *</span>
+                    <input type="password" name="password1" autocomplete="new-password" minlength="8" required placeholder="Не менее 8 символов">
+                </label>
+                <label class="registration-modal__field"><span>Повторите пароль *</span>
+                    <input type="password" name="password2" autocomplete="new-password" minlength="8" required placeholder="Введите пароль ещё раз">
+                </label>
+            </div>
+            <p class="registration-modal__error" id="registration-password-error" role="alert" hidden>Введённые пароли не совпадают.</p>
+            <label class="registration-modal__consent">
+                <input type="checkbox" required>
+                <span>Я принимаю условия пользовательского соглашения и обработки персональных данных.</span>
+            </label>
+            <button class="registration-modal__submit" type="submit">Создать аккаунт</button>
+        </form>
+    </div>
+</div>

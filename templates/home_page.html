@@ -8,63 +8,12 @@
 
 
 {% block content %}
-    <style>
 
-        .main_image_buttons {
-            display: flex !important;
-            padding-top: 10px;
-            width: 100% !important;
-            justify-content: center;
-        }
-
-        .main_image_button {
-            width: 30px !important;
-            height: 2px;
-            border: none;
-            margin-left: 10px !important;
-
-        }
-
-        .main_image_button:hover {
-            background-color: gray;
-        }
-
-        .main_image_button.active {
-            background-color: red; /* Активная кнопка тоже красная для выделения */
-        }
-
-        @media only screen and (min-width: 768px) and (max-width: 992px) {
-            .main_image_buttons {
-                margin-left: 0 !important;
-            }
-        }
-
-        @media only screen   and (min-width: 320px) and (max-width: 760px) {
-            .main_image_buttons {
-
-                margin-left: 0 !important;
-            }
-
-            .brand_buttons-wrapper {
-                margin-top: 0 !important;
-            }
-        }
-
-        .category-name {
-            color: black; /* Default color */
-            transition: color 0.3s ease; /* Smooth color transition */
-        }
-
-        .category-name:hover {
-            color: red; /* Red color on hover */
-        }
-
-    </style>
     <section class="slider--section mb-7" id="mainContent">
         <div class="container">
             <div id="overlay" class="overlay"></div>
             <div id="app"></div>
-            <div class="vertical-block" style="  ">
+            <div class="vertical-block">
                 <div class="high_main_block">
                     <div class="main_high_buttons">
                         <div class="categories">
@@ -89,7 +38,8 @@
                     </div>
                 </div>
                 <div class="main_image">
-                    <div class="main_image_slides">
+                    <div class="main_image_slides" role="region" aria-roledescription="carousel"
+                         aria-label="Главные предложения">
                         {% for banner in banners %}
                             <div class="main_image_slide {% if not forloop.first %}hidden{% endif %}">
                                 <img class="main_image_img"
@@ -110,22 +60,11 @@
                             {% endfor %}
                         {% endfor %}
                         <!-- Добавление заглушек, если баннеров меньше 5 -->
-                        {% if banners|length < 5 %}
-                            {% with extra_slides=5|add:banners|length|add:-5 %}
-                                {% for i in "12345" %}
-                                    {% if forloop.counter0 < extra_slides %}
-                                        <div class="main_image_slide hidden">
-                                            <img class="main_image_img"
-                                                 src="{% static '/src/assets/img/icon/slaider 2.png' %}"
-                                                 alt="Placeholder"
-                                                 loading="lazy">
-                                            <div class="main_image_description">Placeholder description</div>
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endwith %}
-                        {% endif %}
                     </div>
+                    <button class="main_image_arrow main_image_arrow--prev" type="button"
+                            aria-label="Предыдущий слайд">&#10094;</button>
+                    <button class="main_image_arrow main_image_arrow--next" type="button"
+                            aria-label="Следующий слайд">&#10095;</button>
                     <div class="main_image_buttons">
                         {% for banner in banners %}
                             <button class="main_image_button {% if forloop.first %}active{% endif %}"
@@ -138,17 +77,6 @@
                             {% endfor %}
                         {% endfor %}
                         <!-- Добавление кнопок для заглушек, если баннеров меньше 5 -->
-                        {% if banners|length < 5 %}
-                            {% with extra_slides=5|add:banners|length|add:-5 %}
-                                {% for i in "12345" %}
-                                    {% if forloop.counter0 < extra_slides %}
-                                        <button class="main_image_button"
-                                                aria-label="Placeholder slide 
-                                                        {{ forloop.counter0|add:banners|length|add:1 }}"></button>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endwith %}
-                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -269,8 +197,12 @@
                                 <div class="col-lg-18 col-md-17 col-17 mb-lg-8 mb-md-7 mb-5 slide">
                                     {% include "product_block--standard.html" with item=item %}
                                 </div>
-                                {% empty %}
-                                <p>Нет рекомендованных продуктов</p>
+                            {% empty %}
+                                {% for placeholder in "1234" %}
+                                    <div class="col-lg-18 col-md-17 col-17 mb-lg-8 mb-md-7 mb-5 slide">
+                                        {% include "partials/product_placeholder.html" %}
+                                    </div>
+                                {% endfor %}
                             {% endfor %}
                             <script>
                                 initWishlistButtons(document);
@@ -303,7 +235,11 @@
                                     {% include "product_block--standard.html" with item=item %}
                                 </div>
                                 {% empty %}
-                                <p>Нет новинок</p>
+                                    {% for placeholder in "1234" %}
+                                        <div class="col-lg-18 col-md-17 col-17 mb-lg-8 mb-md-7 mb-5 slide">
+                                            {% include "partials/product_placeholder.html" %}
+                                        </div>
+                                    {% endfor %}
                             {% endfor %}
                             <script>
                                 initWishlistButtons(document);
@@ -336,7 +272,11 @@
                                     {% include "product_block--standard.html" with item=item %}
                                 </div>
                                 {% empty %}
-                                <p>Нет рекомендованных продуктов</p>
+                                    {% for placeholder in "1234" %}
+                                        <div class="col-lg-18 col-md-17 col-17 mb-lg-8 mb-md-7 mb-5 slide">
+                                            {% include "partials/product_placeholder.html" %}
+                                        </div>
+                                    {% endfor %}
                             {% endfor %}
                             <script>
                                 initWishlistButtons(document);
@@ -371,6 +311,18 @@
                                 <span class="news_text">{{ news_item.title }}</span>
                             </a>
                         </div>
+                    {% empty %}
+                        {% for placeholder in "123" %}
+                            <div class="news_buttons main_page col-lg-5 col-md-6 col-6">
+                                <div class="news-placeholder">
+                                    <img class="news-placeholder__image"
+                                         src="{% static 'src/assets/img/logo/mixon_banner.png' %}"
+                                         alt="Новость появится позже">
+                                    <span class="news-placeholder__line"></span>
+                                    <span class="news-placeholder__line news-placeholder__line--short"></span>
+                                </div>
+                            </div>
+                        {% endfor %}
                     {% endfor %}
                 </div>
             </div>
@@ -457,6 +409,7 @@
         });
 
         document.addEventListener("DOMContentLoaded", function () {
+            if (document.querySelector(".main_image")?.dataset.sliderReady === "true") return;
             const slides = document.querySelectorAll(".main_image_slide");
             const buttons = document.querySelectorAll(".main_image_button");
             let currentIndex = 0;

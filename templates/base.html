@@ -30,11 +30,30 @@
 <body>
 <div class="body__wrapper">
     <header>{% include "partials/header.html" %}</header>
+    {% if messages %}
+        <div class="site-messages">
+            {% for message in messages %}
+                <div class="site-messages__item site-messages__item--{{ message.tags }}">
+                    {{ message }}
+                    <button type="button" class="site-messages__close" aria-label="Закрыть">&times;</button>
+                </div>
+            {% endfor %}
+        </div>
+        <script>
+            document.addEventListener('click', event => {
+                const closeBtn = event.target.closest('.site-messages__close');
+                if (closeBtn) closeBtn.closest('.site-messages__item').remove();
+            });
+        </script>
+    {% endif %}
     <main class="main__content_wrapper">
         {% block content %} {% endblock %}
     </main>
     <footer>{% include "partials/footer.html" %}</footer>
 </div>
+<!-- Подключено безусловно, а не через дочерний блок скриптов: часть страниц
+     переопределяет его целиком и не наследует родительское содержимое. -->
+<script src="{% static 'src/assets/js/cartActions.js' %}"></script>
 </body>
 {% block scripts %}
     <script src="{% static 'src/assets/js/manageFavorites.js' %}"></script>

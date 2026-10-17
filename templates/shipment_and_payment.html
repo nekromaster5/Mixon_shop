@@ -303,8 +303,10 @@
     <script src="{% static '/src/assets/js/oneOptionCheckInput.js' %}"></script>
     <script defer src="{% static 'src/assets/js/mapCreator.js' %}"></script>
     <script src="{% static 'src/assets/js/getBranches.js' %}"></script>
-    <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMnDGy6nqzX36bSjyh3Kzdts7wvwqTMY0&loading=async&libraries=marker&v=beta&solution_channel=GMP_CCS_complexmarkers_v3"
-            defer
-    ></script>
+    {% if GOOGLE_MAPS_API_KEY %}
+        <script
+                src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&loading=async&libraries=marker&v=beta&solution_channel=GMP_CCS_complexmarkers_v3"
+                defer
+        ></script>
+    {% endif %}
 {% endblock %}

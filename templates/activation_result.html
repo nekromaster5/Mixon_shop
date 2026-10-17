@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if success %}Аккаунт подтверждён{% else %}Ссылка недействительна{% endif %}
+{% endblock %}
+
+{% block content %}
+    <section class="breadcrumb__section breadcrumb__bg">
+        <div class="container">
+            <div class="breadcrumb__content text-center">
+                <ul class="breadcrumb__content--menu d-flex">
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="{% url 'home' %}">Главная</a>
+                    </li>
+                    <li class="breadcrumb__content--menu__items">
+                        {% if success %}Аккаунт подтверждён{% else %}Активация{% endif %}
+                    </li>
+                </ul>
+            </div>
+            <h1 class="breadcrumb__content--title text-center">
+                {% if success %}Аккаунт подтверждён{% else %}Ссылка недействительна{% endif %}
+            </h1>
+        </div>
+    </section>
+
+    <section class="section--padding text-center">
+        <div class="container">
+            {% if success %}
+                <p>Email подтверждён, вы вошли в личный кабинет.</p>
+                <a href="{% url 'cabinet' %}" class="primary__btn">Перейти в кабинет</a>
+            {% else %}
+                <p>Ссылка для подтверждения недействительна или уже была использована.</p>
+                <a href="{% url 'home' %}" class="primary__btn">На главную</a>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

@@ -4,13 +4,9 @@ from random import choice
 
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models.signals import post_save, post_delete
-from django.dispatch import receiver
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from unidecode import unidecode
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
 
 
 # Region model
@@ -42,16 +38,7 @@ class UserProfile(models.Model):
     def __str__(self):
         return f'{self.user.first_name}, {self.user.last_name}'
 
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
-
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.userprofile.save()
+    # Сигналы create_user_profile/save_user_profile — в signals.py.
 
 
 # PhoneNumber model
@@ -352,6 +339,7 @@ class ProductType(models.Model):
 # Product model
 class Product(models.Model):
     name = models.CharField(max_length=256, verbose_name='название продукта')
+    article = models.CharField(max_length=64, blank=True, verbose_name='артикул')
     description = models.TextField(null=True, blank=True, verbose_name='описание продукта')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='категория продукта')
     type = models.ForeignKey(ProductType, on_delete=models.CASCADE, null=True, blank=True, verbose_name='тип продукта')
@@ -410,21 +398,10 @@ class ProductStock(models.Model):
         verbose_name = "Наличие в магазинах"
         verbose_name_plural = "Наличие в магазинах"
 
+    def __str__(self):
+        return f'{self.product} - {self.branch} - {self.volume} - {self.color} - {self.quantity}'
 
-def __str__(self):
-    return f'{self.product} - {self.branch} - {self.volume} - {self.color} - {self.quantity}'
-
-
-@receiver(post_save, sender=ProductStock)
-@receiver(post_delete, sender=ProductStock)
-def update_product_stock_status(sender, instance, **kwargs):
-    product = instance.product
-    # Проверка наличия товаров на складе
-    if ProductStock.objects.filter(product=product).exists():
-        product.is_in_stock = True
-    else:
-        product.is_in_stock = False
-    product.save()
+    # Сигнал update_product_stock_status — в signals.py.
 
 
 class SalesLeaders(models.Model):
@@ -490,7 +467,11 @@ class PromoCode(models.Model):
 # Review model
 class Review(models.Model):
     product = models.ForeignKey(Product, related_name='reviews', on_delete=models.CASCADE, verbose_name='товар')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='пользователь')
+    # Отзыв можно оставить и без входа в аккаунт — тогда user пуст, а имя/телефон
+    # берутся из полей ниже.
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name='пользователь')
+    reviewer_name = models.CharField(max_length=150, blank=True, verbose_name='имя (для отзыва без регистрации)')
+    phone = models.CharField(max_length=18, blank=True, verbose_name='телефон (для отзыва без регистрации)')
     review_text = models.TextField(blank=True, null=True, verbose_name='текст отзыва')
     pros = models.TextField(blank=True, null=True, verbose_name='плюсы товара')
     cons = models.TextField(blank=True, null=True, verbose_name='минусы товара')
@@ -500,6 +481,18 @@ class Review(models.Model):
         verbose_name = "Отзыв"
         verbose_name_plural = "Отзывы"
         unique_together = ('product', 'user')
+
+    @property
+    def display_name(self):
+        if self.user_id:
+            return self.user.get_full_name() or self.user.username
+        return self.reviewer_name or "Аноним"
+
+    def __str__(self):
+        return f"{self.display_name} — {self.product} ({self.rating})"
+
+
+# Сигнал update_product_average_rating — в signals.py.
 
 
 # Order status model
@@ -702,37 +695,6 @@ class ContentBlock(models.Model):
 
     def __str__(self):
         return f"{self.content_type} для {self.news.title}"
-
-
-class Cart(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart', verbose_name='пользователь')
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='дата создания')
-
-    class Meta:
-        verbose_name = "Корзина"
-        verbose_name_plural = "Корзины"
-
-    def get_total_price(self):
-        return sum(item.total_price() for item in self.items.all())
-
-    def __str__(self):
-        return f"Корзина пользователя {self.user.username}"
-
-
-class CartItem(models.Model):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="items", verbose_name='корзина')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='товар')
-    quantity = models.PositiveIntegerField(default=1, verbose_name='кол-во')
-
-    class Meta:
-        verbose_name = "Товар в корзине"
-        verbose_name_plural = "Товары в корзине"
-
-    def total_price(self):
-        return self.quantity * self.product.price
-
-    def __str__(self):
-        return f"{self.product.name} ({self.quantity})"
 
 
 class MainPageSections(models.Model):

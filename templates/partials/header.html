@@ -285,6 +285,9 @@ margin-left:400px;
         <div id="overlay" class="overlay"></div>
         <div id="second_overlay" class="overlay"></div>
         <div id="third_overlay" class="overlay"></div>
+        {% if not user.is_authenticated %}
+            {% include "partials/registration_modal.html" %}
+        {% endif %}
         
         <div id="app"></div>
         <div class="main__header--inner position__relative d-flex justify-content-between align-items-center">
@@ -359,13 +362,23 @@ margin-left:400px;
                     <img src="{% static '/src/assets/img/icon/wats-app-top.svg' %}" alt="Messenger Icon 2">
                     <img src="{% static '/src/assets/img/icon/telegram-top.svg' %}" alt="Messenger Icon 3">
                 </div>
-                <div class="language_panel" style=" ">
-                    <button style="background: none;
-    border: none;">Укр
-                    </button>
-                    <button style="background: none;
-    border: none;"><span style="color:#FE0000">Рус</span>
-                    </button>
+                <div class="language_panel" style="display:flex;">
+                    <form action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        <button type="submit" name="language" value="uk"
+                                style="background: none; border: none;{% if LANGUAGE_CODE == 'uk' %} color:#FE0000;{% endif %}">
+                            Укр
+                        </button>
+                    </form>
+                    <form action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        <button type="submit" name="language" value="ru"
+                                style="background: none; border: none;{% if LANGUAGE_CODE == 'ru' %} color:#FE0000;{% endif %}">
+                            Рус
+                        </button>
+                    </form>
                 </div>
 
             </div>
@@ -392,17 +405,8 @@ margin-left:400px;
            
             
               <div id="user_menu" class="user_menu">
-        <div id="login_form" class="login_form active">
-            <h2> Вход</h2>
-            <span>Войти в личный кабинет</span>
-            <input type="text" placeholder="E-mail" class="user_menu_input">
-            <input type="password" placeholder="Пароль" class="user_menu_input">
-            <a href="#" class="forgot-password">Напомнить пароль</a>
-            <button class="login_button" style="background-color:red;" >Вход</button>
-            <button class="register_button" style="background-color: transparent;"onclick="showRegisterForm()"><span style="color: red;">Регистрация</span></button>
-             
-            
-        </div>
+        <!-- Вход/регистрация теперь выполняются через отдельную модалку
+             (partials/registration_modal.html), а не через эту панель. -->
         <div id="cheaper_menu" class="cheaper_menu">
             <button class="close-button">&times;</button>
             <h2>Хочу дешевле</h2>
@@ -415,47 +419,6 @@ margin-left:400px;
             <input type="text" placeholder="Телефон">
             <textarea placeholder="Вопрос"></textarea>
             <button>Свяжитесь со мной</button>
-        </div>
-        <div id="register_form" class="register_form"  >
-            <div class="modal-content">
-                <span class="close" onclick="toggleUserMenu()">&times;</span>
-                <h2>Регистрация</h2>
-                <form method="post" action="{% url 'register' %}">
-                    {% csrf_token %}
-                    <div style="display:flex;">
-                        <div>
-                            <input type="text" name="username" placeholder="Имя" class="user_menu_input" required>
-                            <input type="password" name="password1" placeholder="Пароль" class="user_menu_input" required>
-                            <input type="email" name="email" placeholder="Email" class="user_menu_input" required>
-                        </div>
-                        <div>
-                          <input type="text" name="last_name" placeholder="Фамилия" class="user_menu_input">
-
-                            <input type="password" name="password2" placeholder="Подтвердите пароль" class="user_menu_input" required>
-                            <input type="text" name="phone" placeholder="Телефон" class="user_menu_input">
-
-                            
-                        </div>
-                        
-                    </div>
-                    <div>
-                        <input type="text" name="city" placeholder="Город" class="user_menu_input" required>
-                        <input type="text" name="postal_code" placeholder="Почтовый индекс" class="user_menu_input">
-                        
-                        </select>
-                    </div>
-                    <p>Регистрируясь, вы соглашаетесь с <a href="#">пользовательским соглашением</a></p>
-                    <button type="submit" class="btn-primary">Зарегистрироваться</button>
-                    <button class="back_button" type="button" onclick="showLoginForm()">Назад</button>
-                </form>
-                {% if form.errors %}
-    <ul class="errorlist">
-        {% for field, errors in form.errors.items %}
-            <li>{{ field }}: {{ errors|join:", " }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
-            </div>
         </div>
     </div>
             <div id="mobile_open_menu" class="mobile_open_menu" style="background-color:white;">
@@ -596,13 +559,21 @@ margin-left:400px;
             </div>
 
             <div class="frame3-panel" style=" margin-left:72px;">
-                <a   id="icon-button_n" class="icon-button_n" style="background: none;border: none;position:relative; " href="{% if user.is_authenticated %}{% url 'cabinet' %}{% else %}#{% endif %}">
+                <a id="icon-button_n" class="icon-button_n"
+                   {% if not user.is_authenticated %}data-registration-trigger{% endif %}
+                   aria-label="{% if user.is_authenticated %}Открыть личный кабинет{% else %}Зарегистрироваться{% endif %}"
+                   style="background: none;border: none;position:relative; "
+                   href="{% if user.is_authenticated %}{% url 'cabinet' %}{% else %}#{% endif %}">
                     
                     <svg width="17" height="24" viewBox="0 0 17 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.2659 6.20894C3.2659 5.17871 3.55763 4.17161 4.10414 3.31501C4.65064 2.4584 5.4274 1.79076 6.3362 1.39651C7.245 1.00226 8.24505 0.899102 9.20982 1.10009C10.1746 1.30108 11.0608 1.79718 11.7563 2.52566C12.4519 3.25415 12.9256 4.18229 13.1175 5.19272C13.3094 6.20316 13.2108 7.2505 12.8344 8.20231C12.458 9.15412 11.8205 9.96764 11.0026 10.54C10.1847 11.1124 9.22316 11.4179 8.23948 11.4179C7.5863 11.418 6.93944 11.2834 6.33596 11.0216C5.73248 10.7599 5.18424 10.3762 4.72238 9.89251C4.26052 9.40879 3.89409 8.83451 3.64419 8.20247C3.39429 7.57043 3.26577 6.89302 3.2659 6.20894ZM13.6322 12.7668H11.835C10.7417 13.428 9.50148 13.7761 8.239 13.7761C6.97652 13.7761 5.73628 13.428 4.64299 12.7668H3.36968C1.79181 12.7668 0.5 15.1209 0.5 16.7745V20.9956C0.5 22.6492 1.79181 23 3.36968 23H13.6294C15.2082 23 16.5 22.6492 16.5 20.9956V16.7745C16.5029 15.1209 15.2111 12.7668 13.6322 12.7668Z"
                               stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                 </a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="icon-button" title="Выйти из аккаунта"
+                       style="background: none;border: none;position:relative;font-size:1.2rem;">Выйти</a>
+                {% endif %}
                 <a href="{% url 'cabinet' %}" class="icon-button "
                    style="background: none;border: none;position:relative; ">
                     <svg width="25" height="23" viewBox="0 0 25 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -650,6 +621,7 @@ margin-left:400px;
 <script src="{% static '/src/assets/js/vendor/bootstrap.min.js' %}" defer="defer"></script>
 <script src="{% static '/src/assets/js/plugins/swiper-bundle.min.js' %}"></script>
 <script src="{% static '/src/assets/js/plugins/glightbox.min.js' %}"></script>
+<script src="{% static '/src/assets/js/registrationModal.js' %}" defer></script>
 <script>
     function toggleDropdown() {
         const dropdown = document.getElementById("myDropdown");
@@ -754,53 +726,6 @@ margin-left:400px;
             }
         });
     });
-    function showRegisterForm() {
-        document.getElementById('login_form').classList.remove('active');
-        document.getElementById('register_form').classList.add('active');
-        document.getElementById('user_menu').style.width = '500px'; // Увеличиваем ширину для формы регистрации
-        document.getElementById('user_menu').style.height = '500px';
-        
-    }
- 
-    function showLoginForm() {
-        document.getElementById('register_form').classList.remove('active');
-        document.getElementById('login_form').classList.add('active');
-        document.getElementById('user_menu').style.width = '500px';
-    }
-    
-    function submitRegistrationForm() {
-        var form = document.getElementById('registrationForm');
-        var formData = new FormData(form);
-
-        fetch("{% url 'register' %}", {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-CSRFToken': '{{ csrf_token }}',
-                'Accept': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Регистрация прошла успешно. Пожалуйста, подтвердите ваш email.');
-                toggleUserMenu(); // Закрыть форму регистрации
-            } else {
-                var errorDiv = document.getElementById('registrationErrors');
-                errorDiv.innerHTML = '';
-                var errors = JSON.parse(data.errors);
-                for (var field in errors) {
-                    if (errors.hasOwnProperty(field)) {
-                        var errorMessage = errors[field].map(function(error) {
-                            return error.message;
-                        }).join(' ');
-                        errorDiv.innerHTML += `<p>${field}: ${errorMessage}</p>`;
-                    }
-                }
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    }
     const dropdownButton = document.querySelector(".panel_dropdowm_button");
     const dropdown = document.querySelector("#myDropdown");
 

@@ -34,6 +34,10 @@ INSTALLED_APPS = [
     'admin_tools.dashboard',
     'adminsortable2',
 
+    # Должен идти до django.contrib.admin, чтобы админка подхватила
+    # TranslationAdmin для переводимых полей.
+    'modeltranslation',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +54,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -71,6 +76,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
+                'Mixon_shop.context_processors.google_maps',
             ],
             'loaders': [
                 'admin_tools.template_loaders.Loader',  # Make sure this is at the beginning
@@ -86,25 +93,97 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv("DB_NAME", "empty_db_name"),
-        'USER': os.getenv("DB_USER", "empty_db_user"),
-        'PASSWORD': os.getenv("DB_PASSWORD", "empty_db_password"),
-        'HOST': os.getenv("DB_HOST", "empty_db_host"),
-        'PORT': os.getenv("DB_PORT", "empty_db_port"),
+if os.getenv("DB_ENGINE", "sqlite").lower() == "mysql":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ["DB_NAME"],
+            'USER': os.environ["DB_USER"],
+            'PASSWORD': os.environ["DB_PASSWORD"],
+            'HOST': os.getenv("DB_HOST", "127.0.0.1"),
+            'PORT': os.getenv("DB_PORT", "3306"),
+        }
     }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 CART_SESSION_ID = 'cart'
+
+# Сайт не использует отдельную страницу входа — вход оформляется модалкой
+# на любой странице, поэтому @login_required просто возвращает на главную.
+LOGIN_URL = 'home'
+LOGIN_REDIRECT_URL = 'home'
+
+# Почта: если EMAIL_HOST не задан в .env — письма (активация аккаунта,
+# сброс пароля) просто печатаются в консоль сервера, ничего не отправляя
+# по-настоящему. Это безопасный дефолт для разработки; на проде задайте
+# EMAIL_HOST/EMAIL_HOST_USER/EMAIL_HOST_PASSWORD в .env.
+if os.getenv("EMAIL_HOST"):
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = os.getenv("EMAIL_HOST")
+    EMAIL_PORT = int(os.getenv("EMAIL_PORT", "587"))
+    EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
+    EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
+    EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "true").lower() == "true"
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "no-reply@mixon-shop.local")
+
+# Ключ для Google Maps (карта филиалов на страницах оформления заказа,
+# контактов и доставки). Без ключа в .env карта на этих страницах просто не
+# подгружается — сама функциональность требует своего аккаунта в Google Cloud.
+GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY", "")
+
+# Логирование. По умолчанию — только в консоль (как и раньше при runserver).
+# LOG_TO_FILE=true в .env дополнительно пишет логи в logs/app.log с ротацией
+# по 5 МБ — удобно на проде, где консоль никто не смотрит.
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{asctime} {levelname} {name}: {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "INFO",
+    },
+    "loggers": {
+        "django.request": {
+            "handlers": ["console"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+    },
+}
+if os.getenv("LOG_TO_FILE", "false").lower() == "true":
+    _logs_dir = BASE_DIR / "logs"
+    _logs_dir.mkdir(exist_ok=True)
+    LOGGING["handlers"]["file"] = {
+        "class": "logging.handlers.RotatingFileHandler",
+        "filename": _logs_dir / "app.log",
+        "maxBytes": 5 * 1024 * 1024,
+        "backupCount": 3,
+        "formatter": "verbose",
+    }
+    LOGGING["root"]["handlers"].append("file")
+    LOGGING["loggers"]["django.request"]["handlers"].append("file")
 
 ADMIN_TOOLS_MENU = 'Mixon_shop.admin_tools.menu.CustomMenu'
 ADMIN_TOOLS_INDEX_DASHBOARD = 'Mixon_shop.admin_tools.dashboard.CustomIndexDashboard'
@@ -145,8 +224,12 @@ LANGUAGES = (
     ('uk', _('Ukrainian')),
     ('ru', _('Russian')),
 )
+MODELTRANSLATION_LANGUAGES = ('uk', 'ru')
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'uk'
 MODELTRANSLATION_PREPOPULATE_LANGUAGE = 'ru'
+# Куда сохраняется выбор языка (django.conf.urls.i18n.set_language) —
+# постоянная кука, а не только текущая сессия.
+LANGUAGE_COOKIE_AGE = 60 * 60 * 24 * 365  # 1 год
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/

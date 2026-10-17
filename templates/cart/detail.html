@@ -1,68 +1,124 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
-</head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-    }
-    
-    h2 {
-        color: #333;
-    }
-    
-    ul {
-        list-style: none;
-        padding: 0;
-    }
-    
-    li {
-        margin: 10px 0;
-    }
-    
-    button {
-        padding: 5px 10px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        cursor: pointer;
-    }
-    
-    button:hover {
-        background-color: #45a049;
-    }
-    
-    input[type="number"] {
-        width: 50px;
-        padding: 5px;
-    }
-    
-</style>
-<body>
-    <h2>Корзина</h2>
-    {% if cart.items.all %}
-        <ul>
-            {% for item in cart.items.all %}
-            <li>
-                {{ item.product.name }} - {{ item.quantity }} шт. - {{ item.get_total_price }} $
-                <form method="POST" action="{% url 'update_cart_item' item.id %}">
-                    {% csrf_token %}
-                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
-                    <button type="submit">Обновить</button>
-                </form>
-                <a href="{% url 'remove_cart_item' item.id %}">Удалить</a>
-            </li>
-            {% endfor %}
-        </ul>
-        <h3>Итоговая сумма: {{ cart.items.all|sum:"get_total_price" }} $</h3>
-        <a href="/checkout/">Перейти к оформлению</a>
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Корзина
+{% endblock %}
+
+{% block content %}
+    <section class="breadcrumb__section breadcrumb__bg">
+        <div class="container">
+            <div class="breadcrumb__content text-center">
+                <ul class="breadcrumb__content--menu d-flex">
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="{% url 'home' %}">Главная</a>
+                    </li>
+                    <li class="breadcrumb__content--menu__items">
+                        <a href="{% url 'cart_detail' %}">Корзина</a>
+                    </li>
+                </ul>
+            </div>
+            <h1 class="breadcrumb__content--title text-center">Корзина</h1>
+        </div>
+    </section>
+
+    {% if cart_items %}
+        <section class="cart__page--area section--padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-16">
+                        <div class="cart__table">
+                            <table class="cart__table--inner">
+                                <thead class="cart__table--header">
+                                <tr>
+                                    <th class="cart__table--header__list">Товар</th>
+                                    <th class="cart__table--header__list text-center">Цена</th>
+                                    <th class="cart__table--header__list text-center">Количество</th>
+                                    <th class="cart__table--header__list text-right">Итого</th>
+                                </tr>
+                                </thead>
+                                <tbody class="cart__table--body__items">
+                                {% for item in cart_items %}
+                                    <tr class="cart__table--body__list d-block d-md-flex align-items-center">
+                                        <td class="cart__table--body__list d-flex align-items-center">
+                                            <form method="post" action="{% url 'cart_remove' item.product.id %}">
+                                                {% csrf_token %}
+                                                <button type="submit" class="cart__remove--btn"
+                                                        title="Удалить из корзины" aria-label="Удалить из корзины">&times;</button>
+                                            </form>
+                                            <div class="cart__thumbnail">
+                                                <a href="{% url 'product' item.product.id %}">
+                                                    <img src="{{ item.product.images.first.image.url }}"
+                                                         alt="{{ item.product.name }}">
+                                                </a>
+                                            </div>
+                                            <div class="cart__content">
+                                                <h4 class="cart__content--title">
+                                                    <a href="{% url 'product' item.product.id %}">{{ item.product.name }}</a>
+                                                </h4>
+                                            </div>
+                                        </td>
+                                        <td class="cart__table--body__list text-center">
+                                            <span class="cart__price">{{ item.price }}₴</span>
+                                        </td>
+                                        <td class="cart__table--body__list text-center">
+                                            <form method="post" class="d-flex align-items-center"
+                                                  action="{% url 'cart_update' item.product.id %}">
+                                                {% csrf_token %}
+                                                <input type="number" name="quantity" value="{{ item.quantity }}"
+                                                       min="1" size="3" class="product--amount__input">
+                                                <button type="submit" class="checkout--edit--btn primary__btn ms-2">
+                                                    Обновить
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td class="cart__table--body__list text-right">
+                                            <span class="cart__price">{{ item.total_price }}₴</span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="continue__shopping d-flex justify-content-between align-items-center">
+                            <a href="{% url 'catalogue' %}" class="continue__shopping--link">← Продолжить покупки</a>
+                            <form method="post" action="{% url 'cart_clear' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="continue__shopping--clear">Очистить корзину</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <aside class="cart__summary">
+                            <h2 class="h3">Итого</h2>
+                            <div class="cart__summary--total">
+                                <table class="cart__summary--total__table">
+                                    <tr class="cart__summary--total__list">
+                                        <td>Товаров</td>
+                                        <td>{{ total_quantity }} шт.</td>
+                                    </tr>
+                                    <tr class="cart__summary--total__list">
+                                        <td>Сумма</td>
+                                        <td>{{ total_price }}₴</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="cart__summary--footer">
+                                <a href="{% url 'checkout' %}" class="primary__btn cart__summary--footer__btn width-100 text-center d-block">
+                                    Оформить заказ
+                                </a>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </section>
     {% else %}
-        <p>Ваша корзина пуста.</p>
-        <a href="/products/">Вернуться к покупкам</a>
+        <section class="cart__page--area section--padding text-center">
+            <div class="container">
+                <p>Ваша корзина пуста.</p>
+                <a href="{% url 'catalogue' %}" class="primary__btn">Перейти в каталог</a>
+            </div>
+        </section>
     {% endif %}
-</body>
-</html>
+{% endblock %}

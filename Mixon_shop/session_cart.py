@@ -1,9 +1,16 @@
-# mixon_shop/session_cart.py
+# Mixon_shop/session_cart.py
 from decimal import Decimal
+
 from django.conf import settings
-from mixon_shop.models import Product  # Предполагается, что модель Product уже есть
+
+from Mixon_shop.models import Product
+
 
 class SessionCart:
+    """Единая реализация корзины на сессии — используется и гостями, и авторизованными
+    пользователями. Формат в сессии: {'<product_id>': {'quantity': int, 'price': '123.45'}}.
+    """
+
     def __init__(self, request):
         self.session = request.session
         cart = self.session.get(settings.CART_SESSION_ID)
@@ -21,6 +28,13 @@ class SessionCart:
             self.cart[product_id]['quantity'] += quantity
         self.save()
 
+    def set_quantity(self, product, quantity):
+        """Выставить точное количество товара. quantity <= 0 удаляет товар из корзины."""
+        if quantity <= 0:
+            self.remove(product)
+            return
+        self.add(product, quantity=quantity, update_quantity=True)
+
     def remove(self, product):
         product_id = str(product.id)
         if product_id in self.cart:
@@ -29,13 +43,24 @@ class SessionCart:
 
     def __iter__(self):
         product_ids = self.cart.keys()
-        products = Product.objects.filter(id__in=product_ids)
-        for product in products:
-            self.cart[str(product.id)]['product'] = product
+        products = Product.objects.filter(id__in=product_ids).prefetch_related('images')
+        products_by_id = {str(product.id): product for product in products}
 
-        for item in self.cart.values():
+        for product_id, item in list(self.cart.items()):
+            product = products_by_id.get(product_id)
+            if product is None:
+                # Товар удалили из каталога — не показываем его в корзине.
+                continue
+            item = dict(item)
+            item['product'] = product
             item['total_price'] = Decimal(item['price']) * item['quantity']
             yield item
+
+    def __len__(self):
+        return self.get_total_quantity()
+
+    def get_total_quantity(self):
+        return sum(item['quantity'] for item in self.cart.values())
 
     def get_total_price(self):
         return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())

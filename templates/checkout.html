@@ -23,7 +23,7 @@
             <h1 class="breadcrumb__content--title text-center">Оформить заказ</h1>
         </div>
     </section>
-    {% if products %}
+    {% if cart_items %}
         <section class="checkout__page--area section--padding">
             <div class="container">
                 <div class="row" style="overflow: hidden;">
@@ -32,8 +32,8 @@
                             <h2 id="cart--title" class="cart__section__header--title h3">Корзина</h2>
                         </div>
                         <div id="cart--items" class="checkout__section--short__desc" style="display: none;">
-                            {% for product in products %}
-                                <span class="mb-4">{{ product.name }}</span><br>
+                            {% for item in cart_items %}
+                                <span class="mb-4">{{ item.product.name }} × {{ item.quantity }}</span><br>
                             {% endfor %}
                             <div class="checkout--edit__block" id="shipping--edit__block--cart">
                                 <button id="cart--edit" class="checkout--edit--btn primary__btn"
@@ -44,28 +44,28 @@
                         <div id="cart--items__large" class="cart__table checkout__product--table">
                             <table class="cart__table--inner">
                                 <tbody class="cart__table--body">
-                                {% for product in products %}
+                                {% for item in cart_items %}
                                     <tr class="cart__table--body__items">
                                         <td class="cart__table--body__list">
                                             <div class="cart__product--desc d-block d-md-flex align-items-center">
                                                 <div class="product__description order-md-1">
                                                     <h4 class="product__description--name">
-                                                        <a href="{% url 'product' product.id %}">{{ product.name }}</a>
+                                                        <a href="{% url 'product' item.product.id %}">{{ item.product.name }}</a>
                                                     </h4>
-                                                    <span class="product__description--variant">Артикул: 1234567890</span>
+                                                    <span class="product__description--variant">Артикул: {{ item.product.article|default:"—" }}</span>
                                                 </div>
                                                 <div class="product__thumbnail border-radius-5">
-                                                    <a class="display-block" href="{% url 'product' product.id %}">
+                                                    <a class="display-block" href="{% url 'product' item.product.id %}">
                                                         <img class="product__thumbnail--img display-block border-radius-5"
-                                                             src="{{ product.images.first.image.url }}"
-                                                             alt="{{ product.name }} image">
+                                                             src="{{ item.product.images.first.image.url }}"
+                                                             alt="{{ item.product.name }} image">
                                                     </a>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="cart__table--body__list position-relative">
                                             <div class="cart__product--value d-block d-md-flex bottom-0"
-                                                 data-product-id="{{ product.id }}"
+                                                 data-product-id="{{ item.product.id }}"
                                                  data-index="{{ forloop.counter0 }}">
                                                 <div class="product--amount d-flex align-items-center pe-0 pe-md-5">
                                                     <button class="product--amount__btn increase">
@@ -78,7 +78,7 @@
                                                     </button>
                                                     <label>
                                                         <input size="1" type="text" class="product--amount__input"
-                                                               value="1">
+                                                               value="{{ item.quantity }}">
                                                     </label>
                                                     <button class="product--amount__btn decrease">
                                                         <svg width="20" height="2" viewBox="0 0 20 2" fill="none">
@@ -88,11 +88,11 @@
                                                     </button>
                                                 </div>
                                                 <div class="product--price">
-                                                    {% if product.discount_price %}
-                                                        <span class="cart__price">{{ product.discount_price }}₴</span>
-                                                        <span class="cart__price--old text-decoration-line-through">{{ product.price }}₴</span>
+                                                    {% if item.product.discount_price %}
+                                                        <span class="cart__price">{{ item.product.discount_price }}₴</span>
+                                                        <span class="cart__price--old text-decoration-line-through">{{ item.product.price }}₴</span>
                                                     {% else %}
-                                                        <span class="cart__price">{{ product.price }}₴</span>
+                                                        <span class="cart__price">{{ item.product.price }}₴</span>
                                                     {% endif %}
                                                 </div>
                                             </div>
@@ -526,16 +526,16 @@
                                             </tr>
                                             </thead>
                                             <tbody class="confirm__order--body">
-                                            {% for product in products %}
+                                            {% for item in cart_items %}
                                                 <tr data-index="{{ forloop.counter0 }}">
-                                                    <td>{{ product.name }}</td>
-                                                    <td>1234567890</td>
+                                                    <td>{{ item.product.name }}</td>
+                                                    <td>{{ item.product.article|default:"—" }}</td>
                                                     <td class="text-center product-amount-confirm"
-                                                        data-index="{{ forloop.counter0 }}">1
+                                                        data-index="{{ forloop.counter0 }}">{{ item.quantity }}
                                                     </td>
                                                     <td class="text-center product-price-confirm"
                                                         data-index="{{ forloop.counter0 }}">
-                                                        {{ product.discount_price|default:product.price }}₴
+                                                        {{ item.total_price }}₴
                                                     </td>
                                                 </tr>
                                             {% endfor %}
@@ -587,8 +587,15 @@
                 </div>
             </div>
         </section>
+    {% else %}
+        <section class="checkout__page--area section--padding text-center">
+            <div class="container">
+                <p>Ваша корзина пуста — добавьте товары, чтобы оформить заказ.</p>
+                <a href="{% url 'catalogue' %}" class="primary__btn">Перейти в каталог</a>
+            </div>
+        </section>
     {% endif %}
-    
+
     <div class="map-modal" id="mapModal">
         <div class="map-modal-content">
             <span class="map-modal-close">&times;</span>
@@ -637,9 +644,11 @@
     <script src="{% static 'src/assets/js/getBranches.js' %}"></script>
     <script src="{% static 'src/assets/js/applyPromo.js' %}"></script>
     <script src="{% static 'src/assets/js/confirmOrder.js' %}"></script>
-    <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMnDGy6nqzX36bSjyh3Kzdts7wvwqTMY0&loading=async&libraries=marker&v=beta&solution_channel=GMP_CCS_complexmarkers_v3"
-            defer
-    ></script>
+    {% if GOOGLE_MAPS_API_KEY %}
+        <script
+                src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&loading=async&libraries=marker&v=beta&solution_channel=GMP_CCS_complexmarkers_v3"
+                defer
+        ></script>
+    {% endif %}
 
 {% endblock %}

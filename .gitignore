@@ -3,3 +3,8 @@
 /.env
 **/__pycache__
 /static/
+*.log
+/logs/
+/venv/
+*.pyc
+/.pytest_cache/

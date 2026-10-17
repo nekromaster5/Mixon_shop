@@ -1,19 +1,25 @@
 @charset "UTF-8";
 /*
-  Template Name: Grocee - Organic Food HTML Template
-  Author Name: Hook theme
-  Author URL: https://themeforest.net/user/hooktheme
-  Version: 1.0.0
-
-  ----------------------------
-  [Table of contents CSS]
-  ----------------------------
-
-    1. Base CSS
-    2. Header css
-
-
-*/
+ * MIXON SHOP — MAIN STYLESHEET
+ *
+ * Architecture
+ *  1. Design tokens and reset
+ *  2. Global typography, layout and utilities
+ *  3. Reusable components (header, catalogue, products, forms, footer)
+ *  4. Responsive component rules
+ *  5. Page-specific rules migrated from Django templates
+ *
+ * Maintenance rules
+ *  - Prefer existing component classes over page-specific selectors.
+ *  - Keep responsive rules next to the component they modify where possible.
+ *  - Do not use element IDs for visual styling.
+ *  - Avoid !important unless overriding a vendor utility is unavoidable.
+ *  - Header-local legacy styles remain in partials/header.html until the
+ *    header is reviewed separately; this stylesheet pass does not touch it.
+ *
+ * The file originated from the Grocee template and now contains the Mixon
+ * storefront design system and project-specific extensions.
+ */
 /*
     1. Base CSS
 */
@@ -11536,3 +11542,466 @@ details > summary::-webkit-details-marker {
         line-height: 2.5rem;
     }
 }
+
+/* ==========================================================================
+   PAGE-SPECIFIC STYLES
+   Rules migrated from Django templates. Keep page sections isolated and move
+   reusable declarations into their component sections during later reviews.
+   ========================================================================== */
+
+/* === HOME PAGE ========================================================= */
+.main_image { position: relative; min-width: 0; }
+.main_image_slides { position: relative; overflow: hidden; background: #f4f4f4; }
+.main_image_slide.hidden { display: none; }
+.main_image_img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1085 / 526;
+    object-fit: cover;
+}
+.main_image_description { padding-top: 0.8rem; white-space: normal; }
+.main_image_arrow {
+    position: absolute;
+    top: calc(50% - 2rem);
+    z-index: 2;
+    display: grid;
+    width: 4rem;
+    height: 4rem;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.48);
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.main_image_arrow:hover,
+.main_image_arrow:focus-visible { background: var(--secondary-color, #e60000); }
+.main_image_arrow--prev { left: 1.5rem; }
+.main_image_arrow--next { right: 1.5rem; }
+@media only screen and (max-width: 767px) {
+    .main_image_arrow { width: 3.2rem; height: 3.2rem; }
+    .main_image_arrow--prev { left: 0.8rem; }
+    .main_image_arrow--next { right: 0.8rem; }
+}
+
+.main_image_buttons {
+            display: flex !important;
+            padding-top: 10px;
+            width: 100% !important;
+            justify-content: center;
+        }
+
+        .main_image_button {
+            width: 30px !important;
+            height: 2px;
+            border: none;
+            margin-left: 10px !important;
+
+        }
+
+        .main_image_button:hover {
+            background-color: gray;
+        }
+
+        .main_image_button.active {
+            background-color: red; /* Активная кнопка тоже красная для выделения */
+        }
+
+        @media only screen and (min-width: 768px) and (max-width: 992px) {
+            .main_image_buttons {
+                margin-left: 0 !important;
+            }
+        }
+
+        @media only screen   and (min-width: 320px) and (max-width: 760px) {
+            .main_image_buttons {
+
+                margin-left: 0 !important;
+            }
+
+            .brand_buttons-wrapper {
+                margin-top: 0 !important;
+            }
+        }
+
+        .category-name {
+            color: black; /* Default color */
+            transition: color 0.3s ease; /* Smooth color transition */
+        }
+
+        .category-name:hover {
+            color: red; /* Red color on hover */
+        }
+
+/* === ABOUT COMPANY PAGE ========================================================= */
+.about_company_heading_div {
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .red-dot_list_li {
+            padding-top: 10px;
+            line-height: 27px;
+        }
+
+        .comparison_class_first {
+            color: red;
+            margin-top: 34px !important;
+        }
+
+        .comparison_class_second {
+            margin-top: 26px !important;
+        }
+
+        .block_about_company {
+            padding-top: 30px;
+            padding-left: 30px;
+            padding-bottom: 76px;
+        }
+
+        .about_company_heading {
+            font-size: 40px;
+            padding-top: 3px;
+        }
+
+        .block_ab_bottom_text {
+            padding-top: 40px !important;
+        }
+
+        .block_about_company_heading {
+            line-height: 33px !important;
+            font-size: 22px !important;
+        }
+
+        .red_dot_second_class {
+            padding-top: 24px !important;
+            font-size: 18px !important;
+            line-height: 27px !important;
+        }
+
+        .high_red_dot_ul {
+            font-weight: 500;
+            font-size: 18px;
+        }
+
+        .img_ab_block {
+            display: flex !important;
+            align-items: flex-start !important;
+        }
+
+        .ab_text {
+            line-height: 33px !important;
+            font-size: 22px !important;
+        }
+
+        @media only screen and (min-width: 768px) and (max-width: 992px) {
+            .ab_text {
+                line-height: 33px !important;
+                font-size: 18px !important;
+            }
+        }
+
+        @media only screen   and (min-width: 320px) and (max-width: 760px) {
+            .ab_text {
+                line-height: 20px !important;
+                font-size: 14px !important;
+            }
+        }
+
+/* === PRODUCT PAGE ========================================================= */
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+            .product_reviev_stars {
+
+                margin-left: 0px !important;
+                margin-right: 100px !important;
+            }
+
+            .high_review_block {
+                justify-content: none !important;
+            }
+
+        }
+
+        .high_review_block {
+            justify-content: space-between !important;
+        }
+
+        .delivery {
+            padding-top: 20px;
+        }
+
+        .first_sale_block_buttons {
+            margin-left: 300px !important;
+        }
+
+        .carousel-item {
+            margin-left: 40px;
+        }
+
+        @media only screen   and (min-width: 320px) and (max-width: 760px) {
+            .buy__btn.big-button {
+                margin-left: 60px !important;
+            }
+
+            .carousel-container {
+                justify-content: center !important;
+            }
+
+            .delivery {
+                padding-top: 80px;
+            }
+
+            .carousel-item {
+                margin-left: 0px !important;
+                margin-right: 30px !important;
+            }
+
+            .about_product_avability {
+                margin-left: 90px !important;
+            }
+
+            .product-info__text--price {
+                font-size: 22px !important;
+            }
+
+            .product-info__text--price-old {
+                font-size: 16px !important;
+            }
+        }
+/* === EMPTY-STATE PLACEHOLDERS ============================================ */
+/* Displayed only while product/news collections are empty. */
+.product-placeholder {
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid #f0eeee;
+    border-radius: 0.4rem;
+    background: #fff;
+}
+
+.product-placeholder__image-wrap {
+    display: flex;
+    min-height: 20rem;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: #f8f8f8;
+}
+
+.product-placeholder__image {
+    width: 100%;
+    max-width: 18rem;
+    height: 16rem;
+    object-fit: contain;
+    opacity: 0.55;
+    filter: grayscale(1);
+}
+
+.product-placeholder__content,
+.news-placeholder {
+    display: grid;
+    gap: 1rem;
+    padding: 1.8rem;
+}
+
+.product-placeholder__line,
+.news-placeholder__line {
+    display: block;
+    width: 72%;
+    height: 1rem;
+    border-radius: 999px;
+    background: #eceae9;
+}
+
+.product-placeholder__line--title {
+    width: 92%;
+    height: 1.4rem;
+}
+
+.product-placeholder__line--price {
+    width: 42%;
+    height: 1.6rem;
+    margin-top: 0.6rem;
+}
+
+.news-placeholder {
+    height: 100%;
+    background: #fff;
+}
+
+.news-placeholder__image {
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+    opacity: 0.48;
+    filter: grayscale(1);
+}
+
+.news-placeholder__line--short {
+    width: 48%;
+}
+
+/* ==========================================================================
+   REGISTRATION MODAL
+   Isolated account-registration component opened from the header user icon.
+   ========================================================================== */
+body.registration-modal-open { overflow: hidden; }
+.registration-modal[hidden] { display: none; }
+.registration-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10050;
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+    overflow-y: auto;
+    background: rgba(18, 14, 12, 0.66);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+.registration-modal.is-open { opacity: 1; }
+.registration-modal__dialog {
+    position: relative;
+    width: min(68rem, 100%);
+    max-height: calc(100vh - 4rem);
+    padding: 3.6rem;
+    overflow-y: auto;
+    border-radius: 1.2rem;
+    background: #fff;
+    box-shadow: 0 2.4rem 7rem rgba(0, 0, 0, 0.28);
+}
+.registration-modal__close {
+    position: absolute;
+    top: 1.4rem;
+    right: 1.6rem;
+    width: 4rem;
+    height: 4rem;
+    padding: 0;
+    border: 0;
+    color: #34302e;
+    background: transparent;
+    font-size: 3rem;
+    line-height: 1;
+    cursor: pointer;
+}
+.registration-modal__eyebrow {
+    margin: 0 0 0.6rem;
+    color: var(--secondary-color, #e60000);
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.registration-modal__title { margin: 0; font-size: clamp(2.6rem, 4vw, 3.8rem); }
+.registration-modal__subtitle { max-width: 52rem; margin: 0.8rem 0 2.6rem; color: #706b68; }
+.registration-modal__tabs {
+    display: flex;
+    gap: 0.6rem;
+    margin: 0 0 2.4rem;
+    border-bottom: 1px solid #e5e0dc;
+}
+.registration-modal__tab {
+    padding: 1rem 0.4rem 1.2rem;
+    margin-bottom: -1px;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: #8c8682;
+    font-weight: 700;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.registration-modal__tab.is-active { color: #1e1b19; border-bottom-color: var(--secondary-color, #e60000); }
+.registration-modal__form[hidden] { display: none; }
+.registration-modal__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.8rem 2rem;
+}
+.registration-modal__field { display: grid; gap: 0.7rem; color: #34302e; font-weight: 600; }
+.registration-modal__field input {
+    width: 100%;
+    min-height: 4.8rem;
+    padding: 1.2rem 1.4rem;
+    border: 1px solid #d8d3d0;
+    border-radius: 0.6rem;
+    color: #1e1b19;
+    background: #fff;
+    font: inherit;
+}
+.registration-modal__field input:focus {
+    border-color: var(--secondary-color, #e60000);
+    outline: 3px solid rgba(230, 0, 0, 0.12);
+}
+.registration-modal__error { margin: 1.4rem 0 0; color: #c30000; font-weight: 600; }
+.registration-modal__consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin: 2rem 0;
+    color: #625d59;
+    font-size: 1.3rem;
+    line-height: 1.5;
+}
+.registration-modal__consent input { width: 1.8rem; height: 1.8rem; margin-top: 0.2rem; accent-color: #e60000; }
+.registration-modal__submit {
+    width: 100%;
+    min-height: 5rem;
+    border: 0;
+    border-radius: 0.6rem;
+    color: #fff;
+    background: var(--secondary-color, #e60000);
+    font-weight: 700;
+    cursor: pointer;
+}
+.registration-modal__submit:hover { background: #bd0000; }
+@media only screen and (max-width: 640px) {
+    .registration-modal { padding: 1rem; align-items: end; }
+    .registration-modal__dialog { max-height: calc(100vh - 1rem); padding: 3rem 2rem 2.4rem; border-radius: 1.2rem 1.2rem 0 0; }
+    .registration-modal__grid { grid-template-columns: 1fr; gap: 1.4rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .registration-modal { transition: none; }
+}
+
+/* ==========================================================================
+   SITE MESSAGES
+   Django messages framework output (login/logout/register feedback etc.),
+   rendered once sitewide in base.html.
+   ========================================================================== */
+.site-messages {
+    display: grid;
+    gap: 0.8rem;
+    max-width: 60rem;
+    margin: 1.6rem auto 0;
+    padding: 0 2rem;
+}
+.site-messages__item {
+    position: relative;
+    padding: 1.2rem 4rem 1.2rem 1.6rem;
+    border-radius: 0.6rem;
+    border: 1px solid transparent;
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+.site-messages__item--success { color: #1e6b3c; background: #e8f7ee; border-color: #bfe8cf; }
+.site-messages__item--info { color: #1f5a8a; background: #e9f2fb; border-color: #c3ddf3; }
+.site-messages__item--warning { color: #8a6416; background: #fbf3e0; border-color: #f0deac; }
+.site-messages__item--error { color: #c30000; background: #fdeaea; border-color: #f5c6c6; }
+.site-messages__close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.8rem;
+    width: 2.8rem;
+    height: 2.8rem;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.6;
+}
+.site-messages__close:hover { opacity: 1; }
