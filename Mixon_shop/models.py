@@ -737,6 +737,29 @@ class MainPageBanner(models.Model):
         verbose_name_plural = "Баннеры на главной странице"
 
 
+class HomeRowBanner(models.Model):
+    """Рекламный блок четвёртым в ряду товаров на главной: тогда в ряду остаётся три товара."""
+    SECTION_CHOICES = [
+        ('sales_leaders', 'Лидеры продаж'),
+        ('novelty', 'Новинки'),
+        ('recommended', 'Рекомендуемые товары'),
+    ]
+    section = models.CharField(max_length=32, choices=SECTION_CHOICES, unique=True, verbose_name='ряд товаров')
+    image = models.ImageField(upload_to='main_page/row_banners/', verbose_name='изображение блока',
+                              help_text='Размер 290×498 px')
+    link = models.CharField(max_length=512, blank=True, verbose_name='ссылка',
+                            help_text='Адрес страницы, куда ведёт блок. Можно оставить пустым.')
+    alt = models.CharField(max_length=256, blank=True, verbose_name='подпись к изображению')
+    is_used = models.BooleanField(default=True, verbose_name='показывать на главной')
+
+    class Meta:
+        verbose_name = "Рекламный блок в ряду товаров"
+        verbose_name_plural = "Рекламные блоки в рядах товаров"
+
+    def __str__(self):
+        return self.get_section_display()
+
+
 class ErrorMessages(models.Model):
     name = models.CharField(verbose_name=_('error`s short name'), max_length=100, unique=True)
     message = models.CharField(verbose_name=_('error`s full text'), max_length=255)

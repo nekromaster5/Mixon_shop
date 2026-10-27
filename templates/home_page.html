@@ -136,10 +136,10 @@
                 <div class="product__section--inner">
                     <div class="slider-container adjustable-slider">
                         <div class="slider">
-                            {% for item in sales_leaders %}
+                            {% for item in sales_leaders %}{% if not row_banners.sales_leaders or forloop.counter <= 3 %}
                                 <div class="col-lg-18 col-md-17 col-17 mb-lg-8 mb-md-7 mb-5 slide">
                                     {% include "product_block--standard.html" with item=item %}
-                                </div>
+                                </div>{% endif %}
                             {% empty %}
                                 {% for placeholder in "1234" %}
                                     <div class="col-lg-18 col-md-17 col-17 mb-lg-8 mb-md-7 mb-5 slide">
@@ -147,6 +147,7 @@
                                     </div>
                                 {% endfor %}
                             {% endfor %}
+                            {% include "partials/home_row_banner.html" with banner=row_banners.sales_leaders %}
                             <script>
                                 initWishlistButtons(document);
                             </script>
@@ -173,10 +174,10 @@
                 <div class="product__section--inner">
                     <div class="slider-container adjustable-slider">
                         <div class="slider">
-                            {% for item in novelty %}
+                            {% for item in novelty %}{% if not row_banners.novelty or forloop.counter <= 3 %}
                                 <div class="col-lg-18 col-md-17 col-17 mb-lg-8 mb-md-7 mb-5 slide">
                                     {% include "product_block--standard.html" with item=item %}
-                                </div>
+                                </div>{% endif %}
                                 {% empty %}
                                     {% for placeholder in "1234" %}
                                         <div class="col-lg-18 col-md-17 col-17 mb-lg-8 mb-md-7 mb-5 slide">
@@ -184,6 +185,7 @@
                                         </div>
                                     {% endfor %}
                             {% endfor %}
+                            {% include "partials/home_row_banner.html" with banner=row_banners.novelty %}
                             <script>
                                 initWishlistButtons(document);
                             </script>
@@ -210,10 +212,10 @@
                 <div class="product__section--inner">
                     <div class="slider-container adjustable-slider">
                         <div class="slider">
-                            {% for item in recommended_products %}
+                            {% for item in recommended_products %}{% if not row_banners.recommended or forloop.counter <= 3 %}
                                 <div class="col-lg-18 col-md-17 col-17 mb-lg-8 mb-md-7 mb-5 slide">
                                     {% include "product_block--standard.html" with item=item %}
-                                </div>
+                                </div>{% endif %}
                                 {% empty %}
                                     {% for placeholder in "1234" %}
                                         <div class="col-lg-18 col-md-17 col-17 mb-lg-8 mb-md-7 mb-5 slide">
@@ -221,6 +223,7 @@
                                         </div>
                                     {% endfor %}
                             {% endfor %}
+                            {% include "partials/home_row_banner.html" with banner=row_banners.recommended %}
                             <script>
                                 initWishlistButtons(document);
                             </script>

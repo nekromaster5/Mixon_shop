@@ -30,7 +30,7 @@ from unicodedata import category
 from .forms import UserRegisterForm, UserLoginForm, ProfileUpdateForm
 from .models import UserProfile, Region
 from .forms import UserLoginForm
-from .models import MainPageBanner
+from .models import MainPageBanner, HomeRowBanner
 from .session_cart import SessionCart
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -137,6 +137,7 @@ class HomePage(View):
             'news': news,
             'sections': sections,
             'banners': banners,
+            'row_banners': {b.section: b for b in HomeRowBanner.objects.filter(is_used=True)},
         })
 
 

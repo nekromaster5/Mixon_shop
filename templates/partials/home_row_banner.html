@@ -1,0 +1,7 @@
+{% if banner %}
+    <div class="col-lg-18 col-md-17 col-17 mb-lg-8 mb-md-7 mb-5 slide home_row_banner">
+        {% if banner.link %}<a href="{{ banner.link }}">{% endif %}
+        <img class="home_row_banner__img" src="{{ banner.image.url }}" alt="{{ banner.alt }}" loading="lazy">
+        {% if banner.link %}</a>{% endif %}
+    </div>
+{% endif %}

@@ -12,7 +12,7 @@ from .models import (
     NewsCategory, News, ErrorMessages, InfoMessages, City, ProductStock, Volume, Color, ProductImage, BindingSubstance,
     ProductType, PromoCode, SalesLeaders, RecommendedProducts, MainPageSections, MainPageBanner, Category, OrderProduct,
     BranchSchedule, BranchScheduleException, ScheduleTemplateItem, ScheduleTemplate, ContentBlock, EmailAddress,
-    Brand,
+    Brand, HomeRowBanner,
 )
 
 
@@ -336,6 +336,12 @@ class MainPageBannerAdmin(admin.ModelAdmin):
     list_display = ('id', 'description', 'is_used')
     list_filter = ('is_used',)
     search_fields = ('description',)
+
+
+@admin.register(HomeRowBanner)
+class HomeRowBannerAdmin(admin.ModelAdmin):
+    list_display = ('section', 'link', 'is_used')
+    list_filter = ('is_used',)
 
 
 @admin.register(ErrorMessages)

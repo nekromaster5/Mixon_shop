@@ -26,9 +26,9 @@
     </ul>
     <div class="product__card--price d-flex">
         {% if item.product.is_discounted %}
-            <span class="current__price">{{ item.product.discount_price }}₴</span>
+            <span class="current__price">{{ item.product.discount_price|stringformat:".2f" }} ₴</span>
         {% else %}
-            <span class="current__price">{{ item.product.price }}₴</span>
+            <span class="current__price">{{ item.product.price|stringformat:".2f" }} ₴</span>
         {% endif %}
         {% if item.product.is_in_stock %}
             <span class="is__in_stock">{% translate "Есть в наличии" %}</span>
@@ -36,4 +36,7 @@
             <span class="is__in_stock">{% translate "Нет в наличии" %}</span>
         {% endif %}
     </div>
+    {% if item.product.is_discounted %}
+        <span class="product__card--old-price">{{ item.product.price|stringformat:".2f" }} ₴</span>
+    {% endif %}
 {% endblock %}
