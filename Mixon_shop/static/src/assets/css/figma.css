@@ -12,13 +12,9 @@
 }
 
 /* ---------- Подвал ---------- */
-.footer__bg {
-    padding: 56px 0 48px;
+.footer__section.footer__bg {
+    padding: 60px 0 34px;
     background: #373432;
-}
-
-.footer__section {
-    padding: 0;
 }
 
 .main__footer {
@@ -88,7 +84,7 @@
 
 /* 320: один столбец, меню без заголовка, соцсети одним рядом по центру */
 @media (max-width: 767px) {
-    .footer__bg {
+    .footer__section.footer__bg {
         padding: 24px 0 32px;
     }
 
@@ -236,6 +232,10 @@
     margin-bottom: 7px;
 }
 
+.footer-col--stores > .footer__widget > .footer__widget--menu > .footer__widget--menu__list:last-child {
+    margin-bottom: 0;
+}
+
 .footer-col--stores .locations_list {
     display: flex;
     flex-direction: column;
@@ -250,12 +250,6 @@
 .footer-col--stores .locations_text {
     font-size: 13px;
     line-height: 16px;
-}
-
-@media (max-width: 1199px) {
-    .footer-col--stores > .footer__widget > .footer__widget--menu > .footer__widget--menu__list {
-        grid-template-columns: 130px minmax(0, 1fr);
-    }
 }
 
 /* ---------- Шапка (макет 1440: верхняя полоса 82px, нижняя 63px) ---------- */
