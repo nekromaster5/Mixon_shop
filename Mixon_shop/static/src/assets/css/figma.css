@@ -1,0 +1,259 @@
+/*
+ * Параметры из макета Figma (mixon-shop), ширина 1440.
+ * Подключается после style.css и переопределяет его там, где вёрстка расходится с макетом.
+ * Единицы px, потому что в макете значения заданы в пикселях (rem в проекте = 10px).
+ */
+
+/* ---------- Контейнер: поля 135px при 1440, контент 1170px ---------- */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
+    }
+}
+
+/* ---------- Подвал ---------- */
+.footer__bg {
+    padding: 56px 0 48px;
+    background: #373432;
+}
+
+.footer__section {
+    padding: 0;
+}
+
+.main__footer {
+    padding: 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 16px;
+}
+
+.footer-col--menu {
+    order: 1;
+}
+
+.footer-col--directions {
+    order: 2;
+}
+
+.footer-col--contacts {
+    order: 3;
+}
+
+.footer-col--stores {
+    order: 4;
+}
+
+/* 768: два столбца (Меню | Товарные направления, затем Контакты | Магазины) */
+@media (min-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 256px minmax(0, 1fr);
+        padding-left: 31px;
+    }
+
+    .footer-col--contacts,
+    .footer-col--stores {
+        margin-top: 24px;
+    }
+
+    .main__footer > img {
+        margin-left: 31px;
+    }
+}
+
+/* 1440: порядок как в макете, четыре столбца */
+@media (min-width: 1200px) {
+    .footer-grid {
+        grid-template-columns: 201px 191px 309px minmax(0, 1fr);
+        padding-left: 0;
+    }
+
+    .main__footer > img {
+        margin-left: 0;
+    }
+
+    .footer-col--contacts { order: 1; }
+    .footer-col--menu { order: 2; }
+    .footer-col--directions { order: 3; }
+    .footer-col--stores { order: 4; }
+
+    .footer-col--contacts,
+    .footer-col--stores {
+        margin-top: 0;
+    }
+}
+
+/* 320: один столбец, меню без заголовка, соцсети одним рядом по центру */
+@media (max-width: 767px) {
+    .footer__bg {
+        padding: 24px 0 32px;
+    }
+
+    .main__footer > img {
+        height: 36px;
+        margin-left: 12px;
+    }
+
+    .footer-grid {
+        padding: 0 21px;
+    }
+
+    .footer-grid .footer__widget--menu__text {
+        font-size: 16px;
+    }
+
+    .footer-col--menu .footer__widget--menu {
+        padding-left: 0;
+    }
+
+    .footer-col--contacts .footer__widget--menu {
+        padding-left: 5px;
+    }
+
+    .footer-col--menu {
+        margin-bottom: 32px;
+    }
+
+    .footer-grid .footer__widget--menu__list {
+        margin-bottom: 13px;
+    }
+
+    .footer-col--contacts .footer-socials {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: 0;
+        width: 100%;
+        margin-top: 24px;
+    }
+
+    .footer-col--contacts .footer-socials > li {
+        display: contents;
+        margin: 0;
+    }
+
+    .footer-col--contacts .footer-socials .footer__social {
+        display: contents !important;
+    }
+}
+
+.footer-grid .footer__widget {
+    margin: 0;
+}
+
+.footer-grid .footer__widget--title {
+    margin: 0 0 24px;
+    font-family: var(--montserrat-fonts);
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 27px;
+}
+
+.footer-grid .footer__widget--menu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.footer-grid .footer__widget--menu__list {
+    margin: 0 0 20px;
+}
+
+.footer-grid .footer__widget--menu__list:last-child {
+    margin-bottom: 0;
+}
+
+.footer-grid .footer__widget--menu__text {
+    display: inline-block;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 21px;
+}
+
+.footer-col--contacts .footer__widget--menu {
+    margin-bottom: 24px;
+    padding-left: 19px;
+}
+
+.footer-col--contacts .footer__widget--menu__text,
+.footer-col--menu .footer__widget--menu__text {
+    font-weight: 500;
+}
+
+.footer-col--menu .footer__widget--menu__text {
+    letter-spacing: -0.03em;
+}
+
+.footer-col--menu .footer__widget--menu,
+.footer-col--directions .footer__widget--menu {
+    padding-left: 5px;
+}
+
+.footer-col--directions .footer__widget--menu__text {
+    max-width: 270px;
+}
+
+.footer .special_highlight,
+.footer-grid .special_highlight {
+    color: #f00;
+}
+
+/* соцсети: два ряда по 30px, зазор 8/7px, ширина 173px */
+.footer-socials {
+    width: 173px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.footer-socials > li + li {
+    margin-top: 7px;
+}
+
+.footer-socials .footer__social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px 8px;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-socials .social__share--list {
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 30px;
+}
+
+/* магазины: город (150px) + адреса, адреса 13px, зазор между ними 7px */
+.footer-col--stores > .footer__widget > .footer__widget--menu > .footer__widget--menu__list {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    align-items: start;
+    margin-bottom: 7px;
+}
+
+.footer-col--stores .locations_list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin: 0;
+}
+
+.footer-col--stores .locations_list .footer__widget--menu__list {
+    margin: 0;
+}
+
+.footer-col--stores .locations_text {
+    font-size: 13px;
+    line-height: 16px;
+}
+
+@media (max-width: 1199px) {
+    .footer-col--stores > .footer__widget > .footer__widget--menu > .footer__widget--menu__list {
+        grid-template-columns: 130px minmax(0, 1fr);
+    }
+}

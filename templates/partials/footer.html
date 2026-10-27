@@ -4,8 +4,8 @@
     <div class="container">
         <div class="main__footer">
             <img src="{% static '/src/assets/img/logo/logo_mix2.svg' %}" alt="mixon-logo">
-            <div class="row ">
-                <div class="col-lg-4 col-md-13 order-lg-0 order-md-2 order-1">
+            <div class="footer-grid">
+                <div class="footer-col footer-col--contacts">
                     <div class="footer__widget">
                         <h2 class="footer__widget--title">Контакты</h2>
                         <div class="footer__widget--inner">
@@ -19,14 +19,12 @@
                                 <li class="footer__widget--menu__list"><a
                                         class="footer__widget--menu__text">+38 067 888 00
                                     03</a></li>
-                                <li class="footer__widget--menu__list invisible"><a
-                                        class="footer__widget--menu__text no-hover no-cursor_change">asd</a></li>
                                 <li class="footer__widget--menu__list"><a
                                         class="footer__widget--menu__text no-hover no-cursor_change">shop@mixon.ua</a>
                                 </li>
                             </ul>
-                            <ul class="social__share d-flex d-md-block">
-                                <li class="mb-4">
+                            <ul class="footer-socials">
+                                <li>
                                     <ul class="social__share footer__social d-flex">
                                         <li class="social__share--list">
                                             <a class="social__share--icon__style2 no-hover" target="_blank"
@@ -141,13 +139,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-13 order-lg-1 order-md-0 order-0">
+                <div class="footer-col footer-col--menu">
                     <div class="footer__widget">
                         <h2 class="footer__widget--title d-none d-md-block">Меню</h2>
                         <ul class="footer__widget--menu footer__widget--inner">
                             <li class="footer__widget--menu__list"><a
                                     href="{% url 'catalogue' filters='discounted-goods' %}"
-                                    class="footer__widget--menu__text"
+                                    class="footer__widget--menu__text special_highlight"
                             >Акции</a></li>
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text"
                                                                       href="{% url 'about_company' %}">О нас</a></li>
@@ -161,7 +159,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-1 col-md-14 order-lg-2 order-md-1 d-none d-md-block">
+                <div class="footer-col footer-col--directions d-none d-md-block">
                     <div class="footer__widget">
                         <h2 class="footer__widget--title ">Товарные направления</h2>
                         <ul class="footer__widget--menu footer__widget--inner">
@@ -188,13 +186,13 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-14 order-lg-3 order-md-3 d-none d-md-block">
+                <div class="footer-col footer-col--stores d-none d-md-block">
                     <div class="footer__widget">
                         <h2 class="footer__widget--title ">Магазины</h2>
                         <ul class="footer__widget--menu footer__widget--inner">
                             <li class="footer__widget--menu__list"><a
                                     class="footer__widget--menu__text no-cursor_change no-hover">г. Одесса</a>
-                                <ul class="footer__widget--menu footer__widget--inner locations_list">
+                                <ul class="footer__widget--menu footer__widget--inner locations_list footer-stores__addresses">
                                     <li class="footer__widget--menu__list"><a
                                             class="footer__widget--menu__text locations_text"
                                             href="{% url 'contacts' %}">ул. Елисаветинская 4,<br> +38 (097) 295 88 03,
@@ -234,7 +232,7 @@
                             </li>
                             <li class="footer__widget--menu__list"><a
                                     class="footer__widget--menu__text no-cursor_change no-hover">г. Киев</a>
-                                <ul class="footer__widget--menu footer__widget--inner locations_list">
+                                <ul class="footer__widget--menu footer__widget--inner locations_list footer-stores__addresses">
                                     <li class="footer__widget--menu__list"><a
                                             class="footer__widget--menu__text locations_text"
                                             href="{% url 'contacts' %}">пр-т Глушкова 40, корп. 3,<br>+38(096) 295 88 09</a>
@@ -243,7 +241,7 @@
                             </li>
                             <li class="footer__widget--menu__list"><a
                                     class="footer__widget--menu__text no-cursor_change no-hover">г. Луцк</a>
-                                <ul class="footer__widget--menu footer__widget--inner locations_list">
+                                <ul class="footer__widget--menu footer__widget--inner locations_list footer-stores__addresses">
                                     <li class="footer__widget--menu__list"><a
                                             class="footer__widget--menu__text locations_text"
                                             href="{% url 'contacts' %}">ул. Ровенская 44,<br>+38(098) 295 33 19, 38(095)
@@ -260,7 +258,7 @@
                             </li>
                             <li class="footer__widget--menu__list"><a
                                     class="footer__widget--menu__text no-cursor_change no-hover">г. Ровно</a>
-                                <ul class="footer__widget--menu footer__widget--inner locations_list">
+                                <ul class="footer__widget--menu footer__widget--inner locations_list footer-stores__addresses">
                                     <li class="footer__widget--menu__list"><a
                                             class="footer__widget--menu__text locations_text"
                                             href="{% url 'contacts' %}">ул. Бородина 4,<br>+38(096) 295 33 12, 38(095)
@@ -269,7 +267,7 @@
                             </li>
                             <li class="footer__widget--menu__list"><a
                                     class="footer__widget--menu__text no-cursor_change no-hover">г. Хмельницкий</a>
-                                <ul class="footer__widget--menu footer__widget--inner locations_list">
+                                <ul class="footer__widget--menu footer__widget--inner locations_list footer-stores__addresses">
                                     <li class="footer__widget--menu__list"><a
                                             class="footer__widget--menu__text locations_text"
                                             href="{% url 'contacts' %}">ул. Побужская 11,<br>+38(098) 295 33 13 38(095)
