@@ -12,7 +12,7 @@ import math
 from .models import MainPageSections
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import JsonResponse
-from django.db.models import F, Case, When, Value, DecimalField, Count, Min, Max, Exists, OuterRef
+from django.db.models import F, Case, When, Value, DecimalField, Count, Min, Max, Exists, OuterRef, Sum
 from django.db.models.functions import Coalesce
 from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
 from django.contrib import messages
@@ -161,9 +161,23 @@ class ProductPage(View):
         related_products = [ProductSelfWrapper(p) for p in annotate_products(product.related_products.all())]
         similar_products = [ProductSelfWrapper(p) for p in annotate_products(product.similar_products.all())]
 
+        # Цвета и объёмы берём из остатков: одна строка на цвет, кол-во суммируется по филиалам
+        stocks = ProductStock.objects.filter(product=product)
+        colors = (
+            stocks.filter(color__isnull=False)
+            .values('color__vendor_code', 'color__name', 'color__rgb_code')
+            .annotate(total=Coalesce(Sum('quantity'), 0))
+            .order_by('color__vendor_code', 'color__name')
+        )
+        volumes = Volume.objects.filter(productstock__product=product).distinct().order_by('size')
+
         return render(request, 'product.html', {
             'product': product,
             'images': images,
+            'colors': colors,
+            'volumes': volumes,
+            'likes_count': product.favoriteproduct_set.count(),
+            'reviews_count': product.reviews.count(),
             'stars': rating_to_stars(product.average_rating),
             'related_products': related_products,
             'similar_products': similar_products,

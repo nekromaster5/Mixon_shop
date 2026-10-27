@@ -49,12 +49,12 @@
                         <div class="product_top_icon">
                             <img style="width:18px;height:19px;"
                                  src="{% static '/src/assets/img/icon/like_icon.png' %}">
-                            <span>67</span>
+                            <span>{{ likes_count }}</span>
                         </div>
                         <div class="product_top_icon">
                             <img src="{% static '/src/assets/img/icon/review_icon.png' %}"
                                  style="width:18px;height:19px;">
-                            <span>23</span></div>
+                            <span>{{ reviews_count }}</span></div>
                     </div>
                 </div>
                 <span class="product_article">Артикул {{ product.article|default:"—" }}</span>
@@ -98,40 +98,25 @@
                     <div class="left_block">
                         <div class="left_flex_display" style="display:flex;">
                             <div class="carousel-buttons">
-                                {% for _ in "1111"|make_list %}
-                                    <button data-item-index="{{ forloop.counter0 }}"
+                                {% for image in images|slice:":4" %}
+                                    <button type="button" data-image-url="{{ image.image.url }}"
                                             style="display: flex; flex-direction: column; align-items: center; width: 100px; height: 100px; margin-top: 20px; border: none; background: transparent;">
-                                        <img src="
-
-
-
-
-                                                {% if product.images.all %}{{ product.images.first.image.url }}{% else %}{% static '/src/assets/img/icon/Path 1623.svg' %}{% endif %}"
-                                             alt="Thumb {{ forloop.counter }}" width="100" height="100">
+                                        <img src="{{ image.image.url }}"
+                                             alt="{{ product.name }} {{ forloop.counter }}" width="100" height="100"
+                                             style="object-fit: contain;">
                                     </button>
                                 {% endfor %}
                             </div>
 
                             <div class="product_left_path">
-                                <button style="border:none;background-color:transparent; width: 400px; height: 400px;">
-                                    <img src="
-
-
-
-
-                                            {% if product.images.all %}{{ product.images.first.image.url }}{% else %}{% static '/src/assets/img/icon/Path 1623.svg' %}{% endif %}"
-                                         alt="{{ product.name }}" width="400" height="400">
-                                </button>
-                            </div>
-
-
-                            <!-- Основная карусель -->
-                            <div class="carousel-container" style="display:flex;">
-                                {% for image in images %}
-                                    <div class="carousel-item">
-                                        <img src="{{ image.image.url }}" alt="Slide {{ forloop.counter }}">
+                                {% if images %}
+                                    <img id="product-main-image" src="{{ images.0.image.url }}"
+                                         alt="{{ product.name }}" width="400" height="400" style="object-fit: contain;">
+                                {% else %}
+                                    <div style="width: 400px; height: 400px; display: flex; align-items: center; justify-content: center; background: #F5F5F5; color: #AEADAA;">
+                                        Нет фото
                                     </div>
-                                {% endfor %}
+                                {% endif %}
                             </div>
 
 
@@ -142,14 +127,6 @@
                             </div>
                         </div>
 
-                        <!-- Кнопки карусели -->
-                        <div class="product_buttons">
-                            <button class="product_carousel-button"></button>
-                            <button class="product_carousel-button"></button>
-                            <button class="product_carousel-button"></button>
-                            <button class="product_carousel-button"></button>
-                            <button class="product_carousel-button"></button>
-                        </div>
                     </div>
 
 
@@ -392,29 +369,26 @@
                             </div>
                         </div>
                         <!-- Вставляем новый блок package_block здесь -->
+                        {% if volumes %}
                         <div class="package_block" style="margin-top: 10px;">
                             <div>
                                 <div style="width:40px; height: 20px; position:relative; font-weight: 500;">
                                     Упаковка:
                                 </div>
                                 <div style="display: flex; margin-top: 5px; gap: 20px;">
-                                    <button class="button_0"
-                                            style="border-radius:2px;border: 1px solid #E9E7E6;box-shadow:none;background-color: white;border-color:#E9E7E6;width: 40px; height: 40px;">
-                                        1л.
-                                    </button>
-                                    <button class="button_1"
-                                            style="border-radius:2px;border: 1px solid #E9E7E6;background-color: white;border-color:#E9E7E6;width: 40px; height: 40px;">
-                                        3л.
-                                    </button>
-                                    <button class="button_2"
-                                            style="border-radius:2px;border: 1px solid #E9E7E6;background-color: white;border-color:#E9E7E6;width: 40px; height: 40px;">
-                                        10л.
-                                    </button>
+                                    {% for volume in volumes %}
+                                        <button type="button" class="button_{{ forloop.counter0 }}"
+                                                style="border-radius:2px;border: 1px solid #E9E7E6;box-shadow:none;background-color: white;border-color:#E9E7E6;min-width: 40px; height: 40px;">
+                                            {{ volume.size|floatformat:"-2" }}л.
+                                        </button>
+                                    {% endfor %}
                                 </div>
 
                             </div>
                         </div>
+                        {% endif %}
                         <div class="right_second_block">
+                            {% if colors %}
                             <div style="width: 70px; height: 20px; border-width: 2px; margin-top: 30px;">Цвет:
                             </div>
                             <div class="product_table">
@@ -425,88 +399,22 @@
                                     </div>
                                     <div>Кол-во</div>
                                 </div>
-                                <div class="table_cell">
-                                    <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
-                                    <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
-                                        MA603BAL
-                                        <span>Хаки603</span>
-                                    </p>
-                                    <div class="table_sphere"></div>
-                                    <p class="table_quantity">0</p>
-
-
-                                </div>
-                                <div class="table_cell">
-                                    <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
-                                    <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
-                                        MA603BAL
-                                        <span>Хаки603</span>
-                                    </p>
-                                    <div class="table_sphere"></div>
-                                    <p class="table_quantity">0</p>
-
-
-                                </div>
-                                <div class="table_cell">
-                                    <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
-                                    <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
-                                        MA603BAL
-                                        <span>Хаки603</span>
-                                    </p>
-                                    <div class="table_sphere"></div>
-                                    <p class="table_quantity">0</p>
-
-
-                                </div>
-                                <div class="table_cell">
-                                    <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
-                                    <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
-                                        MA603BAL
-                                        <span>Хаки603</span>
-                                    </p>
-                                    <div class="table_sphere"></div>
-                                    <p class="table_quantity">0</p>
-
-
-                                </div>
-                                <div class="table_cell">
-                                    <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
-                                    <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
-                                        MA603BAL
-                                        <span>Хаки603</span>
-                                    </p>
-                                    <div class="table_sphere"></div>
-                                    <p class="table_quantity">0</p>
-
-
-                                </div>
-                                <div class="table_cell">
-                                    <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
-                                    <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
-                                        MA603BAL
-                                        <span>Хаки603</span>
-                                    </p>
-                                    <div class="table_sphere"></div>
-                                    <p class="table_quantity">0</p>
-
-
-                                </div>
-                                <div class="table_cell">
-                                    <button style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
-                                    <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
-                                        MA603BAL
-                                        <span>Хаки603</span>
-                                    </p>
-                                    <div class="table_sphere"></div>
-                                    <p class="table_quantity">0</p>
-
-
-                                </div>
-
+                                {% for color in colors %}
+                                    <div class="table_cell">
+                                        <button type="button" style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
+                                        <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
+                                            {{ color.color__vendor_code }}
+                                            <span>{{ color.color__name }}</span>
+                                        </p>
+                                        <div class="table_sphere" style="background-color: {{ color.color__rgb_code }};"></div>
+                                        <p class="table_quantity">{{ color.total }}</p>
+                                    </div>
+                                {% endfor %}
 
                             </div>
+                            {% endif %}
                             <div class="delivery">
-                                <p><span style="color:red;"> Доставка</span> в Хмельницикий</p>
+                                <p><span style="color:red;"> Доставка</span> в Хмельницкий</p>
                                 <div style=" margin-top:10px;display:flex;">
                                     <img class="delivery_img" src="{% static '/src/assets/img/icon/Group 42.png' %}"
                                          style="margin-right:10px;">
@@ -517,16 +425,16 @@
                                 <div style=" margin-top:15px; display:flex;">
                                     <img class="delivery_img" src="{% static '/src/assets/img/icon/Group 41.png' %}"
                                          style="margin-right:10px;">
-                                    <p>Самовывоз из магазина &nbsp;&nbsp;&nbsp;
-                                        <span style="color:gray;">  Доставят до 01.07 &nbsp;&nbsp;&nbsp; от 100грн</span>
+                                    <p>Курьерская доставка &nbsp;&nbsp;&nbsp;
+                                        <span style="color:gray;">  1–2 дня &nbsp;&nbsp;&nbsp; от 100 грн</span>
                                     </p>
                                 </div>
                                 <div style=" margin-top:20px;  display:flex;">
                                     <img class="delivery_img"
                                          src="{% static '/src/assets/img/icon/Group 104.png' %}"
                                          style="margin-right:10px;">
-                                    <p>Самовывоз из магазина &nbsp;&nbsp;&nbsp;
-                                        <span style="color:gray;">  Доставят до 20.07 &nbsp;&nbsp;&nbsp; от 170грн</span>
+                                    <p>Доставка Новой почтой &nbsp;&nbsp;&nbsp;
+                                        <span style="color:gray;">  2–3 дня &nbsp;&nbsp;&nbsp; от 170 грн</span>
                                     </p>
                                 </div>
                             </div>
@@ -1767,19 +1675,9 @@
     <script src="{% static '/src/assets/js/breadcrumbSliderSetWidth.js' %}"></script>
     <script>
         $(document).ready(function () {
-            // Скрываем все слайды, кроме первого
-            $(".carousel-item:not(:first)").hide();
-
-            // Обработчик клика по кнопкам
+            // Клик по миниатюре меняет главное фото
             $(".carousel-buttons button").click(function () {
-                // Получаем индекс слайда из атрибута data-item-index
-                var index = $(this).data("item-index");
-
-                // Скрываем все слайды
-                $(".carousel-item").hide();
-
-                // Показываем выбранный слайд
-                $(".carousel-item").eq(index).show();
+                $("#product-main-image").attr("src", $(this).data("image-url"));
             });
         });
 
