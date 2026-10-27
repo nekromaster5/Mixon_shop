@@ -33,11 +33,12 @@ from .forms import UserLoginForm
 from .models import MainPageBanner, HomeRowBanner
 from .session_cart import SessionCart
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import redirect_to_login
 from django.utils.decorators import method_decorator
 from .models import Product, Review, UserProfile, RecommendedProducts, SalesLeaders, City, ErrorMessages, PromoCode, \
     Order, \
     ShipmentMethod, PaymentMethod, OrderStatus, OrderProduct, BindingSubstance, ProductType, Volume, \
-    ProductStock, News, NewsCategory, Branch, FavoriteProduct, Category, Brand
+    ProductStock, News, NewsCategory, Branch, FavoriteProduct, Category, Brand, Color, ProductRequest
 
 import logging
 
@@ -61,9 +62,14 @@ class ProductSelfWrapper:
         self.comments_count = product.comments_count
 
 
-@login_required
 def manage_favorites(request, product_id):
-    product = Product.objects.get(
+    if not request.user.is_authenticated:
+        # AJAX-кнопке нужен понятный ответ, а не HTML страницы входа после редиректа
+        if request.headers.get("x-requested-with") == "XMLHttpRequest":
+            return JsonResponse({"status": "login_required"}, status=403)
+        return redirect_to_login(request.get_full_path())
+
+    product = get_object_or_404(Product,
         id=product_id if product_id else request.GET.get('product_id')
     )
     user = request.user
@@ -167,17 +173,26 @@ class ProductPage(View):
         stocks = ProductStock.objects.filter(product=product)
         colors = (
             stocks.filter(color__isnull=False)
-            .values('color__vendor_code', 'color__name', 'color__rgb_code')
+            .values('color__id', 'color__vendor_code', 'color__name', 'color__rgb_code')
             .annotate(total=Coalesce(Sum('quantity'), 0))
             .order_by('color__vendor_code', 'color__name')
         )
         volumes = Volume.objects.filter(productstock__product=product).distinct().order_by('size')
+
+        # Пустые значения не выводим (значение с фолбэком на украинский проверяем уже после перевода)
+        characteristics = [
+            item for item in product.characteristic_values.select_related('characteristic') if item.value
+        ]
 
         return render(request, 'product.html', {
             'product': product,
             'images': images,
             'colors': colors,
             'volumes': volumes,
+            'characteristics': characteristics,
+            'characteristics_left': characteristics[:(len(characteristics) + 1) // 2],
+            'characteristics_right': characteristics[(len(characteristics) + 1) // 2:],
+            'is_favorite': bool(user_id) and FavoriteProduct.objects.filter(user_id=user_id, product=product).exists(),
             'likes_count': product.favoriteproduct_set.count(),
             'reviews_count': product.reviews.count(),
             'stars': rating_to_stars(product.average_rating),
@@ -1105,6 +1120,35 @@ def cart_add(request, product_id):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         return JsonResponse({'success': True})
     return redirect('cart_detail')
+
+
+@require_POST
+def product_request(request, product_id):
+    """Заявка «Быстрый заказ» / «Хочу дешевле» со страницы товара."""
+    product = get_object_or_404(Product, id=product_id)
+    kind = request.POST.get('kind')
+    name = request.POST.get('name', '').strip()
+    phone = request.POST.get('phone', '').strip()
+
+    errors = {}
+    if kind not in ProductRequest.Kind.values:
+        errors['kind'] = _('Неизвестный тип заявки.')
+    if not name:
+        errors['name'] = _('Укажите имя.')
+    if sum(ch.isdigit() for ch in phone) < 10 or len(phone) > 18:
+        errors['phone'] = _('Укажите телефон, например +380 67 123 45 67.')
+    if errors:
+        return JsonResponse({'success': False, 'errors': errors}, status=400)
+
+    stocks = ProductStock.objects.filter(product=product)
+    volume = Volume.objects.filter(id=request.POST.get('volume') or None, productstock__in=stocks).first()
+    color = Color.objects.filter(id=request.POST.get('color') or None, productstock__in=stocks).first()
+
+    ProductRequest.objects.create(
+        kind=kind, product=product, volume=volume, color=color, name=name[:150], phone=phone,
+        comment=request.POST.get('comment', '').strip(),
+    )
+    return JsonResponse({'success': True})
 
 
 def cart_remove(request, product_id):

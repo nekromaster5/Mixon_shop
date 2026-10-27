@@ -203,44 +203,23 @@
                     <div class="right_block" style="display: flex; flex-direction: column;  ">
                         <div class="first_sale_block" style="display: flex;">
                             <div class="about_product_avability" style="display: flex; align-items: center;">
-                                <img src="{% static '/src/assets/img/icon/Path 47.png' %}">
-                                <span style="color: green; margin-right: 10px;">{% translate "Есть в наличии" %}</span>
+                                {% if product.is_in_stock %}
+                                    <img src="{% static '/src/assets/img/icon/Path 47.png' %}">
+                                    <span style="color: green; margin-right: 10px;">{% translate "Есть в наличии" %}</span>
+                                {% else %}
+                                    <span style="color: gray; margin-right: 10px;">{% translate "Нет в наличии" %}</span>
+                                {% endif %}
 
                             </div>
                             <div class="first_sale_block_buttons">
-                                <a class="product__card--action__btn compare--button no_scale box_shadow-3_1 small__button p-6 button-margin"
-                                   title="Compare">
-                                    <svg class="product__card--action__btn--svg" width="80%" height="80%"
-                                         viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.43018 22.99C8.60089 21.922 9.14669 20.9499 9.9696 20.248C10.7925 19.5462 11.8386 19.1607 12.9202 19.1607C14.0017 19.1607 15.0478 19.5462 15.8707 20.248C16.6936 20.9499 17.2394 21.922 17.4102 22.99H8.43018Z"
-                                              stroke="currentColor" stroke-miterlimit="10"
-                                              stroke-linecap="round"></path>
-                                        <path d="M1.11108 13.39C1.11108 14.4217 1.52091 15.4111 2.25043 16.1406C2.97994 16.8701 3.96935 17.28 5.00104 17.28C6.03273 17.28 7.02219 16.8701 7.75171 16.1406C8.48123 15.4111 8.89105 14.4217 8.89105 13.39H1.11108Z"
-                                              stroke="currentColor" stroke-linecap="round"
-                                              stroke-linejoin="round"></path>
-                                        <path d="M1.11108 13.39L5.00104 3.71497L8.89105 13.39H1.11108Z"
-                                              stroke="currentColor" stroke-linecap="round"
-                                              stroke-linejoin="round"></path>
-                                        <path d="M16.949 13.39C16.9653 14.4108 17.3823 15.3842 18.11 16.1002C18.8376 16.8163 19.8176 17.2177 20.8385 17.2177C21.8594 17.2177 22.8394 16.8163 23.567 16.1002C24.2947 15.3842 24.7116 14.4108 24.728 13.39H16.949Z"
-                                              stroke="currentColor" stroke-linecap="round"
-                                              stroke-linejoin="round"></path>
-                                        <path d="M16.949 13.39L20.839 3.71497L24.729 13.39H16.949Z"
-                                              stroke="currentColor" stroke-linecap="round"
-                                              stroke-linejoin="round"></path>
-                                        <path d="M12.9199 19.157V0.848999" stroke="currentColor"
-                                              stroke-miterlimit="10"></path>
-                                        <path d="M2.125 2.95599H23.715" stroke="currentColor"
-                                              stroke-miterlimit="10"></path>
-                                    </svg>
-                                    <span class="visually-hidden">Compare</span>
-                                </a>
-                                <a class="product__card--action__btn favourite--button no_scale box_shadow-3_1 small__button p-6"
+                                <a href="{% url 'manage_favorites' product_id=product.id %}" data-product-id="{{ product.id }}"
+                                   class="product__card--action__btn wishlist favourite--button no_scale box_shadow-3_1 small__button p-6"
                                    title="Wishlist">
                                     <svg class="product__card--action__btn--svg" width="70%" height="70%"
                                          viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M15.6219 0.58197C15.9109 0.58197 16.222 0.597991 16.549 0.627991C18.556 0.815991 20.8749 2.57399 21.1569 5.94299V7.06396C20.8949 10.288 18.351 14.264 10.918 19.254C3.48497 14.265 0.942932 10.289 0.679932 7.06396V5.94299C0.961932 2.57499 3.27996 0.815991 5.28796 0.627991C5.61796 0.597991 5.92594 0.583008 6.21594 0.583008C8.53294 0.583008 9.64595 1.54102 10.916 2.99402C12.19 1.54102 13.301 0.58197 15.616 0.58197"
                                               stroke="currentColor" stroke-miterlimit="10"
-                                              stroke-linecap="round"></path>
+                                              stroke-linecap="round"{% if is_favorite %} fill="red"{% endif %}></path>
                                     </svg>
                                     <span class="visually-hidden">Wishlist</span>
                                 </a>
@@ -283,7 +262,7 @@
                                 <!-- Вторая колонка -->
                                 <div class="col-md-6 second_col_product" style=" margin-top:8px; ">
                                     <a class="product__card--action__btn cheaper--button main_cheaper no_scale box_shadow-3_1"
-                                       title="Want Cheaper">
+                                       title="Want Cheaper" data-request-kind="cheaper">
                                         <svg width="21.776123" height="24.913086" viewBox="0 0 21.7761 24.9131"
                                              fill="none"
                                              xmlns="http://www.w3.org/2000/svg"
@@ -300,7 +279,7 @@
                                         <span class="visually-hidden">Want Cheaper</span>
                                     </a>
                                     <a class="product__card--action__btn main_quick_order quick__order--button no_scale"
-                                       title="Quick Order">
+                                       title="Quick Order" data-request-kind="quick_order">
                                         <svg width="20" height="21" viewBox="0 0 20 21" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path d="M7.09668 13.8062L8.93268 15.5922L13.0387 11.6392"
@@ -322,36 +301,8 @@
                                         <div class="first_sale_block" style="display: flex;">
 
                                             <div class="first_sale_block_buttons_mobile ">
-                                                <a class="product__card--action__btn compare--button no_scale box_shadow-3_1 small__button p-6"
-                                                   title="Compare"
-                                                   style="width:31px;height:31px; margin-right:9px;">
-                                                    <svg class="product__card--action__btn--svg" width="80%"
-                                                         height="80%"
-                                                         viewBox="0 0 26 24" fill="none"
-                                                         xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M8.43018 22.99C8.60089 21.922 9.14669 20.9499 9.9696 20.248C10.7925 19.5462 11.8386 19.1607 12.9202 19.1607C14.0017 19.1607 15.0478 19.5462 15.8707 20.248C16.6936 20.9499 17.2394 21.922 17.4102 22.99H8.43018Z"
-                                                              stroke="currentColor" stroke-miterlimit="10"
-                                                              stroke-linecap="round"></path>
-                                                        <path d="M1.11108 13.39C1.11108 14.4217 1.52091 15.4111 2.25043 16.1406C2.97994 16.8701 3.96935 17.28 5.00104 17.28C6.03273 17.28 7.02219 16.8701 7.75171 16.1406C8.48123 15.4111 8.89105 14.4217 8.89105 13.39H1.11108Z"
-                                                              stroke="currentColor" stroke-linecap="round"
-                                                              stroke-linejoin="round"></path>
-                                                        <path d="M1.11108 13.39L5.00104 3.71497L8.89105 13.39H1.11108Z"
-                                                              stroke="currentColor" stroke-linecap="round"
-                                                              stroke-linejoin="round"></path>
-                                                        <path d="M16.949 13.39C16.9653 14.4108 17.3823 15.3842 18.11 16.1002C18.8376 16.8163 19.8176 17.2177 20.8385 17.2177C21.8594 17.2177 22.8394 16.8163 23.567 16.1002C24.2947 15.3842 24.7116 14.4108 24.728 13.39H16.949Z"
-                                                              stroke="currentColor" stroke-linecap="round"
-                                                              stroke-linejoin="round"></path>
-                                                        <path d="M16.949 13.39L20.839 3.71497L24.729 13.39H16.949Z"
-                                                              stroke="currentColor" stroke-linecap="round"
-                                                              stroke-linejoin="round"></path>
-                                                        <path d="M12.9199 19.157V0.848999" stroke="currentColor"
-                                                              stroke-miterlimit="10"></path>
-                                                        <path d="M2.125 2.95599H23.715" stroke="currentColor"
-                                                              stroke-miterlimit="10"></path>
-                                                    </svg>
-                                                    <span class="visually-hidden">Compare</span>
-                                                </a>
-                                                <a class="product__card--action__btn favourite--button no_scale box_shadow-3_1 small__button p-6"
+                                                <a href="{% url 'manage_favorites' product_id=product.id %}" data-product-id="{{ product.id }}"
+                                   class="product__card--action__btn wishlist favourite--button no_scale box_shadow-3_1 small__button p-6"
                                                    title="Wishlist" style="width:31px;height:31px;">
                                                     <svg class="product__card--action__btn--svg" width="70%"
                                                          height="70%"
@@ -359,7 +310,7 @@
                                                          xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M15.6219 0.58197C15.9109 0.58197 16.222 0.597991 16.549 0.627991C18.556 0.815991 20.8749 2.57399 21.1569 5.94299V7.06396C20.8949 10.288 18.351 14.264 10.918 19.254C3.48497 14.265 0.942932 10.289 0.679932 7.06396V5.94299C0.961932 2.57499 3.27996 0.815991 5.28796 0.627991C5.61796 0.597991 5.92594 0.583008 6.21594 0.583008C8.53294 0.583008 9.64595 1.54102 10.916 2.99402C12.19 1.54102 13.301 0.58197 15.616 0.58197"
                                                               stroke="currentColor" stroke-miterlimit="10"
-                                                              stroke-linecap="round"></path>
+                                                              stroke-linecap="round"{% if is_favorite %} fill="red"{% endif %}></path>
                                                     </svg>
                                                     <span class="visually-hidden">Wishlist</span>
                                                 </a>
@@ -378,7 +329,8 @@
                                 </div>
                                 <div style="display: flex; margin-top: 5px; gap: 20px;">
                                     {% for volume in volumes %}
-                                        <button type="button" class="button_{{ forloop.counter0 }}"
+                                        <button type="button" class="button_{{ forloop.counter0 }} product-volume-option"
+                                                data-volume-id="{{ volume.id }}" aria-pressed="false"
                                                 style="border-radius:2px;border: 1px solid #E9E7E6;box-shadow:none;background-color: white;border-color:#E9E7E6;min-width: 40px; height: 40px;">
                                             {{ volume.size|floatformat:"-2" }}{% translate "л." %}
                                         </button>
@@ -401,8 +353,9 @@
                                     <div>{% translate "Кол-во" %}</div>
                                 </div>
                                 {% for color in colors %}
-                                    <div class="table_cell">
-                                        <button type="button" style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
+                                    <div class="table_cell product-color-option" data-color-id="{{ color.color__id }}"
+                                         style="cursor: pointer;">
+                                        <button type="button" class="product-color-checkbox" aria-pressed="false" style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
                                         <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
                                             {{ color.color__vendor_code }}
                                             <span>{{ color.color__name }}</span>
@@ -442,243 +395,77 @@
                         </div>
                     </div>
                 </div>
+                {% if product.description %}
                 <div class="description_block" style="background-color:#FFFFFF;">
                     <div class="inner_description_block">
                         <p style="font-size: 1.5em;">{% translate "Описание" %}</p>
-                        <p>{{ product.description }}</p>
+                        <p>{{ product.description|linebreaksbr }}</p>
                     </div>
                 </div>
+                {% endif %}
+                {% if characteristics %}
                 <div class="describe_block mb-7">
 
 
                     <span class="product__content--title__text main_text">{% translate "Характеристики" %}</span>
                     <div class="about_product_table">
-                        <div class="standart_about_product_table" style="justify-content: space-between;">
+                        <div class="standart_about_product_table" style="justify-content: space-between; align-items: flex-start;">
                             <table class="characteristics__content--table  table_ab main_table_l "
                                    style="  margin-left: 0rem;margin-left:3px; ">
                                 <tbody class="characteristics__content--table__body  position-relative">
-                                <tr class="product__content--text main_table_context_text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title_main">
-                                            {% translate "Использование..........................................................................................................................................." %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {{ product.usage }}
-                                    </td>
-                                </tr>
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title_main">
-                                            {% translate "Связующее вещество.................................................................................................................................................." %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {{ product.binding_substance }}
-                                    </td>
-                                </tr>
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title_main">
-                                            {% translate "Сухой остаток..................................................................................................................................................................." %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {{ product.dry_residue }}
-                                    </td>
-                                </tr>
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title_main">
-                                            {% translate "Плотность..............................................................................................................................................................................." %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {{ product.density }}
-                                    </td>
-                                </tr>
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title_main">
-                                            {% translate "Время высыхания, 23°С 50% RH ................................................................................................................................................................................." %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {{ product.drying_time }}
-                                    </td>
-                                </tr>
-
+                                {% for item in characteristics_left %}
+                                    <tr class="product__content--text">
+                                        <td class="col-6 text-nowrap overflow-hidden">
+                                            <div class="characteristic-title_main">
+                                                {{ item.characteristic.name }}................................................................................................................................................................
+                                            </div>
+                                        </td>
+                                        <td class="col-6">
+                                            {{ item.value }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
                                 </tbody>
                             </table>
                             <table class="characteristics__content--table table_ab main_table_r"
                                    style="  margin-left: 0rem;">
                                 <tbody class="characteristics__content--table__body  position-relative">
-
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title_main">
-                                            {% translate "Расход готовой смеси.........................................................................................................................................................................................." %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {{ product.consumption }}
-                                    </td>
-                                </tr>
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title_main">
-                                            {% translate "Разбавитель.................................................................................................................................................................................................." %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {{ product.solvent }}
-                                    </td>
-                                </tr>
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title_main">
-                                            {% translate "Рабочие инструменты..........................................................................................................................................................................................." %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {{ product.working_tools }}
-                                    </td>
-                                </tr>
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title_main">
-                                            {% translate "Очистка рабочих инструментов..............................................................................................................................................................................................." %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {{ product.tool_cleaning }}
-                                    </td>
-                                </tr>
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title_main">
-                                            {% translate "Хранение......................................................................................................................................................................................................" %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {{ product.storage }}
-                                    </td>
-                                </tr>
-
+                                {% for item in characteristics_right %}
+                                    <tr class="product__content--text">
+                                        <td class="col-6 text-nowrap overflow-hidden">
+                                            <div class="characteristic-title_main">
+                                                {{ item.characteristic.name }}................................................................................................................................................................
+                                            </div>
+                                        </td>
+                                        <td class="col-6">
+                                            {{ item.value }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
                                 </tbody>
                             </table>
                         </div>
                         <div class="adaptive_about_product_table">
                             <table class="characteristics__content--table table_ab " style="  margin-left: 0rem;">
                                 <tbody class="characteristics__content--table__body  position-relative">
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title">
-                                            {% translate "Использование..........................................................................................................................................." %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {% translate "Внутри помещений" %}
-                                    </td>
-                                </tr>
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title">
-                                            {% translate "Связующее вещество.................................................................................................................................................." %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {% translate "Сополимер" %}
-                                    </td>
-                                </tr>
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title">
-                                            {% translate "Сухой остаток..................................................................................................................................................................." %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        10 %
-                                    </td>
-                                </tr>
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title">
-                                            {% translate "Плотность..............................................................................................................................................................................." %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {% translate "1,05 кг/л" %}
-                                    </td>
-                                </tr>
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title">
-                                            {% translate "Время высыхания, 23°С 50% RH................................................................................................................................................................................." %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {% translate "2-6 часов" %}
-                                    </td>
-                                </tr>
-
-
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title">
-                                            {% translate "Расход готовой смеси.........................................................................................................................................................................................." %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {% translate "10-12 м2/л в 1 слой" %}
-                                    </td>
-                                </tr>
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title">
-                                            {% translate "Разбавитель.................................................................................................................................................................................................." %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {% translate "Вода" %}
-                                    </td>
-                                </tr>
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title">
-                                            {% translate "Рабочие инструменты..........................................................................................................................................................................................." %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {% translate "Валик, кисть" %}
-                                    </td>
-                                </tr>
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title">
-                                            {% translate "Очистка рабочих инструментов..............................................................................................................................................................................................." %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {% translate "Вода" %}
-                                    </td>
-                                </tr>
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title">
-                                            {% translate "Хранение......................................................................................................................................................................................................" %}
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {% translate "3 года t > 0оC" %}
-                                    </td>
-                                </tr>
-
+                                {% for item in characteristics %}
+                                    <tr class="product__content--text">
+                                        <td class="col-6 text-nowrap overflow-hidden">
+                                            <div class="characteristic-title">
+                                                {{ item.characteristic.name }}................................................................................................................................................................
+                                            </div>
+                                        </td>
+                                        <td class="col-6">
+                                            {{ item.value }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 <div class="section__buying--together">
                     <div class="section__heading d-flex justify-content-between mb-30 ">
                         <h2 class="section__heading--maintitle flex-grow-1 flex-shrink-0">{% translate "Покупают вместе" %}</h2>
@@ -698,14 +485,11 @@
                     <div class="product__section--inner">
                         <div class="slider-container adjustable-slider">
                             <div class="slider">
-                                {% for i in 'abcd'|make_list %}
+                                {% for item in related_products %}
                                     <div class="col-lg-18 col-md-17 col-17 mb-7 slide">
-                                        {% include "product_block--standard.html" %}
+                                        {% include "product_block--standard.html" with item=item %}
                                     </div>
                                 {% endfor %}
-                                <script>
-                                    initWishlistButtons(document);
-                                </script>
                                 {#                                            <div class="col-17 slide">#}
                                 {#                                                <img style="display: block !important;"#}
                                 {#                                                     src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}"#}
@@ -734,14 +518,11 @@
                     <div class="product__section--inner">
                         <div class="slider-container adjustable-slider">
                             <div class="slider">
-                                {% for i in 'abcd'|make_list %}
+                                {% for item in similar_products %}
                                     <div class="col-lg-18 col-md-17 col-17 mb-7 slide">
-                                        {% include "product_block--standard.html" %}
+                                        {% include "product_block--standard.html" with item=item %}
                                     </div>
                                 {% endfor %}
-                                <script>
-                                    initWishlistButtons(document);
-                                </script>
                                 {#                                            <div class="col-17 slide">#}
                                 {#                                                <img style="display: block !important;"#}
                                 {#                                                     src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}"#}
@@ -758,106 +539,20 @@
                         <span class="product__content--title__text">{% translate "Характеристики" %}</span>
                         <table class="characteristics__content--table">
                             <tbody class="characteristics__content--table__body position-relative">
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        {% translate "Использование..........................................................................................................................................." %}
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    {{ product.usage }}
-                                </td>
-                            </tr>
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        {% translate "Связующее вещество.................................................................................................................................................." %}
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    {{ product.binding_substance }}
-                                </td>
-                            </tr>
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        {% translate "Сухой остаток..................................................................................................................................................................." %}
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    {{ product.dry_residue }}
-                                </td>
-                            </tr>
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        {% translate "Плотность..............................................................................................................................................................................." %}
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    {{ product.density }}
-                                </td>
-                            </tr>
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        {% translate "Время высыхания, 23°С 50% RH................................................................................................................................................................................." %}
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    {{ product.drying_time }}
-                                </td>
-                            </tr>
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        {% translate "Расход готовой смеси.........................................................................................................................................................................................." %}
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    {{ product.consumption }}
-                                </td>
-                            </tr>
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        {% translate "Разбавитель.................................................................................................................................................................................................." %}
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    {{ product.solvent }}
-                                </td>
-                            </tr>
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        {% translate "Рабочие инструменты..........................................................................................................................................................................................." %}
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    {{ product.working_tools }}
-                                </td>
-                            </tr>
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        {% translate "Очистка рабочих инструментов..............................................................................................................................................................................................." %}
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    {{ product.tool_cleaning }}
-                                </td>
-                            </tr>
-                            <tr class="product__content--text">
-                                <td class="col-6 text-nowrap overflow-hidden">
-                                    <div class="characteristic-title">
-                                        {% translate "Хранение......................................................................................................................................................................................................" %}
-                                    </div>
-                                </td>
-                                <td class="col-6">
-                                    {{ product.storage }}
-                                </td>
-                            </tr>
+                            {% for item in characteristics %}
+                                <tr class="product__content--text">
+                                    <td class="col-6 text-nowrap overflow-hidden">
+                                        <div class="characteristic-title">
+                                            {{ item.characteristic.name }}................................................................................................................................................................
+                                        </div>
+                                    </td>
+                                    <td class="col-6">
+                                        {{ item.value }}
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr class="product__content--text"><td class="col-6">{% translate "Характеристики пока не заполнены" %}</td></tr>
+                            {% endfor %}
                             </tbody>
                         </table>
 
@@ -882,14 +577,11 @@
                             <div class="product__section--inner">
                                 <div class="slider-container adjustable-slider">
                                     <div class="slider">
-                                        {% for i in 'abcd'|make_list %}
+                                        {% for item in related_products %}
                                             <div class="col-17 mb-7 slide">
-                                                {% include "product_block--standard.html" %}
+                                                {% include "product_block--standard.html" with item=item %}
                                             </div>
                                         {% endfor %}
-                                        <script>
-                                            initWishlistButtons(document);
-                                        </script>
                                         {#                                            <div class="col-17 slide">#}
                                         {#                                                <img style="display: block !important;"#}
                                         {#                                                     src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}"#}
@@ -918,14 +610,11 @@
                             <div class="product__section--inner">
                                 <div class="slider-container adjustable-slider">
                                     <div class="slider">
-                                        {% for i in 'abcd'|make_list %}
+                                        {% for item in similar_products %}
                                             <div class="col-17 slide">
-                                                {% include "product_block--standard.html" %}
+                                                {% include "product_block--standard.html" with item=item %}
                                             </div>
                                         {% endfor %}
-                                        <script>
-                                            initWishlistButtons(document);
-                                        </script>
                                         {#                                            <div class="col-17 slide">#}
                                         {#                                                <img style="display: block !important;"#}
                                         {#                                                     src="{% static '/src/assets/img/logo/mixon_kars_banner.png' %}"#}
@@ -940,12 +629,12 @@
                         <div class="product-info bg-white align-items-center">
                             <div class="product-info__content row">
                                 <div class="product-info__text col-lg-7 col-md-16 col-16">
+                                    {% if product.is_discounted %}
                                     <div>
-                                        <button class="product-info__promo--label">
-                                            <span>{% translate "Акция" %}</span>
-                                        </button>
+                                        <button class="product-info__promo--label"><span>{% translate "Акция" %}</span></button>
                                     </div>
-                                    <div class="product-info__in-stock">
+                                    {% endif %}
+                                    {% if product.is_in_stock %}<div class="product-info__in-stock">
                                         <svg width="21" height="16" viewBox="0 0 21 16" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path d="M0 8.4162L5.98602 14.2352L19.372 1.34619" stroke="#18943B"
@@ -953,10 +642,14 @@
                                                   stroke-linejoin="round"></path>
                                         </svg>
                                         <span>{% translate "Есть в наличии" %}</span>
-                                    </div>
-                                    <span class="product-info__title">{% translate "Шпатлевка универсальная 2 кг Mixon Uni" %}</span>
-                                    <span class="product-info__text--price-old">265.00 &#8372;</span>
+                                    </div>{% else %}<div class="product-info__in-stock"><span style="color: gray;">{% translate "Нет в наличии" %}</span></div>{% endif %}
+                                    <span class="product-info__title">{{ product.name }}</span>
+                                    {% if product.is_discounted %}
+                                    <span class="product-info__text--price-old">{{ product.price|floatformat:2 }} &#8372;</span>
+                                    <span class="product-info__text--price">{{ product.discount_price|floatformat:2 }} &#8372;</span>
+                                    {% else %}
                                     <span class="product-info__text--price">{{ product.price|floatformat:2 }} &#8372;</span>
+                                    {% endif %}
                                 </div>
                                 <div class="product-info__image col-lg-7 col-md-15 col-15">
                                     <img src="
@@ -964,14 +657,14 @@
 
 
 
-                                            {% if product.images.all %}{{ product.images.first.image.url }}{% else %}{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}{% endif %}"
+                                            {% if product.images.all %}{{ product.images.first.image.url }}{% endif %}"
                                          alt="{{ product.name }}">
                                 </div>
 
                             </div>
                             <div class="product-info__buttons align-content-start flex-shrink-0 flex-grow-1 row">
                                 <a class="product__card--action__btn cheaper--button no_scale box_shadow-3_1"
-                                   title="Want Cheaper">
+                                   title="Want Cheaper" data-request-kind="cheaper">
                                     <svg width="21.776123" height="24.913086" viewBox="0 0 21.7761 24.9131"
                                          fill="none"
                                          xmlns="http://www.w3.org/2000/svg"
@@ -986,44 +679,19 @@
                                     <span>  {% translate "Хочу дешевле" %}</span>
                                     <span class="visually-hidden">Want Cheaper</span>
                                 </a>
-                                <a class="product__card--action__btn compare--button no_scale box_shadow-3_1 small__button p-6"
-                                   title="Compare">
-                                    <svg class="product__card--action__btn--svg" width="80%" height="80%"
-                                         viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.43018 22.99C8.60089 21.922 9.14669 20.9499 9.9696 20.248C10.7925 19.5462 11.8386 19.1607 12.9202 19.1607C14.0017 19.1607 15.0478 19.5462 15.8707 20.248C16.6936 20.9499 17.2394 21.922 17.4102 22.99H8.43018Z"
-                                              stroke="currentColor" stroke-miterlimit="10"
-                                              stroke-linecap="round"></path>
-                                        <path d="M1.11108 13.39C1.11108 14.4217 1.52091 15.4111 2.25043 16.1406C2.97994 16.8701 3.96935 17.28 5.00104 17.28C6.03273 17.28 7.02219 16.8701 7.75171 16.1406C8.48123 15.4111 8.89105 14.4217 8.89105 13.39H1.11108Z"
-                                              stroke="currentColor" stroke-linecap="round"
-                                              stroke-linejoin="round"></path>
-                                        <path d="M1.11108 13.39L5.00104 3.71497L8.89105 13.39H1.11108Z"
-                                              stroke="currentColor" stroke-linecap="round"
-                                              stroke-linejoin="round"></path>
-                                        <path d="M16.949 13.39C16.9653 14.4108 17.3823 15.3842 18.11 16.1002C18.8376 16.8163 19.8176 17.2177 20.8385 17.2177C21.8594 17.2177 22.8394 16.8163 23.567 16.1002C24.2947 15.3842 24.7116 14.4108 24.728 13.39H16.949Z"
-                                              stroke="currentColor" stroke-linecap="round"
-                                              stroke-linejoin="round"></path>
-                                        <path d="M16.949 13.39L20.839 3.71497L24.729 13.39H16.949Z"
-                                              stroke="currentColor" stroke-linecap="round"
-                                              stroke-linejoin="round"></path>
-                                        <path d="M12.9199 19.157V0.848999" stroke="currentColor"
-                                              stroke-miterlimit="10"></path>
-                                        <path d="M2.125 2.95599H23.715" stroke="currentColor"
-                                              stroke-miterlimit="10"></path>
-                                    </svg>
-                                    <span class="visually-hidden">Compare</span>
-                                </a>
-                                <a class="product__card--action__btn favourite--button no_scale box_shadow-3_1 small__button p-6"
+                                <a href="{% url 'manage_favorites' product_id=product.id %}" data-product-id="{{ product.id }}"
+                                   class="product__card--action__btn wishlist favourite--button no_scale box_shadow-3_1 small__button p-6"
                                    title="Wishlist">
                                     <svg class="product__card--action__btn--svg" width="70%" height="70%"
                                          viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M15.6219 0.58197C15.9109 0.58197 16.222 0.597991 16.549 0.627991C18.556 0.815991 20.8749 2.57399 21.1569 5.94299V7.06396C20.8949 10.288 18.351 14.264 10.918 19.254C3.48497 14.265 0.942932 10.289 0.679932 7.06396V5.94299C0.961932 2.57499 3.27996 0.815991 5.28796 0.627991C5.61796 0.597991 5.92594 0.583008 6.21594 0.583008C8.53294 0.583008 9.64595 1.54102 10.916 2.99402C12.19 1.54102 13.301 0.58197 15.616 0.58197"
                                               stroke="currentColor" stroke-miterlimit="10"
-                                              stroke-linecap="round"></path>
+                                              stroke-linecap="round"{% if is_favorite %} fill="red"{% endif %}></path>
                                     </svg>
                                     <span class="visually-hidden">Wishlist</span>
                                 </a>
                                 <a class="primary__btn product__card--action__btn buy__btn d-flex justify-content-evenly no_scale"
-                                   title="Add to cart">
+                                   title="Add to cart" data-product-id="{{ product.id }}">
                                     <svg width="25%" height="50%" viewBox="0 0 24 22" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9.125 15.629C8.58965 15.6292 8.06637 15.7881 7.62134 16.0857C7.17631 16.3833 6.82955 16.8061 6.62482 17.3008C6.42008 17.7954 6.36657 18.3397 6.47113 18.8647C6.57569 19.3898 6.8336 19.872 7.21222 20.2505C7.59084 20.629 8.07319 20.8867 8.59827 20.9911C9.12335 21.0955 9.66759 21.0418 10.1622 20.8369C10.6568 20.6319 11.0795 20.285 11.3769 19.8398C11.6743 19.3947 11.833 18.8713 11.833 18.336C11.8319 17.6182 11.5463 16.9302 11.0386 16.4227C10.531 15.9153 9.84279 15.6298 9.125 15.629ZM9.125 20.294C8.73803 20.2938 8.35982 20.1789 8.03815 19.9638C7.71647 19.7487 7.46581 19.443 7.31781 19.0854C7.16981 18.7279 7.13112 18.3345 7.20667 17.955C7.28221 17.5755 7.46856 17.2269 7.74219 16.9532C8.01582 16.6796 8.36443 16.4932 8.74396 16.4177C9.12349 16.3421 9.5169 16.3808 9.87445 16.5288C10.232 16.6768 10.5377 16.9275 10.7528 17.2491C10.9679 17.5708 11.0828 17.949 11.083 18.336C11.0825 18.8551 10.8761 19.3529 10.509 19.72C10.1419 20.0871 9.64413 20.2935 9.125 20.294ZM18.636 15.629C18.1007 15.629 17.5772 15.7878 17.1321 16.0853C16.6869 16.3827 16.34 16.8055 16.1351 17.3001C15.9302 17.7948 15.8766 18.339 15.981 18.8641C16.0855 19.3892 16.3433 19.8716 16.7219 20.2502C17.1004 20.6288 17.5828 20.8866 18.1079 20.991C18.633 21.0955 19.1773 21.0419 19.6719 20.837C20.1666 20.6321 20.5893 20.2851 20.8868 19.84C21.1842 19.3948 21.343 18.8714 21.343 18.336C21.342 17.6184 21.0564 16.9305 20.549 16.423C20.0416 15.9156 19.3537 15.6301 18.636 15.629ZM18.636 20.294C18.249 20.294 17.8707 20.1793 17.5489 19.9643C17.2271 19.7493 16.9762 19.4437 16.8281 19.0862C16.6799 18.7286 16.6411 18.3352 16.7166 17.9556C16.792 17.576 16.9782 17.2273 17.2518 16.9536C17.5254 16.6798 17.874 16.4933 18.2536 16.4177C18.6332 16.3421 19.0266 16.3807 19.3842 16.5287C19.7418 16.6767 20.0475 16.9273 20.2627 17.249C20.4779 17.5707 20.5928 17.949 20.593 18.336C20.5925 18.855 20.3862 19.3526 20.0193 19.7196C19.6524 20.0867 19.155 20.2932 18.636 20.294ZM4.81201 4.67004L4.56201 0.925049L0.137024 0.786011L0.114014 1.53601L3.85901 1.65302L4.539 11.846L5.72205 13.993L21.835 13.274L23.096 11.974V4.94104L4.81201 4.67004ZM22.346 11.67L21.503 12.538L6.14502 13.223L5.28003 11.709L4.86102 5.42004L22.345 5.68005L22.346 11.67Z"
@@ -1033,7 +701,7 @@
                                     <span class="visually-hidden">Add to cart</span>
                                 </a>
                                 <a class="product__card--action__btn quick__order--button no_scale"
-                                   title="Quick Order">
+                                   title="Quick Order" data-request-kind="quick_order">
                                     <svg width="20" height="21" viewBox="0 0 20 21" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7.09668 13.8062L8.93268 15.5922L13.0387 11.6392"
@@ -1069,9 +737,6 @@
                         {% empty %}
                             <p class="px-7 mt-7">{% translate "Для этого товара пока не указаны сопутствующие товары." %}</p>
                         {% endfor %}
-                        <script>
-                            initWishlistButtons(document);
-                        </script>
                     </div>
                 </div>
             </div>
@@ -1088,9 +753,6 @@
                         {% empty %}
                             <p class="px-7 mt-7">{% translate "Для этого товара пока не указаны похожие товары." %}</p>
                         {% endfor %}
-                        <script>
-                            initWishlistButtons(document);
-                        </script>
                     </div>
                 </div>
             </div>
@@ -1261,12 +923,12 @@
                     <div class="product-info bg-white align-items-center">
                         <div class="product-info__content row">
                             <div class="product-info__text col-lg-7 col-md-16 col-16">
+                                {% if product.is_discounted %}
                                 <div>
-                                    <button class="product-info__promo--label">
-                                        <span>{% translate "Акция" %}</span>
-                                    </button>
+                                    <button class="product-info__promo--label"><span>{% translate "Акция" %}</span></button>
                                 </div>
-                                <div class="product-info__in-stock">
+                                {% endif %}
+                                {% if product.is_in_stock %}<div class="product-info__in-stock">
                                     <svg width="21" height="16" viewBox="0 0 21 16" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0 8.4162L5.98602 14.2352L19.372 1.34619" stroke="#18943B"
@@ -1274,10 +936,14 @@
                                               stroke-linejoin="round"></path>
                                     </svg>
                                     <span>{% translate "Есть в наличии" %}</span>
-                                </div>
-                                <span class="product-info__title">{% translate "Шпатлевка универсальная 2 кг Mixon Uni" %}</span>
-                                <span class="product-info__text--price-old">265.00 &#8372;</span>
+                                </div>{% else %}<div class="product-info__in-stock"><span style="color: gray;">{% translate "Нет в наличии" %}</span></div>{% endif %}
+                                <span class="product-info__title">{{ product.name }}</span>
+                                {% if product.is_discounted %}
+                                <span class="product-info__text--price-old">{{ product.price|floatformat:2 }} &#8372;</span>
+                                <span class="product-info__text--price">{{ product.discount_price|floatformat:2 }} &#8372;</span>
+                                {% else %}
                                 <span class="product-info__text--price">{{ product.price|floatformat:2 }} &#8372;</span>
+                                {% endif %}
                             </div>
                             <div class="product-info__image col-lg-7 col-md-15 col-15">
                                 <img src="
@@ -1285,14 +951,14 @@
 
 
 
-                                        {% if product.images.all %}{{ product.images.first.image.url }}{% else %}{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}{% endif %}"
+                                        {% if product.images.all %}{{ product.images.first.image.url }}{% endif %}"
                                      alt="{{ product.name }}">
                             </div>
 
                         </div>
                         <div class="product-info__buttons align-content-start flex-shrink-0 flex-grow-1 row">
                             <a class="product__card--action__btn cheaper--button no_scale box_shadow-3_1"
-                               title="Want Cheaper">
+                               title="Want Cheaper" data-request-kind="cheaper">
                                 <svg width="21.776123" height="24.913086" viewBox="0 0 21.7761 24.9131"
                                      fill="none"
                                      xmlns="http://www.w3.org/2000/svg"
@@ -1307,44 +973,19 @@
                                 <span>  {% translate "Хочу дешевле" %}</span>
                                 <span class="visually-hidden">Want Cheaper</span>
                             </a>
-                            <a class="product__card--action__btn compare--button no_scale box_shadow-3_1 small__button p-6"
-                               title="Compare">
-                                <svg class="product__card--action__btn--svg" width="80%" height="80%"
-                                     viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8.43018 22.99C8.60089 21.922 9.14669 20.9499 9.9696 20.248C10.7925 19.5462 11.8386 19.1607 12.9202 19.1607C14.0017 19.1607 15.0478 19.5462 15.8707 20.248C16.6936 20.9499 17.2394 21.922 17.4102 22.99H8.43018Z"
-                                          stroke="currentColor" stroke-miterlimit="10"
-                                          stroke-linecap="round"></path>
-                                    <path d="M1.11108 13.39C1.11108 14.4217 1.52091 15.4111 2.25043 16.1406C2.97994 16.8701 3.96935 17.28 5.00104 17.28C6.03273 17.28 7.02219 16.8701 7.75171 16.1406C8.48123 15.4111 8.89105 14.4217 8.89105 13.39H1.11108Z"
-                                          stroke="currentColor" stroke-linecap="round"
-                                          stroke-linejoin="round"></path>
-                                    <path d="M1.11108 13.39L5.00104 3.71497L8.89105 13.39H1.11108Z"
-                                          stroke="currentColor" stroke-linecap="round"
-                                          stroke-linejoin="round"></path>
-                                    <path d="M16.949 13.39C16.9653 14.4108 17.3823 15.3842 18.11 16.1002C18.8376 16.8163 19.8176 17.2177 20.8385 17.2177C21.8594 17.2177 22.8394 16.8163 23.567 16.1002C24.2947 15.3842 24.7116 14.4108 24.728 13.39H16.949Z"
-                                          stroke="currentColor" stroke-linecap="round"
-                                          stroke-linejoin="round"></path>
-                                    <path d="M16.949 13.39L20.839 3.71497L24.729 13.39H16.949Z"
-                                          stroke="currentColor" stroke-linecap="round"
-                                          stroke-linejoin="round"></path>
-                                    <path d="M12.9199 19.157V0.848999" stroke="currentColor"
-                                          stroke-miterlimit="10"></path>
-                                    <path d="M2.125 2.95599H23.715" stroke="currentColor"
-                                          stroke-miterlimit="10"></path>
-                                </svg>
-                                <span class="visually-hidden">Compare</span>
-                            </a>
-                            <a class="product__card--action__btn favourite--button no_scale box_shadow-3_1 small__button p-6"
+                            <a href="{% url 'manage_favorites' product_id=product.id %}" data-product-id="{{ product.id }}"
+                                   class="product__card--action__btn wishlist favourite--button no_scale box_shadow-3_1 small__button p-6"
                                title="Wishlist">
                                 <svg class="product__card--action__btn--svg" width="70%" height="70%"
                                      viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M15.6219 0.58197C15.9109 0.58197 16.222 0.597991 16.549 0.627991C18.556 0.815991 20.8749 2.57399 21.1569 5.94299V7.06396C20.8949 10.288 18.351 14.264 10.918 19.254C3.48497 14.265 0.942932 10.289 0.679932 7.06396V5.94299C0.961932 2.57499 3.27996 0.815991 5.28796 0.627991C5.61796 0.597991 5.92594 0.583008 6.21594 0.583008C8.53294 0.583008 9.64595 1.54102 10.916 2.99402C12.19 1.54102 13.301 0.58197 15.616 0.58197"
                                           stroke="currentColor" stroke-miterlimit="10"
-                                          stroke-linecap="round"></path>
+                                          stroke-linecap="round"{% if is_favorite %} fill="red"{% endif %}></path>
                                 </svg>
                                 <span class="visually-hidden">Wishlist</span>
                             </a>
                             <a class="primary__btn product__card--action__btn buy__btn d-flex justify-content-evenly no_scale"
-                               title="Add to cart">
+                               title="Add to cart" data-product-id="{{ product.id }}">
                                 <svg width="25%" height="50%" viewBox="0 0 24 22" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M9.125 15.629C8.58965 15.6292 8.06637 15.7881 7.62134 16.0857C7.17631 16.3833 6.82955 16.8061 6.62482 17.3008C6.42008 17.7954 6.36657 18.3397 6.47113 18.8647C6.57569 19.3898 6.8336 19.872 7.21222 20.2505C7.59084 20.629 8.07319 20.8867 8.59827 20.9911C9.12335 21.0955 9.66759 21.0418 10.1622 20.8369C10.6568 20.6319 11.0795 20.285 11.3769 19.8398C11.6743 19.3947 11.833 18.8713 11.833 18.336C11.8319 17.6182 11.5463 16.9302 11.0386 16.4227C10.531 15.9153 9.84279 15.6298 9.125 15.629ZM9.125 20.294C8.73803 20.2938 8.35982 20.1789 8.03815 19.9638C7.71647 19.7487 7.46581 19.443 7.31781 19.0854C7.16981 18.7279 7.13112 18.3345 7.20667 17.955C7.28221 17.5755 7.46856 17.2269 7.74219 16.9532C8.01582 16.6796 8.36443 16.4932 8.74396 16.4177C9.12349 16.3421 9.5169 16.3808 9.87445 16.5288C10.232 16.6768 10.5377 16.9275 10.7528 17.2491C10.9679 17.5708 11.0828 17.949 11.083 18.336C11.0825 18.8551 10.8761 19.3529 10.509 19.72C10.1419 20.0871 9.64413 20.2935 9.125 20.294ZM18.636 15.629C18.1007 15.629 17.5772 15.7878 17.1321 16.0853C16.6869 16.3827 16.34 16.8055 16.1351 17.3001C15.9302 17.7948 15.8766 18.339 15.981 18.8641C16.0855 19.3892 16.3433 19.8716 16.7219 20.2502C17.1004 20.6288 17.5828 20.8866 18.1079 20.991C18.633 21.0955 19.1773 21.0419 19.6719 20.837C20.1666 20.6321 20.5893 20.2851 20.8868 19.84C21.1842 19.3948 21.343 18.8714 21.343 18.336C21.342 17.6184 21.0564 16.9305 20.549 16.423C20.0416 15.9156 19.3537 15.6301 18.636 15.629ZM18.636 20.294C18.249 20.294 17.8707 20.1793 17.5489 19.9643C17.2271 19.7493 16.9762 19.4437 16.8281 19.0862C16.6799 18.7286 16.6411 18.3352 16.7166 17.9556C16.792 17.576 16.9782 17.2273 17.2518 16.9536C17.5254 16.6798 17.874 16.4933 18.2536 16.4177C18.6332 16.3421 19.0266 16.3807 19.3842 16.5287C19.7418 16.6767 20.0475 16.9273 20.2627 17.249C20.4779 17.5707 20.5928 17.949 20.593 18.336C20.5925 18.855 20.3862 19.3526 20.0193 19.7196C19.6524 20.0867 19.155 20.2932 18.636 20.294ZM4.81201 4.67004L4.56201 0.925049L0.137024 0.786011L0.114014 1.53601L3.85901 1.65302L4.539 11.846L5.72205 13.993L21.835 13.274L23.096 11.974V4.94104L4.81201 4.67004ZM22.346 11.67L21.503 12.538L6.14502 13.223L5.28003 11.709L4.86102 5.42004L22.345 5.68005L22.346 11.67Z"
@@ -1354,7 +995,7 @@
                                 <span class="visually-hidden">Add to cart</span>
                             </a>
                             <a class="product__card--action__btn product_fast_btn quick__order--button no_scale"
-                               title="Quick Order">
+                               title="Quick Order" data-request-kind="quick_order">
                                 <svg width="20" height="21" viewBox="0 0 20 21" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7.09668 13.8062L8.93268 15.5922L13.0387 11.6392"
@@ -1499,12 +1140,12 @@
                     <div class="product-info bg-white align-items-center">
                         <div class="product-info__content row">
                             <div class="product-info__text col-lg-7 col-md-16 col-16">
+                                {% if product.is_discounted %}
                                 <div>
-                                    <button class="product-info__promo--label">
-                                        <span>{% translate "Акция" %}</span>
-                                    </button>
+                                    <button class="product-info__promo--label"><span>{% translate "Акция" %}</span></button>
                                 </div>
-                                <div class="product-info__in-stock">
+                                {% endif %}
+                                {% if product.is_in_stock %}<div class="product-info__in-stock">
                                     <svg width="21" height="16" viewBox="0 0 21 16" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0 8.4162L5.98602 14.2352L19.372 1.34619" stroke="#18943B"
@@ -1512,10 +1153,14 @@
                                               stroke-linejoin="round"></path>
                                     </svg>
                                     <span>{% translate "Есть в наличии" %}</span>
-                                </div>
-                                <span class="product-info__title">{% translate "Шпатлевка универсальная 2 кг Mixon Uni" %}</span>
-                                <span class="product-info__text--price-old">265.00 &#8372;</span>
+                                </div>{% else %}<div class="product-info__in-stock"><span style="color: gray;">{% translate "Нет в наличии" %}</span></div>{% endif %}
+                                <span class="product-info__title">{{ product.name }}</span>
+                                {% if product.is_discounted %}
+                                <span class="product-info__text--price-old">{{ product.price|floatformat:2 }} &#8372;</span>
+                                <span class="product-info__text--price">{{ product.discount_price|floatformat:2 }} &#8372;</span>
+                                {% else %}
                                 <span class="product-info__text--price">{{ product.price|floatformat:2 }} &#8372;</span>
+                                {% endif %}
                             </div>
                             <div class="product-info__image col-lg-7 col-md-15 col-15">
                                 <img src="
@@ -1523,14 +1168,14 @@
 
 
 
-                                        {% if product.images.all %}{{ product.images.first.image.url }}{% else %}{% static '/src/assets/img/icon/shpatlevka-avtomobilnaya-mixon-uni-150 1.png' %}{% endif %}"
+                                        {% if product.images.all %}{{ product.images.first.image.url }}{% endif %}"
                                      alt="{{ product.name }}">
                             </div>
 
                         </div>
                         <div class="product-info__buttons align-content-start flex-shrink-0 flex-grow-1 row">
                             <a class="product__card--action__btn cheaper--button no_scale box_shadow-3_1"
-                               title="Want Cheaper">
+                               title="Want Cheaper" data-request-kind="cheaper">
                                 <svg width="21.776123" height="24.913086" viewBox="0 0 21.7761 24.9131"
                                      fill="none"
                                      xmlns="http://www.w3.org/2000/svg"
@@ -1545,44 +1190,19 @@
                                 <span>  {% translate "Хочу дешевле" %}</span>
                                 <span class="visually-hidden">Want Cheaper</span>
                             </a>
-                            <a class="product__card--action__btn compare--button no_scale box_shadow-3_1 small__button p-6"
-                               title="Compare">
-                                <svg class="product__card--action__btn--svg" width="80%" height="80%"
-                                     viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8.43018 22.99C8.60089 21.922 9.14669 20.9499 9.9696 20.248C10.7925 19.5462 11.8386 19.1607 12.9202 19.1607C14.0017 19.1607 15.0478 19.5462 15.8707 20.248C16.6936 20.9499 17.2394 21.922 17.4102 22.99H8.43018Z"
-                                          stroke="currentColor" stroke-miterlimit="10"
-                                          stroke-linecap="round"></path>
-                                    <path d="M1.11108 13.39C1.11108 14.4217 1.52091 15.4111 2.25043 16.1406C2.97994 16.8701 3.96935 17.28 5.00104 17.28C6.03273 17.28 7.02219 16.8701 7.75171 16.1406C8.48123 15.4111 8.89105 14.4217 8.89105 13.39H1.11108Z"
-                                          stroke="currentColor" stroke-linecap="round"
-                                          stroke-linejoin="round"></path>
-                                    <path d="M1.11108 13.39L5.00104 3.71497L8.89105 13.39H1.11108Z"
-                                          stroke="currentColor" stroke-linecap="round"
-                                          stroke-linejoin="round"></path>
-                                    <path d="M16.949 13.39C16.9653 14.4108 17.3823 15.3842 18.11 16.1002C18.8376 16.8163 19.8176 17.2177 20.8385 17.2177C21.8594 17.2177 22.8394 16.8163 23.567 16.1002C24.2947 15.3842 24.7116 14.4108 24.728 13.39H16.949Z"
-                                          stroke="currentColor" stroke-linecap="round"
-                                          stroke-linejoin="round"></path>
-                                    <path d="M16.949 13.39L20.839 3.71497L24.729 13.39H16.949Z"
-                                          stroke="currentColor" stroke-linecap="round"
-                                          stroke-linejoin="round"></path>
-                                    <path d="M12.9199 19.157V0.848999" stroke="currentColor"
-                                          stroke-miterlimit="10"></path>
-                                    <path d="M2.125 2.95599H23.715" stroke="currentColor"
-                                          stroke-miterlimit="10"></path>
-                                </svg>
-                                <span class="visually-hidden">Compare</span>
-                            </a>
-                            <a class="product__card--action__btn favourite--button no_scale box_shadow-3_1 small__button p-6"
+                            <a href="{% url 'manage_favorites' product_id=product.id %}" data-product-id="{{ product.id }}"
+                                   class="product__card--action__btn wishlist favourite--button no_scale box_shadow-3_1 small__button p-6"
                                title="Wishlist">
                                 <svg class="product__card--action__btn--svg" width="70%" height="70%"
                                      viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M15.6219 0.58197C15.9109 0.58197 16.222 0.597991 16.549 0.627991C18.556 0.815991 20.8749 2.57399 21.1569 5.94299V7.06396C20.8949 10.288 18.351 14.264 10.918 19.254C3.48497 14.265 0.942932 10.289 0.679932 7.06396V5.94299C0.961932 2.57499 3.27996 0.815991 5.28796 0.627991C5.61796 0.597991 5.92594 0.583008 6.21594 0.583008C8.53294 0.583008 9.64595 1.54102 10.916 2.99402C12.19 1.54102 13.301 0.58197 15.616 0.58197"
                                           stroke="currentColor" stroke-miterlimit="10"
-                                          stroke-linecap="round"></path>
+                                          stroke-linecap="round"{% if is_favorite %} fill="red"{% endif %}></path>
                                 </svg>
                                 <span class="visually-hidden">Wishlist</span>
                             </a>
                             <a class="primary__btn  product__card--action__btn buy__btn d-flex justify-content-evenly no_scale"
-                               title="Add to cart">
+                               title="Add to cart" data-product-id="{{ product.id }}">
                                 <svg width="25%" height="50%" viewBox="0 0 24 22" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M9.125 15.629C8.58965 15.6292 8.06637 15.7881 7.62134 16.0857C7.17631 16.3833 6.82955 16.8061 6.62482 17.3008C6.42008 17.7954 6.36657 18.3397 6.47113 18.8647C6.57569 19.3898 6.8336 19.872 7.21222 20.2505C7.59084 20.629 8.07319 20.8867 8.59827 20.9911C9.12335 21.0955 9.66759 21.0418 10.1622 20.8369C10.6568 20.6319 11.0795 20.285 11.3769 19.8398C11.6743 19.3947 11.833 18.8713 11.833 18.336C11.8319 17.6182 11.5463 16.9302 11.0386 16.4227C10.531 15.9153 9.84279 15.6298 9.125 15.629ZM9.125 20.294C8.73803 20.2938 8.35982 20.1789 8.03815 19.9638C7.71647 19.7487 7.46581 19.443 7.31781 19.0854C7.16981 18.7279 7.13112 18.3345 7.20667 17.955C7.28221 17.5755 7.46856 17.2269 7.74219 16.9532C8.01582 16.6796 8.36443 16.4932 8.74396 16.4177C9.12349 16.3421 9.5169 16.3808 9.87445 16.5288C10.232 16.6768 10.5377 16.9275 10.7528 17.2491C10.9679 17.5708 11.0828 17.949 11.083 18.336C11.0825 18.8551 10.8761 19.3529 10.509 19.72C10.1419 20.0871 9.64413 20.2935 9.125 20.294ZM18.636 15.629C18.1007 15.629 17.5772 15.7878 17.1321 16.0853C16.6869 16.3827 16.34 16.8055 16.1351 17.3001C15.9302 17.7948 15.8766 18.339 15.981 18.8641C16.0855 19.3892 16.3433 19.8716 16.7219 20.2502C17.1004 20.6288 17.5828 20.8866 18.1079 20.991C18.633 21.0955 19.1773 21.0419 19.6719 20.837C20.1666 20.6321 20.5893 20.2851 20.8868 19.84C21.1842 19.3948 21.343 18.8714 21.343 18.336C21.342 17.6184 21.0564 16.9305 20.549 16.423C20.0416 15.9156 19.3537 15.6301 18.636 15.629ZM18.636 20.294C18.249 20.294 17.8707 20.1793 17.5489 19.9643C17.2271 19.7493 16.9762 19.4437 16.8281 19.0862C16.6799 18.7286 16.6411 18.3352 16.7166 17.9556C16.792 17.576 16.9782 17.2273 17.2518 16.9536C17.5254 16.6798 17.874 16.4933 18.2536 16.4177C18.6332 16.3421 19.0266 16.3807 19.3842 16.5287C19.7418 16.6767 20.0475 16.9273 20.2627 17.249C20.4779 17.5707 20.5928 17.949 20.593 18.336C20.5925 18.855 20.3862 19.3526 20.0193 19.7196C19.6524 20.0867 19.155 20.2932 18.636 20.294ZM4.81201 4.67004L4.56201 0.925049L0.137024 0.786011L0.114014 1.53601L3.85901 1.65302L4.539 11.846L5.72205 13.993L21.835 13.274L23.096 11.974V4.94104L4.81201 4.67004ZM22.346 11.67L21.503 12.538L6.14502 13.223L5.28003 11.709L4.86102 5.42004L22.345 5.68005L22.346 11.67Z"
@@ -1592,7 +1212,7 @@
                                 <span class="visually-hidden">Add to cart</span>
                             </a>
                             <a class="product__card--action__btn  quick__order--button no_scale"
-                               title="Quick Order">
+                               title="Quick Order" data-request-kind="quick_order">
                                 <svg width="20" height="21" viewBox="0 0 20 21" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7.09668 13.8062L8.93268 15.5922L13.0387 11.6392"
@@ -1647,19 +1267,146 @@
             </div>
         </div>
     </section>
+
+    <div id="product-request-overlay" class="product-request-overlay" hidden></div>
+    <div id="product-request-modal" class="product-request-modal" role="dialog" aria-modal="true"
+         aria-labelledby="product-request-title" hidden>
+        <button type="button" class="product-request-modal__close" aria-label="{% translate 'Закрыть' %}">&times;</button>
+        <h2 id="product-request-title"></h2>
+        <p class="product-request-modal__product">{{ product.name }}</p>
+        <p class="product-request-modal__hint"></p>
+        <form id="product-request-form" action="{% url 'product_request' product.id %}" method="post" novalidate>
+            {% csrf_token %}
+            <input type="hidden" name="kind">
+            <input type="hidden" name="volume">
+            <input type="hidden" name="color">
+            <input type="text" name="name" placeholder="{% translate 'Имя' %}" maxlength="150" required
+                   value="{% if user.is_authenticated %}{{ user.first_name }}{% endif %}">
+            <input type="tel" name="phone" placeholder="{% translate 'Телефон, например +380 67 123 45 67' %}" maxlength="18" required
+                   value="{% if user.is_authenticated %}{{ user.userprofile.phone|default:'' }}{% endif %}">
+            <textarea name="comment" placeholder="{% translate 'Комментарий (необязательно)' %}"></textarea>
+            <p class="product-request-modal__error" hidden></p>
+            <button type="submit">{% translate "Отправить" %}</button>
+        </form>
+        <p class="product-request-modal__success" hidden>{% translate "Спасибо! Мы перезвоним вам в ближайшее время." %}</p>
+    </div>
 {% endblock %}
 
 
 {% block scripts %}
+    {{ block.super }}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static '/src/assets/js/slider.js' %}"></script>
     <script src="{% static '/src/assets/js/breadcrumbSliderSetWidth.js' %}"></script>
     <script>
-        $(document).ready(function () {
-            // Клик по миниатюре меняет главное фото
-            $(".carousel-buttons button").click(function () {
-                $("#product-main-image").attr("src", $(this).data("image-url"));
+        // Выбор упаковки и цвета: выбранные значения уходят в заявку «Быстрый заказ» / «Хочу дешевле»
+        function selectOption(selector, option) {
+            document.querySelectorAll(selector).forEach(el => {
+                const selected = el === option && !el.classList.contains('is-selected');
+                el.classList.toggle('is-selected', selected);
+                const pressed = el.matches('button') ? el : el.querySelector('button');
+                if (pressed) pressed.setAttribute('aria-pressed', selected ? 'true' : 'false');
             });
+        }
+
+        document.addEventListener('click', function (event) {
+            const thumb = event.target.closest('.carousel-buttons button');
+            if (thumb) {
+                // Клик по миниатюре меняет главное фото
+                document.getElementById('product-main-image').src = thumb.dataset.imageUrl;
+                return;
+            }
+            const volume = event.target.closest('.product-volume-option');
+            if (volume) {
+                selectOption('.product-volume-option', volume);
+                return;
+            }
+            const color = event.target.closest('.product-color-option');
+            if (color) {
+                selectOption('.product-color-option', color);
+                return;
+            }
+            const requestButton = event.target.closest('[data-request-kind]');
+            if (requestButton) {
+                event.preventDefault();
+                openProductRequest(requestButton.dataset.requestKind);
+            }
+        });
+
+        const requestModal = document.getElementById('product-request-modal');
+        const requestOverlay = document.getElementById('product-request-overlay');
+        const requestForm = document.getElementById('product-request-form');
+        const requestTexts = {
+            quick_order: {
+                title: gettext('Быстрый заказ'),
+                hint: gettext('Оставьте имя и телефон — менеджер перезвонит и оформит заказ.'),
+            },
+            cheaper: {
+                title: gettext('Хочу дешевле'),
+                hint: gettext('Оставьте контакты — мы сообщим, если сможем предложить цену ниже.'),
+            },
+        };
+
+        function openProductRequest(kind) {
+            const selectedVolume = document.querySelector('.product-volume-option.is-selected');
+            const selectedColor = document.querySelector('.product-color-option.is-selected');
+            const parts = [];
+            if (selectedVolume) parts.push(gettext('Упаковка:') + ' ' + selectedVolume.textContent.trim());
+            if (selectedColor) parts.push(gettext('Цвет:') + ' ' + selectedColor.querySelector('p').textContent.trim().replace(/\s+/g, ' '));
+
+            requestForm.kind.value = kind;
+            requestForm.volume.value = selectedVolume ? selectedVolume.dataset.volumeId : '';
+            requestForm.color.value = selectedColor ? selectedColor.dataset.colorId : '';
+            document.getElementById('product-request-title').textContent = requestTexts[kind].title;
+            requestModal.querySelector('.product-request-modal__hint').textContent =
+                requestTexts[kind].hint + (parts.length ? ' ' + parts.join(', ') + '.' : '');
+            requestModal.querySelector('.product-request-modal__error').hidden = true;
+            requestModal.querySelector('.product-request-modal__success').hidden = true;
+            requestForm.hidden = false;
+            requestModal.hidden = false;
+            requestOverlay.hidden = false;
+            requestForm.name.focus();
+        }
+
+        function closeProductRequest() {
+            requestModal.hidden = true;
+            requestOverlay.hidden = true;
+        }
+
+        requestOverlay.addEventListener('click', closeProductRequest);
+        requestModal.querySelector('.product-request-modal__close').addEventListener('click', closeProductRequest);
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && !requestModal.hidden) closeProductRequest();
+        });
+
+        requestForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const error = requestModal.querySelector('.product-request-modal__error');
+            const submit = requestForm.querySelector('button[type="submit"]');
+            submit.disabled = true;
+            fetch(requestForm.action, {
+                method: 'POST',
+                body: new FormData(requestForm),
+                headers: {'X-Requested-With': 'XMLHttpRequest'},
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        requestForm.hidden = true;
+                        requestForm.comment.value = '';
+                        requestModal.querySelector('.product-request-modal__success').hidden = false;
+                    } else {
+                        error.textContent = Object.values(data.errors || {}).join(' ') || gettext('Не удалось отправить заявку.');
+                        error.hidden = false;
+                    }
+                })
+                .catch(() => {
+                    error.textContent = gettext('Не удалось отправить заявку. Попробуйте ещё раз.');
+                    error.hidden = false;
+                })
+                .finally(() => {
+                    submit.disabled = false;
+                });
         });
 
         function switchBorder(button) {
@@ -1709,74 +1456,7 @@
             document.querySelector('.availability').style.display = 'block';
         }
 
-        function toggleDropdown() {
-            const dropdown = document.getElementById("myDropdown");
-            dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
-        }
-
-        // Закрыть выпадающий список при клике вне него
-        window.onclick = function (event) {
-            if (!event.target.matches('.panel button')) {
-                const dropdowns = document.getElementsByClassName("dropdown");
-                for (let i = 0; i < dropdowns.length; i++) {
-                    const openDropdown = dropdowns[i];
-                    if (openDropdown.style.display === "block") {
-                        openDropdown.style.display = "none";
-                    }
-                }
-            }
-        }
-
-        // Закрыть выпадающий список при клике вне него
-        window.onclick = function (event) {
-            if (!event.target.matches('.panel button')) {
-                const dropdowns = document.getElementsByClassName("dropdown");
-                for (let i = 0; i < dropdowns.length; i++) {
-                    const openDropdown = dropdowns[i];
-                    if (openDropdown.style.display === "block") {
-                        openDropdown.style.display = "none";
-                    }
-                }
-            }
-        }
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const openMenuButton = document.getElementById('openMenuButton');
-            const closeMenuButton = document.getElementById('closeMenuButton');
-            const overlay = document.getElementById('overlay');
-            const menu = document.getElementById('menu');
-            const mainContent = document.getElementById('mainContent');
-            const header = document.querySelector('header'); // Найти header
-
-            openMenuButton.addEventListener('click', () => {
-                overlay.style.display = 'block';
-                menu.style.display = 'block';
-                mainContent.classList.add('inactive-overlay');
-                document.body.style.overflow = 'hidden';
-
-                // Сделать header активным
-                header.style.zIndex = 20; // Или любое число выше, чем у overlay
-                header.style.pointerEvents = 'auto';
-            });
-
-
-            overlay.addEventListener('click', () => {
-                overlay.style.display = 'none';
-                menu.style.display = 'none';
-                mainContent.classList.remove('inactive-overlay');
-                document.body.style.overflow = 'auto';
-
-                // Вернуть header в исходное состояние
-                header.style.zIndex = '';
-                header.style.pointerEvents = '';
-            });
-        });
-        document.addEventListener('click', (event) => {
-            if (!menu.contains(event.target) && !openMenuButton.contains(event.target)) {
-                overlay.style.display = 'none';
-                menu.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
+        // Мобильное меню и выпадающие списки обрабатываются в partials/header.html
 
     </script>
     <script>

@@ -1,8 +1,8 @@
 from modeltranslation.translator import TranslationOptions, translator
 
 from .models import (
-    BindingSubstance, Category, ContentBlock, News, NewsCategory, Product,
-    ProductType,
+    BindingSubstance, Category, Characteristic, ContentBlock, News, NewsCategory, Product,
+    ProductCharacteristic, ProductType,
 )
 
 
@@ -41,3 +41,15 @@ translator.register(BindingSubstance, BindingSubstanceTranslationOptions)
 translator.register(NewsCategory, NewsCategoryTranslationOptions)
 translator.register(News, NewsTranslationOptions)
 translator.register(ContentBlock, ContentBlockTranslationOptions)
+
+
+class CharacteristicTranslationOptions(TranslationOptions):
+    fields = ('name',)
+
+
+class ProductCharacteristicTranslationOptions(TranslationOptions):
+    fields = ('value',)
+
+
+translator.register(Characteristic, CharacteristicTranslationOptions)
+translator.register(ProductCharacteristic, ProductCharacteristicTranslationOptions)

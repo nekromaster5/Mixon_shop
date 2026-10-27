@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("Mixon_shop", "0041_product_brand"),
+        ("Mixon_shop", "0043_move_fixed_characteristics"),
     ]
 
     operations = [

@@ -674,6 +674,8 @@ margin-left:400px;
         const openMenuButton = document.getElementById('want_cheaper');
         const overlay = document.getElementById('third_overlay');
         const menu = document.getElementById('cheaper_menu');
+        // Кнопка есть только на страницах с карточками товаров
+        if (!openMenuButton) return;
 
         openMenuButton.addEventListener('click', () => {
             overlay.style.display = 'block';

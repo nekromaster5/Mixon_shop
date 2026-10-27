@@ -12,7 +12,7 @@ from .models import (
     NewsCategory, News, ErrorMessages, InfoMessages, City, ProductStock, Volume, Color, ProductImage, BindingSubstance,
     ProductType, PromoCode, SalesLeaders, RecommendedProducts, MainPageSections, MainPageBanner, Category, OrderProduct,
     BranchSchedule, BranchScheduleException, ScheduleTemplateItem, ScheduleTemplate, ContentBlock, EmailAddress,
-    Brand, HomeRowBanner,
+    Brand, Characteristic, ProductCharacteristic, ProductRequest, HomeRowBanner,
 )
 
 
@@ -205,16 +205,72 @@ class OrderProductInline(admin.TabularInline):
     # can_delete = False  # Удаляем
 
 
+class ProductStockInline(admin.TabularInline):
+    # Упаковки и цвета на странице товара строятся по этим строкам
+    model = ProductStock
+    extra = 1
+    fields = ('branch', 'volume', 'color', 'quantity')
+
+
+class ProductCharacteristicInline(TranslationTabularInline):
+    model = ProductCharacteristic
+    extra = 0
+    fields = ('characteristic', 'value')
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        # Предлагаем только характеристики из списка категории товара
+        if db_field.name == 'characteristic':
+            product_id = request.resolver_match.kwargs.get('object_id')
+            product = Product.objects.filter(pk=product_id).first() if product_id else None
+            if product:
+                kwargs['queryset'] = Characteristic.objects.filter(categories=product.category)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+
 @admin.register(Product)
 class ProductAdmin(TranslationAdmin):
     list_display = ('name', 'article', 'brand', 'category', 'price', 'is_new', 'is_discounted', 'is_in_stock',
                     'average_rating')
     search_fields = ('name', 'article', 'average_rating')
-    inlines = [ProductImageInline]
+    inlines = [ProductImageInline, ProductStockInline, ProductCharacteristicInline]
     list_filter = ('brand', 'category', 'is_discounted', 'is_new', 'is_in_stock')
     list_select_related = ('brand', 'category')
     autocomplete_fields = ('brand',)
     filter_horizontal = ('related_products', 'similar_products')
+    # Старые фиксированные характеристики заменены списками характеристик по категориям
+    exclude = ('usage', 'binding_substance', 'dry_residue', 'density', 'drying_time', 'consumption',
+               'solvent', 'working_tools', 'tool_cleaning', 'storage')
+
+    def save_related(self, request, form, formsets, change):
+        super().save_related(request, form, formsets, change)
+        # Добавляем пустые строки для всех характеристик категории, чтобы их оставалось только заполнить
+        product = form.instance
+        existing = set(product.characteristic_values.values_list('characteristic_id', flat=True))
+        for characteristic in Characteristic.objects.filter(categories=product.category):
+            if characteristic.id not in existing:
+                ProductCharacteristic.objects.create(product=product, characteristic=characteristic)
+
+
+@admin.register(Characteristic)
+class CharacteristicAdmin(TranslationAdmin):
+    list_display = ('name', 'order', 'category_list')
+    list_editable = ('order',)
+    list_filter = ('categories',)
+    search_fields = ('name',)
+    filter_horizontal = ('categories',)
+
+    @admin.display(description='категории')
+    def category_list(self, obj):
+        return ', '.join(category.name for category in obj.categories.all())
+
+
+@admin.register(ProductRequest)
+class ProductRequestAdmin(admin.ModelAdmin):
+    list_display = ('created_at', 'kind', 'product', 'volume', 'color', 'name', 'phone', 'is_processed')
+    list_editable = ('is_processed',)
+    list_filter = ('kind', 'is_processed')
+    search_fields = ('name', 'phone', 'product__name')
+    readonly_fields = ('created_at',)
 
 
 @admin.register(Brand)

@@ -14,7 +14,7 @@ function initWishlistButtons(context = document) {
                 })
                 .then(res => {
                     if (res.status === 403) {
-                        alert('Please log in to manage your wishlist.');
+                        alert('Войдите в аккаунт, чтобы добавлять товары в избранное.');
                         return null;
                     }
                     if (!res.ok) throw new Error('Network response was not ok');
@@ -41,7 +41,7 @@ function initWishlistButtons(context = document) {
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('An error occurred while updating the wishlist.');
+                    alert('Не удалось обновить избранное. Попробуйте ещё раз.');
                 });
             });
             btn.dataset.bound = 'true';
