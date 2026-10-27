@@ -987,7 +987,7 @@
 
 /* ---------- Каталог (макет «Каталог»: фильтры 290px, товары сеткой 3x290 с шагом 4px) ---------- */
 @media (min-width: 1200px) {
-    .breadcrumb__content--title {
+    .breadcrumb__content--title:not(.text-center) {
         margin-top: 29px;
         font-size: 30px;
         line-height: 37px;
@@ -1093,5 +1093,98 @@
         max-width: 290px;
         padding: 0;
         margin: 0 !important;
+    }
+}
+
+/* ---------- Новости (макет «Новости»: заголовок 40px по центру, карточки 370x300) ---------- */
+@media (min-width: 1200px) {
+    .news_header {
+        min-height: 276px;
+    }
+
+    .news-header-title {
+        display: block;
+        margin-top: 31px;
+        font-size: 40px;
+        line-height: 49px;
+        font-weight: 500;
+        color: #1f0d01;
+    }
+
+    .news-page__list .comparison_lists {
+        display: grid;
+        grid-template-columns: repeat(3, 370px);
+        gap: 29px 30px;
+        margin: 0 0 0 -1px;
+    }
+
+    .news-page__list .news_buttons {
+        width: 370px;
+        max-width: 370px;
+        padding: 0;
+    }
+
+    .news-page__list .big_news_buttons {
+        display: block;
+        height: 300px;
+        padding: 10px 9px 15px;
+        box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.25);
+    }
+
+    .news-page__list .big_news_buttons img {
+        width: 351px;
+        height: 210px;
+        border-radius: 10px;
+        object-fit: cover;
+    }
+
+    .news-page__list .big_news_buttons .news_text {
+        display: block;
+        width: 318px;
+        padding: 15px 0 0;
+        font-size: 20px;
+        line-height: 25px;
+        color: #1f0d01;
+    }
+}
+
+/* ---------- Бренды (заголовок 40px по центру, плитки 170x63 шагом 200px, 6 в ряд) ---------- */
+@media (min-width: 1200px) {
+    .breadcrumb__content--title.text-center {
+        margin-top: 31px;
+        margin-bottom: 24px !important;
+        font-size: 40px;
+        line-height: 49px;
+        font-weight: 500;
+        color: #1f0d01;
+    }
+
+    .brands-page.slider {
+        flex-wrap: wrap;
+        gap: 20px 0;
+    }
+
+    .brand_buttons.brands-page {
+        flex: 0 0 170px;
+        width: 170px;
+        max-width: 170px;
+        height: 63px;
+        margin-right: 30px;
+    }
+
+    .brand_buttons.brands-page:nth-child(6n) {
+        margin-right: 0;
+    }
+}
+
+/* ---------- Поиск: заголовок слева 30px, товары в 4 колонки по 290px с шагом 4px ---------- */
+@media (min-width: 1200px) {
+    .br-row_3 #products-container {
+        grid-template-columns: repeat(4, 290px);
+        margin: 0 0 0 1px;
+    }
+
+    .br-row_3 {
+        margin-top: 9px;
     }
 }
