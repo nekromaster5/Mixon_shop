@@ -39,12 +39,12 @@ document.addEventListener("DOMContentLoaded", async function () {
         let promoCode = promoInput.value.trim();
 
         if (!promoCode) {
-            alert("Введите промокод.");
+            alert(gettext("Введите промокод."));
             return;
         }
 
         if (appliedPromoCode === promoCode) {
-            alert("Этот промокод уже применен.");
+            alert(gettext("Этот промокод уже применен."));
             return;
         }
 
@@ -77,11 +77,11 @@ document.addEventListener("DOMContentLoaded", async function () {
                 promoInput.disabled = true;
                 document.querySelector('.checkout__discount--code__btn').disabled = true;
 
-                alert(`Промокод применен! Ваша скидка: ${data.discount}`);
+                alert(interpolate(gettext('Промокод применен! Ваша скидка: %s'), [data.discount]));
                 await window.updateTotalPrice();
                 applyDiscount();
             } else {
-                alert(`Ошибка: ${data.error}`);
+                alert(interpolate(gettext('Ошибка: %s'), [data.error]));
             }
         } catch (error) {
             console.error("Ошибка запроса:", error);

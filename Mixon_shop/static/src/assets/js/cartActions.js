@@ -39,11 +39,11 @@ document.addEventListener('click', function (event) {
             return response.json();
         })
         .then(() => {
-            alert('Товар добавлен в корзину!');
+            alert(gettext('Товар добавлен в корзину!'));
         })
         .catch(error => {
             console.error('Ошибка добавления в корзину:', error);
-            alert('Ошибка при добавлении товара.');
+            alert(gettext('Ошибка при добавлении товара.'));
         })
         .finally(() => {
             button.dataset.pending = 'false';

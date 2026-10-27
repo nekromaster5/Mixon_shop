@@ -1,9 +1,10 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 
 
 {% block title %}
-    ЛКМ для Строительства
+    {% translate "ЛКМ для Строительства" %}
 {% endblock %}
 
 
@@ -13,10 +14,10 @@
             <div class="breadcrumb__content text-center slider-container">
                 <ul class="breadcrumb__content--menu d-flex slider">
                     <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'home' %}">Главная</a>
+                        <a href="{% url 'home' %}">{% translate "Главная" %}</a>
                     </li>
                     <li class="breadcrumb__content--menu__items">
-                        Поиск
+                        {% translate "Поиск" %}
                     </li>
                 </ul>
             </div>
@@ -41,7 +42,7 @@
                     {% include 'partials/pagination_search.html' %}
 
                 {% else %}
-                    <p>Нет результатов{% if query %} для "{{ query }}"{% endif %}</p>
+                    <p>{% translate "Нет результатов" %}{% if query %} {% blocktranslate %}для "{{ query }}"{% endblocktranslate %}{% endif %}</p>
                 {% endif %}
             </div>
         </div>

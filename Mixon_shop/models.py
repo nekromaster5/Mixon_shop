@@ -3,6 +3,7 @@ import random
 from random import choice
 
 from django.contrib.auth.models import User
+from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
@@ -336,12 +337,33 @@ class ProductType(models.Model):
         return f'{self.name}'
 
 
+class Brand(models.Model):
+    name = models.CharField(max_length=64, unique=True, verbose_name='название')
+    slug = models.SlugField(max_length=64, unique=True, verbose_name='адрес в URL',
+                            help_text='Латиницей: используется в ссылке каталога ?brand=...')
+    # FileField, а не ImageField: логотипы часто в SVG, а Pillow их не читает
+    logo = models.FileField(upload_to='brands/', null=True, blank=True, verbose_name='логотип',
+                            validators=[FileExtensionValidator(['svg', 'png', 'jpg', 'jpeg', 'webp'])],
+                            help_text='SVG, PNG, JPG или WEBP. Без логотипа на кнопке будет название.')
+    order = models.PositiveSmallIntegerField(default=0, verbose_name='порядок')
+
+    class Meta:
+        ordering = ('order', 'name')
+        verbose_name = 'Бренд'
+        verbose_name_plural = 'Бренды'
+
+    def __str__(self):
+        return self.name
+
+
 # Product model
 class Product(models.Model):
     name = models.CharField(max_length=256, verbose_name='название продукта')
     article = models.CharField(max_length=64, blank=True, verbose_name='артикул')
     description = models.TextField(null=True, blank=True, verbose_name='описание продукта')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='категория продукта')
+    brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True, blank=True, related_name='products',
+                              verbose_name='бренд')
     type = models.ForeignKey(ProductType, on_delete=models.CASCADE, null=True, blank=True, verbose_name='тип продукта')
     usage = models.CharField(max_length=256, null=True, blank=True, verbose_name='назначение продукта')
     binding_substance = models.ForeignKey(BindingSubstance, on_delete=models.CASCADE, null=True, blank=True,

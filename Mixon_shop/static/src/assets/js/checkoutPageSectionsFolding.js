@@ -183,7 +183,7 @@ shippingNextElementButton.addEventListener('click', function () {
             activeShippingButton.querySelector(".shipment__method--type__description").textContent;});
     } else {
         document.querySelectorAll(".span_shipment-method").forEach(element => {
-    element.textContent = "Способ доставки не выбран";});
+    element.textContent = gettext("Способ доставки не выбран");});
     }
 });
 paymentEditElementButton.addEventListener('click', activatePayment);
@@ -196,7 +196,7 @@ paymentNextElementButton.addEventListener('click', function () {
             activePaymentButton.querySelector(".shipment__method--type__description").textContent;});
     } else {
         document.querySelectorAll(".span_payment-method").forEach(element => {
-    element.textContent = "Способ оплаты не выбран";});
+    element.textContent = gettext("Способ оплаты не выбран");});
     }
 });
 commentsEditElementButton.addEventListener('click', activateComments);
@@ -208,7 +208,7 @@ commentsNextElementButton.addEventListener('click', function () {
     element.textContent = text_comment});
     } else {
         document.querySelectorAll(".span_comments").forEach(element => {
-    element.textContent = "Комментариев нет"});
+    element.textContent = gettext("Комментариев нет")});
     }
 
 });

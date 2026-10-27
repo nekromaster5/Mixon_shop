@@ -1,9 +1,10 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 
 
 {% block title %}
-    Оформить заказ
+    {% translate "Оформить заказ" %}
 {% endblock %}
 
 
@@ -13,14 +14,14 @@
             <div class="breadcrumb__content text-center px-3">
                 <ul class="breadcrumb__content--menu d-flex">
                     <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'home' %}">Главная</a>
+                        <a href="{% url 'home' %}">{% translate "Главная" %}</a>
                     </li>
                     <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'checkout' %}">Оформить заказ</a>
+                        <a href="{% url 'checkout' %}">{% translate "Оформить заказ" %}</a>
                     </li>
                 </ul>
             </div>
-            <h1 class="breadcrumb__content--title text-center">Оформить заказ</h1>
+            <h1 class="breadcrumb__content--title text-center">{% translate "Оформить заказ" %}</h1>
         </div>
     </section>
     {% if cart_items %}
@@ -29,7 +30,7 @@
                 <div class="row" style="overflow: hidden;">
                     <div class="col-lg-15 ps-0 pe-4 position-relative">
                         <div class="section__header">
-                            <h2 id="cart--title" class="cart__section__header--title h3">Корзина</h2>
+                            <h2 id="cart--title" class="cart__section__header--title h3">{% translate "Корзина" %}</h2>
                         </div>
                         <div id="cart--items" class="checkout__section--short__desc" style="display: none;">
                             {% for item in cart_items %}
@@ -37,7 +38,7 @@
                             {% endfor %}
                             <div class="checkout--edit__block" id="shipping--edit__block--cart">
                                 <button id="cart--edit" class="checkout--edit--btn primary__btn"
-                                        style="display: none;">Изменить
+                                        style="display: none;">{% translate "Изменить" %}
                                 </button>
                             </div>
                         </div>
@@ -52,7 +53,7 @@
                                                     <h4 class="product__description--name">
                                                         <a href="{% url 'product' item.product.id %}">{{ item.product.name }}</a>
                                                     </h4>
-                                                    <span class="product__description--variant">Артикул: {{ item.product.article|default:"—" }}</span>
+                                                    <span class="product__description--variant">{% translate "Артикул:" %} {{ item.product.article|default:"—" }}</span>
                                                 </div>
                                                 <div class="product__thumbnail border-radius-5">
                                                     <a class="display-block" href="{% url 'product' item.product.id %}">
@@ -107,23 +108,23 @@
                     <div class="col-lg-14 p-0 px-md-4">
                         <aside class="checkout__sidebar sidebar d-block d-md-flex d-lg-block">
                             <div class="checkout__order col-md-6 col-lg-12">
-                                <h2 class="checkout__order--summary__title mb-3 mb-md-7 mb-lg-5">Итого</h2>
+                                <h2 class="checkout__order--summary__title mb-3 mb-md-7 mb-lg-5">{% translate "Итого" %}</h2>
                                 <div class="checkout__total mb-lg-5">
                                     <table class="checkout__total--table">
                                         <tbody class="checkout__total--body">
                                         <tr class="checkout__total--items">
-                                            <td class="checkout__total--title text-left">Товар на сумму</td>
+                                            <td class="checkout__total--title text-left">{% translate "Товар на сумму" %}</td>
                                             <td class="checkout-total checkout__total--amount text-right">{{ total_price }}₴</td>
                                         </tr>
                                         <tr class="checkout__total--items">
-                                            <td class="checkout__total--title text-left">Стоимость доставки</td>
-                                            <td class="checkout__total--amount text-right">Бесплатно</td>
+                                            <td class="checkout__total--title text-left">{% translate "Стоимость доставки" %}</td>
+                                            <td class="checkout__total--amount text-right">{% translate "Бесплатно" %}</td>
                                         </tr>
                                         </tbody>
                                         <tfoot class="checkout__total--footer">
                                         <tr class="checkout__total--footer__items">
                                             <td class="checkout__total--footer__title checkout__total--amount checkout__total--footer__list text-left">
-                                                К оплате
+                                                {% translate "К оплате" %}
                                             </td>
                                             <td class="checkout-total checkout__total--amount checkout__total--footer__list text-right"
                                                 id="total-price-with-discount">
@@ -138,10 +139,10 @@
                                 <form class="d-flex position-relative width-100" action="#">
                                     <label class="width-100 mb-md-0">
                                         <input class="checkout__discount--code__input--field border-radius-5"
-                                               placeholder="Промокод" type="text">
+                                               placeholder="{% translate "Промокод" %}" type="text">
                                     </label>
                                     <button class="checkout__discount--code__btn primary__btn border-radius-5"
-                                            type="submit">Ок
+                                            type="submit">{% translate "Ок" %}
                                     </button>
                                 </form>
                             </div>
@@ -149,8 +150,7 @@
                     </div>
                     <div class="checkout--next__action mt-6 px-6 px-md-0">
                         <button id="cart--next__action" data-target="contacts--title"
-                                class="checkout--next__action--btn primary__btn">Продолжить
-                            оформление
+                                class="checkout--next__action--btn primary__btn">{% translate "Продолжить оформление" %}
                         </button>
                     </div>
                     <div class="section--shipping__address col-lg-15 pe-4">
@@ -163,8 +163,7 @@
                                 <div class="col-14 ps-7 ms-6 position-relative flex-grow-1">
                                     <div class="section__header">
                                         <h2 id="contacts--title"
-                                            class="cart__section__header--title checkout__section--folded h3">Контактная
-                                            информация</h2>
+                                            class="cart__section__header--title checkout__section--folded h3">{% translate "Контактная информация" %}</h2>
                                     </div>
                                     <div id="contacts--items" class="checkout__section--short__desc"
                                          style="display: block;">
@@ -173,7 +172,7 @@
                                         <span class="span_email"></span>
                                         <div class="checkout--edit__block">
                                             <button id="contacts--edit" class="checkout--edit--btn primary__btn">
-                                                Изменить
+                                                {% translate "Изменить" %}
                                             </button>
                                         </div>
                                     </div>
@@ -183,7 +182,7 @@
                                             <div class="checkout__input--list ">
                                                 <label>
                                                     <input class="checkout__input--field border-radius-5"
-                                                           placeholder="Имя" id="input_name" type="text">
+                                                           placeholder="{% translate "Имя" %}" id="input_name" type="text">
                                                 </label>
                                             </div>
                                         </div>
@@ -191,7 +190,7 @@
                                             <div class="checkout__input--list">
                                                 <label>
                                                     <input class="checkout__input--field border-radius-5"
-                                                           placeholder="Телефон"
+                                                           placeholder="{% translate "Телефон" %}"
                                                            id="input_phone" type="text"></label>
                                             </div>
                                         </div>
@@ -204,8 +203,7 @@
                                             </div>
                                         </div>
                                         <button id="contacts--next__action" data-target="shipping--title"
-                                                class="checkout--next__action--btn primary__btn">Продолжить
-                                            оформление
+                                                class="checkout--next__action--btn primary__btn">{% translate "Продолжить оформление" %}
                                         </button>
                                     </div>
 
@@ -218,8 +216,7 @@
                                 <div class="col-14 ps-7 ms-6 position-relative flex-grow-1">
                                     <div class="section__header">
                                         <h2 id="shipping--title"
-                                            class="cart__section__header--title checkout__section--folded h3">Способ
-                                            доставки</h2>
+                                            class="cart__section__header--title checkout__section--folded h3">{% translate "Способ доставки" %}</h2>
                                     </div>
                                     <div id="shipping--items" class="checkout__section--short__desc"
                                          style="display: block;">
@@ -227,15 +224,14 @@
                                         <span class="span_city"></span>
                                         <div class="checkout--edit__block">
                                             <button id="shipping--edit" class="checkout--edit--btn primary__btn">
-                                                Изменить
+                                                {% translate "Изменить" %}
                                             </button>
                                         </div>
                                     </div>
                                     <div id="shipping--items__large" class="checkout--shipping__information"
                                          style="display: none;">
                                         <div class="checkout__input--select__list">
-                                            <label class="checkout__input--label me-0 me-md-5" for="input_city">Доставка
-                                                в</label>
+                                            <label class="checkout__input--label me-0 me-md-5" for="input_city">{% translate "Доставка в" %}</label>
                                             <div class="checkout__input--select select">
                                                 <select class="checkout__input--select__field border-radius-5 flex-grow-0"
                                                         id="input_city">
@@ -280,8 +276,7 @@
                                                                   stroke-miterlimit="10"></path>
                                                         </svg>
                                                     </div>
-                                                    <h4 class="shipment__method--type__description">Самовывоз из
-                                                        магазина</h4>
+                                                    <h4 class="shipment__method--type__description">{% translate "Самовывоз из магазина" %}</h4>
                                                 </button>
                                                 <button id="meest" data-id="2" class="slide shipment__page--list--item shipping">
                                                     <div class="shipment__method--type__thumbnail">
@@ -307,10 +302,7 @@
                                                                   fill-rule="evenodd"></path>
                                                         </svg>
                                                     </div>
-                                                    <h4 class="shipment__method--type__description">Доставка
-                                                        Meest
-                                                        Express на
-                                                        отделение</h4>
+                                                    <h4 class="shipment__method--type__description">{% translate "Доставка Meest Express на отделение" %}</h4>
                                                 </button>
                                                 <button id="nova_office" data-id="3"
                                                         class="slide shipment__page--list--item shipping">
@@ -337,10 +329,7 @@
                                                                   fill-rule="nonzero"></path>
                                                         </svg>
                                                     </div>
-                                                    <h4 class="shipment__method--type__description">Доставка
-                                                        Новой
-                                                        Почтой на
-                                                        отделение</h4>
+                                                    <h4 class="shipment__method--type__description">{% translate "Доставка Новой Почтой на отделение" %}</h4>
                                                 </button>
                                                 <button id="nova_courier" data-id="4"
                                                         class="slide shipment__page--list--item shipping">
@@ -375,9 +364,7 @@
                                                                   fill-rule="nonzero"></path>
                                                         </svg>
                                                     </div>
-                                                    <h4 class="shipment__method--type__description">Доставка
-                                                        курьером Новой
-                                                        Почты по городу</h4>
+                                                    <h4 class="shipment__method--type__description">{% translate "Доставка курьером Новой Почты по городу" %}</h4>
                                                 </button>
                                             </div>
                                         </div>
@@ -398,8 +385,7 @@
                                         </div>
 
                                         <button id="shipping--next__action" data-target="payment--title"
-                                                class="checkout--next__action--btn primary__btn">Продолжить
-                                            оформление
+                                                class="checkout--next__action--btn primary__btn">{% translate "Продолжить оформление" %}
                                         </button>
                                     </div>
                                 </div>
@@ -411,15 +397,14 @@
                                 <div class="col-14 ps-7 ms-6 position-relative flex-grow-1">
                                     <div class="section__header">
                                         <h2 id="payment--title"
-                                            class="cart__section__header--title checkout__section--folded h3">Способ
-                                            оплаты</h2>
+                                            class="cart__section__header--title checkout__section--folded h3">{% translate "Способ оплаты" %}</h2>
                                     </div>
                                     <div id="payment--items" class="checkout__section--short__desc"
                                          style="display: block;">
                                         <span class="span_payment-method"></span>
                                         <div class="checkout--edit__block">
                                             <button id="payment--edit" class="checkout--edit--btn primary__btn">
-                                                Изменить
+                                                {% translate "Изменить" %}
                                             </button>
                                         </div>
                                     </div>
@@ -428,40 +413,27 @@
                                         <div id="payment--slider" class="slider-container mt-5">
                                             <div class="shipment--types__list payment slider mb-5">
                                                 <button id="cod" data-id="1" class="slide shipment__page--list--item payment">
-                                                    <h4 class="shipment__method--type__description payment">Наложеный
-                                                        платеж при
-                                                        получении
-                                                        (при сумме
-                                                        заказа от 200
-                                                        грн.)</h4>
+                                                    <h4 class="shipment__method--type__description payment">{% translate "Наложеный платеж при получении (при сумме заказа от 200 грн.)" %}</h4>
                                                 </button>
                                                 <button id="card" data-id="2" class="slide shipment__page--list--item payment">
-                                                    <h4 class="shipment__method--type__description payment">Оплата на
-                                                        карту</h4>
+                                                    <h4 class="shipment__method--type__description payment">{% translate "Оплата на карту" %}</h4>
                                                 </button>
                                                 <button id="cash__store" data-id="3"
                                                         class="slide shipment__page--list--item payment">
-                                                    <h4 class="shipment__method--type__description payment">Наличными
-                                                        (при
-                                                        самовывозе
-                                                        из магазина)</h4>
+                                                    <h4 class="shipment__method--type__description payment">{% translate "Наличными (при самовывозе из магазина)" %}</h4>
                                                 </button>
                                                 <button id="bank__transfer--vat" data-id="4"
                                                         class="slide shipment__page--list--item payment">
-                                                    <h4 class="shipment__method--type__description payment">Безналичный
-                                                        расчет с НДС</h4>
+                                                    <h4 class="shipment__method--type__description payment">{% translate "Безналичный расчет с НДС" %}</h4>
                                                 </button>
                                                 <button id="bank__transfer" data-id="5"
                                                         class="slide shipment__page--list--item payment">
-                                                    <h4 class="shipment__method--type__description payment">Безналичный
-                                                        расчет без
-                                                        НДС</h4>
+                                                    <h4 class="shipment__method--type__description payment">{% translate "Безналичный расчет без НДС" %}</h4>
                                                 </button>
                                             </div>
                                         </div>
                                         <button id="payment--next__action" data-target="comments--title"
-                                                class="checkout--next__action--btn primary__btn">Продолжить
-                                            оформление
+                                                class="checkout--next__action--btn primary__btn">{% translate "Продолжить оформление" %}
                                         </button>
                                     </div>
                                 </div>
@@ -474,14 +446,14 @@
                                     <div class="section__header">
                                         <h2 id="comments--title"
                                             class="cart__section__header--title checkout__section--folded h3">
-                                            Комментарий</h2>
+                                            {% translate "Комментарий" %}</h2>
                                     </div>
                                     <div id="comments--items" class="checkout__section--short__desc"
                                          style="display: block;">
                                         <span class="span_comments"></span>
                                         <div class="checkout--edit__block">
                                             <button id="comments--edit" class="checkout--edit--btn primary__btn">
-                                                Изменить
+                                                {% translate "Изменить" %}
                                             </button>
                                         </div>
                                     </div>
@@ -489,12 +461,11 @@
                                          style="display: none;">
                                         <label>
                                             <textarea class="comments--text__field"
-                                                      placeholder="Добавьте комментарий к заказу"
+                                                      placeholder="{% translate "Добавьте комментарий к заказу" %}"
                                                       id="text_comment"></textarea>
                                         </label>
                                         <button id="comments--next__action" data-target="confirmation--title"
-                                                class="checkout--next__action--btn primary__btn">Продолжить
-                                            оформление
+                                                class="checkout--next__action--btn primary__btn">{% translate "Продолжить оформление" %}
                                         </button>
                                     </div>
                                 </div>
@@ -507,7 +478,7 @@
                                     <div class="section__header">
                                         <h2 id="confirmation--title"
                                             class="cart__section__header--title checkout__section--folded h3">
-                                            Подтверждение заказа</h2>
+                                            {% translate "Подтверждение заказа" %}</h2>
                                     </div>
                                     <div id="confirmation--items" class="checkout__section--short__desc"
                                          style="display: block;">
@@ -518,11 +489,11 @@
                                         <table class="confirm__order--table">
                                             <thead class="confirm__order--head">
                                             <tr>
-                                                <th>Наименование</th>
-                                                <th>Артикул</th>
-                                                <th class="confirm__order--head--amount__full">Количество</th>
-                                                <th class="confirm__order--head--amount__short">Кол&#8209;во</th>
-                                                <th>Цена</th>
+                                                <th>{% translate "Наименование" %}</th>
+                                                <th>{% translate "Артикул" %}</th>
+                                                <th class="confirm__order--head--amount__full">{% translate "Количество" %}</th>
+                                                <th class="confirm__order--head--amount__short">{% translate "Кол&#8209;во" %}</th>
+                                                <th>{% translate "Цена" %}</th>
                                             </tr>
                                             </thead>
                                             <tbody class="confirm__order--body">
@@ -552,8 +523,8 @@
                                                 </label>
                                                 <div class="d-flex flex-row">
                                                     <label>
-                                                        <span>Доставка:</span>
-                                                        <span>Оплата:</span>
+                                                        <span>{% translate "Доставка:" %}</span>
+                                                        <span>{% translate "Оплата:" %}</span>
                                                     </label>
                                                     <label>
                                                         <span class="confirm__order--summary--text span_shipment-method"></span>
@@ -567,7 +538,7 @@
 
                                             </div>
                                             <div class="confirm__order--summary text-right">
-                                                <label>Итого: <span
+                                                <label>{% translate "Итого:" %} <span
                                                         class="checkout-total confirm__order--summary--number">{{ total_price }}₴</span></label>
                                             </div>
 
@@ -575,7 +546,7 @@
                                         <div class="confirmation--final">
                                             <button id="confirmation--next__action"
                                                     class="checkout--next__action--btn final__action primary__btn">
-                                                Подтверждение заказа
+                                                {% translate "Подтверждение заказа" %}
                                             </button>
                                         </div>
 
@@ -590,8 +561,8 @@
     {% else %}
         <section class="checkout__page--area section--padding text-center">
             <div class="container">
-                <p>Ваша корзина пуста — добавьте товары, чтобы оформить заказ.</p>
-                <a href="{% url 'catalogue' %}" class="primary__btn">Перейти в каталог</a>
+                <p>{% translate "Ваша корзина пуста — добавьте товары, чтобы оформить заказ." %}</p>
+                <a href="{% url 'catalogue' %}" class="primary__btn">{% translate "Перейти в каталог" %}</a>
             </div>
         </section>
     {% endif %}

@@ -28,16 +28,16 @@ def test_colors_come_from_stock_without_duplicates(client, product, branch):
 def test_product_without_stock_hides_color_and_package_blocks(client, product):
     text = client.get(f"/product/{product.id}/").content.decode()
 
-    assert "Цвет:" not in text
+    assert "Колір:" not in text
     assert "Упаковка:" not in text
     assert "MA603BAL" not in text
-    assert "Нет фото" in text
+    assert "Немає фото" in text
 
 
 @pytest.mark.django_db
 def test_delivery_rows_have_distinct_names(client, product):
     text = client.get(f"/product/{product.id}/").content.decode()
 
-    assert "Курьерская доставка" in text
-    assert "Доставка Новой почтой" in text
+    assert "Кур’єрська доставка" in text
+    assert "Доставка Новою поштою" in text
     assert "Доставят до 01.07" not in text

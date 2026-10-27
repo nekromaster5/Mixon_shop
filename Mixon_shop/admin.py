@@ -12,6 +12,7 @@ from .models import (
     NewsCategory, News, ErrorMessages, InfoMessages, City, ProductStock, Volume, Color, ProductImage, BindingSubstance,
     ProductType, PromoCode, SalesLeaders, RecommendedProducts, MainPageSections, MainPageBanner, Category, OrderProduct,
     BranchSchedule, BranchScheduleException, ScheduleTemplateItem, ScheduleTemplate, ContentBlock, EmailAddress,
+    Brand,
 )
 
 
@@ -206,11 +207,26 @@ class OrderProductInline(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(TranslationAdmin):
-    list_display = ('name', 'article', 'category', 'price', 'is_new', 'is_discounted', 'is_in_stock', 'average_rating')
+    list_display = ('name', 'article', 'brand', 'category', 'price', 'is_new', 'is_discounted', 'is_in_stock',
+                    'average_rating')
     search_fields = ('name', 'article', 'average_rating')
     inlines = [ProductImageInline]
-    list_filter = ('category', 'is_discounted', 'is_new', 'is_in_stock')
+    list_filter = ('brand', 'category', 'is_discounted', 'is_new', 'is_in_stock')
+    list_select_related = ('brand', 'category')
+    autocomplete_fields = ('brand',)
     filter_horizontal = ('related_products', 'similar_products')
+
+
+@admin.register(Brand)
+class BrandAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug', 'order', 'products_count')
+    list_editable = ('order',)
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+
+    @admin.display(description='товаров')
+    def products_count(self, obj):
+        return obj.products.count()
 
 
 @admin.register(Category)

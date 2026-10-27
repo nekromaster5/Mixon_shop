@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 
 {% url 'search' as page_url %}
@@ -14,7 +15,7 @@
                    data-product-type="{% if product_type and product_type != 'None' and product_type|striptags|length > 0 %}{{ product_type|urlencode }}{% endif %}"
                    data-page-type="search">
                     <img src="{% static '/src/assets/img/icon/refresh_page__red.svg' %}" alt="refresh page" class="me-3">
-                    Показать ещё
+                    {% translate "Показать ещё" %}
                 </a>
             </div>
         {% endif %}

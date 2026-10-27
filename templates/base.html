@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load i18n %}
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="utf-8">
     {% load static %}
@@ -26,6 +27,8 @@
     <link rel="stylesheet" href="{% static '/src/assets/css/style.css' %}">
     <link rel="stylesheet" href="{% static '/src/assets/css/figma.css' %}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- gettext() для строк в static/js -->
+    <script src="{% url 'javascript-catalog' %}"></script>
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -36,7 +39,7 @@
             {% for message in messages %}
                 <div class="site-messages__item site-messages__item--{{ message.tags }}">
                     {{ message }}
-                    <button type="button" class="site-messages__close" aria-label="Закрыть">&times;</button>
+                    <button type="button" class="site-messages__close" aria-label="{% translate "Закрыть" %}">&times;</button>
                 </div>
             {% endfor %}
         </div>

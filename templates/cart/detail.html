@@ -1,8 +1,9 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}
-    Корзина
+    {% translate "Корзина" %}
 {% endblock %}
 
 {% block content %}
@@ -11,14 +12,14 @@
             <div class="breadcrumb__content text-center">
                 <ul class="breadcrumb__content--menu d-flex">
                     <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'home' %}">Главная</a>
+                        <a href="{% url 'home' %}">{% translate "Главная" %}</a>
                     </li>
                     <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'cart_detail' %}">Корзина</a>
+                        <a href="{% url 'cart_detail' %}">{% translate "Корзина" %}</a>
                     </li>
                 </ul>
             </div>
-            <h1 class="breadcrumb__content--title text-center">Корзина</h1>
+            <h1 class="breadcrumb__content--title text-center">{% translate "Корзина" %}</h1>
         </div>
     </section>
 
@@ -31,10 +32,10 @@
                             <table class="cart__table--inner">
                                 <thead class="cart__table--header">
                                 <tr>
-                                    <th class="cart__table--header__list">Товар</th>
-                                    <th class="cart__table--header__list text-center">Цена</th>
-                                    <th class="cart__table--header__list text-center">Количество</th>
-                                    <th class="cart__table--header__list text-right">Итого</th>
+                                    <th class="cart__table--header__list">{% translate "Товар" %}</th>
+                                    <th class="cart__table--header__list text-center">{% translate "Цена" %}</th>
+                                    <th class="cart__table--header__list text-center">{% translate "Количество" %}</th>
+                                    <th class="cart__table--header__list text-right">{% translate "Итого" %}</th>
                                 </tr>
                                 </thead>
                                 <tbody class="cart__table--body__items">
@@ -44,7 +45,7 @@
                                             <form method="post" action="{% url 'cart_remove' item.product.id %}">
                                                 {% csrf_token %}
                                                 <button type="submit" class="cart__remove--btn"
-                                                        title="Удалить из корзины" aria-label="Удалить из корзины">&times;</button>
+                                                        title="{% translate "Удалить из корзины" %}" aria-label="{% translate "Удалить из корзины" %}">&times;</button>
                                             </form>
                                             <div class="cart__thumbnail">
                                                 <a href="{% url 'product' item.product.id %}">
@@ -68,7 +69,7 @@
                                                 <input type="number" name="quantity" value="{{ item.quantity }}"
                                                        min="1" size="3" class="product--amount__input">
                                                 <button type="submit" class="checkout--edit--btn primary__btn ms-2">
-                                                    Обновить
+                                                    {% translate "Обновить" %}
                                                 </button>
                                             </form>
                                         </td>
@@ -81,31 +82,31 @@
                             </table>
                         </div>
                         <div class="continue__shopping d-flex justify-content-between align-items-center">
-                            <a href="{% url 'catalogue' %}" class="continue__shopping--link">← Продолжить покупки</a>
+                            <a href="{% url 'catalogue' %}" class="continue__shopping--link">{% translate "← Продолжить покупки" %}</a>
                             <form method="post" action="{% url 'cart_clear' %}">
                                 {% csrf_token %}
-                                <button type="submit" class="continue__shopping--clear">Очистить корзину</button>
+                                <button type="submit" class="continue__shopping--clear">{% translate "Очистить корзину" %}</button>
                             </form>
                         </div>
                     </div>
                     <div class="col-lg-8">
                         <aside class="cart__summary">
-                            <h2 class="h3">Итого</h2>
+                            <h2 class="h3">{% translate "Итого" %}</h2>
                             <div class="cart__summary--total">
                                 <table class="cart__summary--total__table">
                                     <tr class="cart__summary--total__list">
-                                        <td>Товаров</td>
-                                        <td>{{ total_quantity }} шт.</td>
+                                        <td>{% translate "Товаров" %}</td>
+                                        <td>{{ total_quantity }} {% translate "шт." %}</td>
                                     </tr>
                                     <tr class="cart__summary--total__list">
-                                        <td>Сумма</td>
+                                        <td>{% translate "Сумма" %}</td>
                                         <td>{{ total_price }}₴</td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="cart__summary--footer">
                                 <a href="{% url 'checkout' %}" class="primary__btn cart__summary--footer__btn width-100 text-center d-block">
-                                    Оформить заказ
+                                    {% translate "Оформить заказ" %}
                                 </a>
                             </div>
                         </aside>
@@ -116,8 +117,8 @@
     {% else %}
         <section class="cart__page--area section--padding text-center">
             <div class="container">
-                <p>Ваша корзина пуста.</p>
-                <a href="{% url 'catalogue' %}" class="primary__btn">Перейти в каталог</a>
+                <p>{% translate "Ваша корзина пуста." %}</p>
+                <a href="{% url 'catalogue' %}" class="primary__btn">{% translate "Перейти в каталог" %}</a>
             </div>
         </section>
     {% endif %}

@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <style>
     @media only screen   and (min-width: 320px) and (max-width: 760px) {
@@ -309,20 +310,20 @@ margin-left:400px;
             <div class="panel-container">
                 <div class="header__menu-panel">
                     <button class="menu-panel__button_first">
-                        <a href="{% url 'catalogue' filters='discounted-goods' %}" class="first_menu-panel__button_text">Акции</a>
+                        <a href="{% url 'catalogue' filters='discounted-goods' %}" class="first_menu-panel__button_text">{% translate "Акции" %}</a>
                     </button>
                     <button class="menu-panel__button"
                             style=" ">
-                        <a href="{% url 'about_company' %}" class="menu-panel__button_text">О нас</a>
+                        <a href="{% url 'about_company' %}" class="menu-panel__button_text">{% translate "О нас" %}</a>
                     </button>
                     <button class="menu-panel__button">
-                        <a href="{% url 'news_list' %}" class="menu-panel__button_text">Новости</a>
+                        <a href="{% url 'news_list' %}" class="menu-panel__button_text">{% translate "Новости" %}</a>
                     </button>
                     <button class="menu-panel__button">
-                        <a href="{% url 'shipment_and_payment' %}" class="menu-panel__button_text">Оплата и доставка</a>
+                        <a href="{% url 'shipment_and_payment' %}" class="menu-panel__button_text">{% translate "Оплата и доставка" %}</a>
                     </button>
                     <button class="menu-panel__button">
-                        <a href="{% url 'contacts' %}" class="menu-panel__button_text">Контакты</a>
+                        <a href="{% url 'contacts' %}" class="menu-panel__button_text">{% translate "Контакты" %}</a>
                     </button>
 
                     <!-- Добавьте еще кнопки, если нужно -->
@@ -346,7 +347,7 @@ margin-left:400px;
                           {{ branch.city.name }} — {{ branch.address_short }}
                         </button>
                       {% empty %}
-                        <p style="padding: 8px;">Нет филиалов</p>
+                        <p style="padding: 8px;">{% translate "Нет филиалов" %}</p>
                       {% endfor %}
                     </div>
                   </div>
@@ -397,7 +398,7 @@ margin-left:400px;
                     <img class="categories__menu_img" src="{% static '/src/assets/img/icon/logo-katalog1.svg' %}"
                          alt="Logo Katalog">
 
-                    <span class="categories__menu_text" style="  ">Каталог товаров</span>
+                    <span class="categories__menu_text" style="  ">{% translate "Каталог товаров" %}</span>
 
                 </div>
 
@@ -409,16 +410,16 @@ margin-left:400px;
              (partials/registration_modal.html), а не через эту панель. -->
         <div id="cheaper_menu" class="cheaper_menu">
             <button class="close-button">&times;</button>
-            <h2>Хочу дешевле</h2>
-            <p>Узнать цену: Шпатлевка универсальная Карс 1 кг UNI</p>
-            <input type="text" placeholder="Имя" class="full-width">
-            <input type="text" placeholder="Фамилия" class="full-width">
-            <input type="text" placeholder="Область">
-            <input type="text" placeholder="Город">
+            <h2>{% translate "Хочу дешевле" %}</h2>
+            <p>{% translate "Узнать цену: Шпатлевка универсальная Карс 1 кг UNI" %}</p>
+            <input type="text" placeholder="{% translate "Имя" %}" class="full-width">
+            <input type="text" placeholder="{% translate "Фамилия" %}" class="full-width">
+            <input type="text" placeholder="{% translate "Область" %}">
+            <input type="text" placeholder="{% translate "Город" %}">
             <input type="email" placeholder="E-mail">
-            <input type="text" placeholder="Телефон">
-            <textarea placeholder="Вопрос"></textarea>
-            <button>Свяжитесь со мной</button>
+            <input type="text" placeholder="{% translate "Телефон" %}">
+            <textarea placeholder="{% translate "Вопрос" %}"></textarea>
+            <button>{% translate "Свяжитесь со мной" %}</button>
         </div>
     </div>
             <div id="mobile_open_menu" class="mobile_open_menu" style="background-color:white;">
@@ -548,11 +549,11 @@ margin-left:400px;
                             <img class="lupa" src="{% static '/src/assets/img/icon/lupa.svg' %}" alt="">
                             <input class="header__search--input" style="height: 40px; border-radius:0;
                             padding-left:30px;" name="query"
-                                   placeholder="Поиск товара" value="{% if query %} {{ query }}{% endif %}">
+                                   placeholder="{% translate "Поиск товара" %}" value="{% if query %} {{ query }}{% endif %}">
                         </label>
                         <button class="header__search--button bg__primary text-white" aria-label="search button"
                                 type="submit"
-                                style="   height: 42px;margin-top:-1px;border-radius:0;background-color:red;"> Найти
+                                style="   height: 42px;margin-top:-1px;border-radius:0;background-color:red;"> {% translate "Найти" %}
                         </button>
                     </div>
                 </form>
@@ -561,7 +562,7 @@ margin-left:400px;
             <div class="frame3-panel" style=" margin-left:72px;">
                 <a id="icon-button_n" class="icon-button_n"
                    {% if not user.is_authenticated %}data-registration-trigger{% endif %}
-                   aria-label="{% if user.is_authenticated %}Открыть личный кабинет{% else %}Зарегистрироваться{% endif %}"
+                   aria-label="{% if user.is_authenticated %}{% translate "Открыть личный кабинет" %}{% else %}{% translate "Зарегистрироваться" %}{% endif %}"
                    style="background: none;border: none;position:relative; "
                    href="{% if user.is_authenticated %}{% url 'cabinet' %}{% else %}#{% endif %}">
                     
@@ -571,8 +572,8 @@ margin-left:400px;
                     </svg>
                 </a>
                 {% if user.is_authenticated %}
-                    <a href="{% url 'logout' %}" class="icon-button" title="Выйти из аккаунта"
-                       style="background: none;border: none;position:relative;font-size:1.2rem;">Выйти</a>
+                    <a href="{% url 'logout' %}" class="icon-button" title="{% translate "Выйти из аккаунта" %}"
+                       style="background: none;border: none;position:relative;font-size:1.2rem;">{% translate "Выйти" %}</a>
                 {% endif %}
                 <a href="{% url 'cabinet' %}" class="icon-button "
                    style="background: none;border: none;position:relative; ">

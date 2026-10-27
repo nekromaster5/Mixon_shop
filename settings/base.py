@@ -78,6 +78,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
                 'Mixon_shop.context_processors.google_maps',
+                'Mixon_shop.context_processors.brands',
             ],
             'loaders': [
                 'admin_tools.template_loaders.Loader',  # Make sure this is at the beginning
@@ -230,6 +231,10 @@ MODELTRANSLATION_PREPOPULATE_LANGUAGE = 'ru'
 # Куда сохраняется выбор языка (django.conf.urls.i18n.set_language) —
 # постоянная кука, а не только текущая сессия.
 LANGUAGE_COOKIE_AGE = 60 * 60 * 24 * 365  # 1 год
+# Переводы интерфейса (шаблоны, сообщения, JS). Исходные строки в коде —
+# русские, uk-перевод в locale/uk. .mo лежат в репозитории, gettext на
+# сервере не нужен.
+LOCALE_PATHS = [BASE_DIR / 'locale']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/

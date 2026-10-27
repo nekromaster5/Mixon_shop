@@ -17,9 +17,9 @@ function toggleCharacteristicsBlock(block, button) {
             characteristicBlock.style.display = 'none';
         }
     });
-    if (button.textContent === 'Развернуть') {
-        button.textContent = 'Свернуть';
+    if (button.textContent === gettext('Развернуть')) {
+        button.textContent = gettext('Свернуть');
     } else {
-        button.textContent = 'Развернуть';
+        button.textContent = gettext('Развернуть');
     }
 }

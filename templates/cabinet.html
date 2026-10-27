@@ -1,9 +1,10 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 
 
 {% block title %}
-    Кабинет
+    {% translate "Кабинет" %}
 {% endblock %}
 
 
@@ -13,10 +14,10 @@
             <div class="breadcrumb__content text-center">
                 <ul class="breadcrumb__content--menu d-flex">
                     <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'home' %}">Главная</a>
+                        <a href="{% url 'home' %}">{% translate "Главная" %}</a>
                     </li>
                     <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'cabinet' %}">Кабинет</a>
+                        <a href="{% url 'cabinet' %}">{% translate "Кабинет" %}</a>
                     </li>
 
                 </ul>
@@ -29,7 +30,7 @@
             <div id="overlay" class="overlay"></div>
             <div id="app"></div>
             <div class="menu_button_div">
-                <button class="menu_button">Меню кабинета</button>
+                <button class="menu_button">{% translate "Меню кабинета" %}</button>
             </div>
             <div class="row">
                 <!-- Первый блок - блок виджетов -->
@@ -38,7 +39,7 @@
                         <div class="single__widget px-0">
                             <div class="d-flex cabinet--widget__title" style="flex-direction: column;  ">
                                 <div class="widget_inner">
-                                    <h2 class="h3">Ваш кабинет</h2>
+                                    <h2 class="h3">{% translate "Ваш кабинет" %}</h2>
                                     <div class="personal_name">
                                         {{ user.first_name }}
                                         {{ user.last_name }}{% if not user.first_name and not user.last_name %}
@@ -62,7 +63,7 @@
                                                     onclick="switchBlock_to_zakladki(); "
                                                     class="widget__cabinet--button"
                                                     style="  background-color: transparent; border:none;color: black;">
-                                                Закладки
+                                                {% translate "Закладки" %}
                                             </button>
                                         </div>
                                     </li>
@@ -95,7 +96,7 @@
                                             <button class="footer__widget--menu__text"
                                                     onclick="switchBlock_to_comparison_lists(); "
                                                     style="  background-color: transparent; border:none; color: black;"
-                                                    class="widget__cabinet--button">Списки сравнений
+                                                    class="widget__cabinet--button">{% translate "Списки сравнений" %}
                                             </button>
                                         </div>
                                     </li>
@@ -118,7 +119,7 @@
                                             <button onclick="switchBlock_to_orders_history(); "
                                                     style="  background-color: transparent; border:none;color: black;"
                                                     class="footer__widget--menu__text widget__cabinet--button">
-                                                <span> История заказов </span>
+                                                <span> {% translate "История заказов" %} </span>
                                             </button>
                                         </div>
                                     </li>
@@ -141,7 +142,7 @@
                                             <button class="footer__widget--menu__text"
                                                     onclick="switchBlock_to_my_review(); "
                                                     style="  background-color: transparent; border:none;color: black;"
-                                                    class="widget__cabinet--button">Мои отзывы
+                                                    class="widget__cabinet--button">{% translate "Мои отзывы" %}
                                             </button>
                                         </div>
                                     </li>
@@ -161,7 +162,7 @@
                                             <button class="footer__widget--menu__text"
                                                     onclick="switchBlock_to_my_marks(); "
                                                     style="  background-color: transparent; border:none;color: black;"
-                                                    class="widget__cabinet--button">Мои оценки
+                                                    class="widget__cabinet--button">{% translate "Мои оценки" %}
                                             </button>
                                         </div>
                                     </li>
@@ -178,7 +179,7 @@
                                             <button class="footer__widget--menu__text"
                                                     onclick="switchBlock_to_contact_information(); "
                                                     style="  background-color: transparent; border:none;color: black;"
-                                                    class="widget__cabinet--button">Контактная информация
+                                                    class="widget__cabinet--button">{% translate "Контактная информация" %}
                                             </button>
                                         </div>
                                     </li>
@@ -205,10 +206,10 @@
                     <div class="comparison_list">
                         <div class="comparison__list--inner d-flex justify-content-between"
                              style="position: relative; background-color:white;">
-                            <span style="margin-left:4px;">Сравнение 1 универсальные краски</span>
+                            <span style="margin-left:4px;">{% translate "Сравнение 1 универсальные краски" %}</span>
                             <button class="comparison_cab_button"
                                     style="color:red; background-color:transparent; border:none;">
-                                <span>Добавить в сравнение >></span>
+                                <span>{% translate "Добавить в сравнение >>" %}</span>
                             </button>
                         </div>
                         <div class="comparison-list row">
@@ -221,17 +222,17 @@
                                 initWishlistButtons(document);
                             </script>
                             <div class="col-12 px-lg-6 px-md-6   row">
-                                <button class="fold-button col-lg-5 col-md-4 col-6 px-0">Развернуть</button>
+                                <button class="fold-button col-lg-5 col-md-4 col-6 px-0">{% translate "Развернуть" %}</button>
                             </div>
                         </div>
                     </div>
                     <div class="comparison_list">
                         <div class="comparison__list--inner d-flex justify-content-between"
                              style="position: relative;background-color:white;">
-                            <span style="margin-left:4px;  ">Сравнение 2 универсальные краски</span>
+                            <span style="margin-left:4px;  ">{% translate "Сравнение 2 универсальные краски" %}</span>
                             <button class="comparison_cab_button"
                                     style="color:red; background-color:transparent; border:none;">
-                                <span>Добавить в сравнение >></span>
+                                <span>{% translate "Добавить в сравнение >>" %}</span>
                             </button>
                         </div>
                         <div class="comparison-list row">
@@ -244,7 +245,7 @@
                                 initWishlistButtons(document);
                             </script>
                             <div class="col-12 px-lg-6 px-md-6 px-8 row">
-                                <button class="fold-button col-lg-5 col-md-4 col-6 px-0">Развернуть</button>
+                                <button class="fold-button col-lg-5 col-md-4 col-6 px-0">{% translate "Развернуть" %}</button>
                             </div>
                         </div>
                     </div>
@@ -257,13 +258,13 @@
 
                                     <div class="first_order_history_block row col-lg-27 col-md-17 col-4">
                                         <div class="first_text_block col-lg-26 col-md-6">
-                                            <span class="order_label">Заказ №{{ order.id }}</span>
-                                            <span class="extra_span" style="margin-left: 0;">Статус заказа:</span>
+                                            <span class="order_label">{% translate "Заказ №" %}{{ order.id }}</span>
+                                            <span class="extra_span" style="margin-left: 0;">{% translate "Статус заказа:" %}</span>
                                         </div>
                                         <div class="adding_mobile_labels" style="text-align: right;">
-                                            <p style="font-size:12px;">Статус заказа:</p>
-                                            <p style="color:#787878;font-size:12px;">Кол-во товаров:</p>
-                                            <p class="order_history_first_text" style="color:#787878;">Итого:</p>
+                                            <p style="font-size:12px;">{% translate "Статус заказа:" %}</p>
+                                            <p style="color:#787878;font-size:12px;">{% translate "Кол-во товаров:" %}</p>
+                                            <p class="order_history_first_text" style="color:#787878;">{% translate "Итого:" %}</p>
                                         </div>
 
                                         <div class="second_text_block col-lg-26 col-md-6">
@@ -274,8 +275,8 @@
 
                                     <div class="second_order_history_block row col-lg-27 col-md-17 col-4">
                                         <div class="first_text_block col-lg-26 col-md-6" style="text-align: right;">
-                                            <span style="color:#787878;">Кол-во товаров:</span>
-                                            <span class="order_history_first_text" style="color:#787878;">Итого:</span>
+                                            <span style="color:#787878;">{% translate "Кол-во товаров:" %}</span>
+                                            <span class="order_history_first_text" style="color:#787878;">{% translate "Итого:" %}</span>
                                         </div>
                                         <div class="second_text_block col-lg-26 col-md-6" style="text-align:center;">
                                             <span class="order_history_second_text">{{ order.products.count }}</span>
@@ -289,7 +290,7 @@
                                         <button class="order_pa_button" style="display:flex;">
                                             <img class="order_history_button_img"
                                                  src="{% static '/src/assets/img/icon/repeat_button.svg' %}">
-                                            <p class="repeat_button">Повторить</p>
+                                            <p class="repeat_button">{% translate "Повторить" %}</p>
                                         </button>
                                     </div>
                                 </div>
@@ -300,10 +301,10 @@
                                     <table>
                                         <thead>
                                         <tr class="high_table_labels" style="background-color:#F5F5F5;">
-                                            <th>Наименование</th>
-                                            <th class="artykyl">Артикул</th>
-                                            <th>Количество</th>
-                                            <th>Цена</th>
+                                            <th>{% translate "Наименование" %}</th>
+                                            <th class="artykyl">{% translate "Артикул" %}</th>
+                                            <th>{% translate "Количество" %}</th>
+                                            <th>{% translate "Цена" %}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -322,7 +323,7 @@
                                 <hr style="background:#AEADAA; height:1px; border:none;">
                                 <div class="bottom_order_table_records row">
                                     <div class="high_order_label col-lg-26 col-md-6" style="text-align:right;">
-                                        <span>Итого:</span>
+                                        <span>{% translate "Итого:" %}</span>
                                         <span style="color:red;">{{ order.goods_cost }}₴</span>
                                     </div>
                                     <div class="col-lg-26 col-md-6 row">
@@ -334,19 +335,19 @@
                                         </div>
                                         <div style="display:flex;">
                                             <div class="bottom_order_table_records_left">
-                                                <p class="bottom_order_table_record">Доставка:</p>
-                                                <p class="bottom_order_table_record">Оплата:</p>
+                                                <p class="bottom_order_table_record">{% translate "Доставка:" %}</p>
+                                                <p class="bottom_order_table_record">{% translate "Оплата:" %}</p>
                                             </div>
                                             <div class="bottom_order_table_records_right">
                                                 <p class="bottom_order_table_record">{{ order.shipment_method.name }}, {{ order.order_place.name }}</p>
                                                 <p class="bottom_order_table_record">{{ order.payment_method.name }}</p>
                                                 <p class="bottom_order_table_record">
-                                                    {{ order.comment|default:"Коментариев нет" }}</p>
+                                                    {{ order.comment|default:_("Коментариев нет") }}</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="button_order_label col-lg-26 col-md-6" style="text-align:right;">
-                                        <span class="button_order_label_total">Итого:</span>
+                                        <span class="button_order_label_total">{% translate "Итого:" %}</span>
                                         <span style="color:red;">{{ order.goods_cost }}₴</span>
                                     </div>
                                 </div>
@@ -354,12 +355,12 @@
 
                             <button class="order_button"
                                     style="margin-top:20px;border:none;background:transparent;color:red;">
-                                <p class="button_text">Развернуть >></p>
+                                <p class="button_text">{% translate "Развернуть >>" %}</p>
                             </button>
                             <hr style="background:#AEADAA; height:1px; border:none;">
                         </div>
                         {% empty %}
-                        <p>У вас пока нет заказов.</p>
+                        <p>{% translate "У вас пока нет заказов." %}</p>
                     {% endfor %}
                 </div>
                 <div class="my_review col-lg-8" style="display: none">
@@ -373,14 +374,14 @@
                                          alt="{{ product.name }}">
                                 {% else %}
                                     <img class="rev_img" src="{% static 'src/assets/img/icon/tovar-photo 1.png' %}"
-                                         alt="Нет фото">
+                                         alt="{% translate "Нет фото" %}">
                                 {% endif %}
                             </div>
                             <div class="review_personal_block_f col-lg-10 col-md-2 col-4">
                                 <div class="personal_review_high_block">
                                     <span class="rev_labe">{{ product.name }}</span>
                                     <button class="rev_but">
-                                        <p style="color:#FF0000;">Оставить отзыв</p>
+                                        <p style="color:#FF0000;">{% translate "Оставить отзыв" %}</p>
                                     </button>
                                 </div>
                             </div>
@@ -396,7 +397,7 @@
                                              alt="{{ review.product.name }}">
                                     {% else %}
                                         <img class="rev_img" src="{% static 'src/assets/img/icon/tovar-photo 1.png' %}"
-                                             alt="Нет фото">
+                                             alt="{% translate "Нет фото" %}">
                                     {% endif %}
                                 </div>
                                 <div class="col-lg-10 col-md-6 col-4">
@@ -415,8 +416,8 @@
                                         </div>
                                         <div class="rev_text">
                                             {% if review.review_text %}<p>{{ review.review_text }}</p>{% endif %}
-                                            {% if review.pros %}<p>Плюсы: {{ review.pros }}</p>{% endif %}
-                                            {% if review.cons %}<p>Минусы: {{ review.cons }}</p>{% endif %}
+                                            {% if review.pros %}<p>{% translate "Плюсы:" %} {{ review.pros }}</p>{% endif %}
+                                            {% if review.cons %}<p>{% translate "Минусы:" %} {{ review.cons }}</p>{% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -445,12 +446,12 @@
                         <form method="post" action="{% url 'profile_update' %}">
                             {% csrf_token %}
                             <div class="contact_block">
-                                <h2 class="h3 contact_label">Основные данные:</h2>
+                                <h2 class="h3 contact_label">{% translate "Основные данные:" %}</h2>
                                 <div class="row mx-md-6 mx-7 ">
                                     <div class="col-lg-5 col-md-5 px-9 px-md-7">
                                         <input type="text" name="first_name" class="form-control mb-md-6 mb-3"
                                                value="{{ profile_form.first_name.value|default_if_none:'' }}"
-                                               placeholder="Имя">
+                                               placeholder="{% translate "Имя" %}">
                                         <input type="email" name="email" required class="form-control"
                                                value="{{ profile_form.email.value|default_if_none:'' }}"
                                                placeholder="E-mail">
@@ -458,22 +459,22 @@
                                     <div class="col-lg-5 col-md-5 px-9 px-md-7 pt-md-0 pt-6">
                                         <input type="text" name="last_name" class="form-control mb-md-6 mb-3"
                                                value="{{ profile_form.last_name.value|default_if_none:'' }}"
-                                               placeholder="Фамилия">
+                                               placeholder="{% translate "Фамилия" %}">
                                         <input type="text" name="phone" class="form-control"
                                                value="{{ profile_form.phone.value|default_if_none:'' }}"
-                                               placeholder="Телефон">
+                                               placeholder="{% translate "Телефон" %}">
                                     </div>
                                 </div>
                             </div>
                             <div class="contact_block ml-6">
-                                <h2 class="h3 contact_label">Адрес:</h2>
+                                <h2 class="h3 contact_label">{% translate "Адрес:" %}</h2>
                                 <div class="row mx-md-6 mx-7">
                                     <div class="col-lg-5 col-md-5 px-9 px-md-7 ">
                                         <input type="text" name="company" class="form-control mb-md-6 mb-3"
                                                value="{{ profile_form.company.value|default_if_none:'' }}"
-                                               placeholder="Компания">
+                                               placeholder="{% translate "Компания" %}">
                                         <select name="region" class="form-control">
-                                            <option value="">Область не выбрана</option>
+                                            <option value="">{% translate "Область не выбрана" %}</option>
                                             {% for region in regions %}
                                                 <option value="{{ region.id }}"
                                                         {% if profile_form.region.value == region.id %}selected{% endif %}>
@@ -486,39 +487,39 @@
                                         <input type="text" name="registration_number"
                                                class="form-control mb-md-6 mb-3"
                                                value="{{ profile_form.registration_number.value|default_if_none:'' }}"
-                                               placeholder="Регистрационный номер">
+                                               placeholder="{% translate "Регистрационный номер" %}">
                                         <input type="text" name="city" required class="form-control"
                                                value="{{ profile_form.city.value|default_if_none:'' }}"
-                                               placeholder="Город">
+                                               placeholder="{% translate "Город" %}">
                                     </div>
                                     <div class="col-lg-5 col-md-5 px-9 px-md-7 pt-lg-0 pt-md-6 pt-6 pos-lg-relative pos-initial">
                                         <input style="bottom: 0;" type="text" name="postal_code"
                                                class="form-control pos-lg-absolute pos-initial"
                                                value="{{ profile_form.postal_code.value|default_if_none:'' }}"
-                                               placeholder="Индекс">
+                                               placeholder="{% translate "Индекс" %}">
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="cabinet_save_button">Сохранить</button>
+                            <button type="submit" class="cabinet_save_button">{% translate "Сохранить" %}</button>
                         </form>
 
                         <form method="post" action="{% url 'change_password' %}" class="contact_block ml-6">
                             {% csrf_token %}
-                            <h2 class="h3 contact_label">Пароль:</h2>
+                            <h2 class="h3 contact_label">{% translate "Пароль:" %}</h2>
                             <div class="row mx-md-6 mx-7">
                                 <div class="col-lg-5 col-md-5 px-9 px-md-7">
                                     <input type="password" name="old_password" class="form-control mb-md-6 mb-3"
-                                           autocomplete="current-password" placeholder="Текущий пароль">
+                                           autocomplete="current-password" placeholder="{% translate "Текущий пароль" %}">
                                     <input type="password" name="new_password1" class="form-control"
-                                           autocomplete="new-password" placeholder="Новый пароль">
+                                           autocomplete="new-password" placeholder="{% translate "Новый пароль" %}">
                                 </div>
                                 <div class="col-lg-5 col-md-5 px-9 px-md-7">
                                     <input type="password" name="new_password2" class="form-control"
-                                           autocomplete="new-password" placeholder="Подтверждение нового пароля">
+                                           autocomplete="new-password" placeholder="{% translate "Подтверждение нового пароля" %}">
                                 </div>
                             </div>
                             <button type="submit" class="cabinet_save_button" style="margin-top:16px;">
-                                Сменить пароль
+                                {% translate "Сменить пароль" %}
                             </button>
                         </form>
                     </div>
