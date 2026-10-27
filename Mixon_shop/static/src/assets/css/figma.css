@@ -575,3 +575,112 @@
         cursor: pointer;
     }
 }
+
+/* ---------- Главная: сайдбар категорий 300x420 + слайдер 870x420 (макет «Главная») ---------- */
+@media (min-width: 1200px) {
+    .slider--section .vertical-block {
+        margin-top: 1px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .slider--section .high_main_block {
+        width: 300px;
+        height: 420px;
+        flex-shrink: 0;
+        background: #fff;
+    }
+
+    .slider--section .main_high_buttons,
+    .slider--section .main_high_buttons .categories {
+        width: 300px;
+    }
+
+    .slider--section .main_high_buttons .categories {
+        padding-top: 17px;
+    }
+
+    /* кнопка 300x45: отступы 10/11px, зазор 10px, Montserrat Medium 16px */
+    .slider--section .main_high_item {
+        width: 300px;
+        min-height: 45px;
+        padding: 11px 10px !important;
+        gap: 10px;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .slider--section .main_high_item img {
+        height: 23px;
+        width: auto;
+        max-width: 28px;
+        flex-shrink: 0;
+    }
+
+    .slider--section .main_high_item .category-name {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: -0.48px;
+        color: #000;
+    }
+
+    .slider--section .main_high_item:hover .category-name {
+        color: #f00;
+    }
+
+    .slider--section .main_image {
+        width: 870px;
+        margin-left: 0;
+        padding-bottom: 0;
+        flex-shrink: 0;
+    }
+
+    .slider--section .main_image_slides,
+    .slider--section .main_image_img {
+        width: 870px;
+        height: 420px;
+    }
+
+    .slider--section .main_image_img {
+        aspect-ratio: auto;
+        object-fit: cover;
+    }
+
+    /* точки: 30x2px, на 20px ниже слайдера */
+    .slider--section .main_image_buttons {
+        padding-top: 20px;
+        position: absolute;
+        top: 420px;
+        left: 0;
+        width: 870px;
+        height: 22px;
+    }
+
+    .slider--section .main_image_button {
+        background: #b4b4b4;
+    }
+
+    .slider--section .main_image_button.active {
+        background: #fe0000;
+    }
+
+    /* кнопки брендов: плитки 170x64, шаг 200px, от слайдера 42px */
+    .slider--section .brand_buttons-wrapper {
+        margin: 42px 0 0 -15px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .slider--section .brand_buttons {
+        flex: 0 0 200px;
+        width: 200px;
+        max-width: 200px;
+        height: 64px;
+    }
+
+    .slider--section .brand_buttons-inner {
+        padding: 0 10px;
+    }
+}

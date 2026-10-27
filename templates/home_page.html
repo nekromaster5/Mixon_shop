@@ -19,18 +19,15 @@
                     <div class="main_high_buttons">
                         <div class="categories">
                             {% for section in sections %}
-                                <div class="item"
-                                     style="position:relative; top:{{ forloop.counter0|add:20 }}px; left:15px;">
-
+                                <div class="item main_high_item">
                                     {% if section.name.image %}
                                         <img src="{{ section.name.image.url }}"
-                                             alt="{{ section.name.name }}"
-                                             style="position:absolute; left:-30px;">
+                                             alt="{{ section.name.name }}">
                                     {% else %}
                                         <p>{% translate "[Нет картинки]" %}</p>
                                     {% endif %}
 
-                                    <p class="category-name" style="font-weight: 500;">
+                                    <p class="category-name">
                                         {{ section.name.name }}
                                     </p>
                                 </div>
