@@ -113,10 +113,19 @@
                                 {% if images %}
                                     <img id="product-main-image" src="{{ images.0.image.url }}"
                                          alt="{{ product.name }}">
+                                    {% if images|length > 1 %}
+                                        <button type="button" class="pd-arrow pd-arrow--prev" aria-label="{% translate "Назад" %}">&#8249;</button>
+                                        <button type="button" class="pd-arrow pd-arrow--next" aria-label="{% translate "Вперёд" %}">&#8250;</button>
+                                    {% endif %}
                                 {% else %}
                                     <div class="pd-main__empty">{% translate "Нет фото" %}</div>
                                 {% endif %}
                             </div>
+                            {% if images|length > 1 %}
+                                <div class="pd-dashes">
+                                    {% for image in images|slice:":4" %}<span class="pd-dash{% if forloop.first %} is-active{% endif %}"></span>{% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
 
                     </div>
@@ -125,36 +134,15 @@
                     <!-- Правый блок -->
                     <div class="product-rating-mobile d-flex">
                         <div class="product_top_stars_mobile">
-                            <svg width="12" height="13" viewBox="0 0 12 13" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.94144 0.94165L7.77724 4.79016L11.8816 5.40718L8.91154 8.40274L9.61243 12.633L5.94081 10.6355L2.26922 12.633L2.9701 8.40274L0 5.40718L4.10438 4.79016L5.94144 0.94165Z"
-                                      fill="#FFC107"></path>
-                            </svg>
-
-                            <svg width="12" height="13" viewBox="0 0 12 13" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.94144 0.94165L7.77724 4.79016L11.8816 5.40718L8.91154 8.40274L9.61243 12.633L5.94081 10.6355L2.26922 12.633L2.9701 8.40274L0 5.40718L4.10438 4.79016L5.94144 0.94165Z"
-                                      fill="#FFC107"></path>
-                            </svg>
-
-                            <svg width="12" height="13" viewBox="0 0 12 13" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.94144 0.94165L7.77724 4.79016L11.8816 5.40718L8.91154 8.40274L9.61243 12.633L5.94081 10.6355L2.26922 12.633L2.9701 8.40274L0 5.40718L4.10438 4.79016L5.94144 0.94165Z"
-                                      fill="#FFC107"></path>
-                            </svg>
-
-                            <svg width="12" height="13" viewBox="0 0 12 13" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.94144 0.94165L7.77724 4.79016L11.8816 5.40718L8.91154 8.40274L9.61243 12.633L5.94081 10.6355L2.26922 12.633L2.9701 8.40274L0 5.40718L4.10438 4.79016L5.94144 0.94165Z"
-                                      fill="#FFC107"></path>
-                            </svg>
-
-                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6.53619 0.94165L8.37197 4.79016L12.4764 5.40718L9.50629 8.40274L10.2071 12.633L6.53554 10.6355L2.86394 12.633L3.56483 8.40274L0.594727 5.40718L4.69915 4.79016L6.53619 0.94165Z"
-                                      fill="#AEADAA"></path>
-                            </svg>
-
+                            {% for star in stars %}
+                                {% if star == "full" %}
+                                    <img src="{% static 'src/assets/img/icon/Path 131.png' %}" alt="">
+                                {% elif star == "half" %}
+                                    <img src="{% static 'src/assets/img/icon/Path 132.png' %}" alt="">
+                                {% else %}
+                                    <img src="{% static 'src/assets/img/icon/Path 133.png' %}" alt="">
+                                {% endif %}
+                            {% endfor %}
                         </div>
                         <div class="product_top_icons_mobile">
                             <div class="product_top_icon">
@@ -307,7 +295,7 @@
                         </div>
                         {% endif %}
                         <div class="delivery pd-delivery">
-                            <p class="pd-delivery__title"><span class="pd-delivery__city">{% translate "Доставка" %}</span> {% translate "в Хмельницкий" %}</p>
+                            <p class="pd-delivery__title">{% translate "Доставка в" %} <span class="pd-delivery__city">{% translate "Хмельницкий" %}</span></p>
                             <div class="pd-delivery__row">
                                 <img class="delivery_img" src="{% static '/src/assets/img/icon/Group 42.png' %}" alt="">
                                 <span class="pd-delivery__name">{% translate "Самовывоз из магазина" %}</span>
@@ -316,89 +304,34 @@
                             </div>
                             <div class="pd-delivery__row">
                                 <img class="delivery_img" src="{% static '/src/assets/img/icon/Group 41.png' %}" alt="">
-                                <span class="pd-delivery__name">{% translate "Курьерская доставка" %}</span>
-                                <span class="pd-delivery__when">{% translate "1–2 дня" %}</span>
-                                <span class="pd-delivery__cost">{% translate "от 100 грн" %}</span>
+                                <span class="pd-delivery__name">{% translate "Самовывоз из отделения" %}</span>
+                                <span class="pd-delivery__when">{% translate "Доставят до" %} {{ delivery_date_branch }}</span>
+                                <span class="pd-delivery__cost">{% translate "от 100 грн." %}</span>
                             </div>
                             <div class="pd-delivery__row">
                                 <img class="delivery_img" src="{% static '/src/assets/img/icon/Group 104.png' %}" alt="">
-                                <span class="pd-delivery__name">{% translate "Доставка Новой почтой" %}</span>
-                                <span class="pd-delivery__when">{% translate "2–3 дня" %}</span>
-                                <span class="pd-delivery__cost">{% translate "от 170 грн" %}</span>
+                                <span class="pd-delivery__name">{% translate "Доставка до квартиры" %}</span>
+                                <span class="pd-delivery__when">{% translate "Доставят до" %} {{ delivery_date_home }}</span>
+                                <span class="pd-delivery__cost">{% translate "от 170 грн." %}</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 {% if product.description %}
-                <div class="description_block" style="background-color:#FFFFFF;">
-                    <div class="inner_description_block">
-                        <p style="font-size: 1.5em;">{% translate "Описание" %}</p>
-                        <p>{{ product.description|linebreaksbr }}</p>
-                    </div>
-                </div>
+                <section class="pd-info">
+                    <h2 class="pd-info__title">{% translate "Описание" %}</h2>
+                    <p class="pd-info__text">{{ product.description|linebreaksbr }}</p>
+                </section>
                 {% endif %}
                 {% if characteristics %}
-                <div class="describe_block mb-7">
-
-
-                    <span class="product__content--title__text main_text">{% translate "Характеристики" %}</span>
-                    <div class="about_product_table">
-                        <div class="standart_about_product_table" style="justify-content: space-between; align-items: flex-start;">
-                            <table class="characteristics__content--table  table_ab main_table_l "
-                                   style="  margin-left: 0rem;margin-left:3px; ">
-                                <tbody class="characteristics__content--table__body  position-relative">
-                                {% for item in characteristics_left %}
-                                    <tr class="product__content--text">
-                                        <td class="col-6 text-nowrap overflow-hidden">
-                                            <div class="characteristic-title_main">
-                                                {{ item.characteristic.name }}................................................................................................................................................................
-                                            </div>
-                                        </td>
-                                        <td class="col-6">
-                                            {{ item.value }}
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                            <table class="characteristics__content--table table_ab main_table_r"
-                                   style="  margin-left: 0rem;">
-                                <tbody class="characteristics__content--table__body  position-relative">
-                                {% for item in characteristics_right %}
-                                    <tr class="product__content--text">
-                                        <td class="col-6 text-nowrap overflow-hidden">
-                                            <div class="characteristic-title_main">
-                                                {{ item.characteristic.name }}................................................................................................................................................................
-                                            </div>
-                                        </td>
-                                        <td class="col-6">
-                                            {{ item.value }}
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="adaptive_about_product_table">
-                            <table class="characteristics__content--table table_ab " style="  margin-left: 0rem;">
-                                <tbody class="characteristics__content--table__body  position-relative">
-                                {% for item in characteristics %}
-                                    <tr class="product__content--text">
-                                        <td class="col-6 text-nowrap overflow-hidden">
-                                            <div class="characteristic-title">
-                                                {{ item.characteristic.name }}................................................................................................................................................................
-                                            </div>
-                                        </td>
-                                        <td class="col-6">
-                                            {{ item.value }}
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                <section class="pd-info">
+                    <h2 class="pd-info__title">{% translate "Характеристики" %}</h2>
+                    <dl class="pd-spec">
+                        {% for item in characteristics %}
+                            <div class="pd-spec__row"><dt>{{ item.characteristic.name }}</dt><dd>{{ item.value }}</dd></div>
+                        {% endfor %}
+                    </dl>
+                </section>
                 {% endif %}
                 <div class="section__buying--together">
                     <div class="section__heading d-flex justify-content-between mb-30 ">
@@ -469,26 +402,17 @@
             </div>
             <div class="characteristics" style="display: none; position: relative;">
                 <div class="row ps-0 pe-0 justify-content-between">
-                    <div class="characteristics__content col-lg-16 px-0">
-                        <span class="product__content--title__text">{% translate "Характеристики" %}</span>
-                        <table class="characteristics__content--table">
-                            <tbody class="characteristics__content--table__body position-relative">
-                            {% for item in characteristics %}
-                                <tr class="product__content--text">
-                                    <td class="col-6 text-nowrap overflow-hidden">
-                                        <div class="characteristic-title">
-                                            {{ item.characteristic.name }}................................................................................................................................................................
-                                        </div>
-                                    </td>
-                                    <td class="col-6">
-                                        {{ item.value }}
-                                    </td>
-                                </tr>
-                            {% empty %}
-                                <tr class="product__content--text"><td class="col-6">{% translate "Характеристики пока не заполнены" %}</td></tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                    <div class="characteristics__content pd-info col-lg-16 px-0">
+                        <h2 class="pd-info__title">{% translate "Характеристики" %}</h2>
+                        {% if characteristics %}
+                            <dl class="pd-spec">
+                                {% for item in characteristics %}
+                                    <div class="pd-spec__row"><dt>{{ item.characteristic.name }}</dt><dd>{{ item.value }}</dd></div>
+                                {% endfor %}
+                            </dl>
+                        {% else %}
+                            <p class="pd-info__text">{% translate "Характеристики пока не заполнены" %}</p>
+                        {% endif %}
 
                     </div>
                     <div class="characteristics-slider__section px-0">
@@ -1243,11 +1167,40 @@
             });
         }
 
+        // Карусель на телефоне: стрелки, полоски-индикаторы и свайп листают те же фото, что и миниатюры
+        const galleryThumbs = Array.from(document.querySelectorAll('.pd-thumb'));
+        const galleryDashes = Array.from(document.querySelectorAll('.pd-dash'));
+        let galleryIndex = 0;
+
+        function showGalleryImage(index) {
+            if (!galleryThumbs.length) return;
+            galleryIndex = (index + galleryThumbs.length) % galleryThumbs.length;
+            document.getElementById('product-main-image').src = galleryThumbs[galleryIndex].dataset.imageUrl;
+            galleryDashes.forEach((dash, i) => dash.classList.toggle('is-active', i === galleryIndex));
+        }
+
+        const galleryMain = document.querySelector('.pd-main');
+        if (galleryMain) {
+            let swipeStartX = null;
+            galleryMain.addEventListener('touchstart', e => { swipeStartX = e.changedTouches[0].clientX; }, {passive: true});
+            galleryMain.addEventListener('touchend', e => {
+                if (swipeStartX === null) return;
+                const distance = e.changedTouches[0].clientX - swipeStartX;
+                swipeStartX = null;
+                if (Math.abs(distance) > 40) showGalleryImage(galleryIndex + (distance < 0 ? 1 : -1));
+            }, {passive: true});
+        }
+
         document.addEventListener('click', function (event) {
+            const arrow = event.target.closest('.pd-arrow');
+            if (arrow) {
+                showGalleryImage(galleryIndex + (arrow.classList.contains('pd-arrow--next') ? 1 : -1));
+                return;
+            }
             const thumb = event.target.closest('.carousel-buttons button');
             if (thumb) {
                 // Клик по миниатюре меняет главное фото
-                document.getElementById('product-main-image').src = thumb.dataset.imageUrl;
+                showGalleryImage(galleryThumbs.indexOf(thumb));
                 return;
             }
             const volume = event.target.closest('.product-volume-option');

@@ -41,8 +41,8 @@ def test_product_without_stock_hides_color_and_package_blocks(client, product):
 def test_delivery_rows_have_distinct_names(client, product):
     text = client.get(f"/product/{product.id}/").content.decode()
 
-    assert "Кур’єрська доставка" in text
-    assert "Доставка Новою поштою" in text
+    assert "Самовивіз із відділення" in text
+    assert "Доставка до квартири" in text
     assert "Доставят до 01.07" not in text
 
 

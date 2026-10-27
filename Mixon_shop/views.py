@@ -195,6 +195,9 @@ class ProductPage(View):
             'likes_count': product.favoriteproduct_set.count(),
             'reviews_count': product.reviews.count(),
             'stars': rating_to_stars(product.average_rating),
+            # Срок доставки считается от сегодняшнего дня: в отделение до 2 дней, до квартиры до 3
+            'delivery_date_branch': (now() + timedelta(days=2)).strftime('%d.%m'),
+            'delivery_date_home': (now() + timedelta(days=3)).strftime('%d.%m'),
             'related_products': related_products,
             'similar_products': similar_products,
         })

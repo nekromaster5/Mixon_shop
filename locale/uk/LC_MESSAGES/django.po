@@ -1658,3 +1658,31 @@ msgstr "2–3 дні"
 #: templates/product.html:0
 msgid "от 170 грн"
 msgstr "від 170 грн"
+
+#: templates/product.html:0
+msgid "Самовывоз из отделения"
+msgstr "Самовивіз із відділення"
+
+#: templates/product.html:0
+msgid "Доставят до"
+msgstr "Доставимо до"
+
+#: templates/product.html:0
+msgid "от 100 грн."
+msgstr "від 100 грн."
+
+#: templates/product.html:0
+msgid "Доставка до квартиры"
+msgstr "Доставка до квартири"
+
+#: templates/product.html:0
+msgid "от 170 грн."
+msgstr "від 170 грн."
+
+#: templates/product.html:0
+msgid "Назад"
+msgstr "Назад"
+
+#: templates/product.html:0
+msgid "Вперёд"
+msgstr "Уперед"
