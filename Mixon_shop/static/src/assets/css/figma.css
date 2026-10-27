@@ -684,3 +684,75 @@
         padding: 0 10px;
     }
 }
+
+/* ---------- Главная: заголовки секций, «Посмотреть все», товары, новости ---------- */
+@media (min-width: 1200px) {
+    .product__section .section__heading--maintitle {
+        font-size: 30px;
+        line-height: 37px;
+        font-weight: 500;
+        letter-spacing: -0.9px;
+        color: #1f0d01;
+    }
+
+    .product__section .view__all--link {
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: -0.45px;
+        color: #fe0000;
+    }
+
+    .product__section .view__all--link {
+        align-items: center;
+    }
+
+    .product__section .view__all--link svg {
+        width: 11px;
+        height: 13px;
+        margin-left: 2px;
+        color: #fe0000;
+    }
+
+    /* карточки товаров: 292px по ширине, 500px по высоте */
+    .product__section .product__section--inner .slide > * {
+        min-height: 500px;
+    }
+
+    /* новости: карточки 370x300 с шагом 402px, фото 350x210 */
+    .product__section .comparison_lists.main_page {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 32px;
+        margin: 0 -2px;
+    }
+
+    .product__section .news_buttons.main_page {
+        width: 370px;
+        max-width: 370px;
+        flex: 0 0 370px;
+        padding: 0;
+    }
+
+    .product__section .big_news_buttons {
+        display: block;
+        height: 300px;
+        padding: 10px 9px 15px;
+        box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.25);
+    }
+
+    .product__section .big_news_buttons img {
+        width: 351px;
+        height: 210px;
+        border-radius: 10px;
+        object-fit: cover;
+    }
+
+    .product__section .big_news_buttons .news_text {
+        display: block;
+        width: 318px;
+        padding: 15px 0 0;
+        font-size: 20px;
+        line-height: 25px;
+        color: #1f0d01;
+    }
+}
