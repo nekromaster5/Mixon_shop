@@ -1,63 +1,14 @@
 from admin_tools.menu import items, Menu
+from django.urls import reverse
+
+from .groups import GROUPS
 
 
 class CustomMenu(Menu):
     def init_with_context(self, context):
+        self.children += [items.MenuItem('Главная', reverse('admin:index'))]
         self.children += [
-            items.MenuItem('Пользователи и профили', children=[
-                items.ModelList(
-                    'Пользователи и профили',
-                    models=('django.contrib.auth.models.User', 'Mixon_shop.models.FavoriteProduct',
-                            'Mixon_shop.models.ProductComparison', 'Mixon_shop.models.Review',
-                            'Mixon_shop.models.Region')
-                ),
-            ]),
-            items.MenuItem('Управление товарами', children=[
-                items.ModelList(
-                    'Управление товарами',
-                    models=('Mixon_shop.models.Product', 'Mixon_shop.models.ProductStock',
-                            'Mixon_shop.models.Color', 'Mixon_shop.models.Volume',
-                            'Mixon_shop.models.BindingSubstance', 'Mixon_shop.models.ProductType',
-                            'Mixon_shop.models.Category', 'Mixon_shop.models.PromoCode',
-                            'Mixon_shop.models.RecommendedProducts', 'Mixon_shop.models.SalesLeaders',
-                            'Mixon_shop.models.FavoriteProduct',)
-                ),
-            ]),
-            items.MenuItem('Главная страница', children=[
-                items.ModelList(
-                    'Главная страница',
-                    models=('Mixon_shop.models.MainPageSections', 'Mixon_shop.models.MainPageBanner',
-                            'Mixon_shop.models.RecommendedProducts', 'Mixon_shop.models.SalesLeaders')
-                ),
-            ]),
-            items.MenuItem('Новости', children=[
-                items.ModelList(
-                    'Новости',
-                    models=('Mixon_shop.models.News', 'Mixon_shop.models.NewsCategory')
-                ),
-            ]),
-            items.MenuItem('Заказы и статус', children=[
-                items.ModelList(
-                    'Заказы и статус',
-                    models=('Mixon_shop.models.Order', 'Mixon_shop.models.OrderStatus')
-                ),
-            ]),
-            items.MenuItem('Местоположения и филиалы', children=[
-                items.ModelList(
-                    'Местоположения и филиалы',
-                    models=('Mixon_shop.models.Branch', 'Mixon_shop.models.City', 'Mixon_shop.models.PhoneNumber',
-                            'Mixon_shop.models.EmailAddress',
-                            'Mixon_shop.models.ScheduleTemplate',
-                            'Mixon_shop.models.ScheduleTemplateItem',
-                            'Mixon_shop.models.BranchSchedule',
-                            'Mixon_shop.models.BranchScheduleException',
-                            )
-                ),
-            ]),
-            items.MenuItem('Сообщения и уведомления', children=[
-                items.ModelList(
-                    'Сообщения и уведомления',
-                    models=('Mixon_shop.models.ErrorMessages', 'Mixon_shop.models.InfoMessages')
-                ),
-            ]),
+            items.MenuItem(title, children=[items.ModelList(title, models=models)])
+            for title, models in GROUPS
         ]
+        self.children += [items.MenuItem('Открыть сайт', reverse('home'))]

@@ -1,58 +1,38 @@
 from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
+from django.urls import reverse
+
+from .groups import COLLAPSED, GROUPS
 
 
 class CustomIndexDashboard(Dashboard):
+    columns = 2
+
     def init_with_context(self, context):
-        self.children.append(modules.ModelList(
-            title='Пользователи и профили',
-            models=('django.contrib.auth.models.User', 'Mixon_shop.models.FavoriteProduct',
-                    'Mixon_shop.models.ProductComparison',
-                    'Mixon_shop.models.Review', 'Mixon_shop.models.Region'),
-            collapsible=True,
-            collapsed=False,
+        self.children.append(modules.LinkList(
+            title='Быстрые действия',
+            layout='inline',
+            draggable=False,
+            deletable=False,
+            collapsible=False,
+            children=[
+                ['Заказы', reverse('admin:Mixon_shop_order_changelist')],
+                ['Необработанные заявки',
+                 reverse('admin:Mixon_shop_productrequest_changelist') + '?is_processed__exact=0'],
+                ['Добавить товар', reverse('admin:Mixon_shop_product_add')],
+                ['Товары без наличия', reverse('admin:Mixon_shop_product_changelist') + '?is_in_stock__exact=0'],
+                ['Открыть сайт', reverse('home')],
+            ],
         ))
 
-        self.children.append(modules.ModelList(
-            title='Управление товарами',
-            models=('Mixon_shop.models.Product', 'Mixon_shop.models.ProductStock',
-                    'Mixon_shop.models.Color', 'Mixon_shop.models.Volume',
-                    'Mixon_shop.models.BindingSubstance', 'Mixon_shop.models.ProductType',
-                    'Mixon_shop.models.Category', 'Mixon_shop.models.PromoCode',
-                    'Mixon_shop.models.RecommendedProducts', 'Mixon_shop.models.SalesLeaders',
-                    'Mixon_shop.models.FavoriteProduct',)
-        ))
+        for title, models in GROUPS:
+            self.children.append(modules.ModelList(
+                title=title,
+                models=models,
+                collapsible=True,
+                collapsed=title in COLLAPSED,
+            ))
 
-        self.children.append(modules.ModelList(
-            title='Главная страница',
-            models=('Mixon_shop.models.MainPageSections', 'Mixon_shop.models.MainPageBanner',
-                    'Mixon_shop.models.RecommendedProducts', 'Mixon_shop.models.SalesLeaders')
-        ))
-
-        self.children.append(modules.ModelList(
-            title='Новости',
-            models=('Mixon_shop.models.News', 'Mixon_shop.models.NewsCategory')
-        ))
-
-        self.children.append(modules.ModelList(
-            title='Заказы и статус',
-            models=('Mixon_shop.models.Order', 'Mixon_shop.models.OrderStatus')
-        ))
-
-        self.children.append(modules.ModelList(
-            title='Местоположения и филиалы',
-            models=('Mixon_shop.models.Branch', 'Mixon_shop.models.City', 'Mixon_shop.models.PhoneNumber',
-                    'Mixon_shop.models.EmailAddress',
-                    'Mixon_shop.models.ScheduleTemplate',
-                    'Mixon_shop.models.ScheduleTemplateItem',
-                    'Mixon_shop.models.BranchSchedule',
-                    'Mixon_shop.models.BranchScheduleException',
-                    )
-        ))
-
-        self.children.append(modules.ModelList(
-            title='Сообщения и уведомления',
-            models=('Mixon_shop.models.ErrorMessages', 'Mixon_shop.models.InfoMessages')
-        ))
+        self.children.append(modules.RecentActions(title='Последние изменения', limit=10))
 
 
 class CustomAppIndexDashboard(AppIndexDashboard):

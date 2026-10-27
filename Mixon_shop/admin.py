@@ -1,71 +1,587 @@
+"""Админка магазина.
+
+Правила, по которым она устроена (чтобы владельцу было понятно без программиста):
+- у каждой модели в списке видны главные колонки, есть поиск и фильтры справа;
+- формы разбиты на блоки (fieldsets), редко нужные блоки свёрнуты;
+- всё, что относится к товару (фото, упаковки/цвета/остатки, характеристики), редактируется
+  прямо на странице товара;
+- подсказки к полям — в HELP_TEXTS у каждой админки (без миграций: правим только форму).
+Группировка разделов на главной странице админки — в admin_tools/dashboard.py.
+"""
 from adminsortable2.admin import SortableInlineAdminMixin, SortableAdminBase
 from django.contrib import admin
-from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
-from django.db import models
+from django.db.models import Count
+from django.utils.html import format_html
 from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
 from .models import (
     Region, UserProfile, PhoneNumber, Branch, Product, Review,
-    OrderStatus, Order, FavoriteProduct, ProductComparison,
+    OrderStatus, Order, FavoriteProduct,
     NewsCategory, News, ErrorMessages, InfoMessages, City, ProductStock, Volume, Color, ProductImage, BindingSubstance,
     ProductType, PromoCode, SalesLeaders, RecommendedProducts, MainPageSections, MainPageBanner, Category, OrderProduct,
     BranchSchedule, BranchScheduleException, ScheduleTemplateItem, ScheduleTemplate, ContentBlock, EmailAddress,
-    Brand, Characteristic, ProductCharacteristic, ProductRequest,
+    Brand, Characteristic, ProductCharacteristic, ProductRequest, ShipmentMethod, PaymentMethod,
 )
 
+admin.site.site_header = 'Mixon — управление магазином'
+admin.site.site_title = 'Mixon: админка'
+admin.site.index_title = 'Что будем делать?'
+admin.site.empty_value_display = '—'
+# Боковой список всех моделей дублирует верхнее меню по разделам и только путает
+admin.site.enable_nav_sidebar = False
 
-@admin.register(Region)
-class RegionAdmin(admin.ModelAdmin):
+
+class HelpTextMixin:
+    """Подсказки под полями формы: HELP_TEXTS = {'имя_поля': 'текст'}.
+    Для переводимых полей (name_uk, name_ru) достаточно указать 'name'."""
+    HELP_TEXTS = {}
+
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
+        formfield = super().formfield_for_dbfield(db_field, request, **kwargs)
+        name = getattr(db_field, 'translated_field', db_field).name
+        if formfield is not None and name in self.HELP_TEXTS:
+            formfield.help_text = self.HELP_TEXTS[name]
+        return formfield
+
+
+def image_preview(file_field, height=60):
+    if not file_field:
+        return '—'
+    return format_html('<img src="{}" style="height:{}px;max-width:160px;object-fit:contain;'
+                       'border:1px solid #ddd;border-radius:4px;background:#fff">', file_field.url, height)
+
+
+# ---------------------------------------------------------------- Товары
+
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 1
+    fields = ('preview', 'image')
+    readonly_fields = ('preview',)
+    verbose_name = 'фото'
+    verbose_name_plural = 'Фотографии (первая — главная)'
+
+    @admin.display(description='превью')
+    def preview(self, obj):
+        return image_preview(obj.image)
+
+
+class ProductStockInline(HelpTextMixin, admin.TabularInline):
+    # Упаковки и цвета на странице товара строятся по этим строкам
+    model = ProductStock
+    extra = 1
+    fields = ('branch', 'volume', 'color', 'quantity')
+    autocomplete_fields = ('color',)
+    verbose_name = 'строка наличия'
+    verbose_name_plural = 'Упаковки, цвета и наличие в магазинах'
+    HELP_TEXTS = {
+        'branch': 'Магазин, где лежит товар.',
+        'volume': 'Объём упаковки. Каждая упаковка станет кнопкой на странице товара.',
+        'color': 'Можно оставить пустым, если у товара нет цветов. Начните печатать название или артикул.',
+        'quantity': 'Сколько штук в этом магазине.',
+    }
+
+
+class ProductCharacteristicInline(TranslationTabularInline):
+    model = ProductCharacteristic
+    extra = 0
+    fields = ('characteristic', 'value')
+    verbose_name_plural = 'Характеристики (список берётся из категории товара)'
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        # Предлагаем только характеристики из списка категории товара
+        if db_field.name == 'characteristic':
+            product_id = request.resolver_match.kwargs.get('object_id')
+            product = Product.objects.filter(pk=product_id).first() if product_id else None
+            if product:
+                kwargs['queryset'] = Characteristic.objects.filter(categories=product.category)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+
+@admin.register(Product)
+class ProductAdmin(HelpTextMixin, TranslationAdmin):
+    list_display = ('photo', 'name', 'article', 'brand', 'category', 'price', 'discount_price', 'is_discounted',
+                    'is_new', 'is_in_stock')
+    list_display_links = ('photo', 'name')
+    list_editable = ('is_discounted', 'is_new')
+    search_fields = ('name_uk', 'name_ru', 'article')
+    list_filter = ('category', 'brand', 'type', 'is_in_stock', 'is_new', 'is_discounted')
+    list_select_related = ('brand', 'category')
+    list_per_page = 50
+    autocomplete_fields = ('brand',)
+    filter_horizontal = ('related_products', 'similar_products')
+    readonly_fields = ('is_in_stock', 'average_rating')
+    save_on_top = True
+    inlines = [ProductImageInline, ProductStockInline, ProductCharacteristicInline]
+    # Старые фиксированные характеристики (usage, dry_residue и т.д.) заменены списками характеристик
+    # по категориям, поэтому в форме их нет. binding_substance оставлен: по нему работает фильтр каталога.
+    fieldsets = (
+        ('Основное', {
+            'fields': ('name', 'article', ('category', 'type'), 'brand', 'binding_substance'),
+        }),
+        ('Цена', {
+            'fields': (('price', 'discount_price'), 'is_discounted'),
+        }),
+        ('Отметки на сайте', {
+            'fields': ('is_new', 'is_in_stock', 'average_rating'),
+        }),
+        ('Описание', {
+            'fields': ('description',),
+        }),
+        ('Похожие и сопутствующие товары', {
+            'classes': ('collapse',),
+            'fields': ('similar_products', 'related_products'),
+        }),
+    )
+    HELP_TEXTS = {
+        'name': 'Название, как его увидит покупатель.',
+        'article': 'Код товара у поставщика или на складе. Показывается на странице товара.',
+        'category': 'Раздел каталога. От категории зависит список характеристик ниже.',
+        'type': 'Вид товара внутри категории (для фильтра каталога).',
+        'brand': 'Производитель. Начните печатать название.',
+        'binding_substance': 'Основа (для фильтра каталога). Можно не заполнять.',
+        'price': 'Цена в гривнах.',
+        'discount_price': 'Цена со скидкой. Работает, только если отмечено «скидка активна».',
+        'is_discounted': 'Отметьте, чтобы показать цену со скидкой и старую цену зачёркнутой.',
+        'is_new': 'Показывать значок «Новинка».',
+        'is_in_stock': 'Ставится автоматически: «да», если ниже есть хотя бы одна строка наличия.',
+        'average_rating': 'Считается автоматически по отзывам.',
+        'similar_products': 'Показываются в блоке «Похожие товары».',
+        'related_products': 'Показываются в блоке «С этим товаром покупают».',
+    }
+
+    @admin.display(description='фото')
+    def photo(self, obj):
+        first = obj.images.first()
+        return image_preview(first.image if first else None, height=40)
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).prefetch_related('images')
+
+    def save_related(self, request, form, formsets, change):
+        super().save_related(request, form, formsets, change)
+        # Добавляем пустые строки для всех характеристик категории, чтобы их оставалось только заполнить
+        product = form.instance
+        existing = set(product.characteristic_values.values_list('characteristic_id', flat=True))
+        for characteristic in Characteristic.objects.filter(categories=product.category):
+            if characteristic.id not in existing:
+                ProductCharacteristic.objects.create(product=product, characteristic=characteristic)
+
+
+@admin.register(Category)
+class CategoryAdmin(HelpTextMixin, TranslationAdmin):
+    list_display = ('logo', 'name', 'products_count')
+    list_display_links = ('logo', 'name')
+    search_fields = ('name_uk', 'name_ru')
+    HELP_TEXTS = {'image': 'Картинка для меню каталога и главной страницы.'}
+
+    @admin.display(description='логотип')
+    def logo(self, obj):
+        return image_preview(obj.image, height=32)
+
+    @admin.display(description='товаров', ordering='products_total')
+    def products_count(self, obj):
+        return obj.products_total
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).annotate(products_total=Count('product'))
+
+
+@admin.register(Characteristic)
+class CharacteristicAdmin(HelpTextMixin, TranslationAdmin):
+    list_display = ('name', 'order', 'category_list')
+    list_editable = ('order',)
+    list_filter = ('categories',)
+    search_fields = ('name_uk', 'name_ru')
+    filter_horizontal = ('categories',)
+    HELP_TEXTS = {
+        'categories': 'У товаров этих категорий характеристика появится в списке для заполнения.',
+        'order': 'Чем меньше число, тем выше строка в таблице характеристик.',
+    }
+
+    @admin.display(description='категории')
+    def category_list(self, obj):
+        return ', '.join(category.name for category in obj.categories.all())
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).prefetch_related('categories')
+
+
+@admin.register(Brand)
+class BrandAdmin(admin.ModelAdmin):
+    list_display = ('logo_preview', 'name', 'slug', 'order', 'products_count')
+    list_display_links = ('logo_preview', 'name')
+    list_editable = ('order',)
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+
+    @admin.display(description='логотип')
+    def logo_preview(self, obj):
+        return image_preview(obj.logo, height=32)
+
+    @admin.display(description='товаров', ordering='products_total')
+    def products_count(self, obj):
+        return obj.products_total
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).annotate(products_total=Count('products'))
+
+
+@admin.register(ProductType)
+class ProductTypeAdmin(TranslationAdmin):
+    list_display = ('name', 'category_list')
+    list_filter = ('categories',)
+    search_fields = ('name_uk', 'name_ru')
+    filter_horizontal = ('categories',)
+
+    @admin.display(description='категории')
+    def category_list(self, obj):
+        return ', '.join(category.name for category in obj.categories.all())
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).prefetch_related('categories')
+
+
+@admin.register(BindingSubstance)
+class BindingSubstanceAdmin(TranslationAdmin):
     list_display = ('name',)
+    search_fields = ('name_uk', 'name_ru')
+
+
+@admin.register(Color)
+class ColorAdmin(HelpTextMixin, admin.ModelAdmin):
+    list_display = ('swatch', 'vendor_code', 'name', 'rgb_code')
+    list_display_links = ('swatch', 'vendor_code', 'name')
+    search_fields = ('name', 'vendor_code')
+    HELP_TEXTS = {
+        'vendor_code': 'Номер цвета по каталогу (например, RAL 9003).',
+        'rgb_code': 'Цвет кружка на сайте: #RRGGBB, например #FFFFFF, или rgb(255, 255, 255).',
+    }
+
+    @admin.display(description='цвет')
+    def swatch(self, obj):
+        return format_html('<span style="display:inline-block;width:24px;height:24px;border-radius:50%;'
+                           'border:1px solid #999;background:{}"></span>', obj.rgb_code)
+
+
+@admin.register(Volume)
+class VolumeAdmin(HelpTextMixin, admin.ModelAdmin):
+    list_display = ('size',)
+    search_fields = ('size',)
+    ordering = ('size',)
+    HELP_TEXTS = {'size': 'Объём упаковки в литрах, например 0.75 или 10.'}
+
+
+@admin.register(ProductStock)
+class ProductStockAdmin(admin.ModelAdmin):
+    list_display = ('product', 'branch', 'volume', 'color', 'quantity')
+    list_editable = ('quantity',)
+    search_fields = ('product__name_uk', 'product__name_ru', 'product__article', 'color__name',
+                     'color__vendor_code')
+    list_filter = ('branch', 'volume')
+    list_select_related = ('product', 'branch__city', 'volume', 'color')
+    autocomplete_fields = ('product', 'color')
+
+
+@admin.register(ProductImage)
+class ProductImageAdmin(admin.ModelAdmin):
+    list_display = ('preview', 'product')
+    search_fields = ('product__name_uk', 'product__name_ru')
+    autocomplete_fields = ('product',)
+
+    @admin.display(description='фото')
+    def preview(self, obj):
+        return image_preview(obj.image, height=40)
+
+
+# ---------------------------------------------------------------- Заказы и заявки
+
+class OrderProductInline(admin.TabularInline):
+    model = OrderProduct
+    extra = 0
+    autocomplete_fields = ('product',)
+    verbose_name_plural = 'Товары в заказе'
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'created_at', 'name', 'phone', 'total', 'shipment_method', 'status')
+    list_display_links = ('id', 'name')
+    list_editable = ('status',)
+    list_filter = ('status', 'shipment_method', 'payment_method', 'order_place', 'created_at')
+    search_fields = ('id', 'name', 'phone', 'email')
+    list_select_related = ('status', 'shipment_method')
+    date_hierarchy = 'created_at'
+    readonly_fields = ('created_at',)
+    autocomplete_fields = ('user', 'promo')
+    save_on_top = True
+    inlines = [OrderProductInline]
+    fieldsets = (
+        ('Статус', {
+            'fields': ('status', 'created_at'),
+        }),
+        ('Покупатель', {
+            'fields': ('name', 'phone', 'email', 'user', 'comment'),
+        }),
+        ('Доставка и оплата', {
+            'fields': ('shipment_method', 'order_place', 'payment_method'),
+        }),
+        ('Сумма', {
+            'fields': (('goods_cost', 'shipment_cost'), ('promo_applied', 'promo')),
+        }),
+    )
+
+    @admin.display(description='сумма, грн')
+    def total(self, obj):
+        return obj.goods_cost + obj.shipment_cost
+
+
+@admin.register(ProductRequest)
+class ProductRequestAdmin(admin.ModelAdmin):
+    list_display = ('created_at', 'kind', 'product', 'volume', 'color', 'name', 'phone', 'is_processed')
+    list_editable = ('is_processed',)
+    list_filter = ('is_processed', 'kind', 'created_at')
+    search_fields = ('name', 'phone', 'product__name_uk', 'product__name_ru')
+    list_select_related = ('product', 'volume', 'color')
+    date_hierarchy = 'created_at'
+    readonly_fields = ('created_at',)
+    autocomplete_fields = ('product', 'color')
+    fields = ('is_processed', 'kind', 'created_at', 'product', ('volume', 'color'), 'name', 'phone', 'comment')
+
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('product', 'display_name', 'rating', 'short_text')
+    search_fields = ('product__name_uk', 'product__name_ru', 'user__username', 'reviewer_name', 'review_text')
+    list_filter = ('rating',)
+    list_select_related = ('product', 'user')
+    autocomplete_fields = ('product', 'user')
+    fieldsets = (
+        (None, {'fields': ('product', 'rating')}),
+        ('Автор', {
+            'fields': ('user', ('reviewer_name', 'phone')),
+            'description': 'Если отзыв оставлен без входа в аккаунт, пользователь пуст, а имя и телефон заполнены.',
+        }),
+        ('Текст', {'fields': ('review_text', 'pros', 'cons')}),
+    )
+
+    @admin.display(description='автор')
+    def display_name(self, obj):
+        return obj.display_name
+
+    @admin.display(description='отзыв')
+    def short_text(self, obj):
+        text = obj.review_text or ''
+        return text if len(text) <= 80 else text[:80] + '…'
+
+
+@admin.register(PromoCode)
+class PromoCodeAdmin(HelpTextMixin, admin.ModelAdmin):
+    list_display = ('code', 'discount_type', 'discount_value', 'max_usage_count', 'usage_count', 'expiry_date')
+    list_filter = ('discount_type', 'expiry_date')
+    search_fields = ('code',)
+    readonly_fields = ('usage_count',)
+    fieldsets = (
+        ('Промокод', {
+            'fields': ('code', 'discount_type', 'discount_value')
+        }),
+        ('Ограничения', {
+            'fields': ('max_usage_count', 'expiry_date', 'usage_count')
+        }),
+    )
+    HELP_TEXTS = {
+        'discount_value': 'Для «Процент» — сколько процентов, для «Число» — сколько гривен.',
+        'max_usage_count': 'Пусто — без ограничения.',
+        'expiry_date': 'Пусто — бессрочно.',
+    }
+
+
+@admin.register(OrderStatus)
+class OrderStatusAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
     search_fields = ('name',)
 
 
-@admin.register(UserProfile)
-class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'phone', 'company', 'city', 'region')
-    search_fields = ('user__username', 'phone', 'company', 'city')
+@admin.register(ShipmentMethod)
+class ShipmentMethodAdmin(admin.ModelAdmin):
+    list_display = ('logo', 'name')
+    list_display_links = ('logo', 'name')
+    search_fields = ('name',)
+
+    @admin.display(description='логотип')
+    def logo(self, obj):
+        return image_preview(obj.image, height=32)
 
 
-class UserProfileInline(admin.StackedInline):
-    model = UserProfile
-    can_delete = False
-    verbose_name_plural = 'User Profiles'
-    fk_name = 'user'
+@admin.register(PaymentMethod)
+class PaymentMethodAdmin(admin.ModelAdmin):
+    list_display = ('logo', 'name')
+    list_display_links = ('logo', 'name')
+    search_fields = ('name',)
+
+    @admin.display(description='логотип')
+    def logo(self, obj):
+        return image_preview(obj.image, height=32)
 
 
-# Кастомный UserAdmin
-class CustomUserAdmin(BaseUserAdmin):
-    inlines = (UserProfileInline,)
-    list_display = ('user_info', 'email', 'phone', 'is_staff')
-    list_select_related = ('userprofile',)
+# ---------------------------------------------------------------- Главная страница и новости
 
-    def get_inline_instances(self, request, obj=None):
-        if not obj:
-            return list()
-        return super(CustomUserAdmin, self).get_inline_instances(request, obj)
+@admin.register(MainPageBanner)
+class MainPageBannerAdmin(HelpTextMixin, admin.ModelAdmin):
+    list_display = ('preview', 'description', 'is_used')
+    list_display_links = ('preview', 'description')
+    list_editable = ('is_used',)
+    list_filter = ('is_used',)
+    search_fields = ('description',)
+    HELP_TEXTS = {'is_used': 'Снимите отметку, чтобы убрать баннер с главной, не удаляя его.'}
 
-    @staticmethod
-    def phone(instance):
-        return instance.userprofile.phone
-
-    @staticmethod
-    def user_info(instance):
-        return f'{instance.last_name} {instance.first_name} {instance.username}'
-
-    user_info.short_description = 'User Info'
+    @admin.display(description='баннер')
+    def preview(self, obj):
+        return image_preview(obj.image, height=50)
 
 
-# Удаляем стандартный UserAdmin
-admin.site.unregister(User)
+@admin.register(MainPageSections)
+class MainPageSectionsAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name__name_uk', 'name__name_ru')
 
-# Регистрируем User модель с кастомным UserAdmin
-admin.site.register(User, CustomUserAdmin)
+
+@admin.register(SalesLeaders)
+class SalesLeadersAdmin(admin.ModelAdmin):
+    list_display = ('product', 'product_price')
+    search_fields = ('product__name_uk', 'product__name_ru')
+    list_select_related = ('product',)
+    autocomplete_fields = ('product',)
+
+    @admin.display(description='цена')
+    def product_price(self, obj):
+        return obj.product.price
+
+
+@admin.register(RecommendedProducts)
+class RecommendedProductsAdmin(admin.ModelAdmin):
+    list_display = ('product', 'product_price')
+    search_fields = ('product__name_uk', 'product__name_ru')
+    list_select_related = ('product',)
+    autocomplete_fields = ('product',)
+
+    @admin.display(description='цена')
+    def product_price(self, obj):
+        return obj.product.price
+
+
+class ContentBlockInline(TranslationTabularInline, SortableInlineAdminMixin, admin.TabularInline):
+    model = ContentBlock
+    extra = 1
+    fields = ('content_type', 'text', 'image', 'order')
+    ordering = ['order']
+    verbose_name_plural = 'Текст новости по блокам (порядок меняется перетаскиванием)'
+
+
+@admin.register(News)
+class NewsAdmin(SortableAdminBase, TranslationAdmin):
+    list_display = ('title', 'category', 'date_published')
+    list_filter = ('category', 'date_published')
+    search_fields = ('title_uk', 'title_ru')
+    date_hierarchy = 'date_published'
+    prepopulated_fields = {'slug': ('title',)}
+    inlines = [ContentBlockInline]
+
+
+@admin.register(NewsCategory)
+class NewsCategoryAdmin(TranslationAdmin):
+    list_display = ('name', 'slug')
+    search_fields = ('name_uk', 'name_ru')
+
+
+# ---------------------------------------------------------------- Магазины
+
+class BranchScheduleInline(admin.TabularInline):
+    model = BranchSchedule
+    extra = 0
+    fields = ('day_of_week', 'is_closed', 'open_time', 'close_time')
+    verbose_name_plural = 'Своё расписание магазина (если отличается от раскладки)'
+
+    def get_extra(self, request, obj=None, **kwargs):
+        if obj is None:
+            return 7
+        return 0
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.order_by('order')
+
+
+class BranchScheduleExceptionInline(admin.TabularInline):
+    model = BranchScheduleException
+    extra = 0
+    fields = ('date', 'is_closed', 'open_time', 'close_time')
+    verbose_name_plural = 'Особые дни (праздники, переучёт)'
+
+
+class ScheduleTemplateItemInline(admin.TabularInline):
+    model = ScheduleTemplateItem
+    extra = 0
+    fields = ('day_of_week', 'is_closed', 'open_time', 'close_time')
+    verbose_name = 'день'
+    verbose_name_plural = 'Дни недели'
+
+    def get_extra(self, request, obj=None, **kwargs):
+        if obj is None:
+            return 7
+        return 0
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.order_by('order')
+
+
+@admin.register(Branch)
+class BranchAdmin(HelpTextMixin, admin.ModelAdmin):
+    list_display = ('address_short', 'city', 'schedule_template')
+    list_filter = ('city', 'schedule_template')
+    search_fields = ('address_short', 'address_base', 'city__name')
+    list_select_related = ('city', 'schedule_template')
+    filter_horizontal = ('phone_numbers', 'email')
+    inlines = [BranchScheduleInline, BranchScheduleExceptionInline]
+    fieldsets = (
+        ('Адрес', {
+            'fields': ('city', 'address_short', 'address_base', 'address_detail', 'map_info'),
+        }),
+        ('Контакты', {
+            'fields': ('phone_numbers', 'email'),
+        }),
+        ('Часы работы', {
+            'fields': ('schedule_template',),
+            'description': 'Выберите готовую раскладку расписания или заполните расписание магазина ниже.',
+        }),
+    )
+    HELP_TEXTS = {
+        'address_short': 'Короткий адрес для списков, например «ул. Бугаевская, 21».',
+        'address_base': 'Полный адрес для страницы контактов.',
+        'address_detail': 'Уточнение: этаж, вход, ориентир.',
+        'map_info': 'Координаты для карты в виде «lat: 46.4825, lng: 30.7233» '
+                    '(числа можно скопировать из Google Maps).',
+    }
+
+
+@admin.register(ScheduleTemplate)
+class ScheduleTemplateAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)
+    inlines = [ScheduleTemplateItemInline]
 
 
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)
+
+
+@admin.register(Region)
+class RegionAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
 
@@ -82,325 +598,66 @@ class EmailAddressAdmin(admin.ModelAdmin):
     search_fields = ('address',)
 
 
-# Инлайн для расписания филиала
-class BranchScheduleInline(admin.TabularInline):
-    model = BranchSchedule
-    extra = 0
-    fields = ('day_of_week', 'is_closed', 'open_time', 'close_time')
+# ---------------------------------------------------------------- Покупатели
 
-    def get_extra(self, request, obj=None, **kwargs):
-        if obj is None:
-            return 7
-        return 0
-
-    def get_queryset(self, request):
-        qs = super().get_queryset(request)
-        return qs.order_by('order')  # Сортировка по полю order
+class UserProfileInline(admin.StackedInline):
+    model = UserProfile
+    can_delete = False
+    verbose_name = 'профиль покупателя'
+    verbose_name_plural = 'Профиль покупателя'
+    fk_name = 'user'
 
 
-# Инлайн для исключений расписания
-class BranchScheduleExceptionInline(admin.TabularInline):
-    model = BranchScheduleException
-    extra = 1
-    fields = ('date', 'is_closed', 'open_time', 'close_time')
+class CustomUserAdmin(BaseUserAdmin):
+    inlines = (UserProfileInline,)
+    list_display = ('user_info', 'email', 'phone', 'is_staff', 'date_joined')
+    list_select_related = ('userprofile',)
+    search_fields = ('username', 'first_name', 'last_name', 'email', 'userprofile__phone')
+
+    def get_inline_instances(self, request, obj=None):
+        if not obj:
+            return list()
+        return super().get_inline_instances(request, obj)
+
+    @admin.display(description='телефон')
+    def phone(self, obj):
+        profile = getattr(obj, 'userprofile', None)
+        return profile.phone if profile else None
+
+    @admin.display(description='пользователь')
+    def user_info(self, obj):
+        return f'{obj.last_name} {obj.first_name} ({obj.username})'.strip()
 
 
-# Инлайн для элементов шаблона расписания
-class ScheduleTemplateItemInline(admin.TabularInline):
-    model = ScheduleTemplateItem
-    extra = 0
-    fields = ('day_of_week', 'is_closed', 'open_time', 'close_time')
-
-    def get_extra(self, request, obj=None, **kwargs):
-        if obj is None:
-            return 7
-        return 0
-
-    def get_queryset(self, request):
-        qs = super().get_queryset(request)
-        return qs.order_by('order')  # Сортировка по полю order
+admin.site.unregister(User)
+admin.site.register(User, CustomUserAdmin)
 
 
-# @admin.register(Branch)
-# class BranchAdmin(admin.ModelAdmin):
-#     list_display = ('city', 'address', 'working_hours')
-#     list_filter = ('city',)
-#     search_fields = ('address', 'working_hours')
-#     filter_horizontal = ('phone_numbers',)
-
-
-# Админка для филиала
-@admin.register(Branch)
-class BranchAdmin(admin.ModelAdmin):
-    list_display = ('address_short', 'city', 'schedule_template')
-    list_filter = ('city', 'schedule_template')
-    search_fields = ('address_short', 'city__name')
-    inlines = [BranchScheduleInline, BranchScheduleExceptionInline]
-    fieldsets = (
-        (None, {
-            'fields': ('city', 'address_short', 'address_base', 'address_detail', 'phone_numbers', 'email', 'map_info')
-        }),
-        ('Раскладки расписания', {
-            'fields': ('schedule_template',),
-            'description': 'Выберите одну из ранее созданных раскладок либо составьте новую'
-        }),
-    )
-    # Настройка виджета для phone_numbers
-    formfield_overrides = {
-        models.ManyToManyField: {'widget': FilteredSelectMultiple('Phone Numbers', is_stacked=False)},
-    }
-
-
-# Админка для шаблона расписания
-@admin.register(ScheduleTemplate)
-class ScheduleTemplateAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-    search_fields = ('name',)
-    inlines = [ScheduleTemplateItemInline]
-
-
-@admin.register(Volume)
-class VolumeAdmin(admin.ModelAdmin):
-    list_display = ('size',)
-    search_fields = ('size',)
-
-
-@admin.register(Color)
-class ColorAdmin(admin.ModelAdmin):
-    list_display = ('vendor_code', 'name', 'rgb_code')
-    search_fields = ('name',)
-
-
-@admin.register(BindingSubstance)
-class BindingSubstanceAdmin(TranslationAdmin):
-    list_display = ('name',)
-    search_fields = ('name',)
-
-
-@admin.register(ProductType)
-class ProductTypeAdmin(TranslationAdmin):
-    list_display = ('name',)
-    search_fields = ('name',)
-    filter_horizontal = ('categories',)
-
-
-@admin.register(ProductStock)
-class ProductStockAdmin(admin.ModelAdmin):
-    list_display = ('product', 'branch', 'volume', 'color', 'quantity')
-    search_fields = ('product__description', 'branch__address_short', 'volume__size', 'color__name')
-    list_filter = ('branch', 'volume', 'color')
-
-
-class ProductImageInline(admin.TabularInline):
-    model = ProductImage
-    extra = 1
-
-
-# Inline для OrderProduct
-class OrderProductInline(admin.TabularInline):
-    model = OrderProduct
-    extra = 1  # Показывать одну пустую строку для добавления нового товара
-    # Убираем readonly_fields и can_delete, чтобы можно было редактировать
-    # readonly_fields = ('product', 'quantity')  # Удаляем
-    # can_delete = False  # Удаляем
-
-
-class ProductStockInline(admin.TabularInline):
-    # Упаковки и цвета на странице товара строятся по этим строкам
-    model = ProductStock
-    extra = 1
-    fields = ('branch', 'volume', 'color', 'quantity')
-
-
-class ProductCharacteristicInline(TranslationTabularInline):
-    model = ProductCharacteristic
-    extra = 0
-    fields = ('characteristic', 'value')
-
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        # Предлагаем только характеристики из списка категории товара
-        if db_field.name == 'characteristic':
-            product_id = request.resolver_match.kwargs.get('object_id')
-            product = Product.objects.filter(pk=product_id).first() if product_id else None
-            if product:
-                kwargs['queryset'] = Characteristic.objects.filter(categories=product.category)
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
-
-
-@admin.register(Product)
-class ProductAdmin(TranslationAdmin):
-    list_display = ('name', 'article', 'brand', 'category', 'price', 'is_new', 'is_discounted', 'is_in_stock',
-                    'average_rating')
-    search_fields = ('name', 'article', 'average_rating')
-    inlines = [ProductImageInline, ProductStockInline, ProductCharacteristicInline]
-    list_filter = ('brand', 'category', 'is_discounted', 'is_new', 'is_in_stock')
-    list_select_related = ('brand', 'category')
-    autocomplete_fields = ('brand',)
-    filter_horizontal = ('related_products', 'similar_products')
-    # Старые фиксированные характеристики заменены списками характеристик по категориям
-    exclude = ('usage', 'binding_substance', 'dry_residue', 'density', 'drying_time', 'consumption',
-               'solvent', 'working_tools', 'tool_cleaning', 'storage')
-
-    def save_related(self, request, form, formsets, change):
-        super().save_related(request, form, formsets, change)
-        # Добавляем пустые строки для всех характеристик категории, чтобы их оставалось только заполнить
-        product = form.instance
-        existing = set(product.characteristic_values.values_list('characteristic_id', flat=True))
-        for characteristic in Characteristic.objects.filter(categories=product.category):
-            if characteristic.id not in existing:
-                ProductCharacteristic.objects.create(product=product, characteristic=characteristic)
-
-
-@admin.register(Characteristic)
-class CharacteristicAdmin(TranslationAdmin):
-    list_display = ('name', 'order', 'category_list')
-    list_editable = ('order',)
-    list_filter = ('categories',)
-    search_fields = ('name',)
-    filter_horizontal = ('categories',)
-
-    @admin.display(description='категории')
-    def category_list(self, obj):
-        return ', '.join(category.name for category in obj.categories.all())
-
-
-@admin.register(ProductRequest)
-class ProductRequestAdmin(admin.ModelAdmin):
-    list_display = ('created_at', 'kind', 'product', 'volume', 'color', 'name', 'phone', 'is_processed')
-    list_editable = ('is_processed',)
-    list_filter = ('kind', 'is_processed')
-    search_fields = ('name', 'phone', 'product__name')
-    readonly_fields = ('created_at',)
-
-
-@admin.register(Brand)
-class BrandAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug', 'order', 'products_count')
-    list_editable = ('order',)
-    search_fields = ('name',)
-    prepopulated_fields = {'slug': ('name',)}
-
-    @admin.display(description='товаров')
-    def products_count(self, obj):
-        return obj.products.count()
-
-
-@admin.register(Category)
-class CategoryAdmin(TranslationAdmin):
-    list_display = ('name',)  # Отображаем имя категории
-    search_fields = ('name',)  # Позволяем искать по имени
-    list_filter = ()  # Фильтры не нужны, но можно добавить, если потребуется
-
-
-@admin.register(ProductImage)
-class ProductImageAdmin(admin.ModelAdmin):
-    list_display = ('product', 'image')
-
-
-@admin.register(PromoCode)
-class PromoCodeAdmin(admin.ModelAdmin):
-    list_display = ('code', 'discount_type', 'discount_value', 'max_usage_count', 'usage_count', 'expiry_date')
-    list_filter = ('discount_type', 'expiry_date')
-    search_fields = ('code',)
-    readonly_fields = ('usage_count',)
-    fieldsets = (
-        (None, {
-            'fields': ('code', 'discount_type', 'discount_value')
-        }),
-        ('Restrictions', {
-            'fields': ('max_usage_count', 'expiry_date', 'usage_count')
-        }),
-    )
-
-
-@admin.register(SalesLeaders)
-class SalesLeadersAdmin(admin.ModelAdmin):
-    list_display = ('product',)
-    search_fields = ('product__name',)
-    autocomplete_fields = ('product',)
-
-
-@admin.register(RecommendedProducts)
-class RecommendedProductsAdmin(admin.ModelAdmin):
-    list_display = ('product',)
-    search_fields = ('product__name',)
-    autocomplete_fields = ('product',)
-
-
-@admin.register(Review)
-class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('product', 'display_name', 'user', 'rating')
-    search_fields = ('product__description', 'user__username', 'reviewer_name', 'review_text')
-    list_filter = ('rating',)
-
-
-@admin.register(OrderStatus)
-class OrderStatusAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-    search_fields = ('name',)
-
-
-@admin.register(Order)
-class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'created_at', 'status')
-    list_filter = ('status', 'created_at')
-    search_fields = ('name', 'phone', 'email')
-    inlines = [OrderProductInline]
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'phone', 'company', 'city', 'region')
+    search_fields = ('user__username', 'user__email', 'phone', 'company', 'city')
+    list_filter = ('region',)
+    list_select_related = ('user', 'region')
 
 
 @admin.register(FavoriteProduct)
 class FavoriteProductAdmin(admin.ModelAdmin):
     list_display = ('user', 'product')
-    search_fields = ('user__username', 'product__description')
+    search_fields = ('user__username', 'product__name_uk', 'product__name_ru')
+    list_select_related = ('user', 'product')
+    autocomplete_fields = ('user', 'product')
 
 
-@admin.register(ProductComparison)
-class ProductComparisonAdmin(admin.ModelAdmin):
-    list_display = ('user',)
-    search_fields = ('user__username',)
-    filter_horizontal = ('products',)
-
-
-class ContentBlockInline(TranslationTabularInline, SortableInlineAdminMixin, admin.TabularInline):
-    model = ContentBlock
-    extra = 1
-    fields = ('content_type', 'text', 'image', 'order')
-    ordering = ['order']
-
-@admin.register(News)
-class NewsAdmin(SortableAdminBase, TranslationAdmin):  # Изменено на SortableAdminBase
-    list_display = ('title', 'category', 'date_published')
-    list_filter = ('category', 'date_published')
-    search_fields = ('title',)
-    prepopulated_fields = {'slug': ('title',)}
-    inlines = [ContentBlockInline]
-
-@admin.register(NewsCategory)
-class NewsCategoryAdmin(TranslationAdmin):
-    list_display = ('name',)
-    search_fields = ('name',)
-
-
-@admin.register(MainPageSections)
-class MainPageSectionsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
-    search_fields = ('name',)
-
-
-@admin.register(MainPageBanner)
-class MainPageBannerAdmin(admin.ModelAdmin):
-    list_display = ('id', 'description', 'is_used')
-    list_filter = ('is_used',)
-    search_fields = ('description',)
-
+# ---------------------------------------------------------------- Тексты сообщений
 
 @admin.register(ErrorMessages)
 class ErrorMessagesAdmin(admin.ModelAdmin):
-    list_display = ('message',)
-    search_fields = ('message',)
+    list_display = ('name', 'message')
+    search_fields = ('name', 'message')
 
 
 @admin.register(InfoMessages)
 class InfoMessagesAdmin(admin.ModelAdmin):
-    list_display = ('message',)
-    search_fields = ('message',)
+    list_display = ('name', 'message')
+    search_fields = ('name', 'message')

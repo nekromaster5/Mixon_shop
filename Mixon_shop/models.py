@@ -742,16 +742,14 @@ class News(models.Model):
             update_slug = True
         elif self.pk:
             try:
-                old_instance = NewsCategory.objects.get(pk=self.pk)
+                old_instance = News.objects.get(pk=self.pk)
                 if old_instance.title != self.title:
                     update_slug = True
-            except NewsCategory.DoesNotExist:
+            except News.DoesNotExist:
                 update_slug = True
 
         if update_slug:
-            print(f"self.name: {self.title}")
             self.slug = slugify(unidecode(self.title))
-            print(f"slugified: {self.title}")
 
         super().save(*args, **kwargs)
 
