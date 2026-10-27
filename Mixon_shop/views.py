@@ -36,7 +36,7 @@ from django.utils.decorators import method_decorator
 from .models import Product, Review, UserProfile, RecommendedProducts, SalesLeaders, City, ErrorMessages, PromoCode, \
     Order, \
     ShipmentMethod, PaymentMethod, OrderStatus, OrderProduct, BindingSubstance, ProductType, Volume, \
-    ProductStock, News, NewsCategory, Branch, FavoriteProduct, Category
+    ProductStock, News, NewsCategory, Branch, FavoriteProduct, Category, Brand
 
 import logging
 
@@ -276,6 +276,7 @@ class CataloguePage(View):
     def get(self, request, filters=None):
         product_category_id = request.GET.get('product_category_id')
         product_type_ids = request.GET.getlist('type')
+        brand_slug = request.GET.get('brand')
         binding_substance_id = request.GET.get('binding_substance')
         volume_ids = request.GET.getlist('volume')
         is_discounted = True if filters == "discounted-goods" else request.GET.get('is_discounted', 'false') == 'true'
@@ -318,6 +319,10 @@ class CataloguePage(View):
                 )
             )
         ).all()
+
+        brand = Brand.objects.filter(slug=brand_slug).first() if brand_slug else None
+        if brand:
+            products = products.filter(brand=brand)
 
         if product_type_ids:
             products = products.filter(type__id__in=product_type_ids)
@@ -383,6 +388,7 @@ class CataloguePage(View):
             'product_type': None,
             'page_type': 'catalogue',
             'product_category': product_category,
+            'brand': brand,
             'product_types': product_types,
             'binding_substances': binding_substances,
             'product_volumes': product_volumes,

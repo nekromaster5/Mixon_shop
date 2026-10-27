@@ -64,6 +64,9 @@ $(function () {
         if (productCategoryId) {
             data.product_category_id = productCategoryId; // Добавляем category
         }
+        if (filterParams.brand) {
+            data.brand = filterParams.brand;
+        }
 
         let filteredData = Object.fromEntries(
             Object.entries(data).filter(([key, value]) => {
@@ -113,6 +116,9 @@ $(function () {
         }
         if (productCategoryId) {
             data.product_category_id = productCategoryId;
+        }
+        if (filterParams.brand) {
+            data.brand = filterParams.brand;
         }
 
         console.log('Load more data:', data);
@@ -179,6 +185,9 @@ $(function () {
         }
         if (productCategoryId) {
             data.product_category_id = productCategoryId;
+        }
+        if (filterParams.brand) {
+            data.brand = filterParams.brand;
         }
 
         console.log('Page link data:', data);

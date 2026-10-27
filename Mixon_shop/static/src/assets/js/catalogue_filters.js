@@ -47,6 +47,9 @@ $(function () {
         if (productCategoryId) {
             data.product_category_id = productCategoryId;
         }
+        if (params.get('brand')) {
+            data.brand = params.get('brand');
+        }
 
         if (filterParams.price_gte !== undefined) {
             data.price_gte = filterParams.price_gte;
