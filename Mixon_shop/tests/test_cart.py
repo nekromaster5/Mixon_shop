@@ -1,4 +1,5 @@
 import json
+from decimal import Decimal
 
 import pytest
 
@@ -20,6 +21,25 @@ def test_add_to_cart_and_view(client, make_product):
     assert p1.name in text
     assert p2.name in text
     assert "250" in text  # 2x100 + 1x50
+
+
+@pytest.mark.django_db
+def test_cart_uses_discount_price_and_follows_price_changes(client, make_product):
+    """Регрессия: корзина считала полную цену, хотя на карточке показывалась скидка."""
+    discounted = make_product(name="Sale", price="100.00", discount_price="80.00", is_discounted=True)
+    inactive = make_product(name="Inactive", price="50.00", discount_price="10.00", is_discounted=False)
+
+    for product in (discounted, inactive):
+        client.post(f"/cart/add/{product.id}/", HTTP_X_REQUESTED_WITH="XMLHttpRequest")
+
+    response = client.get("/cart/")
+    assert response.context["total_price"] == Decimal("130.00")  # 80 + 50, не 100 + 50
+
+    # Цену изменили в админке после добавления в корзину — в корзине актуальная.
+    discounted.discount_price = Decimal("70.00")
+    discounted.save()
+    response = client.get("/cart/")
+    assert response.context["total_price"] == Decimal("120.00")
 
 
 @pytest.mark.django_db

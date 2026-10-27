@@ -71,10 +71,14 @@ function initMainBannerSlider() {
 // Определение пользовательского события
 const calculateMaxTranslateEvent = new Event('calculateMaxTranslateEvent');
 
-let disableSlider, enableSlider;
+// Включение/выключение касаний работает для любого слайдера на странице и не падает,
+// если слайдер ещё не инициализирован или его нет в разметке.
+const enableSlider = slider => slider && slider._enableTouch && slider._enableTouch();
+const disableSlider = slider => slider && slider._disableTouch && slider._disableTouch();
 
 function initSlider(sliderContainer) {
     const slider = sliderContainer.querySelector('.slider');
+    if (!slider) return;
     const slides = sliderContainer.querySelectorAll('.slide');
     let isDragging = false,
         startPos = 0,
@@ -151,20 +155,20 @@ function initSlider(sliderContainer) {
         return margin + padding;
     }
 
-    enableSlider = function (slider) {
+    slider._enableTouch = function () {
         // Слушатели событий для сенсорного управления
         slider.addEventListener('touchstart', touchStart);
         slider.addEventListener('touchmove', touchMove);
         slider.addEventListener('touchend', touchEnd);
     };
 
-    disableSlider = function (slider) {
+    slider._disableTouch = function () {
         slider.removeEventListener('touchstart', touchStart);
         slider.removeEventListener('touchmove', touchMove);
         slider.removeEventListener('touchend', touchEnd);
     };
 
-    enableSlider(slider)
+    slider._enableTouch();
 
 
     // Инициализируем maxTranslate и добавляем обработчик на изменение размера окна
