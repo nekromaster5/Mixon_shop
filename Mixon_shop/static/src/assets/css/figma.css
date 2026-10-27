@@ -491,3 +491,87 @@
         gap: 0;
     }
 }
+
+/* ---------- Меню каталога (макет «Главная меню»: панель 900x420, на 6px ниже шапки) ---------- */
+@media (min-width: 1200px) {
+    #menu.menu {
+        top: 69px;
+        left: 0;
+        right: auto;
+        bottom: auto;
+        width: 900px;
+        height: 420px;
+        padding: 20px 0 0;
+        box-shadow: none;
+    }
+
+    #menu .main_high_button {
+        width: 320px;
+        padding-left: 9px;
+        flex-shrink: 0;
+    }
+
+    #menu .second_main_high_button {
+        width: 300px !important;
+        padding: 10px 0 0 !important;
+        flex-shrink: 0;
+    }
+
+    #menu .third_main_high_button {
+        padding: 10px 0 0 !important;
+    }
+
+    /* левая колонка: кнопки 294px, шаг 45px, Montserrat Medium 16px */
+    #menu .main_high_button .item {
+        width: 294px;
+        padding: 11px 10px !important;
+        gap: 10px;
+        align-items: center;
+    }
+
+    #menu .main_high_button .item img {
+        height: 23px;
+        width: auto;
+        flex-shrink: 0;
+    }
+
+    #menu .main_high_button .item p {
+        margin: 0;
+        font-size: 16px;
+        letter-spacing: -0.48px;
+        line-height: normal;
+        font-weight: 500 !important;
+    }
+
+    /* средняя и правая колонки: Regular 16px, интерлиньяж 1.47 */
+    #menu .second_main_high_button .item,
+    #menu .third_main_high_button .item {
+        padding: 0 !important;
+        margin-bottom: 24px;
+        min-height: 23px;
+    }
+
+    #menu .third_main_high_button .item {
+        margin-bottom: 21px;
+    }
+
+    #menu .second_main_high_button .item p,
+    #menu .third_main_high_button .item p {
+        margin: 0;
+        font-size: 16px;
+        line-height: 22px;
+        letter-spacing: -0.32px;
+        font-weight: 400 !important;
+        color: #000;
+    }
+
+    #menu .second_main_high_button .item p {
+        width: 230px;
+    }
+
+    #menu .second_main_high_button .item p:hover,
+    #menu .third_main_high_button .item p:hover {
+        color: #f00;
+        cursor: pointer;
+    }
+}
