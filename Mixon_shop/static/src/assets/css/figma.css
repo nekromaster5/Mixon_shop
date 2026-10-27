@@ -984,3 +984,114 @@
         vertical-align: top;
     }
 }
+
+/* ---------- Каталог (макет «Каталог»: фильтры 290px, товары сеткой 3x290 с шагом 4px) ---------- */
+@media (min-width: 1200px) {
+    .breadcrumb__content--title {
+        margin-top: 29px;
+        font-size: 30px;
+        line-height: 37px;
+        font-weight: 500;
+        color: #1f0d01;
+    }
+
+    .breadcrumb__section .brand_buttons-wrapper {
+        margin-top: 24px;
+    }
+
+    .breadcrumb__section .brand_buttons {
+        flex: 0 0 200px;
+        width: 200px;
+        max-width: 200px;
+        height: 63px;
+    }
+
+    .breadcrumb__section .brand_buttons-inner {
+        padding: 0 10px;
+    }
+
+    .catalogue-sort {
+        margin-top: 5px;
+        margin-bottom: 23px;
+    }
+
+    /* панели фильтров: 290px, зазор 4px */
+    .shop__sidebar--widget .single__widget {
+        width: 290px;
+        margin-bottom: 4px;
+        padding: 20px 20px 20px;
+    }
+
+    .shop__sidebar--widget .widget__title {
+        height: 40px;
+        align-items: center;
+        padding-left: 20px;
+    }
+
+    .shop__sidebar--widget .widget__title .arrow_image {
+        left: 0;
+        top: 50%;
+        margin-top: -3px;
+    }
+
+    .shop__sidebar--widget .widget__content {
+        margin-top: 0;
+    }
+
+    .shop__sidebar--widget .single__widget.price__widget {
+        padding: 20px 20px 27px !important;
+    }
+
+    .shop__sidebar--widget .price__widget .widget__content {
+        margin-top: 13px;
+    }
+
+    .shop__sidebar--widget .price__filter--form__inner {
+        height: 40px;
+        margin-bottom: 30px !important;
+    }
+
+    .shop__sidebar--widget .price__filter--input,
+    .shop__sidebar--widget .price__filter--btn {
+        width: 70px !important;
+        height: 40px;
+    }
+
+    .shop__sidebar--widget .price__filter--input {
+        margin-right: 26px;
+    }
+
+    .shop__sidebar--widget .price__filter--input + .price__filter--input,
+    .shop__sidebar--widget .price__filter--group + .price__filter--group {
+        margin-right: 14px;
+    }
+
+    .shop__sidebar--widget .price__slider {
+        margin-top: 0;
+        height: 16px;
+    }
+
+    .shop__sidebar--widget .widget__form--check__list {
+        min-height: 41px;
+        margin-bottom: 7px;
+    }
+
+    .shop__sidebar--widget .widget__form--check__list:last-child {
+        margin-bottom: 0;
+    }
+
+    /* товары: три колонки по 290px */
+    #products-container {
+        display: grid;
+        grid-template-columns: repeat(3, 290px);
+        gap: 4px;
+        margin: 0 0 0 -3px;
+    }
+
+    #products-container > div {
+        width: 290px;
+        max-width: 290px;
+        padding: 0;
+        margin: 0 !important;
+    }
+}
