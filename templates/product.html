@@ -97,34 +97,25 @@
                 <div class="product_description_high_block" style="background-color:#FFFFFF">
                     <!-- Левый блок -->
                     <div class="left_block">
-                        <div class="left_flex_display" style="display:flex;">
-                            <div class="carousel-buttons">
+                        <div class="left_flex_display pd-gallery">
+                            <div class="carousel-buttons pd-thumbs">
                                 {% for image in images|slice:":4" %}
-                                    <button type="button" data-image-url="{{ image.image.url }}"
-                                            style="display: flex; flex-direction: column; align-items: center; width: 100px; height: 100px; margin-top: 20px; border: none; background: transparent;">
-                                        <img src="{{ image.image.url }}"
-                                             alt="{{ product.name }} {{ forloop.counter }}" width="100" height="100"
-                                             style="object-fit: contain;">
+                                    <button type="button" class="pd-thumb" data-image-url="{{ image.image.url }}">
+                                        <img src="{{ image.image.url }}" alt="{{ product.name }} {{ forloop.counter }}">
                                     </button>
                                 {% endfor %}
                             </div>
 
-                            <div class="product_left_path">
+                            <div class="product_left_path pd-main">
+                                {% if product.is_discounted %}
+                                    <span class="pd-promo">{% translate "Акция" %}</span>
+                                {% endif %}
                                 {% if images %}
                                     <img id="product-main-image" src="{{ images.0.image.url }}"
-                                         alt="{{ product.name }}" width="400" height="400" style="object-fit: contain;">
+                                         alt="{{ product.name }}">
                                 {% else %}
-                                    <div style="width: 400px; height: 400px; display: flex; align-items: center; justify-content: center; background: #F5F5F5; color: #AEADAA;">
-                                        {% translate "Нет фото" %}
-                                    </div>
+                                    <div class="pd-main__empty">{% translate "Нет фото" %}</div>
                                 {% endif %}
-                            </div>
-
-
-                            <div class="product_right_path">
-                                <button style="border:none;background-color:transparent">
-                                    <img src="{% static '/src/assets/img/icon/Path 1622.svg' %}">
-                                </button>
                             </div>
                         </div>
 
@@ -200,20 +191,18 @@
                                 <span>{{ reviews_count }}</span></div>
                         </div>
                     </div>
-                    <div class="right_block" style="display: flex; flex-direction: column;  ">
-                        <div class="first_sale_block" style="display: flex;">
-                            <div class="about_product_avability" style="display: flex; align-items: center;">
-                                {% if product.is_in_stock %}
-                                    <img src="{% static '/src/assets/img/icon/Path 47.png' %}">
-                                    <span style="color: green; margin-right: 10px;">{% translate "Есть в наличии" %}</span>
-                                {% else %}
-                                    <span style="color: gray; margin-right: 10px;">{% translate "Нет в наличии" %}</span>
-                                {% endif %}
-
-                            </div>
-                            <div class="first_sale_block_buttons">
-                                <a href="{% url 'manage_favorites' product_id=product.id %}" data-product-id="{{ product.id }}"
-                                   class="product__card--action__btn wishlist favourite--button no_scale box_shadow-3_1 small__button p-6"
+                    <div class="right_block pd">
+                        <div class="pd-stock">
+                            {% if product.is_in_stock %}
+                                <img src="{% static '/src/assets/img/icon/Path 47.png' %}" alt="">
+                                <span class="pd-stock__yes">{% translate "Есть в наличии" %}</span>
+                            {% else %}
+                                <span class="pd-stock__no">{% translate "Нет в наличии" %}</span>
+                            {% endif %}
+                        </div>
+                        <div class="pd-wish-wrap">
+                            <a href="{% url 'manage_favorites' product_id=product.id %}" data-product-id="{{ product.id }}"
+                                   class="product__card--action__btn wishlist favourite--button no_scale box_shadow-3_1 pd-wish"
                                    title="Wishlist">
                                     <svg class="product__card--action__btn--svg" width="70%" height="70%"
                                          viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -223,30 +212,17 @@
                                     </svg>
                                     <span class="visually-hidden">Wishlist</span>
                                 </a>
-                            </div>
                         </div>
-                        <div class="second_sale_block">
-                            <div class="row">
-                                <!-- Первая колонка -->
-                                <div class="col-md-6 first_prtoduct_col">
-                                    <div class="product_texts" style="width: 160px;  flex-direction: row;  ">
-                                        {% if product.is_discounted %}
-                                            <span class="product-info__text--price" style="white-space: nowrap;">
-                                                {{ product.discount_price }} &#8372;
-                                            </span>
-                                            <span class="product-info__text--price-old about_product_info"
-                                                  style="white-space: nowrap; display:block;">
-                                                {{ product.price }} &#8372;
-                                            </span>
-                                        {% else %}
-                                            <span class="product-info__text--price" style="white-space: nowrap;">
-                                                {{ product.price }} &#8372;
-                                            </span>
-                                        {% endif %}
-                                    </div>
-
-
-                                    <a class="primary__btn product__card--action__btn buy__btn big-button d-flex justify-content-evenly no_scale"
+                        <div class="pd-price">
+                            {% if product.is_discounted %}
+                                <span class="pd-price__now">{{ product.discount_price|floatformat:2 }} &#8372;</span>
+                                <span class="pd-price__old">{{ product.price|floatformat:2 }} &#8372;</span>
+                            {% else %}
+                                <span class="pd-price__now">{{ product.price|floatformat:2 }} &#8372;</span>
+                            {% endif %}
+                        </div>
+                        <div class="pd-actions">
+                            <a class="primary__btn product__card--action__btn buy__btn pd-btn pd-buy no_scale"
                                        title="Add to cart" data-product-id="{{ product.id }}">
                                         <svg width="40%" height="50%" viewBox="0 0 24 22" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
@@ -258,10 +234,7 @@
                                         <span class="visually-hidden">Add to cart</span>
 
                                     </a>
-                                </div>
-                                <!-- Вторая колонка -->
-                                <div class="col-md-6 second_col_product" style=" margin-top:8px; ">
-                                    <a class="product__card--action__btn cheaper--button main_cheaper no_scale box_shadow-3_1"
+                            <a class="product__card--action__btn cheaper--button pd-btn pd-cheaper no_scale box_shadow-3_1"
                                        title="Want Cheaper" data-request-kind="cheaper">
                                         <svg width="21.776123" height="24.913086" viewBox="0 0 21.7761 24.9131"
                                              fill="none"
@@ -278,7 +251,7 @@
                                         <span>  {% translate "Хочу дешевле" %}</span>
                                         <span class="visually-hidden">Want Cheaper</span>
                                     </a>
-                                    <a class="product__card--action__btn main_quick_order quick__order--button no_scale"
+                            <a class="product__card--action__btn pd-btn pd-quick quick__order--button no_scale"
                                        title="Quick Order" data-request-kind="quick_order">
                                         <svg width="20" height="21" viewBox="0 0 20 21" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
@@ -297,100 +270,61 @@
                                         <span>  {% translate "Быстрый заказ" %}</span>
                                         <span class="visually-hidden">Want Cheaper</span>
                                     </a>
-                                    <div class="mobile_lit_buttons">
-                                        <div class="first_sale_block" style="display: flex;">
-
-                                            <div class="first_sale_block_buttons_mobile ">
-                                                <a href="{% url 'manage_favorites' product_id=product.id %}" data-product-id="{{ product.id }}"
-                                   class="product__card--action__btn wishlist favourite--button no_scale box_shadow-3_1 small__button p-6"
-                                                   title="Wishlist" style="width:31px;height:31px;">
-                                                    <svg class="product__card--action__btn--svg" width="70%"
-                                                         height="70%"
-                                                         viewBox="0 0 22 20" fill="none"
-                                                         xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M15.6219 0.58197C15.9109 0.58197 16.222 0.597991 16.549 0.627991C18.556 0.815991 20.8749 2.57399 21.1569 5.94299V7.06396C20.8949 10.288 18.351 14.264 10.918 19.254C3.48497 14.265 0.942932 10.289 0.679932 7.06396V5.94299C0.961932 2.57499 3.27996 0.815991 5.28796 0.627991C5.61796 0.597991 5.92594 0.583008 6.21594 0.583008C8.53294 0.583008 9.64595 1.54102 10.916 2.99402C12.19 1.54102 13.301 0.58197 15.616 0.58197"
-                                                              stroke="currentColor" stroke-miterlimit="10"
-                                                              stroke-linecap="round"{% if is_favorite %} fill="red"{% endif %}></path>
-                                                    </svg>
-                                                    <span class="visually-hidden">Wishlist</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                        <!-- Вставляем новый блок package_block здесь -->
                         {% if volumes %}
-                        <div class="package_block" style="margin-top: 10px;">
-                            <div>
-                                <div style="width:40px; height: 20px; position:relative; font-weight: 500;">
-                                    {% translate "Упаковка:" %}
-                                </div>
-                                <div style="display: flex; margin-top: 5px; gap: 20px;">
-                                    {% for volume in volumes %}
-                                        <button type="button" class="button_{{ forloop.counter0 }} product-volume-option"
-                                                data-volume-id="{{ volume.id }}" aria-pressed="false"
-                                                style="border-radius:2px;border: 1px solid #E9E7E6;box-shadow:none;background-color: white;border-color:#E9E7E6;min-width: 40px; height: 40px;">
-                                            {{ volume.size|floatformat:"-2" }}{% translate "л." %}
-                                        </button>
-                                    {% endfor %}
-                                </div>
-
+                        <div class="package_block pd-pack">
+                            <div class="pd-label">{% translate "Упаковка:" %}</div>
+                            <div class="pd-pack__list">
+                                {% for volume in volumes %}
+                                    <button type="button" class="button_{{ forloop.counter0 }} product-volume-option pd-pack__item">
+                                        {{ volume.size|floatformat:"-2" }}{% translate "л." %}
+                                    </button>
+                                {% endfor %}
                             </div>
                         </div>
                         {% endif %}
-                        <div class="right_second_block">
-                            {% if colors %}
-                            <div style="width: 70px; height: 20px; border-width: 2px; margin-top: 30px;">{% translate "Цвет:" %}
-                            </div>
-                            <div class="product_table">
-
-                                <div class="table_columns">
-                                    <div>{% translate "Артикул" %}</div>
-                                    <div>{% translate "Название цвета" %}
-                                    </div>
-                                    <div>{% translate "Кол-во" %}</div>
+                        {% if colors %}
+                        <div class="pd-colors">
+                            <div class="pd-label">{% translate "Цвет:" %}</div>
+                            <div class="pc-table">
+                                <div class="pc-row pc-row--head">
+                                    <span></span>
+                                    <span>{% translate "Артикул" %}</span>
+                                    <span>{% translate "Название цвета" %}</span>
+                                    <span></span>
+                                    <span class="pc-qty">{% translate "Кол-во" %}</span>
                                 </div>
                                 {% for color in colors %}
-                                    <div class="table_cell product-color-option" data-color-id="{{ color.color__id }}"
-                                         style="cursor: pointer;">
-                                        <button type="button" class="product-color-checkbox" aria-pressed="false" style="background-color: white; position: relative; width: 20px; border: 1px solid #AEADAA; top: 2px; height: 20px; border-radius: 2px; border-color: #AEADAA; left: 10px;"></button>
-                                        <p style="font-family: 'Montserrat', sans-serif;    margin-left:19px; ">
-                                            {{ color.color__vendor_code }}
-                                            <span>{{ color.color__name }}</span>
-                                        </p>
-                                        <div class="table_sphere" style="background-color: {{ color.color__rgb_code }};"></div>
-                                        <p class="table_quantity">{{ color.total }}</p>
+                                    <div class="pc-row product-color-option" data-color-id="{{ color.color__id }}">
+                                        <span><button type="button" class="product-color-checkbox" aria-pressed="false" aria-label="{{ color.color__name }}"></button></span>
+                                        <span>{{ color.color__vendor_code }}</span>
+                                        <span>{{ color.color__name }}</span>
+                                        <span><i class="pc-dot" style="background-color: {{ color.color__rgb_code }};"></i></span>
+                                        <span class="pc-qty">{{ color.total }}</span>
                                     </div>
                                 {% endfor %}
-
                             </div>
-                            {% endif %}
-                            <div class="delivery">
-                                <p><span style="color:red;"> {% translate "Доставка" %}</span> {% translate "в Хмельницкий" %}</p>
-                                <div style=" margin-top:10px;display:flex;">
-                                    <img class="delivery_img" src="{% static '/src/assets/img/icon/Group 42.png' %}"
-                                         style="margin-right:10px;">
-                                    <p>{% translate "Самовывоз из магазина &nbsp;&nbsp;&nbsp;" %}
-                                        <span style="color:gray;">  {% translate "Забрать сегодня &nbsp;&nbsp;&nbsp; Бесплатно" %}</span>
-                                    </p>
-                                </div>
-                                <div style=" margin-top:15px; display:flex;">
-                                    <img class="delivery_img" src="{% static '/src/assets/img/icon/Group 41.png' %}"
-                                         style="margin-right:10px;">
-                                    <p>{% translate "Курьерская доставка &nbsp;&nbsp;&nbsp;" %}
-                                        <span style="color:gray;">  {% translate "1–2 дня &nbsp;&nbsp;&nbsp; от 100 грн" %}</span>
-                                    </p>
-                                </div>
-                                <div style=" margin-top:20px;  display:flex;">
-                                    <img class="delivery_img"
-                                         src="{% static '/src/assets/img/icon/Group 104.png' %}"
-                                         style="margin-right:10px;">
-                                    <p>{% translate "Доставка Новой почтой &nbsp;&nbsp;&nbsp;" %}
-                                        <span style="color:gray;">  {% translate "2–3 дня &nbsp;&nbsp;&nbsp; от 170 грн" %}</span>
-                                    </p>
-                                </div>
+                        </div>
+                        {% endif %}
+                        <div class="delivery pd-delivery">
+                            <p class="pd-delivery__title"><span class="pd-delivery__city">{% translate "Доставка" %}</span> {% translate "в Хмельницкий" %}</p>
+                            <div class="pd-delivery__row">
+                                <img class="delivery_img" src="{% static '/src/assets/img/icon/Group 42.png' %}" alt="">
+                                <span class="pd-delivery__name">{% translate "Самовывоз из магазина" %}</span>
+                                <span class="pd-delivery__when">{% translate "Забрать сегодня" %}</span>
+                                <span class="pd-delivery__cost">{% translate "Бесплатно" %}</span>
+                            </div>
+                            <div class="pd-delivery__row">
+                                <img class="delivery_img" src="{% static '/src/assets/img/icon/Group 41.png' %}" alt="">
+                                <span class="pd-delivery__name">{% translate "Курьерская доставка" %}</span>
+                                <span class="pd-delivery__when">{% translate "1–2 дня" %}</span>
+                                <span class="pd-delivery__cost">{% translate "от 100 грн" %}</span>
+                            </div>
+                            <div class="pd-delivery__row">
+                                <img class="delivery_img" src="{% static '/src/assets/img/icon/Group 104.png' %}" alt="">
+                                <span class="pd-delivery__name">{% translate "Доставка Новой почтой" %}</span>
+                                <span class="pd-delivery__when">{% translate "2–3 дня" %}</span>
+                                <span class="pd-delivery__cost">{% translate "от 170 грн" %}</span>
                             </div>
                         </div>
                     </div>
@@ -1352,7 +1286,7 @@
             const selectedColor = document.querySelector('.product-color-option.is-selected');
             const parts = [];
             if (selectedVolume) parts.push(gettext('Упаковка:') + ' ' + selectedVolume.textContent.trim());
-            if (selectedColor) parts.push(gettext('Цвет:') + ' ' + selectedColor.querySelector('p').textContent.trim().replace(/\s+/g, ' '));
+            if (selectedColor) parts.push(gettext('Цвет:') + ' ' + Array.from(selectedColor.querySelectorAll(':scope > span')).slice(1, 3).map(cell => cell.textContent.trim()).join(' '));
 
             requestForm.kind.value = kind;
             requestForm.volume.value = selectedVolume ? selectedVolume.dataset.volumeId : '';
