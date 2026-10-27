@@ -1,0 +1,99 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Mixon Shop\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+#: Mixon_shop/static/src/assets/js/applyPromo.js:42
+msgid "Введите промокод."
+msgstr "Введіть промокод."
+
+#: Mixon_shop/static/src/assets/js/applyPromo.js:47
+msgid "Этот промокод уже применен."
+msgstr "Цей промокод уже застосовано."
+
+#: Mixon_shop/static/src/assets/js/applyPromo.js:80
+#, javascript-format
+msgid "Промокод применен! Ваша скидка: %s"
+msgstr "Промокод застосовано! Ваша знижка: %s"
+
+#: Mixon_shop/static/src/assets/js/applyPromo.js:84 Mixon_shop/static/src/assets/js/confirmOrder.js:97
+#, javascript-format
+msgid "Ошибка: %s"
+msgstr "Помилка: %s"
+
+#: Mixon_shop/static/src/assets/js/cabinetOrderInfoCollapse.js:18
+msgid "Свернуть >>"
+msgstr "Згорнути >>"
+
+#: Mixon_shop/static/src/assets/js/cabinetOrderInfoCollapse.js:21
+msgid "Детально >>"
+msgstr "Детально >>"
+
+#: Mixon_shop/static/src/assets/js/cabinetProductBlocksCollapse.js:20 Mixon_shop/static/src/assets/js/cabinetProductBlocksCollapse.js:23
+msgid "Развернуть"
+msgstr "Розгорнути"
+
+#: Mixon_shop/static/src/assets/js/cabinetProductBlocksCollapse.js:21
+msgid "Свернуть"
+msgstr "Згорнути"
+
+#: Mixon_shop/static/src/assets/js/cartActions.js:42
+msgid "Товар добавлен в корзину!"
+msgstr "Товар додано до кошика!"
+
+#: Mixon_shop/static/src/assets/js/cartActions.js:46
+msgid "Ошибка при добавлении товара."
+msgstr "Помилка під час додавання товару."
+
+#: Mixon_shop/static/src/assets/js/checkoutPageSectionsFolding.js:186
+msgid "Способ доставки не выбран"
+msgstr "Спосіб доставки не вибрано"
+
+#: Mixon_shop/static/src/assets/js/checkoutPageSectionsFolding.js:199
+msgid "Способ оплаты не выбран"
+msgstr "Спосіб оплати не вибрано"
+
+#: Mixon_shop/static/src/assets/js/checkoutPageSectionsFolding.js:211
+msgid "Комментариев нет"
+msgstr "Коментарів немає"
+
+#: Mixon_shop/static/src/assets/js/confirmOrder.js:101
+msgid "Произошла ошибка при создании заказа. Пожалуйста, попробуйте снова."
+msgstr "Сталася помилка під час створення замовлення. Будь ласка, спробуйте ще раз."
+
+#: Mixon_shop/static/src/assets/js/confirmOrder.js:11
+msgid "Пожалуйста, выберите способ доставки."
+msgstr "Будь ласка, виберіть спосіб доставки."
+
+#: Mixon_shop/static/src/assets/js/confirmOrder.js:19
+msgid "Пожалуйста, выберите филиал для доставки."
+msgstr "Будь ласка, виберіть філію для доставки."
+
+#: Mixon_shop/static/src/assets/js/confirmOrder.js:26
+msgid "Пожалуйста, выберите способ оплаты."
+msgstr "Будь ласка, виберіть спосіб оплати."
+
+#: Mixon_shop/static/src/assets/js/confirmOrder.js:34
+msgid "Пожалуйста, укажите ваше имя."
+msgstr "Будь ласка, вкажіть ваше ім’я."
+
+#: Mixon_shop/static/src/assets/js/confirmOrder.js:39
+msgid "Пожалуйста, укажите хотя бы телефон или email для связи."
+msgstr "Будь ласка, вкажіть хоча б телефон або email для зв’язку."
+
+#: Mixon_shop/static/src/assets/js/confirmOrder.js:54
+msgid "Корзина пуста. Добавьте товары перед оформлением заказа."
+msgstr "Кошик порожній. Додайте товари перед оформленням замовлення."
+
+#: Mixon_shop/static/src/assets/js/confirmOrder.js:92
+msgid "Ваш заказ принят"
+msgstr "Ваше замовлення прийнято"
+
+#: Mixon_shop/static/src/assets/js/registrationModal.js:63
+msgid "Пароли не совпадают"
+msgstr "Паролі не збігаються"

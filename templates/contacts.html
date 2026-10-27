@@ -1,9 +1,10 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 
 
 {% block title %}
-    Контакты
+    {% translate "Контакты" %}
 {% endblock %}
 
 
@@ -13,14 +14,14 @@
             <div class="breadcrumb__content text-center px-3">
                 <ul class="breadcrumb__content--menu d-flex">
                     <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'home' %}">Главная</a>
+                        <a href="{% url 'home' %}">{% translate "Главная" %}</a>
                     </li>
                     <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'contacts' %}">Контакты</a>
+                        <a href="{% url 'contacts' %}">{% translate "Контакты" %}</a>
                     </li>
                 </ul>
             </div>
-            <h1 class="breadcrumb__content--title text-center">Контакты</h1>
+            <h1 class="breadcrumb__content--title text-center">{% translate "Контакты" %}</h1>
         </div>
     </section>
     <section class="contacts__call--section section--padding contacts">
@@ -63,8 +64,7 @@
                             03</a></li>
                     </ul>
                 </div>
-                <h3 style="text-align: center;" class="col-lg-5 col-md-19 col-12 text-right px-0">Адрес: г. Одесса,
-                    ул. Промышленная, 28</h3>
+                <h3 style="text-align: center;" class="col-lg-5 col-md-19 col-12 text-right px-0">{% translate "Адрес: г. Одесса, ул. Промышленная, 28" %}</h3>
             </div>
         </div>
     </section>
@@ -73,7 +73,7 @@
             <div class="row">
                 <div class="addresses--block col-lg-18 col-md-4">
                     <div class="shop-selector">
-                        <h2 class="mb-lg-6 mb-4 pe-lg-5 pe-0">Магазины</h2>
+                        <h2 class="mb-lg-6 mb-4 pe-lg-5 pe-0">{% translate "Магазины" %}</h2>
                         <div class="checkout__input--select select mb-lg-5 mb-4">
                             <label for="input_city"></label>
                             <select class="checkout__input--select__field border-radius-5 flex-grow-0" id="input_city">
@@ -98,7 +98,7 @@
                 </div>
                 <div class="addresses--block col-lg-18 col-md-4">
                     <div class="shop-selector">
-                        <h2 class="mb-lg-6 mb-4 pe-lg-5 pe-0">Магазины</h2>
+                        <h2 class="mb-lg-6 mb-4 pe-lg-5 pe-0">{% translate "Магазины" %}</h2>
                         <label for="input_city2"></label>
                         <div class="checkout__input--select select mb-lg-5 mb-4">
                             <select class="checkout__input--select__field border-radius-5 flex-grow-0" id="input_city2">
@@ -123,8 +123,8 @@
                         <img src="{% static '/src/assets/img/icon/Group 100.png' %}">
                     </div>
                     <div class="flex-shrink-1 flex-grow-0 pe-8" style="flex-direction:column;margin-left:10px;">
-                        <h2 class="h3">Доставка</h2>
-                        <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
+                        <h2 class="h3">{% translate "Доставка" %}</h2>
+                        <span>{% translate 'Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"' %}</span>
                     </div>
                 </div>
                 <div class="delivery_product_block">
@@ -132,8 +132,8 @@
                         <img src="{% static '/src/assets/img/icon/Group 101.png' %}">
                     </div>
                     <div class="flex-shrink-1 flex-grow-0 pe-8" style="flex-direction:column;margin-left:10px;">
-                        <h2 class="h3">Доставка</h2>
-                        <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
+                        <h2 class="h3">{% translate "Доставка" %}</h2>
+                        <span>{% translate 'Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"' %}</span>
                     </div>
                 </div>
                 <div class="delivery_product_block">
@@ -141,8 +141,8 @@
                         <img src="{% static '/src/assets/img/icon/Group 102.png' %}">
                     </div>
                     <div class="flex-shrink-1 flex-grow-0 pe-8" style="flex-direction:column;margin-left:10px;">
-                        <h2 class="h3">Доставка</h2>
-                        <span>Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"</span>
+                        <h2 class="h3">{% translate "Доставка" %}</h2>
+                        <span>{% translate 'Самовывоз из магазина MikC доставка по адресу или в отделения "Новая Пошта"' %}</span>
                     </div>
                 </div>
             </div>

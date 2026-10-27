@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const shipmentMethodButton = document.querySelector('.shipment__page--list--item.shipping.active');
         if (!shipmentMethodButton) {
-            alert("Пожалуйста, выберите способ доставки.");
+            alert(gettext("Пожалуйста, выберите способ доставки."));
             return;
         }
         const shipmentMethodId = shipmentMethodButton.dataset.id;
@@ -16,14 +16,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const selectedBranch = document.querySelector('.widget__form--check__input:checked');
         if (!selectedBranch) {
-            alert("Пожалуйста, выберите филиал для доставки.");
+            alert(gettext("Пожалуйста, выберите филиал для доставки."));
             return;
         }
         const orderPlaceId = selectedBranch.id;
 
         const paymentMethodButton = document.querySelector('.shipment__page--list--item.payment.active');
         if (!paymentMethodButton) {
-            alert("Пожалуйста, выберите способ оплаты.");
+            alert(gettext("Пожалуйста, выберите способ оплаты."));
             return;
         }
         const paymentMethodId = paymentMethodButton.dataset.id;
@@ -31,12 +31,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const comment = document.querySelector('#text_comment').value.trim();
 
         if (!name) {
-            alert("Пожалуйста, укажите ваше имя.");
+            alert(gettext("Пожалуйста, укажите ваше имя."));
             return;
         }
 
         if (!phone && !email) {
-            alert("Пожалуйста, укажите хотя бы телефон или email для связи.");
+            alert(gettext("Пожалуйста, укажите хотя бы телефон или email для связи."));
             return;
         }
 
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (Object.keys(productsData).length === 0) {
-            alert("Корзина пуста. Добавьте товары перед оформлением заказа.");
+            alert(gettext("Корзина пуста. Добавьте товары перед оформлением заказа."));
             return;
         }
 
@@ -89,16 +89,16 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.json();
 
             if (data.success) {
-                alert("Ваш заказ принят");
+                alert(gettext("Ваш заказ принят"));
                 localStorage.removeItem('promoDiscount');
                 localStorage.removeItem('appliedPromoCode');
                 window.location.reload();
             } else {
-                alert(`Ошибка: ${data.error}`);
+                alert(interpolate(gettext('Ошибка: %s'), [data.error]));
             }
         } catch (error) {
             console.error("Ошибка при создании заказа:", error);
-            alert("Произошла ошибка при создании заказа. Пожалуйста, попробуйте снова.");
+            alert(gettext("Произошла ошибка при создании заказа. Пожалуйста, попробуйте снова."));
         }
     });
 

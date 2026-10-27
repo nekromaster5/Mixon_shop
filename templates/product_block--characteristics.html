@@ -1,13 +1,14 @@
 {% extends "product_block--standard.html" %}
+{% load i18n %}
 
 {% block additional %}
     <div class="product__card--characteristics" style="display: none">
-        <h3 class="mb-4">Характеристики</h3>
+        <h3 class="mb-4">{% translate "Характеристики" %}</h3>
         <ul class="characteristics__list">
             <li>
                 <ul class="characteristics__list--element">
                     <li>
-                        Использование
+                        {% translate "Использование" %}
                     </li>
                     <li>
                         {{ product.usage }}
@@ -15,7 +16,7 @@
                 </ul>
                 <ul class="characteristics__list--element">
                     <li>
-                        Связующее вещество
+                        {% translate "Связующее вещество" %}
                     </li>
                     <li>
                         {{ product.binding_substance }}
@@ -23,7 +24,7 @@
                 </ul>
                 <ul class="characteristics__list--element">
                     <li>
-                        Сухой остаток
+                        {% translate "Сухой остаток" %}
                     </li>
                     <li>
                         {{ product.dry_residue }}
@@ -31,7 +32,7 @@
                 </ul>
                 <ul class="characteristics__list--element">
                     <li>
-                        Плотность
+                        {% translate "Плотность" %}
                     </li>
                     <li>
                         {{ product.density }}
@@ -39,7 +40,7 @@
                 </ul>
                 <ul class="characteristics__list--element">
                     <li>
-                        Время высыхания, 23°С 50% RH
+                        {% translate "Время высыхания, 23°С 50% RH" %}
                     </li>
                     <li>
                         {{ product.drying_time }}
@@ -47,7 +48,7 @@
                 </ul>
                 <ul class="characteristics__list--element">
                     <li>
-                        Расход готовой смеси
+                        {% translate "Расход готовой смеси" %}
                     </li>
                     <li>
                         {{ product.consumption }}
@@ -55,7 +56,7 @@
                 </ul>
                 <ul class="characteristics__list--element">
                     <li>
-                        Разбавитель
+                        {% translate "Разбавитель" %}
                     </li>
                     <li>
                         {{ product.solvent }}
@@ -63,7 +64,7 @@
                 </ul>
                 <ul class="characteristics__list--element">
                     <li>
-                        Рабочие инструменты
+                        {% translate "Рабочие инструменты" %}
                     </li>
                     <li>
                         {{ product.working_tools }}
@@ -71,7 +72,7 @@
                 </ul>
                 <ul class="characteristics__list--element">
                     <li>
-                        Очистка рабочих инструментов
+                        {% translate "Очистка рабочих инструментов" %}
                     </li>
                     <li>
                         {{ product.tool_cleaning }}
@@ -79,7 +80,7 @@
                 </ul>
                 <ul class="characteristics__list--element">
                     <li>
-                        Хранение
+                        {% translate "Хранение" %}
                     </li>
                     <li>
                         {{ product.storage }}

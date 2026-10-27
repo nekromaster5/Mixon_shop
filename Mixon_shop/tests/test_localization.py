@@ -1,3 +1,5 @@
+import json
+
 import pytest
 from django.urls import reverse
 
@@ -43,3 +45,26 @@ def test_language_switcher_buttons_present_on_home_page(client):
     text = response.content.decode()
     assert 'name="language" value="uk"' in text
     assert 'name="language" value="ru"' in text
+
+
+@pytest.mark.django_db
+def test_interface_strings_follow_selected_language(client):
+    """Регрессия: при переключении на ru менялись только поля товаров
+    (modeltranslation), а фильтры, шапка и подвал оставались как были."""
+    text = client.get("/catalogue/").content.decode()
+    assert "Фільтри" in text
+    assert "Каталог товарів" in text
+    assert "Оплата і доставка" in text
+
+    client.post(reverse("set_language"), data={"language": "ru", "next": "/"})
+    text = client.get("/catalogue/").content.decode()
+    assert "Фильтры" in text
+    assert "Каталог товаров" in text
+    assert "Фільтри" not in text
+
+
+@pytest.mark.django_db
+def test_javascript_catalog_has_ukrainian_strings(client):
+    text = client.get(reverse("javascript-catalog")).content.decode()
+    # каталог отдаётся как JSON с \uXXXX-экранированием
+    assert json.dumps("Товар додано до кошика!") in text

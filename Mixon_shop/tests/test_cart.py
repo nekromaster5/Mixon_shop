@@ -112,4 +112,4 @@ def test_create_order_clears_cart(client, make_product, branch, shipment_method,
     assert order.products.count() == 2
 
     response = client.get("/cart/")
-    assert "Ваша корзина пуста" in response.content.decode()
+    assert "Ваш кошик порожній" in response.content.decode()

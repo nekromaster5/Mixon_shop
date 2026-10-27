@@ -38,7 +38,7 @@ def test_profile_update_rejects_email_taken_by_another_user(client, django_user_
     )
     user1.refresh_from_db()
     assert user1.email == "user1@example.com"
-    assert "уже используется" in response.content.decode()
+    assert "уже використовується" in response.content.decode()
 
 
 @pytest.mark.django_db

@@ -15,9 +15,9 @@ function toggleReviewBlock(block) {
     const computedStyle = window.getComputedStyle(table);
     if (computedStyle.display === 'none') {
         table.style.display = 'block';
-        text.textContent = 'Свернуть >>'; // Текст при открытом состоянии
+        text.textContent = gettext('Свернуть >>'); // Текст при открытом состоянии
     } else {
         table.style.display = 'none';
-        text.textContent = 'Детально >>'; // Текст при закрытом состоянии
+        text.textContent = gettext('Детально >>'); // Текст при закрытом состоянии
     }
 }

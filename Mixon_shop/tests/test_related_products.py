@@ -6,8 +6,8 @@ def test_no_related_or_similar_products_shows_empty_state(client, product):
     response = client.get(f"/product/{product.id}/")
     assert response.status_code == 200
     text = response.content.decode()
-    assert "не указаны сопутствующие товары" in text
-    assert "не указаны похожие товары" in text
+    assert "не вказані супутні товари" in text
+    assert "не вказані схожі товари" in text
 
 
 @pytest.mark.django_db

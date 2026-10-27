@@ -1,9 +1,10 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 
 
 {% block title %}
-    О компании
+    {% translate "О компании" %}
 {% endblock %}
 
 
@@ -16,10 +17,10 @@
             <div class="breadcrumb__content text-center">
                 <ul class="breadcrumb__content--menu d-flex">
                     <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'home' %}">Главная</a>
+                        <a href="{% url 'home' %}">{% translate "Главная" %}</a>
                     </li>
                     <li class="breadcrumb__content--menu__items">
-                        <a href="{% url 'about_company' %}">О компании</a>
+                        <a href="{% url 'about_company' %}">{% translate "О компании" %}</a>
                     </li>
 
                 </ul>
@@ -97,7 +98,7 @@
                             <div class="brand_buttons-inner about_company">
                                 <a href="{% url 'brands' %}"
                                    class="view__all--link d-inline-block text-nowrap slide">
-                                    <span class="me-3">Еще новости</span>
+                                    <span class="me-3">{% translate "Еще новости" %}</span>
                                     <svg width="5%" viewBox="0 0 11 13" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0.384766 0.764038L6.07377 6.39398L0.384766 12.024"
@@ -117,7 +118,7 @@
     <section>
         <div class="container">
             <div class="about_company_heading_div">
-                <span class="about_company_heading">О компании MikC</span></div>
+                <span class="about_company_heading">{% translate "О компании MikC" %}</span></div>
             <div class="about_company_content">
                 <div class="comparison_lists  row  ">
                     <div class="col-lg-7">
@@ -130,18 +131,16 @@
                                 </div>
                                 <div class="block_about_company_heading  flex-grow-0
                                     flex-shrink-1  " style="margin-left: 20px;    ">
-                                    <h2 class="h3 ab_text">MikC - это <span
-                                            style="color:red;">производитель</span>
-                                        лакокрасочной продукции, автохимии и автокосметики под брендами
-                                        MIXON,DOMEX,MVL </h2>
+                                    <h2 class="h3 ab_text">{% translate "MikC - это" %} <span
+                                            style="color:red;">{% translate "производитель" %}</span>
+                                        {% translate "лакокрасочной продукции, автохимии и автокосметики под брендами MIXON,DOMEX,MVL" %} </h2>
                                 </div>
                             </div>
                             <div class="block_ab_bottom_text">
-                                <ul class="high_red_dot_ul">Благодаря этому мы можем:</ul>
+                                <ul class="high_red_dot_ul">{% translate "Благодаря этому мы можем:" %}</ul>
                                 <ul class="red-dot_list red_dot_second_class">
-                                    <li class="red-dot_list_li">Создавать лимитированные партии под спец-заказы</li>
-                                    <li class="red-dot_list_li">Обеспечить полный ассортимент материалов и
-                                        инструментов необходмых для выполнения малярных работ
+                                    <li class="red-dot_list_li">{% translate "Создавать лимитированные партии под спец-заказы" %}</li>
+                                    <li class="red-dot_list_li">{% translate "Обеспечить полный ассортимент материалов и инструментов необходмых для выполнения малярных работ" %}
                                     </li>
 
                                 </ul>
@@ -156,17 +155,15 @@
                                 </div>
                                 <div class="block_about_company_heading  flex-grow-0
                                     flex-shrink-1" style="margin-left: 20px;   ">
-                                    <h2 class="h3 ab_text">MikC - это <span style="color:red;">прямой экспортер</span>
-                                        абразивных материалов SMIRDEX, ЛКМ для обработки древесины GENC, бумаги для
-                                        малярок PRODYVER и т.д. </h2>
+                                    <h2 class="h3 ab_text">{% translate "MikC - это" %} <span style="color:red;">{% translate "прямой экспортер" %}</span>
+                                        {% translate "абразивных материалов SMIRDEX, ЛКМ для обработки древесины GENC, бумаги для малярок PRODYVER и т.д." %} </h2>
                                 </div>
                             </div>
                             <div class="block_ab_bottom_text">
-                                <ul class="high_red_dot_ul">Благодаря этому мы можем:</ul>
+                                <ul class="high_red_dot_ul">{% translate "Благодаря этому мы можем:" %}</ul>
                                 <ul class="red-dot_list red_dot_second_class">
-                                    <li class="red-dot_list_li">Доукомплектовать</li>
-                                    <li class="red-dot_list_li">Обеспечить полный ассортимент материалов и
-                                        инструментов необходмых для выполнения малярных работ
+                                    <li class="red-dot_list_li">{% translate "Доукомплектовать" %}</li>
+                                    <li class="red-dot_list_li">{% translate "Обеспечить полный ассортимент материалов и инструментов необходмых для выполнения малярных работ" %}
                                     </li>
 
                                 </ul>
@@ -181,18 +178,15 @@
                                 </div>
                                 <div class=" block_about_company_heading flex-grow-0
                                     flex-shrink-1" style="margin-left: 20px;  ">
-                                    <h2 class="h3 ab_text">MikC - это <span style="color:red;">cеть магазинов</span>по
-                                        продаже лакокрасочной продукции </h2>
+                                    <h2 class="h3 ab_text">{% translate "MikC - это" %} <span style="color:red;">{% translate "cеть магазинов" %}</span>{% translate "по продаже лакокрасочной продукции" %} </h2>
                                 </div>
                             </div>
                             <div class="block_ab_bottom_text">
-                                <ul class="high_red_dot_ul">Благодаря этому мы можем:</ul>
+                                <ul class="high_red_dot_ul">{% translate "Благодаря этому мы можем:" %}</ul>
                                 <ul class="red-dot_list red_dot_second_class">
-                                    <li class="red-dot_list_li ">Принимать оплату разными способами(наличный и
-                                        безналичный расчет,в том числе
-                                        и с НДС, перевод на платежную карту и т.п.)
+                                    <li class="red-dot_list_li ">{% translate "Принимать оплату разными способами(наличный и безналичный расчет,в том числе и с НДС, перевод на платежную карту и т.п.)" %}
                                     </li>
-                                    <li class="red-dot_list_li">Обслуживать клиентов в различных частях города</li>
+                                    <li class="red-dot_list_li">{% translate "Обслуживать клиентов в различных частях города" %}</li>
 
                                 </ul>
                             </div>
@@ -208,19 +202,16 @@
                                 </div>
                                 <div class=" block_about_company_heading flex-grow-0
                                     flex-shrink-1" style="margin-left: 20px;  ">
-                                    <h2 class="h3 ab_text">MikC - это структурированная система<span style="color:red;">оптовых продаж</span>
-                                        и скидок</h2>
+                                    <h2 class="h3 ab_text">{% translate "MikC - это структурированная система" %}<span style="color:red;">{% translate "оптовых продаж" %}</span>
+                                        {% translate "и скидок" %}</h2>
                                 </div>
                             </div>
                             <div class="block_ab_bottom_text">
-                                <ul class="high_red_dot_ul">Благодаря этому мы можем:</ul>
+                                <ul class="high_red_dot_ul">{% translate "Благодаря этому мы можем:" %}</ul>
                                 <ul class="red-dot_list red_dot_second_class">
-                                    <li class="red-dot_list_li">Предложить систему скидок в завимости от статуса клиента
-                                        - професионал,
-                                        диллер, дистрибьютор.
+                                    <li class="red-dot_list_li">{% translate "Предложить систему скидок в завимости от статуса клиента - професионал, диллер, дистрибьютор." %}
                                     </li>
-                                    <li class="red-dot_list_li">Давать скидки в зависимости от объема закупок при
-                                        условии предоставлении информации клиента о себе.
+                                    <li class="red-dot_list_li">{% translate "Давать скидки в зависимости от объема закупок при условии предоставлении информации клиента о себе." %}
                                     </li>
 
                                 </ul>
@@ -235,15 +226,14 @@
                                 </div>
                                 <div class=" block_about_company_heading flex-grow-0
                                     flex-shrink-1" style="margin-left: 20px;  ">
-                                    <h2 class="h3 ab_text">MikC - это оптовый склад, свой грузовой транспорт</h2>
+                                    <h2 class="h3 ab_text">{% translate "MikC - это оптовый склад, свой грузовой транспорт" %}</h2>
                                 </div>
                             </div>
                             <div class="block_ab_bottom_text">
-                                <ul class="high_red_dot_ul">Благодаря этому мы можем:</ul>
+                                <ul class="high_red_dot_ul">{% translate "Благодаря этому мы можем:" %}</ul>
                                 <ul class="red-dot_list red_dot_second_class">
-                                    <li class="red-dot_list_li">Всегда иметь в наличии полный ассортимент продукции</li>
-                                    <li class="red-dot_list_li">Организовать доставку товара на объект при сумме
-                                        закупки от 3 000 грн.
+                                    <li class="red-dot_list_li">{% translate "Всегда иметь в наличии полный ассортимент продукции" %}</li>
+                                    <li class="red-dot_list_li">{% translate "Организовать доставку товара на объект при сумме закупки от 3 000 грн." %}
                                     </li>
 
                                 </ul>
@@ -258,43 +248,39 @@
     <section>
         <div class="container">
             <div class="">
-                <span class="about_company_heading_non">Товарные направления</span>
+                <span class="about_company_heading_non">{% translate "Товарные направления" %}</span>
 
                 <div class="comparison_lists col-lg-12 row">
                     <button class="about_company_button">
                         <img class="ab_butt" src="{% static '/src/assets/img/icon/Group 37.png' %}"
                              alt="Image">
                         <h2 class="h3 comparison_class_first">CAR REFINISH</h2>
-                        <h2 class="h3 comparison_class_second">ЛКМ для покраски автомобиля</h2></button>
+                        <h2 class="h3 comparison_class_second">{% translate "ЛКМ для покраски автомобиля" %}</h2></button>
                     <button class="about_company_button">
                         <img class="ab_butt" src="{% static '/src/assets/img/icon/Path 69.png' %}"
                              alt="Image">
                         <h2 class="h3 comparison_class_first" style="color:red;">DECORATIVE COATING</h2>
-                        <h2 class="h3 comparison_class_second">ЛКМ для строительства и ремонта</h2></button>
+                        <h2 class="h3 comparison_class_second">{% translate "ЛКМ для строительства и ремонта" %}</h2></button>
                     <button class="about_company_button">
                         <img class="ab_butt" src="{% static '/src/assets/img/icon/Path 68.png' %}"
                              alt="Image">
                         <h2 class="h3 comparison_class_first" style="color:red;">WOOD COATING</h2>
-                        <h2 class="h3 comparison_class_second">ЛКМ для побработки древесины</h2></button>
+                        <h2 class="h3 comparison_class_second">{% translate "ЛКМ для побработки древесины" %}</h2></button>
                     <button class="about_company_button">
                         <img class="ab_butt" src="{% static '/src/assets/img/icon/Group 38.png' %}"
                              alt="Image">
                         <h2 class="h3 comparison_class_first" style="color:red;">INDUSTRIAL COATING</h2>
-                        <h2 class="h3 comparison_class_second">ЛКМ для промышленности, ремонта дорог и
-                            т.п.</h2></button>
+                        <h2 class="h3 comparison_class_second">{% translate "ЛКМ для промышленности, ремонта дорог и т.п." %}</h2></button>
                     <button class="about_company_button">
                         <img class="ab_butt" src="{% static '/src/assets/img/icon/Path 66.png' %}"
                              alt="Image">
                         <h2 class="h3 comparison_class_first" style="color:red;">CAR CARE</h2>
-                        <h2 class="h3 comparison_class_second">Автохимия, автокосметика и оборудование для
-                            моек</h2></button>
+                        <h2 class="h3 comparison_class_second">{% translate "Автохимия, автокосметика и оборудование для моек" %}</h2></button>
                     <button class="about_company_button">
                         <img class="ab_butt" src="{% static '/src/assets/img/icon/Path 67.png' %}"
                              alt="Image">
                         <h2 class="h3 comparison_class_first" style="color:red;">NON PAINT</h2>
-                        <h2 class="h3 comparison_class_second">Инструменты, оборудование и расходные материалы
-                            для малярных и
-                            покрасочных работ</h2></button>
+                        <h2 class="h3 comparison_class_second">{% translate "Инструменты, оборудование и расходные материалы для малярных и покрасочных работ" %}</h2></button>
                 </div>
                 <div style="height:40px;"></div>
             </div>

@@ -64,7 +64,7 @@ def test_activation_link_activates_and_logs_in(client, mailoutbox):
 
     response = client.get(f"/activate/{match.group(1)}/{match.group(2)}/")
     assert response.status_code == 200
-    assert "подтверждён" in response.content.decode()
+    assert "підтверджено" in response.content.decode()
 
     user = User.objects.get(username=USERNAME)
     assert user.is_active is True
@@ -82,7 +82,7 @@ def test_invalid_activation_token_shows_error_without_crashing(client):
     uid = urlsafe_base64_encode(force_bytes(user.pk))
     response = client.get(f"/activate/{uid}/not-a-real-token/")
     assert response.status_code == 200
-    assert "недействительна" in response.content.decode()
+    assert "недійсне" in response.content.decode()
 
     user.refresh_from_db()
     assert user.is_active is False

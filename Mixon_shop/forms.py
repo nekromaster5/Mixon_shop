@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from .models import UserProfile, Region
@@ -21,7 +22,7 @@ class UserRegisterForm(UserCreationForm):
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():
-            raise forms.ValidationError("Этот email уже зарегистрирован.")
+            raise forms.ValidationError(_("Этот email уже зарегистрирован."))
         return email
 
     def save(self, commit=True):
@@ -39,23 +40,23 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserLoginForm(AuthenticationForm):
-    username = forms.CharField(label="Имя пользователя")
-    password = forms.CharField(widget=forms.PasswordInput, label="Пароль")
+    username = forms.CharField(label=_("Имя пользователя"))
+    password = forms.CharField(widget=forms.PasswordInput, label=_("Пароль"))
 
 
 class ProfileUpdateForm(forms.Form):
     """Вкладка «Контактная информация» в личном кабинете — те же поля, что
     заполняются при регистрации, только для редактирования уже существующего
     аккаунта."""
-    first_name = forms.CharField(max_length=150, required=False, label='Имя')
-    last_name = forms.CharField(max_length=150, required=False, label='Фамилия')
+    first_name = forms.CharField(max_length=150, required=False, label=_("Имя"))
+    last_name = forms.CharField(max_length=150, required=False, label=_("Фамилия"))
     email = forms.EmailField(required=True, label='E-mail')
-    phone = forms.CharField(max_length=18, required=False, label='Телефон')
-    company = forms.CharField(max_length=256, required=False, label='Компания')
-    registration_number = forms.CharField(max_length=256, required=False, label='Регистрационный номер')
-    city = forms.CharField(max_length=256, required=True, label='Город')
-    postal_code = forms.CharField(max_length=10, required=False, label='Почтовый индекс')
-    region = forms.ModelChoiceField(queryset=Region.objects.all(), required=False, label='Область')
+    phone = forms.CharField(max_length=18, required=False, label=_("Телефон"))
+    company = forms.CharField(max_length=256, required=False, label=_("Компания"))
+    registration_number = forms.CharField(max_length=256, required=False, label=_("Регистрационный номер"))
+    city = forms.CharField(max_length=256, required=True, label=_("Город"))
+    postal_code = forms.CharField(max_length=10, required=False, label=_("Почтовый индекс"))
+    region = forms.ModelChoiceField(queryset=Region.objects.all(), required=False, label=_("Область"))
 
     def __init__(self, *args, user, **kwargs):
         self.user = user
@@ -64,7 +65,7 @@ class ProfileUpdateForm(forms.Form):
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exclude(pk=self.user.pk).exists():
-            raise forms.ValidationError("Этот email уже используется другим аккаунтом.")
+            raise forms.ValidationError(_("Этот email уже используется другим аккаунтом."))
         return email
 
     def save(self):

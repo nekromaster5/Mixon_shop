@@ -66,6 +66,16 @@ GitHub Actions на каждый push/PR ([.github/workflows/tests.yml](.github/
   `python manage.py update_translation_fields`, это скопирует значение из исходного поля
   (`name`) в поле языка по умолчанию (`name_uk`).
 
+Остальной интерфейс (шапка, подвал, фильтры, кнопки, сообщения) — обычный gettext Django:
+
+- Исходные строки в шаблонах и коде — русские: `{% translate "Фильтры" %}`, `_("...")`,
+  в `static/src/assets/js` — `gettext("...")` (каталог отдаёт `/jsi18n/`).
+- Украинский перевод — `locale/uk/LC_MESSAGES/django.po` (шаблоны и Python) и `djangojs.po` (JS).
+  Скомпилированные `.mo` лежат в репозитории, поэтому на сервере ничего собирать не нужно.
+- После правки `.po` перекомпилируйте: `python manage.py compilemessages -l uk -l ru`
+  (нужен пакет `gettext`). Новые строки собирает `python manage.py makemessages -l uk -l ru`
+  и `python manage.py makemessages -d djangojs -l uk -l ru`.
+
 ## Структура проекта
 
 - `Mixon_shop/` — единственное Django-приложение: модели, вьюхи, шаблонные теги, тесты.

@@ -1,9 +1,10 @@
+{% load i18n %}
 {% load static %}
-<article class="product-placeholder" aria-label="Карточка товара временно недоступна">
+<article class="product-placeholder" aria-label="{% translate "Карточка товара временно недоступна" %}">
     <div class="product-placeholder__image-wrap">
         <img class="product-placeholder__image"
              src="{% static 'src/assets/img/other/temp_product250.png' %}"
-             alt="Изображение товара появится позже">
+             alt="{% translate "Изображение товара появится позже" %}">
     </div>
     <div class="product-placeholder__content">
         <span class="product-placeholder__line product-placeholder__line--title"></span>

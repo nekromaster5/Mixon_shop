@@ -1,3 +1,4 @@
+{% load i18n %}
 {% for data in branches_data %}
     <li class="widget__form--check__list align-items-start" data-map-info="{{ data.branch.map_info }}">
         <input class="widget__form--check__input flex-shrink-0"
@@ -14,10 +15,10 @@
             </label>
             <button id="show--map-{{ data.branch.id }}" class="show--map--btn primary__btn"
                     data-map-info="{{ data.branch.map_info }}">
-                Посмотреть на карте
+                {% translate "Посмотреть на карте" %}
             </button>
         </div>
     </li>
     {% empty %}
-    <li>Нет доступных филиалов</li>
+    <li>{% translate "Нет доступных филиалов" %}</li>
 {% endfor %}

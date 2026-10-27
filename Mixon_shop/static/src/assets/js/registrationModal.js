@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const validatePasswords = () => {
         const mismatch = Boolean(passwordConfirmation.value && password.value !== passwordConfirmation.value);
-        passwordConfirmation.setCustomValidity(mismatch ? 'Пароли не совпадают' : '');
+        passwordConfirmation.setCustomValidity(mismatch ? gettext('Пароли не совпадают') : '');
         passwordError.hidden = !mismatch;
         return !mismatch;
     };

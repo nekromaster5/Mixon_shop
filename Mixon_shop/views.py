@@ -5,6 +5,7 @@ from urllib.parse import unquote
 # Existing import statements
 from django.template.loader import render_to_string
 from django.utils.timezone import now
+from django.utils.translation import gettext as _
 from django.views import View
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
@@ -620,13 +621,14 @@ def get_branches(request):
     current_time = now.time()
 
     DAYS_OF_WEEK_DISPLAY = {
-        'MON': 'понедельник',
-        'TUE': 'вторник',
-        'WED': 'среда',
-        'THU': 'четверг',
-        'FRI': 'пятница',
-        'SAT': 'суббота',
-        'SUN': 'воскресенье',
+        # винительный падеж: «Забрать в среду»
+        'MON': _('понедельник'),
+        'TUE': _('вторник'),
+        'WED': _('среду'),
+        'THU': _('четверг'),
+        'FRI': _('пятницу'),
+        'SAT': _('субботу'),
+        'SUN': _('воскресенье'),
     }
 
     branches_data = []
@@ -639,7 +641,7 @@ def get_branches(request):
         if today_schedule and not today_schedule.is_closed:
             if today_schedule.open_time <= current_time <= today_schedule.close_time:
                 can_pickup_today = True
-                pickup_message = "Забрать сегодня"
+                pickup_message = _("Забрать сегодня")
                 pickup_hours = f"{today_schedule.open_time.strftime('%H:%M')} - {today_schedule.close_time.strftime('%H:%M')}"
             else:
                 next_day = now
@@ -655,12 +657,12 @@ def get_branches(request):
                 if next_schedule:
                     day_display = DAYS_OF_WEEK_DISPLAY[next_weekday]
                     if next_day.date() == now.date() + timedelta(days=1):
-                        pickup_message = "Забрать завтра"
+                        pickup_message = _("Забрать завтра")
                     else:
-                        pickup_message = f"Забрать в {day_display}"
+                        pickup_message = _("Забрать в %(day)s") % {'day': day_display}
                     pickup_hours = f"{next_schedule.open_time.strftime('%H:%M')} - {next_schedule.close_time.strftime('%H:%M')}"
                 else:
-                    pickup_message = "Филиал не работает"
+                    pickup_message = _("Филиал не работает")
                     pickup_hours = ""
         else:
             next_day = now
@@ -676,12 +678,12 @@ def get_branches(request):
             if next_schedule:
                 day_display = DAYS_OF_WEEK_DISPLAY[next_weekday]
                 if next_day.date() == now.date() + timedelta(days=1):
-                    pickup_message = "Забрать завтра"
+                    pickup_message = _("Забрать завтра")
                 else:
-                    pickup_message = f"Забрать в {day_display}"
+                    pickup_message = _("Забрать в %(day)s") % {'day': day_display}
                 pickup_hours = f"{next_schedule.open_time.strftime('%H:%M')} - {next_schedule.close_time.strftime('%H:%M')}"
             else:
-                pickup_message = "Филиал не работает"
+                pickup_message = _("Филиал не работает")
                 pickup_hours = ""
 
         branches_data.append({
@@ -713,7 +715,7 @@ def get_branch_details(request):
         'MON': 1, 'TUE': 2, 'WED': 3, 'THU': 4, 'FRI': 5, 'SAT': 6, 'SUN': 7
     }
     DAYS_SHORT = {
-        'MON': 'ПН', 'TUE': 'ВТ', 'WED': 'СР', 'THU': 'ЧТ', 'FRI': 'ПТ', 'SAT': 'СБ', 'SUN': 'ВС'
+        'MON': _('ПН'), 'TUE': _('ВТ'), 'WED': _('СР'), 'THU': _('ЧТ'), 'FRI': _('ПТ'), 'SAT': _('СБ'), 'SUN': _('ВС')
     }
 
     # Получаем полное расписание
@@ -734,7 +736,7 @@ def get_branch_details(request):
         # Сортируем дни по порядку
         days.sort(key=lambda x: DAY_ORDER[x])
         if key == "closed":
-            schedule_lines.append(f"{', '.join(DAYS_SHORT[day] for day in days)}: Закрыто")
+            schedule_lines.append(f"{', '.join(DAYS_SHORT[day] for day in days)}: {_('Закрыто')}")
         else:
             # Объединяем последовательные дни в диапазоны
             ranges = []
@@ -762,21 +764,21 @@ def apply_promo_code(request):
         code = request.POST.get("code", "").strip()
 
         if not code:
-            return JsonResponse({"success": False, "error": "Введите промокод."}, status=400)
+            return JsonResponse({"success": False, "error": _("Введите промокод.")}, status=400)
 
         applied_promo = request.session.get('applied_promo_code')
         if applied_promo == code:
-            return JsonResponse({"success": False, "error": "Этот промокод уже применен."}, status=400)
+            return JsonResponse({"success": False, "error": _("Этот промокод уже применен.")}, status=400)
 
         try:
             promo = PromoCode.objects.get(code=code)
 
             if promo.expiry_date and promo.expiry_date < now():
-                return JsonResponse({"success": False, "error": "Срок действия промокода истек."}, status=400)
+                return JsonResponse({"success": False, "error": _("Срок действия промокода истек.")}, status=400)
 
             if promo.max_usage_count is not None and promo.usage_count >= promo.max_usage_count:
                 return JsonResponse(
-                    {"success": False, "error": "Этот промокод уже использован максимальное количество раз."},
+                    {"success": False, "error": _("Этот промокод уже использован максимальное количество раз.")},
                     status=400)
 
             discount = promo.discount_value if promo.discount_type == "amount" else f"{promo.discount_value}%"
@@ -795,9 +797,9 @@ def apply_promo_code(request):
             return JsonResponse({"success": True, "discount": discount})
 
         except PromoCode.DoesNotExist:
-            return JsonResponse({"success": False, "error": "Неверный промокод."}, status=400)
+            return JsonResponse({"success": False, "error": _("Неверный промокод.")}, status=400)
 
-    return JsonResponse({"success": False, "error": "Неверный метод запроса."}, status=405)
+    return JsonResponse({"success": False, "error": _("Неверный метод запроса.")}, status=405)
 
 
 def create_order(request):
@@ -808,14 +810,14 @@ def create_order(request):
         required_fields = ['name', 'shipment_method', 'order_place', 'payment_method', 'goods_cost', 'shipment_cost']
         for field in required_fields:
             if field not in data or data[field] is None:
-                return JsonResponse({"success": False, "error": f"Поле '{field}' обязательно для заполнения."},
+                return JsonResponse({"success": False, "error": _("Поле '%(field)s' обязательно для заполнения.") % {'field': field}},
                                     status=400)
 
         # Проверяем, что хотя бы одно из полей phone или email заполнено
         phone = data.get('phone', '').strip()
         email = data.get('email', '').strip()
         if not phone and not email:
-            return JsonResponse({"success": False, "error": "Необходимо указать хотя бы телефон или email для связи."},
+            return JsonResponse({"success": False, "error": _("Необходимо указать хотя бы телефон или email для связи.")},
                                 status=400)
 
         try:
@@ -839,7 +841,7 @@ def create_order(request):
             # Получаем продукты
             products = Product.objects.filter(id__in=product_counts.keys())
             if not products:
-                return JsonResponse({"success": False, "error": "Не выбрано ни одного товара."}, status=400)
+                return JsonResponse({"success": False, "error": _("Не выбрано ни одного товара.")}, status=400)
 
             # Проверяем промокод
             promo_applied = False
@@ -900,18 +902,18 @@ def create_order(request):
             # Заказ создан — корзина больше не нужна.
             SessionCart(request).clear()
 
-            return JsonResponse({"success": True, "message": "Заказ успешно создан!"})
+            return JsonResponse({"success": True, "message": _("Заказ успешно создан!")})
 
         except Exception:
             # Подробности — только в серверный лог; клиенту незачем видеть
             # внутренний текст исключения (могут утечь детали реализации).
             logger.exception("Ошибка при создании заказа")
             return JsonResponse(
-                {"success": False, "error": "Не удалось оформить заказ. Попробуйте ещё раз."},
+                {"success": False, "error": _("Не удалось оформить заказ. Попробуйте ещё раз.")},
                 status=500,
             )
 
-    return JsonResponse({"success": False, "error": "Неверный метод запроса."}, status=405)
+    return JsonResponse({"success": False, "error": _("Неверный метод запроса.")}, status=405)
 
 
 class TestSlider(View):
@@ -979,7 +981,7 @@ def _send_activation_email(request, user):
         'token': token,
     })
     send_mail(
-        "Подтверждение регистрации — Mixon Shop",
+        _("Подтверждение регистрации — Mixon Shop"),
         message,
         settings.DEFAULT_FROM_EMAIL,
         [user.email],
@@ -994,7 +996,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            messages.success(request, "Вы успешно вошли!")
+            messages.success(request, _("Вы успешно вошли!"))
         else:
             for field, errors in form.errors.items():
                 for error in errors:
@@ -1006,7 +1008,7 @@ def login_view(request):
 # ---------------- LOGOUT ----------------
 def logout_view(request):
     logout(request)
-    messages.info(request, "Вы вышли из аккаунта")
+    messages.info(request, _("Вы вышли из аккаунта"))
     return redirect('home')
 
 
@@ -1031,8 +1033,8 @@ def register_view(request):
             _send_activation_email(request, user)
             messages.success(
                 request,
-                "Регистрация почти завершена — мы отправили письмо со ссылкой "
-                "для подтверждения на указанный email."
+                _("Регистрация почти завершена — мы отправили письмо со ссылкой "
+                  "для подтверждения на указанный email.")
             )
         else:
             # собираем ошибки и передаем через messages
@@ -1071,7 +1073,7 @@ def profile_update(request):
     form = ProfileUpdateForm(request.POST, user=request.user)
     if form.is_valid():
         form.save()
-        messages.success(request, "Данные профиля обновлены.")
+        messages.success(request, _("Данные профиля обновлены."))
     else:
         for field, errors in form.errors.items():
             for error in errors:
@@ -1087,7 +1089,7 @@ def change_password_view(request):
         user = form.save()
         # Иначе смена пароля разлогинит пользователя прямо в его кабинете.
         update_session_auth_hash(request, user)
-        messages.success(request, "Пароль изменён.")
+        messages.success(request, _("Пароль изменён."))
     else:
         for field, errors in form.errors.items():
             for error in errors:
@@ -1172,7 +1174,7 @@ def submit_review(request, product_id):
         rating_int = 0
 
     if not 1 <= rating_int <= 5:
-        messages.error(request, "Пожалуйста, поставьте оценку от 1 до 5 звёзд.")
+        messages.error(request, _("Пожалуйста, поставьте оценку от 1 до 5 звёзд."))
         return redirect('product', product_id=product.id)
 
     if request.user.is_authenticated:
@@ -1190,7 +1192,7 @@ def submit_review(request, product_id):
         )
     else:
         if not reviewer_name:
-            messages.error(request, "Пожалуйста, укажите ваше имя, чтобы оставить отзыв без входа в аккаунт.")
+            messages.error(request, _("Пожалуйста, укажите ваше имя, чтобы оставить отзыв без входа в аккаунт."))
             return redirect('product', product_id=product.id)
         Review.objects.create(
             product=product,
@@ -1203,5 +1205,5 @@ def submit_review(request, product_id):
             review_text=review_text,
         )
 
-    messages.success(request, "Спасибо, ваш отзыв опубликован!")
+    messages.success(request, _("Спасибо, ваш отзыв опубликован!"))
     return redirect('product', product_id=product.id)

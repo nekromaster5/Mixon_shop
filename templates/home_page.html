@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 
 
@@ -26,7 +27,7 @@
                                              alt="{{ section.name.name }}"
                                              style="position:absolute; left:-30px;">
                                     {% else %}
-                                        <p>[Нет картинки]</p>
+                                        <p>{% translate "[Нет картинки]" %}</p>
                                     {% endif %}
 
                                     <p class="category-name" style="font-weight: 500;">
@@ -39,7 +40,7 @@
                 </div>
                 <div class="main_image">
                     <div class="main_image_slides" role="region" aria-roledescription="carousel"
-                         aria-label="Главные предложения">
+                         aria-label="{% translate "Главные предложения" %}">
                         {% for banner in banners %}
                             <div class="main_image_slide {% if not forloop.first %}hidden{% endif %}">
                                 <img class="main_image_img"
@@ -62,9 +63,9 @@
                         <!-- Добавление заглушек, если баннеров меньше 5 -->
                     </div>
                     <button class="main_image_arrow main_image_arrow--prev" type="button"
-                            aria-label="Предыдущий слайд">&#10094;</button>
+                            aria-label="{% translate "Предыдущий слайд" %}">&#10094;</button>
                     <button class="main_image_arrow main_image_arrow--next" type="button"
-                            aria-label="Следующий слайд">&#10095;</button>
+                            aria-label="{% translate "Следующий слайд" %}">&#10095;</button>
                     <div class="main_image_buttons">
                         {% for banner in banners %}
                             <button class="main_image_button {% if forloop.first %}active{% endif %}"
@@ -99,7 +100,7 @@
                             <div class="brand_buttons-inner">
                                 <a href="{% url 'brands' %}"
                                    class="view__all--link d-inline-block text-nowrap slide">
-                                    <span>Все бренды</span>
+                                    <span>{% translate "Все бренды" %}</span>
                                     <svg width="7%" viewBox="0 0 11 13" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0.384766 0.764038L6.07377 6.39398L0.384766 12.024"
@@ -121,10 +122,10 @@
         <div class="container ps-md-4 ps-2">
             <div class="section__top--sellers">
                 <div class="section__heading d-flex justify-content-between mb-md-8 mb-0">
-                    <h2 class="section__heading--maintitle flex-grow-1 flex-shrink-0">Лидеры продаж</h2>
+                    <h2 class="section__heading--maintitle flex-grow-1 flex-shrink-0">{% translate "Лидеры продаж" %}</h2>
                     <a href="{% url 'catalogue' %}"
                        class="view__all--link d-flex justify-content-end text-nowrap flex-grow-0 flex-shrink-1">
-                        <span class="me-3">Посмотреть все</span>
+                        <span class="me-3">{% translate "Посмотреть все" %}</span>
                         <svg width="2%" height="65%" viewBox="0 0 11 13" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path d="M0.384766 0.764038L6.07377 6.39398L0.384766 12.024"
@@ -158,10 +159,10 @@
             </div>
             <div class="section__newbies">
                 <div class="section__heading d-flex justify-content-between mb-md-8 mb-0">
-                    <h2 class="section__heading--maintitle flex-grow-1 flex-shrink-0">Новинки</h2>
+                    <h2 class="section__heading--maintitle flex-grow-1 flex-shrink-0">{% translate "Новинки" %}</h2>
                     <a href="{% url 'catalogue' filters='new-goods' %}"
                        class="view__all--link d-flex justify-content-end text-nowrap flex-grow-0 flex-shrink-1">
-                        <span class="me-3">Посмотреть все</span>
+                        <span class="me-3">{% translate "Посмотреть все" %}</span>
                         <svg width="2%" height="65%" viewBox="0 0 11 13" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path d="M0.384766 0.764038L6.07377 6.39398L0.384766 12.024"
@@ -195,10 +196,10 @@
             </div>
             <div class="section__recommended">
                 <div class="section__heading d-flex justify-content-between mb-md-8 mb-0">
-                    <h2 class="section__heading--maintitle flex-grow-1 flex-shrink-0">Рекомендуемые товары</h2>
+                    <h2 class="section__heading--maintitle flex-grow-1 flex-shrink-0">{% translate "Рекомендуемые товары" %}</h2>
                     <a href="{% url 'catalogue' %}"
                        class="view__all--link d-flex justify-content-end text-nowrap flex-grow-0 flex-shrink-1">
-                        <span class="me-3">Посмотреть все</span>
+                        <span class="me-3">{% translate "Посмотреть все" %}</span>
                         <svg width="2%" height="65%" viewBox="0 0 11 13" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path d="M0.384766 0.764038L6.07377 6.39398L0.384766 12.024"
@@ -233,10 +234,10 @@
             </div>
             <div class="section__news">
                 <div class="section__heading d-flex justify-content-between mb-md-8 mb-0">
-                    <h2 class="section__heading--maintitle flex-grow-1 flex-shrink-0">Новости</h2>
+                    <h2 class="section__heading--maintitle flex-grow-1 flex-shrink-0">{% translate "Новости" %}</h2>
                     <a href="{% url 'news_list' %}"
                        class="view__all--link d-flex justify-content-end text-nowrap flex-grow-0 flex-shrink-1">
-                        <span class="me-3">Посмотреть все</span>
+                        <span class="me-3">{% translate "Посмотреть все" %}</span>
                         <svg width="2%" height="65%" viewBox="0 0 11 13" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path d="M0.384766 0.764038L6.07377 6.39398L0.384766 12.024"
@@ -262,7 +263,7 @@
                                 <div class="news-placeholder">
                                     <img class="news-placeholder__image"
                                          src="{% static 'src/assets/img/logo/mixon_banner.png' %}"
-                                         alt="Новость появится позже">
+                                         alt="{% translate "Новость появится позже" %}">
                                     <span class="news-placeholder__line"></span>
                                     <span class="news-placeholder__line news-placeholder__line--short"></span>
                                 </div>

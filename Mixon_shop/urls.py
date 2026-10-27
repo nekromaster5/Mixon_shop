@@ -20,6 +20,7 @@ from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+from django.views.i18n import JavaScriptCatalog
 
 from Mixon_shop.views import HomePage, CataloguePage, ProductPage, Brands, NewsPage, \
     AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts, \
@@ -31,6 +32,7 @@ urlpatterns = [
     path('admin_tools/', include('admin_tools.urls')),
     path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),  # POST сюда — переключение uk/ru
+    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),  # gettext() для static/js
 
     # продукты
     path('product/<int:product_id>/', ProductPage.as_view(), name='product'),
