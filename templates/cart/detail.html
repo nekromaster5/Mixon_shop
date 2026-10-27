@@ -7,6 +7,40 @@
 {% endblock %}
 
 {% block content %}
+    <style>
+        .cart-items__head, .cart-items__row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 10rem 23rem 10rem;
+            align-items: center;
+            column-gap: 1rem;
+        }
+        .cart-items__head {
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .cart-items__row {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--grey-color);
+        }
+        .cart-items__product { display: flex; align-items: center; gap: 1.5rem; min-width: 0; }
+        .cart-items__thumb {
+            flex: none; width: 9rem; height: 9rem; display: flex;
+            align-items: center; justify-content: center; background: var(--body-background-color);
+        }
+        .cart-items__thumb img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .cart-items__price, .cart-items__total { display: flex; flex-direction: column; }
+        .cart-items__qty { display: flex; align-items: center; gap: 1rem; margin: 0; }
+        .cart-items__qty .product--amount__input { width: 6rem; flex: none; }
+        .cart-items__total { text-align: right; }
+        .cart-items__head .cart-items__total { display: block; }
+        @media (max-width: 767px) {
+            .cart-items__head { display: none; }
+            .cart-items__row { grid-template-columns: 1fr 1fr; row-gap: 1.2rem; }
+            .cart-items__row .cart-items__product { grid-column: 1 / -1; }
+        }
+    </style>
     <section class="breadcrumb__section breadcrumb__bg">
         <div class="container">
             <div class="breadcrumb__content text-center">
@@ -28,58 +62,52 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-16">
-                        <div class="cart__table">
-                            <table class="cart__table--inner">
-                                <thead class="cart__table--header">
-                                <tr>
-                                    <th class="cart__table--header__list">{% translate "Товар" %}</th>
-                                    <th class="cart__table--header__list text-center">{% translate "Цена" %}</th>
-                                    <th class="cart__table--header__list text-center">{% translate "Количество" %}</th>
-                                    <th class="cart__table--header__list text-right">{% translate "Итого" %}</th>
-                                </tr>
-                                </thead>
-                                <tbody class="cart__table--body__items">
-                                {% for item in cart_items %}
-                                    <tr class="cart__table--body__list d-block d-md-flex align-items-center">
-                                        <td class="cart__table--body__list d-flex align-items-center">
-                                            <form method="post" action="{% url 'cart_remove' item.product.id %}">
-                                                {% csrf_token %}
-                                                <button type="submit" class="cart__remove--btn"
-                                                        title="{% translate "Удалить из корзины" %}" aria-label="{% translate "Удалить из корзины" %}">&times;</button>
-                                            </form>
-                                            <div class="cart__thumbnail">
-                                                <a href="{% url 'product' item.product.id %}">
-                                                    <img src="{{ item.product.images.first.image.url }}"
-                                                         alt="{{ item.product.name }}">
-                                                </a>
-                                            </div>
-                                            <div class="cart__content">
-                                                <h4 class="cart__content--title">
-                                                    <a href="{% url 'product' item.product.id %}">{{ item.product.name }}</a>
-                                                </h4>
-                                            </div>
-                                        </td>
-                                        <td class="cart__table--body__list text-center">
-                                            <span class="cart__price">{{ item.price }}₴</span>
-                                        </td>
-                                        <td class="cart__table--body__list text-center">
-                                            <form method="post" class="d-flex align-items-center"
-                                                  action="{% url 'cart_update' item.product.id %}">
-                                                {% csrf_token %}
-                                                <input type="number" name="quantity" value="{{ item.quantity }}"
-                                                       min="1" size="3" class="product--amount__input">
-                                                <button type="submit" class="checkout--edit--btn primary__btn ms-2">
-                                                    {% translate "Обновить" %}
-                                                </button>
-                                            </form>
-                                        </td>
-                                        <td class="cart__table--body__list text-right">
-                                            <span class="cart__price">{{ item.total_price }}₴</span>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
+                        <div class="cart-items">
+                            <div class="cart-items__head">
+                                <span class="cart-items__product">{% translate "Товар" %}</span>
+                                <span class="cart-items__price">{% translate "Цена" %}</span>
+                                <span class="cart-items__qty">{% translate "Количество" %}</span>
+                                <span class="cart-items__total">{% translate "Итого" %}</span>
+                            </div>
+                            {% for item in cart_items %}
+                                <div class="cart-items__row">
+                                    <div class="cart-items__product">
+                                        <form method="post" action="{% url 'cart_remove' item.product.id %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="cart__remove--btn"
+                                                    title="{% translate "Удалить из корзины" %}" aria-label="{% translate "Удалить из корзины" %}">&times;</button>
+                                        </form>
+                                        <a class="cart-items__thumb" href="{% url 'product' item.product.id %}">
+                                            {% with image=item.product.images.first %}
+                                                {% if image %}
+                                                    <img src="{{ image.image.url }}" alt="{{ item.product.name }}">
+                                                {% endif %}
+                                            {% endwith %}
+                                        </a>
+                                        <h4 class="cart__content--title">
+                                            <a href="{% url 'product' item.product.id %}">{{ item.product.name }}</a>
+                                        </h4>
+                                    </div>
+                                    <div class="cart-items__price">
+                                        <span class="cart__price">{{ item.price }}₴</span>
+                                        {% if item.product.is_discounted and item.product.discount_price %}
+                                            <span class="cart__price--old text-decoration-line-through">{{ item.product.price }}₴</span>
+                                        {% endif %}
+                                    </div>
+                                    <form method="post" class="cart-items__qty"
+                                          action="{% url 'cart_update' item.product.id %}">
+                                        {% csrf_token %}
+                                        <input type="number" name="quantity" value="{{ item.quantity }}"
+                                               min="1" class="product--amount__input">
+                                        <button type="submit" class="checkout--edit--btn primary__btn">
+                                            {% translate "Обновить" %}
+                                        </button>
+                                    </form>
+                                    <div class="cart-items__total">
+                                        <span class="cart__price">{{ item.total_price }}₴</span>
+                                    </div>
+                                </div>
+                            {% endfor %}
                         </div>
                         <div class="continue__shopping d-flex justify-content-between align-items-center">
                             <a href="{% url 'catalogue' %}" class="continue__shopping--link">{% translate "← Продолжить покупки" %}</a>

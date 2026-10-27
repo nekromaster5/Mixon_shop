@@ -12120,3 +12120,58 @@ body.registration-modal-open { overflow: hidden; }
     color: #18943B;
     font-weight: 500;
 }
+
+/* Страница товара на телефоне: галерея в колонку, без фиксированной высоты и сдвигов */
+@media (max-width: 767px) {
+    .left_block,
+    .left_flex_display {
+        height: auto !important;
+    }
+
+    .left_flex_display {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding-top: 4rem;
+    }
+
+    .left_flex_display .product_left_path {
+        margin: 0 !important;
+        width: 100%;
+        height: auto !important;
+        text-align: center;
+    }
+
+    .left_flex_display .product_left_path img {
+        width: 100%;
+        height: auto;
+        max-height: 320px;
+    }
+
+    .left_flex_display .product_right_path {
+        display: none !important;
+    }
+
+    .left_flex_display .carousel-buttons {
+        display: flex !important;
+        flex-direction: row;
+        gap: 0.8rem;
+        order: 2;
+        width: 100%;
+        justify-content: center;
+        margin: 0 !important;
+        overflow-x: auto;
+    }
+
+    .left_flex_display .carousel-buttons button {
+        flex: none;
+        width: 64px !important;
+        height: 64px !important;
+        margin: 0 !important;
+    }
+
+    .left_flex_display .carousel-buttons button img {
+        width: 100%;
+        height: 100%;
+    }
+}
