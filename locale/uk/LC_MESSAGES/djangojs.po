@@ -21,7 +21,8 @@ msgstr "Цей промокод уже застосовано."
 msgid "Промокод применен! Ваша скидка: %s"
 msgstr "Промокод застосовано! Ваша знижка: %s"
 
-#: Mixon_shop/static/src/assets/js/applyPromo.js:84 Mixon_shop/static/src/assets/js/confirmOrder.js:97
+#: Mixon_shop/static/src/assets/js/applyPromo.js:84
+#: Mixon_shop/static/src/assets/js/confirmOrder.js:97
 #, javascript-format
 msgid "Ошибка: %s"
 msgstr "Помилка: %s"
@@ -34,7 +35,8 @@ msgstr "Згорнути >>"
 msgid "Детально >>"
 msgstr "Детально >>"
 
-#: Mixon_shop/static/src/assets/js/cabinetProductBlocksCollapse.js:20 Mixon_shop/static/src/assets/js/cabinetProductBlocksCollapse.js:23
+#: Mixon_shop/static/src/assets/js/cabinetProductBlocksCollapse.js:20
+#: Mixon_shop/static/src/assets/js/cabinetProductBlocksCollapse.js:23
 msgid "Развернуть"
 msgstr "Розгорнути"
 
@@ -64,7 +66,8 @@ msgstr "Коментарів немає"
 
 #: Mixon_shop/static/src/assets/js/confirmOrder.js:101
 msgid "Произошла ошибка при создании заказа. Пожалуйста, попробуйте снова."
-msgstr "Сталася помилка під час створення замовлення. Будь ласка, спробуйте ще раз."
+msgstr ""
+"Сталася помилка під час створення замовлення. Будь ласка, спробуйте ще раз."
 
 #: Mixon_shop/static/src/assets/js/confirmOrder.js:11
 msgid "Пожалуйста, выберите способ доставки."
@@ -97,3 +100,28 @@ msgstr "Ваше замовлення прийнято"
 #: Mixon_shop/static/src/assets/js/registrationModal.js:63
 msgid "Пароли не совпадают"
 msgstr "Паролі не збігаються"
+
+msgid "Быстрый заказ"
+msgstr "Швидке замовлення"
+
+msgid "Хочу дешевле"
+msgstr "Хочу дешевше"
+
+msgid "Оставьте имя и телефон — менеджер перезвонит и оформит заказ."
+msgstr "Залиште ім’я та телефон — менеджер зателефонує й оформить замовлення."
+
+msgid "Оставьте контакты — мы сообщим, если сможем предложить цену ниже."
+msgstr ""
+"Залиште контакти — ми повідомимо, якщо зможемо запропонувати нижчу ціну."
+
+msgid "Упаковка:"
+msgstr "Упаковка:"
+
+msgid "Цвет:"
+msgstr "Колір:"
+
+msgid "Не удалось отправить заявку."
+msgstr "Не вдалося надіслати заявку."
+
+msgid "Не удалось отправить заявку. Попробуйте ещё раз."
+msgstr "Не вдалося надіслати заявку. Спробуйте ще раз."

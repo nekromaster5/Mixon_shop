@@ -396,6 +396,39 @@ class Product(models.Model):
         return self.name
 
 
+class Characteristic(models.Model):
+    """Характеристика из списка категории (например, «Сухой остаток»).
+    Одна характеристика может входить в списки нескольких категорий."""
+    name = models.CharField(max_length=256, verbose_name='название характеристики')
+    categories = models.ManyToManyField(Category, related_name='characteristics', blank=True,
+                                        verbose_name='категории')
+    order = models.PositiveIntegerField(default=0, verbose_name='порядок вывода')
+
+    class Meta:
+        ordering = ('order', 'name')
+        verbose_name = "Характеристика"
+        verbose_name_plural = "Характеристики"
+
+    def __str__(self):
+        return self.name
+
+
+class ProductCharacteristic(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='characteristic_values',
+                                verbose_name='товар')
+    characteristic = models.ForeignKey(Characteristic, on_delete=models.CASCADE, verbose_name='характеристика')
+    value = models.CharField(max_length=512, blank=True, verbose_name='значение')
+
+    class Meta:
+        unique_together = ('product', 'characteristic')
+        ordering = ('characteristic__order', 'characteristic__name')
+        verbose_name = "Характеристика товара"
+        verbose_name_plural = "Характеристики товара"
+
+    def __str__(self):
+        return f'{self.characteristic}: {self.value}'
+
+
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images', verbose_name='товар')
     image = models.ImageField(upload_to='products/images/', verbose_name='картинка')
@@ -424,6 +457,33 @@ class ProductStock(models.Model):
         return f'{self.product} - {self.branch} - {self.volume} - {self.color} - {self.quantity}'
 
     # Сигнал update_product_stock_status — в signals.py.
+
+
+class ProductRequest(models.Model):
+    """Заявка со страницы товара: «Быстрый заказ» или «Хочу дешевле».
+    Письма с PythonAnywhere не уходят, поэтому заявки смотрят в админке."""
+
+    class Kind(models.TextChoices):
+        QUICK_ORDER = 'quick_order', 'Быстрый заказ'
+        CHEAPER = 'cheaper', 'Хочу дешевле'
+
+    kind = models.CharField(max_length=20, choices=Kind.choices, verbose_name='тип заявки')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='requests', verbose_name='товар')
+    volume = models.ForeignKey(Volume, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='упаковка')
+    color = models.ForeignKey(Color, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='цвет')
+    name = models.CharField(max_length=150, verbose_name='имя')
+    phone = models.CharField(max_length=18, verbose_name='телефон')
+    comment = models.TextField(blank=True, verbose_name='комментарий')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='создана')
+    is_processed = models.BooleanField(default=False, verbose_name='обработана?')
+
+    class Meta:
+        ordering = ('-created_at',)
+        verbose_name = "Заявка с товара"
+        verbose_name_plural = "Заявки с товара"
+
+    def __str__(self):
+        return f'{self.get_kind_display()}: {self.product} — {self.name}, {self.phone}'
 
 
 class SalesLeaders(models.Model):

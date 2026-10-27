@@ -21,7 +21,8 @@ msgstr "Этот промокод уже применен."
 msgid "Промокод применен! Ваша скидка: %s"
 msgstr "Промокод применен! Ваша скидка: %s"
 
-#: Mixon_shop/static/src/assets/js/applyPromo.js:84 Mixon_shop/static/src/assets/js/confirmOrder.js:97
+#: Mixon_shop/static/src/assets/js/applyPromo.js:84
+#: Mixon_shop/static/src/assets/js/confirmOrder.js:97
 #, javascript-format
 msgid "Ошибка: %s"
 msgstr "Ошибка: %s"
@@ -34,7 +35,8 @@ msgstr "Свернуть >>"
 msgid "Детально >>"
 msgstr "Детально >>"
 
-#: Mixon_shop/static/src/assets/js/cabinetProductBlocksCollapse.js:20 Mixon_shop/static/src/assets/js/cabinetProductBlocksCollapse.js:23
+#: Mixon_shop/static/src/assets/js/cabinetProductBlocksCollapse.js:20
+#: Mixon_shop/static/src/assets/js/cabinetProductBlocksCollapse.js:23
 msgid "Развернуть"
 msgstr "Развернуть"
 
@@ -97,3 +99,27 @@ msgstr "Ваш заказ принят"
 #: Mixon_shop/static/src/assets/js/registrationModal.js:63
 msgid "Пароли не совпадают"
 msgstr "Пароли не совпадают"
+
+msgid "Быстрый заказ"
+msgstr "Быстрый заказ"
+
+msgid "Хочу дешевле"
+msgstr "Хочу дешевле"
+
+msgid "Оставьте имя и телефон — менеджер перезвонит и оформит заказ."
+msgstr "Оставьте имя и телефон — менеджер перезвонит и оформит заказ."
+
+msgid "Оставьте контакты — мы сообщим, если сможем предложить цену ниже."
+msgstr "Оставьте контакты — мы сообщим, если сможем предложить цену ниже."
+
+msgid "Упаковка:"
+msgstr "Упаковка:"
+
+msgid "Цвет:"
+msgstr "Цвет:"
+
+msgid "Не удалось отправить заявку."
+msgstr "Не удалось отправить заявку."
+
+msgid "Не удалось отправить заявку. Попробуйте ещё раз."
+msgstr "Не удалось отправить заявку. Попробуйте ещё раз."

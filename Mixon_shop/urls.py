@@ -26,7 +26,7 @@ from Mixon_shop.views import HomePage, CataloguePage, ProductPage, Brands, NewsP
     AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts, \
     SearchPage, submit_review, get_branches, activate, branch_list, create_order, \
     apply_promo_code, Topic, register_view, login_view, logout_view, profile_update, change_password_view, \
-    cart_add, cart_remove, cart_update, cart_detail, cart_clear, get_branch_details, manage_favorites
+    cart_add, cart_remove, product_request, cart_update, cart_detail, cart_clear, get_branch_details, manage_favorites
 
 urlpatterns = [
     path('admin_tools/', include('admin_tools.urls')),
@@ -37,6 +37,7 @@ urlpatterns = [
     # продукты
     path('product/<int:product_id>/', ProductPage.as_view(), name='product'),
     path('product/<int:product_id>/submit_review/', submit_review, name='submit_review'),
+    path('product/<int:product_id>/request/', product_request, name='product_request'),
     path('manage-favorites/<int:product_id>', manage_favorites, name='manage_favorites'),
 
     # главная и каталоги
