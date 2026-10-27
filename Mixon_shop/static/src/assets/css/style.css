@@ -361,7 +361,7 @@ p,
 .p {
     margin-top: 0;
     margin-bottom: 1rem;
-    font-family: var(--inter-fonts);
+    font-family: var(--montserrat-fonts);
 }
 
 @media only screen and (min-width: 1200px) {
@@ -3745,7 +3745,7 @@ Header
 .header__info--link {
     font-size: 1.2rem;
     font-weight: 500;
-    font-family: var(--inter-fonts);
+    font-family: var(--montserrat-fonts);
     line-height: 1.8rem;
 }
 
@@ -3805,7 +3805,7 @@ Header
 .header__link--menu__text {
     font-size: 1.3rem;
     font-weight: 500;
-    font-family: var(--inter-fonts);
+    font-family: var(--montserrat-fonts);
 }
 
 .header__link--menu__text svg {
@@ -4213,7 +4213,7 @@ Header
 
 .minicart__btn--text {
     padding-left: 2rem;
-    font-family: var(--rubik-fonts);
+    font-family: var(--montserrat-fonts);
     font-size: 1.5rem;
     line-height: 1.6rem;
 }
@@ -5696,7 +5696,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .copyright__content {
     font-size: 1.6rem;
-    font-family: var(--rubik-fonts);
+    font-family: var(--montserrat-fonts);
     color: var(--text-white-color);
 }
 
@@ -5809,7 +5809,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .tab__btn--link {
     font-weight: 600;
-    font-family: var(--inter-fonts);
+    font-family: var(--montserrat-fonts);
     font-size: 1.3rem;
     text-transform: uppercase;
     color: var(--foreground-sub-color);
@@ -6354,7 +6354,7 @@ input[type=number]::-webkit-outer-spin-button {
     line-height: 4rem;
     background: var(--secondary-color);
     color: var(--text-white-color);
-    font-family: var(--inter-fonts);
+    font-family: var(--montserrat-fonts);
     position: absolute;
     top: 12px;
     right: 12px;
@@ -10065,7 +10065,7 @@ details > summary::-webkit-details-marker {
     color: var(--foreground-sub-color);
     font-size: 1.4rem;
     line-height: 2rem;
-    font-family: var(--inter-fonts);
+    font-family: var(--montserrat-fonts);
 }
 
 .shipping__info {
