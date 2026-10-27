@@ -257,3 +257,237 @@
         grid-template-columns: 130px minmax(0, 1fr);
     }
 }
+
+/* ---------- Шапка (макет 1440: верхняя полоса 82px, нижняя 63px) ---------- */
+@media (min-width: 1200px) {
+    .main__header {
+        height: 82px;
+        padding: 0;
+        background: #fff;
+    }
+
+    .main__header .main__header--inner {
+        height: 82px;
+        justify-content: flex-start !important;
+        gap: 0;
+    }
+
+    .main__header .main__logo,
+    .main__header .main__logo--link {
+        width: 101px;
+        height: 41px;
+    }
+
+    .main__header .main__logo--img {
+        width: 101px;
+        height: 41px;
+    }
+
+    .main__header .panel-container {
+        margin: 0;
+        justify-content: flex-start;
+        align-items: center;
+        flex: 1;
+    }
+
+    /* верхнее меню: x=263, поля 15px, зазор 15px, Montserrat Medium 14px */
+    .main__header .header__menu-panel {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        width: 500px;
+        margin-left: 27px;
+        padding: 5px 15px;
+        flex-shrink: 0;
+    }
+
+    .main__header .menu-panel__button,
+    .main__header .menu-panel__button_first {
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        letter-spacing: -0.42px;
+    }
+
+    .main__header .menu-panel__button_text,
+    .main__header .first_menu-panel__button_text {
+        font-size: 14px;
+        line-height: normal;
+        letter-spacing: -0.42px;
+    }
+
+    .main__header .menu-panel__button_text {
+        color: #787878;
+    }
+
+    /* город: x=763, 150px, Montserrat Medium 16px #5a5a5a */
+    .main__header #myPanel {
+        width: 150px;
+        height: 20.5px;
+        flex-shrink: 0;
+        gap: 5px;
+        margin-right: 27px;
+    }
+
+    .main__header #myPanel > img {
+        width: 16.2px;
+        height: 18.5px;
+    }
+
+    .main__header .panel_label_text {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: -0.48px;
+        color: #5a5a5a;
+        white-space: nowrap;
+    }
+
+    /* телефон: x=940, 175px, 15px #5a5a5a */
+    .main__header .panel-right {
+        width: 175px;
+        margin: 0;
+        justify-content: space-between;
+        flex-shrink: 0;
+        overflow: visible;
+    }
+
+    .main__header .panel-right::after {
+        content: "";
+        width: 12px;
+        height: 12px;
+        flex-shrink: 0;
+        background: url("../img/icon/phone-chevron.svg") center / contain no-repeat;
+    }
+
+    .main__header .panel-right img {
+        width: 16.5px;
+        height: 16.5px;
+        margin: 0;
+    }
+
+    .main__header .panel-right .label {
+        margin: 0;
+        width: auto;
+        font-size: 15px;
+        font-weight: 500;
+        color: #5a5a5a;
+        white-space: nowrap;
+    }
+
+    /* мессенджеры: x=1129, отступ 5px, зазор 11px */
+    .main__header .logo-messengers {
+        width: auto;
+        height: auto;
+        margin: 0 0 0 14px;
+        padding: 5px;
+        gap: 11px;
+        flex-shrink: 0;
+        overflow: visible;
+    }
+
+    .main__header .logo-messengers img {
+        margin: 0;
+    }
+
+    /* язык: x=1234, зазор 12px; Рус слева, Укр справа, активный красный */
+    .main__header .language_panel {
+        flex-direction: row-reverse;
+        gap: 12px;
+        margin-left: 16px;
+        padding-left: 0 !important;
+    }
+
+    .main__header .language_panel button {
+        padding: 0 !important;
+        font-size: 15px;
+        font-weight: 500;
+        color: #b4b4b4;
+    }
+
+    /* нижняя полоса */
+    .header__bottom {
+        height: 63px;
+        background: #383433;
+    }
+
+    .header__bottom .categories__menu {
+        width: 292px;
+        flex-shrink: 0;
+    }
+
+    .header__bottom .categories__menu--header {
+        width: 292px;
+        height: 63px;
+        padding: 20px;
+        gap: 15px;
+    }
+
+    .header__bottom .categories__menu_img {
+        width: 22.7px;
+        height: 23px;
+    }
+
+    .header__bottom .categories__menu_text {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: -0.16px;
+        white-space: nowrap;
+    }
+
+    /* поиск: x=444, 540x40, кнопка 100px */
+    .header__bottom .header__search--widget {
+        margin-left: 17px !important;
+        width: 540px;
+        flex-shrink: 0;
+    }
+
+    .header__bottom .header__search--form {
+        border: 0;
+    }
+
+    .header__bottom .header__search--box {
+        width: 540px;
+        height: 40px;
+        background: #fff;
+        border: 0;
+    }
+
+    .header__bottom .header__search--input {
+        width: 440px;
+        height: 40px !important;
+        padding-left: 40px !important;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: -0.48px;
+    }
+
+    .header__bottom .header__search--input::placeholder {
+        color: #787878;
+    }
+
+    .header__bottom .header__search--button {
+        width: 100px;
+        height: 40px !important;
+        margin-top: 0 !important;
+        padding: 0;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: -0.48px;
+        background: #fe0000 !important;
+    }
+
+    .header__bottom .lupa {
+        margin-top: 12px;
+        margin-left: 12px;
+    }
+
+    /* иконки: первая x≈1056, зазор 35px */
+    .header__bottom .frame3-panel {
+        margin-left: 72px !important;
+        display: flex;
+        align-items: center;
+        gap: 0;
+    }
+}
