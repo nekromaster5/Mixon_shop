@@ -9,6 +9,8 @@ from Mixon_shop.models import Product
 class SessionCart:
     """Единая реализация корзины на сессии — используется и гостями, и авторизованными
     пользователями. Формат в сессии: {'<product_id>': {'quantity': int, 'price': '123.45'}}.
+    Цена в сессии — на момент добавления; при показе и в сумме берётся актуальная цена товара
+    (с учётом скидки), поэтому изменение цены или скидки в админке сразу попадает в корзину.
     """
 
     def __init__(self, request):
@@ -21,7 +23,7 @@ class SessionCart:
     def add(self, product, quantity=1, update_quantity=False):
         product_id = str(product.id)
         if product_id not in self.cart:
-            self.cart[product_id] = {'quantity': 0, 'price': str(product.price)}
+            self.cart[product_id] = {'quantity': 0, 'price': str(product.current_price)}
         if update_quantity:
             self.cart[product_id]['quantity'] = quantity
         else:
@@ -53,7 +55,8 @@ class SessionCart:
                 continue
             item = dict(item)
             item['product'] = product
-            item['total_price'] = Decimal(item['price']) * item['quantity']
+            item['price'] = product.current_price
+            item['total_price'] = product.current_price * item['quantity']
             yield item
 
     def __len__(self):
@@ -63,7 +66,7 @@ class SessionCart:
         return sum(item['quantity'] for item in self.cart.values())
 
     def get_total_price(self):
-        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+        return sum((item['total_price'] for item in self), Decimal('0'))
 
     def clear(self):
         if settings.CART_SESSION_ID in self.session:

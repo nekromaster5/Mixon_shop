@@ -89,7 +89,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="product--price">
-                                                    {% if item.product.discount_price %}
+                                                    {% if item.product.is_discounted and item.product.discount_price %}
                                                         <span class="cart__price">{{ item.product.discount_price }}₴</span>
                                                         <span class="cart__price--old text-decoration-line-through">{{ item.product.price }}₴</span>
                                                     {% else %}
