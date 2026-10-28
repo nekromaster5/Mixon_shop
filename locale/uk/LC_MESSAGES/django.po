@@ -232,7 +232,7 @@ msgid ""
 "абразивных материалов SMIRDEX, ЛКМ для обработки древесины GENC, бумаги для "
 "малярок PRODYVER и т.д."
 msgstr ""
-"абразивних матеріалів SMIRDEX, ЛФМ для обробки деревини GENC, паперу для "
+"абразивних матеріалів SMIRDEX, ЛКМ для обробки деревини GENC, паперу для "
 "малярних робіт PRODYVER тощо."
 
 #: templates/about_company.html:165
@@ -316,19 +316,19 @@ msgstr "Товарні напрями"
 
 #: templates/about_company.html:258
 msgid "ЛКМ для покраски автомобиля"
-msgstr "ЛФМ для фарбування автомобіля"
+msgstr "ЛКМ для фарбування автомобіля"
 
 #: templates/about_company.html:263
 msgid "ЛКМ для строительства и ремонта"
-msgstr "ЛФМ для будівництва та ремонту"
+msgstr "ЛКМ для будівництва та ремонту"
 
 #: templates/about_company.html:268
 msgid "ЛКМ для побработки древесины"
-msgstr "ЛФМ для обробки деревини"
+msgstr "ЛКМ для обробки деревини"
 
 #: templates/about_company.html:273
 msgid "ЛКМ для промышленности, ремонта дорог и т.п."
-msgstr "ЛФМ для промисловості, ремонту доріг тощо"
+msgstr "ЛКМ для промисловості, ремонту доріг тощо"
 
 #: templates/about_company.html:278
 msgid "Автохимия, автокосметика и оборудование для моек"
@@ -952,19 +952,19 @@ msgstr "Оплата і доставка"
 #: templates/partials/footer.html:169 templates/product.html:20
 #: templates/search.html:7
 msgid "ЛКМ для Строительства"
-msgstr "ЛФМ для будівництва"
+msgstr "ЛКМ для будівництва"
 
 #: templates/partials/footer.html:171
 msgid "ЛКМ для Авторемонта"
-msgstr "ЛФМ для авторемонту"
+msgstr "ЛКМ для авторемонту"
 
 #: templates/partials/footer.html:173
 msgid "ЛКМ для Деревообработки"
-msgstr "ЛФМ для деревообробки"
+msgstr "ЛКМ для деревообробки"
 
 #: templates/partials/footer.html:175
 msgid "ЛКМ для Промышленности"
-msgstr "ЛФМ для промисловості"
+msgstr "ЛКМ для промисловості"
 
 #: templates/partials/footer.html:177
 msgid "Автохимия, автокосметика, оборудование для автомоек"

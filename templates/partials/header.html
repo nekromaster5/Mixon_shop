@@ -174,7 +174,7 @@ margin-left:400px;
     }
 
     .catalog-menu .item:hover p,
-    .catalog-menu__category.is-active p {
+    .catalog-menu__section.is-active p {
         color: red;
     }
 
@@ -182,8 +182,7 @@ margin-left:400px;
         flex: 0 0 270px;
     }
 
-    .catalog-menu__category img,
-    .catalog-menu__icon-placeholder {
+    .catalog-menu__section img {
         flex-shrink: 0;
         width: 24px;
         height: 24px;
@@ -198,6 +197,7 @@ margin-left:400px;
         columns: 2 230px;
         column-gap: 40px;
         column-fill: auto;
+        overflow-x: auto;
     }
 
     .catalog-menu__types.is-active {
@@ -479,32 +479,31 @@ margin-left:400px;
             <div id="menu" class="menu">
                 <div class="catalog-menu">
                     <div class="main_high_button catalog-menu__categories">
-                        <a class="item catalog-menu__category" style="padding-top:10px;"
+                        <a class="item catalog-menu__section" style="padding-top:10px;"
                            href="{% url 'catalogue' filters='discounted-goods' %}">
                             <img src="{% static '/src/assets/img/icon/akciya 1.svg' %}" alt="">
-                            <p style="color:red;font-weight: 500;">Акции</p>
+                            <p style="color:red;font-weight: 500;">{% translate "Акции" %}</p>
                         </a>
-                        {% for category in catalog_menu_categories %}
-                            <a class="item catalog-menu__category" data-category-id="{{ category.id }}"
-                               href="{% url 'catalogue' %}?product_category_id={{ category.id }}">
-                                {% if category.fallback_icon %}
-                                    <img src="{% static category.fallback_icon %}" alt="">
-                                {% elif category.image %}
-                                    <img src="{{ category.image.url }}" alt="">
-                                {% else %}
-                                    <span class="catalog-menu__icon-placeholder"></span>
-                                {% endif %}
-                                <p style="font-weight: 500;">{{ category.name }}</p>
-                            </a>
+                        {% for section in catalog_menu_sections %}
+                            <div class="item catalog-menu__section" data-section="{{ section.key }}">
+                                <img src="{% static section.icon %}" alt="">
+                                <p style="font-weight: 500;">{{ section.label }}</p>
+                            </div>
                         {% endfor %}
                     </div>
-                    {% for category in catalog_menu_categories %}
-                        <div class="catalog-menu__types" data-category-id="{{ category.id }}">
-                            {% for product_type in category.product_types.all %}
-                                <a class="item catalog-menu__type"
-                                   href="{% url 'catalogue' %}?product_category_id={{ category.id }}&amp;type={{ product_type.id }}">
-                                    <p style="font-weight: 500;">{{ product_type.name }}</p>
+                    {% for section in catalog_menu_sections %}
+                        <div class="catalog-menu__types" data-section="{{ section.key }}">
+                            {% for category in section.categories %}
+                                <a class="item catalog-menu__group"
+                                   href="{% url 'catalogue' %}?product_category_id={{ category.id }}">
+                                    <p style="font-weight: 600;">{{ category.name }}</p>
                                 </a>
+                                {% for product_type in category.product_types.all %}
+                                    <a class="item catalog-menu__type"
+                                       href="{% url 'catalogue' %}?product_category_id={{ category.id }}&amp;type={{ product_type.id }}">
+                                        <p style="font-weight: 400;">{{ product_type.name }}</p>
+                                    </a>
+                                {% endfor %}
                             {% endfor %}
                         </div>
                     {% endfor %}
@@ -618,22 +617,22 @@ margin-left:400px;
         const overlay = document.getElementById('overlay');
         const menu = document.getElementById('menu');
 
-        // Наведение на категорию показывает её типы товаров
-        const categoryItems = menu.querySelectorAll('.catalog-menu__category');
+        // Наведение на раздел слева показывает его категории и типы товаров
+        const sectionItems = menu.querySelectorAll('.catalog-menu__section[data-section]');
         const typePanels = menu.querySelectorAll('.catalog-menu__types');
-        const showCategory = (categoryId) => {
-            categoryItems.forEach((item) => {
-                item.classList.toggle('is-active', item.dataset.categoryId === categoryId);
+        const showSection = (key) => {
+            sectionItems.forEach((item) => {
+                item.classList.toggle('is-active', item.dataset.section === key);
             });
             typePanels.forEach((panel) => {
-                panel.classList.toggle('is-active', panel.dataset.categoryId === categoryId);
+                panel.classList.toggle('is-active', panel.dataset.section === key);
             });
         };
-        categoryItems.forEach((item) => {
-            item.addEventListener('mouseenter', () => showCategory(item.dataset.categoryId));
+        sectionItems.forEach((item) => {
+            item.addEventListener('mouseenter', () => showSection(item.dataset.section));
         });
-        if (typePanels.length) {
-            showCategory(typePanels[0].dataset.categoryId);
+        if (sectionItems.length) {
+            showSection(sectionItems[0].dataset.section);
         }
 
         openMenuButton.addEventListener('click', () => {

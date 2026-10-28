@@ -172,10 +172,15 @@ class ProductAdmin(HelpTextMixin, TranslationAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(HelpTextMixin, TranslationAdmin):
-    list_display = ('logo', 'name', 'products_count')
+    list_display = ('logo', 'name', 'menu_section', 'products_count')
     list_display_links = ('logo', 'name')
+    list_filter = ('menu_section',)
     search_fields = ('name_uk', 'name_ru')
-    HELP_TEXTS = {'image': 'Картинка для меню каталога и главной страницы.'}
+    HELP_TEXTS = {
+        'image': 'Картинка для главной страницы.',
+        'menu_section': 'В каком пункте меню «Каталог товаров» показывается эта категория. '
+                        'Пункты меню и их иконки фиксированные.',
+    }
 
     @admin.display(description='логотип')
     def logo(self, obj):

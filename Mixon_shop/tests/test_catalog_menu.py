@@ -1,25 +1,34 @@
 import pytest
 
-from Mixon_shop.models import Category, ProductType
+from Mixon_shop.models import MENU_SECTIONS, Category, ProductType
 
 
 @pytest.mark.django_db
-def test_catalog_menu_shows_categories_and_their_types(client):
-    building = Category.objects.create(name="ЛКМ для Строительства")
-    auto = Category.objects.create(name="ЛКМ для Авторемонта")
-    facade = ProductType.objects.create(name="Фасадные краски и грунты")
-    facade.categories.add(building)
+def test_menu_sections_and_icons_are_fixed(client):
+    text = client.get("/catalogue/").content.decode()
+    for key, _label in MENU_SECTIONS:
+        assert f'data-section="{key}"' in text
+    assert "lkm-stroitelstvo" in text and "instrument" in text
+
+
+@pytest.mark.django_db
+def test_menu_shows_categories_and_types_of_their_section(client):
+    wall = Category.objects.create(name="Краски для стен", menu_section="building")
+    spray = Category.objects.create(name="Аэрозоли", menu_section="auto")
+    facade = ProductType.objects.create(name="Фасадные краски")
+    facade.categories.add(wall)
     enamel = ProductType.objects.create(name="Аэрозольные эмали")
-    enamel.categories.add(building, auto)
+    enamel.categories.add(spray)
 
-    response = client.get("/catalogue/")
-    assert response.status_code == 200
-    text = response.content.decode()
+    text = client.get("/catalogue/").content.decode()
+    building = text.split('class="catalog-menu__types" data-section="building"')[1].split("catalog-menu__types")[0]
+    assert "Краски для стен" in building
+    assert f"?product_category_id={wall.id}&amp;type={facade.id}" in building
+    assert "Аэрозоли" not in building
+    assert f"?product_category_id={spray.id}&amp;type={enamel.id}" in text
 
-    assert f'data-category-id="{building.id}"' in text
-    assert f"?product_category_id={building.id}&amp;type={facade.id}" in text
-    assert f"?product_category_id={auto.id}&amp;type={enamel.id}" in text
-    # Тип показан только в своей категории.
-    assert f"?product_category_id={auto.id}&amp;type={facade.id}" not in text
-    # Для категории без логотипа берётся иконка из static по названию.
-    assert "lkm-stroitelstvo%201.svg" in text or "lkm-stroitelstvo 1.svg" in text
+
+@pytest.mark.django_db
+def test_category_without_section_is_not_in_menu(client):
+    Category.objects.create(name="Без раздела")
+    assert "Без раздела" not in client.get("/catalogue/").content.decode()
