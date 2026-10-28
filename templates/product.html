@@ -190,6 +190,7 @@
                             {% endif %}
                         </div>
                         <div class="pd-wish-wrap">
+                            {% include 'partials/compare_button.html' with product_id=product.id extra_class='no_scale box_shadow-3_1 pd-wish' %}
                             <a href="{% url 'manage_favorites' product_id=product.id %}" data-product-id="{{ product.id }}"
                                    class="product__card--action__btn wishlist favourite--button no_scale box_shadow-3_1 pd-wish"
                                    title="Wishlist">
@@ -541,6 +542,7 @@
                                     <span>  {% translate "Хочу дешевле" %}</span>
                                     <span class="visually-hidden">Want Cheaper</span>
                                 </a>
+                                {% include 'partials/compare_button.html' with product_id=product.id extra_class='favourite--button no_scale box_shadow-3_1 small__button p-6' %}
                                 <a href="{% url 'manage_favorites' product_id=product.id %}" data-product-id="{{ product.id }}"
                                    class="product__card--action__btn wishlist favourite--button no_scale box_shadow-3_1 small__button p-6"
                                    title="Wishlist">
@@ -835,6 +837,7 @@
                                 <span>  {% translate "Хочу дешевле" %}</span>
                                 <span class="visually-hidden">Want Cheaper</span>
                             </a>
+                            {% include 'partials/compare_button.html' with product_id=product.id extra_class='favourite--button no_scale box_shadow-3_1 small__button p-6' %}
                             <a href="{% url 'manage_favorites' product_id=product.id %}" data-product-id="{{ product.id }}"
                                    class="product__card--action__btn wishlist favourite--button no_scale box_shadow-3_1 small__button p-6"
                                title="Wishlist">
@@ -1052,6 +1055,7 @@
                                 <span>  {% translate "Хочу дешевле" %}</span>
                                 <span class="visually-hidden">Want Cheaper</span>
                             </a>
+                            {% include 'partials/compare_button.html' with product_id=product.id extra_class='favourite--button no_scale box_shadow-3_1 small__button p-6' %}
                             <a href="{% url 'manage_favorites' product_id=product.id %}" data-product-id="{{ product.id }}"
                                    class="product__card--action__btn wishlist favourite--button no_scale box_shadow-3_1 small__button p-6"
                                title="Wishlist">
