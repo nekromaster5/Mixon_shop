@@ -2,1617 +2,1093 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Mixon Shop\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 19:46+0000\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-#: Mixon_shop/forms.py:25
-msgid "Этот email уже зарегистрирован."
-msgstr "Цей email уже зареєстровано."
+msgid "Телефон"
+msgstr "Телефон"
 
-#: Mixon_shop/forms.py:58
+msgid "Компания"
+msgstr "Компанія"
+
+msgid "Регистрационный номер"
+msgstr "Реєстраційний номер"
+
+msgid "Город"
+msgstr "Місто"
+
 msgid "Почтовый индекс"
 msgstr "Поштовий індекс"
 
-#: Mixon_shop/forms.py:68
+msgid "Область"
+msgstr "Область"
+
+msgid "Этот email уже зарегистрирован."
+msgstr "Цей email уже зареєстровано."
+
+msgid "Имя пользователя"
+msgstr "Ім’я користувача"
+
+msgid "Пароль"
+msgstr "Пароль"
+
+msgid "Имя"
+msgstr "Ім’я"
+
+msgid "Фамилия"
+msgstr "Прізвище"
+
 msgid "Этот email уже используется другим аккаунтом."
 msgstr "Цей email уже використовується іншим акаунтом."
 
-#: Mixon_shop/views.py:1005
-msgid "Вы вышли из аккаунта"
-msgstr "Ви вийшли з акаунта"
+msgid "Раскладка расписания, например \"Стандартное расписание Одесса\""
+msgstr "Розкладка розкладу, наприклад \"Стандартний розклад Одеса\""
 
-#: Mixon_shop/views.py:1030
-msgid ""
-"Регистрация почти завершена — мы отправили письмо со ссылкой для "
-"подтверждения на указанный email."
-msgstr ""
-"Реєстрацію майже завершено — ми надіслали лист із посиланням для "
-"підтвердження на вказаний email."
+msgid "Monday"
+msgstr "Понеділок"
 
-#: Mixon_shop/views.py:1070
-msgid "Данные профиля обновлены."
-msgstr "Дані профілю оновлено."
+msgid "Tuesday"
+msgstr "Вівторок"
 
-#: Mixon_shop/views.py:1086
-msgid "Пароль изменён."
-msgstr "Пароль змінено."
+msgid "Wednesday"
+msgstr "Середа"
 
-#: Mixon_shop/views.py:1171
-msgid "Пожалуйста, поставьте оценку от 1 до 5 звёзд."
-msgstr "Будь ласка, поставте оцінку від 1 до 5 зірок."
+msgid "Thursday"
+msgstr "Четвер"
 
-#: Mixon_shop/views.py:1189
-msgid ""
-"Пожалуйста, укажите ваше имя, чтобы оставить отзыв без входа в аккаунт."
-msgstr ""
-"Будь ласка, вкажіть ваше ім’я, щоб залишити відгук без входу в акаунт."
+msgid "Friday"
+msgstr "Пʼятниця"
 
-#: Mixon_shop/views.py:1202
-msgid "Спасибо, ваш отзыв опубликован!"
-msgstr "Дякуємо, ваш відгук опубліковано!"
+msgid "Saturday"
+msgstr "Субота"
 
-#: Mixon_shop/views.py:619
+msgid "Sunday"
+msgstr "Неділя"
+
+msgid "Раскладка расписания"
+msgstr "Розкладка розкладу"
+
+msgid "Раскладки расписаний"
+msgstr "Розкладки розкладів"
+
+msgid "Расписание филиала"
+msgstr "Розклад філії"
+
+msgid "Расписание филиалов"
+msgstr "Розклад філій"
+
+msgid "Исключение в расписании филиала"
+msgstr "Виняток у розкладі філії"
+
+msgid "Исключения в расписании филиалов"
+msgstr "Винятки у розкладі філій"
+
+msgid "Аноним"
+msgstr "Анонім"
+
+msgid "error`s short name"
+msgstr "Коротка назва помилки"
+
+msgid "error`s full text"
+msgstr "Повний текст помилки"
+
+msgid "message`s short name"
+msgstr "Коротка назва повідомлення"
+
+msgid "message`s full text"
+msgstr "Повний текст повідомлення"
+
+msgid "Упаковка"
+msgstr "Фасування"
+
+msgid "Цвет"
+msgstr "Колір"
+
 msgid "понедельник"
 msgstr "понеділок"
 
-#: Mixon_shop/views.py:620
 msgid "вторник"
 msgstr "вівторок"
 
-#: Mixon_shop/views.py:621
 msgid "среду"
 msgstr "середу"
 
-#: Mixon_shop/views.py:622
 msgid "четверг"
 msgstr "четвер"
 
-#: Mixon_shop/views.py:623
 msgid "пятницу"
 msgstr "п’ятницю"
 
-#: Mixon_shop/views.py:624
 msgid "субботу"
 msgstr "суботу"
 
-#: Mixon_shop/views.py:625
 msgid "воскресенье"
 msgstr "неділю"
 
-#: Mixon_shop/views.py:675 Mixon_shop/views.py:654
+msgid "Забрать сегодня"
+msgstr "Забрати сьогодні"
+
 msgid "Забрать завтра"
 msgstr "Забрати завтра"
 
-#: Mixon_shop/views.py:677 Mixon_shop/views.py:656
 #, python-format
 msgid "Забрать в %(day)s"
 msgstr "Забрати у %(day)s"
 
-#: Mixon_shop/views.py:680 Mixon_shop/views.py:659
 msgid "Филиал не работает"
 msgstr "Філія не працює"
 
-#: Mixon_shop/views.py:712
 msgid "ПН"
 msgstr "ПН"
 
-#: Mixon_shop/views.py:712
 msgid "ВТ"
 msgstr "ВТ"
 
-#: Mixon_shop/views.py:712
 msgid "СР"
 msgstr "СР"
 
-#: Mixon_shop/views.py:712
 msgid "ЧТ"
 msgstr "ЧТ"
 
-#: Mixon_shop/views.py:712
 msgid "ПТ"
 msgstr "ПТ"
 
-#: Mixon_shop/views.py:712
 msgid "СБ"
 msgstr "СБ"
 
-#: Mixon_shop/views.py:712
 msgid "ВС"
 msgstr "НД"
 
-#: Mixon_shop/views.py:733
 msgid "Закрыто"
 msgstr "Зачинено"
 
-#: Mixon_shop/views.py:761
 msgid "Введите промокод."
 msgstr "Введіть промокод."
 
-#: Mixon_shop/views.py:765
 msgid "Этот промокод уже применен."
 msgstr "Цей промокод уже застосовано."
 
-#: Mixon_shop/views.py:771
 msgid "Срок действия промокода истек."
 msgstr "Термін дії промокоду минув."
 
-#: Mixon_shop/views.py:775
 msgid "Этот промокод уже использован максимальное количество раз."
 msgstr "Цей промокод уже використано максимальну кількість разів."
 
-#: Mixon_shop/views.py:794
 msgid "Неверный промокод."
 msgstr "Невірний промокод."
 
-#: Mixon_shop/views.py:796 Mixon_shop/views.py:910
 msgid "Неверный метод запроса."
 msgstr "Невірний метод запиту."
 
-#: Mixon_shop/views.py:807
-#, python-format
-msgid "Поле '%(field)s' обязательно для заполнения."
-msgstr "Поле '%(field)s' обов’язкове для заповнення."
-
-#: Mixon_shop/views.py:814
-msgid "Необходимо указать хотя бы телефон или email для связи."
-msgstr "Потрібно вказати хоча б телефон або email для зв’язку."
-
-#: Mixon_shop/views.py:838
-msgid "Не выбрано ни одного товара."
-msgstr "Не вибрано жодного товару."
-
-#: Mixon_shop/views.py:899
-msgid "Заказ успешно создан!"
-msgstr "Замовлення успішно створено!"
-
-#: Mixon_shop/views.py:906
-msgid "Не удалось оформить заказ. Попробуйте ещё раз."
-msgstr "Не вдалося оформити замовлення. Спробуйте ще раз."
-
-#: Mixon_shop/views.py:978
-msgid "Подтверждение регистрации — Mixon Shop"
-msgstr "Підтвердження реєстрації — Mixon Shop"
-
-#: Mixon_shop/views.py:993
-msgid "Вы успешно вошли!"
-msgstr "Ви успішно увійшли!"
-
-#: templates/about_company.html:101
-msgid "Еще новости"
-msgstr "Ще новини"
-
-#: templates/about_company.html:121
-msgid "О компании MikC"
-msgstr "Про компанію MikC"
-
-#: templates/about_company.html:134 templates/about_company.html:158
-#: templates/about_company.html:181
-msgid "MikC - это"
-msgstr "MikC - це"
-
-#: templates/about_company.html:135
-msgid "производитель"
-msgstr "виробник"
-
-#: templates/about_company.html:136
-msgid ""
-"лакокрасочной продукции, автохимии и автокосметики под брендами "
-"MIXON,DOMEX,MVL"
-msgstr ""
-"лакофарбової продукції, автохімії та автокосметики під брендами MIXON, "
-"DOMEX, MVL"
-
-#: templates/about_company.html:140 templates/about_company.html:163
-#: templates/about_company.html:185 templates/about_company.html:210
-#: templates/about_company.html:233
-msgid "Благодаря этому мы можем:"
-msgstr "Завдяки цьому ми можемо:"
-
-#: templates/about_company.html:142
-msgid "Создавать лимитированные партии под спец-заказы"
-msgstr "Створювати лімітовані партії під спецзамовлення"
-
-#: templates/about_company.html:143 templates/about_company.html:166
-msgid ""
-"Обеспечить полный ассортимент материалов и инструментов необходмых для "
-"выполнения малярных работ"
-msgstr ""
-"Забезпечити повний асортимент матеріалів та інструментів, необхідних для "
-"виконання малярних робіт"
-
-#: templates/about_company.html:158
-msgid "прямой экспортер"
-msgstr "прямий експортер"
-
-#: templates/about_company.html:159
-msgid ""
-"абразивных материалов SMIRDEX, ЛКМ для обработки древесины GENC, бумаги для "
-"малярок PRODYVER и т.д."
-msgstr ""
-"абразивних матеріалів SMIRDEX, ЛФМ для обробки деревини GENC, паперу для "
-"малярних робіт PRODYVER тощо."
-
-#: templates/about_company.html:165
-msgid "Доукомплектовать"
-msgstr "Доукомплектувати"
-
-#: templates/about_company.html:181
-msgid "cеть магазинов"
-msgstr "мережа магазинів"
-
-#: templates/about_company.html:181
-msgid "по продаже лакокрасочной продукции"
-msgstr "з продажу лакофарбової продукції"
-
-#: templates/about_company.html:187
-msgid ""
-"Принимать оплату разными способами(наличный и безналичный расчет,в том числе"
-" и с НДС, перевод на платежную карту и т.п.)"
-msgstr ""
-"Приймати оплату різними способами (готівковий і безготівковий розрахунок, "
-"зокрема з ПДВ, переказ на платіжну картку тощо)"
-
-#: templates/about_company.html:189
-msgid "Обслуживать клиентов в различных частях города"
-msgstr "Обслуговувати клієнтів у різних частинах міста"
-
-#: templates/about_company.html:20 templates/activation_result.html:15
-#: templates/brands.html:17 templates/cabinet.html:17
-#: templates/cart/detail.html:15 templates/catalogue.html:21
-#: templates/checkout.html:17 templates/contacts.html:17
-#: templates/error_page.html:21 templates/news.html:17
-#: templates/product.html:17 templates/search.html:17
-#: templates/shipment_and_payment.html:17 templates/topic.html:17
-msgid "Главная"
-msgstr "Головна"
-
-#: templates/about_company.html:205
-msgid "MikC - это структурированная система"
-msgstr "MikC - це структурована система"
-
-#: templates/about_company.html:205
-msgid "оптовых продаж"
-msgstr "оптових продажів"
-
-#: templates/about_company.html:206
-msgid "и скидок"
-msgstr "і знижок"
-
-#: templates/about_company.html:212
-msgid ""
-"Предложить систему скидок в завимости от статуса клиента - професионал, "
-"диллер, дистрибьютор."
-msgstr ""
-"Запропонувати систему знижок залежно від статусу клієнта - професіонал, "
-"дилер, дистриб’ютор."
-
-#: templates/about_company.html:214
-msgid ""
-"Давать скидки в зависимости от объема закупок при условии предоставлении "
-"информации клиента о себе."
-msgstr ""
-"Надавати знижки залежно від обсягу закупівель за умови надання клієнтом "
-"інформації про себе."
-
-#: templates/about_company.html:229
-msgid "MikC - это оптовый склад, свой грузовой транспорт"
-msgstr "MikC - це оптовий склад, власний вантажний транспорт"
-
-#: templates/about_company.html:235
-msgid "Всегда иметь в наличии полный ассортимент продукции"
-msgstr "Завжди мати в наявності повний асортимент продукції"
-
-#: templates/about_company.html:236
-msgid "Организовать доставку товара на объект при сумме закупки от 3 000 грн."
-msgstr ""
-"Організувати доставку товару на об’єкт при сумі закупівлі від 3 000 грн."
-
-#: templates/about_company.html:251 templates/partials/footer.html:166
-msgid "Товарные направления"
-msgstr "Товарні напрями"
-
-#: templates/about_company.html:258
-msgid "ЛКМ для покраски автомобиля"
-msgstr "ЛФМ для фарбування автомобіля"
-
-#: templates/about_company.html:263
-msgid "ЛКМ для строительства и ремонта"
-msgstr "ЛФМ для будівництва та ремонту"
-
-#: templates/about_company.html:268
-msgid "ЛКМ для побработки древесины"
-msgstr "ЛФМ для обробки деревини"
-
-#: templates/about_company.html:273
-msgid "ЛКМ для промышленности, ремонта дорог и т.п."
-msgstr "ЛФМ для промисловості, ремонту доріг тощо"
-
-#: templates/about_company.html:278
-msgid "Автохимия, автокосметика и оборудование для моек"
-msgstr "Автохімія, автокосметика та обладнання для мийок"
-
-#: templates/about_company.html:283
-msgid ""
-"Инструменты, оборудование и расходные материалы для малярных и покрасочных "
-"работ"
-msgstr ""
-"Інструменти, обладнання та витратні матеріали для малярних і фарбувальних "
-"робіт"
-
-#: templates/about_company.html:7 templates/about_company.html:23
-msgid "О компании"
-msgstr "Про компанію"
-
-#: templates/activation_result.html:18
-msgid "Активация"
-msgstr "Активація"
-
-#: templates/activation_result.html:31
-msgid "Email подтверждён, вы вошли в личный кабинет."
-msgstr "Email підтверджено, ви увійшли до особистого кабінету."
-
-#: templates/activation_result.html:32
-msgid "Перейти в кабинет"
-msgstr "Перейти до кабінету"
-
-#: templates/activation_result.html:34
-msgid "Ссылка для подтверждения недействительна или уже была использована."
-msgstr "Посилання для підтвердження недійсне або вже було використане."
-
-#: templates/activation_result.html:35
-msgid "На главную"
-msgstr "На головну"
-
-#: templates/activation_result.html:6 templates/activation_result.html:18
-#: templates/activation_result.html:23
-msgid "Аккаунт подтверждён"
-msgstr "Акаунт підтверджено"
-
-#: templates/activation_result.html:6 templates/activation_result.html:23
-msgid "Ссылка недействительна"
-msgstr "Посилання недійсне"
-
-#: templates/base.html:41
-msgid "Закрыть"
-msgstr "Закрити"
-
-#: templates/brands.html:7 templates/brands.html:20 templates/brands.html:25
-msgid "Бренды"
-msgstr "Бренди"
-
-#: templates/cabinet.html:122
-msgid "История заказов"
-msgstr "Історія замовлень"
-
-#: templates/cabinet.html:145
-msgid "Мои отзывы"
-msgstr "Мої відгуки"
-
-#: templates/cabinet.html:165
-msgid "Мои оценки"
-msgstr "Мої оцінки"
-
-#: templates/cabinet.html:182 templates/checkout.html:166
-msgid "Контактная информация"
-msgstr "Контактна інформація"
-
-#: templates/cabinet.html:209
-msgid "Сравнение 1 универсальные краски"
-msgstr "Порівняння 1 універсальні фарби"
-
-#: templates/cabinet.html:212 templates/cabinet.html:235
-msgid "Добавить в сравнение >>"
-msgstr "Додати до порівняння >>"
-
-#: templates/cabinet.html:225 templates/cabinet.html:248
-msgid "Развернуть"
-msgstr "Розгорнути"
-
-#: templates/cabinet.html:232
-msgid "Сравнение 2 универсальные краски"
-msgstr "Порівняння 2 універсальні фарби"
-
-#: templates/cabinet.html:261
-msgid "Заказ №"
-msgstr "Замовлення №"
-
-#: templates/cabinet.html:262 templates/cabinet.html:265
-msgid "Статус заказа:"
-msgstr "Статус замовлення:"
-
-#: templates/cabinet.html:266 templates/cabinet.html:278
-msgid "Кол-во товаров:"
-msgstr "Кількість товарів:"
-
-#: templates/cabinet.html:267 templates/cabinet.html:279
-#: templates/cabinet.html:326 templates/cabinet.html:350
-#: templates/checkout.html:541
-msgid "Итого:"
-msgstr "Разом:"
-
-#: templates/cabinet.html:293
-msgid "Повторить"
-msgstr "Повторити"
-
-#: templates/cabinet.html:304 templates/checkout.html:492
-msgid "Наименование"
-msgstr "Найменування"
-
-#: templates/cabinet.html:305 templates/checkout.html:493
-#: templates/product.html:61 templates/product.html:398
-msgid "Артикул"
-msgstr "Артикул"
-
-#: templates/cabinet.html:306 templates/cart/detail.html:37
-#: templates/checkout.html:494
-msgid "Количество"
-msgstr "Кількість"
-
-#: templates/cabinet.html:307 templates/cart/detail.html:36
-#: templates/catalogue.html:256 templates/checkout.html:496
-msgid "Цена"
-msgstr "Ціна"
-
-#: templates/cabinet.html:33
-msgid "Меню кабинета"
-msgstr "Меню кабінету"
-
-#: templates/cabinet.html:338 templates/checkout.html:526
-msgid "Доставка:"
-msgstr "Доставка:"
-
-#: templates/cabinet.html:339 templates/checkout.html:527
-msgid "Оплата:"
-msgstr "Оплата:"
-
-#: templates/cabinet.html:345
-msgid "Коментариев нет"
-msgstr "Коментарів немає"
-
-#: templates/cabinet.html:358
-msgid "Развернуть >>"
-msgstr "Розгорнути >>"
-
-#: templates/cabinet.html:363
-msgid "У вас пока нет заказов."
-msgstr "У вас поки немає замовлень."
-
-#: templates/cabinet.html:377 templates/cabinet.html:400
-#: templates/product.html:118
-msgid "Нет фото"
-msgstr "Немає фото"
-
-#: templates/cabinet.html:384 templates/product.html:1249
-msgid "Оставить отзыв"
-msgstr "Залишити відгук"
-
-#: templates/cabinet.html:419 templates/product.html:1158
-msgid "Плюсы:"
-msgstr "Переваги:"
-
-#: templates/cabinet.html:42
-msgid "Ваш кабинет"
-msgstr "Ваш кабінет"
-
-#: templates/cabinet.html:420 templates/product.html:1163
-msgid "Минусы:"
-msgstr "Недоліки:"
-
-#: templates/cabinet.html:449
-msgid "Основные данные:"
-msgstr "Основні дані:"
-
-#: templates/cabinet.html:454 templates/checkout.html:185
-#: templates/partials/header.html:415 templates/product.html:1225
-#: Mixon_shop/forms.py:51
-msgid "Имя"
-msgstr "Ім’я"
-
-#: templates/cabinet.html:462 templates/partials/header.html:416
-#: Mixon_shop/forms.py:52
-msgid "Фамилия"
-msgstr "Прізвище"
-
-#: templates/cabinet.html:465 templates/checkout.html:193
-#: templates/partials/header.html:420
-#: templates/partials/registration_modal.html:40 templates/product.html:1233
-#: Mixon_shop/forms.py:54
-msgid "Телефон"
-msgstr "Телефон"
-
-#: templates/cabinet.html:470
-msgid "Адрес:"
-msgstr "Адреса:"
-
-#: templates/cabinet.html:475 Mixon_shop/forms.py:55
-msgid "Компания"
-msgstr "Компанія"
-
-#: templates/cabinet.html:477
-msgid "Область не выбрана"
-msgstr "Область не вибрана"
-
-#: templates/cabinet.html:490 Mixon_shop/forms.py:56
-msgid "Регистрационный номер"
-msgstr "Реєстраційний номер"
-
-#: templates/cabinet.html:493 templates/partials/header.html:418
-#: Mixon_shop/forms.py:57
-msgid "Город"
-msgstr "Місто"
-
-#: templates/cabinet.html:499
-msgid "Индекс"
-msgstr "Індекс"
-
-#: templates/cabinet.html:503
-msgid "Сохранить"
-msgstr "Зберегти"
-
-#: templates/cabinet.html:508
-msgid "Пароль:"
-msgstr "Пароль:"
-
-#: templates/cabinet.html:512
-msgid "Текущий пароль"
-msgstr "Поточний пароль"
-
-#: templates/cabinet.html:514
-msgid "Новый пароль"
-msgstr "Новий пароль"
-
-#: templates/cabinet.html:518
-msgid "Подтверждение нового пароля"
-msgstr "Підтвердження нового пароля"
-
-#: templates/cabinet.html:522
-msgid "Сменить пароль"
-msgstr "Змінити пароль"
-
-#: templates/cabinet.html:66
-msgid "Закладки"
-msgstr "Закладки"
-
-#: templates/cabinet.html:7 templates/cabinet.html:20
-msgid "Кабинет"
-msgstr "Кабінет"
-
-#: templates/cabinet.html:99
-msgid "Списки сравнений"
-msgstr "Списки порівнянь"
-
-#: templates/cart/detail.html:102
-msgid "Сумма"
-msgstr "Сума"
-
-#: templates/cart/detail.html:109 templates/checkout.html:7
-#: templates/checkout.html:20 templates/checkout.html:24
-msgid "Оформить заказ"
-msgstr "Оформити замовлення"
-
-#: templates/cart/detail.html:120
-msgid "Ваша корзина пуста."
-msgstr "Ваш кошик порожній."
-
-#: templates/cart/detail.html:121 templates/checkout.html:565
-msgid "Перейти в каталог"
-msgstr "Перейти до каталогу"
-
-#: templates/cart/detail.html:35
-msgid "Товар"
-msgstr "Товар"
-
-#: templates/cart/detail.html:38 templates/cart/detail.html:94
-#: templates/checkout.html:111
-msgid "Итого"
-msgstr "Разом"
-
-#: templates/cart/detail.html:48 templates/cart/detail.html:48
-msgid "Удалить из корзины"
-msgstr "Видалити з кошика"
-
-#: templates/cart/detail.html:6 templates/cart/detail.html:18
-#: templates/cart/detail.html:22 templates/checkout.html:33
-msgid "Корзина"
-msgstr "Кошик"
-
-#: templates/cart/detail.html:72
-msgid "Обновить"
-msgstr "Оновити"
-
-#: templates/cart/detail.html:85
-msgid "← Продолжить покупки"
-msgstr "← Продовжити покупки"
-
-#: templates/cart/detail.html:88
-msgid "Очистить корзину"
-msgstr "Очистити кошик"
-
-#: templates/cart/detail.html:98
-msgid "Товаров"
-msgstr "Товарів"
-
-#: templates/cart/detail.html:99
-msgid "шт."
-msgstr "шт."
-
-#: templates/catalogue.html:10 templates/catalogue.html:25
-#: templates/catalogue.html:32 templates/catalogue.html:41
-msgid "Все товары"
-msgstr "Усі товари"
-
-#: templates/catalogue.html:117 templates/home_page.html:158
-msgid "Все бренды"
-msgstr "Усі бренди"
-
-#: templates/catalogue.html:137
-msgid "Фильтры"
-msgstr "Фільтри"
-
-#: templates/catalogue.html:139
-msgid "Сортировать по:"
-msgstr "Сортувати за:"
-
-#: templates/catalogue.html:140
-msgid "популярности"
-msgstr "популярністю"
-
-#: templates/catalogue.html:141
-msgid "цене"
-msgstr "ціною"
-
-#: templates/catalogue.html:142
-msgid "названию"
-msgstr "назвою"
-
-#: templates/catalogue.html:180
-msgid "Выбрать"
-msgstr "Вибрати"
-
-#: templates/catalogue.html:193
-msgid "Акционные"
-msgstr "Акційні"
-
-#: templates/catalogue.html:204 templates/home_page.html:217
-msgid "Новинки"
-msgstr "Новинки"
-
-#: templates/catalogue.html:215 templates/product.html:207
-#: templates/product.html:955 templates/product.html:1276
-#: templates/product.html:1514 templates/product_block--standard.html:34
-msgid "Есть в наличии"
-msgstr "Є в наявності"
-
-#: templates/catalogue.html:227
-msgid "Вид"
-msgstr "Вид"
-
-#: templates/catalogue.html:281
-msgid "ОК"
-msgstr "ОК"
-
-#: templates/catalogue.html:302
-msgid "Основа"
-msgstr "Основа"
-
-#: templates/catalogue.html:331
-msgid "Объем (вес)"
-msgstr "Об’єм (вага)"
-
-#: templates/checkout.html:116
-msgid "Товар на сумму"
-msgstr "Товари на суму"
-
-#: templates/checkout.html:120
-msgid "Стоимость доставки"
-msgstr "Вартість доставки"
-
-#: templates/checkout.html:121
-msgid "Бесплатно"
-msgstr "Безкоштовно"
-
-#: templates/checkout.html:127
-msgid "К оплате"
-msgstr "До сплати"
-
-#: templates/checkout.html:142
-msgid "Промокод"
-msgstr "Промокод"
-
-#: templates/checkout.html:145
-msgid "Ок"
-msgstr "Ок"
-
-#: templates/checkout.html:153 templates/checkout.html:206
-#: templates/checkout.html:388 templates/checkout.html:436
-#: templates/checkout.html:468 templates/shipment_and_payment.html:193
-#: templates/shipment_and_payment.html:227
-msgid "Продолжить оформление"
-msgstr "Продовжити оформлення"
-
-#: templates/checkout.html:219
 msgid "Способ доставки"
 msgstr "Спосіб доставки"
 
-#: templates/checkout.html:234 templates/shipment_and_payment.html:39
-msgid "Доставка в"
-msgstr "Доставка в"
+msgid "Филиал"
+msgstr "Філія"
 
-#: templates/checkout.html:279 templates/shipment_and_payment.html:84
-msgid "Самовывоз из магазина"
-msgstr "Самовивіз із магазину"
-
-#: templates/checkout.html:305 templates/shipment_and_payment.html:110
-msgid "Доставка Meest Express на отделение"
-msgstr "Доставка Meest Express у відділення"
-
-#: templates/checkout.html:332 templates/shipment_and_payment.html:137
-msgid "Доставка Новой Почтой на отделение"
-msgstr "Доставка Новою Поштою у відділення"
-
-#: templates/checkout.html:367 templates/shipment_and_payment.html:172
-msgid "Доставка курьером Новой Почты по городу"
-msgstr "Доставка кур’єром Нової Пошти по місту"
-
-#: templates/checkout.html:400
 msgid "Способ оплаты"
 msgstr "Спосіб оплати"
 
-#: templates/checkout.html:41 templates/checkout.html:175
-#: templates/checkout.html:227 templates/checkout.html:407
-#: templates/checkout.html:456
+msgid "Стоимость товаров"
+msgstr "Вартість товарів"
+
+msgid "Стоимость доставки"
+msgstr "Вартість доставки"
+
+#, python-format
+msgid "Поле «%(field)s» обязательно для заполнения."
+msgstr "Поле «%(field)s» обовʼязкове для заповнення."
+
+msgid "Необходимо указать хотя бы телефон или email для связи."
+msgstr "Потрібно вказати хоча б телефон або email для зв’язку."
+
+msgid "Не выбрано ни одного товара."
+msgstr "Не вибрано жодного товару."
+
+msgid "Заказ успешно создан!"
+msgstr "Замовлення успішно створено!"
+
+msgid "Не удалось оформить заказ. Попробуйте ещё раз."
+msgstr "Не вдалося оформити замовлення. Спробуйте ще раз."
+
+msgid "Подтверждение регистрации — Mixon Shop"
+msgstr "Підтвердження реєстрації — Mixon Shop"
+
+msgid "Вы успешно вошли!"
+msgstr "Ви успішно увійшли!"
+
+msgid "Вы вышли из аккаунта"
+msgstr "Ви вийшли з акаунта"
+
+msgid "Регистрация почти завершена — мы отправили письмо со ссылкой для подтверждения на указанный email."
+msgstr "Реєстрацію майже завершено — ми надіслали лист із посиланням для підтвердження на вказаний email."
+
+msgid "Данные профиля обновлены."
+msgstr "Дані профілю оновлено."
+
+msgid "Пароль изменён."
+msgstr "Пароль змінено."
+
+msgid "Такого варианта у товара нет."
+msgstr "Такого варіанта в товару немає."
+
+msgid "Неизвестный тип заявки."
+msgstr "Невідомий тип заявки."
+
+msgid "Укажите имя."
+msgstr "Вкажіть ім’я."
+
+msgid "Укажите телефон, например +380 67 123 45 67."
+msgstr "Вкажіть телефон, наприклад +380 67 123 45 67."
+
+msgid "Пожалуйста, поставьте оценку от 1 до 5 звёзд."
+msgstr "Будь ласка, поставте оцінку від 1 до 5 зірок."
+
+msgid "Пожалуйста, укажите ваше имя, чтобы оставить отзыв без входа в аккаунт."
+msgstr "Будь ласка, вкажіть ваше ім’я, щоб залишити відгук без входу в акаунт."
+
+msgid "Спасибо, ваш отзыв опубликован!"
+msgstr "Дякуємо, ваш відгук опубліковано!"
+
+#, python-format
+msgid "В сравнение можно добавить не более %(max)d товаров."
+msgstr "До порівняння можна додати не більше ніж %(max)d товарів."
+
+msgid "Ukrainian"
+msgstr "Українська"
+
+msgid "Russian"
+msgstr "Російська"
+
+msgid "О компании"
+msgstr "Про компанію"
+
+msgid "Главная"
+msgstr "Головна"
+
+msgid "Еще новости"
+msgstr "Ще новини"
+
+msgid "О компании MikC"
+msgstr "Про компанію MikC"
+
+msgid "MikC - это"
+msgstr "MikC - це"
+
+msgid "производитель"
+msgstr "виробник"
+
+msgid "лакокрасочной продукции, автохимии и автокосметики под брендами MIXON,DOMEX,MVL"
+msgstr "лакофарбової продукції, автохімії та автокосметики під брендами MIXON, DOMEX, MVL"
+
+msgid "Благодаря этому мы можем:"
+msgstr "Завдяки цьому ми можемо:"
+
+msgid "Создавать лимитированные партии под спец-заказы"
+msgstr "Створювати лімітовані партії під спецзамовлення"
+
+msgid "Обеспечить полный ассортимент материалов и инструментов необходмых для выполнения малярных работ"
+msgstr "Забезпечити повний асортимент матеріалів та інструментів, необхідних для виконання малярних робіт"
+
+msgid "прямой экспортер"
+msgstr "прямий експортер"
+
+msgid "абразивных материалов SMIRDEX, ЛКМ для обработки древесины GENC, бумаги для малярок PRODYVER и т.д."
+msgstr "абразивних матеріалів SMIRDEX, ЛФМ для обробки деревини GENC, паперу для малярних робіт PRODYVER тощо."
+
+msgid "Доукомплектовать"
+msgstr "Доукомплектувати"
+
+msgid "cеть магазинов"
+msgstr "мережа магазинів"
+
+msgid "по продаже лакокрасочной продукции"
+msgstr "з продажу лакофарбової продукції"
+
+msgid "Принимать оплату разными способами(наличный и безналичный расчет,в том числе и с НДС, перевод на платежную карту и т.п.)"
+msgstr "Приймати оплату різними способами (готівковий і безготівковий розрахунок, зокрема з ПДВ, переказ на платіжну картку тощо)"
+
+msgid "Обслуживать клиентов в различных частях города"
+msgstr "Обслуговувати клієнтів у різних частинах міста"
+
+msgid "MikC - это структурированная система"
+msgstr "MikC - це структурована система"
+
+msgid "оптовых продаж"
+msgstr "оптових продажів"
+
+msgid "и скидок"
+msgstr "і знижок"
+
+msgid "Предложить систему скидок в завимости от статуса клиента - професионал, диллер, дистрибьютор."
+msgstr "Запропонувати систему знижок залежно від статусу клієнта - професіонал, дилер, дистриб’ютор."
+
+msgid "Давать скидки в зависимости от объема закупок при условии предоставлении информации клиента о себе."
+msgstr "Надавати знижки залежно від обсягу закупівель за умови надання клієнтом інформації про себе."
+
+msgid "MikC - это оптовый склад, свой грузовой транспорт"
+msgstr "MikC - це оптовий склад, власний вантажний транспорт"
+
+msgid "Всегда иметь в наличии полный ассортимент продукции"
+msgstr "Завжди мати в наявності повний асортимент продукції"
+
+msgid "Организовать доставку товара на объект при сумме закупки от 3 000 грн."
+msgstr "Організувати доставку товару на об’єкт при сумі закупівлі від 3 000 грн."
+
+msgid "Товарные направления"
+msgstr "Товарні напрями"
+
+msgid "ЛКМ для покраски автомобиля"
+msgstr "ЛФМ для фарбування автомобіля"
+
+msgid "ЛКМ для строительства и ремонта"
+msgstr "ЛФМ для будівництва та ремонту"
+
+msgid "ЛКМ для побработки древесины"
+msgstr "ЛФМ для обробки деревини"
+
+msgid "ЛКМ для промышленности, ремонта дорог и т.п."
+msgstr "ЛФМ для промисловості, ремонту доріг тощо"
+
+msgid "Автохимия, автокосметика и оборудование для моек"
+msgstr "Автохімія, автокосметика та обладнання для мийок"
+
+msgid "Инструменты, оборудование и расходные материалы для малярных и покрасочных работ"
+msgstr "Інструменти, обладнання та витратні матеріали для малярних і фарбувальних робіт"
+
+msgid "Здравствуйте"
+msgstr "Вітаємо"
+
+msgid "Спасибо за регистрацию в Mixon Shop."
+msgstr "Дякуємо за реєстрацію в Mixon Shop."
+
+msgid "Чтобы подтвердить email и завершить регистрацию, перейдите по ссылке:"
+msgstr "Щоб підтвердити email і завершити реєстрацію, перейдіть за посиланням:"
+
+msgid "Аккаунт подтверждён"
+msgstr "Акаунт підтверджено"
+
+msgid "Ссылка недействительна"
+msgstr "Посилання недійсне"
+
+msgid "Активация"
+msgstr "Активація"
+
+msgid "Email подтверждён, вы вошли в личный кабинет."
+msgstr "Email підтверджено, ви увійшли до особистого кабінету."
+
+msgid "Перейти в кабинет"
+msgstr "Перейти до кабінету"
+
+msgid "Ссылка для подтверждения недействительна или уже была использована."
+msgstr "Посилання для підтвердження недійсне або вже було використане."
+
+msgid "На главную"
+msgstr "На головну"
+
+msgid "Закрыть"
+msgstr "Закрити"
+
+msgid "Бренды"
+msgstr "Бренди"
+
+msgid "Кабинет"
+msgstr "Кабінет"
+
+msgid "Меню кабинета"
+msgstr "Меню кабінету"
+
+msgid "Ваш кабинет"
+msgstr "Ваш кабінет"
+
+msgid "Закладки"
+msgstr "Закладки"
+
+msgid "Списки сравнений"
+msgstr "Списки порівнянь"
+
+msgid "История заказов"
+msgstr "Історія замовлень"
+
+msgid "Мои отзывы"
+msgstr "Мої відгуки"
+
+msgid "Мои оценки"
+msgstr "Мої оцінки"
+
+msgid "Контактная информация"
+msgstr "Контактна інформація"
+
+msgid "Сравнение 1 универсальные краски"
+msgstr "Порівняння 1 універсальні фарби"
+
+msgid "Добавить в сравнение >>"
+msgstr "Додати до порівняння >>"
+
+msgid "Развернуть"
+msgstr "Розгорнути"
+
+msgid "Сравнение 2 универсальные краски"
+msgstr "Порівняння 2 універсальні фарби"
+
+msgid "Заказ №"
+msgstr "Замовлення №"
+
+msgid "Статус заказа:"
+msgstr "Статус замовлення:"
+
+msgid "Кол-во товаров:"
+msgstr "Кількість товарів:"
+
+msgid "Итого:"
+msgstr "Разом:"
+
+msgid "Повторить"
+msgstr "Повторити"
+
+msgid "Наименование"
+msgstr "Найменування"
+
+msgid "Артикул"
+msgstr "Артикул"
+
+msgid "Количество"
+msgstr "Кількість"
+
+msgid "Цена"
+msgstr "Ціна"
+
+msgid "Доставка:"
+msgstr "Доставка:"
+
+msgid "Оплата:"
+msgstr "Оплата:"
+
+msgid "Коментариев нет"
+msgstr "Коментарів немає"
+
+msgid "Развернуть >>"
+msgstr "Розгорнути >>"
+
+msgid "У вас пока нет заказов."
+msgstr "У вас поки немає замовлень."
+
+msgid "Нет фото"
+msgstr "Немає фото"
+
+msgid "Оставить отзыв"
+msgstr "Залишити відгук"
+
+msgid "Плюсы:"
+msgstr "Переваги:"
+
+msgid "Минусы:"
+msgstr "Недоліки:"
+
+msgid "Основные данные:"
+msgstr "Основні дані:"
+
+msgid "Адрес:"
+msgstr "Адреса:"
+
+msgid "Область не выбрана"
+msgstr "Область не вибрана"
+
+msgid "Индекс"
+msgstr "Індекс"
+
+msgid "Сохранить"
+msgstr "Зберегти"
+
+msgid "Пароль:"
+msgstr "Пароль:"
+
+msgid "Текущий пароль"
+msgstr "Поточний пароль"
+
+msgid "Новый пароль"
+msgstr "Новий пароль"
+
+msgid "Подтверждение нового пароля"
+msgstr "Підтвердження нового пароля"
+
+msgid "Сменить пароль"
+msgstr "Змінити пароль"
+
+msgid "Корзина"
+msgstr "Кошик"
+
+msgid "Товар"
+msgstr "Товар"
+
+msgid "Итого"
+msgstr "Разом"
+
+msgid "Удалить из корзины"
+msgstr "Видалити з кошика"
+
+msgid "Обновить"
+msgstr "Оновити"
+
+msgid "← Продолжить покупки"
+msgstr "← Продовжити покупки"
+
+msgid "Очистить корзину"
+msgstr "Очистити кошик"
+
+msgid "Товаров"
+msgstr "Товарів"
+
+msgid "шт."
+msgstr "шт."
+
+msgid "Сумма"
+msgstr "Сума"
+
+msgid "Оформить заказ"
+msgstr "Оформити замовлення"
+
+msgid "Ваша корзина пуста."
+msgstr "Ваш кошик порожній."
+
+msgid "Перейти в каталог"
+msgstr "Перейти до каталогу"
+
+msgid "Все товары"
+msgstr "Усі товари"
+
+msgid "Все бренды"
+msgstr "Усі бренди"
+
+msgid "Фильтры"
+msgstr "Фільтри"
+
+msgid "Сортировать по:"
+msgstr "Сортувати за:"
+
+msgid "популярности"
+msgstr "популярністю"
+
+msgid "цене"
+msgstr "ціною"
+
+msgid "названию"
+msgstr "назвою"
+
+msgid "Выбрать"
+msgstr "Вибрати"
+
+msgid "Акционные"
+msgstr "Акційні"
+
+msgid "Новинки"
+msgstr "Новинки"
+
+msgid "Есть в наличии"
+msgstr "Є в наявності"
+
+msgid "Вид"
+msgstr "Вид"
+
+msgid "ОК"
+msgstr "ОК"
+
+msgid "Основа"
+msgstr "Основа"
+
+msgid "Объем (вес)"
+msgstr "Об’єм (вага)"
+
 msgid "Изменить"
 msgstr "Змінити"
 
-#: templates/checkout.html:416 templates/shipment_and_payment.html:207
-msgid "Наложеный платеж при получении (при сумме заказа от 200 грн.)"
-msgstr "Накладений платіж при отриманні (при сумі замовлення від 200 грн.)"
-
-#: templates/checkout.html:419 templates/shipment_and_payment.html:210
-msgid "Оплата на карту"
-msgstr "Оплата на картку"
-
-#: templates/checkout.html:423 templates/shipment_and_payment.html:214
-msgid "Наличными (при самовывозе из магазина)"
-msgstr "Готівкою (при самовивозі з магазину)"
-
-#: templates/checkout.html:427 templates/shipment_and_payment.html:218
-msgid "Безналичный расчет с НДС"
-msgstr "Безготівковий розрахунок з ПДВ"
-
-#: templates/checkout.html:431 templates/shipment_and_payment.html:222
-msgid "Безналичный расчет без НДС"
-msgstr "Безготівковий розрахунок без ПДВ"
-
-#: templates/checkout.html:449
-msgid "Комментарий"
-msgstr "Коментар"
-
-#: templates/checkout.html:464
-msgid "Добавьте комментарий к заказу"
-msgstr "Додайте коментар до замовлення"
-
-#: templates/checkout.html:481 templates/checkout.html:549
-msgid "Подтверждение заказа"
-msgstr "Підтвердження замовлення"
-
-#: templates/checkout.html:495
-msgid "Кол&#8209;во"
-msgstr "К&#8209;сть"
-
-#: templates/checkout.html:56
 msgid "Артикул:"
 msgstr "Артикул:"
 
-#: templates/checkout.html:564
+msgid "Товар на сумму"
+msgstr "Товари на суму"
+
+msgid "Бесплатно"
+msgstr "Безкоштовно"
+
+msgid "К оплате"
+msgstr "До сплати"
+
+msgid "Промокод"
+msgstr "Промокод"
+
+msgid "Ок"
+msgstr "Ок"
+
+msgid "Продолжить оформление"
+msgstr "Продовжити оформлення"
+
+msgid "Доставка в"
+msgstr "Доставка в"
+
+msgid "Самовывоз из магазина"
+msgstr "Самовивіз із магазину"
+
+msgid "Доставка Meest Express на отделение"
+msgstr "Доставка Meest Express у відділення"
+
+msgid "Доставка Новой Почтой на отделение"
+msgstr "Доставка Новою Поштою у відділення"
+
+msgid "Доставка курьером Новой Почты по городу"
+msgstr "Доставка кур’єром Нової Пошти по місту"
+
+msgid "Наложеный платеж при получении (при сумме заказа от 200 грн.)"
+msgstr "Накладений платіж при отриманні (при сумі замовлення від 200 грн.)"
+
+msgid "Оплата на карту"
+msgstr "Оплата на картку"
+
+msgid "Наличными (при самовывозе из магазина)"
+msgstr "Готівкою (при самовивозі з магазину)"
+
+msgid "Безналичный расчет с НДС"
+msgstr "Безготівковий розрахунок з ПДВ"
+
+msgid "Безналичный расчет без НДС"
+msgstr "Безготівковий розрахунок без ПДВ"
+
+msgid "Комментарий"
+msgstr "Коментар"
+
+msgid "Добавьте комментарий к заказу"
+msgstr "Додайте коментар до замовлення"
+
+msgid "Подтверждение заказа"
+msgstr "Підтвердження замовлення"
+
+msgid "Кол&#8209;во"
+msgstr "К&#8209;сть"
+
 msgid "Ваша корзина пуста — добавьте товары, чтобы оформить заказ."
 msgstr "Ваш кошик порожній — додайте товари, щоб оформити замовлення."
 
-#: templates/contacts.html:126 templates/contacts.html:135
-#: templates/contacts.html:144 templates/product.html:418
-#: templates/product.html:1627 templates/product.html:1635
-#: templates/product.html:1643
-msgid "Доставка"
-msgstr "Доставка"
+msgid "Сравнение товаров"
+msgstr "Порівняння товарів"
 
-#: templates/contacts.html:127 templates/contacts.html:136
-#: templates/contacts.html:145 templates/product.html:1628
-#: templates/product.html:1636 templates/product.html:1644
-msgid ""
-"Самовывоз из магазина MikC доставка по адресу или в отделения \"Новая "
-"Пошта\""
-msgstr ""
-"Самовивіз із магазину MikC, доставка за адресою або у відділення \"Нова "
-"Пошта\""
+msgid "Убрать"
+msgstr "Прибрати"
 
-#: templates/contacts.html:67
-msgid "Адрес: г. Одесса, ул. Промышленная, 28"
-msgstr "Адреса: м. Одеса, вул. Промислова, 28"
+msgid "Бренд"
+msgstr "Бренд"
 
-#: templates/contacts.html:7 templates/contacts.html:20
-#: templates/contacts.html:24 templates/partials/footer.html:11
-#: templates/partials/footer.html:160 templates/partials/header.html:326
-msgid "Контакты"
-msgstr "Контакти"
+msgid "Категория"
+msgstr "Категорія"
 
-#: templates/contacts.html:76 templates/contacts.html:101
-#: templates/partials/footer.html:185
-msgid "Магазины"
-msgstr "Магазини"
+msgid "Наличие"
+msgstr "Наявність"
 
-#: templates/error_page.html:17
-msgid "Ошибка 404"
-msgstr "Помилка 404"
-
-#: templates/error_page.html:18
-msgid "Страница не найдена"
-msgstr "Сторінку не знайдено"
-
-#: templates/error_page.html:19
-msgid "Возможно, она была удалена или вы перешли по"
-msgstr "Можливо, її було видалено або ви перейшли за"
-
-#: templates/error_page.html:19
-msgid "устаревшей ссылке"
-msgstr "застарілим посиланням"
-
-#: templates/error_page.html:20
-msgid "Пожалуйста, проверьте написание адреса в браузерной"
-msgstr "Будь ласка, перевірте написання адреси в адресному"
-
-#: templates/error_page.html:20
-msgid "строке или вернитесь на главную"
-msgstr "рядку браузера або поверніться на головну"
-
-#: templates/home_page.html:180
-msgid "Лидеры продаж"
-msgstr "Лідери продажів"
-
-#: templates/home_page.html:183 templates/home_page.html:220
-#: templates/home_page.html:257 templates/home_page.html:295
-#: templates/product.html:687 templates/product.html:723
-#: templates/product.html:871 templates/product.html:907
-msgid "Посмотреть все"
-msgstr "Переглянути всі"
-
-#: templates/home_page.html:254
-msgid "Рекомендуемые товары"
-msgstr "Рекомендовані товари"
-
-#: templates/home_page.html:292 templates/news.html:7 templates/news.html:20
-#: templates/news.html:26 templates/partials/footer.html:156
-#: templates/partials/header.html:320 templates/topic.html:20
-msgid "Новости"
-msgstr "Новини"
-
-#: templates/home_page.html:30
-msgid "[Нет картинки]"
-msgstr "[Немає зображення]"
-
-#: templates/home_page.html:321
-msgid "Новость появится позже"
-msgstr "Новина з’явиться пізніше"
-
-#: templates/home_page.html:43
-msgid "Главные предложения"
-msgstr "Головні пропозиції"
-
-#: templates/home_page.html:66
-msgid "Предыдущий слайд"
-msgstr "Попередній слайд"
-
-#: templates/home_page.html:68
-msgid "Следующий слайд"
-msgstr "Наступний слайд"
-
-#: templates/news.html:60
-msgid "Новостей пока нет."
-msgstr "Новин поки немає."
-
-#: templates/partials/branch_details.html:23
-msgid "Время работы:"
-msgstr "Час роботи:"
-
-#: templates/partials/branch_details.html:6
-#: templates/partials/branch_details.html:13
-msgid "Нет данных"
-msgstr "Немає даних"
-
-#: templates/partials/branches_list-checkout.html:18
-msgid "Посмотреть на карте"
-msgstr "Переглянути на мапі"
-
-#: templates/partials/branches_list-checkout.html:23
-#: templates/partials/branches_list-contacts.html:15
-msgid "Нет доступных филиалов"
-msgstr "Немає доступних філій"
-
-#: templates/partials/footer.html:147
-msgid "Меню"
-msgstr "Меню"
-
-#: templates/partials/footer.html:152 templates/partials/header.html:313
-msgid "Акции"
-msgstr "Акції"
-
-#: templates/partials/footer.html:154 templates/partials/header.html:317
-msgid "О нас"
-msgstr "Про нас"
-
-#: templates/partials/footer.html:158 templates/partials/header.html:323
-#: templates/shipment_and_payment.html:7
-#: templates/shipment_and_payment.html:20
-#: templates/shipment_and_payment.html:24
-msgid "Оплата и доставка"
-msgstr "Оплата і доставка"
-
-#: templates/partials/footer.html:169 templates/product.html:20
-#: templates/search.html:7
-msgid "ЛКМ для Строительства"
-msgstr "ЛФМ для будівництва"
-
-#: templates/partials/footer.html:171
-msgid "ЛКМ для Авторемонта"
-msgstr "ЛФМ для авторемонту"
-
-#: templates/partials/footer.html:173
-msgid "ЛКМ для Деревообработки"
-msgstr "ЛФМ для деревообробки"
-
-#: templates/partials/footer.html:175
-msgid "ЛКМ для Промышленности"
-msgstr "ЛФМ для промисловості"
-
-#: templates/partials/footer.html:177
-msgid "Автохимия, автокосметика, оборудование для автомоек"
-msgstr "Автохімія, автокосметика, обладнання для автомийок"
-
-#: templates/partials/footer.html:179
-msgid "Инструменты, аксессуары, оборудование"
-msgstr "Інструменти, аксесуари, обладнання"
-
-#: templates/partials/footer.html:188
-msgid "г. Одесса"
-msgstr "м. Одеса"
-
-#: templates/partials/footer.html:192
-msgid "ул. Елисаветинская 4,"
-msgstr "вул. Єлисаветинська 4,"
-
-#: templates/partials/footer.html:197
-msgid "ул. Ильфа и Петрова 18а,"
-msgstr "вул. Ільфа і Петрова 18а,"
-
-#: templates/partials/footer.html:202
-msgid "ул. 25 чапаевской дивизии 13/1,"
-msgstr "вул. 25-ї Чапаєвської дивізії 13/1,"
-
-#: templates/partials/footer.html:207
-msgid "Промр-к «Черноморец», ул. Малиновского, 67,"
-msgstr "Промр-к «Чорноморець», вул. Малиновського, 67,"
-
-#: templates/partials/footer.html:212
-msgid "Промрынок «Меркурий», Днепро дорога,"
-msgstr "Промринок «Меркурій», Дніпровська дорога,"
-
-#: templates/partials/footer.html:217
-msgid "Промр-к «Староконный», ул. Раскидайлов. 31,"
-msgstr "Промр-к «Староконний», вул. Розкидайлівська 31,"
-
-#: templates/partials/footer.html:222
-msgid "ул. Раскидайловская 34,"
-msgstr "вул. Розкидайлівська 34,"
-
-#: templates/partials/footer.html:228
-msgid "г. Киев"
-msgstr "м. Київ"
-
-#: templates/partials/footer.html:232
-msgid "пр-т Глушкова 40, корп. 3,"
-msgstr "пр-т Глушкова 40, корп. 3,"
-
-#: templates/partials/footer.html:237
-msgid "г. Луцк"
-msgstr "м. Луцьк"
-
-#: templates/partials/footer.html:241
-msgid "ул. Ровенская 44,"
-msgstr "вул. Рівненська 44,"
-
-#: templates/partials/footer.html:245
-msgid "пр-т Победы 18,"
-msgstr "пр-т Перемоги 18,"
-
-#: templates/partials/footer.html:249
-msgid "ул. Кравчука 44а,"
-msgstr "вул. Кравчука 44а,"
-
-#: templates/partials/footer.html:254
-msgid "г. Ровно"
-msgstr "м. Рівне"
-
-#: templates/partials/footer.html:258
-msgid "ул. Бородина 4,"
-msgstr "вул. Бородіна 4,"
-
-#: templates/partials/footer.html:263
-msgid "г. Хмельницкий"
-msgstr "м. Хмельницький"
-
-#: templates/partials/footer.html:267
-msgid "ул. Побужская 11,"
-msgstr "вул. Побузька 11,"
-
-#: templates/partials/header.html:350
-msgid "Нет филиалов"
-msgstr "Немає філій"
-
-#: templates/partials/header.html:401
-msgid "Каталог товаров"
-msgstr "Каталог товарів"
-
-#: templates/partials/header.html:413
-#: templates/partials/product_block--base.html:87 templates/product.html:299
-#: templates/product.html:986 templates/product.html:1307
-#: templates/product.html:1545
-msgid "Хочу дешевле"
-msgstr "Хочу дешевше"
-
-#: templates/partials/header.html:414
-msgid "Узнать цену: Шпатлевка универсальная Карс 1 кг UNI"
-msgstr "Дізнатися ціну: Шпаклівка універсальна Карс 1 кг UNI"
-
-#: templates/partials/header.html:417 Mixon_shop/forms.py:59
-msgid "Область"
-msgstr "Область"
-
-#: templates/partials/header.html:421
-msgid "Вопрос"
-msgstr "Питання"
-
-#: templates/partials/header.html:422
-msgid "Свяжитесь со мной"
-msgstr "Зв’яжіться зі мною"
-
-#: templates/partials/header.html:552
-msgid "Поиск товара"
-msgstr "Пошук товару"
-
-#: templates/partials/header.html:556
-msgid "Найти"
-msgstr "Знайти"
-
-#: templates/partials/header.html:565
-msgid "Открыть личный кабинет"
-msgstr "Відкрити особистий кабінет"
-
-#: templates/partials/header.html:565
-msgid "Зарегистрироваться"
-msgstr "Зареєструватися"
-
-#: templates/partials/header.html:575
-msgid "Выйти из аккаунта"
-msgstr "Вийти з акаунта"
-
-#: templates/partials/header.html:576
-msgid "Выйти"
-msgstr "Вийти"
-
-#: templates/partials/pagination_catalogue.html:17
-#: templates/partials/pagination_search.html:18
-msgid "Показать ещё"
-msgstr "Показати ще"
-
-#: templates/partials/product_block--base.html:71 templates/product.html:278
-#: templates/product.html:1032 templates/product.html:1353
-#: templates/product.html:1591
-msgid "Купить"
-msgstr "Купити"
-
-#: templates/partials/product_placeholder.html:3
-msgid "Карточка товара временно недоступна"
-msgstr "Картка товару тимчасово недоступна"
-
-#: templates/partials/product_placeholder.html:7
-msgid "Изображение товара появится позже"
-msgstr "Зображення товару з’явиться пізніше"
-
-#: templates/partials/registration_modal.html:13
-msgid "Вход"
-msgstr "Вхід"
-
-#: templates/partials/registration_modal.html:15
-msgid "Регистрация"
-msgstr "Реєстрація"
-
-#: templates/partials/registration_modal.html:21 Mixon_shop/forms.py:43
-msgid "Имя пользователя"
-msgstr "Ім’я користувача"
-
-#: templates/partials/registration_modal.html:22
-#: templates/partials/registration_modal.html:35
-msgid "Например, ivan"
-msgstr "Наприклад, ivan"
-
-#: templates/partials/registration_modal.html:24 Mixon_shop/forms.py:44
-msgid "Пароль"
-msgstr "Пароль"
-
-#: templates/partials/registration_modal.html:25
-msgid "Ваш пароль"
-msgstr "Ваш пароль"
-
-#: templates/partials/registration_modal.html:27
-msgid "Войти"
-msgstr "Увійти"
-
-#: templates/partials/registration_modal.html:34
-msgid "Имя пользователя *"
-msgstr "Ім’я користувача *"
-
-#: templates/partials/registration_modal.html:4
-msgid "Закрыть окно входа"
-msgstr "Закрити вікно входу"
-
-#: templates/partials/registration_modal.html:43
-msgid "Город *"
-msgstr "Місто *"
-
-#: templates/partials/registration_modal.html:44
-msgid "Ваш город"
-msgstr "Ваше місто"
-
-#: templates/partials/registration_modal.html:46
-msgid "Пароль *"
-msgstr "Пароль *"
-
-#: templates/partials/registration_modal.html:47
-msgid "Не менее 8 символов"
-msgstr "Не менше 8 символів"
-
-#: templates/partials/registration_modal.html:49
-msgid "Повторите пароль *"
-msgstr "Повторіть пароль *"
-
-#: templates/partials/registration_modal.html:50
-msgid "Введите пароль ещё раз"
-msgstr "Введіть пароль ще раз"
-
-#: templates/partials/registration_modal.html:53
-msgid "Введённые пароли не совпадают."
-msgstr "Введені паролі не збігаються."
-
-#: templates/partials/registration_modal.html:56
-msgid ""
-"Я принимаю условия пользовательского соглашения и обработки персональных "
-"данных."
-msgstr "Я приймаю умови користувацької угоди та обробки персональних даних."
-
-#: templates/partials/registration_modal.html:58
-msgid "Создать аккаунт"
-msgstr "Створити акаунт"
-
-#: templates/partials/registration_modal.html:6
-msgid "Личный кабинет"
-msgstr "Особистий кабінет"
-
-#: templates/partials/registration_modal.html:7
-msgid "Вход и регистрация"
-msgstr "Вхід і реєстрація"
-
-#: templates/partials/registration_modal.html:8
-msgid "Войдите, чтобы видеть заказы и избранное, либо создайте новый аккаунт."
-msgstr "Увійдіть, щоб бачити замовлення та обране, або створіть новий акаунт."
-
-#: templates/product.html:1070
-msgid "Для этого товара пока не указаны сопутствующие товары."
-msgstr "Для цього товару поки не вказані супутні товари."
-
-#: templates/product.html:1089
-msgid "Для этого товара пока не указаны похожие товары."
-msgstr "Для цього товару поки не вказані схожі товари."
-
-#: templates/product.html:1117
-msgid "Половинка звезды"
-msgstr "Половина зірки"
-
-#: templates/product.html:1126
-msgid "Рейтинг"
-msgstr "Рейтинг"
-
-#: templates/product.html:1174 templates/product.html:1175
-msgid "Показать еще"
-msgstr "Показати ще"
-
-#: templates/product.html:1183
-msgid "Написать отзыв"
-msgstr "Написати відгук"
-
-#: templates/product.html:1215
-msgid "Ваша оценка"
-msgstr "Ваша оцінка"
-
-#: templates/product.html:1228
-msgid "Плюсы"
-msgstr "Переваги"
-
-#: templates/product.html:1236
-msgid "Минусы"
-msgstr "Недоліки"
-
-#: templates/product.html:1245
-msgid "Напишите отзыв"
-msgstr "Напишіть відгук"
-
-#: templates/product.html:1396
-msgid "Одесса"
-msgstr "Одеса"
-
-#: templates/product.html:1397
-msgid "Киев"
-msgstr "Київ"
-
-#: templates/product.html:1398
-msgid "Луцк"
-msgstr "Луцьк"
-
-#: templates/product.html:1399
-msgid "Ровно"
-msgstr "Рівне"
-
-#: templates/product.html:1400
-msgid "Хмельницкий"
-msgstr "Хмельницький"
-
-#: templates/product.html:1405 Mixon_shop/views.py:638
-msgid "Забрать сегодня"
-msgstr "Забрати сьогодні"
-
-#: templates/product.html:1416 templates/product.html:1459
-msgid "г. Одесса - ул. Елизаветинская 4"
-msgstr "м. Одеса - вул. Єлисаветинська 4"
-
-#: templates/product.html:1438 templates/product.html:1481
-msgid "Показать на карте"
-msgstr "Показати на мапі"
-
-#: templates/product.html:1444 templates/product.html:1487
-msgid "В наличии:"
-msgstr "В наявності:"
-
-#: templates/product.html:1445 templates/product.html:1488
-msgid "25 штук"
-msgstr "25 штук"
-
-#: templates/product.html:1446 templates/product.html:1489
-msgid "На 01.07.21"
-msgstr "На 01.07.21"
-
-#: templates/product.html:318 templates/product.html:1050
-#: templates/product.html:1371 templates/product.html:1609
-msgid "Быстрый заказ"
-msgstr "Швидке замовлення"
-
-#: templates/product.html:377
-msgid "Упаковка:"
-msgstr "Упаковка:"
-
-#: templates/product.html:383
-msgid "л."
-msgstr "л."
-
-#: templates/product.html:39 templates/product.html:1113
-#: templates/product.html:1144
-msgid "Полная звезда"
-msgstr "Повна зірка"
-
-#: templates/product.html:393
-msgid "Цвет:"
-msgstr "Колір:"
-
-#: templates/product.html:399
-msgid "Название цвета"
-msgstr "Назва кольору"
-
-#: templates/product.html:401
-msgid "Кол-во"
-msgstr "К-сть"
-
-#: templates/product.html:41
-msgid "Половинчатая звезда"
-msgstr "Половина зірки"
-
-#: templates/product.html:418
-msgid "в Хмельницкий"
-msgstr "у Хмельницький"
-
-#: templates/product.html:422
-msgid "Самовывоз из магазина &nbsp;&nbsp;&nbsp;"
-msgstr "Самовивіз із магазину &nbsp;&nbsp;&nbsp;"
-
-#: templates/product.html:423
-msgid "Забрать сегодня &nbsp;&nbsp;&nbsp; Бесплатно"
-msgstr "Забрати сьогодні &nbsp;&nbsp;&nbsp; Безкоштовно"
-
-#: templates/product.html:429
-msgid "Курьерская доставка &nbsp;&nbsp;&nbsp;"
-msgstr "Кур’єрська доставка &nbsp;&nbsp;&nbsp;"
-
-#: templates/product.html:43 templates/product.html:1122
-#: templates/product.html:1148
-msgid "Пустая звезда"
-msgstr "Порожня зірка"
-
-#: templates/product.html:430
-msgid "1–2 дня &nbsp;&nbsp;&nbsp; от 100 грн"
-msgstr "1–2 дні &nbsp;&nbsp;&nbsp; від 100 грн"
-
-#: templates/product.html:437
-msgid "Доставка Новой почтой &nbsp;&nbsp;&nbsp;"
-msgstr "Доставка Новою поштою &nbsp;&nbsp;&nbsp;"
-
-#: templates/product.html:438
-msgid "2–3 дня &nbsp;&nbsp;&nbsp; от 170 грн"
-msgstr "2–3 дні &nbsp;&nbsp;&nbsp; від 170 грн"
-
-#: templates/product.html:447
-msgid "Описание"
-msgstr "Опис"
-
-#: templates/product.html:463 templates/product.html:577
-#: templates/product.html:764
-msgid ""
-"Использование..........................................................................................................................................."
-msgstr ""
-"Використання..........................................................................................................................................."
-
-#: templates/product.html:473 templates/product.html:587
-#: templates/product.html:774
-msgid ""
-"Связующее "
-"вещество.................................................................................................................................................."
-msgstr ""
-"Сполучна "
-"речовина.................................................................................................................................................."
-
-#: templates/product.html:483 templates/product.html:597
-#: templates/product.html:784
-msgid ""
-"Сухой "
-"остаток..................................................................................................................................................................."
-msgstr ""
-"Сухий "
-"залишок..................................................................................................................................................................."
-
-#: templates/product.html:493 templates/product.html:607
-#: templates/product.html:794
-msgid ""
-"Плотность..............................................................................................................................................................................."
-msgstr ""
-"Щільність..............................................................................................................................................................................."
-
-#: templates/product.html:503
-#, python-format
-msgid ""
-"Время высыхания, 23°С 50%% RH "
-"................................................................................................................................................................................."
-msgstr ""
-"Час висихання, 23°С 50%% RH "
-"................................................................................................................................................................................."
-
-#: templates/product.html:520 templates/product.html:629
-#: templates/product.html:814
-msgid ""
-"Расход готовой "
-"смеси.........................................................................................................................................................................................."
-msgstr ""
-"Витрата готової "
-"суміші.........................................................................................................................................................................................."
-
-#: templates/product.html:530 templates/product.html:639
-#: templates/product.html:824
-msgid ""
-"Разбавитель.................................................................................................................................................................................................."
-msgstr ""
-"Розчинник.................................................................................................................................................................................................."
-
-#: templates/product.html:540 templates/product.html:649
-#: templates/product.html:834
-msgid ""
-"Рабочие "
-"инструменты..........................................................................................................................................................................................."
-msgstr ""
-"Робочі "
-"інструменти..........................................................................................................................................................................................."
-
-#: templates/product.html:550 templates/product.html:659
-#: templates/product.html:844
-msgid ""
-"Очистка рабочих "
-"инструментов..............................................................................................................................................................................................."
-msgstr ""
-"Очищення робочих "
-"інструментів..............................................................................................................................................................................................."
-
-#: templates/product.html:560 templates/product.html:669
-#: templates/product.html:854
-msgid ""
-"Хранение......................................................................................................................................................................................................"
-msgstr ""
-"Зберігання......................................................................................................................................................................................................"
-
-#: templates/product.html:581
-msgid "Внутри помещений"
-msgstr "Усередині приміщень"
-
-#: templates/product.html:591
-msgid "Сополимер"
-msgstr "Сополімер"
-
-#: templates/product.html:611
-msgid "1,05 кг/л"
-msgstr "1,05 кг/л"
-
-#: templates/product.html:617 templates/product.html:804
-#, python-format
-msgid ""
-"Время высыхания, 23°С 50%% "
-"RH................................................................................................................................................................................."
-msgstr ""
-"Час висихання, 23°С 50%% "
-"RH................................................................................................................................................................................."
-
-#: templates/product.html:621
-msgid "2-6 часов"
-msgstr "2-6 годин"
-
-#: templates/product.html:633
-msgid "10-12 м2/л в 1 слой"
-msgstr "10-12 м2/л в 1 шар"
-
-#: templates/product.html:643 templates/product.html:663
-msgid "Вода"
-msgstr "Вода"
-
-#: templates/product.html:653
-msgid "Валик, кисть"
-msgstr "Валик, пензель"
-
-#: templates/product.html:673
-msgid "3 года t > 0оC"
-msgstr "3 роки t > 0оC"
-
-#: templates/product.html:73
-msgid "Все о товаре"
-msgstr "Усе про товар"
-
-#: templates/product.html:77 templates/product.html:454
-#: templates/product.html:758 templates/product_block--characteristics.html:6
-msgid "Характеристики"
-msgstr "Характеристики"
-
-#: templates/product.html:81 templates/product.html:684
-#: templates/product.html:868 templates/product.html:1061
-msgid "Покупают вместе"
-msgstr "Купують разом"
-
-#: templates/product.html:85 templates/product.html:720
-#: templates/product.html:904 templates/product.html:1080
-msgid "Похожие товары"
-msgstr "Схожі товари"
-
-#: templates/product.html:88 templates/product.html:1101
-msgid "Отзывы"
-msgstr "Відгуки"
-
-#: templates/product.html:92 templates/product.html:1385
-#: templates/product.html:1390
-msgid "Наличие в магазинах"
-msgstr "Наявність у магазинах"
-
-#: templates/product.html:945 templates/product.html:1266
-#: templates/product.html:1504
-msgid "Акция"
-msgstr "Акція"
-
-#: templates/product.html:957 templates/product.html:1278
-#: templates/product.html:1516
-msgid "Шпатлевка универсальная 2 кг Mixon Uni"
-msgstr "Шпаклівка універсальна 2 кг Mixon Uni"
-
-#: templates/product_block--characteristics.html:11
-msgid "Использование"
-msgstr "Використання"
-
-#: templates/product_block--characteristics.html:19
-msgid "Связующее вещество"
-msgstr "Сполучна речовина"
-
-#: templates/product_block--characteristics.html:27
-msgid "Сухой остаток"
-msgstr "Сухий залишок"
-
-#: templates/product_block--characteristics.html:35
-msgid "Плотность"
-msgstr "Щільність"
-
-#: templates/product_block--characteristics.html:43
-#, python-format
-msgid "Время высыхания, 23°С 50%% RH"
-msgstr "Час висихання, 23°С 50%% RH"
-
-#: templates/product_block--characteristics.html:51
-msgid "Расход готовой смеси"
-msgstr "Витрата готової суміші"
-
-#: templates/product_block--characteristics.html:59
-msgid "Разбавитель"
-msgstr "Розчинник"
-
-#: templates/product_block--characteristics.html:67
-msgid "Рабочие инструменты"
-msgstr "Робочі інструменти"
-
-#: templates/product_block--characteristics.html:75
-msgid "Очистка рабочих инструментов"
-msgstr "Очищення робочих інструментів"
-
-#: templates/product_block--characteristics.html:83
-msgid "Хранение"
-msgstr "Зберігання"
-
-#: templates/product_block--standard.html:36
 msgid "Нет в наличии"
 msgstr "Немає в наявності"
 
-#: templates/search.html:20
-msgid "Поиск"
-msgstr "Пошук"
+msgid "Очистить сравнение"
+msgstr "Очистити порівняння"
 
-#: templates/search.html:45
-msgid "Нет результатов"
-msgstr "Немає результатів"
+msgid "Список сравнения пуст. Нажмите на значок весов у товара, чтобы добавить его сюда."
+msgstr "Список порівняння порожній. Натисніть на значок терезів біля товару, щоб додати його сюди."
 
-#: templates/search.html:45
-#, python-format
-msgid "для \"%(query)s\""
-msgstr "для \"%(query)s\""
+msgid "Контакты"
+msgstr "Контакти"
 
-#: templates/shipment_and_payment.html:200
-msgid "Способы оплаты"
-msgstr "Способи оплати"
+msgid "Адрес: г. Одесса, ул. Промышленная, 28"
+msgstr "Адреса: м. Одеса, вул. Промислова, 28"
 
-#: templates/shipment_and_payment.html:31
-msgid "Способы доставки"
-msgstr "Способи доставки"
+msgid "Магазины"
+msgstr "Магазини"
 
-#: templates/shipment_and_payment.html:33
-msgid ""
-"Доставка грузоперевозчиками осуществляется за счет покупателя согласно "
-"тарифам грузоперевозчика. Заказ отправляется в течении 2-х рабочих дней "
-"после оформления заказа."
-msgstr ""
-"Доставка перевізниками здійснюється за рахунок покупця згідно з тарифами "
-"перевізника. Замовлення відправляється протягом 2 робочих днів після "
-"оформлення."
+msgid "Доставка"
+msgstr "Доставка"
 
-#: templates/topic.html:43
-msgid "Изображение"
-msgstr "Зображення"
+msgid "Самовывоз из магазина MikC доставка по адресу или в отделения \"Новая Пошта\""
+msgstr "Самовивіз із магазину MikC, доставка за адресою або у відділення \"Нова Пошта\""
 
-#: templates/topic.html:49
-msgid "Ещё новости"
-msgstr "Ще новини"
+msgid "Ошибка 404"
+msgstr "Помилка 404"
 
-#: templates/topic.html:71
-msgid "Нет доступных новостей"
-msgstr "Немає доступних новин"
+msgid "Страница не найдена"
+msgstr "Сторінку не знайдено"
 
-msgid "Спасибо! Мы перезвоним вам в ближайшее время."
-msgstr "Дякуємо! Ми зателефонуємо вам найближчим часом."
+msgid "Возможно, она была удалена или вы перешли по"
+msgstr "Можливо, її було видалено або ви перейшли за"
+
+msgid "устаревшей ссылке"
+msgstr "застарілим посиланням"
+
+msgid "Пожалуйста, проверьте написание адреса в браузерной"
+msgstr "Будь ласка, перевірте написання адреси в адресному"
+
+msgid "строке или вернитесь на главную"
+msgstr "рядку браузера або поверніться на головну"
+
+msgid "[Нет картинки]"
+msgstr "[Немає зображення]"
+
+msgid "Главные предложения"
+msgstr "Головні пропозиції"
+
+msgid "Предыдущий слайд"
+msgstr "Попередній слайд"
+
+msgid "Следующий слайд"
+msgstr "Наступний слайд"
+
+msgid "Лидеры продаж"
+msgstr "Лідери продажів"
+
+msgid "Посмотреть все"
+msgstr "Переглянути всі"
+
+msgid "Рекомендуемые товары"
+msgstr "Рекомендовані товари"
+
+msgid "Новости"
+msgstr "Новини"
+
+msgid "Новость появится позже"
+msgstr "Новина з’явиться пізніше"
+
+msgid "Новостей пока нет."
+msgstr "Новин поки немає."
+
+msgid "Нет данных"
+msgstr "Немає даних"
+
+msgid "Время работы:"
+msgstr "Час роботи:"
+
+msgid "Посмотреть на карте"
+msgstr "Переглянути на мапі"
+
+msgid "Нет доступных филиалов"
+msgstr "Немає доступних філій"
+
+msgid "Сравнение"
+msgstr "Порівняння"
+
+msgid "Меню"
+msgstr "Меню"
+
+msgid "Акции"
+msgstr "Акції"
+
+msgid "О нас"
+msgstr "Про нас"
+
+msgid "Оплата и доставка"
+msgstr "Оплата і доставка"
+
+msgid "ЛКМ для Строительства"
+msgstr "ЛФМ для будівництва"
+
+msgid "ЛКМ для Авторемонта"
+msgstr "ЛФМ для авторемонту"
+
+msgid "ЛКМ для Деревообработки"
+msgstr "ЛФМ для деревообробки"
+
+msgid "ЛКМ для Промышленности"
+msgstr "ЛФМ для промисловості"
+
+msgid "Автохимия, автокосметика, оборудование для автомоек"
+msgstr "Автохімія, автокосметика, обладнання для автомийок"
+
+msgid "Инструменты, аксессуары, оборудование"
+msgstr "Інструменти, аксесуари, обладнання"
+
+msgid "г. Одесса"
+msgstr "м. Одеса"
+
+msgid "ул. Елисаветинская 4,"
+msgstr "вул. Єлисаветинська 4,"
+
+msgid "ул. Ильфа и Петрова 18а,"
+msgstr "вул. Ільфа і Петрова 18а,"
+
+msgid "ул. 25 чапаевской дивизии 13/1,"
+msgstr "вул. 25-ї Чапаєвської дивізії 13/1,"
+
+msgid "Промр-к «Черноморец», ул. Малиновского, 67,"
+msgstr "Промр-к «Чорноморець», вул. Малиновського, 67,"
+
+msgid "Промрынок «Меркурий», Днепро дорога,"
+msgstr "Промринок «Меркурій», Дніпровська дорога,"
+
+msgid "Промр-к «Староконный», ул. Раскидайлов. 31,"
+msgstr "Промр-к «Староконний», вул. Розкидайлівська 31,"
+
+msgid "ул. Раскидайловская 34,"
+msgstr "вул. Розкидайлівська 34,"
+
+msgid "г. Киев"
+msgstr "м. Київ"
+
+msgid "пр-т Глушкова 40, корп. 3,"
+msgstr "просп. Глушкова, 40, корп. 3,"
+
+msgid "г. Луцк"
+msgstr "м. Луцьк"
+
+msgid "ул. Ровенская 44,"
+msgstr "вул. Рівненська 44,"
+
+msgid "пр-т Победы 18,"
+msgstr "пр-т Перемоги 18,"
+
+msgid "ул. Кравчука 44а,"
+msgstr "вул. Кравчука 44а,"
+
+msgid "г. Ровно"
+msgstr "м. Рівне"
+
+msgid "ул. Бородина 4,"
+msgstr "вул. Бородіна 4,"
+
+msgid "г. Хмельницкий"
+msgstr "м. Хмельницький"
+
+msgid "ул. Побужская 11,"
+msgstr "вул. Побузька 11,"
+
+msgid "Нет филиалов"
+msgstr "Немає філій"
+
+msgid "Каталог товаров"
+msgstr "Каталог товарів"
+
+msgid "Хочу дешевле"
+msgstr "Хочу дешевше"
+
+msgid "Узнать цену: Шпатлевка универсальная Карс 1 кг UNI"
+msgstr "Дізнатися ціну: Шпаклівка універсальна Карс 1 кг UNI"
+
+msgid "Вопрос"
+msgstr "Питання"
+
+msgid "Свяжитесь со мной"
+msgstr "Зв’яжіться зі мною"
+
+msgid "Поиск товара"
+msgstr "Пошук товару"
+
+msgid "Найти"
+msgstr "Знайти"
+
+msgid "Открыть личный кабинет"
+msgstr "Відкрити особистий кабінет"
+
+msgid "Зарегистрироваться"
+msgstr "Зареєструватися"
+
+msgid "Выйти из аккаунта"
+msgstr "Вийти з акаунта"
+
+msgid "Выйти"
+msgstr "Вийти"
+
+msgid "Показать ещё"
+msgstr "Показати ще"
+
+msgid "Купить"
+msgstr "Купити"
+
+msgid "Карточка товара временно недоступна"
+msgstr "Картка товару тимчасово недоступна"
+
+msgid "Изображение товара появится позже"
+msgstr "Зображення товару з’явиться пізніше"
+
+msgid "Закрыть окно входа"
+msgstr "Закрити вікно входу"
+
+msgid "Личный кабинет"
+msgstr "Особистий кабінет"
+
+msgid "Вход и регистрация"
+msgstr "Вхід і реєстрація"
+
+msgid "Войдите, чтобы видеть заказы и избранное, либо создайте новый аккаунт."
+msgstr "Увійдіть, щоб бачити замовлення та обране, або створіть новий акаунт."
+
+msgid "Вход"
+msgstr "Вхід"
+
+msgid "Регистрация"
+msgstr "Реєстрація"
+
+msgid "Например, ivan"
+msgstr "Наприклад, ivan"
+
+msgid "Ваш пароль"
+msgstr "Ваш пароль"
+
+msgid "Войти"
+msgstr "Увійти"
+
+msgid "Имя пользователя *"
+msgstr "Ім’я користувача *"
+
+msgid "Город *"
+msgstr "Місто *"
+
+msgid "Ваш город"
+msgstr "Ваше місто"
+
+msgid "Пароль *"
+msgstr "Пароль *"
+
+msgid "Не менее 8 символов"
+msgstr "Не менше 8 символів"
+
+msgid "Повторите пароль *"
+msgstr "Повторіть пароль *"
+
+msgid "Введите пароль ещё раз"
+msgstr "Введіть пароль ще раз"
+
+msgid "Введённые пароли не совпадают."
+msgstr "Введені паролі не збігаються."
+
+msgid "Я принимаю условия пользовательского соглашения и обработки персональных данных."
+msgstr "Я приймаю умови користувацької угоди та обробки персональних даних."
+
+msgid "Создать аккаунт"
+msgstr "Створити акаунт"
+
+msgid "Полная звезда"
+msgstr "Повна зірка"
+
+msgid "Половинчатая звезда"
+msgstr "Половина зірки"
+
+msgid "Пустая звезда"
+msgstr "Порожня зірка"
+
+msgid "Все о товаре"
+msgstr "Усе про товар"
+
+msgid "Характеристики"
+msgstr "Характеристики"
+
+msgid "Покупают вместе"
+msgstr "Купують разом"
+
+msgid "Похожие товары"
+msgstr "Схожі товари"
+
+msgid "Отзывы"
+msgstr "Відгуки"
+
+msgid "Наличие в магазинах"
+msgstr "Наявність у магазинах"
+
+msgid "Акция"
+msgstr "Акція"
+
+msgid "Назад"
+msgstr "Назад"
+
+msgid "Вперёд"
+msgstr "Уперед"
+
+msgid "Быстрый заказ"
+msgstr "Швидке замовлення"
+
+msgid "Название"
+msgstr "Назва"
+
+msgid "Кол-во"
+msgstr "К-сть"
+
+msgid "Хмельницкий"
+msgstr "Хмельницький"
+
+msgid "Самовывоз из отделения"
+msgstr "Самовивіз із відділення"
+
+msgid "Доставят до"
+msgstr "Доставимо до"
+
+msgid "от 100 грн."
+msgstr "від 100 грн."
+
+msgid "Доставка до квартиры"
+msgstr "Доставка до квартири"
+
+msgid "от 170 грн."
+msgstr "від 170 грн."
+
+msgid "Описание"
+msgstr "Опис"
+
+msgid "Характеристики пока не заполнены"
+msgstr "Характеристики поки не заповнені"
+
+msgid "Для этого товара пока не указаны сопутствующие товары."
+msgstr "Для цього товару поки не вказані супутні товари."
+
+msgid "Для этого товара пока не указаны похожие товары."
+msgstr "Для цього товару поки не вказані схожі товари."
+
+msgid "Половинка звезды"
+msgstr "Половина зірки"
+
+msgid "Рейтинг"
+msgstr "Рейтинг"
+
+msgid "Показать еще"
+msgstr "Показати ще"
+
+msgid "Написать отзыв"
+msgstr "Написати відгук"
+
+msgid "Ваша оценка"
+msgstr "Ваша оцінка"
+
+msgid "Плюсы"
+msgstr "Переваги"
+
+msgid "Минусы"
+msgstr "Недоліки"
+
+msgid "Напишите отзыв"
+msgstr "Напишіть відгук"
+
+msgid "Одесса"
+msgstr "Одеса"
+
+msgid "Киев"
+msgstr "Київ"
+
+msgid "Луцк"
+msgstr "Луцьк"
+
+msgid "Ровно"
+msgstr "Рівне"
+
+msgid "г. Одесса - ул. Елизаветинская 4"
+msgstr "м. Одеса - вул. Єлисаветинська 4"
+
+msgid "Показать на карте"
+msgstr "Показати на мапі"
+
+msgid "В наличии:"
+msgstr "В наявності:"
+
+msgid "25 штук"
+msgstr "25 штук"
+
+msgid "На 01.07.21"
+msgstr "На 01.07.21"
 
 msgid "Телефон, например +380 67 123 45 67"
 msgstr "Телефон, наприклад +380 67 123 45 67"
@@ -1623,14 +1099,79 @@ msgstr "Коментар (необов’язково)"
 msgid "Отправить"
 msgstr "Надіслати"
 
-msgid "Характеристики пока не заполнены"
-msgstr "Характеристики поки не заповнені"
+msgid "Спасибо! Мы перезвоним вам в ближайшее время."
+msgstr "Дякуємо! Ми зателефонуємо вам найближчим часом."
 
-msgid "Неизвестный тип заявки."
-msgstr "Невідомий тип заявки."
+msgid "Использование"
+msgstr "Використання"
 
-msgid "Укажите имя."
-msgstr "Вкажіть ім’я."
+msgid "Связующее вещество"
+msgstr "Сполучна речовина"
 
-msgid "Укажите телефон, например +380 67 123 45 67."
-msgstr "Вкажіть телефон, наприклад +380 67 123 45 67."
+msgid "Сухой остаток"
+msgstr "Сухий залишок"
+
+msgid "Плотность"
+msgstr "Щільність"
+
+#, python-format
+msgid "Время высыхания, 23°С 50%% RH"
+msgstr "Час висихання, 23°С 50%% RH"
+
+msgid "Расход готовой смеси"
+msgstr "Витрата готової суміші"
+
+msgid "Разбавитель"
+msgstr "Розчинник"
+
+msgid "Рабочие инструменты"
+msgstr "Робочі інструменти"
+
+msgid "Очистка рабочих инструментов"
+msgstr "Очищення робочих інструментів"
+
+msgid "Хранение"
+msgstr "Зберігання"
+
+msgid "Поиск"
+msgstr "Пошук"
+
+msgid "Нет результатов"
+msgstr "Немає результатів"
+
+#, python-format
+msgid "для \"%(query)s\""
+msgstr "для \"%(query)s\""
+
+msgid "Способы доставки"
+msgstr "Способи доставки"
+
+msgid "Доставка грузоперевозчиками осуществляется за счет покупателя согласно тарифам грузоперевозчика. Заказ отправляется в течении 2-х рабочих дней после оформления заказа."
+msgstr "Доставка перевізниками здійснюється за рахунок покупця згідно з тарифами перевізника. Замовлення відправляється протягом 2 робочих днів після оформлення."
+
+msgid "Способы оплаты"
+msgstr "Способи оплати"
+
+msgid "Изображение"
+msgstr "Зображення"
+
+msgid "Ещё новости"
+msgstr "Ще новини"
+
+msgid "Нет доступных новостей"
+msgstr "Немає доступних новин"
+
+msgid "Упаковка:"
+msgstr "Упаковка:"
+
+msgid "л."
+msgstr "л."
+
+msgid "Цвет:"
+msgstr "Колір:"
+
+msgid "от 100 грн"
+msgstr "від 100 грн"
+
+msgid "от 170 грн"
+msgstr "від 170 грн"

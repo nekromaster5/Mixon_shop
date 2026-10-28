@@ -28,6 +28,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- gettext() для строк в static/js -->
     <script src="{% url 'javascript-catalog' %}"></script>
+    <!-- В <head>, чтобы initWishlistButtons() был определён к инлайн-вызовам в теле страницы -->
+    <script src="{% static 'src/assets/js/manageFavorites.js' %}"></script>
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -57,8 +59,7 @@
 <!-- Подключено безусловно, а не через дочерний блок скриптов: часть страниц
      переопределяет его целиком и не наследует родительское содержимое. -->
 <script src="{% static 'src/assets/js/cartActions.js' %}"></script>
+<script src="{% static 'src/assets/js/compare.js' %}"></script>
 </body>
-{% block scripts %}
-    <script src="{% static 'src/assets/js/manageFavorites.js' %}"></script>
-{% endblock %}
+{% block scripts %}{% endblock %}
 </html>

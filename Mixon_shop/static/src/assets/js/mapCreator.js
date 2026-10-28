@@ -13,9 +13,12 @@ function setupMapListeners() {
 
     function updateMap(mapInfo) {
 
-        // Извлекаем координаты из mapInfo
-        const lat = parseFloat(mapInfo.split(",")[0].split(":")[1]);
-        const lng = parseFloat(mapInfo.split(",")[1].split(":")[1]);
+        // Извлекаем координаты из mapInfo вида «lat: 46.4825, lng: 30.7233»;
+        // если в филиале они не заданы или записаны иначе, карту не трогаем.
+        const coords = String(mapInfo || "").match(/lat\s*:\s*(-?\d+(?:\.\d+)?)\s*,\s*lng\s*:\s*(-?\d+(?:\.\d+)?)/i);
+        if (!coords) return;
+        const lat = parseFloat(coords[1]);
+        const lng = parseFloat(coords[2]);
 
         if (window.innerWidth < 768 && !isContactsPage) {
             // На маленьких экранах (не Contacts) используем фиксированные координаты для модальной карты

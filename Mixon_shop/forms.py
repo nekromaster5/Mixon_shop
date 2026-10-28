@@ -6,13 +6,13 @@ from .models import UserProfile, Region
 
 
 class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-    phone = forms.CharField(max_length=18, required=False)
-    company = forms.CharField(max_length=256, required=False)
-    registration_number = forms.CharField(max_length=256, required=False)
-    city = forms.CharField(max_length=256, required=True)
-    postal_code = forms.CharField(max_length=10, required=False)
-    region = forms.ModelChoiceField(queryset=Region.objects.all(), required=False)
+    email = forms.EmailField(required=True, label='E-mail')
+    phone = forms.CharField(max_length=18, required=False, label=_("Телефон"))
+    company = forms.CharField(max_length=256, required=False, label=_("Компания"))
+    registration_number = forms.CharField(max_length=256, required=False, label=_("Регистрационный номер"))
+    city = forms.CharField(max_length=256, required=True, label=_("Город"))
+    postal_code = forms.CharField(max_length=10, required=False, label=_("Почтовый индекс"))
+    region = forms.ModelChoiceField(queryset=Region.objects.all(), required=False, label=_("Область"))
 
     class Meta:
         model = User

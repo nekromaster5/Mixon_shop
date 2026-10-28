@@ -34,7 +34,7 @@
                         </div>
                         <div id="cart--items" class="checkout__section--short__desc" style="display: none;">
                             {% for item in cart_items %}
-                                <span class="mb-4">{{ item.product.name }} × {{ item.quantity }}</span><br>
+                                <span class="mb-4">{{ item.product.name }}{% if item.variant %} ({{ item.variant }}){% endif %} × {{ item.quantity }}</span><br>
                             {% endfor %}
                             <div class="checkout--edit__block" id="shipping--edit__block--cart">
                                 <button id="cart--edit" class="checkout--edit--btn primary__btn"
@@ -54,6 +54,7 @@
                                                         <a href="{% url 'product' item.product.id %}">{{ item.product.name }}</a>
                                                     </h4>
                                                     <span class="product__description--variant">{% translate "Артикул:" %} {{ item.product.article|default:"—" }}</span>
+                                                    {% if item.variant %}<span class="product__description--variant d-block">{{ item.variant }}</span>{% endif %}
                                                 </div>
                                                 <div class="product__thumbnail border-radius-5">
                                                     <a class="display-block" href="{% url 'product' item.product.id %}">
@@ -66,7 +67,7 @@
                                         </td>
                                         <td class="cart__table--body__list position-relative">
                                             <div class="cart__product--value d-block d-md-flex bottom-0"
-                                                 data-product-id="{{ item.product.id }}"
+                                                 data-cart-key="{{ item.key }}"
                                                  data-index="{{ forloop.counter0 }}">
                                                 <div class="product--amount d-flex align-items-center pe-0 pe-md-5">
                                                     <button class="product--amount__btn increase">
@@ -89,7 +90,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="product--price">
-                                                    {% if item.product.discount_price %}
+                                                    {% if item.product.is_discounted and item.product.discount_price %}
                                                         <span class="cart__price">{{ item.product.discount_price }}₴</span>
                                                         <span class="cart__price--old text-decoration-line-through">{{ item.product.price }}₴</span>
                                                     {% else %}
@@ -499,7 +500,7 @@
                                             <tbody class="confirm__order--body">
                                             {% for item in cart_items %}
                                                 <tr data-index="{{ forloop.counter0 }}">
-                                                    <td>{{ item.product.name }}</td>
+                                                    <td>{{ item.product.name }}{% if item.variant %}<br><small>{{ item.variant }}</small>{% endif %}</td>
                                                     <td>{{ item.product.article|default:"—" }}</td>
                                                     <td class="text-center product-amount-confirm"
                                                         data-index="{{ forloop.counter0 }}">{{ item.quantity }}

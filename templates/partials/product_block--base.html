@@ -18,27 +18,7 @@
                 <li class="product__card--action__list mb-3">
                     <ul class="product__card--action--inner__list d-flex align-items-center justify-content-center">
                         <li class="product__card--action__list">
-                            <a class="product__card--action__btn small__button" title="Compare">
-                                <svg class="product__card--action__btn--svg" width="26" height="24" viewBox="0 0 26 24"
-                                     fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8.43018 22.99C8.60089 21.922 9.14669 20.9499 9.9696 20.248C10.7925 19.5462 11.8386 19.1607 12.9202 19.1607C14.0017 19.1607 15.0478 19.5462 15.8707 20.248C16.6936 20.9499 17.2394 21.922 17.4102 22.99H8.43018Z"
-                                          stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round"></path>
-                                    <path d="M1.11108 13.39C1.11108 14.4217 1.52091 15.4111 2.25043 16.1406C2.97994 16.8701 3.96935 17.28 5.00104 17.28C6.03273 17.28 7.02219 16.8701 7.75171 16.1406C8.48123 15.4111 8.89105 14.4217 8.89105 13.39H1.11108Z"
-                                          stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M1.11108 13.39L5.00104 3.71497L8.89105 13.39H1.11108Z"
-                                          stroke="currentColor"
-                                          stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M16.949 13.39C16.9653 14.4108 17.3823 15.3842 18.11 16.1002C18.8376 16.8163 19.8176 17.2177 20.8385 17.2177C21.8594 17.2177 22.8394 16.8163 23.567 16.1002C24.2947 15.3842 24.7116 14.4108 24.728 13.39H16.949Z"
-                                          stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M16.949 13.39L20.839 3.71497L24.729 13.39H16.949Z" stroke="currentColor"
-                                          stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M12.9199 19.157V0.848999" stroke="currentColor"
-                                          stroke-miterlimit="10"></path>
-                                    <path d="M2.125 2.95599H23.715" stroke="currentColor" stroke-miterlimit="10"></path>
-                                </svg>
-                                <span class="visually-hidden">Compare</span>
-                            </a>
+                            {% if item.product %}{% include 'partials/compare_button.html' with product_id=item.product.id extra_class='small__button' size='24' %}{% endif %}
                         </li>
                         <li class="product__card--action__list">
                             {% if item.product %}
