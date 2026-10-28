@@ -1,3 +1,4 @@
+import logging
 import string
 import random
 from random import choice
@@ -11,6 +12,8 @@ from django.utils.translation import gettext_lazy as _
 from unidecode import unidecode
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+
+logger = logging.getLogger(__name__)
 
 
 # Region model
@@ -410,9 +413,8 @@ class ProductStock(models.Model):
         verbose_name = "Наличие в магазинах"
         verbose_name_plural = "Наличие в магазинах"
 
-
-def __str__(self):
-    return f'{self.product} - {self.branch} - {self.volume} - {self.color} - {self.quantity}'
+    def __str__(self):
+        return f'{self.product} - {self.branch} - {self.volume} - {self.color} - {self.quantity}'
 
 
 @receiver(post_save, sender=ProductStock)
@@ -627,20 +629,20 @@ class NewsCategory(models.Model):
         update_slug = False
         if not self.slug:
             update_slug = True
-            print('no slug')
+            logger.debug('no slug')
         elif self.pk:
             try:
                 old_instance = NewsCategory.objects.get(pk=self.pk)
                 if old_instance.name != self.name:
                     update_slug = True
-                    print('name changed')
+                    logger.debug('name changed')
             except NewsCategory.DoesNotExist:
                 update_slug = True
 
         if update_slug:
-            print(f"self.name: {self.name}")
+            logger.debug("self.name: %s", self.name)
             self.slug = slugify(unidecode(self.name))
-            print(f"slugified: {self.slug}")
+            logger.debug("slugified: %s", self.slug)
 
         super().save(*args, **kwargs)
 
@@ -674,9 +676,9 @@ class News(models.Model):
                 update_slug = True
 
         if update_slug:
-            print(f"self.name: {self.title}")
+            logger.debug("self.title: %s", self.title)
             self.slug = slugify(unidecode(self.title))
-            print(f"slugified: {self.title}")
+            logger.debug("slugified: %s", self.slug)
 
         super().save(*args, **kwargs)
 

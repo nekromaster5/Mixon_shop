@@ -13,6 +13,7 @@ from django.views.decorators.http import require_POST
 import math
 from .models import MainPageSections
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db import transaction
 from django.http import JsonResponse
 from django.db.models import F, Case, When, Value, DecimalField, Count, Min, Max, Exists, OuterRef
 from django.db.models.functions import Coalesce
@@ -51,7 +52,7 @@ def product_detail(request, product_id):
     # 'empty' - пустая звезда.
     star_list = ['full'] * full_stars + ['half'] * half_star + ['empty'] * empty_stars
     # Для отладки
-    print("DEBUG star_list =", star_list)
+    logger.debug("star_list = %s", star_list)
     context = {
         'product': product,
         'stars': star_list,  # передаем готовый список звезд в шаблон
@@ -236,7 +237,7 @@ class UniversalPaginator:
         total_pages = self.paginator.num_pages if self.has_items else 0
         has_next = paginated_products.has_next() if self.has_items else False
 
-        print(f'Current page: {current_page}, Total pages: {total_pages}, Has next: {has_next}')
+        logger.debug('Current page: %s, Total pages: %s, Has next: %s', current_page, total_pages, has_next)
 
         pages_to_display = get_pages_to_display(current_page, total_pages) if self.has_items else []
 
@@ -285,16 +286,16 @@ class CataloguePage(View):
         try:
             product_category = Category.objects.get(id=product_category_id)
         except:
-            print('no cat')
+            logger.debug('no category in request')
 
-        print('Request GET params:', dict(request.GET))  # Логування всіх параметрів
+        logger.debug('Request GET params: %s', dict(request.GET))  # Логування всіх параметрів
 
         if product_category:
             product_types = ProductType.objects.filter(categories=product_category.id)
-            print('\n\n\nтолько определенные типы\n\n\n')
+            logger.debug('filtering by selected product types')
         else:
             product_types = ProductType.objects.all()
-            print('\n\n\nвообще все типы\n\n\n')
+            logger.debug('showing all product types')
 
         products = Product.objects.filter(type__in=product_types).prefetch_related('images').annotate(
             likes_count=Count('favoriteproduct'),
@@ -319,25 +320,25 @@ class CataloguePage(View):
             )
 
         if product_type_ids:
-            print('Applying type filter:', product_type_ids)
+            logger.debug('Applying type filter: %s', product_type_ids)
             products = products.filter(type__id__in=product_type_ids)
         if binding_substance_id:
-            print('Applying binding substance filter:', binding_substance_id)
+            logger.debug('Applying binding substance filter: %s', binding_substance_id)
             products = products.filter(binding_substance__id=binding_substance_id)
         if volume_ids:
-            print('Applying volume filter:', volume_ids)
+            logger.debug('Applying volume filter: %s', volume_ids)
             product_ids_with_volumes = ProductStock.objects.filter(
                 volume__id__in=volume_ids
             ).values_list('product__id', flat=True).distinct()
             products = products.filter(id__in=product_ids_with_volumes)
         if is_discounted:
-            print('Applying is_discounted filter')
+            logger.debug('Applying is_discounted filter')
             products = products.filter(is_discounted=True)
         if is_new:
-            print('Applying is_new filter')
+            logger.debug('Applying is_new filter')
             products = products.filter(is_new=True)
         if is_in_stock:
-            print('Applying is_in_stock filter')
+            logger.debug('Applying is_in_stock filter')
             products = products.filter(is_in_stock=True)
 
         price_range = products.aggregate(
@@ -355,7 +356,7 @@ class CataloguePage(View):
                     price_gte = min_price
                 if price_lte > max_price:
                     price_lte = max_price
-                print('Applying price filter:', price_gte, price_lte)
+                logger.debug('Applying price filter: %s - %s', price_gte, price_lte)
                 products = products.filter(effective_price__gte=price_gte, effective_price__lte=price_lte)
             except (ValueError, TypeError):
                 pass
@@ -701,7 +702,7 @@ def get_branch_details(request):
 
     # Формируем строки расписания
     schedule_lines = []
-    print('\n\n\n', branch.address_base, '\n', branch.address_detail, '\n\n\n')
+    logger.debug('Branch address: %s, %s', branch.address_base, branch.address_detail)
     for key, days in schedule_dict.items():
         # Сортируем дни по порядку
         days.sort(key=lambda x: DAY_ORDER[x])
@@ -772,93 +773,106 @@ def apply_promo_code(request):
     return JsonResponse({"success": False, "error": "Неверный метод запроса."}, status=405)
 
 
+def calculate_goods_cost(products, product_counts, promo=None):
+    """Считает стоимость товаров на сервере, не доверяя сумме из браузера."""
+    total = Decimal('0')
+    for product in products:
+        price = product.discount_price if product.is_discounted and product.discount_price is not None else product.price
+        total += price * product_counts[product.id]
+
+    if promo:
+        if promo.discount_type == 'amount':
+            total -= promo.discount_value
+        else:
+            total *= (Decimal('100') - promo.discount_value) / Decimal('100')
+
+    return max(total, Decimal('0')).quantize(Decimal('0.01'))
+
+
 def create_order(request):
     if request.method == "POST":
-        data = json.loads(request.body)
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({"success": False, "error": "Некорректные данные запроса."}, status=400)
 
         # Проверяем обязательные поля
-        required_fields = ['name', 'shipment_method', 'order_place', 'payment_method', 'goods_cost', 'shipment_cost']
+        required_fields = ['name', 'shipment_method', 'order_place', 'payment_method', 'shipment_cost']
         for field in required_fields:
             if field not in data or data[field] is None:
                 return JsonResponse({"success": False, "error": f"Поле '{field}' обязательно для заполнения."},
                                     status=400)
 
         # Проверяем, что хотя бы одно из полей phone или email заполнено
-        phone = data.get('phone', '').strip()
-        email = data.get('email', '').strip()
+        phone = (data.get('phone') or '').strip()
+        email = (data.get('email') or '').strip()
         if not phone and not email:
             return JsonResponse({"success": False, "error": "Необходимо указать хотя бы телефон или email для связи."},
                                 status=400)
 
+        # Формат: {product_id: quantity}
         try:
-            # Получаем данные
-            name = data.get('name')
-            shipment_method_id = int(data.get('shipment_method'))
-            order_place_id = int(data.get('order_place'))
-            payment_method_id = int(data.get('payment_method'))
-            comment = data.get('comment', '')
-            goods_cost = float(data.get('goods_cost'))
-            shipment_cost = float(data.get('shipment_cost'))
-            product_counts = data.get('products', {})  # Формат: {product_id: quantity}
-            promo_code = data.get('promo_code')
+            product_counts = {int(product_id): int(quantity)
+                              for product_id, quantity in (data.get('products') or {}).items()}
+        except (TypeError, ValueError, AttributeError):
+            return JsonResponse({"success": False, "error": "Некорректный список товаров."}, status=400)
+        if not product_counts:
+            return JsonResponse({"success": False, "error": "Не выбрано ни одного товара."}, status=400)
+        if any(quantity < 1 for quantity in product_counts.values()):
+            return JsonResponse({"success": False, "error": "Количество товара должно быть больше нуля."},
+                                status=400)
 
-            # Получаем объекты из базы данных
-            shipment_method = ShipmentMethod.objects.get(id=shipment_method_id)
-            order_place = Branch.objects.get(id=order_place_id)
-            payment_method = PaymentMethod.objects.get(id=payment_method_id)
-            status = OrderStatus.objects.get(id=1)  # Статус "Заказ принят"
+        products = list(Product.objects.filter(id__in=product_counts.keys()))
+        if len(products) != len(product_counts):
+            return JsonResponse({"success": False, "error": "Некоторые товары не найдены."}, status=400)
 
-            # Получаем продукты
-            products = Product.objects.filter(id__in=product_counts.keys())
-            if not products:
-                return JsonResponse({"success": False, "error": "Не выбрано ни одного товара."}, status=400)
+        try:
+            shipment_method = ShipmentMethod.objects.get(id=int(data['shipment_method']))
+            order_place = Branch.objects.get(id=int(data['order_place']))
+            payment_method = PaymentMethod.objects.get(id=int(data['payment_method']))
+            shipment_cost = Decimal(str(data['shipment_cost']))
+        except (ShipmentMethod.DoesNotExist, Branch.DoesNotExist, PaymentMethod.DoesNotExist,
+                TypeError, ValueError, ArithmeticError):
+            return JsonResponse({"success": False, "error": "Некорректные параметры доставки или оплаты."},
+                                status=400)
 
-            # Проверяем промокод
-            promo_applied = False
-            promo = None
-            if promo_code:
-                try:
-                    promo = PromoCode.objects.get(code=promo_code)
-                    promo_applied = True
-                except PromoCode.DoesNotExist:
-                    pass
+        promo = None
+        promo_code = data.get('promo_code')
+        if promo_code:
+            promo = PromoCode.objects.filter(code=promo_code).first()
 
-            # Создаем заказ
-            order = Order.objects.create(
-                user=request.user if request.user.is_authenticated else None,
-                name=name,
-                phone=phone,
-                email=email,
-                shipment_method=shipment_method,
-                order_place=order_place,
-                payment_method=payment_method,
-                comment=comment,
-                goods_cost=goods_cost,
-                shipment_cost=shipment_cost,
-                promo_applied=promo_applied,
-                promo=promo,
-                status=status,
-            )
-
-            # Добавляем продукты в заказ с количеством через OrderProduct
-            for product_id, quantity in product_counts.items():
-                product = Product.objects.get(id=int(product_id))
-                OrderProduct.objects.create(
-                    order=order,
-                    product=product,
-                    quantity=int(quantity)
+        try:
+            # Заказ и его товары сохраняются вместе: при ошибке не останется заказа без товаров
+            with transaction.atomic():
+                order = Order.objects.create(
+                    user=request.user if request.user.is_authenticated else None,
+                    name=data['name'],
+                    phone=phone,
+                    email=email,
+                    shipment_method=shipment_method,
+                    order_place=order_place,
+                    payment_method=payment_method,
+                    comment=data.get('comment', ''),
+                    goods_cost=calculate_goods_cost(products, product_counts, promo),
+                    shipment_cost=shipment_cost,
+                    promo_applied=promo is not None,
+                    promo=promo,
+                    status=OrderStatus.objects.get(id=1),  # Статус "Заказ принят"
                 )
+                OrderProduct.objects.bulk_create(
+                    OrderProduct(order=order, product=product, quantity=product_counts[product.id])
+                    for product in products
+                )
+        except Exception:
+            logger.exception("Failed to create order")
+            return JsonResponse({"success": False, "error": "Не удалось создать заказ. Попробуйте позже."},
+                                status=500)
 
-            # Очищаем сессию (если она используется)
-            if 'applied_promo_code' in request.session:
-                del request.session['applied_promo_code']
-            if 'discount' in request.session:
-                del request.session['discount']
+        # Очищаем сессию (если она используется)
+        request.session.pop('applied_promo_code', None)
+        request.session.pop('discount', None)
 
-            return JsonResponse({"success": True, "message": "Заказ успешно создан!"})
-
-        except Exception as e:
-            return JsonResponse({"success": False, "error": str(e)}, status=500)
+        return JsonResponse({"success": True, "message": "Заказ успешно создан!"})
 
     return JsonResponse({"success": False, "error": "Неверный метод запроса."}, status=405)
 
@@ -871,8 +885,8 @@ class TestSlider(View):
 class Test(View):
     def get(self, request):
         categories = Category.objects.filter(mainpagesections__isnull=False)
-        print(categories)
-        print('\nКатегория 1 id', categories[0].id, '\nКатегория 2 id', categories[1].id, '\n')
+        logger.debug('categories: %s', categories)
+        logger.debug('category ids: %s', [c.id for c in categories[:2]])
         return render(request, 'test.html')
 
 
