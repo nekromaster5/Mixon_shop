@@ -2,12 +2,12 @@ from modeltranslation.translator import TranslationOptions, translator
 
 from .models import (
     BindingSubstance, Category, Characteristic, ContentBlock, News, NewsCategory, Product,
-    ProductCharacteristic, ProductType,
+    ProductCharacteristic, ProductParameter, ProductType,
 )
 
 
 class ProductTranslationOptions(TranslationOptions):
-    fields = ('name', 'description', 'usage')
+    fields = ('name', 'description', 'usage', 'table_title')
 
 
 class CategoryTranslationOptions(TranslationOptions):
@@ -53,3 +53,10 @@ class ProductCharacteristicTranslationOptions(TranslationOptions):
 
 translator.register(Characteristic, CharacteristicTranslationOptions)
 translator.register(ProductCharacteristic, ProductCharacteristicTranslationOptions)
+
+
+class ProductParameterTranslationOptions(TranslationOptions):
+    fields = ('name', 'unit')
+
+
+translator.register(ProductParameter, ProductParameterTranslationOptions)

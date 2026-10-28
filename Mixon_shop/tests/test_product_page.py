@@ -1,30 +1,38 @@
 import pytest
 
 from Mixon_shop.models import (
-    Branch, Category, Characteristic, City, Color, FavoriteProduct, ProductCharacteristic, ProductRequest,
-    ProductStock, Volume,
+    Branch, Category, Characteristic, City, FavoriteProduct, ProductCharacteristic, ProductParameter,
+    ProductParameterImage, ProductParameterValue, ProductRequest, ProductTableRow,
 )
 
 
 @pytest.mark.django_db
-def test_colors_come_from_stock_without_duplicates(client, product, branch):
-    other_branch = Branch.objects.create(
-        city=City.objects.create(name="Other"), address_short="Other", map_info="{}"
-    )
-    khaki = Color.objects.create(vendor_code="MA603BAL", name="Хаки603", rgb_code="#6b6b3a")
-    white = Color.objects.create(vendor_code="MA100", name="Белый", rgb_code="#ffffff")
-    one_liter = Volume.objects.create(size="1.00")
-    ProductStock.objects.create(product=product, branch=branch, color=khaki, volume=one_liter, quantity=3)
-    ProductStock.objects.create(product=product, branch=other_branch, color=khaki, volume=one_liter, quantity=2)
-    ProductStock.objects.create(product=product, branch=branch, color=white, volume=one_liter, quantity=1)
+def test_parameter_and_table_are_configured_in_admin(client, product):
+    weight = ProductParameter.objects.create(name="Вага", unit="кг")
+    product.parameter = weight
+    product.table_title = "Відтінок"
+    product.save()
+    ProductParameterValue.objects.create(product=product, value="1.500")
+    ProductParameterValue.objects.create(product=product, value="5")
+    ProductTableRow.objects.create(product=product, vendor_code="MA603BAL", name="Хаки603", rgb_code="#6b6b3a")
+    ProductTableRow.objects.create(product=product, vendor_code="MA100", name="Белый", rgb_code="#ffffff")
 
     text = client.get(f"/product/{product.id}/").content.decode()
 
-    assert text.count("MA603BAL") == 1
-    assert text.count("MA100") == 1
-    assert '<span class="pc-qty">5</span>' in text
-    assert "1л." in text
-    assert "3л." not in text
+    assert "Вага:" in text and "Відтінок:" in text
+    assert "1.5 кг" in text and "5 кг" in text
+    assert text.count("MA603BAL") == 1 and text.count("MA100") == 1
+    assert 'class="pc-qty__input"' in text
+
+
+@pytest.mark.django_db
+def test_parameter_value_images_are_passed_to_the_page(client, product):
+    value = ProductParameterValue.objects.create(product=product, value="3")
+    ProductParameterImage.objects.create(parameter_value=value, image="products/parameters/three.png")
+
+    text = client.get(f"/product/{product.id}/").content.decode()
+
+    assert "products/parameters/three.png" in text
 
 
 @pytest.mark.django_db
@@ -32,7 +40,7 @@ def test_product_without_stock_hides_color_and_package_blocks(client, product):
     text = client.get(f"/product/{product.id}/").content.decode()
 
     assert 'class="pc-table"' not in text
-    assert 'pd-pack' not in text
+    assert 'package_block' not in text
     assert "MA603BAL" not in text
     assert "Немає фото" in text
 
@@ -86,19 +94,19 @@ def test_admin_adds_empty_rows_for_category_characteristics(admin_client, produc
 
 @pytest.mark.django_db
 def test_quick_order_request_is_saved(client, product, branch):
-    color = Color.objects.create(vendor_code="MA603BAL", name="Хаки603", rgb_code="#6b6b3a")
-    volume = Volume.objects.create(size="3.00")
-    ProductStock.objects.create(product=product, branch=branch, color=color, volume=volume, quantity=1)
+    value = ProductParameterValue.objects.create(product=product, value="3")
+    row = ProductTableRow.objects.create(product=product, vendor_code="MA603BAL", name="Хаки603")
 
     response = client.post(
         f"/product/{product.id}/request/",
         {"kind": "quick_order", "name": "Іван", "phone": "+380 67 123 45 67",
-         "volume": volume.id, "color": color.id},
+         "parameter_value": value.id, "row": row.id, f"quantity_{row.id}": 4},
     )
 
     assert response.json() == {"success": True}
     saved = ProductRequest.objects.get()
-    assert (saved.kind, saved.volume, saved.color, saved.phone) == ("quick_order", volume, color, "+380 67 123 45 67")
+    assert (saved.kind, saved.phone) == ("quick_order", "+380 67 123 45 67")
+    assert "3" in saved.selection and "MA603BAL" in saved.selection and "× 4" in saved.selection
 
 
 @pytest.mark.django_db

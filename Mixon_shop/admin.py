@@ -23,6 +23,7 @@ from .models import (
     ProductType, PromoCode, SalesLeaders, RecommendedProducts, MainPageSections, MainPageBanner, Category, OrderProduct,
     BranchSchedule, BranchScheduleException, ScheduleTemplateItem, ScheduleTemplate, ContentBlock, EmailAddress,
     Brand, Characteristic, ProductCharacteristic, ProductRequest, ShipmentMethod, PaymentMethod,
+    ProductParameter, ProductParameterValue, ProductParameterImage, ProductTableRow,
 )
 
 admin.site.site_header = 'Mixon — управление магазином'
@@ -68,17 +69,43 @@ class ProductImageInline(admin.TabularInline):
         return image_preview(obj.image)
 
 
+class ProductParameterValueInline(admin.TabularInline):
+    # Кнопки над таблицей на странице товара. Фото значения добавляются на его странице (ссылка «фото»)
+    model = ProductParameterValue
+    extra = 1
+    fields = ('value', 'order', 'photos')
+    readonly_fields = ('photos',)
+    verbose_name = 'значение'
+    verbose_name_plural = 'Значения параметра (только число, единица допишется сама)'
+
+    @admin.display(description='фото значения')
+    def photos(self, obj):
+        if not obj.pk:
+            return 'Сохраните товар, затем откройте значение, чтобы добавить фото'
+        from django.urls import reverse
+        url = reverse('admin:Mixon_shop_productparametervalue_change', args=[obj.pk])
+        return format_html('{} шт. · <a href="{}">добавить/изменить фото</a>', obj.images.count(), url)
+
+
+class ProductTableRowInline(admin.TabularInline):
+    model = ProductTableRow
+    extra = 1
+    fields = ('vendor_code', 'name', 'rgb_code', 'order')
+    verbose_name = 'строка таблицы'
+    verbose_name_plural = 'Строки таблицы (покупатель отмечает любые и вводит количество)'
+
+
 class ProductStockInline(HelpTextMixin, admin.TabularInline):
-    # Упаковки и цвета на странице товара строятся по этим строкам
+    # Остатки по магазинам (и по упаковкам/цветам — для фильтра каталога)
     model = ProductStock
     extra = 1
     fields = ('branch', 'volume', 'color', 'quantity')
     autocomplete_fields = ('color',)
     verbose_name = 'строка наличия'
-    verbose_name_plural = 'Упаковки, цвета и наличие в магазинах'
+    verbose_name_plural = 'Наличие в магазинах'
     HELP_TEXTS = {
         'branch': 'Магазин, где лежит товар.',
-        'volume': 'Объём упаковки. Каждая упаковка станет кнопкой на странице товара.',
+        'volume': 'Объём упаковки (нужен для фильтра каталога). Кнопки на странице товара настраиваются выше.',
         'color': 'Можно оставить пустым, если у товара нет цветов. Начните печатать название или артикул.',
         'quantity': 'Сколько штук в этом магазине.',
     }
@@ -114,7 +141,8 @@ class ProductAdmin(HelpTextMixin, TranslationAdmin):
     filter_horizontal = ('related_products', 'similar_products')
     readonly_fields = ('is_in_stock', 'average_rating')
     save_on_top = True
-    inlines = [ProductImageInline, ProductStockInline, ProductCharacteristicInline]
+    inlines = [ProductImageInline, ProductParameterValueInline, ProductTableRowInline, ProductStockInline,
+               ProductCharacteristicInline]
     # Старые фиксированные характеристики (usage, dry_residue и т.д.) заменены списками характеристик
     # по категориям, поэтому в форме их нет. binding_substance оставлен: по нему работает фильтр каталога.
     fieldsets = (
@@ -126,6 +154,9 @@ class ProductAdmin(HelpTextMixin, TranslationAdmin):
         }),
         ('Отметки на сайте', {
             'fields': ('is_new', 'is_in_stock', 'average_rating'),
+        }),
+        ('Выбор на странице товара', {
+            'fields': ('parameter', 'table_title'),
         }),
         ('Описание', {
             'fields': ('description',),
@@ -142,6 +173,9 @@ class ProductAdmin(HelpTextMixin, TranslationAdmin):
         'type': 'Вид товара внутри категории (для фильтра каталога).',
         'brand': 'Производитель. Начните печатать название.',
         'binding_substance': 'Основа (для фильтра каталога). Можно не заполнять.',
+        'parameter': 'Что покупатель выбирает кнопками: «Упаковка», «Объём», «Вес»... Значения вводятся ниже. '
+                     'Список параметров — в разделе «Параметры товара».',
+        'table_title': 'Заголовок таблицы под кнопками, например «Цвет». Если пусто — «Цвет».',
         'price': 'Цена в гривнах.',
         'discount_price': 'Цена со скидкой. Работает, только если отмечено «скидка активна».',
         'is_discounted': 'Отметьте, чтобы показать цену со скидкой и старую цену зачёркнутой.',
@@ -168,6 +202,44 @@ class ProductAdmin(HelpTextMixin, TranslationAdmin):
         for characteristic in Characteristic.objects.filter(categories=product.category):
             if characteristic.id not in existing:
                 ProductCharacteristic.objects.create(product=product, characteristic=characteristic)
+
+
+@admin.register(ProductParameter)
+class ProductParameterAdmin(HelpTextMixin, TranslationAdmin):
+    list_display = ('name', 'unit')
+    search_fields = ('name_uk', 'name_ru')
+    HELP_TEXTS = {
+        'name': 'Например «Упаковка» или «Объём». Это подпись над кнопками на странице товара.',
+        'unit': 'Например «л» или «кг». В значениях админ вводит только число, единица дописывается на сайте.',
+    }
+
+
+class ProductParameterImageInline(admin.TabularInline):
+    model = ProductParameterImage
+    extra = 1
+    fields = ('preview', 'image', 'order')
+    readonly_fields = ('preview',)
+    verbose_name = 'фото'
+    verbose_name_plural = 'Фото значения (при выборе значения главное фото товара заменится на них)'
+
+    @admin.display(description='превью')
+    def preview(self, obj):
+        return image_preview(obj.image)
+
+
+@admin.register(ProductParameterValue)
+class ProductParameterValueAdmin(admin.ModelAdmin):
+    list_display = ('product', 'value', 'photos_count')
+    search_fields = ('product__name_uk', 'product__name_ru')
+    autocomplete_fields = ('product',)
+    inlines = [ProductParameterImageInline]
+
+    def has_module_permission(self, request):
+        return False  # открывается по ссылке со страницы товара
+
+    @admin.display(description='фото')
+    def photos_count(self, obj):
+        return obj.images.count()
 
 
 @admin.register(Category)
@@ -340,15 +412,20 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(ProductRequest)
 class ProductRequestAdmin(admin.ModelAdmin):
-    list_display = ('created_at', 'kind', 'product', 'volume', 'color', 'name', 'phone', 'is_processed')
+    list_display = ('created_at', 'kind', 'product', 'selection_short', 'name', 'phone', 'is_processed')
     list_editable = ('is_processed',)
     list_filter = ('is_processed', 'kind', 'created_at')
     search_fields = ('name', 'phone', 'product__name_uk', 'product__name_ru')
-    list_select_related = ('product', 'volume', 'color')
+    list_select_related = ('product',)
     date_hierarchy = 'created_at'
-    readonly_fields = ('created_at',)
-    autocomplete_fields = ('product', 'color')
-    fields = ('is_processed', 'kind', 'created_at', 'product', ('volume', 'color'), 'name', 'phone', 'comment')
+    readonly_fields = ('created_at', 'volume', 'color')
+    autocomplete_fields = ('product',)
+    fields = ('is_processed', 'kind', 'created_at', 'product', 'selection', ('volume', 'color'), 'name', 'phone',
+              'comment')
+
+    @admin.display(description='что выбрано')
+    def selection_short(self, obj):
+        return obj.selection.replace('\n', '; ') or '—'
 
 
 @admin.register(Review)

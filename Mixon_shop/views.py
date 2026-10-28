@@ -13,7 +13,7 @@ import math
 from .models import MainPageSections
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import JsonResponse
-from django.db.models import F, Case, When, Value, DecimalField, Count, Min, Max, Exists, OuterRef, Sum
+from django.db.models import F, Case, When, Value, DecimalField, Count, Min, Max, Exists, OuterRef
 from django.db.models.functions import Coalesce
 from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
 from django.contrib import messages
@@ -31,14 +31,15 @@ from .forms import UserRegisterForm, UserLoginForm, ProfileUpdateForm
 from .models import UserProfile, Region
 from .forms import UserLoginForm
 from .models import MainPageBanner
-from .session_cart import SessionCart
+from .session_cart import SessionCart, describe_variant, parse_cart_key
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import redirect_to_login
 from django.utils.decorators import method_decorator
 from .models import Product, Review, UserProfile, RecommendedProducts, SalesLeaders, City, ErrorMessages, PromoCode, \
     Order, \
     ShipmentMethod, PaymentMethod, OrderStatus, OrderProduct, BindingSubstance, ProductType, Volume, \
-    ProductStock, News, NewsCategory, Branch, FavoriteProduct, Category, Brand, Color, ProductRequest
+    ProductStock, News, NewsCategory, Branch, FavoriteProduct, Category, Brand, ProductRequest, \
+    ProductParameterValue, ProductTableRow
 
 import logging
 
@@ -168,15 +169,9 @@ class ProductPage(View):
         related_products = [ProductSelfWrapper(p) for p in annotate_products(product.related_products.all())]
         similar_products = [ProductSelfWrapper(p) for p in annotate_products(product.similar_products.all())]
 
-        # Цвета и объёмы берём из остатков: одна строка на цвет, кол-во суммируется по филиалам
-        stocks = ProductStock.objects.filter(product=product)
-        colors = (
-            stocks.filter(color__isnull=False)
-            .values('color__id', 'color__vendor_code', 'color__name', 'color__rgb_code')
-            .annotate(total=Coalesce(Sum('quantity'), 0))
-            .order_by('color__vendor_code', 'color__name')
-        )
-        volumes = Volume.objects.filter(productstock__product=product).distinct().order_by('size')
+        # Кнопки параметра («Упаковка», «Объём»...) и таблица вариантов — настраиваются в админке товара
+        parameter_values = list(product.parameter_values.prefetch_related('images'))
+        table_rows = list(product.table_rows.all())
 
         # Пустые значения не выводим (значение с фолбэком на украинский проверяем уже после перевода)
         characteristics = [
@@ -186,8 +181,10 @@ class ProductPage(View):
         return render(request, 'product.html', {
             'product': product,
             'images': images,
-            'colors': colors,
-            'volumes': volumes,
+            'parameter_values': parameter_values,
+            'parameter_name': product.parameter.name if product.parameter else _('Упаковка'),
+            'table_rows': table_rows,
+            'table_title': product.table_title or _('Цвет'),
             'characteristics': characteristics,
             'characteristics_left': characteristics[:(len(characteristics) + 1) // 2],
             'characteristics_right': characteristics[(len(characteristics) + 1) // 2:],
@@ -616,15 +613,18 @@ class CheckoutPage(View):
         data = json.loads(request.body)
         product_counts = data.get('products', {})
 
-        # Получаем товары из базы данных
-        products = Product.objects.filter(id__in=product_counts.keys())
+        # Ключи — строки корзины («12», «12-v3-r7»): один товар может идти несколькими строками
+        counts_by_product = {}
+        for key, count in product_counts.items():
+            ids = parse_cart_key(key)
+            if ids:
+                counts_by_product[ids[0]] = counts_by_product.get(ids[0], 0) + int(count or 1)
+        products = Product.objects.filter(id__in=counts_by_product)
 
         # Пересчитываем общую сумму
         total_price = 0
         for product in products:
-            count = int(product_counts.get(str(product.id), 1))
-            price = product.discount_price if product.is_discounted and product.discount_price is not None else product.price
-            total_price += float(price) * count  # Приводим price к float
+            total_price += float(product.current_price) * counts_by_product[product.id]  # Приводим price к float
 
         # Возвращаем результат как JSON, убедившись, что total_price — это число
         return JsonResponse({'total_price': float(total_price)})  # Приводим к float
@@ -847,7 +847,7 @@ def create_order(request):
             comment = data.get('comment', '')
             goods_cost = float(data.get('goods_cost'))
             shipment_cost = float(data.get('shipment_cost'))
-            product_counts = data.get('products', {})  # Формат: {product_id: quantity}
+            product_counts = data.get('products', {})  # Формат: {ключ строки корзины: quantity}
             promo_code = data.get('promo_code')
 
             # Получаем объекты из базы данных
@@ -856,9 +856,16 @@ def create_order(request):
             payment_method = PaymentMethod.objects.get(id=payment_method_id)
             status = OrderStatus.objects.get(id=1)  # Статус "Заказ принят"
 
-            # Получаем продукты
-            products = Product.objects.filter(id__in=product_counts.keys())
-            if not products:
+            # Получаем продукты. Ключ — «12» или «12-v3-r7» (товар, значение параметра, строка таблицы)
+            lines = []
+            for key, quantity in product_counts.items():
+                ids = parse_cart_key(key)
+                if ids and int(quantity) > 0:
+                    lines.append((ids, int(quantity)))
+            products = {p.id: p for p in Product.objects.filter(id__in={ids[0] for ids, _q in lines})
+                        .select_related('parameter')}
+            lines = [(ids, quantity) for ids, quantity in lines if ids[0] in products]
+            if not lines:
                 return JsonResponse({"success": False, "error": _("Не выбрано ни одного товара.")}, status=400)
 
             # Проверяем промокод
@@ -889,20 +896,25 @@ def create_order(request):
             )
 
             # Добавляем продукты в заказ с количеством через OrderProduct
-            for product_id, quantity in product_counts.items():
-                product = Product.objects.get(id=int(product_id))
-                quantity = int(quantity)
+            for (product_id, value_id, row_id), quantity in lines:
+                product = products[product_id]
+                parameter_value = ProductParameterValue.objects.filter(id=value_id, product=product).first()
+                table_row = ProductTableRow.objects.filter(id=row_id, product=product).first()
                 OrderProduct.objects.create(
                     order=order,
                     product=product,
-                    quantity=quantity
+                    quantity=quantity,
+                    parameter_value=parameter_value,
+                    table_row=table_row,
+                    variant=describe_variant(product, parameter_value, table_row)[:255],
                 )
+                if parameter_value or table_row:
+                    # Остатки по упаковкам/цветам ведутся вручную: строки наличия
+                    # не связаны с вариантами на странице товара.
+                    continue
 
                 # Списываем остаток на складе — только для товаров без вариаций
                 # (объём/цвет не заданы) на филиале, откуда оформлен заказ.
-                # Для вариативных складов (свой объём/цвет) покупатель пока нигде
-                # не выбирает конкретный вариант, поэтому автосписание для них
-                # не выполняется — остаток по ним корректируется вручную.
                 stock = ProductStock.objects.filter(
                     product=product, branch=order_place,
                     volume__isnull=True, color__isnull=True,
@@ -1115,12 +1127,54 @@ def change_password_view(request):
     return _back_to_cabinet_tab('contact_information')
 
 
+def _positive_int(text, default=1, maximum=9999):
+    try:
+        number = int(text)
+    except (TypeError, ValueError):
+        return default
+    return min(max(number, 1), maximum)
+
+
+def _cart_lines(request, product):
+    """Что добавить в корзину со страницы товара: [(значение параметра, строка таблицы, кол-во)].
+    parameter_value — id выбранной кнопки; row — id отмеченных строк таблицы (сколько угодно),
+    quantity_<id строки> — количество по строке. Без строк — одна позиция с quantity.
+    Кнопка «Купить» в каталоге ничего не передаёт — товар добавляется без варианта."""
+    data = request.POST
+    parameter_value = None
+    if data.get('parameter_value'):
+        parameter_value = product.parameter_values.filter(id=data['parameter_value']).first()
+        if parameter_value is None:
+            raise ValueError(_('Такого варианта у товара нет.'))
+
+    row_ids = [row_id for row_id in data.getlist('row') if row_id]
+    if not row_ids:
+        return [(parameter_value, None, _positive_int(data.get('quantity')))]
+
+    rows = {str(row.id): row for row in product.table_rows.filter(id__in=[i for i in row_ids if i.isdigit()])}
+    if len(rows) != len(set(row_ids)):
+        raise ValueError(_('Такого варианта у товара нет.'))
+    return [(parameter_value, rows[row_id], _positive_int(data.get(f'quantity_{row_id}')))
+            for row_id in dict.fromkeys(row_ids)]
+
+
 def cart_add(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    SessionCart(request).add(product, quantity=1)
+    is_ajax = request.headers.get('x-requested-with') == 'XMLHttpRequest'
+    try:
+        lines = _cart_lines(request, product)
+    except ValueError as error:
+        if is_ajax:
+            return JsonResponse({'success': False, 'error': str(error)}, status=400)
+        messages.error(request, str(error))
+        return redirect('product', product_id=product.id)
 
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        return JsonResponse({'success': True})
+    cart = SessionCart(request)
+    for parameter_value, table_row, quantity in lines:
+        cart.add(product, quantity=quantity, parameter_value=parameter_value, table_row=table_row)
+
+    if is_ajax:
+        return JsonResponse({'success': True, 'total_quantity': cart.get_total_quantity()})
     return redirect('cart_detail')
 
 
@@ -1142,20 +1196,26 @@ def product_request(request, product_id):
     if errors:
         return JsonResponse({'success': False, 'errors': errors}, status=400)
 
-    stocks = ProductStock.objects.filter(product=product)
-    volume = Volume.objects.filter(id=request.POST.get('volume') or None, productstock__in=stocks).first()
-    color = Color.objects.filter(id=request.POST.get('color') or None, productstock__in=stocks).first()
+    # Что выбрано на странице: кнопка параметра и отмеченные строки таблицы с количеством
+    try:
+        lines = _cart_lines(request, product)
+    except ValueError:
+        lines = []
+    selection = []
+    for parameter_value, table_row, quantity in lines:
+        variant = describe_variant(product, parameter_value, table_row)
+        if variant:
+            selection.append(f'{variant} × {quantity}' if table_row else variant)
 
     ProductRequest.objects.create(
-        kind=kind, product=product, volume=volume, color=color, name=name[:150], phone=phone,
+        kind=kind, product=product, name=name[:150], phone=phone, selection='\n'.join(selection),
         comment=request.POST.get('comment', '').strip(),
     )
     return JsonResponse({'success': True})
 
 
-def cart_remove(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    SessionCart(request).remove(product)
+def cart_remove(request, item_key):
+    SessionCart(request).remove(item_key)
 
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         return JsonResponse({'success': True})
@@ -1163,18 +1223,16 @@ def cart_remove(request, product_id):
 
 
 @require_POST
-def cart_update(request, product_id):
-    """Выставляет точное количество товара в корзине (используется страницей
+def cart_update(request, item_key):
+    """Выставляет точное количество строки корзины (используется страницей
     корзины и счётчиком количества на странице оформления заказа)."""
-    product = get_object_or_404(Product, id=product_id)
-
     try:
         quantity = int(request.POST.get('quantity', 1))
     except (TypeError, ValueError):
         quantity = 1
 
     cart = SessionCart(request)
-    cart.set_quantity(product, quantity)
+    cart.set_quantity(item_key, quantity)
 
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         return JsonResponse({

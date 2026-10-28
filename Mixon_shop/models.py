@@ -387,6 +387,11 @@ class Product(models.Model):
     average_rating = models.DecimalField(max_digits=3, decimal_places=2, default=0.0, verbose_name='средняя оценка')
     stocks = models.ManyToManyField(Branch, through='ProductStock', related_name='product_stocks',
                                     verbose_name='наличие')
+    # Кнопки над таблицей на странице товара («Упаковка: 1 л, 5 л»): какой параметр — выбирает админ
+    parameter = models.ForeignKey('ProductParameter', on_delete=models.SET_NULL, null=True, blank=True,
+                                  related_name='products', verbose_name='параметр для выбора')
+    # Заголовок таблицы вариантов («Цвет:»). Пусто — на сайте будет «Цвет»
+    table_title = models.CharField(max_length=64, blank=True, verbose_name='название таблицы')
 
     class Meta:
         verbose_name = "Товар"
@@ -466,6 +471,82 @@ class ProductStock(models.Model):
     # Сигнал update_product_stock_status — в signals.py.
 
 
+class ProductParameter(models.Model):
+    """Параметр, значения которого покупатель выбирает кнопками на странице товара:
+    «Упаковка», «Объём», «Вес»... Значения хранятся числами, единица дописывается на сайте."""
+    name = models.CharField(max_length=64, verbose_name='название')
+    unit = models.CharField(max_length=16, blank=True, verbose_name='единица измерения')
+
+    class Meta:
+        ordering = ('name',)
+        verbose_name = 'Параметр товара'
+        verbose_name_plural = 'Параметры товара'
+
+    def __str__(self):
+        return f'{self.name}, {self.unit}' if self.unit else self.name
+
+
+class ProductParameterValue(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='parameter_values',
+                                verbose_name='товар')
+    value = models.DecimalField(max_digits=10, decimal_places=3, verbose_name='значение')
+    order = models.PositiveIntegerField(default=0, verbose_name='порядок')
+
+    class Meta:
+        ordering = ('order', 'value')
+        unique_together = ('product', 'value')
+        verbose_name = 'Значение параметра'
+        verbose_name_plural = 'Значения параметра'
+
+    def __str__(self):
+        return self.label
+
+    @property
+    def number(self):
+        """Число без лишних нулей: 1.500 -> «1.5», 5.000 -> «5»."""
+        return format(self.value.normalize(), 'f')
+
+    @property
+    def label(self):
+        parameter = self.product.parameter
+        unit = parameter.unit if parameter else ''
+        return f'{self.number} {unit}'.strip()
+
+
+class ProductParameterImage(models.Model):
+    """Фото для значения параметра: при выборе значения главное фото товара меняется на него."""
+    parameter_value = models.ForeignKey(ProductParameterValue, on_delete=models.CASCADE, related_name='images',
+                                        verbose_name='значение параметра')
+    image = models.ImageField(upload_to='products/parameters/', verbose_name='картинка')
+    order = models.PositiveIntegerField(default=0, verbose_name='порядок')
+
+    class Meta:
+        ordering = ('order', 'id')
+        verbose_name = 'Фото значения'
+        verbose_name_plural = 'Фото значения'
+
+    def __str__(self):
+        return f'Фото для {self.parameter_value}'
+
+
+class ProductTableRow(models.Model):
+    """Строка таблицы вариантов под кнопками (например, цвет): покупатель может отметить
+    сколько угодно строк и для каждой указать количество."""
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='table_rows', verbose_name='товар')
+    vendor_code = models.CharField(max_length=50, blank=True, verbose_name='артикул')
+    name = models.CharField(max_length=100, verbose_name='название')
+    rgb_code = models.CharField(max_length=50, blank=True, verbose_name='цвет кружка')
+    order = models.PositiveIntegerField(default=0, verbose_name='порядок')
+
+    class Meta:
+        ordering = ('order', 'vendor_code', 'name')
+        verbose_name = 'Строка таблицы'
+        verbose_name_plural = 'Строки таблицы'
+
+    def __str__(self):
+        return f'{self.vendor_code} {self.name}'.strip()
+
+
 class ProductRequest(models.Model):
     """Заявка со страницы товара: «Быстрый заказ» или «Хочу дешевле».
     Письма с PythonAnywhere не уходят, поэтому заявки смотрят в админке."""
@@ -478,6 +559,8 @@ class ProductRequest(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='requests', verbose_name='товар')
     volume = models.ForeignKey(Volume, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='упаковка')
     color = models.ForeignKey(Color, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='цвет')
+    selection = models.TextField(blank=True, verbose_name='что выбрано',
+                                 help_text='Значение параметра и строки таблицы с количеством.')
     name = models.CharField(max_length=150, verbose_name='имя')
     phone = models.CharField(max_length=18, verbose_name='телефон')
     comment = models.TextField(blank=True, verbose_name='комментарий')
@@ -626,14 +709,21 @@ class OrderProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='товар')
     quantity = models.PositiveIntegerField(default=1,
                                            verbose_name='кол-во товара в заказе')  # Количество товара в заказе
+    # Один товар может быть в заказе несколькими строками: разные упаковки и цвета
+    parameter_value = models.ForeignKey(ProductParameterValue, on_delete=models.SET_NULL, null=True, blank=True,
+                                        verbose_name='значение параметра')
+    table_row = models.ForeignKey(ProductTableRow, on_delete=models.SET_NULL, null=True, blank=True,
+                                  verbose_name='строка таблицы')
+    # Текстом на случай, если вариант потом удалят из товара
+    variant = models.CharField(max_length=255, blank=True, verbose_name='вариант')
 
     class Meta:
-        unique_together = ('order', 'product')  # Гарантируем уникальность комбинации order + product
         verbose_name = "Товар в заказе"
         verbose_name_plural = "Товары в заказе"
 
     def __str__(self):
-        return f"{self.product.name} (x{self.quantity})"
+        variant = f', {self.variant}' if self.variant else ''
+        return f"{self.product.name}{variant} (x{self.quantity})"
 
 
 # Order model

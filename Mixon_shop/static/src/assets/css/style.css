@@ -12029,6 +12029,21 @@ body.registration-modal-open { overflow: hidden; }
     border: 1px solid #AEADAA;
 }
 
+.pc-qty__input {
+    width: 56px;
+    height: 28px;
+    padding: 0 4px;
+    text-align: center;
+    font: inherit;
+    border: 1px solid #AEADAA;
+    border-radius: 3px;
+    background: #fff;
+}
+
+.product-color-option {
+    cursor: pointer;
+}
+
 .product-color-option.is-selected .product-color-checkbox {
     background-color: var(--secondary-color) !important;
     border-color: var(--secondary-color) !important;
