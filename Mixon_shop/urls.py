@@ -26,7 +26,8 @@ from Mixon_shop.views import HomePage, CataloguePage, ProductPage, Brands, NewsP
     AboutCompany, PersonalPage, CheckoutPage, TestSlider, Test, ErrorPage, ShipmentPayment, Contacts, \
     SearchPage, submit_review, get_branches, activate, branch_list, create_order, \
     apply_promo_code, Topic, register_view, login_view, logout_view, profile_update, change_password_view, \
-    cart_add, cart_remove, product_request, cart_update, cart_detail, cart_clear, get_branch_details, manage_favorites
+    cart_add, cart_remove, product_request, cart_update, cart_detail, cart_clear, get_branch_details, manage_favorites, \
+    compare_toggle, compare_remove, compare_clear, compare_page
 
 urlpatterns = [
     path('admin_tools/', include('admin_tools.urls')),
@@ -39,6 +40,12 @@ urlpatterns = [
     path('product/<int:product_id>/submit_review/', submit_review, name='submit_review'),
     path('product/<int:product_id>/request/', product_request, name='product_request'),
     path('manage-favorites/<int:product_id>', manage_favorites, name='manage_favorites'),
+
+    # сравнение
+    path('compare/', compare_page, name='compare'),
+    path('compare/toggle/<int:product_id>/', compare_toggle, name='compare_toggle'),
+    path('compare/remove/<int:product_id>/', compare_remove, name='compare_remove'),
+    path('compare/clear/', compare_clear, name='compare_clear'),
 
     # главная и каталоги
     path('', HomePage.as_view(), name='home'),
@@ -77,8 +84,8 @@ urlpatterns = [
 
     # корзина и заказы
     path('cart/add/<int:product_id>/', cart_add, name='cart_add'),
-    path('cart/remove/<int:product_id>/', cart_remove, name='cart_remove'),
-    path('cart/update/<int:product_id>/', cart_update, name='cart_update'),
+    path('cart/remove/<str:item_key>/', cart_remove, name='cart_remove'),
+    path('cart/update/<str:item_key>/', cart_update, name='cart_update'),
     path('cart/clear/', cart_clear, name='cart_clear'),
     path('cart/', cart_detail, name='cart_detail'),
     path('apply-promo/', apply_promo_code, name='apply_promo_code'),

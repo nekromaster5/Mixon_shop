@@ -2,8 +2,8 @@
 window.updateTotalPrice = async function updateTotalPrice() {
     const productsData = {};
     document.querySelectorAll('.product--amount__input').forEach(input => {
-        const productId = input.closest('.cart__product--value').dataset.productId;
-        productsData[productId] = input.value;
+        const cartKey = input.closest('.cart__product--value').dataset.cartKey;
+        productsData[cartKey] = input.value;
     });
 
 
@@ -100,11 +100,11 @@ function getCsrfToken() {
 // Сохраняет изменённое на странице оформления количество товара в корзине
 // сессии, чтобы она не "отставала" от того, что видит покупатель на чекауте.
 function syncCartQuantity(input) {
-    const productId = input.closest('.cart__product--value')?.dataset.productId;
-    if (!productId) return;
+    const cartKey = input.closest('.cart__product--value')?.dataset.cartKey;
+    if (!cartKey) return;
     const quantity = parseInt(input.value, 10) || 1;
 
-    fetch(`/cart/update/${productId}/`, {
+    fetch(`/cart/update/${cartKey}/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',

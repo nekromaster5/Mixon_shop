@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% translate "Сравнение товаров" %}{% endblock %}
+
+{% block content %}
+    <section class="breadcrumb__section breadcrumb__bg">
+        <div class="container">
+            <div class="breadcrumb__content text-center px-3">
+                <ul class="breadcrumb__content--menu d-flex">
+                    <li class="breadcrumb__content--menu__items"><a href="{% url 'home' %}">{% translate "Главная" %}</a></li>
+                    <li class="breadcrumb__content--menu__items"><a href="{% url 'compare' %}">{% translate "Сравнение товаров" %}</a></li>
+                </ul>
+            </div>
+            <h1 class="breadcrumb__content--title text-center">{% translate "Сравнение товаров" %}</h1>
+        </div>
+    </section>
+    <section class="compare__section">
+        <div class="container">
+            {% if products %}
+                <div class="compare-table__scroll">
+                    <table class="compare-table">
+                        <tr>
+                            <th class="compare-table__label"></th>
+                            {% for product in products %}
+                                <td>
+                                    {% with image=product.images.first %}
+                                        {% if image %}
+                                            <a href="{% url 'product' product_id=product.id %}"><img src="{{ image.image.url }}" alt="{{ product.name }}"></a>
+                                        {% endif %}
+                                    {% endwith %}
+                                    <a href="{% url 'product' product_id=product.id %}"><strong>{{ product.name }}</strong></a>
+                                    <form method="post" action="{% url 'compare_remove' product_id=product.id %}" style="margin-top:8px;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-link p-0">{% translate "Убрать" %}</button>
+                                    </form>
+                                </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th class="compare-table__label">{% translate "Цена" %}</th>
+                            {% for product in products %}
+                                <td>
+                                    {% if product.is_discounted and product.discount_price %}
+                                        <s>{{ product.price }} ₴</s> <strong>{{ product.discount_price }} ₴</strong>
+                                    {% else %}
+                                        <strong>{{ product.price }} ₴</strong>
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th class="compare-table__label">{% translate "Бренд" %}</th>
+                            {% for product in products %}<td>{{ product.brand.name|default:"—" }}</td>{% endfor %}
+                        </tr>
+                        <tr>
+                            <th class="compare-table__label">{% translate "Категория" %}</th>
+                            {% for product in products %}<td>{{ product.category.name }}</td>{% endfor %}
+                        </tr>
+                        <tr>
+                            <th class="compare-table__label">{% translate "Наличие" %}</th>
+                            {% for product in products %}
+                                <td>{% if product.is_in_stock %}{% translate "Есть в наличии" %}{% else %}{% translate "Нет в наличии" %}{% endif %}</td>
+                            {% endfor %}
+                        </tr>
+                        {% for row in rows %}
+                            <tr{% if row.differs %} class="is-different"{% endif %}>
+                                <th class="compare-table__label">{{ row.name }}</th>
+                                {% for value in row.values %}<td>{{ value|default:"—" }}</td>{% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <form method="post" action="{% url 'compare_clear' %}" style="margin-bottom:40px;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-secondary">{% translate "Очистить сравнение" %}</button>
+                </form>
+            {% else %}
+                <p style="padding:40px 0;">
+                    {% translate "Список сравнения пуст. Нажмите на значок весов у товара, чтобы добавить его сюда." %}
+                    <a href="{% url 'catalogue' %}">{% translate "Перейти в каталог" %}</a>
+                </p>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}
