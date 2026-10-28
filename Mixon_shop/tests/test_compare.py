@@ -75,3 +75,11 @@ def test_product_page_has_active_compare_button(client, make_product):
     assert "compare-button is-active" not in client.get(page).content.decode()
     client.post(reverse("compare_toggle", args=[product.id]), **AJAX)
     assert "compare-button is-active" in client.get(page).content.decode()
+
+
+@pytest.mark.django_db
+def test_compare_page_is_translated_to_ukrainian(client):
+    client.post("/i18n/setlang/", {"language": "uk", "next": "/"})
+    text = client.get(reverse("compare")).content.decode()
+    assert "Порівняння товарів" in text
+    assert "Список порівняння порожній" in text

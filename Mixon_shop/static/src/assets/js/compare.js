@@ -39,6 +39,6 @@ document.addEventListener('click', function (e) {
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Не удалось обновить сравнение. Попробуйте ещё раз.');
+            alert(gettext('Не удалось обновить сравнение. Попробуйте ещё раз.'));
         });
 });
