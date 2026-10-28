@@ -212,6 +212,7 @@
 
                             </div>
                             <div class="first_sale_block_buttons">
+                                {% include 'partials/compare_button.html' with product_id=product.id extra_class='favourite--button no_scale box_shadow-3_1 small__button p-6' %}
                                 <a href="{% url 'manage_favorites' product_id=product.id %}" data-product-id="{{ product.id }}"
                                    class="product__card--action__btn wishlist favourite--button no_scale box_shadow-3_1 small__button p-6"
                                    title="Wishlist">
@@ -301,6 +302,7 @@
                                         <div class="first_sale_block" style="display: flex;">
 
                                             <div class="first_sale_block_buttons_mobile ">
+                                                {% include 'partials/compare_button.html' with product_id=product.id extra_class='favourite--button no_scale box_shadow-3_1 small__button p-6' %}
                                                 <a href="{% url 'manage_favorites' product_id=product.id %}" data-product-id="{{ product.id }}"
                                    class="product__card--action__btn wishlist favourite--button no_scale box_shadow-3_1 small__button p-6"
                                                    title="Wishlist" style="width:31px;height:31px;">
@@ -679,6 +681,7 @@
                                     <span>  {% translate "Хочу дешевле" %}</span>
                                     <span class="visually-hidden">Want Cheaper</span>
                                 </a>
+                                {% include 'partials/compare_button.html' with product_id=product.id extra_class='favourite--button no_scale box_shadow-3_1 small__button p-6' %}
                                 <a href="{% url 'manage_favorites' product_id=product.id %}" data-product-id="{{ product.id }}"
                                    class="product__card--action__btn wishlist favourite--button no_scale box_shadow-3_1 small__button p-6"
                                    title="Wishlist">
@@ -973,6 +976,7 @@
                                 <span>  {% translate "Хочу дешевле" %}</span>
                                 <span class="visually-hidden">Want Cheaper</span>
                             </a>
+                            {% include 'partials/compare_button.html' with product_id=product.id extra_class='favourite--button no_scale box_shadow-3_1 small__button p-6' %}
                             <a href="{% url 'manage_favorites' product_id=product.id %}" data-product-id="{{ product.id }}"
                                    class="product__card--action__btn wishlist favourite--button no_scale box_shadow-3_1 small__button p-6"
                                title="Wishlist">
@@ -1190,6 +1194,7 @@
                                 <span>  {% translate "Хочу дешевле" %}</span>
                                 <span class="visually-hidden">Want Cheaper</span>
                             </a>
+                            {% include 'partials/compare_button.html' with product_id=product.id extra_class='favourite--button no_scale box_shadow-3_1 small__button p-6' %}
                             <a href="{% url 'manage_favorites' product_id=product.id %}" data-product-id="{{ product.id }}"
                                    class="product__card--action__btn wishlist favourite--button no_scale box_shadow-3_1 small__button p-6"
                                title="Wishlist">

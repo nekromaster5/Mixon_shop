@@ -2,6 +2,7 @@ from django.conf import settings
 from django.utils.functional import SimpleLazyObject
 
 from .models import Brand, Category
+from .session_compare import SessionCompare
 
 
 def google_maps(request):
@@ -42,3 +43,9 @@ def catalog_menu(request):
             (icon for key, icon in CATEGORY_FALLBACK_ICONS if key in name), None
         )
     return {"catalog_menu_categories": categories}
+
+
+def compare(request):
+    """id товаров в списке сравнения: для счётчика в шапке и подсветки кнопок."""
+    ids = SessionCompare(request).ids
+    return {"compare_ids": ids, "compare_count": len(ids)}

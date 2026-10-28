@@ -545,8 +545,9 @@ margin-left:400px;
                     <a href="{% url 'logout' %}" class="icon-button" title="{% translate "Выйти из аккаунта" %}"
                        style="background: none;border: none;position:relative;font-size:1.2rem;">{% translate "Выйти" %}</a>
                 {% endif %}
-                <a href="{% url 'cabinet' %}" class="icon-button "
+                <a href="{% url 'compare' %}" class="icon-button" title="{% translate "Сравнение" %}"
                    style="background: none;border: none;position:relative; ">
+                    <span class="header-compare-badge" data-compare-count{% if not compare_count %} hidden{% endif %}>{{ compare_count }}</span>
                     <svg width="25" height="23" viewBox="0 0 25 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.81787 22.2263C7.98792 21.15 8.53361 20.1701 9.35669 19.4627C10.1798 18.7552 11.2264 18.3666 12.3085 18.3666C13.3906 18.3666 14.4372 18.7552 15.2603 19.4627C16.0833 20.1701 16.6289 21.15 16.799 22.2263H7.81787Z"
                               stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round"></path>
