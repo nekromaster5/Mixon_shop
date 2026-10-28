@@ -32,3 +32,17 @@ def test_menu_shows_categories_and_types_of_their_section(client):
 def test_category_without_section_is_not_in_menu(client):
     Category.objects.create(name="Без раздела")
     assert "Без раздела" not in client.get("/catalogue/").content.decode()
+
+
+@pytest.mark.django_db
+def test_mobile_menu_accordion_lists_fixed_sections_and_db_content(client):
+    wall = Category.objects.create(name="Краски для стен", menu_section="building")
+    facade = ProductType.objects.create(name="Фасадные краски")
+    facade.categories.add(wall)
+
+    text = client.get("/catalogue/").content.decode()
+    mobile = text.split('id="mobile_open_menu"')[1].split('id="menu"')[0]
+    for key, _label in MENU_SECTIONS:
+        assert mobile.count("mobile-catalog__toggle") == len(MENU_SECTIONS)
+    assert "Краски для стен" in mobile
+    assert f"?product_category_id={wall.id}&amp;type={facade.id}" in mobile
