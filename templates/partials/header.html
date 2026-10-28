@@ -154,6 +154,57 @@ margin-left:400px;
     }
 
 
+    /* Меню «Каталог товаров»: слева категории, справа типы товаров
+       наведённой категории. Типы идут в одну колонку и переносятся во
+       вторую, только если не поместились по высоте. */
+    .catalog-menu {
+        display: flex;
+        height: 100%;
+    }
+
+    .catalog-menu .item {
+        align-items: center;
+        color: inherit;
+        text-decoration: none;
+        break-inside: avoid;
+    }
+
+    .catalog-menu .item p {
+        margin: 0;
+    }
+
+    .catalog-menu .item:hover p,
+    .catalog-menu__category.is-active p {
+        color: red;
+    }
+
+    .catalog-menu__categories {
+        flex: 0 0 270px;
+    }
+
+    .catalog-menu__category img,
+    .catalog-menu__icon-placeholder {
+        flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        margin-right: 12px;
+        object-fit: contain;
+    }
+
+    .catalog-menu__types {
+        display: none;
+        height: 100%;
+        padding-left: 20px;
+        columns: 2 230px;
+        column-gap: 40px;
+        column-fill: auto;
+    }
+
+    .catalog-menu__types.is-active {
+        display: block;
+    }
+
+
     .close-menu-button {
         display: block;
         margin-bottom: 20px;
@@ -426,119 +477,38 @@ margin-left:400px;
 
             </div>
             <div id="menu" class="menu">
-                <div style="display:flex;">
-                    <div class="main_high_button">
-                        <div class="item" style="padding-top:10px;"
-                             onclick="">
-                            <img
-                                    src="{% static '/src/assets/img/icon/akciya 1.svg' %}" alt="">
+                <div class="catalog-menu">
+                    <div class="main_high_button catalog-menu__categories">
+                        <a class="item catalog-menu__category" style="padding-top:10px;"
+                           href="{% url 'catalogue' filters='discounted-goods' %}">
+                            <img src="{% static '/src/assets/img/icon/akciya 1.svg' %}" alt="">
                             <p style="color:red;font-weight: 500;">Акции</p>
-                        </div>
-                        <div class="item" style=" "
-                             onclick="">
-                            <img style=" "
-                                 src="{% static '/src/assets/img/icon/lkm-stroitelstvo 1.svg' %}" alt="">
-                            <p style="font-weight: 500;position:relative; ">
-                                ЛКМ для Строительства</p>
-                        </div>
-                        <div class="item" style=" "
-                             onclick="">
-                            <img style=" "
-                                 src="{% static '/src/assets/img/icon/lkm-autoremont 1.svg' %}" alt="">
-                            <p style="font-weight: 500;">ЛКМ для Авторемонта</p>
-                        </div>
-                        <div class="item" style=" "
-                             onclick="">
-                            <img style=" "
-                                 src="{% static '/src/assets/img/icon/lkm-derevo 1.svg' %}" alt="">
-                            <p style="font-weight: 500;">ЛКМ для Древообработки</p>
-                        </div>
-                        <div class="item" style=" "
-                             onclick="">
-                            <img style=" "
-                                 src="{% static '/src/assets/img/icon/lkm-industry 1.svg' %}" alt="">
-                            <p style="font-weight: 500;">ЛКМ для Промышленности</p>
-                        </div>
-                        <div class="item" style=" "
-                             onclick="">
-                            <img style=" "
-                                 src="{% static '/src/assets/img/icon/auto-chemikal 1.svg' %}" alt="">
-                            <p style="font-weight: 500;">Автохимия,автокосметика,<br>
-                                оборудование для автомоек</p>
-                        </div>
-                        <div class="item" style=" "
-                             onclick="">
-                            <img style=" "
-                                 src="{% static '/src/assets/img/icon/instrument 1.svg' %}" alt="">
-                            <p style="font-weight: 500;">Инструменты, аксесуары,<br>
-                                оборудование</p>
-                        </div>
+                        </a>
+                        {% for category in catalog_menu_categories %}
+                            <a class="item catalog-menu__category" data-category-id="{{ category.id }}"
+                               href="{% url 'catalogue' %}?product_category_id={{ category.id }}">
+                                {% if category.fallback_icon %}
+                                    <img src="{% static category.fallback_icon %}" alt="">
+                                {% elif category.image %}
+                                    <img src="{{ category.image.url }}" alt="">
+                                {% else %}
+                                    <span class="catalog-menu__icon-placeholder"></span>
+                                {% endif %}
+                                <p style="font-weight: 500;">{{ category.name }}</p>
+                            </a>
+                        {% endfor %}
                     </div>
-                    <div class="second_main_high_button" style="padding-left:20px; width:230px;">
-                        <div class="item" style="padding-top:10px;"
-                             onclick="">
-
-                            <p style="font-weight: 500;position:relative; ">
-                                Краски и грунты для стен и потолка</p>
+                    {% for category in catalog_menu_categories %}
+                        <div class="catalog-menu__types" data-category-id="{{ category.id }}">
+                            {% for product_type in category.product_types.all %}
+                                <a class="item catalog-menu__type"
+                                   href="{% url 'catalogue' %}?product_category_id={{ category.id }}&amp;type={{ product_type.id }}">
+                                    <p style="font-weight: 500;">{{ product_type.name }}</p>
+                                </a>
+                            {% endfor %}
                         </div>
-                        <div class="item" style=" "
-                             onclick="">
-
-                            <p style="font-weight: 500;">Фасадные краски и грунты</p>
-                        </div>
-                        <div class="item" style=" "
-                             onclick="">
-
-                            <p style="font-weight: 500;">Отдлелочные материалы для фасадов</p>
-                        </div>
-                        <div class="item" style=" "
-                             onclick="">
-
-                            <p style="font-weight: 500;">Универсальные грунты и краски</p>
-                        </div>
-                        <div class="item" style=" "
-                             onclick="">
-
-                            <p style="font-weight: 500;">Грунты, краски и материалы Спец назначения</p>
-                        </div>
-                        <div class="item" style=" "
-                             onclick="">
-
-                            <p style="font-weight: 500;">Аэрозольные эмали</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="third_main_high_button" style="padding-left:60px; ">
-                            <div class="item" style="padding-top:10px;"
-                                 onclick="">
-
-                                <p style="font-weight: 500;position:relative; ">
-                                    Древозащитные средства</p>
-                            </div>
-                            <div class="item" style=" "
-                                 onclick="">
-
-                                <p style="font-weight: 500;">Лаки для дерева</p>
-                            </div>
-                            <div class="item" style=" "
-                                 onclick="">
-
-                                <p style="font-weight: 500;">Декоративные материалы</p>
-                            </div>
-                            <div class="item" style=" "
-                                 onclick="">
-
-                                <p style="font-weight: 500;">Пена монтажная</p>
-                            </div>
-                            <div class="item" style=" "
-                                 onclick="">
-
-                                <p style="font-weight: 500;">Растворители</p>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
-
             </div>
             <div class="header__search--widget   d-lg-block header__sticky--none" style="
                     margin-left:100px; ">
@@ -575,8 +545,9 @@ margin-left:400px;
                     <a href="{% url 'logout' %}" class="icon-button" title="{% translate "Выйти из аккаунта" %}"
                        style="background: none;border: none;position:relative;font-size:1.2rem;">{% translate "Выйти" %}</a>
                 {% endif %}
-                <a href="{% url 'cabinet' %}" class="icon-button "
+                <a href="{% url 'compare' %}" class="icon-button" title="{% translate "Сравнение" %}"
                    style="background: none;border: none;position:relative; ">
+                    <span class="header-compare-badge" data-compare-count{% if not compare_count %} hidden{% endif %}>{{ compare_count }}</span>
                     <svg width="25" height="23" viewBox="0 0 25 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.81787 22.2263C7.98792 21.15 8.53361 20.1701 9.35669 19.4627C10.1798 18.7552 11.2264 18.3666 12.3085 18.3666C13.3906 18.3666 14.4372 18.7552 15.2603 19.4627C16.0833 20.1701 16.6289 21.15 16.799 22.2263H7.81787Z"
                               stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round"></path>
@@ -646,6 +617,24 @@ margin-left:400px;
         const openMenuButton = document.getElementById('openMenuButton');
         const overlay = document.getElementById('overlay');
         const menu = document.getElementById('menu');
+
+        // Наведение на категорию показывает её типы товаров
+        const categoryItems = menu.querySelectorAll('.catalog-menu__category');
+        const typePanels = menu.querySelectorAll('.catalog-menu__types');
+        const showCategory = (categoryId) => {
+            categoryItems.forEach((item) => {
+                item.classList.toggle('is-active', item.dataset.categoryId === categoryId);
+            });
+            typePanels.forEach((panel) => {
+                panel.classList.toggle('is-active', panel.dataset.categoryId === categoryId);
+            });
+        };
+        categoryItems.forEach((item) => {
+            item.addEventListener('mouseenter', () => showCategory(item.dataset.categoryId));
+        });
+        if (typePanels.length) {
+            showCategory(typePanels[0].dataset.categoryId);
+        }
 
         openMenuButton.addEventListener('click', () => {
             overlay.style.display = 'block';

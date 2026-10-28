@@ -79,6 +79,8 @@ TEMPLATES = [
                 'django.template.context_processors.i18n',
                 'Mixon_shop.context_processors.google_maps',
                 'Mixon_shop.context_processors.brands',
+                'Mixon_shop.context_processors.catalog_menu',
+                'Mixon_shop.context_processors.compare',
             ],
             'loaders': [
                 'admin_tools.template_loaders.Loader',  # Make sure this is at the beginning

@@ -32,6 +32,7 @@ from .models import UserProfile, Region
 from .forms import UserLoginForm
 from .models import MainPageBanner
 from .session_cart import SessionCart
+from .session_compare import SessionCompare, COMPARE_MAX_PRODUCTS
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import redirect_to_login
 from django.utils.decorators import method_decorator
@@ -195,6 +196,9 @@ class ProductPage(View):
             'likes_count': product.favoriteproduct_set.count(),
             'reviews_count': product.reviews.count(),
             'stars': rating_to_stars(product.average_rating),
+            # Срок доставки считается от сегодняшнего дня: в отделение до 2 дней, до квартиры до 3
+            'delivery_date_branch': (now() + timedelta(days=2)).strftime('%d.%m'),
+            'delivery_date_home': (now() + timedelta(days=3)).strftime('%d.%m'),
             'related_products': related_products,
             'similar_products': similar_products,
         })
@@ -1251,3 +1255,55 @@ def submit_review(request, product_id):
 
     messages.success(request, _("Спасибо, ваш отзыв опубликован!"))
     return redirect('product', product_id=product.id)
+
+
+@require_POST
+def compare_toggle(request, product_id):
+    """Добавить товар в сравнение или убрать (кнопка со «весами» у сердечка)."""
+    product = get_object_or_404(Product, id=product_id)
+    compare_list = SessionCompare(request)
+    status = compare_list.toggle(product)
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({
+            'status': status,
+            'count': len(compare_list),
+            'max': COMPARE_MAX_PRODUCTS,
+            'message': _('В сравнение можно добавить не более %(max)d товаров.') % {'max': COMPARE_MAX_PRODUCTS}
+            if status == 'full' else '',
+        })
+    return redirect(_safe_redirect_target(request))
+
+
+@require_POST
+def compare_remove(request, product_id):
+    SessionCompare(request).remove(product_id)
+    return redirect('compare')
+
+
+@require_POST
+def compare_clear(request):
+    SessionCompare(request).clear()
+    return redirect('compare')
+
+
+def compare_page(request):
+    """Страница сравнения: товары столбцами, характеристики строками."""
+    products = SessionCompare(request).products()
+    names = []
+    for product in products:
+        for item in product.characteristic_values.all():
+            if item.value and item.characteristic.name not in names:
+                names.append(item.characteristic.name)
+    rows = []
+    for name in names:
+        values = []
+        for product in products:
+            value = next((i.value for i in product.characteristic_values.all()
+                          if i.characteristic.name == name and i.value), '')
+            values.append(value)
+        rows.append({'name': name, 'values': values, 'differs': len(set(values)) > 1})
+    return render(request, 'compare.html', {
+        'products': products,
+        'rows': rows,
+        'max_products': COMPARE_MAX_PRODUCTS,
+    })

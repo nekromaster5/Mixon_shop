@@ -22,7 +22,7 @@ def test_colors_come_from_stock_without_duplicates(client, product, branch):
 
     assert text.count("MA603BAL") == 1
     assert text.count("MA100") == 1
-    assert '<p class="table_quantity">5</p>' in text
+    assert '<span class="pc-qty">5</span>' in text
     assert "1л." in text
     assert "3л." not in text
 
@@ -31,8 +31,8 @@ def test_colors_come_from_stock_without_duplicates(client, product, branch):
 def test_product_without_stock_hides_color_and_package_blocks(client, product):
     text = client.get(f"/product/{product.id}/").content.decode()
 
-    assert 'class="product_table"' not in text
-    assert 'class="package_block"' not in text
+    assert 'class="pc-table"' not in text
+    assert 'pd-pack' not in text
     assert "MA603BAL" not in text
     assert "Немає фото" in text
 
@@ -41,8 +41,8 @@ def test_product_without_stock_hides_color_and_package_blocks(client, product):
 def test_delivery_rows_have_distinct_names(client, product):
     text = client.get(f"/product/{product.id}/").content.decode()
 
-    assert "Кур’єрська доставка" in text
-    assert "Доставка Новою поштою" in text
+    assert "Самовивіз із відділення" in text
+    assert "Доставка до квартири" in text
     assert "Доставят до 01.07" not in text
 
 

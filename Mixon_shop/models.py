@@ -395,6 +395,13 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def current_price(self):
+        """Цена, по которой товар продаётся сейчас: со скидкой, если она включена."""
+        if self.is_discounted and self.discount_price is not None:
+            return self.discount_price
+        return self.price
+
 
 class Characteristic(models.Model):
     """Характеристика из списка категории (например, «Сухой остаток»).
