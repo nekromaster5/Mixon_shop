@@ -658,7 +658,7 @@ class Review(models.Model):
     def display_name(self):
         if self.user_id:
             return self.user.get_full_name() or self.user.username
-        return self.reviewer_name or "Аноним"
+        return self.reviewer_name or _("Аноним")
 
     def __str__(self):
         return f"{self.display_name} — {self.product} ({self.rating})"

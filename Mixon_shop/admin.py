@@ -87,7 +87,7 @@ class ProductParameterValueInline(admin.TabularInline):
         return format_html('{} шт. · <a href="{}">добавить/изменить фото</a>', obj.images.count(), url)
 
 
-class ProductTableRowInline(admin.TabularInline):
+class ProductTableRowInline(TranslationTabularInline):
     model = ProductTableRow
     extra = 1
     fields = ('vendor_code', 'name', 'rgb_code', 'order')
@@ -476,16 +476,16 @@ class PromoCodeAdmin(HelpTextMixin, admin.ModelAdmin):
 
 
 @admin.register(OrderStatus)
-class OrderStatusAdmin(admin.ModelAdmin):
+class OrderStatusAdmin(TranslationAdmin):
     list_display = ('id', 'name')
-    search_fields = ('name',)
+    search_fields = ('name_uk', 'name_ru')
 
 
 @admin.register(ShipmentMethod)
-class ShipmentMethodAdmin(admin.ModelAdmin):
+class ShipmentMethodAdmin(TranslationAdmin):
     list_display = ('logo', 'name')
     list_display_links = ('logo', 'name')
-    search_fields = ('name',)
+    search_fields = ('name_uk', 'name_ru')
 
     @admin.display(description='логотип')
     def logo(self, obj):
@@ -493,10 +493,10 @@ class ShipmentMethodAdmin(admin.ModelAdmin):
 
 
 @admin.register(PaymentMethod)
-class PaymentMethodAdmin(admin.ModelAdmin):
+class PaymentMethodAdmin(TranslationAdmin):
     list_display = ('logo', 'name')
     list_display_links = ('logo', 'name')
-    search_fields = ('name',)
+    search_fields = ('name_uk', 'name_ru')
 
     @admin.display(description='логотип')
     def logo(self, obj):
@@ -506,12 +506,12 @@ class PaymentMethodAdmin(admin.ModelAdmin):
 # ---------------------------------------------------------------- Главная страница и новости
 
 @admin.register(MainPageBanner)
-class MainPageBannerAdmin(HelpTextMixin, admin.ModelAdmin):
+class MainPageBannerAdmin(HelpTextMixin, TranslationAdmin):
     list_display = ('preview', 'description', 'is_used')
     list_display_links = ('preview', 'description')
     list_editable = ('is_used',)
     list_filter = ('is_used',)
-    search_fields = ('description',)
+    search_fields = ('description_uk', 'description_ru')
     HELP_TEXTS = {'is_used': 'Снимите отметку, чтобы убрать баннер с главной, не удаляя его.'}
 
     @admin.display(description='баннер')
@@ -616,10 +616,11 @@ class ScheduleTemplateItemInline(admin.TabularInline):
 
 
 @admin.register(Branch)
-class BranchAdmin(HelpTextMixin, admin.ModelAdmin):
+class BranchAdmin(HelpTextMixin, TranslationAdmin):
     list_display = ('address_short', 'city', 'schedule_template')
     list_filter = ('city', 'schedule_template')
-    search_fields = ('address_short', 'address_base', 'city__name')
+    search_fields = ('address_short_uk', 'address_short_ru', 'address_base_uk', 'address_base_ru',
+                     'city__name_uk', 'city__name_ru')
     list_select_related = ('city', 'schedule_template')
     filter_horizontal = ('phone_numbers', 'email')
     inlines = [BranchScheduleInline, BranchScheduleExceptionInline]
@@ -652,15 +653,15 @@ class ScheduleTemplateAdmin(admin.ModelAdmin):
 
 
 @admin.register(City)
-class CityAdmin(admin.ModelAdmin):
+class CityAdmin(TranslationAdmin):
     list_display = ('name',)
-    search_fields = ('name',)
+    search_fields = ('name_uk', 'name_ru')
 
 
 @admin.register(Region)
-class RegionAdmin(admin.ModelAdmin):
+class RegionAdmin(TranslationAdmin):
     list_display = ('name',)
-    search_fields = ('name',)
+    search_fields = ('name_uk', 'name_ru')
 
 
 @admin.register(PhoneNumber)

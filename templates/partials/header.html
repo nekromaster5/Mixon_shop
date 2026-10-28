@@ -482,7 +482,7 @@ margin-left:400px;
                         <a class="item catalog-menu__category" style="padding-top:10px;"
                            href="{% url 'catalogue' filters='discounted-goods' %}">
                             <img src="{% static '/src/assets/img/icon/akciya 1.svg' %}" alt="">
-                            <p style="color:red;font-weight: 500;">Акции</p>
+                            <p style="color:red;font-weight: 500;">{% translate "Акции" %}</p>
                         </a>
                         {% for category in catalog_menu_categories %}
                             <a class="item catalog-menu__category" data-category-id="{{ category.id }}"

@@ -755,7 +755,8 @@ def get_branch_details(request):
         # Сортируем дни по порядку
         days.sort(key=lambda x: DAY_ORDER[x])
         if key == "closed":
-            schedule_lines.append(f"{', '.join(DAYS_SHORT[day] for day in days)}: {_('Закрыто')}")
+            closed = _('Закрыто')
+            schedule_lines.append(f"{', '.join(str(DAYS_SHORT[day]) for day in days)}: {closed}")
         else:
             # Объединяем последовательные дни в диапазоны
             ranges = []
@@ -826,10 +827,14 @@ def create_order(request):
         data = json.loads(request.body)
 
         # Проверяем обязательные поля
-        required_fields = ['name', 'shipment_method', 'order_place', 'payment_method', 'goods_cost', 'shipment_cost']
-        for field in required_fields:
+        required_fields = {
+            'name': _('Имя'), 'shipment_method': _('Способ доставки'), 'order_place': _('Филиал'),
+            'payment_method': _('Способ оплаты'), 'goods_cost': _('Стоимость товаров'),
+            'shipment_cost': _('Стоимость доставки'),
+        }
+        for field, label in required_fields.items():
             if field not in data or data[field] is None:
-                return JsonResponse({"success": False, "error": _("Поле '%(field)s' обязательно для заполнения.") % {'field': field}},
+                return JsonResponse({"success": False, "error": _("Поле «%(field)s» обязательно для заполнения.") % {'field': label}},
                                     status=400)
 
         # Проверяем, что хотя бы одно из полей phone или email заполнено
@@ -1002,6 +1007,14 @@ def _safe_redirect_target(request):
     return '/'
 
 
+def _form_errors_to_messages(request, form):
+    """Ошибки формы в messages: с подписью поля на языке сайта, а не с его именем в коде."""
+    for field, errors in form.errors.items():
+        label = form.fields[field].label if field in form.fields else None
+        for error in errors:
+            messages.error(request, f"{label}: {error}" if label else error)
+
+
 def _send_activation_email(request, user):
     uid = urlsafe_base64_encode(force_bytes(user.pk))
     token = default_token_generator.make_token(user)
@@ -1029,9 +1042,7 @@ def login_view(request):
             login(request, user)
             messages.success(request, _("Вы успешно вошли!"))
         else:
-            for field, errors in form.errors.items():
-                for error in errors:
-                    messages.error(request, f"{field}: {error}")
+            _form_errors_to_messages(request, form)
 
     return redirect(_safe_redirect_target(request))
 
@@ -1069,9 +1080,7 @@ def register_view(request):
             )
         else:
             # собираем ошибки и передаем через messages
-            for field, errors in form.errors.items():
-                for error in errors:
-                    messages.error(request, f"{field}: {error}")
+            _form_errors_to_messages(request, form)
 
     # После обработки всегда редирект на ту же страницу, где есть модалка
     return redirect(_safe_redirect_target(request))
@@ -1106,9 +1115,7 @@ def profile_update(request):
         form.save()
         messages.success(request, _("Данные профиля обновлены."))
     else:
-        for field, errors in form.errors.items():
-            for error in errors:
-                messages.error(request, f"{field}: {error}")
+        _form_errors_to_messages(request, form)
     return _back_to_cabinet_tab('contact_information')
 
 
@@ -1122,9 +1129,7 @@ def change_password_view(request):
         update_session_auth_hash(request, user)
         messages.success(request, _("Пароль изменён."))
     else:
-        for field, errors in form.errors.items():
-            for error in errors:
-                messages.error(request, f"{field}: {error}")
+        _form_errors_to_messages(request, form)
     return _back_to_cabinet_tab('contact_information')
 
 

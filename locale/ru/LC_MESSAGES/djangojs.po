@@ -2,101 +2,88 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Mixon Shop\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 19:43+0000\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-#: Mixon_shop/static/src/assets/js/applyPromo.js:42
 msgid "Введите промокод."
 msgstr "Введите промокод."
 
-#: Mixon_shop/static/src/assets/js/applyPromo.js:47
 msgid "Этот промокод уже применен."
 msgstr "Этот промокод уже применен."
 
-#: Mixon_shop/static/src/assets/js/applyPromo.js:80
 #, javascript-format
 msgid "Промокод применен! Ваша скидка: %s"
 msgstr "Промокод применен! Ваша скидка: %s"
 
-#: Mixon_shop/static/src/assets/js/applyPromo.js:84
-#: Mixon_shop/static/src/assets/js/confirmOrder.js:97
 #, javascript-format
 msgid "Ошибка: %s"
 msgstr "Ошибка: %s"
 
-#: Mixon_shop/static/src/assets/js/cabinetOrderInfoCollapse.js:18
 msgid "Свернуть >>"
 msgstr "Свернуть >>"
 
-#: Mixon_shop/static/src/assets/js/cabinetOrderInfoCollapse.js:21
 msgid "Детально >>"
 msgstr "Детально >>"
 
-#: Mixon_shop/static/src/assets/js/cabinetProductBlocksCollapse.js:20
-#: Mixon_shop/static/src/assets/js/cabinetProductBlocksCollapse.js:23
 msgid "Развернуть"
 msgstr "Развернуть"
 
-#: Mixon_shop/static/src/assets/js/cabinetProductBlocksCollapse.js:21
 msgid "Свернуть"
 msgstr "Свернуть"
 
-#: Mixon_shop/static/src/assets/js/cartActions.js:42
 msgid "Товар добавлен в корзину!"
 msgstr "Товар добавлен в корзину!"
 
-#: Mixon_shop/static/src/assets/js/cartActions.js:46
 msgid "Ошибка при добавлении товара."
 msgstr "Ошибка при добавлении товара."
 
-#: Mixon_shop/static/src/assets/js/checkoutPageSectionsFolding.js:186
 msgid "Способ доставки не выбран"
 msgstr "Способ доставки не выбран"
 
-#: Mixon_shop/static/src/assets/js/checkoutPageSectionsFolding.js:199
 msgid "Способ оплаты не выбран"
 msgstr "Способ оплаты не выбран"
 
-#: Mixon_shop/static/src/assets/js/checkoutPageSectionsFolding.js:211
 msgid "Комментариев нет"
 msgstr "Комментариев нет"
 
-#: Mixon_shop/static/src/assets/js/confirmOrder.js:101
-msgid "Произошла ошибка при создании заказа. Пожалуйста, попробуйте снова."
-msgstr "Произошла ошибка при создании заказа. Пожалуйста, попробуйте снова."
+msgid "Не удалось обновить сравнение. Попробуйте ещё раз."
+msgstr "Не удалось обновить сравнение. Попробуйте ещё раз."
 
-#: Mixon_shop/static/src/assets/js/confirmOrder.js:11
 msgid "Пожалуйста, выберите способ доставки."
 msgstr "Пожалуйста, выберите способ доставки."
 
-#: Mixon_shop/static/src/assets/js/confirmOrder.js:19
 msgid "Пожалуйста, выберите филиал для доставки."
 msgstr "Пожалуйста, выберите филиал для доставки."
 
-#: Mixon_shop/static/src/assets/js/confirmOrder.js:26
 msgid "Пожалуйста, выберите способ оплаты."
 msgstr "Пожалуйста, выберите способ оплаты."
 
-#: Mixon_shop/static/src/assets/js/confirmOrder.js:34
 msgid "Пожалуйста, укажите ваше имя."
 msgstr "Пожалуйста, укажите ваше имя."
 
-#: Mixon_shop/static/src/assets/js/confirmOrder.js:39
 msgid "Пожалуйста, укажите хотя бы телефон или email для связи."
 msgstr "Пожалуйста, укажите хотя бы телефон или email для связи."
 
-#: Mixon_shop/static/src/assets/js/confirmOrder.js:54
 msgid "Корзина пуста. Добавьте товары перед оформлением заказа."
 msgstr "Корзина пуста. Добавьте товары перед оформлением заказа."
 
-#: Mixon_shop/static/src/assets/js/confirmOrder.js:92
 msgid "Ваш заказ принят"
 msgstr "Ваш заказ принят"
 
-#: Mixon_shop/static/src/assets/js/registrationModal.js:63
+msgid "Произошла ошибка при создании заказа. Пожалуйста, попробуйте снова."
+msgstr "Произошла ошибка при создании заказа. Пожалуйста, попробуйте снова."
+
+msgid "Войдите в аккаунт, чтобы добавлять товары в избранное."
+msgstr "Войдите в аккаунт, чтобы добавлять товары в избранное."
+
+msgid "Не удалось обновить избранное. Попробуйте ещё раз."
+msgstr "Не удалось обновить избранное. Попробуйте ещё раз."
+
 msgid "Пароли не совпадают"
 msgstr "Пароли не совпадают"
 
