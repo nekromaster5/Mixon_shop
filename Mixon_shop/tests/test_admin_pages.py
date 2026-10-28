@@ -10,7 +10,8 @@ from django.urls import reverse
 from Mixon_shop.models import (
     Brand, BranchSchedule, BranchScheduleException, Characteristic, Color, ContentBlock, EmailAddress,
     ErrorMessages, FavoriteProduct, InfoMessages, MainPageBanner, MainPageSections, News, NewsCategory, Order,
-    OrderProduct, PhoneNumber, PromoCode, ProductCharacteristic, ProductImage, ProductRequest, ProductStock,
+    OrderProduct, PhoneNumber, PromoCode, ProductCharacteristic, ProductImage, ProductParameter, ProductParameterImage,
+    ProductParameterValue, ProductRequest, ProductTableRow, ProductStock,
     RecommendedProducts, Review, SalesLeaders, ScheduleTemplate, ScheduleTemplateItem, Volume, BindingSubstance,
 )
 
@@ -33,6 +34,11 @@ def filled_db(product, branch, region, shipment_method, payment_method, order_st
     color = Color.objects.create(vendor_code="RAL 9003", name="Белый", rgb_code="#ffffff")
     ProductStock.objects.create(product=product, branch=branch, volume=volume, color=color, quantity=3)
     ProductImage.objects.create(product=product, image="products/images/test.png")
+    product.parameter = ProductParameter.objects.create(name="Упаковка", unit="л")
+    product.save()
+    parameter_value = ProductParameterValue.objects.create(product=product, value="2.5")
+    ProductParameterImage.objects.create(parameter_value=parameter_value, image="products/parameters/p.png")
+    ProductTableRow.objects.create(product=product, vendor_code="RAL 9003", name="Белый", rgb_code="#ffffff")
     characteristic = Characteristic.objects.create(name="Сухой остаток")
     characteristic.categories.add(product.category)
     ProductCharacteristic.objects.create(product=product, characteristic=characteristic, value="50%")
@@ -133,6 +139,13 @@ def test_product_saved_with_packages_colors_brand_and_characteristics(superuser_
         "price": "450.00", "discount_price": "399.00", "is_discounted": "on", "is_new": "on",
         "description_uk": "Опис", "description_ru": "Описание",
         **management_form("images", 0),
+        "parameter": "", "table_title_uk": "Відтінок", "table_title_ru": "Оттенок",
+        **management_form("parameter_values", 2),
+        "parameter_values-0-value": "1", "parameter_values-0-order": "0",
+        "parameter_values-1-value": "5", "parameter_values-1-order": "1",
+        **management_form("table_rows", 1),
+        "table_rows-0-vendor_code": "RAL 9003", "table_rows-0-name_uk": "Білий", "table_rows-0-name_ru": "Белый",
+        "table_rows-0-order": "0",
         **management_form("productstock_set", 2),
         "productstock_set-0-branch": branch.pk, "productstock_set-0-volume": small.pk,
         "productstock_set-0-color": white.pk, "productstock_set-0-quantity": "5",
@@ -163,6 +176,8 @@ def test_product_saved_with_packages_colors_brand_and_characteristics(superuser_
     response = superuser_client.get(reverse("admin:Mixon_shop_product_change", args=[product.pk]))
     assert response.status_code == 200
     assert "RAL 9003" in response.content.decode()
+    assert [str(v.value) for v in product.parameter_values.all()] == ["1.000", "5.000"]
+    assert product.table_rows.get().vendor_code == "RAL 9003" and product.table_title_ru == "Оттенок"
 
 
 @pytest.mark.django_db

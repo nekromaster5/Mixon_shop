@@ -12029,6 +12029,36 @@ body.registration-modal-open { overflow: hidden; }
     border: 1px solid #AEADAA;
 }
 
+.pc-qty__input {
+    width: 44px;
+    height: 24px;
+    padding: 0;
+    text-align: center;
+    font: inherit;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #AEADAA;
+    border-radius: 0;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.pc-qty__input:focus {
+    outline: 0;
+    border-bottom-color: var(--secondary-color);
+}
+
+.pc-qty__input::-webkit-outer-spin-button,
+.pc-qty__input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.product-color-option {
+    cursor: pointer;
+}
+
 .product-color-option.is-selected .product-color-checkbox {
     background-color: var(--secondary-color) !important;
     border-color: var(--secondary-color) !important;
@@ -12421,7 +12451,7 @@ body.registration-modal-open { overflow: hidden; }
 
 .pc-row {
     display: grid;
-    grid-template-columns: 40px 126px 97px 80px 53px;
+    grid-template-columns: 40px 126px 97px 60px 73px;
     align-items: center;
     height: 30px;
     border-bottom: 1px solid #E9E7E6;
@@ -12455,7 +12485,7 @@ body.registration-modal-open { overflow: hidden; }
 }
 
 .pc-qty {
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 .pc-table .product-color-checkbox {

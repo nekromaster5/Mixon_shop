@@ -119,6 +119,7 @@
                                     {% endif %}
                                 {% else %}
                                     <div class="pd-main__empty">{% translate "Нет фото" %}</div>
+                                <img id="product-main-image" src="" alt="{{ product.name }}" hidden>
                                 {% endif %}
                             </div>
                             {% if images|length > 1 %}
@@ -260,36 +261,39 @@
                                         <span class="visually-hidden">Want Cheaper</span>
                                     </a>
                         </div>
-                        {% if volumes %}
+                        {% if parameter_values %}
                         <div class="package_block pd-pack">
-                            <div class="pd-label">{% translate "Упаковка:" %}</div>
+                            <div class="pd-label">{{ parameter_name }}:</div>
                             <div class="pd-pack__list">
-                                {% for volume in volumes %}
-                                    <button type="button" class="button_{{ forloop.counter0 }} product-volume-option pd-pack__item">
-                                        {{ volume.size|floatformat:"-2" }}{% translate "л." %}
+                                {% for value in parameter_values %}
+                                    <button type="button" class="product-volume-option pd-pack__item"
+                                            data-parameter-value="{{ value.id }}"
+                                            data-images="{% for image in value.images.all %}{{ image.image.url }}{% if not forloop.last %}|{% endif %}{% endfor %}">
+                                        {{ value.label }}
                                     </button>
                                 {% endfor %}
                             </div>
                         </div>
                         {% endif %}
-                        {% if colors %}
+                        {% if table_rows %}
                         <div class="pd-colors">
-                            <div class="pd-label">{% translate "Цвет:" %}</div>
+                            <div class="pd-label">{{ table_title }}:</div>
                             <div class="pc-table">
                                 <div class="pc-row pc-row--head">
                                     <span></span>
                                     <span>{% translate "Артикул" %}</span>
-                                    <span>{% translate "Название цвета" %}</span>
+                                    <span>{% translate "Название" %}</span>
                                     <span></span>
                                     <span class="pc-qty">{% translate "Кол-во" %}</span>
                                 </div>
-                                {% for color in colors %}
-                                    <div class="pc-row product-color-option" data-color-id="{{ color.color__id }}">
-                                        <span><button type="button" class="product-color-checkbox" aria-pressed="false" aria-label="{{ color.color__name }}"></button></span>
-                                        <span>{{ color.color__vendor_code }}</span>
-                                        <span>{{ color.color__name }}</span>
-                                        <span><i class="pc-dot" style="background-color: {{ color.color__rgb_code }};"></i></span>
-                                        <span class="pc-qty">{{ color.total }}</span>
+                                {% for row in table_rows %}
+                                    <div class="pc-row product-color-option" data-row-id="{{ row.id }}">
+                                        <span><button type="button" class="product-color-checkbox" aria-pressed="false" aria-label="{{ row.name }}"></button></span>
+                                        <span>{{ row.vendor_code }}</span>
+                                        <span>{{ row.name }}</span>
+                                        <span>{% if row.rgb_code %}<i class="pc-dot" style="background-color: {{ row.rgb_code }};"></i>{% endif %}</span>
+                                        <span class="pc-qty"><input type="number" class="pc-qty__input" min="1" max="9999" value="1"
+                                                                    inputmode="numeric" aria-label="{% translate "Кол-во" %}"></span>
                                     </div>
                                 {% endfor %}
                             </div>
@@ -1140,8 +1144,6 @@
         <form id="product-request-form" action="{% url 'product_request' product.id %}" method="post" novalidate>
             {% csrf_token %}
             <input type="hidden" name="kind">
-            <input type="hidden" name="volume">
-            <input type="hidden" name="color">
             <input type="text" name="name" placeholder="{% translate 'Имя' %}" maxlength="150" required
                    value="{% if user.is_authenticated %}{{ user.first_name }}{% endif %}">
             <input type="tel" name="phone" placeholder="{% translate 'Телефон, например +380 67 123 45 67' %}" maxlength="18" required
@@ -1161,26 +1163,91 @@
     <script src="{% static '/src/assets/js/slider.js' %}"></script>
     <script src="{% static '/src/assets/js/breadcrumbSliderSetWidth.js' %}"></script>
     <script>
-        // Выбор упаковки и цвета: выбранные значения уходят в заявку «Быстрый заказ» / «Хочу дешевле»
-        function selectOption(selector, option) {
-            document.querySelectorAll(selector).forEach(el => {
-                const selected = el === option && !el.classList.contains('is-selected');
-                el.classList.toggle('is-selected', selected);
-                const pressed = el.matches('button') ? el : el.querySelector('button');
-                if (pressed) pressed.setAttribute('aria-pressed', selected ? 'true' : 'false');
+        // Упаковка (параметр) выбирается одна, строки таблицы — любое количество (в том числе ни одной).
+        function selectParameter(option) {
+            const select = !option.classList.contains('is-selected');
+            document.querySelectorAll('.product-volume-option').forEach(el => {
+                const on = select && el === option;
+                el.classList.toggle('is-selected', on);
+                el.setAttribute('aria-pressed', on ? 'true' : 'false');
             });
+            // Фото выбранного значения подменяют главное фото; без выбора возвращаются фото товара
+            const own = option.dataset.images ? option.dataset.images.split('|').filter(Boolean) : [];
+            setGallery(select && own.length ? own : null);
+        }
+
+        function toggleRow(row) {
+            const on = !row.classList.contains('is-selected');
+            row.classList.toggle('is-selected', on);
+            row.querySelector('button').setAttribute('aria-pressed', on ? 'true' : 'false');
+        }
+
+        // Выбранное на странице: {parameter_value, rows: [{id, quantity}]}
+        function currentSelection() {
+            const value = document.querySelector('.product-volume-option.is-selected');
+            const rows = Array.from(document.querySelectorAll('.product-color-option.is-selected')).map(row => {
+                const quantity = parseInt(row.querySelector('.pc-qty__input').value, 10);
+                return {id: row.dataset.rowId, quantity: quantity > 0 ? quantity : 1};
+            });
+            return {parameterValue: value ? value.dataset.parameterValue : '', rows: rows};
+        }
+
+        // Кнопка «Купить» (cartActions.js) отправляет выбранные упаковку и строки таблицы с количеством
+        window.buildCartFormData = () => selectionToFormData(new FormData());
+
+        function selectionToFormData(formData) {
+            const selection = currentSelection();
+            if (selection.parameterValue) formData.append('parameter_value', selection.parameterValue);
+            selection.rows.forEach(row => {
+                formData.append('row', row.id);
+                formData.append('quantity_' + row.id, row.quantity);
+            });
+            return formData;
         }
 
         // Карусель на телефоне: стрелки, полоски-индикаторы и свайп листают те же фото, что и миниатюры
-        const galleryThumbs = Array.from(document.querySelectorAll('.pd-thumb'));
-        const galleryDashes = Array.from(document.querySelectorAll('.pd-dash'));
+        const thumbsBox = document.querySelector('.pd-thumbs');
+        const dashesBox = document.querySelector('.pd-dashes');
+        const mainImage = document.getElementById('product-main-image');
+        const emptyMain = document.querySelector('.pd-main__empty');
+        const productImages = Array.from(document.querySelectorAll('.pd-thumb')).map(el => el.dataset.imageUrl);
+        let galleryUrls = productImages;
         let galleryIndex = 0;
 
         function showGalleryImage(index) {
-            if (!galleryThumbs.length) return;
-            galleryIndex = (index + galleryThumbs.length) % galleryThumbs.length;
-            document.getElementById('product-main-image').src = galleryThumbs[galleryIndex].dataset.imageUrl;
-            galleryDashes.forEach((dash, i) => dash.classList.toggle('is-active', i === galleryIndex));
+            if (!galleryUrls.length) return;
+            galleryIndex = (index + galleryUrls.length) % galleryUrls.length;
+            mainImage.src = galleryUrls[galleryIndex];
+            document.querySelectorAll('.pd-dash').forEach((dash, i) => dash.classList.toggle('is-active', i === galleryIndex));
+        }
+
+        // Заменяет фото в галерее на фото выбранного значения параметра (null — вернуть фото товара)
+        function setGallery(urls) {
+            galleryUrls = (urls || productImages).slice(0, 4);
+            if (thumbsBox) {
+                thumbsBox.replaceChildren(...galleryUrls.map((url, i) => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'pd-thumb';
+                    button.dataset.imageUrl = url;
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.alt = mainImage.alt + ' ' + (i + 1);
+                    button.appendChild(img);
+                    return button;
+                }));
+            }
+            if (dashesBox) {
+                dashesBox.replaceChildren(...galleryUrls.map(() => {
+                    const dash = document.createElement('span');
+                    dash.className = 'pd-dash';
+                    return dash;
+                }));
+                dashesBox.hidden = galleryUrls.length < 2;
+            }
+            mainImage.hidden = !galleryUrls.length;
+            if (emptyMain) emptyMain.hidden = galleryUrls.length > 0;
+            showGalleryImage(0);
         }
 
         const galleryMain = document.querySelector('.pd-main');
@@ -1204,17 +1271,18 @@
             const thumb = event.target.closest('.carousel-buttons button');
             if (thumb) {
                 // Клик по миниатюре меняет главное фото
-                showGalleryImage(galleryThumbs.indexOf(thumb));
+                showGalleryImage(Array.from(thumbsBox.children).indexOf(thumb));
                 return;
             }
             const volume = event.target.closest('.product-volume-option');
             if (volume) {
-                selectOption('.product-volume-option', volume);
+                selectParameter(volume);
                 return;
             }
             const color = event.target.closest('.product-color-option');
             if (color) {
-                selectOption('.product-color-option', color);
+                // Поле количества не должно переключать отметку строки
+                if (!event.target.closest('.pc-qty__input')) toggleRow(color);
                 return;
             }
             const requestButton = event.target.closest('[data-request-kind]');
@@ -1227,6 +1295,7 @@
         const requestModal = document.getElementById('product-request-modal');
         const requestOverlay = document.getElementById('product-request-overlay');
         const requestForm = document.getElementById('product-request-form');
+        let requestSelection = {parameterValue: '', rows: []};
         const requestTexts = {
             quick_order: {
                 title: gettext('Быстрый заказ'),
@@ -1239,15 +1308,17 @@
         };
 
         function openProductRequest(kind) {
+            const selection = currentSelection();
             const selectedVolume = document.querySelector('.product-volume-option.is-selected');
-            const selectedColor = document.querySelector('.product-color-option.is-selected');
             const parts = [];
-            if (selectedVolume) parts.push(gettext('Упаковка:') + ' ' + selectedVolume.textContent.trim());
-            if (selectedColor) parts.push(gettext('Цвет:') + ' ' + Array.from(selectedColor.querySelectorAll(':scope > span')).slice(1, 3).map(cell => cell.textContent.trim()).join(' '));
+            if (selectedVolume) parts.push(document.querySelector('.pd-pack .pd-label').textContent.trim() + ' ' + selectedVolume.textContent.trim());
+            selection.rows.forEach(row => {
+                const cells = document.querySelector('.product-color-option[data-row-id="' + row.id + '"]').querySelectorAll(':scope > span');
+                parts.push(cells[1].textContent.trim() + ' ' + cells[2].textContent.trim() + ' × ' + row.quantity);
+            });
 
             requestForm.kind.value = kind;
-            requestForm.volume.value = selectedVolume ? selectedVolume.dataset.volumeId : '';
-            requestForm.color.value = selectedColor ? selectedColor.dataset.colorId : '';
+            requestSelection = selection;
             document.getElementById('product-request-title').textContent = requestTexts[kind].title;
             requestModal.querySelector('.product-request-modal__hint').textContent =
                 requestTexts[kind].hint + (parts.length ? ' ' + parts.join(', ') + '.' : '');
@@ -1277,7 +1348,7 @@
             submit.disabled = true;
             fetch(requestForm.action, {
                 method: 'POST',
-                body: new FormData(requestForm),
+                body: selectionToFormData(new FormData(requestForm)),
                 headers: {'X-Requested-With': 'XMLHttpRequest'},
             })
                 .then(response => response.json())

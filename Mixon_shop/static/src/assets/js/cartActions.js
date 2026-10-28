@@ -27,17 +27,21 @@ document.addEventListener('click', function (event) {
     if (button.dataset.pending === 'true') return;
     button.dataset.pending = 'true';
 
+    // На странице товара кнопка "Купить" этого товара отправляет ещё и выбранный вариант
+    const body = button.matches('.pd-buy') && window.buildCartFormData ? window.buildCartFormData() : null;
+
     fetch(`/cart/add/${productId}/`, {
         method: 'POST',
         headers: {
             'X-CSRFToken': getCsrfToken(),
             'X-Requested-With': 'XMLHttpRequest',
         },
+        body: body,
     })
-        .then(response => {
-            if (!response.ok) throw new Error('Network response was not ok');
-            return response.json();
-        })
+        .then(response => response.json().then(data => {
+            if (!response.ok) throw new Error(data.error || 'Network response was not ok');
+            return data;
+        }))
         .then(() => {
             alert(gettext('Товар добавлен в корзину!'));
         })

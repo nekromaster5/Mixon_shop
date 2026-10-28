@@ -84,8 +84,8 @@ urlpatterns = [
 
     # корзина и заказы
     path('cart/add/<int:product_id>/', cart_add, name='cart_add'),
-    path('cart/remove/<int:product_id>/', cart_remove, name='cart_remove'),
-    path('cart/update/<int:product_id>/', cart_update, name='cart_update'),
+    path('cart/remove/<str:item_key>/', cart_remove, name='cart_remove'),
+    path('cart/update/<str:item_key>/', cart_update, name='cart_update'),
     path('cart/clear/', cart_clear, name='cart_clear'),
     path('cart/', cart_detail, name='cart_detail'),
     path('apply-promo/', apply_promo_code, name='apply_promo_code'),
