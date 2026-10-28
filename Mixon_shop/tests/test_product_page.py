@@ -8,9 +8,10 @@ from Mixon_shop.models import (
 
 @pytest.mark.django_db
 def test_parameter_and_table_are_configured_in_admin(client, product):
-    weight = ProductParameter.objects.create(name="Вага", unit="кг")
+    weight = ProductParameter.objects.create(name_uk="Вага", name_ru="Вес", unit_uk="кг", unit_ru="кг")
     product.parameter = weight
-    product.table_title = "Відтінок"
+    product.table_title_uk = "Відтінок"
+    product.table_title_ru = "Оттенок"
     product.save()
     ProductParameterValue.objects.create(product=product, value="1.500")
     ProductParameterValue.objects.create(product=product, value="5")
