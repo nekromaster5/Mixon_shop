@@ -312,9 +312,23 @@ class BindingSubstance(models.Model):
         return self.name
 
 
+# Фиксированные разделы меню «Каталог товаров»: названия и иконки не редактируются,
+# админ лишь выбирает у категории, в каком разделе она показывается.
+MENU_SECTIONS = (
+    ('building', 'ЛКМ для Строительства'),
+    ('auto', 'ЛКМ для Авторемонта'),
+    ('wood', 'ЛКМ для Деревообработки'),
+    ('industry', 'ЛКМ для Промышленности'),
+    ('autochem', 'Автохимия, автокосметика, оборудование для автомоек'),
+    ('tools', 'Инструменты, аксессуары, оборудование'),
+)
+
+
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name='название категории')
     image = models.ImageField(upload_to='category/images/', blank=True, verbose_name='логотип категории')
+    menu_section = models.CharField(max_length=16, choices=MENU_SECTIONS, blank=True, default='',
+                                    verbose_name='раздел меню каталога')
 
     class Meta:
         verbose_name = "Категория товара"
