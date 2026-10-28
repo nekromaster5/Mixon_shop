@@ -43,10 +43,10 @@ document.addEventListener("DOMContentLoaded", function () {
         // Собираем данные о товарах и их количестве
         const productsData = {};
         document.querySelectorAll('.product--amount__input').forEach(input => {
-            const productId = input.closest('.cart__product--value').dataset.productId;
+            const cartKey = input.closest('.cart__product--value').dataset.cartKey;
             const quantity = parseInt(input.value, 10);
             if (quantity > 0) {  // Добавляем только товары с количеством больше 0
-                productsData[productId] = quantity;
+                productsData[cartKey] = quantity;
             }
         });
 
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
             comment: comment,
             goods_cost: finalCost,
             shipment_cost: shipmentCost,
-            products: productsData,  // Отправляем {product_id: quantity}
+            products: productsData,  // Отправляем {ключ строки корзины: quantity}
             promo_code: appliedPromoCode,
         };
 

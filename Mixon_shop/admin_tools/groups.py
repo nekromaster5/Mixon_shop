@@ -14,6 +14,7 @@ GROUPS = (
         'Mixon_shop.models.Category',
         'Mixon_shop.models.Brand',
         'Mixon_shop.models.Characteristic',
+        'Mixon_shop.models.ProductParameter',
         'Mixon_shop.models.Color',
         'Mixon_shop.models.Volume',
         'Mixon_shop.models.ProductType',
@@ -53,6 +54,7 @@ GROUPS = (
         'Mixon_shop.models.ErrorMessages',
         'Mixon_shop.models.InfoMessages',
         'Mixon_shop.models.ProductImage',
+        'Mixon_shop.models.ProductParameterValue',
         'django.contrib.auth.models.Group',
     )),
 )

@@ -24,6 +24,7 @@
             padding: 2rem 0;
             border-bottom: 1px solid var(--grey-color);
         }
+        .cart-items__variant { display: block; margin-top: .4rem; font-size: 1.3rem; font-weight: 400; color: #787878; }
         .cart-items__product { display: flex; align-items: center; gap: 1.5rem; min-width: 0; }
         .cart-items__thumb {
             flex: none; width: 9rem; height: 9rem; display: flex;
@@ -72,7 +73,7 @@
                             {% for item in cart_items %}
                                 <div class="cart-items__row">
                                     <div class="cart-items__product">
-                                        <form method="post" action="{% url 'cart_remove' item.product.id %}">
+                                        <form method="post" action="{% url 'cart_remove' item.key %}">
                                             {% csrf_token %}
                                             <button type="submit" class="cart__remove--btn"
                                                     title="{% translate "Удалить из корзины" %}" aria-label="{% translate "Удалить из корзины" %}">&times;</button>
@@ -86,6 +87,7 @@
                                         </a>
                                         <h4 class="cart__content--title">
                                             <a href="{% url 'product' item.product.id %}">{{ item.product.name }}</a>
+                                            {% if item.variant %}<span class="cart-items__variant">{{ item.variant }}</span>{% endif %}
                                         </h4>
                                     </div>
                                     <div class="cart-items__price">
@@ -95,7 +97,7 @@
                                         {% endif %}
                                     </div>
                                     <form method="post" class="cart-items__qty"
-                                          action="{% url 'cart_update' item.product.id %}">
+                                          action="{% url 'cart_update' item.key %}">
                                         {% csrf_token %}
                                         <input type="number" name="quantity" value="{{ item.quantity }}"
                                                min="1" class="product--amount__input">
